@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
+<title>Fundamentals of Quantitative Analysis - 6&nbsp; Data Wrangling 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./webexercises.html" rel="next">
+<link href="./05-wrangling-2.html" rel="prev">
+<link href="./images/logos/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-wrangling-3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Fundamentals of Quantitative Analysis</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-programming-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Programming basics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-intro-to-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Intro to R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Starting with data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./webexercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Webexercises</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#tidy-data" id="toc-tidy-data" class="nav-link active" data-scroll-target="#tidy-data"><span class="header-section-number">6.1</span> Tidy data</a></li>
+  <li><a href="#analysing-the-autism-spectrum-quotient-aq" id="toc-analysing-the-autism-spectrum-quotient-aq" class="nav-link" data-scroll-target="#analysing-the-autism-spectrum-quotient-aq"><span class="header-section-number">6.2</span> Analysing the Autism Spectrum Quotient (AQ)</a></li>
+  <li>
+<a href="#getting-set-up" id="toc-getting-set-up" class="nav-link" data-scroll-target="#getting-set-up"><span class="header-section-number">6.3</span> Getting Set-Up</a>
+  <ul class="collapse">
+<li><a href="#dw3-a1" id="toc-dw3-a1" class="nav-link" data-scroll-target="#dw3-a1"><span class="header-section-number">6.3.1</span> Activity 1: Set-up Data Wrangling 3</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#loading-in-data" id="toc-loading-in-data" class="nav-link" data-scroll-target="#loading-in-data"><span class="header-section-number">6.4</span> Loading in Data</a>
+  <ul class="collapse">
+<li><a href="#dw3-a2" id="toc-dw3-a2" class="nav-link" data-scroll-target="#dw3-a2"><span class="header-section-number">6.4.1</span> Activity 2: Load in the data</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#looking-at-data" id="toc-looking-at-data" class="nav-link" data-scroll-target="#looking-at-data"><span class="header-section-number">6.5</span> Looking at Data</a>
+  <ul class="collapse">
+<li><a href="#dw3-a3" id="toc-dw3-a3" class="nav-link" data-scroll-target="#dw3-a3"><span class="header-section-number">6.5.1</span> Activity 3: Look at your data</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#gathering-your-data" id="toc-gathering-your-data" class="nav-link" data-scroll-target="#gathering-your-data"><span class="header-section-number">6.6</span> Gathering Your Data</a>
+  <ul class="collapse">
+<li><a href="#dw3-a4" id="toc-dw3-a4" class="nav-link" data-scroll-target="#dw3-a4"><span class="header-section-number">6.6.1</span> Activity 4: Gathering with pivot_longer()</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#joining-your-data" id="toc-joining-your-data" class="nav-link" data-scroll-target="#joining-your-data"><span class="header-section-number">6.7</span> Joining Your Data</a>
+  <ul class="collapse">
+<li><a href="#dw3-a5" id="toc-dw3-a5" class="nav-link" data-scroll-target="#dw3-a5"><span class="header-section-number">6.7.1</span> Activity 5: Combining data</a></li>
+  <li><a href="#dw3-a6" id="toc-dw3-a6" class="nav-link" data-scroll-target="#dw3-a6"><span class="header-section-number">6.7.2</span> Activity 6: Combining more data</a></li>
+  <li><a href="#dw3-a7" id="toc-dw3-a7" class="nav-link" data-scroll-target="#dw3-a7"><span class="header-section-number">6.7.3</span> Activity 7: Calculating the AQ scores</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#pipes-again" id="toc-pipes-again" class="nav-link" data-scroll-target="#pipes-again"><span class="header-section-number">6.8</span> Pipes Again!</a>
+  <ul class="collapse">
+<li><a href="#dw3-a8" id="toc-dw3-a8" class="nav-link" data-scroll-target="#dw3-a8"><span class="header-section-number">6.8.1</span> Activity 8: One last thing on pipes</a></li>
+  </ul>
+</li>
+  <li><a href="#finished" id="toc-finished" class="nav-link" data-scroll-target="#finished"><span class="header-section-number">6.9</span> Finished</a></li>
+  <li><a href="#dw3-test" id="toc-dw3-test" class="nav-link" data-scroll-target="#dw3-test"><span class="header-section-number">6.10</span> Test yourself</a></li>
+  <li>
+<a href="#dw3-sols" id="toc-dw3-sols" class="nav-link" data-scroll-target="#dw3-sols"><span class="header-section-number">6.11</span> Activity solutions</a>
+  <ul class="collapse">
+<li><a href="#dw3-a1sol" id="toc-dw3-a1sol" class="nav-link" data-scroll-target="#dw3-a1sol"><span class="header-section-number">6.11.1</span> Activity 1</a></li>
+  <li><a href="#dw3-a2sol" id="toc-dw3-a2sol" class="nav-link" data-scroll-target="#dw3-a2sol"><span class="header-section-number">6.11.2</span> Activity 2</a></li>
+  <li><a href="#dw3-a5sol" id="toc-dw3-a5sol" class="nav-link" data-scroll-target="#dw3-a5sol"><span class="header-section-number">6.11.3</span> Activity 5</a></li>
+  <li><a href="#dw3-a7sol" id="toc-dw3-a7sol" class="nav-link" data-scroll-target="#dw3-a7sol"><span class="header-section-number">6.11.4</span> Activity 7</a></li>
+  <li><a href="#dw3-a8sol" id="toc-dw3-a8sol" class="nav-link" data-scroll-target="#dw3-a8sol"><span class="header-section-number">6.11.5</span> Activity 8</a></li>
+  </ul>
+</li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">6.12</span> Words from this Chapter</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>In the last chapter, we looked at using one-table Wickham verbs to <code>filter</code>, <code>arrange</code>, <code>group_by</code>, <code>select</code>, <code>mutate</code> and <code>summarise</code> the pong data. We also learnt a little more about <a class="glossary">pipes<span class="def"></span></a> and we saw how to do some quick counting and some ungrouping. Be sure to try out those activities before moving on as we will start to add a few more functions to allow us a few more skills in <a class="glossary">data wrangling<span class="def"></span></a>.</p>
+<p>Today, as a progression from working with one table/tibble, we will focus on working with data across two or more tibbles To do this we are going to add two more functions, to the skills we already know. Those are:</p>
+<ul>
+<li>
+<code>pivot_longer()</code> which allows us to <strong>transform</strong> a <a class="glossary">tibble<span class="def"></span></a> from <a class="glossary">wide<span class="def"></span></a> format to <a class="glossary">long<span class="def"></span></a> format.</li>
+<li>
+<code>inner_join()</code> which allows us to <strong>combine</strong> two tibbles together based on common columns. We actually saw this <a class="glossary">function<span class="def"></span></a> in Chapter 3 so this might be more of a recap.</li>
+</ul>
+<p>And just to recap, if you are still struggling with the idea of a function, remember that a function takes an input, performs some action, and gives an output. Think of your toaster again like we mentioned before: it takes bread as an input; it performs the action of heating it up; and it gives an output, the toast. A good thing about a lot of the functions we use is that they are nicely named as verbs to describe what they do - <code>mutate()</code> mutates (adds on a column); <code>arrange()</code> arranges columns, <code>summarise()</code> summarises, etc. But keep in mind that you don’t have to know or memorise all the different functions; through practice and repetition you will quickly learn to remember which ones are which and what <a class="glossary">package<span class="def"></span></a> they come from. Sort of like where to find your spoons in your kitchen - you don’t look in the fridge, and then the washing machine, and then the drawer. Nope, you learnt, by repetition, to look in the drawer first time. It’s the same with functions. Keep in mind that research methods is like a language in that the more you use it and work with it the more it makes sense. So with that, let’s do some practicing!</p>
+<section id="tidy-data" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="tidy-data">
+<span class="header-section-number">6.1</span> Tidy data</h2>
+<p>But first a little more on data structure and organisation.For most of this book, we will use a type of data organisation known as <a class="glossary">tidy data<span class="def"></span></a>. Any data in this format is easily processed through the <code>tidyverse</code> package. However, the data you work with will not always start formatted in the most efficient way possible. If that happens then our first step is to put it into <code>Tidy Data</code> format. There are two fundamental principles defining <code>Tidy Data</code>:</p>
+<ol type="1">
+<li>Each variable must have its own column.</li>
+<li>Each observation must have its own row.</li>
+</ol>
+<p><a href="https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf" target="_blank">Tidy Data (Wickham, 2014)</a> adds the following principle:</p>
+<ul>
+<li>Each type of observation unit forms a table.</li>
+</ul>
+<p>And <a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">Grolemund and Wickham (2017)</a> restate this third principle as:</p>
+<ul>
+<li>Each value must have its own cell (i.e.&nbsp;no grouping two variables together, e.g.&nbsp;time/date in one cell).</li>
+</ul>
+<p>Where a cell is where any specific row and column meet; a single data point in a tibble is a cell for example. The <a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">Grolemund and Wickham (2017)</a> book is a very useful read and it is free, but browsing the chapter on Tidy Data will help you visualise how you want to arrange data. Try to keep the principles in mind whilst doing so.</p>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+If you’ve worked with any kind of data before, particularly if you’ve used Excel, it’s very likely that you will have used <strong>wide format</strong> or <strong>long format</strong> data. In wide format, each participant’s data is all in one row with multiple columns for different data points. This means that the data set tends to be very wide and you will have as many rows as you have participants.
+</p>
+<p>
+Long format is where each <strong>row</strong> is a single observation, typically a single trial in an experiment or a response to a single item on a questionnaire. When you have multiple trials per participant, you will have multiple rows for the same participant. To identify participants, you would need a variable with some kind of participant id, which can be as simple as a distinct integer value for each participant. In addition to the participant identifier, you would have any measurements taken during each observation (e.g., response time) and what experimental condition the observation was taken under.
+</p>
+<p>
+In wide format data, each <strong>row</strong> corresponds to a single participant, with multiple observations for that participant spread across columns. So for instance, with survey data, you would have a separate column for each survey question.
+</p>
+<p>
+<code>Tidy</code> is a mix of both of these approachs and most functions in the tidyverse assume the tidy format, so typically the first thing you need to do when you get data, particularly wide-format data, is to reshape it through wrangling. Which is why we teach these really important skills.
+</p>
+<p>
+There is more information about <a href="https://r4ds.had.co.nz/tidy-data.html">tidy data available here</a>.
+</p>
+</div>
+</div>
+</section><section id="analysing-the-autism-spectrum-quotient-aq" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="analysing-the-autism-spectrum-quotient-aq">
+<span class="header-section-number">6.2</span> Analysing the Autism Spectrum Quotient (AQ)</h2>
+<p>To continue building your data wrangling skills in this chapter you will tidy data from the Autism Spectrum Quotient (AQ) questionnaire. The AQ10 is a non-diagnostic short form of the AQ with only 10 questions per participant. It is a discrete scale and the higher a participant scores on the AQ10 the more autistic-like traits they are said to display. Any person scoring 6 or above is recommended for further diagnosis. You can see an example of the AQ10 through this link: <a href="http://docs.autismresearchcentre.com/tests/AQ10.pdf">AQ10 Example</a>.</p>
+<p><strong>Today’s Goal</strong></p>
+<p>Today we will be working with data from 66 participants and your goal in this chapter is to find an AQ score for each of them through your data-wrangling skills.</p>
+<p>There are four data files to work with that you should download into your chapter folder. You can either right click and save each file separately below, or <a href="data/chpt6/PsyTeachR_FQA_Chpt6-data.zip" target="_blank">click here to download all the files in a zip file</a> for you to unzip:</p>
+<ul>
+<li>
+<a href="responses.csv" download="">responses.csv</a> containing the AQ survey responses to each of the 10 questions for the 66 participants</li>
+<li>
+<a href="qformats.csv" download="">qformats.csv</a> containing information on how a question should be coded - i.e.&nbsp;forward or reverse coding</li>
+<li>
+<a href="scoring.csv" download="">scoring.csv</a> containing information on how many points a specific response should get; depending on whether it is forward or reverse coded</li>
+<li>
+<a href="pinfo.csv" download="">pinfo.csv</a> containing participant information such as Age, Sex and importantly <code>ID</code> number.</li>
+</ul>
+<p><br></p>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+<strong>Why do we use .csv</strong>
+</p>
+<p>
+<code>csv</code> stands for ‘comma separated variable’, and is a very basic way of storing and transferring data. It really just stores numbers and text and nothing else. The great thing about being this basic is that it can be read by many different machines and does not need expensive licenses to open it.
+</p>
+</div>
+</div>
+<p>And now over a series of eight activities we will build on our data wrangling skills. Remember to try things out,and to ask questions, but that the solutions are at the bottom of the chapter if you are stuck.</p>
+</section><section id="getting-set-up" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="getting-set-up">
+<span class="header-section-number">6.3</span> Getting Set-Up</h2>
+<p>This first activity is about getting ourselves ready to analyse the data so try out the steps and if you need help, consult the earlier chapters.</p>
+<section id="dw3-a1" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="dw3-a1">
+<span class="header-section-number">6.3.1</span> Activity 1: Set-up Data Wrangling 3</h3>
+<ul>
+<li>Open RStudio and set the working directory to your chapter folder. Ensure the environment is clear.
+<ul>
+<li>If you’re using the Rserver, avoid a number of issues by restarting the session - click <code>Session</code> - <code>Restart R</code>
+</li>
+</ul>
+</li>
+<li>Open a new R Markdown document and save it in your working directory. Call the file “DataWrangling3”.<br>
+</li>
+<li>Make sure that you have downloaded the four .csv files above and saved them in your chapter folder. Remember not to change the file names at all and that <code>data.csv</code> is not the same as <code>data (1).csv</code>.</li>
+<li>Delete the default R Markdown welcome text and insert a new code chunk that loads the package <code>tidyverse</code> using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function. Remember the solutions if needed.</li>
+</ul></section></section><section id="loading-in-data" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="loading-in-data">
+<span class="header-section-number">6.4</span> Loading in Data</h2>
+<p>Now you need to load in the <code>.csv</code> data files using the <code>read_csv()</code> function and save them as tibbles in the environment. For example, to load in the <code>responses.csv</code> file and save it as the object <code>responses</code>, we would type:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"responses.csv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="dw3-a2" class="level3" data-number="6.4.1"><h3 data-number="6.4.1" class="anchored" data-anchor-id="dw3-a2">
+<span class="header-section-number">6.4.1</span> Activity 2: Load in the data</h3>
+<ul>
+<li>Add the following lines of code to your RMarkdown in a new code chunk and complete them to load in all four <code>.csv</code> data files. Use the above code as an example and name each object the same as its original file name (minus the .csv part), again as above, e.g.&nbsp;<code>responses.csv</code> gets saved as <code>responses</code>. Remember to run the lines so that the data loaded in and is stored in your environment.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>responses <span class="ot">&lt;-</span>  <span class="fu">read_csv</span>()    <span class="co"># load in survey responses</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>qformats <span class="ot">&lt;-</span>                 <span class="co"># load in question formats</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>scoring <span class="ot">&lt;-</span>                  <span class="co"># load in scoring info</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>pinfo <span class="ot">&lt;-</span>                    <span class="co"># load in participant information</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="looking-at-data" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="looking-at-data">
+<span class="header-section-number">6.5</span> Looking at Data</h2>
+<p>Now that we have the data loaded in it is always best to have a look at it to get an idea of its layout. We showed you a number ways of doing this before such as the <code>glimpse()</code> or <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> functions. Remember you put these in your Console window and put the name of the data between the brackets to see how it is arranged. Don’t add these to your Markdown file, these are just for trying things out in the Console window</p>
+<section id="dw3-a3" class="level3" data-number="6.5.1"><h3 data-number="6.5.1" class="anchored" data-anchor-id="dw3-a3">
+<span class="header-section-number">6.5.1</span> Activity 3: Look at your data</h3>
+<p>Have a look at the data in <code>responses</code> to see if you think it is Tidy or not and answer the following question:</p>
+<ul>
+<li>The data in <code>responses</code> is in what format?
+<div id="radio_CQDOGAUPTH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CQDOGAUPTH" value=""><span>Tidy</span></label><label><input type="radio" autocomplete="off" name="radio_CQDOGAUPTH" value=""><span>Long</span></label><label><input type="radio" autocomplete="off" name="radio_CQDOGAUPTH" value="answer"><span>Wide</span></label>
+</div>
+</li>
+</ul>
+<div class="webex-solution">
+<button>
+Explain this answer
+</button>
+<div class="cell" data-layout-align="center">
+<p>The <code>reponses</code> tibble is far from being tidy; each row represents multiple observations from the same participant, i.e.&nbsp;each row shows responses to multiple questions and there are the same number of rows as there are participants (66)- <code>wide format</code>. Remember we want the data in tidy format as described above.</p>
+<p>Eh, remind what’s a tibble?</p>
+<p>Remember, a tibble is simply a dataframe - or a table of data with columns and rows - that is really handy for working with when using the <code>tidyverse</code> package. When we say tibble, you can think of a dataframe with rows and columns of information and numbers stored in them - like <code>responses</code>, it is a tibble. For more info, see here: <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html" target="_blank">Tibbles</a>.</p>
+</div>
+</div>
+</section></section><section id="gathering-your-data" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="gathering-your-data">
+<span class="header-section-number">6.6</span> Gathering Your Data</h2>
+<p>We now have all the data we need loaded in, but in order to make it easier for us to get the AQ score for each participant, we need to change the layout of the <code>responses</code> tibble to Tidy Data.</p>
+<section id="dw3-a4" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="dw3-a4">
+<span class="header-section-number">6.6.1</span> Activity 4: Gathering with pivot_longer()</h3>
+<p>The first step is to use the function <code>pivot_longer()</code> to transform the data. The pivot functions can be easier to show than tell - you may find it a useful exercise to run the below code and compare the tibble in the newly created object <code>rlong</code> with the tibble in the original object, <code>respones</code>, before reading on.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>rlong <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> responses,</span>
+<span id="cb3-2"><a href="#cb3-2"></a>                      <span class="at">cols =</span> Q1<span class="sc">:</span>Q10,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>                      <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
+<span id="cb3-4"><a href="#cb3-4"></a>                      <span class="at">values_to =</span> <span class="st">"Response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To break this code down a little to help you understand it more:</p>
+<ul>
+<li>As with the other tidyverse functions, the first argument specifies the dataset to use as the base, in this case <code>responses</code>.
+<ul>
+<li>And remember the more experienced and confident you get you do not have to write the argument names, e.g.&nbsp;<code>data =</code>.</li>
+</ul>
+</li>
+<li>The second argument, <code>cols</code> specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. In this case, we only have a single column <code>Id</code> that will remain constant and we will transform all the the other columns that contain participant’s responses to each question.
+<ul>
+<li>The colon notation <code>first_column:last_column</code> is used to select all variables from the first column specified to the second column specified. So in our code, <code>cols</code> specifies that the columns we want to transform are <code>Q1</code> to <code>Q10</code>.</li>
+<li>Note that “Gathering” of columns is based on position in the tibble. If the order of columns in the tibble was Q1 then Q10, the above code would only gather those two columns. As it is, in our tibble, the order, is Q1, Q2, Q3, … Q10, and therefore the code gathers all the columns between Q1 and Q10.</li>
+</ul>
+</li>
+<li>The third and fourth arguments are the names of the new columns we are creating.
+<ul>
+<li>
+<code>names_to</code> specifies the names of the new columns that will be created.</li>
+<li>Finally, <code>values_to</code> names the new column that will contain the measurements, in this case we’ll call it <code>Response</code>.</li>
+<li>These new column names are put in quotes because they do not already exist in the tibble. This is not always the case but is the case for this function.</li>
+<li>Note also that these names could have been anything but by using these names the code makes more sense.</li>
+<li>Lastly, you do need to write names_to = … and values_to = … otherwise the columns won’t be created correctly.</li>
+</ul>
+</li>
+</ul>
+<p>And now that we have run the code and explained it a bit, you may find it helpful to go back and compare <code>rlong</code> and <code>responses</code> again to see how each argument matches up with the output of the table.</p>
+</section></section><section id="joining-your-data" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="joining-your-data">
+<span class="header-section-number">6.7</span> Joining Your Data</h2>
+<p>Now the <code>responses</code> data is in tidy format, you are closer to being able to calculate an AQ score for each person. However, you still need some extra information:</p>
+<ul>
+<li>Were the questions reverse or forward scored (i.e., is strongly agree a positive or negative response)? This information is found in <code>qformats</code>
+</li>
+<li>How many points are given to a specific response? This information is found in <code>scoring</code>.</li>
+</ul>
+<p>This is a typical analysis situation where different information is in different tables and you need to join them altogether. Both these pieces of information are contained in <code>qformats</code> and <code>scoring</code> respectively, but we want to join them to <code>responses</code> to create one informative tidy table with all the information we need. We can do this type of join through the function <code>inner_join()</code>; a function to combine information in two tibbles using a column common to both tibbles.</p>
+<section id="dw3-a5" class="level3" data-number="6.7.1"><h3 data-number="6.7.1" class="anchored" data-anchor-id="dw3-a5">
+<span class="header-section-number">6.7.1</span> Activity 5: Combining data</h3>
+<p>A wee bit different of an approach here in this activity but try it out and see how you get on. Remember that the solutions are at the end of the chapter.</p>
+<ul>
+<li>Copy the code below into a new code chunk.</li>
+<li>Next, replace the <code>NULL</code> values in the below code with the necessary variable names to join <code>rlong</code> and <code>qformats</code> by <code>Question</code>. If you need extra help, revisit Starting with Data chapter as you used the same function then! Make sure you try yourself first.
+<ul>
+<li>
+<strong>Hint:</strong> join two tibbles (x and y) by “a common column”.</li>
+</ul>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>rlong2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> <span class="cn">NULL</span>, </span>
+<span id="cb4-2"><a href="#cb4-2"></a>                     <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>                     <span class="at">by =</span> <span class="st">"NULL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Now have a look at the tibble in <code>rlong2</code>. As you can see we have matched each question with its scoring format, <code>forward</code> or <code>reverse</code>.</li>
+</ul>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+<strong>What is forward and reverse scoring</strong>
+</p>
+<p>
+A lot of questionnaires have some questions that are Forward scored and some questions that are Reverse scored. What does this mean? Imagine a situation where your options in replying to a question are: 1 - extremely agree, 2 - agree, 3 - neutral, 4 - disagree, 5 - extremely disagree. In a forward-scoring question you would get 1 point for extremely agree, 2 for agree, 3 for neutral, etc. In a reverse scoring question you would get 5 for extremely agree, 4 for agree, 3 for neutral, etc.
+</p>
+<p>
+The reasoning behind this shift is that sometimes agreeing or disagreeing might be more favorable depending on how the question is worded. Secondly, sometimes these questions are used just to catch people out - imagine if you had two similar questions where one has the reverse meaning of the other. In this scenario, people should respond opposites. If they respond the same then they might not be paying attention.
+</p>
+</div>
+</div>
+<p>So far so good but there is more information we want to bring into the tibble. We now need to combine the information in our new tibble, <code>rlong2</code>, with the <code>scoring</code> tibble so you know how many points to attribute each question based on the answer the participant gave, and whether the question was forward or reverse coded. Again, you can use the <code>inner_join()</code> function, but this time the common columns found in <code>rlong2</code> and <code>scoring</code> are <code>QFormat</code> and <code>Response</code> - i.e.&nbsp;there are two common columns.</p>
+</section><section id="dw3-a6" class="level3" data-number="6.7.2"><h3 data-number="6.7.2" class="anchored" data-anchor-id="dw3-a6">
+<span class="header-section-number">6.7.2</span> Activity 6: Combining more data</h3>
+<p>Here, in the code below, we are going to show you how to combine data with two common columns. Really this is about combining tibbles were there is corresponding information in the two tibbles - participants appear in both tibbles but there is different info in each tibble and you want it all in the one tibble. This is called an <a class="glossary">inner-join<span class="def"></span></a> But first some information on this task.</p>
+<ul>
+<li>You can only ever join two tables with <code>inner_join()</code> at once. If you have multiple tibbles to join like we do, you need to do multiple calls to <code>inner_join()</code>.</li>
+<li>When there is more than one common column between two tibbles you are joining, it is best to combine by all the columns to avoid repeated columns names in the new tibble. For example, if you run a join and it produces columns named <code>variable.x</code> and <code>variable.y</code> it means that there was another column that was the same in both datasets that you didn’t add to <code>by =</code>.</li>
+<li>You have to be very careful to use <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> if you have multiple variables for <code>by</code>. This is a common error and results in the <code>variable.x</code>/<code>variable.y</code> issue above. If you forget to use the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> and just state different columns, the code will only look at the first column and ignore the rest.</li>
+</ul>
+<p>Now type the below line into a new code chunk in your RMarkdown file, run it, and then view the new object. What this code does is it combines <code>rlong2</code> and <code>scoring</code> based on the matching data in <code>QFormat</code> and <code>Response</code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>rscores <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(rlong2, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>                      scoring, </span>
+<span id="cb5-3"><a href="#cb5-3"></a>                      <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You have now created <code>rscores</code> which has information on how each participant responded to each question and how each question should be coded and scored, all within the one tibble. All you need now is to sum the scores for each participant to get their AQ score.</p>
+</section><section id="dw3-a7" class="level3" data-number="6.7.3"><h3 data-number="6.7.3" class="anchored" data-anchor-id="dw3-a7">
+<span class="header-section-number">6.7.3</span> Activity 7: Calculating the AQ scores</h3>
+<ul>
+<li>First, based on your knowledge from the last chapter, type the below line into your code and replace the NULLs to obtain individual <code>aq_scores</code> for each participant.
+<ul>
+<li>
+<strong>hint:</strong> <code>group_by()</code> - how will you group individual participants?</li>
+<li>
+<strong>hint:</strong> <code>summarise()</code> - which column will you sum to obtain AQ scores?</li>
+</ul>
+</li>
+<li>Then, save your Markdown and knit it to make sure all your code works.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>aq_scores <span class="ot">&lt;-</span> rscores <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>             <span class="fu">group_by</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>             <span class="fu">summarise</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(<span class="cn">NULL</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="webex-solution">
+<button>
+Additional Hints
+</button>
+<div class="cell" data-layout-align="center">
+<p>Each participant could be grouped by their Id.</p>
+<p>If we summed up the value for each Score we might get a full AQ Score for each particpipant.</p>
+</div>
+</div>
+<p>Excellent. Have a look at <code>aq_scores</code> and see that you have all the individual AQ scores for each participant!</p>
+</section></section><section id="pipes-again" class="level2" data-number="6.8"><h2 data-number="6.8" class="anchored" data-anchor-id="pipes-again">
+<span class="header-section-number">6.8</span> Pipes Again!</h2>
+<p>You now have a complete code to load in your data, convert it to Tidy, combine the tables and calculate an AQ score for each participant. But, if you look at it, some of your code could be more efficient by using pipes. Let’s see how well we understand pipes now!</p>
+<section id="dw3-a8" class="level3" data-number="6.8.1"><h3 data-number="6.8.1" class="anchored" data-anchor-id="dw3-a8">
+<span class="header-section-number">6.8.1</span> Activity 8: One last thing on pipes</h3>
+<ul>
+<li>Go back through your code and try to rewrite it using pipes <code>%&gt;%</code> so that it is as efficient as possible.
+<ul>
+<li>
+<strong>hint:</strong> At any point where the first argument of your function is the name of an object created before that line, there is a good chance you could have used a pipe!</li>
+</ul>
+</li>
+</ul>
+<div class="webex-solution">
+<button>
+Additional Hints
+</button>
+<p>Here are all the bits of this code that could be piped together into one chain:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="st">`</span><span class="at">rlong &lt;- pivot_longer(responses, names_to = "Question", values_to = "Response", Q1:Q10)</span><span class="st">`</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">`</span><span class="at">rlong2 &lt;- inner_join(rlong, qformats, </span><span class="sc">\"</span><span class="at">Question</span><span class="sc">\"</span><span class="at">)</span><span class="st">`</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">`</span><span class="at">rscores &lt;- inner_join(rlong2, scoring, c(</span><span class="sc">\"</span><span class="at">QFormat</span><span class="sc">\"</span><span class="at">, </span><span class="sc">\"</span><span class="at">Response</span><span class="sc">\"</span><span class="at">))</span><span class="st">`</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="st">`</span><span class="at">aq_scores &lt;- rscores %&gt;% group_by(Id) %&gt;% summarise(AQ = sum(Score))</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section></section><section id="finished" class="level2" data-number="6.9"><h2 data-number="6.9" class="anchored" data-anchor-id="finished">
+<span class="header-section-number">6.9</span> Finished</h2>
+<p>Brilliant work again today! You have now recapped one-table verbs and started to expand your knowledge of two-table verbs. These are great to know as for example, as seen above, it actually only took a handful of reproducible steps to get from messy data to tidy data; could you imagine doing this by hand in Excel through cutting and pasting? Not to mention the mistakes you could make! Excellent work! You are a DataWrangling expert! Before finishing, remember to go over anything you are unsure of, and if you have any questions, please post them on Teams. There are some additional questions below to help you check your understanding.</p>
+</section><section id="dw3-test" class="level2" data-number="6.10"><h2 data-number="6.10" class="anchored" data-anchor-id="dw3-test">
+<span class="header-section-number">6.10</span> Test yourself</h2>
+<ul>
+<li>
+<p>Complete the sentence, the higher the AQ score…</p>
+<div id="radio_CXKMTSLAAM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CXKMTSLAAM" value=""><span>the less autistic-like traits displayed</span></label><label><input type="radio" autocomplete="off" name="radio_CXKMTSLAAM" value=""><span>has no relation to autistic-like traits</span></label><label><input type="radio" autocomplete="off" name="radio_CXKMTSLAAM" value="answer"><span>the more autistic-like traits displayed</span></label>
+</div>
+</li>
+<li>
+<p>Assuming that your code all worked, what was the AQ score (just the number) of Participant ID No.&nbsp;87:</p>
+<div id="radio_THBVEUDEZI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value=""><span>6</span></label>
+</div>
+</li>
+<li><p>Type in the box how many participants had an AQ score of 3 (again just the number): <input class="webex-solveme nospaces" size="10" data-answer="[&quot;13&quot;]"></p></li>
+<li>
+<p>The cut-off for the AQ10 is usually said to be around 6 meaning that anyone with a score of more than 6 should be referred for diagnostic assessment. Based on this data, how many participants might be referred for further assessment?</p>
+<div id="radio_TMSHYAIGHQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value=""><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value="answer"><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value=""><span>8</span></label>
+</div>
+</li>
+</ul>
+<div class="webex-solution">
+<button>
+Explain these answers
+</button>
+<div class="cell" data-layout-align="center">
+<ol type="1">
+<li><p>As mentioned, the higher the score on the AQ10 the more autistic-like traits a participant is said to show.</p></li>
+<li><p>You could do this by code with <code>filter(aq_scores, Id == 87)</code>, which would give you a tibble of 1x2 showing the ID number and score. If you just wanted the score you could use <code>pull()</code> but we haven’t shown you that yet: <code>filter(aq_scores, Id == 87) %&gt;% pull(AQ)</code>. The answer is an AQ score of 2.</p></li>
+<li><p>Same as above but changing the argument of the filter. <code>filter(aq_scores, AQ == 3) %&gt;% count()</code>. The answer is 13. Remember you can do this by counting but the code makes it reproducible and accurate every time. You might make mistakes.</p></li>
+<li><p><code>filter(aq_scores, AQ &gt; 6) %&gt;% count()</code> or <code>filter(aq_scores, AQ &gt;= 7) %&gt;% count()</code>. The answer is 6.</p></li>
+</ol>
+</div>
+</div>
+<p><strong>Recap on Wickham Verbs!</strong></p>
+<p>Which function(s) would you use to approach each of the following problems?</p>
+<ul>
+<li><p>We have a dataset of 400 adults, but we want to remove anyone with an age of 50 years or more. To do this, we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">arrange()</option>
+<option value="">group_by()</option>
+<option value="">select()</option>
+<option value="answer">filter()</option>
+<option value="">summarise()</option>
+<option value="">mutate()</option></select> function.</p></li>
+<li><p>We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">select()</option>
+<option value="">group_by()</option>
+<option value="answer">summarise()</option>
+<option value="">filter()</option>
+<option value="">mutate()</option>
+<option value="">arrange()</option></select> function.</p></li>
+<li><p>Our dataset has a column with the number of cats a person has, and a column with the number of dogs. We want to calculate a new column which contains the total number of pets each participant has. To do this, we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">group_by()</option>
+<option value="">select()</option>
+<option value="">summarise()</option>
+<option value="answer">mutate()</option>
+<option value="">filter()</option>
+<option value="">arrange()</option></select> function.</p></li>
+<li><p>We want to calculate the average for each participant in our dataset. To do this we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">filter() and select()</option>
+<option value="">group_by() and arrange()</option>
+<option value="">arrange() and mutate()</option>
+<option value="answer">group_by() and summarise()</option></select> functions.</p></li>
+<li><p>We want to order a dataframe of participants by the number of cats that they own, but want our new dataframe to only contain some of our columns. To do this we could use the <select class="webex-select"><option value="blank"></option>
+<option value="answer">filter() and select()</option>
+<option value="">select() and summarise()</option>
+<option value="answer">arrange() and select()</option>
+<option value="">group_by() and mutate()</option></select> functions.</p></li>
+</ul>
+<div class="webex-solution">
+<button>
+Explain these Answers
+</button>
+<div class="cell" data-layout-align="center">
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> helps us keep and remove rows!</li>
+<li>
+<code>summarise()</code> is the main function for creating means, medians, modes, etc.</li>
+<li>
+<code>mutate()</code> can be used to add columns to help add more information.</li>
+<li>When you want summary statistics for individual groups or participants you have to first <code>group_by()</code> and then <code>summarise()</code>.</li>
+<li>You would need to <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> first to reduce the people based on their number of cats and then just <code>select()</code> the columns you want to keep.</li>
+</ul>
+</div>
+</div>
+</section><section id="dw3-sols" class="level2" data-number="6.11"><h2 data-number="6.11" class="anchored" data-anchor-id="dw3-sols">
+<span class="header-section-number">6.11</span> Activity solutions</h2>
+<p>Below you will find the solutions to the above questions. Only look at them after giving the questions a good try and trying to find help on Google or Teams about any issues.</p>
+<section id="dw3-a1sol" class="level3" data-number="6.11.1"><h3 data-number="6.11.1" class="anchored" data-anchor-id="dw3-a1sol">
+<span class="header-section-number">6.11.1</span> Activity 1</h3>
+<ul>
+<li>To load the tidyverse into the library we would do the following:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw3-a2sol" class="level3" data-number="6.11.2"><h3 data-number="6.11.2" class="anchored" data-anchor-id="dw3-a2sol">
+<span class="header-section-number">6.11.2</span> Activity 2</h3>
+<ul>
+<li>Remember that you should always use <code>read_csv()</code> when working with this book.</li>
+<li>You read the data into the objects as follows.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"responses.csv"</span>)                  </span>
+<span id="cb9-2"><a href="#cb9-2"></a>qformats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qformats.csv"</span>)                 </span>
+<span id="cb9-3"><a href="#cb9-3"></a>scoring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"scoring.csv"</span>)                  </span>
+<span id="cb9-4"><a href="#cb9-4"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"pinfo.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw3-a5sol" class="level3" data-number="6.11.3"><h3 data-number="6.11.3" class="anchored" data-anchor-id="dw3-a5sol">
+<span class="header-section-number">6.11.3</span> Activity 5</h3>
+<ul>
+<li>In this <code>inner_join()</code> the first tibble is in <code>rlong</code>, the second tibble is in <code>qformats</code> and the common column is <code>Question</code>.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>rlong2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> rlong, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>                     <span class="at">y =</span> qformats, </span>
+<span id="cb10-3"><a href="#cb10-3"></a>                     <span class="at">by =</span> <span class="st">"Question"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw3-a7sol" class="level3" data-number="6.11.4"><h3 data-number="6.11.4" class="anchored" data-anchor-id="dw3-a7sol">
+<span class="header-section-number">6.11.4</span> Activity 7</h3>
+<ul>
+<li>To create the AQ score we would first group_by the <code>Id</code> column so that we have each individual participants data, and then we would sum the <code>Score</code> column to obtain their AQ score.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>aq_scores <span class="ot">&lt;-</span> rscores <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>             <span class="fu">group_by</span>(Id) <span class="sc">%&gt;%</span> <span class="co"># group by the ID number in column Id</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>             <span class="fu">summarise</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score)) <span class="co"># sum column Score to obtain AQ scores.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw3-a8sol" class="level3" data-number="6.11.5"><h3 data-number="6.11.5" class="anchored" data-anchor-id="dw3-a8sol">
+<span class="header-section-number">6.11.5</span> Activity 8</h3>
+<p>This was a tricky one but here is how you might read out the below code. Remember that <code>%&gt;%</code> can be read as <code>and then...</code></p>
+<ul>
+<li>First, take the data in <code>responses</code> and then</li>
+<li>take columns Q1 to Q10, put the column names in Question and the scores in Response and then</li>
+<li>join with <code>qformats</code> and match the data by the column <code>Question</code> and then</li>
+<li>join with <code>scoring</code> and match the data by the columns <code>Qformat</code> and <code>Response</code> and then</li>
+<li>group by participant ID and then</li>
+<li>calculate the total AQ score</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>aq_scores2 <span class="ot">&lt;-</span> responses <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> Q1<span class="sc">:</span>Q10,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>               <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
+<span id="cb12-4"><a href="#cb12-4"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">inner_join</span>(qformats, <span class="st">"Question"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">inner_join</span>(scoring, <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">group_by</span>(Id) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">summarise</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="6.12"><h2 data-number="6.12" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">6.12</span> Words from this Chapter</h2>
+<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">data wrangling</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">function</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">inner-join</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">long</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">package</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pipe</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tibble</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tidy data</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wide</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
+
+
+</section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./05-wrangling-2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./webexercises.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Webexercises</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
+<title>Fundamentals of Quantitative Analysis - 4&nbsp; Data wrangling 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-wrangling-2.html" rel="next">
+<link href="./03-loading-data.html" rel="prev">
+<link href="./images/logos/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Overview</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Fundamentals of Quantitative Analysis</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-programming-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Programming basics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-intro-to-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Intro to R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Starting with data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-data-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Intro to Data Visualisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-t-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">t-tests</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power and Effect Sizes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Screening Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./webexercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Webexercises</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#tidyverse" id="toc-tidyverse" class="nav-link active" data-scroll-target="#tidyverse"><span class="header-section-number">4.1</span> Tidyverse</a></li>
+  <li>
+<a href="#intro-to-the-babynames-database" id="toc-intro-to-the-babynames-database" class="nav-link" data-scroll-target="#intro-to-the-babynames-database"><span class="header-section-number">4.2</span> Intro to the <code>babynames</code> database</a>
+  <ul class="collapse">
+<li><a href="#dw1-a1" id="toc-dw1-a1" class="nav-link" data-scroll-target="#dw1-a1"><span class="header-section-number">4.2.1</span> Activity 1: Set-up</a></li>
+  <li><a href="#dw1-a2" id="toc-dw1-a2" class="nav-link" data-scroll-target="#dw1-a2"><span class="header-section-number">4.2.2</span> Activity 2: Look at the data</a></li>
+  <li><a href="#dw1-a3" id="toc-dw1-a3" class="nav-link" data-scroll-target="#dw1-a3"><span class="header-section-number">4.2.3</span> Activity 3: Your first plot</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#six-functions-for-wrangling-the-babynames" id="toc-six-functions-for-wrangling-the-babynames" class="nav-link" data-scroll-target="#six-functions-for-wrangling-the-babynames"><span class="header-section-number">4.3</span> Six functions for wrangling the <code>babynames</code></a>
+  <ul class="collapse">
+<li><a href="#dw1-a4" id="toc-dw1-a4" class="nav-link" data-scroll-target="#dw1-a4"><span class="header-section-number">4.3.1</span> Activity 4: Selecting variables of interest with <code>select()</code></a></li>
+  <li><a href="#dw1-a5" id="toc-dw1-a5" class="nav-link" data-scroll-target="#dw1-a5"><span class="header-section-number">4.3.2</span> Activity 5: Arranging the data with <code>arrange()</code></a></li>
+  <li><a href="#dw1-a6" id="toc-dw1-a6" class="nav-link" data-scroll-target="#dw1-a6"><span class="header-section-number">4.3.3</span> Activity 6: Using <code>filter()</code> to choose observations</a></li>
+  <li><a href="#dw1-a7" id="toc-dw1-a7" class="nav-link" data-scroll-target="#dw1-a7"><span class="header-section-number">4.3.4</span> Activity 7: Creating new variables with <code>mutate()</code></a></li>
+  <li><a href="#dw1-a8" id="toc-dw1-a8" class="nav-link" data-scroll-target="#dw1-a8"><span class="header-section-number">4.3.5</span> Activity 8: Grouping and summarising</a></li>
+  </ul>
+</li>
+  <li><a href="#dw1-a9" id="toc-dw1-a9" class="nav-link" data-scroll-target="#dw1-a9"><span class="header-section-number">4.4</span> Introducing Pipes</a></li>
+  <li><a href="#dw1-fin" id="toc-dw1-fin" class="nav-link" data-scroll-target="#dw1-fin"><span class="header-section-number">4.5</span> Finished!</a></li>
+  <li>
+<a href="#ld-test" id="toc-ld-test" class="nav-link" data-scroll-target="#ld-test"><span class="header-section-number">4.6</span> Test yourself</a>
+  <ul class="collapse">
+<li><a href="#knowledge-questions" id="toc-knowledge-questions" class="nav-link" data-scroll-target="#knowledge-questions"><span class="header-section-number">4.6.1</span> Knowledge Questions</a></li>
+  <li><a href="#dw1-debugex" id="toc-dw1-debugex" class="nav-link" data-scroll-target="#dw1-debugex"><span class="header-section-number">4.6.2</span> Debugging exercises</a></li>
+  </ul>
+</li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">4.7</span> Words from this Chapter</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>So far we having been starting to get our head around data and storing them in <a class="glossary">objects<span class="def"></span></a> but as you will learn, data comes in lots of different formats. One of the most common formats is that of a <a class="glossary">two-dimensional table<span class="def"></span></a> (the two dimensions being rows and columns). Usually, each row stands for a separate <a class="glossary">object<span class="def"></span></a> (e.g.&nbsp;a subject), and each column stands for a different variable (e.g.&nbsp;a response, category, or group). A key benefit of tabular data is that it allows you to store different <a class="glossary">types of data<span class="def"></span></a>, e.g.&nbsp;numerical measurements, alphanumeric labels, categorical descriptors, etc, all in one place.</p>
+<p>One of the core skills you will learn when working with data is <a class="glossary">data wrangling<span class="def"></span></a>. This means completing tasks such as determining <a class="glossary">outliers<span class="def"></span></a>, clearing up erroneous values, changing the structure of tables, merging information stored in separate tables, reducing the data down to a subset of observations, and producing data summaries. It may surprise you to learn that researchers actually spend far more of time cleaning and preparing their data than they spend actually analysing it. Some have estimated that up to 80% of time spent on data analysis involves such data preparation tasks <span class="citation" data-cites="dasu2003">(<a href="references.html#ref-dasu2003" role="doc-biblioref"><strong>dasu2003?</strong></a>)</span>!</p>
+<p>When you ask people about data wrangling, many people seem to operate under the assumption that the only approach is the painstaking and time-consuming cutting and pasting of data within a proprietary spreadsheet programs like Excel. Indeed, many may waste days, weeks, and even months manually transforming their data through the laborious cutting, copying, and pasting of data. Wrangling your data manually, by hand, however is not only a terrible use of your time, but it is error-prone and not <a class="glossary">reproducible<span class="def"></span></a>. Additionally, in this day and age where we can easily collect massive datasets online, it is just not conceivable to organise, clean, and prepare this data by hand, and so the alternative and reproducible approach you have begun to learn is highly beneficial.</p>
+<p>In short, being able to perform some key data wrangling skills will allow you the opportunity to thrive, not only as a psychologist but in any of the numerous roles that require handling data. You see the truth is that although every dataset presents unique challenges, there are some systematic principles you should follow that will make your analyses easier, less error-prone, more efficient, and more reproducible.Putting that another way, the data changes but the skills stay the same!</p>
+<p>So now let’s get into learning some new skills. In this lesson you will see how data wrangling skills will allow you to efficiently get answers to nearly any question you might want to ask about your data. By learning how to properly make your computer do the hard and boring work for you, you can focus on the bigger issues.</p>
+<section id="tidyverse" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="tidyverse">
+<span class="header-section-number">4.1</span> Tidyverse</h2>
+<p>In the first chapter we introduced a <a class="glossary">package<span class="def"></span></a> called <code>tidyverse</code> and it is going to be at the core of a lot of the data skills you develop. The <code>tidyverse</code> <a href="https://www.tidyverse.org/" target="_blank">https://www.tidyverse.org/</a> <span class="citation" data-cites="tidyverse">(<a href="references.html#ref-tidyverse" role="doc-biblioref"><strong>tidyverse?</strong></a>)</span> is actually a collection of packages developed by a team led by the world-famous data scientist Hadley Wickham. Those core packages contained within <code>tidyverse</code> are <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>ggplot2</code>, and <code>tibble</code>, and within these six core packages you will have access to <a class="glossary">functions<span class="def"></span></a> that will pretty much cover everything you need in order to be able to wrangle and visualise your data.. Again, don’t worry about trying to remember all the different packages and what they all do, that will come with practice. The main thing to note however is that previously when you typed <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> into your code, you will have seen that it loads in all of these packages in one go. You will learn how to use a whole host of functions from the <code>tidyverse</code> as we progress, but in this chapter we are going to focus on functions from the <code>dplyr</code> package, mainly for data wrangling, and <code>ggplot2</code> for visualisation (i.e.&nbsp;creating images and figures).</p>
+<p>Looking at the <code>dplyr</code> package specifically, it contains six very important functions based on common English verbs to help readability of the code. These six verbs are often referred to as the Wickham Six “one-table” dplyr verbs as they perform actions on a single table of data. Those six functions are:</p>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: center;">Function</th>
+<th style="text-align: left;">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>select()</code></td>
+<td style="text-align: left;">Include or exclude certain variables (columns)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code></td>
+<td style="text-align: left;">Include or exclude certain observations (rows)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>mutate()</code></td>
+<td style="text-align: left;">Create new variables (columns)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>arrange()</code></td>
+<td style="text-align: left;">Change the order of observations (rows)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>group_by()</code></td>
+<td style="text-align: left;">Organize the observations (rows) into groups</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>summarise()</code></td>
+<td style="text-align: left;">Create summary variables for groups of observations</td>
+</tr>
+</tbody>
+</table>
+<p>Just looking at the names gives you some idea of what the functions do. For example, <code>select()</code>, which we saw previously, selects columns! But don’t be fooled, although the operations of these functions may seem very simplistic, it’s amazing what you can accomplish when you string them together. Hadley Wickham, in fact, has claimed that 90% of data analysis can be reduced to the operations described by these six functions. You are going to use the functions but we will introduce them today just to show what they can do.</p>
+</section><section id="intro-to-the-babynames-database" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="intro-to-the-babynames-database">
+<span class="header-section-number">4.2</span> Intro to the <code>babynames</code> database</h2>
+<p>To demonstrate the power of the six <code>dplyr</code> verbs we will use them to work with data from the <code>babynames</code> package. The babynames dataset has historical information about the births of babies in the U.S. from 1880 to the present day and is a nice understandable dataset that will allow us to us just focus on getting to know the functions across a series of activities, beginning now!</p>
+<section id="dw1-a1" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="dw1-a1">
+<span class="header-section-number">4.2.1</span> Activity 1: Set-up</h3>
+<p>Complete the following series of steps. If you are unsure, try consulting the previous two chapters, keeping in mind that this is something we have done before!</p>
+<ol type="1">
+<li>Open RStudio and set the working directory to your chapter folder. Ensure the environment is clear.
+<ol type="i">
+<li>If you are working on the Rserver, avoid a number of issues by restarting the session - top menu: <strong><code>Session &gt;&gt; Restart R</code></strong>
+</li>
+</ol>
+</li>
+<li>Open a new R Markdown document and save it in your working directory. Call the file “DataWrangling1.Rmd”.<br>
+</li>
+<li>If you are working <strong>on your own computer</strong>, install the package <code>babynames</code> using the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> function - you will need quotation marks around the package name. <strong>Remember, never install packages if you are working on a university computer or on the Rserver</strong>.</li>
+<li>Delete the default R Markdown default text (i.e.&nbsp;everything from line 12 down) and insert a new code <a class="glossary">code chunk<span class="def"></span></a> that loads the packages <code>babynames</code> and <code>tidyverse</code> using <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function and run this code chunk.
+<ol type="i">
+<li>Note that the order of packages is deliberate!</li>
+</ol>
+</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(babynames)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+<strong>On the order of libraries</strong>
+</p>
+<p>
+In the first chapter you will recall we mentioned the issue of conflicts - the situation where two packages loaded into the library have functions with the same name but different approaches or jobs. The default approach that R takes in this situation is to “mask” the function from the library that was loaded in first. That means that it will use the function from the library loaded in most recently. As <code>tidyverse</code> contains the functions that you will use most of the time, the safest approach is to always load in the <code>tidyverse</code> last, regardless of the other packages you are loading in. In truth, as with everything in life, there is an additional complication involved that sometimes arises but for now taking the approach of running <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> last is going to save a lot of issues.
+</p>
+</div>
+</div>
+</section><section id="dw1-a2" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="dw1-a2">
+<span class="header-section-number">4.2.2</span> Activity 2: Look at the data</h3>
+<p>Great! Now that we have our packages loaded in let’s look at our data. The package <code>babynames</code> is a bit unique in that it contains an object of the same name, <code>babynames</code>, that contains all the data about, well, baby names, and we can look at that object to get a sense of our data.</p>
+<ul>
+<li>Have a look at your data by typing the word <code>babynames</code> into your <a class="glossary">console<span class="def"></span></a> window and running it.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>babynames</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You should see something like the following output:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">prop</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Mary</td>
+<td style="text-align: right;">7065</td>
+<td style="text-align: right;">0.0723836</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Anna</td>
+<td style="text-align: right;">2604</td>
+<td style="text-align: right;">0.0266790</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Emma</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.0205215</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Elizabeth</td>
+<td style="text-align: right;">1939</td>
+<td style="text-align: right;">0.0198658</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Minnie</td>
+<td style="text-align: right;">1746</td>
+<td style="text-align: right;">0.0178884</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Margaret</td>
+<td style="text-align: right;">1578</td>
+<td style="text-align: right;">0.0161672</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The first line tells us “# A tibble: 1924665 x 5”. What this means is that the object we are looking at is actually a <a class="glossary">tibble<span class="def"></span></a>, a type of two dimensional table with some unique properties, and we have data across 1924665 variables (columns) with 1924665 million observations (rows). Yes, this dataset contains over 1.9 <strong>million</strong> observations. Interested in analyzing these data by hand? No thanks!</p>
+<p>Looking at the column names you start to get a sense of what the data is. The variables (columns) are as follows:</p>
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 24%">
+<col style="width: 63%">
+</colgroup>
+<thead><tr class="header">
+<th>variable</th>
+<th>type</th>
+<th>description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>double (numeric)</td>
+<td>year of birth</td>
+</tr>
+<tr class="even">
+<td>sex</td>
+<td>character</td>
+<td>recorded sex of baby (F = female, M = male)</td>
+</tr>
+<tr class="odd">
+<td>name</td>
+<td>character</td>
+<td>forename given to baby</td>
+</tr>
+<tr class="even">
+<td>n</td>
+<td>integer</td>
+<td>number of babies given that name</td>
+</tr>
+<tr class="odd">
+<td>prop</td>
+<td>double (numeric)</td>
+<td>proportion of all babies of that sex</td>
+</tr>
+</tbody>
+</table>
+<p>As such, each row represents data about births for a given name and sex in a given year. For example, the first row of the data tells us that in the year 1880, there were 7065 baby girls (F) born in the U.S.A who were given the name Mary, and this accounted for 7.238359% of all baby girls that year.</p>
+</section><section id="dw1-a3" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="dw1-a3">
+<span class="header-section-number">4.2.3</span> Activity 3: Your first plot</h3>
+<p>Brilliant! Now we know what our data looks like in terms of the table - or really the <code>tibble</code> - let’s show you a quick code to help visualise some of this data.</p>
+<ul>
+<li>In a new code chunk in your R Markdwon file, type the code below and run it.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dat <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>                     <span class="st">"Kathleen"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>                     <span class="st">"Alexandra"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>                     <span class="st">"Beverly"</span>), sex<span class="sc">==</span><span class="st">"F"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat,</span>
+<span id="cb3-8"><a href="#cb3-8"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb3-9"><a href="#cb3-9"></a>           <span class="at">y =</span> prop, </span>
+<span id="cb3-10"><a href="#cb3-10"></a>           <span class="at">colour =</span> name))<span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">geom_line</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And you should see this output:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04-wrangling-1_files/figure-html/babynames-plot-real-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Proportion of four baby names from 1880 to 2014</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Now we know that the code right now will not make much sense to you but don’t worry about that as we don’t expect you to fully understand the code just yet. The point is really to show you how much you can accomplish with very little code. The code creates a figure (Figure @ref(fig:babynames-plot-real)) showing the popularity of four girl baby names - Alexandra, Beverly, Emily, and Kathleen - from 1880 to 2014. Popularity here is expressed in proportion (y-axis) in different years (x-axis). As you will come to learn, <code>ggplot()</code> is the main visualisation function, and <code>geom_line()</code> creates a linegraph.</p>
+<ul>
+<li>Now change the names in your code chunk to some female names you like and run the code to see how the Figure changes.</li>
+<li>Now change the names in your code chunk to some male names and change the sex from “F” to “M”. Run the code and see what happens. Post the photos of your new plots on the Teams channel.</li>
+<li>Now change the code to what you want to display and post an image of your favorite figure that you have created on the TEAMS channel and get some praise from the TEAM!</li>
+</ul>
+<div class="webex-solution">
+<button>
+But I want to display male AND female names!
+</button>
+<p>This is more complicated than you might first imagine so only read on if you’re feeling confident. If you remove the filter for <code>sex</code> when creating <code>dat</code> and then run the plot code again, it will make a very messy looking plot (try it). This is because for most names there will be two data points because although the numbers might be small for gendered names, there is usually always at least one baby of the non-dominant name gender that has been assigned that name.</p>
+<p>You can get around this by adding an additional line of code that produces separate plots by sex. See here:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dat2 <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>,<span class="st">"Kathleen"</span>,<span class="st">"Alexandra"</span>,<span class="st">"Beverly"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat2,<span class="fu">aes</span>(<span class="at">x =</span> year,<span class="at">y =</span> prop, <span class="at">colour=</span>name))<span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04-wrangling-1_files/figure-html/chpt4-hid1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Plots by sex with different scales</figcaption></figure>
+</div>
+</div>
+<p>The <code>facet_wrap()</code> function is one that can split up figures based on a given variable - in this case <code>sex</code>, meaning give me a plot for all the different sex categories we have. The <code>scales</code> argument tells the code that it can use different scales on the y-axis for each plot - when there’s a large difference between the two scales this is helpful to allow you to see the data in both sets (run this code and then remove the scales argument and run it again to see the difference) although it does run the risk of people misinterpreting the data if the difference between the scales isn’t made clear.</p>
+<p>On the other hand, if the scales for your two groups are fairly similar, it’s better to keep the same scales to aid comparison. This time we will filter the dataset for gender neutral names where it might make more sense to have them on the same scale - again try it with and without the scales argument to see what happens</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>dat3 <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Sam"</span>,<span class="st">"Alex"</span>,<span class="st">"Jordan"</span>,<span class="st">"Drew"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat3,<span class="fu">aes</span>(<span class="at">x =</span> year,<span class="at">y =</span> prop, <span class="at">colour=</span>name))<span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04-wrangling-1_files/figure-html/chpt4-show1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Plots by sex with the same scale</figcaption></figure>
+</div>
+</div>
+</div>
+<p>As a side point, because in most countries assigned sex at birth is binary, there is no data on intersex, trans or non-binary names. In lieu of that, here’s the <a href="https://en.wikipedia.org/wiki/Unisex_name" target="_blank">Wikipedia page</a> about gender-neutral names and naming laws around the world which will hopefully make you question why we ascribe someone’s entire gender identity to a bunch of sounds and letters we use to label them.</p>
+</section></section><section id="six-functions-for-wrangling-the-babynames" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="six-functions-for-wrangling-the-babynames">
+<span class="header-section-number">4.3</span> Six functions for wrangling the <code>babynames</code>
+</h2>
+<p>Ok so now we have a fairly code understanding of the babynames, let’s use it to learn a bit more about the six functions from <code>dplyr</code> that make up a lot of data wrangling!</p>
+<section id="dw1-a4" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="dw1-a4">
+<span class="header-section-number">4.3.1</span> Activity 4: Selecting variables of interest with <code>select()</code>
+</h3>
+<p>Often data has a lot of variables we don’t need and it can be easier to focus on just the data we do need. In <code>babynames</code> there are two numeric measurements of name popularity - <code>prop</code>, the proportion of all babies with each name, is probably more useful than <code>n</code>, the total number of babies with that name, because <code>prop</code> takes into account that different numbers of babies are born in different years.</p>
+<p>Now as we saw previously, if we wanted to create a dataset that only includes certain variables, we can use the <code>select()</code> function from the <code>dplyr</code> package.</p>
+<ul>
+<li>In a new code chunk, type and run the below code to select only the columns <code>year</code>, <code>sex</code>, <code>name</code> and <code>prop</code> and store it as a <code>tibble</code> in the object named <code>babynames_reduced</code>.
+<ul>
+<li>the first argument <code>.data</code> is the object we want to select variables from, in this case <code>babynames</code>
+</li>
+<li>the additional arguments are the names of the variables you want to <strong>keep</strong>!</li>
+</ul>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>babynames_reduced1 <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> babynames,</span>
+<span id="cb6-2"><a href="#cb6-2"></a>                            year, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>                            sex, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>                            name, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>                            prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Alternatively, you can also state which variables you don’t want to keep! This is really handy if you want to keep a lot of columns and only get rid of maybe one or two.</p>
+<ul>
+<li>Type and run in the below code in a new code chunk.
+<ul>
+<li>Here, rather than stating you want to keep <code>year</code>, <code>sex</code>, <code>name</code> and <code>prop</code>, we can say drop (i.e.&nbsp;get rid of) the column <code>n</code> using the minus sign <code>-</code> before the variable name.</li>
+</ul>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>babynames_reduced2 <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> babynames, </span>
+<span id="cb7-2"><a href="#cb7-2"></a>                             <span class="sc">-</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Note</strong> that <code>select()</code> does not change the original tibble, <code>babynames</code>, but makes a new object that stores a new tibble with the specified columns, i.e.&nbsp;<code>babynames_reduced1</code> and <code>babynames_reduced2</code>. You will see the new objects in your environment pane. If you don’t save the new tibbles to an object, they won’t be saved. For example, the below code does the same as the previous code but is not saved as the output of the function is not assigned (using the <a class="glossary">assignment operator<span class="def"></span></a>, <code>&lt;-</code>) to a new object.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">select</span>(<span class="at">.data =</span> babynames, </span>
+<span id="cb8-2"><a href="#cb8-2"></a>       <span class="sc">-</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw1-a5" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="dw1-a5">
+<span class="header-section-number">4.3.2</span> Activity 5: Arranging the data with <code>arrange()</code>
+</h3>
+<p>Superb! We now know how to select variables. Another handy skill is being able to change the order of data in a tibble. The function <code>arrange()</code> will sort the rows in the table according to the columns you supply.</p>
+<ul>
+<li>Type and run the below code in a new code chunk.
+<ul>
+<li>the first argument <code>.data</code> again says what object to work on</li>
+<li>the second argument says what column to sort the data by - in this instance we are sorting by <code>name</code>
+</li>
+<li>the default sorting order is ascending!</li>
+</ul>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>sort_asc <span class="ot">&lt;-</span> <span class="fu">arrange</span>(<span class="at">.data =</span> babynames,</span>
+<span id="cb9-2"><a href="#cb9-2"></a>                    name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you look in <code>sort_asc</code> the data are now sorted in ascending alphabetical order by name. But what if you want the data in descending order? Here we can wrap the name of the variable in the <code>desc()</code> function.</p>
+<ul>
+<li>Type and run the below code in a new code chunk. When you have run the code have a look at <code>sort_desc</code> and note that the data is now sorted by descending year!</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>sort_desc <span class="ot">&lt;-</span> <span class="fu">arrange</span>(babynames, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>                     <span class="fu">desc</span>(year)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, you can also sort by more than one column and a combination of ascending and descending columns. Have a look at th below code and then answer the question below:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">arrange</span>(babynames, </span>
+<span id="cb11-2"><a href="#cb11-2"></a>        <span class="fu">desc</span>(year), </span>
+<span id="cb11-3"><a href="#cb11-3"></a>        <span class="fu">desc</span>(sex), </span>
+<span id="cb11-4"><a href="#cb11-4"></a>        <span class="fu">desc</span>(prop)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+The above code will produce:
+<div id="radio_YLSMEWSJOS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YLSMEWSJOS" value=""><span>the data sorted by descending year and sex but ascending prop</span></label><label><input type="radio" autocomplete="off" name="radio_YLSMEWSJOS" value=""><span>the data sorted by descending year and prop but ascending sex</span></label><label><input type="radio" autocomplete="off" name="radio_YLSMEWSJOS" value="answer"><span>the data sorted by descending year, sex and prop</span></label><label><input type="radio" autocomplete="off" name="radio_YLSMEWSJOS" value=""><span>the data sorted by ascending year, sex and prop</span></label>
+</div>
+<div class="webex-solution">
+<button>
+Explain this answer
+</button>
+<p>As all the columns stated are wrapped in the <code>desc()</code> function inside the <code>arrange()</code> function then all columns will be sorted in descending fashion, sorting the year first, then the sex, then the prop. Note however that the output is not being stored at all in a new object so you would not be able to work on the data later without saving it in an object first!</p>
+</div>
+</section><section id="dw1-a6" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="dw1-a6">
+<span class="header-section-number">4.3.3</span> Activity 6: Using <code>filter()</code> to choose observations</h3>
+<p>We are doing well here! OK, so we have previously used <code>select()</code> to keep certain variables (i.e.&nbsp;columns). However, frequently you will also want to keep only certain observations (i.e.&nbsp;rows) - for example, only babies born after 1999, only Female babies (as above), or only babies named “Mary”. You do this using the verb <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>. The <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function is a bit more involved than the other verbs, and requires more detailed explanation, but this is because it is also extremely powerful.</p>
+<p>Here is an example of filter() function in action. Take a few minutes to think about what it might do. Perhaps even run it in a new code chunk and look at the ouput!</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>filt1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> babynames, </span>
+<span id="cb12-2"><a href="#cb12-2"></a>                year <span class="sc">&gt;</span> <span class="dv">2000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Had a think about it? We are going to tell you now so maybe write down your answer before reading on!</p>
+<p>OK, let’s see if you are correct. The first part of the code tells the function to use the object <code>babynames</code>. The second argument, <code>year &gt; 2000</code>, is what is known as a <strong>Boolean expression</strong>: an expression whose evaluation (or action) results in a value of either TRUE or FALSE. What <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> does here really is keep any observations (rows) for which the expression (<code>year &gt; 2000</code> - which reads as “year greater than 2000”) evaluates as TRUE, and excludes (removes) any row for which the expression evaluates to FALSE. So in effect, behind the scenes, <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> goes through the entire set of 1.9+ million observations, row by row, checking the value of year for each row, keeping it if the value is greater than 2000, and rejecting it if it is less than 2000.</p>
+<p>To see how a boolean expression works, consider the code below. First we create an object will all the values (let’s pretend they are years) from 1996:2005.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>years <span class="ot">&lt;-</span> <span class="dv">1996</span><span class="sc">:</span><span class="dv">2005</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005</code></pre>
+</div>
+</div>
+<p>Now we run the same boolean expression fomr above across this set of values:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>years <span class="sc">&gt;</span> <span class="dv">2000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+</div>
+<p>You can see that the expression <code>years &gt; 2000</code> returns a <strong>logical vector</strong> (a <a class="glossary">vector<span class="def"></span></a> of TRUE and FALSE values), where each entry represents whether the expression (<code>year &gt; 2000</code>) is TRUE or FALSE for that an entry in <code>years</code>. For the first five <code>years</code> (1996 to 2000) the answer is FALSE as they are less than 2000, and for the last five <code>years</code> (2001 to 2005) it is TRUE. Note that 2000 returns as FALSE because 2000 is not greater than 2000; it would instead be equivalent to 2000.</p>
+<p>Here are the most commonly used Boolean expressions.</p>
+<table class="table">
+<thead><tr class="header">
+<th>Operator</th>
+<th>Name</th>
+<th>is TRUE if and only if</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>A &lt; B</td>
+<td>less than</td>
+<td>A is less than B</td>
+</tr>
+<tr class="even">
+<td>A &lt;= B</td>
+<td>less than or equal</td>
+<td>A is less than or equal to B</td>
+</tr>
+<tr class="odd">
+<td>A &gt; B</td>
+<td>greater than</td>
+<td>A is greater than B</td>
+</tr>
+<tr class="even">
+<td>A &gt;= B</td>
+<td>greater than or equal</td>
+<td>A is greater than or equal to B</td>
+</tr>
+<tr class="odd">
+<td>A == B</td>
+<td>equivalence</td>
+<td>A exactly equals B</td>
+</tr>
+<tr class="even">
+<td>A != B</td>
+<td>not equal</td>
+<td>A does not exactly equal B</td>
+</tr>
+<tr class="odd">
+<td>A %in% B</td>
+<td>in</td>
+<td>A is an element of vector B</td>
+</tr>
+</tbody>
+</table>
+<p>We will run through a few of these just to introduce them so you get the idea. We would suggest typing each one in a new code chunk and running them and looking at the output to get an idea of what it does.</p>
+<p>First example is if you want only those observations for a specific name (e.g., Mary), you use the equivalence operator <code>==</code>. Note that you use double equal signs, not a single equal sign.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>only_Marys <span class="ot">&lt;-</span> <span class="fu">filter</span>(babynames, </span>
+<span id="cb17-2"><a href="#cb17-2"></a>                     name <span class="sc">==</span> <span class="st">"Mary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Alternatively, if you wanted all the names except Mary, you use the ‘not equals’ operator which is a single equals sign preceeded by an exclamation mark:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>no_Marys <span class="ot">&lt;-</span> <span class="fu">filter</span>(babynames, </span>
+<span id="cb18-2"><a href="#cb18-2"></a>                   name <span class="sc">!=</span> <span class="st">"Mary"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, what if you wanted names from a defined set - e.g., names of British queens? Just like we did previously, you can use the <code>%in%</code> approach shown here.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>queens <span class="ot">&lt;-</span> <span class="fu">filter</span>(babynames, </span>
+<span id="cb19-2"><a href="#cb19-2"></a>                 name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mary"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3"></a>                             <span class="st">"Elizabeth"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>                             <span class="st">"Victoria"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This gives you data for the names in the vector on the right hand side of <code>%in%</code>. Note that the names are all held together in the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> which we have seen before, and each name is surrounded by quotation marks and seperated by a comma.</p>
+<p>Next, a bit like when we got rid of all Marys, you can always invert an expression to get its opposite - that is what the exclamation mark tends to do. So, for instance, if you instead wanted to get rid of all Marys, Elizabeths, and Victorias you would use the following:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>no_queens <span class="ot">&lt;-</span> <span class="fu">filter</span>(babynames, </span>
+<span id="cb20-2"><a href="#cb20-2"></a>                    <span class="sc">!</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mary"</span>,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>                                  <span class="st">"Elizabeth"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>                                  <span class="st">"Victoria"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ok so that is a brief intro to filters but it is worth keeping in mind that you can include as many expressions as you like as additional arguments to <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and it will only pull out the rows for which all of the expressions evaluate to TRUE. For instance, <code>filter(babynames, year &gt; 2000, prop &gt; .01)</code> will keep only the rows (observations) where the year is greater than 2000 and that represent greater than 1% of the names for a given sex; any observation where either expression is false will be excluded. This ability to string together criteria makes <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> a very powerful member of the Wickham Six. Referring back to this section will help with a lot of the answers to problems you face when wrangling data!</p>
+</section><section id="dw1-a7" class="level3" data-number="4.3.4"><h3 data-number="4.3.4" class="anchored" data-anchor-id="dw1-a7">
+<span class="header-section-number">4.3.4</span> Activity 7: Creating new variables with <code>mutate()</code>
+</h3>
+<p>Doing really well! Only a little more to go we promise! OK so we have really learnt a lot about changing the data we have but sometimes we need to create a new variable that doesn’t exist in our dataset. For instance, we might want to figure out what decade a particular year belongs to in out babynames data and add that to our data! To create new variables, we use the function <code>mutate()</code>.</p>
+<ul>
+<li>Type and run the below code in a new code chunk.
+<ul>
+<li>Here, you are mutating a new column onto the data and storing it in the object <code>baby_decades</code>
+</li>
+<li>the first argument is the original data, <code>babynames</code>
+</li>
+<li>the second argument is the name of the new column <code>decade</code> followed by what you want in that column - the decade.</li>
+<li>we are creating the decades using the code `floor(year/10)*10. This seems complicated but it says take the year and divide by 10, then get rid of the decimal places, and then multiply by 10. So for example, 1945/10 = 194.5, and if you get rid of the decimal places that becomes 194, and multiply it by 10 gives you 1940s!.</li>
+</ul>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>baby_decades <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> babynames,</span>
+<span id="cb21-2"><a href="#cb21-2"></a>                  <span class="at">decade =</span> <span class="fu">floor</span>(year<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span><span class="dv">10</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>baby_decades</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The start of the data will look something like this with the new column called <code>decade</code> mutated on:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">prop</th>
+<th style="text-align: right;">decade</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Mary</td>
+<td style="text-align: right;">7065</td>
+<td style="text-align: right;">0.0723836</td>
+<td style="text-align: right;">1880</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Anna</td>
+<td style="text-align: right;">2604</td>
+<td style="text-align: right;">0.0266790</td>
+<td style="text-align: right;">1880</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Emma</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.0205215</td>
+<td style="text-align: right;">1880</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Elizabeth</td>
+<td style="text-align: right;">1939</td>
+<td style="text-align: right;">0.0198658</td>
+<td style="text-align: right;">1880</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Minnie</td>
+<td style="text-align: right;">1746</td>
+<td style="text-align: right;">0.0178884</td>
+<td style="text-align: right;">1880</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1880</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Margaret</td>
+<td style="text-align: right;">1578</td>
+<td style="text-align: right;">0.0161672</td>
+<td style="text-align: right;">1880</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>But mutates can be much simpler like this example here. Have a look at the code and then answer the question below:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>baby_where <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> babynames,</span>
+<span id="cb22-2"><a href="#cb22-2"></a>                  <span class="at">country =</span> <span class="st">"USA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+What will be stored in the object <code>baby_where</code>?
+<div id="radio_IHHUAXSODR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IHHUAXSODR" value=""><span>a tibble with one column called country that contains the decade people were born</span></label><label><input type="radio" autocomplete="off" name="radio_IHHUAXSODR" value="answer"><span>a tibble with all the original data and a new column called country stating USA</span></label><label><input type="radio" autocomplete="off" name="radio_IHHUAXSODR" value=""><span>a tibble with all the original data and a new column stating usa</span></label><label><input type="radio" autocomplete="off" name="radio_IHHUAXSODR" value=""><span>a tibble with all the original data arranged by the country USA</span></label>
+</div>
+<div class="webex-solution">
+<button>
+Explain this Answer
+</button>
+<p>This code will create a new object storing a tibble that has all the original data and a new column called country that states USA for each row. The <code>mutate()</code> adds to what is already there unless you add a <code>select()</code> or <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> to remove columns or rows. Note that one of the answers is wrong because it states usa in lowercase but the code states it in uppercase, i.e.&nbsp;USA. Remember to be specific.</p>
+</div>
+</section><section id="dw1-a8" class="level3" data-number="4.3.5"><h3 data-number="4.3.5" class="anchored" data-anchor-id="dw1-a8">
+<span class="header-section-number">4.3.5</span> Activity 8: Grouping and summarising</h3>
+<p>Brilliant! You are learning so much about changing data and just one more important step to go. The goal of wrangling in quantitative analysis is to summarise your data somehow! Perhaps you want to calculate the mean or median, or a sum total of your data. You can perform all of these operations using the function <code>summarise()</code>.</p>
+<p>First, let’s use the object <code>dat</code> from above that just has the data for the four girls names, Alexandra, Beverly, Emily, and Kathleen. Type and run this code in a new code chunk if <code>dat</code> does not already exist in your environment pane:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>dat <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3"></a>                     <span class="st">"Kathleen"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4"></a>                     <span class="st">"Alexandra"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5"></a>                     <span class="st">"Beverly"</span>), sex <span class="sc">==</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now to start off, we’re going to calculate the total number of babies across all years that were given one of these four names.</p>
+<ul>
+<li>Type and run the below code in a new code chunk
+<ul>
+<li>
+<code>summarise()</code> is the function we use to create summaries of the data</li>
+<li>as per usual the first argument is the object we want to use, in this case <code>dat</code>
+</li>
+<li>the second argument is the name of the summary column, in this case <code>total</code>, and the summary value we want to create, in this case the sum, using <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, of all the values in <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>dat_sum <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> dat,</span>
+<span id="cb24-2"><a href="#cb24-2"></a>                     <span class="at">total =</span> <span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A <strong>top tip</strong> when coding is to get in the habit of translating your code into full sentences to make it easier to figure out what’s happening. You can read the above code as “run the function <code>summarise()</code> using the data in the object <code>dat</code> to create a new variable named <code>total</code> that is the result of adding up all the numbers in the column <code>n</code> and store it in <code>dat_sum</code>”. If you look in <code>dat_sum</code> you will see the below output:</p>
+<p>Here we see we have a total of 2161374 babies with those four names in our dataset! We will learn more summary functions as we go along, but <code>summarise()</code> becomes even more powerful when combined with the final <code>dplyr</code> function, <code>group_by()</code>. Quite often, you will want to produce your summary statistics broken down by groups, for examples, the scores of participants in different conditions, or the reading time for native and non-native speakers and that is what <code>group_by()</code> helps us do.</p>
+<p>There are two ways you can use <code>group_by()</code>. First, you can create a new, grouped object as such. Here we are saying use the <code>group_by()</code> function to group the data in <code>dat</code> based on the categories in the variable <code>name</code>.</p>
+<ul>
+<li>Type and run this code in a new code chunk.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>group_dat <span class="ot">&lt;-</span> <span class="fu">group_by</span>(<span class="at">.data =</span> dat,</span>
+<span id="cb25-2"><a href="#cb25-2"></a>                      name) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you look at this object in the viewer, it won’t look any different to the original <code>dat</code>, however, the underlying structure has changed - you can see this by typing group_dat in the console window and running it. It says the number of groups in the secpnd line of the output - “# Groups: name [4]”</p>
+<p>However, let’s run the above summarise code again, but now using the new <code>group_dat</code> object and look at the output.</p>
+<ul>
+<li>Type and run the below code in a new code chunk</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>group_sum <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> group_dat, </span>
+<span id="cb26-2"><a href="#cb26-2"></a>                       <span class="at">total =</span> <span class="fu">sum</span>(n)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>summarise()</code> has performed exactly the same operation as before - adding up the total number in the column <code>n</code> - but this time it has done is separately for each group, which in this case was the variable <code>name</code> and gives an output that looks like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Alexandra</td>
+<td style="text-align: right;">231364</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Beverly</td>
+<td style="text-align: right;">376914</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Emily</td>
+<td style="text-align: right;">841491</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kathleen</td>
+<td style="text-align: right;">711605</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+If you get what looks like an error that says <code>summarise() ungrouping output (override with .groups argument)</code>don’t worry, this isn’t an error it’s just R telling you what it’s done to the groups that you have created and will become more obvious with more examples in later chapters.
+</p>
+</div>
+</div>
+<p>And two more final examples to show that you can request multiple summary calculations to be performed in the same function. For example, the following code calculates the mean and median number of babies given each name every year.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>sum_multi <span class="ot">&lt;-</span> <span class="fu">summarise</span>(group_dat,</span>
+<span id="cb27-2"><a href="#cb27-2"></a>                       <span class="at">mean_year =</span> <span class="fu">mean</span>(n),</span>
+<span id="cb27-3"><a href="#cb27-3"></a>                       <span class="at">median_year =</span> <span class="fu">median</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And you can also add multiple grouping variables. For example, the following code groups <code>baby_decades</code> by <code>sex</code> and <code>decade</code> and then calculates the summary statistics to give us the mean and median number of male and female babies in each decade.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>group_decades <span class="ot">&lt;-</span> <span class="fu">group_by</span>(baby_decades, </span>
+<span id="cb28-2"><a href="#cb28-2"></a>                          sex, </span>
+<span id="cb28-3"><a href="#cb28-3"></a>                          decade)</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>sum_decades <span class="ot">&lt;-</span> <span class="fu">summarise</span>(group_decades,</span>
+<span id="cb28-6"><a href="#cb28-6"></a>                         <span class="at">mean_year =</span> <span class="fu">mean</span>(n),</span>
+<span id="cb28-7"><a href="#cb28-7"></a>                         <span class="at">median_year =</span> <span class="fu">median</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And again if you look at <code>sum_decades</code>, the first few lines would look something like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">decade</th>
+<th style="text-align: right;">mean_year</th>
+<th style="text-align: right;">median_year</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">1880</td>
+<td style="text-align: right;">110.5702</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">128.1841</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">1900</td>
+<td style="text-align: right;">131.3290</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">1910</td>
+<td style="text-align: right;">187.0628</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">1920</td>
+<td style="text-align: right;">210.5457</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">1930</td>
+<td style="text-align: right;">214.1987</td>
+<td style="text-align: right;">12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Excellent! We have now had a run through of all of the Wickham six functions that allow us to arrange, select, filter, mutate, group by and summarise our data!</p>
+</section></section><section id="dw1-a9" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="dw1-a9">
+<span class="header-section-number">4.4</span> Introducing Pipes</h2>
+<p>The final activity for this chapter essentially repeats what we’ve already covered but in a slightly different way. In the previous activities, you created new objects with new variables or groupings and then you called <code>summarise()</code> on those new objects in separate lines of code. As a result, you had multiple objects in your environment pane and you need to make sure that you keep track of the different names.</p>
+<p>Instead, you can use <a class="glossary">pipes<span class="def"></span></a>. Pipes are written as <code>%&gt;%</code> and can be read as “and then”. Pipes allow you to string together ‘sentences’ of code into ‘paragraphs’ so that you don’t need to create intermediary objects. Really, this is something that is easier to show than tell.</p>
+<p>The below code does very similar to all the code we wrote above but it only creates one object.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>pipe_summary <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">mutate</span>(<span class="at">decade =</span> <span class="fu">floor</span>(year<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4"></a>                     <span class="st">"Kathleen"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5"></a>                     <span class="st">"Alexandra"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6"></a>                     <span class="st">"Beverly"</span>), sex<span class="sc">==</span><span class="st">"F"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">group_by</span>(name, </span>
+<span id="cb29-8"><a href="#cb29-8"></a>           decade) <span class="sc">%&gt;%</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a>  <span class="fu">summarise</span>(<span class="at">mean_decade =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'name'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+</div>
+<p>Again, just to note, you may see a warning when you run the above code regarding groups in the - this is similar to the previous time we saw the message and it is just letting you know what the output is grouped by. Nothing to worry about it basically. And if we then, as is good practice, look at the output from the above code, the first few lines would gives us:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">decade</th>
+<th style="text-align: right;">mean_decade</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Alexandra</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">6.500000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alexandra</td>
+<td style="text-align: right;">1900</td>
+<td style="text-align: right;">8.285714</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alexandra</td>
+<td style="text-align: right;">1910</td>
+<td style="text-align: right;">32.700000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alexandra</td>
+<td style="text-align: right;">1920</td>
+<td style="text-align: right;">37.000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alexandra</td>
+<td style="text-align: right;">1930</td>
+<td style="text-align: right;">44.400000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alexandra</td>
+<td style="text-align: right;">1940</td>
+<td style="text-align: right;">117.100000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Now just to explain a little more, the reason that this function, the <code>%&gt;%</code>, is called a pipe is because it ‘pipes’ the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don’t need to specify it again.</p>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+<strong>Read your pipe like a paragraph</strong>
+</p>
+<p>
+When learning to code it can be a useful practice to read your code ‘out loud’ in full sentences to help you understand what it is doing. You can read the code above as “starting with <code>babynames</code>, create a new variable called <code>decade</code> AND THEN keep only the names Emily, Kathleen, Alexandra and Beverly and that belong to female babies, AND THEN group the dataset by name and decade AND THEN calculate the mean number of babies with each name per decade.” Try doing this each time you write a new bit of code and you should find the code becomes much easier to follow
+</p>
+</div>
+</div>
+<p>Some people find pipes a bit tricky to understand from a conceptual point of view, however, it’s well worth learning to use them as when your code starts getting longer they are much more efficient and mean you have to write less code which is always a good thing!</p>
+</section><section id="dw1-fin" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="dw1-fin">
+<span class="header-section-number">4.5</span> Finished!</h2>
+<p>Brilliant! That has been a lot of information but hopefully it has started to give you a sense of some of the approaches to data wrangling and the main functions we will use as we get deeper into the book!</p>
+</section><section id="ld-test" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="ld-test">
+<span class="header-section-number">4.6</span> Test yourself</h2>
+<section id="knowledge-questions" class="level3" data-number="4.6.1"><h3 data-number="4.6.1" class="anchored" data-anchor-id="knowledge-questions">
+<span class="header-section-number">4.6.1</span> Knowledge Questions</h3>
+<ol type="1">
+<li>Which of the following is not one of the Wickham Six functions?
+<div id="radio_OHSKERHOSE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OHSKERHOSE" value="answer"><span>melt()</span></label><label><input type="radio" autocomplete="off" name="radio_OHSKERHOSE" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_OHSKERHOSE" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_OHSKERHOSE" value=""><span>filter()</span></label>
+</div>
+</li>
+<li>Which of the following functions would I use if I wanted to keep only certain columns?
+<div id="radio_GJOCOURBSL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GJOCOURBSL" value="answer"><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_GJOCOURBSL" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_GJOCOURBSL" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_GJOCOURBSL" value=""><span>filter()</span></label>
+</div>
+</li>
+<li>Which of the following functions would I use if I wanted to keep only certain rows?
+<div id="radio_BAHHHNYCUR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BAHHHNYCUR" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_BAHHHNYCUR" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_BAHHHNYCUR" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_BAHHHNYCUR" value="answer"><span>filter()</span></label>
+</div>
+</li>
+<li>Which of the following functions would I use if I wanted to add a new column of information?
+<div id="radio_GCAPUYBLFU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GCAPUYBLFU" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_GCAPUYBLFU" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_GCAPUYBLFU" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_GCAPUYBLFU" value=""><span>filter()</span></label>
+</div>
+</li>
+<li>Which boolean expression would I add to a <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function to keep only Male babies in the original <code>babynames</code> data?
+<div id="radio_XFSZDPOFMM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XFSZDPOFMM" value=""><span>sex == F</span></label><label><input type="radio" autocomplete="off" name="radio_XFSZDPOFMM" value="answer"><span>sex == M</span></label><label><input type="radio" autocomplete="off" name="radio_XFSZDPOFMM" value=""><span>sex &lt; F</span></label><label><input type="radio" autocomplete="off" name="radio_XFSZDPOFMM" value=""><span>Sex == M</span></label>
+</div>
+</li>
+</ol>
+<div class="webex-solution">
+<button>
+Explain these Answers
+</button>
+<ol type="1">
+<li>
+<code>melt()</code> is not a function in the Wickham six functions. It is actually a function but not one we tend to use.</li>
+<li>
+<code>select()</code> is the function for keeping and removing columns.</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> is the function for keeping and removing rows.</li>
+<li>
+<code>mutate()</code> is the function for adding new columns.</li>
+<li>Assuming the original data has not been changed, <code>"sex == M"</code> would work and not <code>"Sex == M"</code> as there is no column called Sex with an uppercase S. Remember to be exact.</li>
+</ol>
+</div>
+</section><section id="dw1-debugex" class="level3" data-number="4.6.2"><h3 data-number="4.6.2" class="anchored" data-anchor-id="dw1-debugex">
+<span class="header-section-number">4.6.2</span> Debugging exercises</h3>
+<ol type="1">
+<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code in your console window:</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>babynames</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will produce the error:</p>
+<pre><code>Error: object 'babynames' not found</code></pre>
+<p>Once you figure out how to fix this error, make a note of it.</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>This is an indication that you have not loaded the <code>babynames</code> package into the library using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function</p>
+</div>
+<p><br></p>
+<ol start="2" type="1">
+<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code in your console window:</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">library</span>(babynames)</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames, <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will produce the error:</p>
+<pre><code>Error in summarise(.data = babynames, mean_n = mean(n)) : 
+  could not find function "summarise"</code></pre>
+<p>Once you figure out how to fix this error, make a note of it.</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>What the error is saying is that there is no function called <code>summarise()</code>. You know that function exists though. What you have not done is call load the function into the libary using <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code></p>
+</div>
+<p><br></p>
+<ol start="3" type="1">
+<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code in your console window:</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">library</span>(babynames)</span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will produce the error:</p>
+<pre><code>Error: unexpected symbol in "dat &lt;- summarise(.data = babynames mean_n"
+</code></pre>
+<p>Once you figure out how to fix this error, make a note of it.</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>This is actually one of the most painful errors you can see as it doesn’t really help you solve your issue because it is not quite clear what it means. <strong>unexpected symbol</strong> means effectively that the code is wrong and it is seeing something it did not think it would see. Again not that clear right? What we do when we see this is ask ourselves have we forgotten a comma somewhere or maybe a bracket or a quotation mark! Look for those issues and see if that helps. The error does show you that the error comes between <code>babynames</code> and <code>mean_n</code> it just isn’t clear that that is what it means. The issue will be around the last word it mentions basically. The answer here is that there is a comma missing between the data and the arguement; between <code>babynames</code> and <code>mean_n</code>. The line should read:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">library</span>(babynames)</span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb37-3"><a href="#cb37-3"></a></span>
+<span id="cb37-4"><a href="#cb37-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames, <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Again an incredibly frustrating and time consuming error. Watch out for these. It is why partitioning the code on to new lines after a comma can be really help see errors as such:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">library</span>(babynames)</span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb38-3"><a href="#cb38-3"></a></span>
+<span id="cb38-4"><a href="#cb38-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames, </span>
+<span id="cb38-5"><a href="#cb38-5"></a>                 <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Such a dastardly error! Well done if you spotted it!!!</p>
+</div>
+<p><br></p>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">4.7</span> Words from this Chapter</h2>
+<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">assignment operator</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">chunk</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">console</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">data wrangling</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">data-type</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">function</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">object</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">outlier</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">package</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pipe</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">reproducible research</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabular data</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tibble</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">vector</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>End of Chapter</strong></p>
+<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
+
+
+</section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./03-loading-data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Starting with data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-wrangling-2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

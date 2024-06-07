@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
+<title>Fundamentals of Quantitative Analysis - 5&nbsp; Data wrangling 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./06-wrangling-3.html" rel="next">
+<link href="./04-wrangling-1.html" rel="prev">
+<link href="./images/logos/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-wrangling-2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Fundamentals of Quantitative Analysis</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-programming-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Programming basics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-intro-to-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Intro to R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Starting with data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./webexercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Webexercises</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#learning-to-wrangle-is-there-a-chastity-belt-on-perception" id="toc-learning-to-wrangle-is-there-a-chastity-belt-on-perception" class="nav-link active" data-scroll-target="#learning-to-wrangle-is-there-a-chastity-belt-on-perception"><span class="header-section-number">5.1</span> Learning to wrangle: Is there a chastity belt on perception</a>
+  <ul class="collapse">
+<li><a href="#dw2-a1" id="toc-dw2-a1" class="nav-link" data-scroll-target="#dw2-a1"><span class="header-section-number">5.1.1</span> Activity 1: Set-up Data Wrangling 2</a></li>
+  <li><a href="#dw2-a2" id="toc-dw2-a2" class="nav-link" data-scroll-target="#dw2-a2"><span class="header-section-number">5.1.2</span> Activity 2: Look at your data</a></li>
+  <li><a href="#dw2-a3" id="toc-dw2-a3" class="nav-link" data-scroll-target="#dw2-a3"><span class="header-section-number">5.1.3</span> Activity 3: <strong><code>select()</code></strong></a></li>
+  <li><a href="#dw2-a4" id="toc-dw2-a4" class="nav-link" data-scroll-target="#dw2-a4"><span class="header-section-number">5.1.4</span> Activity 4: Reorder the variables</a></li>
+  <li><a href="#dw2-a5" id="toc-dw2-a5" class="nav-link" data-scroll-target="#dw2-a5"><span class="header-section-number">5.1.5</span> Activity 5: <strong><code>arrange()</code></strong></a></li>
+  <li><a href="#dw2-a6" id="toc-dw2-a6" class="nav-link" data-scroll-target="#dw2-a6"><span class="header-section-number">5.1.6</span> Activity 6: <strong><code>filter()</code></strong></a></li>
+  <li><a href="#dw2-a7" id="toc-dw2-a7" class="nav-link" data-scroll-target="#dw2-a7"><span class="header-section-number">5.1.7</span> Activity 7: <strong><code>mutate()</code></strong></a></li>
+  <li><a href="#dw2-a8" id="toc-dw2-a8" class="nav-link" data-scroll-target="#dw2-a8"><span class="header-section-number">5.1.8</span> Activity 8: Summarising data</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#ungrouping-counting-pipes---quick-notes" id="toc-ungrouping-counting-pipes---quick-notes" class="nav-link" data-scroll-target="#ungrouping-counting-pipes---quick-notes"><span class="header-section-number">5.2</span> Ungrouping, counting, pipes - quick notes!</a>
+  <ul class="collapse">
+<li><a href="#dw2-a9" id="toc-dw2-a9" class="nav-link" data-scroll-target="#dw2-a9"><span class="header-section-number">5.2.1</span> Counting data</a></li>
+  <li><a href="#dw2-ungroup" id="toc-dw2-ungroup" class="nav-link" data-scroll-target="#dw2-ungroup"><span class="header-section-number">5.2.2</span> Ungrouping data</a></li>
+  <li><a href="#dw2-pipes" id="toc-dw2-pipes" class="nav-link" data-scroll-target="#dw2-pipes"><span class="header-section-number">5.2.3</span> Recapping Pipes (<strong><code>%&gt;%</code></strong>)</a></li>
+  </ul>
+</li>
+  <li><a href="#dw2-fin" id="toc-dw2-fin" class="nav-link" data-scroll-target="#dw2-fin"><span class="header-section-number">5.3</span> Finished!</a></li>
+  <li>
+<a href="#dw2-test" id="toc-dw2-test" class="nav-link" data-scroll-target="#dw2-test"><span class="header-section-number">5.4</span> Test yourself</a>
+  <ul class="collapse">
+<li><a href="#knowledge-questions" id="toc-knowledge-questions" class="nav-link" data-scroll-target="#knowledge-questions"><span class="header-section-number">5.4.1</span> Knowledge Questions</a></li>
+  <li><a href="#dw2-debug" id="toc-dw2-debug" class="nav-link" data-scroll-target="#dw2-debug"><span class="header-section-number">5.4.2</span> Debugging tips</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#dw2-sols" id="toc-dw2-sols" class="nav-link" data-scroll-target="#dw2-sols"><span class="header-section-number">5.5</span> Solutions to Activities</a>
+  <ul class="collapse">
+<li><a href="#dw2-a3sol" id="toc-dw2-a3sol" class="nav-link" data-scroll-target="#dw2-a3sol"><span class="header-section-number">5.5.1</span> Activity 3</a></li>
+  <li><a href="#dw2-a4sol" id="toc-dw2-a4sol" class="nav-link" data-scroll-target="#dw2-a4sol"><span class="header-section-number">5.5.2</span> Activity 4</a></li>
+  <li><a href="#dw2-a5sol" id="toc-dw2-a5sol" class="nav-link" data-scroll-target="#dw2-a5sol"><span class="header-section-number">5.5.3</span> Activity 5</a></li>
+  <li><a href="#dw2-a6sol" id="toc-dw2-a6sol" class="nav-link" data-scroll-target="#dw2-a6sol"><span class="header-section-number">5.5.4</span> Activity 6</a></li>
+  <li><a href="#dw2-a7sol" id="toc-dw2-a7sol" class="nav-link" data-scroll-target="#dw2-a7sol"><span class="header-section-number">5.5.5</span> Activity 7</a></li>
+  </ul>
+</li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">5.6</span> Words from this Chapter</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>As we have said previously, one of the key aspects in a researcher’s toolbox is the knowledge and skill to work with data - regardless of how it comes to you. In fact, when you run an experiment you might get lots of different data types in various different files. For instance, it is not uncommon for an experimental software to create a new file for every participant you run and for each participant’s file to contain numerous columns and rows of different data types, only some of which are important. Being able to wrangle that data, manipulate it into different layouts, extract the parts you need, and summarise it, is one of the most important skills we will help you learn through this book.</p>
+<p>In the last chapter we introduced you to the <strong>Wickham six</strong> one-table <a class="glossary">functions<span class="def"></span></a> which we use to do that data wrangling. Over the course of this book we will reiterate these functions and skills, and <a class="glossary">packages<span class="def"></span></a> like the <code>tidyverse</code> and the packages it contains, across a number of different datasets to give you a wide range of exposure to what Psychology is about, and to reiterate that the same skills apply across different datasets. Always remember, <strong>the whilst the data changes, the skills stay the same!</strong></p>
+<p>We have also started to introduce different types of data and data structures. For example, data is often stored in two-dimensional tables, either called data frames, tables, or <a class="glossary">tibbles<span class="def"></span></a>. There are other ways of storing data that you will discover in time but mainly, in this book, we will be using tibbles, which we mentioned in the previous chapter (if you would like more info, type <code>vignette("tibble")</code> in the console). A tibble is really just a table of data with columns and rows of information - and some additional features we will learn about - and within the cells of the tibble, a cell being where a row and a column meets, you get different types of data, e.g.&nbsp;<a class="glossary">double<span class="def"></span></a>, <a class="glossary">integer<span class="def"></span></a>, <a class="glossary">character<span class="def"></span></a> and <a class="glossary">factor<span class="def"></span></a></p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Type of Data</th>
+<th style="text-align: left;">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Double</td>
+<td style="text-align: left;">Numbers that can take decimals</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Integer</td>
+<td style="text-align: left;">Numbers that cannot take decimals</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Character</td>
+<td style="text-align: left;">Tends to contain letters or be words</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Factor</td>
+<td style="text-align: left;">Nominal (categorical). Can be words or numbers (e.g., animal or human, 1 or 2)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<strong>Note 1:</strong> Double and Integer can both be referred to as <a class="glossary">numeric<span class="def"></span></a> data, and you will see this word from time to time. For clarity, we will use Double as a term for any number that can take a decimal (e.g.&nbsp;3.14) and Integer as a term for any whole number (no decimal, e.g.&nbsp;3).</li>
+<li>
+<strong>Note 2:</strong> A wee bit confusingly Double data does not have to have decimal places in it. For instance, the value of 1 could be Double as well as Integer. However, the value of 1.1 could only be Double and never Integer. Integers cannot have decimal places. Again, the more you work with data the more this will make sense, but it highlights the importance of looking at your data and checking what type it is as the type determines what you can do with the data.</li>
+</ul>
+<p>Today, we are going to continue developing our understanding of data, and build on the knowledge and skills we have seen to this point, to help you develop your ability to work with data. The only difference in this chapter is we are going to ask you to do more of the wrangling yourself, based on what we have shown you previously. To build our skills we will analyse a novel dataset and some activities based around manipulating that data. Remember to be pro-active in your learning and to refer back to what we have done before, using the example code as a guide. The solutions for all the tasks are at the bottom of the page as well for you to check yourself, but do be sure to try the tasks first. There is also the online <a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">cheatsheets</a> if you need more help - the key cheatsheet for this chapter is the Data Transformation with <strong><code>dplyr</code></strong> - and don’t forget to ask questions on ours forums.</p>
+<section id="learning-to-wrangle-is-there-a-chastity-belt-on-perception" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="learning-to-wrangle-is-there-a-chastity-belt-on-perception">
+<span class="header-section-number">5.1</span> Learning to wrangle: Is there a chastity belt on perception</h2>
+<p>Today we are going to be using data from the paper <a href="http://journals.sagepub.com/doi/abs/10.1177/0956797617730892" target="_blank">Is there a Chastity Belt on Perception</a><span class="citation" data-cites="witt2018">(<a href="references.html#ref-witt2018" role="doc-biblioref"><strong>witt2018?</strong></a>)</span>. You can read the full paper if you like but we will summarise the paper for you. The paper asks the research question of <strong>does your ability to perform an action influence your perception?</strong> For instance, does your ability to hit a tennis ball influence how fast you perceive the ball to be moving? Or to phrase another way, do expert tennis players perceive the ball moving slower than novice tennis players?</p>
+<p>This experiment does not use tennis players however. Instead they used the Pong task: “a computerised game in which participants aim to block moving balls with various sizes of paddles”. A bit like a very classic retro arcade game. Participants tend to estimate the balls as moving faster when they have to block it with a smaller paddle as opposed to when they have a bigger paddle. You can read the paper to get more details if you wish but hopefully that gives enough of an idea to help you understand the wrangling we will do on the data. We have cleaned up the data a little to start with. Let’s begin!</p>
+<section id="dw2-a1" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="dw2-a1">
+<span class="header-section-number">5.1.1</span> Activity 1: Set-up Data Wrangling 2</h3>
+<ul>
+<li>First, download <a href="data/chpt5/PongBlueRedBack 1-16 Codebook.csv" download="">PongBlueRedBack 1-16 Codebook.csv</a> into your chapter folder.
+<ul>
+<li>If you are having trouble downloading .csv files directly you may prefer to download the data as a zip file and unzip it from this link: <a href="data/chpt5/PsyTeachR_FQA_Chpt5-data.zip" download="">PongBlueRedBack 1-16 Codebook.zip</a>. Again just unzip it into your chapter folder.</li>
+</ul>
+</li>
+<li>Next, set the <a class="glossary">working directory<span class="def"></span></a> to your chapter folder. Ensure the <a class="glossary">environment<span class="def"></span></a> is clear.
+<ul>
+<li>If you’re using the Rserver, avoid a number of issues by restarting the session - click <code>Session</code> - <code>Restart R</code>
+</li>
+</ul>
+</li>
+<li>Now, open a new R Markdown document and save it in your working directory and call the file something informative like “DataWrangling2”.</li>
+<li>Next, delete the default R Markdown welcome text and insert a new code <a class="glossary">chunk<span class="def"></span></a>.</li>
+<li>Finally, copy and paste the below code into this code chunk and then run the code.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"PongBlueRedBack 1-16 Codebook.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">summary</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Remember: </strong> We use the <code>read_csv()</code> function to load in data, and the data filename must be a) in quotation marks and b) spelt exactly as the filename states, including spaces and the file extension (in this case .csv)</p>
+<p>If you have done this task correctly you should see the following output:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Participant     JudgedSpeed      PaddleLength   BallSpeed    TrialNumber    
+ Min.   : 1.00   Min.   :0.0000   Min.   : 50   Min.   :2.0   Min.   :  1.00  
+ 1st Qu.: 4.75   1st Qu.:0.0000   1st Qu.: 50   1st Qu.:3.0   1st Qu.: 72.75  
+ Median : 8.50   Median :1.0000   Median :150   Median :4.5   Median :144.50  
+ Mean   : 8.50   Mean   :0.5471   Mean   :150   Mean   :4.5   Mean   :144.50  
+ 3rd Qu.:12.25   3rd Qu.:1.0000   3rd Qu.:250   3rd Qu.:6.0   3rd Qu.:216.25  
+ Max.   :16.00   Max.   :1.0000   Max.   :250   Max.   :7.0   Max.   :288.00  
+ BackgroundColor      HitOrMiss       BlockNumber   
+ Length:4608        Min.   :0.0000   Min.   : 1.00  
+ Class :character   1st Qu.:0.0000   1st Qu.: 3.75  
+ Mode  :character   Median :1.0000   Median : 6.50  
+                    Mean   :0.6866   Mean   : 6.50  
+                    3rd Qu.:1.0000   3rd Qu.: 9.25  
+                    Max.   :1.0000   Max.   :12.00  </code></pre>
+</div>
+</div>
+<p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, from the <strong><code>base</code></strong> package - the default packages automatically installed - provides a quick overview of the variables in your dataset and can be useful as a quick check that you have indeed imported the correct data. It will also provide some basic <a class="glossary">descriptive<span class="def"></span></a> statistics and some information on whether the data is character (text) data which can also be useful to check.</p>
+<p>An alternative approach for looking at data types would be to use the <code>glimpse()</code> function, from the <strong><code>dplyr</code></strong> package, loaded in with <strong><code>tidyverse</code></strong>. Try the following in your <a class="glossary">console<span class="def"></span></a> window:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">glimpse</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And you will see:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 4,608
+Columns: 8
+$ Participant     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ JudgedSpeed     &lt;dbl&gt; 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, …
+$ PaddleLength    &lt;dbl&gt; 50, 250, 50, 250, 250, 50, 250, 50, 250, 50, 50, 250, …
+$ BallSpeed       &lt;dbl&gt; 5, 3, 4, 3, 7, 5, 6, 2, 4, 4, 7, 7, 3, 6, 5, 7, 2, 5, …
+$ TrialNumber     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…
+$ BackgroundColor &lt;chr&gt; "red", "blue", "red", "red", "blue", "blue", "red", "r…
+$ HitOrMiss       &lt;dbl&gt; 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, …
+$ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …</code></pre>
+</div>
+</div>
+<p>And if you look at that table you can see the eight column names followed by <code>&lt;dbl&gt;</code>, short for double, or <code>&lt;chr&gt;</code> short for character. Again, this might not mean that much to you but as you progress you will become very adept at recognising the type of data you are working with, as the type of data changes what you can do to the data.</p>
+</section><section id="dw2-a2" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="dw2-a2">
+<span class="header-section-number">5.1.2</span> Activity 2: Look at your data</h3>
+<p>Great! Now that we have the data loaded in, let’s have a look at the <code>pong_data</code> and see how it is organized. Again you can do this various ways, but today, click on <code>pong_data</code> in your environment pane.</p>
+<p>In the dataset you will see that each row (observation) represents one trial per participant and that there were 288 trials for each of the 16 participants. The columns (variables) we have in the dataset are as follows:</p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 41%">
+<col style="width: 39%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">Variable</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Participant</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">participant number</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">JudgedSpeed</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">speed judgement (1 = fast, 0 = slow)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">PaddleLength</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">paddle length (pixels)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">BallSpeed</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">ball speed (2 pixels/4ms)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">TrialNumber</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">trial number</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">BackgroundColor</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">background display colour</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">HitOrMiss</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">hit ball = 1, missed ball = 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">BlockNumber</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">block number (out of 12 blocks)</td>
+</tr>
+</tbody>
+</table>
+<p>Just as we saw with <code>glimpse()</code>, some of the data is <code>double</code> - i.e.&nbsp;numbers - and some of the data is <code>character</code> - i.e.&nbsp;text. We will use this data to master our skills of the Wickham Six verbs, taking each verb in turn. You should refer to the explanations and example code in the previous chapter to help you complete these. Remember the six main functions were:</p>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: center;">Function</th>
+<th style="text-align: left;">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>select()</code></td>
+<td style="text-align: left;">Include or exclude certain variables (columns)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code></td>
+<td style="text-align: left;">Include or exclude certain observations (rows)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>mutate()</code></td>
+<td style="text-align: left;">Create new variables (columns)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>arrange()</code></td>
+<td style="text-align: left;">Change the order of observations (rows)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>group_by()</code></td>
+<td style="text-align: left;">Organize the observations (rows) into groups</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>summarise()</code></td>
+<td style="text-align: left;">Create summary variables for groups of observations</td>
+</tr>
+</tbody>
+</table>
+<p>Now, let’s do some wrangling!!! And don’t forget, it can help to take a new code chunk on each activity and write yourself some notes between the code chunks!</p>
+</section><section id="dw2-a3" class="level3" data-number="5.1.3"><h3 data-number="5.1.3" class="anchored" data-anchor-id="dw2-a3">
+<span class="header-section-number">5.1.3</span> Activity 3: <strong><code>select()</code></strong>
+</h3>
+<p>We are going to start with some selections!</p>
+<ul>
+<li>Either by inclusion (stating all the variables you want to keep) or exclusion (stating all the variables you want to drop), select only the <code>Participant</code>, <code>PaddleLength</code>, <code>TrialNumber</code>, <code>BackgroundColor</code> and <code>HitOrMiss</code> columns from <code>pong_data</code> and store it in a new object named <code>select_dat</code>.</li>
+</ul></section><section id="dw2-a4" class="level3" data-number="5.1.4"><h3 data-number="5.1.4" class="anchored" data-anchor-id="dw2-a4">
+<span class="header-section-number">5.1.4</span> Activity 4: Reorder the variables</h3>
+<p>Good work! Now, we previously mentioned that <code>select()</code> can also be used to reorder the columns in a tibble, as the new tibble will display the variables in the order that you entered them.</p>
+<ul>
+<li>Use <code>select()</code> to keep only the columns <code>Participant</code>, <code>JudgedSpeed</code>, <code>BallSpeed</code>, <code>TrialNumber</code>, and <code>HitOrMiss</code> from <code>pong_data</code> but have them display in alphabetical order, left to right. Save this tibble in a new object named <code>reorder_dat</code>.</li>
+</ul></section><section id="dw2-a5" class="level3" data-number="5.1.5"><h3 data-number="5.1.5" class="anchored" data-anchor-id="dw2-a5">
+<span class="header-section-number">5.1.5</span> Activity 5: <strong><code>arrange()</code></strong>
+</h3>
+<p>We are now master of selections!!! Let’s move on to a different skill and test our ability to change the order of the data in the rows.</p>
+<ul>
+<li>Arrange the data by the following two variables: <code>HitOrMiss</code> (putting hits - 1 - first), and <code>JudgedSpeed</code> (putting fast judgement - 1 - first) and store this in an object named <code>arrange_dat</code>.</li>
+</ul></section><section id="dw2-a6" class="level3" data-number="5.1.6"><h3 data-number="5.1.6" class="anchored" data-anchor-id="dw2-a6">
+<span class="header-section-number">5.1.6</span> Activity 6: <strong><code>filter()</code></strong>
+</h3>
+<p>Great! But what about keeping and removing some of the rows with <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>! You may need to refer back to the different boolean operations to complete this activity!</p>
+<p>Use <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> to extract all Participants in the original <code>pong_data</code> that had:</p>
+<ul>
+<li>a fast speed judgement;</li>
+<li>for speeds 2, 4, 5, and 7;</li>
+<li>but missed the ball.</li>
+</ul>
+<p>Store this remaining data in a new object called <code>pong_fast_miss</code></p>
+<div class="webex-solution">
+<button>
+Helpful Hint
+</button>
+<div class="cell" data-layout-align="center">
+<p>There are three parts to this filter so it is best to think about them individually and then combine them.</p>
+<ol type="1">
+<li><p>Filter all fast speed judgements (<code>JudgedSpeed</code>)</p></li>
+<li><p>Filter for the speeds 2, 4, 5 and 7 (<code>BallSpeed</code>)</p></li>
+<li><p>Filter for all Misses (<code>HitOrMiss</code>)</p></li>
+</ol>
+<p>You could do this in three filters where each one uses the output of the preceding one, or remember that filter functions can take more than one argument. You may also need to use <code>==</code> instead of just <code>=</code>.</p>
+</div>
+</div>
+<p><br></p>
+<div class="cell" data-layout-align="center" type="warning">
+<div class="warning">
+<p>
+The filter function is very useful but if used wrongly can give you very misleading findings. This is why it is very important to always check your data after you perform an action. Let’s say you are working in comparative psychology and have run a study looking at how cats, dogs and horses perceive emotion. Let’s say the data is all stored in the tibble <code>animal_data</code> and there is a column called <code>animals</code> that tells you what type of animal your participant was. Imagine you wanted all the data from just cats:
+</p>
+<p>
+<code>filter(animal_data, animals == “cat”)</code>
+</p>
+<p>
+Exactly! But what if you wanted cats and dogs?
+</p>
+<p>
+<code>filter(animal_data, animals == “cat”, animals == “dog”)</code>
+</p>
+<p>
+Right? Wrong! This actually says “give me everything that is a cat and a dog”. But nothing is a cat and a dog, that would be weird - like a dat or a cog. In fact you want everything that is either a cat <strong>or</strong> a dog, so you could do:
+</p>
+<p>
+<code>filter(animal_data, animals == “cat”| animals == “dog”)</code>
+</p>
+<p>
+Or you could do:
+</p>
+<p>
+<code>filter(animal_data, animals %in% c(“cat”, “dog”))</code>
+</p>
+<p>
+You used this last approach, using <code>%in%</code>, when producing your own graph of <code>babynames</code>. It is a very helpful function so don’t forget it exists!
+</p>
+</div>
+</div>
+</section><section id="dw2-a7" class="level3" data-number="5.1.7"><h3 data-number="5.1.7" class="anchored" data-anchor-id="dw2-a7">
+<span class="header-section-number">5.1.7</span> Activity 7: <strong><code>mutate()</code></strong>
+</h3>
+<p>Brilliant work on getting this far! You really are starting to get the hang of wrangling! Now, let’s test our skills on <code>mutate()</code> but first we want to introduce a new function to help understand what we can do with <code>mutate()</code>.</p>
+<p>Previously you learned how the <code>mutate()</code> function lets us create a new variable in our dataset. However, it also has another useful function in that it can be combined with <code>recode()</code> to create new columns with recoded values - where you change how different categories in a variable are represented. For example, the code below adds a new column to <code>pong_data</code> in which the judged speed is converted into a text label where <code>1</code> will become <code>Fast</code>, and <code>0</code> will become “Slow”. Run the code and look at the output!</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>pong_data_mut1 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>                    <span class="at">JudgedSpeedLabel =</span> <span class="fu">recode</span>(JudgedSpeed, </span>
+<span id="cb5-3"><a href="#cb5-3"></a>                                                    <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Fast"</span>, </span>
+<span id="cb5-4"><a href="#cb5-4"></a>                                                    <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"Slow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code here is a bit complicated but we will explain:</p>
+<ul>
+<li>
+<code>JudgedSpeedLabel</code> is the name of your new column,</li>
+<li>
+<code>JudgedSpeed</code> is the name of the old column and the one to take information from
+<ul>
+<li>Note that if you gave the recoded variable the same name as the original it would overwrite it.</li>
+</ul>
+</li>
+<li>Fast and Slow are the new codings of 1 and 0 respectively in the new column</li>
+</ul>
+<p>The <code>mutate()</code> function is also handy for making some calculations on or across columns in your data. For example, say you realise you made a mistake in your experiment where your participant numbers should be 1 higher for every participant, i.e.&nbsp;Participant 1 should actually be numbered as Participant 2, etc. You could do something like:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>pong_data_mut2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data, </span>
+<span id="cb6-2"><a href="#cb6-2"></a>                         <span class="at">Participant =</span> Participant <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note here, in this second example, you are giving the new column the same name as the old column <code>Participant</code>. Again, happens here is that you are <strong>overwriting the old data with the new data</strong>! So watch out, mutate can create a new column or overwrite an existing column, depending on what you tell it to do!</p>
+<p>Ok great! Now, imagine you realise that there is a mistake in your dataset and that all your trial numbers are wrong. The first trial (trial number 1) was a practice so should be excluded and your experiment actually started on trial 2. Your turn! You can either do this following activity in two separate steps and create a new object each time, or you can uses pipes <code>%&gt;%</code> and do it it one line of code. The final tibble should be stored in an object called <code>pong_data_renumbered</code>.</p>
+<ul>
+<li>Filter out all trials with the number 1 (<code>TrialNumber</code> column) from <code>pong_data</code>.</li>
+<li>Then use the <code>mutate()</code> function to renumber all the remaining trial numbers, starting them at one again instead of two, overwriting the values that were in the <code>TrialNumber</code> column.</li>
+</ul>
+<div class="webex-solution">
+<button>
+Helpful Hint
+</button>
+<div class="cell" data-layout-align="center">
+<ul>
+<li><p>Step 1. filter(<code>TrialNumber</code> does not equal 1). Remember to store this output in a variable if you are not using pipes.</p></li>
+<li><p>Step 2. mutate(<code>TrialNumber</code> = TrialNumber minus 1)</p></li>
+</ul>
+</div>
+</div>
+</section><section id="dw2-a8" class="level3" data-number="5.1.8"><h3 data-number="5.1.8" class="anchored" data-anchor-id="dw2-a8">
+<span class="header-section-number">5.1.8</span> Activity 8: Summarising data</h3>
+<p>Excellent! And now that we have done some wrangling we want to calculate some descriptive statistics for the data using <code>summarise()</code>. <code>summarise()</code> has a range of internal functions that make life really easy, e.g.&nbsp;<code>mean</code>, <code>sum</code>, <code>max</code>, <code>min</code>, etc. See the <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">dplyr cheatsheet</a> for more examples. And additional one that we will use from time-to-time is <code>na.rm = TRUE</code> which we can add when calculating descriptive statistics to say what to do if there are missing values. Missing values often appear as <code>NA</code> and the job of <code>na.rm</code> is to say whether to remove (rm) the NAs (<code>na.rm = TRUE</code>) or not (<code>na.rm = FALSE</code>). If you try to calculate values from data that have NAs, such as the mean, it would return <code>NA</code> as the result because it doesn’t know how to average nothing. This dataset has no missing values but we will show you how to use it here and try to remember this argument exists, as you will use it often and it save you a lot of time!</p>
+<p>Back to the activity. Here, using the data in <code>pong_data_renumbered</code> we will calculate:</p>
+<ul>
+<li>The total (sum) number of hits for each combination of background colour and paddle length.</li>
+<li>The mean number of hits for each combination of background colour and paddle length</li>
+</ul>
+<p>Remember though, because we want to produce descriptive statistics by groups (background colour and paddle length), there are two steps:</p>
+<ul>
+<li>First we group the data by <code>BackgroundColor</code> and <code>PaddleLength</code> using <code>group_by()</code>.</li>
+<li>Then, we use <code>summarise()</code> to calculate the total and mean number of hits (<code>HitOrMiss</code>) using the grouped data</li>
+</ul>
+<p>We will do this activity using pipes to reduce the amount of code we write. Remember to try and read the code out loud and to pronounce <code>%&gt;%</code> as ‘and then’. Copy and paste the below code into a new code chunk and run the code.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>pong_data_hits <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb7-3"><a href="#cb7-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
+<span id="cb7-5"><a href="#cb7-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-6"><a href="#cb7-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
+<span id="cb7-7"><a href="#cb7-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'BackgroundColor'. You can override using
+the `.groups` argument.</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+Remember, if you get what looks like an error that says “<code>summarise()</code> has grouped output by ‘BackgroundColor’. You can override using the <code>.groups</code> argument.”, don’t worry, this isn’t an error it’s just the code telling you how the final object is grouped.
+</p>
+</div>
+</div>
+<ul>
+<li>View <code>pong_data_hits</code> and answer the following questions to see if you have completed the task correctly.</li>
+</ul>
+<ul>
+<li>What was the total number of hits made with the small paddle (50) and the blue colour background?
+<div id="radio_GRRWAOXEAM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GRRWAOXEAM" value=""><span>1057</span></label><label><input type="radio" autocomplete="off" name="radio_GRRWAOXEAM" value=""><span>516</span></label><label><input type="radio" autocomplete="off" name="radio_GRRWAOXEAM" value="answer"><span>527</span></label><label><input type="radio" autocomplete="off" name="radio_GRRWAOXEAM" value=""><span>1059</span></label>
+</div>
+</li>
+</ul>
+<ul>
+<li>To three decimal places, what was the mean number of hits made with the small paddle (50) and the blue colour background?
+<div id="radio_PZZNIUXEKG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PZZNIUXEKG" value=""><span>0.92</span></label><label><input type="radio" autocomplete="off" name="radio_PZZNIUXEKG" value="answer"><span>0.459</span></label><label><input type="radio" autocomplete="off" name="radio_PZZNIUXEKG" value=""><span>0.922</span></label><label><input type="radio" autocomplete="off" name="radio_PZZNIUXEKG" value=""><span>0.451</span></label>
+</div>
+</li>
+</ul>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The name of the column within <code>pong_data_hits</code> is <code>total_hits</code>; this is what you called it in the above code. You could have called it anything you wanted but always try to use something sensible.</li>
+<li>Make sure to call your variables something you (and anyone looking at your code) will understand and recognize later (i.e.&nbsp;not variable1, variable2, variable3. etc.), and avoid spaces (use_underscores_never_spaces).</li>
+</ul></section></section><section id="ungrouping-counting-pipes---quick-notes" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="ungrouping-counting-pipes---quick-notes">
+<span class="header-section-number">5.2</span> Ungrouping, counting, pipes - quick notes!</h2>
+<p>You have done some superb work today! Congratulations. You should be really proud of yourself. Before ending we just want to show a couple more new functions and approaches that will help in future activities.</p>
+<section id="dw2-a9" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="dw2-a9">
+<span class="header-section-number">5.2.1</span> Counting data</h3>
+<p>First we want to look at different ways of counting your observations. Often it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you’ve done something with the code and your mean or median is only being calculated using a subset of the values you intended.</p>
+<p>There are two ways of counting the number of observations. The first uses <code>summarise()</code> and the function <code>n()</code> within the <code>summarise()</code>. For example, the below code is the same as the previous activity, but with an extra line that will add a column called <code>n</code> to the table that contains the number of observations in each group. This is useful for when you want to add a column of counts to a table of other descriptive statistics.</p>
+<ul>
+<li>
+<strong>Note:</strong> the function is <code>n()</code> and takes no arguments it is just left blank as shown, <code>n()</code>. However, as in other functions, the <code>n</code> prior to the <code>=</code> could be called anything you want the column to be called, e.g.&nbsp;<code>n = n()</code> or <code>number = n()</code> would do the same but just give different names to the column.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>pong_count <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb9-3"><a href="#cb9-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
+<span id="cb9-5"><a href="#cb9-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-6"><a href="#cb9-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
+<span id="cb9-7"><a href="#cb9-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-8"><a href="#cb9-8"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, if you’re just interested in counts rather than also calculating descriptives, this above method is a bit clunky. Instead, we can use the function <code>count()</code> which is specifically designed to count observations and doesn’t require the use of <code>summarise()</code> or <code>group_by()</code>.</p>
+<p>To count the total number of observations in the dataset for example we would do:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>pong_data <span class="sc">%&gt;%</span> <span class="co"># take pong_data</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">count</span>() <span class="co"># and then count the observations in it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And it would give the answer of:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">n</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">4608</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Alternatively, to count the number of observations in each level of a variable you could do:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">count</span>(BackgroundColor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And it would give the answer of:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">BackgroundColor</th>
+<th style="text-align: right;">n</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">blue</td>
+<td style="text-align: right;">2304</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">red</td>
+<td style="text-align: right;">2304</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Which method you use will depend on whether you want to add the counts to a table of other descriptives, but both functions are useful to know.</p>
+</section><section id="dw2-ungroup" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="dw2-ungroup">
+<span class="header-section-number">5.2.2</span> Ungrouping data</h3>
+<p>After grouping data together using the <code>group_by()</code> function and then performing a task on it, e.g.&nbsp;<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, it can be very good practice to ungroup the data before performing another function - by piping it into the <code>ungroup()</code> function - this is related to what the warnings about <code>summarise()</code> mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won’t always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.</p>
+<p>This is an example of how you might use the function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>pong_data_ungroup <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>           PaddleLength) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  ungroup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw2-pipes" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="dw2-pipes">
+<span class="header-section-number">5.2.3</span> Recapping Pipes (<strong><code>%&gt;%</code></strong>)</h3>
+<p>And finally today we just want to throw in a quick recap on <a class="glossary">pipes<span class="def"></span></a>. We have used pipes a little above but you might still not have got the hang of it so reading through this will help a little. Remember where pipes become most useful is when we <strong>string a series of functions together</strong>, rather than using them as separate steps and having to save the data each time under a new variable name and getting ourselves all confused. In non-piped code we have to create a new object each time, for example, <code>data</code>, <code>data_filtered</code>, <code>data_arranged</code>, <code>data_grouped</code>, <code>data_summarised</code> just to get to the final one we actually want. This creates a lot of variables and tibbles in our environment and can make everything unclear, difficult to follow, and eventually slow down our computer. Piped code however uses one variable name, saving space in the environment, and is clear and easy to read. With pipes we skip unnecessary steps and avoid cluttering our environment.</p>
+<p>Here is an example of code that doesn’t use pipes to find how many hits there were with the large paddle length and the red background:</p>
+<ul>
+<li>First we group the data accordingly, storing it in <code>pong_data_group</code>
+</li>
+<li>And then we summarise it, storing the answer in <code>total_hits</code>
+</li>
+<li>And finally we filter just the red, large paddle hits</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>pong_data_group <span class="ot">&lt;-</span> <span class="fu">group_by</span>(pong_data, </span>
+<span id="cb13-2"><a href="#cb13-2"></a>                            BackgroundColor, </span>
+<span id="cb13-3"><a href="#cb13-3"></a>                            PaddleLength)</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a>pong_data_hits <span class="ot">&lt;-</span> <span class="fu">summarise</span>(pong_data_group, </span>
+<span id="cb13-6"><a href="#cb13-6"></a>                            <span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss))</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_hits, </span>
+<span id="cb13-9"><a href="#cb13-9"></a>                                   BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
+<span id="cb13-10"><a href="#cb13-10"></a>                                   PaddleLength <span class="sc">==</span> <span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Alternatively we can make our code even more efficient, using less code, by stringing our sequence of functions together using pipes. This would look like:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb14-3"><a href="#cb14-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">filter</span>(BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
+<span id="cb14-6"><a href="#cb14-6"></a>         PaddleLength <span class="sc">==</span> <span class="dv">250</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So the code becomes easier to read as you remember the data goes into one function “and then” into another, “and then” into another, and so on.</p>
+<p>It is also worth remembering that whilst pipes and code can be written in a single line, but it is much easier to see what the pipe is doing if each function takes its own line. You just have to remember that every time you add a function to the pipeline, add a <code>%&gt;%</code> first and <strong>note that when using separate lines for each function, the <code>%&gt;%</code> must appear at the end of the line and not the start of the next line</strong>. Compare the two examples below. The first won’t work but the second will because the second puts the pipes at the end of the line where they need to be!</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Piped version that won't work </span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>data_arrange <span class="ot">&lt;-</span> pong_data </span>
+<span id="cb15-3"><a href="#cb15-3"></a>                <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>                <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(BallSpeed) </span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># Piped version that will work </span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>data_arrange <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>                <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>                <span class="fu">arrange</span>(BallSpeed) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="dw2-fin" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="dw2-fin">
+<span class="header-section-number">5.3</span> Finished!</h2>
+<p>Brilliant work again! We have now learned a number of functions and verbs that you will need as you progress through this book. You will use them in the next chapter so be sure to go over these and try them out to make yourself more comfortable with them. If you have any questions please post them on Teams. <strong>Happy Wrangling!</strong></p>
+</section><section id="dw2-test" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="dw2-test">
+<span class="header-section-number">5.4</span> Test yourself</h2>
+<section id="knowledge-questions" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="knowledge-questions">
+<span class="header-section-number">5.4.1</span> Knowledge Questions</h3>
+<ol type="1">
+<li>What type of data would these most likely be:</li>
+</ol>
+<ul>
+<li><p>Male = <select class="webex-select"><option value="blank"></option>
+<option value="answer">Character</option>
+<option value="">Numeric</option>
+<option value="">Integer</option></select></p></li>
+<li><p>7.15 = <select class="webex-select"><option value="blank"></option>
+<option value="">Character</option>
+<option value="answer">Double</option>
+<option value="">Integer</option></select></p></li>
+<li><p>137 = <select class="webex-select"><option value="blank"></option>
+<option value="">Character</option>
+<option value="">Double</option>
+<option value="answer">Integer</option></select></p></li>
+</ul>
+<div class="webex-solution">
+<button>
+Explain these answers
+</button>
+<div class="cell" data-layout-align="center">
+<p>There is a lot of different types of data and as well as different types of levels of measurements and it can get very confusing. It’s important to try to remember which is which because you can only do certain types of analyses on certain types of data and certain types of measurements. For instance, you can’t take the average of Characters just like you can’t take the average of Categorical data. Likewise, you can do any maths on Double data, just like you can on Interval and Ratio data. Integer data is funny in that sometimes it is Ordinal and sometimes it is Interval, sometimes you should take the median, sometimes you should take the mean. The main point is to always know what type of data you are using and to think about what you can and cannot do with them.</p>
+<ul>
+<li>Note that the last answer, 137, could also be double as it isn’t clear if it could take a decimal or not.</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+<ol start="2" type="1">
+<li>Which of the Wickham Six would you use to sort columns from smallest to largest:
+<div id="radio_VDYFBAIIWS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VDYFBAIIWS" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_VDYFBAIIWS" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_VDYFBAIIWS" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_VDYFBAIIWS" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_VDYFBAIIWS" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_VDYFBAIIWS" value=""><span>summarise</span></label>
+</div>
+</li>
+<li>Which of the Wickham Six would you use to calculate the mean of a column:
+<div id="radio_HTUNLWSOCM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HTUNLWSOCM" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_HTUNLWSOCM" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_HTUNLWSOCM" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_HTUNLWSOCM" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_HTUNLWSOCM" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_HTUNLWSOCM" value="answer"><span>summarise</span></label>
+</div>
+</li>
+<li>Which of the Wickham Six would you use to remove certain observations - e.g.&nbsp;remove all males:
+<div id="radio_RWHYHFVBRN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RWHYHFVBRN" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_RWHYHFVBRN" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_RWHYHFVBRN" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_RWHYHFVBRN" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_RWHYHFVBRN" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_RWHYHFVBRN" value=""><span>summarise</span></label>
+</div>
+</li>
+<li>What does this line of code say? <code>data %&gt;% filter() %&gt;% group_by() %&gt;% summarise()</code>:
+<div id="radio_IXHFHBMEAM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IXHFHBMEAM" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_IXHFHBMEAM" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_IXHFHBMEAM" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_IXHFHBMEAM" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
+</div>
+</li>
+</ol></section><section id="dw2-debug" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="dw2-debug">
+<span class="header-section-number">5.4.2</span> Debugging tips</h3>
+<p>There are no debugging challenges today as we have done a lot of work but here are some tips to keep in mind.</p>
+<ul>
+<li>Remember to run the library and not just write the code</li>
+<li>Make sure you have spelt the data file name <strong>exactly</strong> as it is shown. Spaces and everything. Do not change the name of the csv file, fix your code instead. If you have a different name for your file than someone else then your code is not reproducible.</li>
+<li>Remember when uploading data we use <code>read_csv()</code> which has an underscore, whereas the data file itself will have a dot in its name, <code>filename.csv</code>.</li>
+<li>Check that the datafile is actually in the folder you have set as your working directory.</li>
+<li>Remember to start a new session each time you start a new analysis - the more functions and packages you use the great a chance of conflicting functions.</li>
+<li>Watch the spelling of functions and remember to put the data first. Often people forget to include the data as they are focussing on what they want to do.</li>
+<li>Always look at the output of your functions as you build the code. Often code runs but it doesn’t do what you think it is doing because you wrote the code wrong. Code only does what you tell it to do!</li>
+<li>When using pipes, remember that you only need the data once, at the start.</li>
+<li>If separating pipes across different lines, remember the line ends with the pipe, it does not start with the pipe.</li>
+<li>And lastly, remember that only the data changes, the skills stay the same. Always look back to when you had the code working and go from there.</li>
+</ul></section></section><section id="dw2-sols" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="dw2-sols">
+<span class="header-section-number">5.5</span> Solutions to Activities</h2>
+<p>Below you will find the solutions to the above questions. Only look at them after giving the questions a good try and speaking to the tutor about any issues.</p>
+<section id="dw2-a3sol" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="dw2-a3sol">
+<span class="header-section-number">5.5.1</span> Activity 3</h3>
+<ul>
+<li>To include variables we would name all the variables we want:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>select_dat <span class="ot">&lt;-</span> <span class="fu">select</span>(pong_data, </span>
+<span id="cb16-2"><a href="#cb16-2"></a>                     Participant, </span>
+<span id="cb16-3"><a href="#cb16-3"></a>                     PaddleLength, </span>
+<span id="cb16-4"><a href="#cb16-4"></a>                     TrialNumber, </span>
+<span id="cb16-5"><a href="#cb16-5"></a>                     BackgroundColor, </span>
+<span id="cb16-6"><a href="#cb16-6"></a>                     HitOrMiss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>in contrast, to exclude variables we would name the ones we don’t want and put a <code>-</code> prior to the name:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>select_dat <span class="ot">&lt;-</span><span class="fu">select</span>(pong_data, </span>
+<span id="cb17-2"><a href="#cb17-2"></a>                    <span class="sc">-</span>JudgedSpeed, </span>
+<span id="cb17-3"><a href="#cb17-3"></a>                    <span class="sc">-</span>BallSpeed, </span>
+<span id="cb17-4"><a href="#cb17-4"></a>                    <span class="sc">-</span>BlockNumber)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw2-a4sol" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="dw2-a4sol">
+<span class="header-section-number">5.5.2</span> Activity 4</h3>
+<ul>
+<li>To reorder variables using the <code>select()</code> we state the order of the variables we want them in. Note that this only works on column order.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>reorder_dat <span class="ot">&lt;-</span> <span class="fu">select</span>(pong_data, </span>
+<span id="cb18-2"><a href="#cb18-2"></a>                      BallSpeed, </span>
+<span id="cb18-3"><a href="#cb18-3"></a>                      HitOrMiss, </span>
+<span id="cb18-4"><a href="#cb18-4"></a>                      JudgedSpeed, </span>
+<span id="cb18-5"><a href="#cb18-5"></a>                      Participant, </span>
+<span id="cb18-6"><a href="#cb18-6"></a>                      TrialNumber)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw2-a5sol" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="dw2-a5sol">
+<span class="header-section-number">5.5.3</span> Activity 5</h3>
+<ul>
+<li>To arrange the rows by certain columns we use <code>arrange()</code> but you need to remember to include <code>desc()</code> to change it from running smallest-to-largest to largest-to-smallest.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>arrange_dat <span class="ot">&lt;-</span> <span class="fu">arrange</span>(pong_data, </span>
+<span id="cb19-2"><a href="#cb19-2"></a>                       <span class="fu">desc</span>(HitOrMiss), </span>
+<span id="cb19-3"><a href="#cb19-3"></a>                       <span class="fu">desc</span>(JudgedSpeed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw2-a6sol" class="level3" data-number="5.5.4"><h3 data-number="5.5.4" class="anchored" data-anchor-id="dw2-a6sol">
+<span class="header-section-number">5.5.4</span> Activity 6</h3>
+<ul>
+<li><p>Remembering that filters can take more than one argument then the below code would filter for data where:</p></li>
+<li><p>JudgedSpeed is 1 AND</p></li>
+<li><p>BallSpeed is either 2, 4, 5, or 7, AND</p></li>
+<li><p>HitOrMiss is 0.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>pong_fast_miss <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
+<span id="cb20-2"><a href="#cb20-2"></a>                         JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>, </span>
+<span id="cb20-3"><a href="#cb20-3"></a>                         BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>), </span>
+<span id="cb20-4"><a href="#cb20-4"></a>                         HitOrMiss <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dw2-a7sol" class="level3" data-number="5.5.5"><h3 data-number="5.5.5" class="anchored" data-anchor-id="dw2-a7sol">
+<span class="header-section-number">5.5.5</span> Activity 7</h3>
+<p>If you didn’t use pipes then the following code would be appropriate:</p>
+<ul>
+<li>First you filter. And remember that you can call the first object <code>pong_data_filt</code> anything that makes sense to you and others.</li>
+<li>Then in a separate step you mutate.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>pong_data_filt <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
+<span id="cb21-2"><a href="#cb21-2"></a>                         TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) </span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data_filt, </span>
+<span id="cb21-5"><a href="#cb21-5"></a>                               <span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And if you used pipes this would be the solution:</p>
+<ul>
+<li>Remember you include the data once, and the pipes end the line, they do not start the line.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
+<span id="cb22-2"><a href="#cb22-2"></a>                               TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>which could also be written as below - which some find better to remember the data goes in first and only once:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">5.6</span> Words from this Chapter</h2>
+<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">chunk</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">console</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">descriptive</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">double</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">environment</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">function</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">package</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pipe</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tibble</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">working directory</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
+
+
+</section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./04-wrangling-1.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./06-wrangling-3.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>
