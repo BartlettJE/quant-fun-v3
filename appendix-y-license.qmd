@@ -4,4 +4,4 @@ This book is licensed under Creative Commons Attribution-ShareAlike 4.0 Internat
 
 ## Citation
 
-Nordmann, E., & McAleer, P. (2021). Fundamentals of Quantitative Analysis (Version 2.0). https://psyteachr.github.io/quant-fun-v2/
+Bartlett, J.E. & Toivo, W. (2024). Fundamentals of Quantitative Analysis (Version 3.0). https://github.com/BartlettJE/quant-fun-v3
