@@ -1,4 +1,4 @@
-# Programming basics
+# Introduction to programming with R/R Studio
 
 In this chapter, we will cover how to use R and RStudio at the University of Glasgow, as well as some basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, however, even if you've used R before, or have experience in programming, there may be some helpful hints and tips so please make sure you read through this chapter before the moving on.
 

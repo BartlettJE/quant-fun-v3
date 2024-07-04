@@ -43,21 +43,25 @@ book:
   - index.qmd
   - 00-foreword.qmd
   - 01-programming-basics.qmd
-  - 02-intro-to-r.qmd
-  - 03-loading-data.qmd
+  - 02-starting-with-data.qmd
+  - 03-intro-data-viz.qmd
   - 04-wrangling-1.qmd
   - 05-wrangling-2.qmd
   - 06-wrangling-3.qmd
-  - 07-data-viz.qmd
-  - 09-correlation.qmd
-  - 10-t-tests.qmd
-  - 11-power.qmd
-  - 12-missing-data.qmd
-  - 13-visualisation.qmd
-  - 14-anova.qmd
-  - 15-factorial-anova.qmd
-  - 16-regression.qmd
-  - 17-multiple-regression.qmd
+  - 07-more-visualisation.qmd
+  - 08-lm-continuous.qmd
+  - 09-lm-categorical.qmd
+  - 10-power.qmd
+  - 11-screening-data.qmd
+  - 12-anova.qmd
+  - 13-factorial-anova.qmd
+  - 14-multiple-regression.qmd
+  - 15-dissertation-prep.qmd
+  - 16-analysis-journeys.qmd
+  - 17-analysis-journey-1.qmd
+  - 18-analysis-journey-2.qmd
+  - 19-analysis-journey-3.qmd
+  - 20-analysis-journey-4.qmd
   appendices:
   - appendix-a-installing-r.qmd
   - appendix-a1-updating-packages.qmd

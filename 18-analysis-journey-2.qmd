@@ -1,0 +1,3 @@
+# Analysis Journey 2: Simple Linear Regression
+
+Activity on simple linear regression. 
