@@ -70,7 +70,7 @@ book:
   - appendix-b-symbols.qmd
   - appendix-d-probability.qmd
   - appendix-y-license.qmd
-bibliography: include/references.bib
+bibliography: include/book.bib
 csl: include/apa.csl
 format:
   html:
