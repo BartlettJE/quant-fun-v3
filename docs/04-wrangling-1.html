@@ -52,7 +52,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -61,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./05-wrangling-2.html" rel="next">
-<link href="./03-loading-data.html" rel="prev">
+<link href="./03-intro-data-viz.html" rel="prev">
 <link href="./images/logos/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -161,25 +180,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-foreword.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Foreword</span></a>
+ <span class="menu-text">How to use this book</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-programming-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Programming basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to programming with R/R Studio</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-intro-to-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Intro to R</span></span></a>
+  <a href="./02-starting-with-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Starting with data</span></span></a>
+  <a href="./03-intro-data-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Data Visualisation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -202,62 +221,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-data-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Intro to Data Visualisation</span></span></a>
+  <a href="./07-more-visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Correlations</span></span></a>
+  <a href="./08-lm-continuous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one contiuous predictor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-t-tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">t-tests</span></span></a>
+  <a href="./09-lm-categorical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression with one categorical predictor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Power and Effect Sizes</span></span></a>
+  <a href="./10-power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-missing-data.html" class="sidebar-item-text sidebar-link">
+  <a href="./11-screening-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Screening Data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-visualisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisation</span></span></a>
+  <a href="./12-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">One-way ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">One-way ANOVA</span></span></a>
+  <a href="./13-factorial-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-factorial-anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
+  <a href="./14-multiple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  <a href="./15-dissertation-prep.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Dissertation Preparation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./17-multiple-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+  <a href="./16-analysis-journeys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Analysis Journeys</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-analysis-journey-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-analysis-journey-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-analysis-journey-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Analysis Journey 3: ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-analysis-journey-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Analysis Journey 4: Multiple Linear Regression.</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -370,13 +413,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 </header><p>So far we having been starting to get our head around data and storing them in <a class="glossary">objects<span class="def"></span></a> but as you will learn, data comes in lots of different formats. One of the most common formats is that of a <a class="glossary">two-dimensional table<span class="def"></span></a> (the two dimensions being rows and columns). Usually, each row stands for a separate <a class="glossary">object<span class="def"></span></a> (e.g.&nbsp;a subject), and each column stands for a different variable (e.g.&nbsp;a response, category, or group). A key benefit of tabular data is that it allows you to store different <a class="glossary">types of data<span class="def"></span></a>, e.g.&nbsp;numerical measurements, alphanumeric labels, categorical descriptors, etc, all in one place.</p>
-<p>One of the core skills you will learn when working with data is <a class="glossary">data wrangling<span class="def"></span></a>. This means completing tasks such as determining <a class="glossary">outliers<span class="def"></span></a>, clearing up erroneous values, changing the structure of tables, merging information stored in separate tables, reducing the data down to a subset of observations, and producing data summaries. It may surprise you to learn that researchers actually spend far more of time cleaning and preparing their data than they spend actually analysing it. Some have estimated that up to 80% of time spent on data analysis involves such data preparation tasks <span class="citation" data-cites="dasu2003">(<a href="#ref-dasu2003" role="doc-biblioref"><strong>dasu2003?</strong></a>)</span>!</p>
+<p>One of the core skills you will learn when working with data is <a class="glossary">data wrangling<span class="def"></span></a>. This means completing tasks such as determining <a class="glossary">outliers<span class="def"></span></a>, clearing up erroneous values, changing the structure of tables, merging information stored in separate tables, reducing the data down to a subset of observations, and producing data summaries. It may surprise you to learn that researchers actually spend far more of time cleaning and preparing their data than they spend actually analysing it. Some have estimated that up to 80% of time spent on data analysis involves such data preparation tasks <span class="citation" data-cites="dasu2003">(<a href="#ref-dasu2003" role="doc-biblioref">Dasu &amp; Johnson, 2003</a>)</span>!</p>
 <p>When you ask people about data wrangling, many people seem to operate under the assumption that the only approach is the painstaking and time-consuming cutting and pasting of data within a proprietary spreadsheet programs like Excel. Indeed, many may waste days, weeks, and even months manually transforming their data through the laborious cutting, copying, and pasting of data. Wrangling your data manually, by hand, however is not only a terrible use of your time, but it is error-prone and not <a class="glossary">reproducible<span class="def"></span></a>. Additionally, in this day and age where we can easily collect massive datasets online, it is just not conceivable to organise, clean, and prepare this data by hand, and so the alternative and reproducible approach you have begun to learn is highly beneficial.</p>
 <p>In short, being able to perform some key data wrangling skills will allow you the opportunity to thrive, not only as a psychologist but in any of the numerous roles that require handling data. You see the truth is that although every dataset presents unique challenges, there are some systematic principles you should follow that will make your analyses easier, less error-prone, more efficient, and more reproducible.Putting that another way, the data changes but the skills stay the same!</p>
 <p>So now let’s get into learning some new skills. In this lesson you will see how data wrangling skills will allow you to efficiently get answers to nearly any question you might want to ask about your data. By learning how to properly make your computer do the hard and boring work for you, you can focus on the bigger issues.</p>
 <section id="tidyverse" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="tidyverse">
 <span class="header-section-number">4.1</span> Tidyverse</h2>
-<p>In the first chapter we introduced a <a class="glossary">package<span class="def"></span></a> called <code>tidyverse</code> and it is going to be at the core of a lot of the data skills you develop. The <code>tidyverse</code> <a href="https://www.tidyverse.org/" target="_blank">https://www.tidyverse.org/</a> <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref"><strong>tidyverse?</strong></a>)</span> is actually a collection of packages developed by a team led by the world-famous data scientist Hadley Wickham. Those core packages contained within <code>tidyverse</code> are <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>ggplot2</code>, and <code>tibble</code>, and within these six core packages you will have access to <a class="glossary">functions<span class="def"></span></a> that will pretty much cover everything you need in order to be able to wrangle and visualise your data.. Again, don’t worry about trying to remember all the different packages and what they all do, that will come with practice. The main thing to note however is that previously when you typed <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> into your code, you will have seen that it loads in all of these packages in one go. You will learn how to use a whole host of functions from the <code>tidyverse</code> as we progress, but in this chapter we are going to focus on functions from the <code>dplyr</code> package, mainly for data wrangling, and <code>ggplot2</code> for visualisation (i.e.&nbsp;creating images and figures).</p>
+<p>In the first chapter we introduced a <a class="glossary">package<span class="def"></span></a> called <code>tidyverse</code> and it is going to be at the core of a lot of the data skills you develop. The <code>tidyverse</code> <a href="https://www.tidyverse.org/" target="_blank">https://www.tidyverse.org/</a> <span class="citation" data-cites="tidyverse">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham, 2017</a>)</span> is actually a collection of packages developed by a team led by the world-famous data scientist Hadley Wickham. Those core packages contained within <code>tidyverse</code> are <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>ggplot2</code>, and <code>tibble</code>, and within these six core packages you will have access to <a class="glossary">functions<span class="def"></span></a> that will pretty much cover everything you need in order to be able to wrangle and visualise your data.. Again, don’t worry about trying to remember all the different packages and what they all do, that will come with practice. The main thing to note however is that previously when you typed <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> into your code, you will have seen that it loads in all of these packages in one go. You will learn how to use a whole host of functions from the <code>tidyverse</code> as we progress, but in this chapter we are going to focus on functions from the <code>dplyr</code> package, mainly for data wrangling, and <code>ggplot2</code> for visualisation (i.e.&nbsp;creating images and figures).</p>
 <p>Looking at the <code>dplyr</code> package specifically, it contains six very important functions based on common English verbs to help readability of the code. These six verbs are often referred to as the Wickham Six “one-table” dplyr verbs as they perform actions on a single table of data. Those six functions are:</p>
 <table class="table">
 <thead><tr class="header">
@@ -1341,6 +1384,14 @@ Solution
 <p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-dasu2003" class="csl-entry" role="listitem">
+Dasu, T., &amp; Johnson, T. (2003). <em>Exploratory data mining and data cleaning</em>. Wiley-Interscience.
+</div>
+<div id="ref-tidyverse" class="csl-entry" role="listitem">
+Wickham, H. (2017). <em>Tidyverse: Easily install and load the ’tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>
+</div>
+</div>
 </section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
@@ -1921,8 +1972,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./03-loading-data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Starting with data</span></span>
+      <a href="./03-intro-data-viz.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Data Visualisation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
