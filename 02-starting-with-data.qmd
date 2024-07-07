@@ -41,14 +41,11 @@ library(tidyverse)
 
 ## The data
 
-For this chapter we are going to be using real data from the following paper:
+For this chapter, we use real data from @woodworth_data_2018 '[Web-based Positive Psychology Interventions: A Reexamination of Effectiveness](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.35){target="_blank"}'. It would be useful to read the abstract to give you a sense of what the paper is about and what the data might look like, but in summary, the files contain data from two scales as well as demographic information about participants. The two scales are:
 
-[Woodworth, R.J., O'Brien-Malone, A., Diamond, M.R. and Schüz, B., 2018. Data from, ‘Web-based Positive Psychology Interventions: A Reexamination of Effectiveness’. Journal of Open Psychology Data, 6(1).](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.35/)
+- The Authentic Happiness Inventory (AHI).
 
-It would be good to read through this paper even briefly, or just the abstract, to give you a sense of what the paper is about and what the data might look like, but in summary the files contain data from two scales as well as demographic information about participants. The two scales are:
-
-* the Authentic Happiness Inventory (AHI), 
-* and the Center for Epidemiological Studies Depression (CES-D) scale. 
+- The Center for Epidemiological Studies Depression (CES-D) scale. 
 
 ### Activity 3: Read in data {#ld-a3}
 

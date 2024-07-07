@@ -52,7 +52,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -408,10 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To get a better understanding of how some of these tests run we will look at running an example of a between-subjects t-test and a within-subjects t-test through a series of activities. Remember that the solutions are at the bottom of the page if you are stuck, and please do ask questions on the forums.</p>
 <section id="between-subjects-t-tests-two-sample" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="between-subjects-t-tests-two-sample">
 <span class="header-section-number">9.1</span> Between-Subjects t-tests (two-sample)</h2>
-<p>We will begin by looking at the between-subjects t-test which is used for comparing the outcome in two groups of different people. Here we will be using data from Schroeder and Epley (2015) on the perception of people from their job applications. You can take a look at the Psychological Science article here, <a href="https://doi.org/10.1177/0956797615572906" target="_blank">Schroeder, J. and Epley, N. (2015). The sound of intellect: Speech reveals a thoughtful mind, increasing a job candidate’s appeal. Psychological Science, 26, 277–891.</a>, if you like but it is not essential for completing the activities. The abstract from this article explains more about the different experiments conducted, and we will be specifically looking at the data set from Experiment 4, based on information from the <a href="https://sites.trinity.edu/osl/data-sets-and-activities/t-test-activities" target="_blank">Open Stats Lab</a>. The abstract reads:</p>
-<blockquote class="blockquote">
-<p>A person’s mental capacities, such as intellect, cannot be observed directly and so are instead inferred from indirect cues. We predicted that a person’s intellect would be conveyed most strongly through a cue closely tied to actual thinking: his or her voice. Hypothetical employers (Experiments 1-3b) and professional recruiters (Experiment 4) watched, listened to, or read job candidates’ pitches about why they should be hired. These evaluators (the employers) rated a candidate as more competent, thoughtful, and intelligent when they heard a pitch rather than read it and, as a result, had a more favourable impression of the candidate and were more interested in hiring the candidate. Adding voice to written pitches, by having trained actors (Experiment 3a) or untrained adults (Experiment 3b) read them, produced the same results. Adding visual cues to audio pitches did not alter evaluations of the candidates. For conveying one’s intellect, it is important that one’s voice, quite literally, be heard.</p>
-</blockquote>
+<p>We will begin by looking at the between-subjects t-test which is used for comparing the outcome in two groups of different people. Here we will be using data from <a href="https://doi.org/10.1177/0956797615572906" target="_blank">‘The sound of intellect: Speech reveals a thoughtful mind, increasing a job candidate’s appeal’</a> <span class="citation" data-cites="schroeder_sound_2015">(<a href="references.html#ref-schroeder_sound_2015" role="doc-biblioref">Schroeder &amp; Epley, 2015</a>)</span>. The abstract explains more about their study but for the purposes of this activity, we focus Experiment 4.</p>
 <p>To summarise, 39 professional recruiters from Fortune 500 companies evaluated job pitches of M.B.A. candidates from the University of Chicago Booth School of Business. The methods and results appear on pages 887-889 of the article if you want to look at them specifically for more details and the original data, in <strong>wide</strong> format, can be found at the <a href="https://drive.google.com/open?id=0Bz-rhZ21ShvOei1MM24xNndnQ00" target="_blank">Open Stats Lab</a> website for later self-directed learning. Today however, we will be working with a modified version in “tidy” format which can be downloaded below and what we plan to do is reproduce the results from the article on Pg 887.</p>
 <section id="data-and-descriptives" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="data-and-descriptives">
 <span class="header-section-number">9.1.1</span> Data and Descriptives</h3>
@@ -1382,6 +1398,11 @@ Show our write-up
 <p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-schroeder_sound_2015" class="csl-entry" role="listitem">
+Schroeder, J., &amp; Epley, N. (2015). The <span>Sound</span> of <span>Intellect</span>: <span>Speech</span> <span>Reveals</span> a <span>Thoughtful</span> <span>Mind</span>, <span>Increasing</span> a <span>Job</span> <span>Candidate</span>’s <span>Appeal</span>. <em>Psychological Science</em>, <em>26</em>(6), 877–891. <a href="https://doi.org/10.1177/0956797615572906">https://doi.org/10.1177/0956797615572906</a>
+</div>
+</div>
 </section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */

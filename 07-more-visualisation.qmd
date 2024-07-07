@@ -8,7 +8,7 @@ In this chapter we are going to focus on visualising data using `ggplot2`. You'v
 
 In this chapter, you won't be asked to write any code yourself, we will give you all the example code. Instead, play with the arguments, change TRUE to FALSE and vice-versa, change the values and colours. This will help you learn what each bit does. 
 
-For all of the activities in this chapter we are going to use data from  Experiment 3 of [Zhang, T., Kim, T., Brooks, A. W., Gino, F., & Norton, M. I. (2014). A "present" for the future: The unexpected value of rediscovery. Psychological Science, 25, 1851-1860.](https://journals.sagepub.com/doi/abs/10.1177/0956797614542274).
+For all of the activities in this chapter, we are going to use data from Experiment 3 of [A "present" for the future: The unexpected value of rediscovery](https://journals.sagepub.com/doi/abs/10.1177/0956797614542274){target="_blank"} [@zhang_present_2014].
 
 To help you understand the data we're visualising, here is the abstract:
 

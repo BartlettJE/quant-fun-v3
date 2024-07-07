@@ -5,8 +5,10 @@
 `r glossary("Data Visualisation")`. Being able to visualise our data, and relationships between our variables, is an incredibly useful and important skill. Before we do any statistical analyses or present any summary statistics, we should visualise our data as it is:
 
 1. A quick and easy way to check our data make sense, and to identify any unusual trends.
+
 2. A way to honestly present the features of our data to anyone who reads our research.
-4. A means of checking that our data fits with the assumptions of our `r glossary("descriptive")` and `r glossary("inferential")` tests and of the statistical analyses that we intend to use.
+
+3. A means of checking that our data fits with the assumptions of our `r glossary("descriptive")` and `r glossary("inferential")` tests and of the statistical analyses that we intend to use.
 
 As Grolemund and Wickham tell us in [R for Data Science](http://r4ds.had.co.nz/introduction.html){target="_blank"}:
 
@@ -22,7 +24,7 @@ knitr::include_graphics("images/layers2.PNG")
 
 ## Setting up to Visaulise
 
-We will use the same data files as in Chapter 2, Starting with Data, as we already know what the data contains so we can focus just on visualising it. 
+We will use the same files from @woodworth_data_2018 as in Chapter 2 - Creating reproducible documents - as you already know what the data contains, so we can focus just on visualising it. 
 
 #### Activity 1: Set-up {#introviz-a1}
 

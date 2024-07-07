@@ -52,7 +52,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -431,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><p>In this chapter we are going to focus on visualising data using <code>ggplot2</code>. You’ve already created a number of different plots including bar charts, scatterplots, histograms, qq-plots, and violin-boxplots, but now we will show you how to customise your plots further to give you a better idea of the range and flexibility of visualising data in R.</p>
 <p>In this chapter, you won’t be asked to write any code yourself, we will give you all the example code. Instead, play with the arguments, change TRUE to FALSE and vice-versa, change the values and colours. This will help you learn what each bit does.</p>
-<p>For all of the activities in this chapter we are going to use data from Experiment 3 of <a href="https://journals.sagepub.com/doi/abs/10.1177/0956797614542274">Zhang, T., Kim, T., Brooks, A. W., Gino, F., &amp; Norton, M. I. (2014). A “present” for the future: The unexpected value of rediscovery. Psychological Science, 25, 1851-1860.</a>.</p>
+<p>For all of the activities in this chapter, we are going to use data from Experiment 3 of <a href="https://journals.sagepub.com/doi/abs/10.1177/0956797614542274" target="_blank">A “present” for the future: The unexpected value of rediscovery</a> <span class="citation" data-cites="zhang_present_2014">(<a href="references.html#ref-zhang_present_2014" role="doc-biblioref">Zhang et al., 2014</a>)</span>.</p>
 <p>To help you understand the data we’re visualising, here is the abstract:</p>
 <blockquote class="blockquote">
 <p>Although documenting everyday activities may seem trivial, four studies reveal that creating records of the present generates unexpected benefits by allowing future rediscoveries. In Study 1, we used a time-capsule paradigm to show that individuals underestimate the extent to which rediscovering experiences from the past will be curiosity provoking and interesting in the future. In Studies 2 and 3, we found that people are particularly likely to underestimate the pleasure of rediscovering ordinary, mundane experiences, as opposed to extraordinary experiences. Finally, Study 4 demonstrates that underestimating the pleasure of rediscovery leads to time-inconsistent choices: Individuals forgo opportunities to document the present but then prefer rediscovering those moments in the future to engaging in an alternative fun activity. Underestimating the value of rediscovery is linked to people’s erroneous faith in their memory of everyday events. By documenting the present, people provide themselves with the opportunity to rediscover mundane moments that may otherwise have been forgotten.</p>
@@ -1091,6 +1110,11 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 <p>And you’re done! As we’ve said throughout this chapter, you do not need to remember all of this code, you just need to remember what’s possible and where to find the examples that you can modify.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-zhang_present_2014" class="csl-entry" role="listitem">
+Zhang, T., Kim, T., Brooks, A. W., Gino, F., &amp; Norton, M. I. (2014). A <span>“<span>Present</span>”</span> for the <span>Future</span>: <span>The</span> <span>Unexpected</span> <span>Value</span> of <span>Rediscovery</span>. <em>Psychological Science</em>, <em>25</em>(10), 1851–1860. <a href="https://doi.org/10.1177/0956797614542274">https://doi.org/10.1177/0956797614542274</a>
+</div>
+</div>
 </section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */

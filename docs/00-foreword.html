@@ -21,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -189,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-lm-continuous.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one contiuous predictor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one continuous predictor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -334,8 +353,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#welcome-to-the-fundamentals-of-quantitative-analysis" id="toc-welcome-to-the-fundamentals-of-quantitative-analysis" class="nav-link active" data-scroll-target="#welcome-to-the-fundamentals-of-quantitative-analysis">Welcome to the Fundamentals of Quantitative Analysis</a></li>
-  <li><a href="#how-to-use-this-book-and-the-accompanying-videos" id="toc-how-to-use-this-book-and-the-accompanying-videos" class="nav-link" data-scroll-target="#how-to-use-this-book-and-the-accompanying-videos">How to use this book and the accompanying videos</a></li>
-  <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
+  <li><a href="#how-to-use-this-book" id="toc-how-to-use-this-book" class="nav-link" data-scroll-target="#how-to-use-this-book">How to use this book</a></li>
+  <li><a href="#accompanying-videos" id="toc-accompanying-videos" class="nav-link" data-scroll-target="#accompanying-videos">Accompanying videos</a></li>
+  <li><a href="#data-set-acknowledgements" id="toc-data-set-acknowledgements" class="nav-link" data-scroll-target="#data-set-acknowledgements">Data set acknowledgements</a></li>
+  <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link" data-scroll-target="#intended-learning-outcomes">Intended learning outcomes</a></li>
   </ul>
 </nav>
     </div>
@@ -361,27 +382,44 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="welcome-to-the-fundamentals-of-quantitative-analysis" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="welcome-to-the-fundamentals-of-quantitative-analysis">Welcome to the Fundamentals of Quantitative Analysis</h2>
-<p>This book has been written and designed to help you learn core data skills through R and RStudio. These skills will lead to you being able to manipulate and analyse quantitative data - a key component of any accredited Psychology programme. In addition to this book the team will support you with helpful skills demonstration videos, and we would encourage you to use Teams to ask any questions that you have.</p>
-<p>The ability to work with quantitative data is a key skill for Psychologists and by using R as our tool, for working with data, we can also promote reproducible research practices. Although at first it may seem like writing a programming script is more time-consuming than other point-and-click approaches, this is not the case! Once you have written a script that does what you need it to do, you can easily re-run your analysis without having to go through each step again manually which is a) easier and b) less likely to result in errors if you do something slightly different or forget one of the steps.</p>
-<p>Crucially, with an analysis script other researchers can also see how you got from the raw data to the statistics you report in your final paper. Sharing analysis scripts online on sites such as the <a href="https://osf.io/" target="_blank">Open Science Framework</a> is now seen as an important open science practice. Even if you don’t continue with quantitative research, in the future, the skills you develop on this course will allow you to evaluate quantitative research and to understand what goes on behind the scenes with data before the conclusions are presented, allowing you to become much more confident and competent consumers and users of research.</p>
+<p>We wrote and designed this book to support RM1 and RM2 on the MSc Psychology Conversion programme, where you will learn core quantitative data skills using R and R Studio. In addition to this book, the course team will support you with demonstration videos and we encourage you to use Teams or office hours to ask any questions.</p>
+<p>The ability to work with quantitative data is a key skill for psychologists and by using R and R Studio as our tool, we can also promote reproducible research practices. Although at first it may seem like writing a programming script is more time-consuming than other point-and-click approaches, you speed up with practice. Once you have written a script that does what you need it to do, you can easily re-run your analysis without having to go through each step again manually which is easier and less likely to result in errors if you do something slightly different or forget one of the steps.</p>
+<p>Crucially, with an analysis script, you can demonstrate to other researchers how you got from the raw data to the statistics you report in your final paper. Sharing analysis scripts alongside published articles on sites such as the <a href="https://osf.io/" target="_blank">Open Science Framework</a> is now an important open science practice. Even if you do not continue with quantitative research yourself, the skills you develop throughout these courses will allow you to evaluate quantitative research and to understand what goes on behind the scenes to produce their numbers and conclusions, allowing you to become a much more confident and competent consumer and user of research.</p>
 </section>
-<section id="how-to-use-this-book-and-the-accompanying-videos" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="how-to-use-this-book-and-the-accompanying-videos">How to use this book and the accompanying videos</h2>
-<p>Within the book itself, for many of the initial chapters, we will provide the code you need to use. We would always strongly encourage you to type out the code yourself, as this is good practice for learning to code, but remember you can copy and paste from the book if you need to. Typing the code will seem much slower at first and you will make errors, lots of them, but you will learn much more quickly this way so do try to write the code yourself where you can.</p>
-<p>We also provide the solutions to many of the activities. No-one is going to check whether you tried to figured out an activity yourself rather than going straight to the solution but remember this, if you copy and paste without thinking, you will learn nothing. Learning data skills and the knowledge that underpins those skills is much like learning a language - the more you practice and the more you use it, the better you become.</p>
-<p>Additionally, a number of the chapters of this book have an associated video or videos. These videos are there to support you as you get comfortable in your data skills. However, it is important that you use them wisely. You should always try to work through each chapter of the book (or if you prefer each activity) on your own first, and only then watch the video if you get stuck, or for extra information.</p>
-<p>Finally, this book is a living document. What that means is that on occasion we will make updates to the book such as fixing typos and including additional detail or activities. When substantial changes are made, we will create new support materials such as an accompanying video. However, it would be impossible to record a new video every time we make a minor change to an activity, therefore, sometimes there may be slight differences between the videos and the content of this book. Where there are differences between the book and the video, the book should always be considered the definitive version.</p>
+<section id="how-to-use-this-book" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-book">How to use this book</h2>
+<p>We follow a scaffolding approach in this book to build your skills from following along to independently being able to apply these skills to new scenarios.</p>
+<p>In each chapter, we first guide you through a set of demonstrations focused on different data skills, highlighting key parts of the output and what it means (just keep in mind we focus on the practical side of doing and interpreting in this book, the course lectures cover the conceptual background). We strongly encourage you to type out the code yourself, as this is good practice for learning to code, but remember you can copy and paste from the book if you need to. Typing the code will seem much slower at first and you will make lots errors, but you will learn much more quickly this way.</p>
+<p>After these demonstrations, we give you little activities and independent tasks using a new data set to test your understanding using interactive questions. This gives you instant feedback on whether you could apply the skills or if there is something you need to check again.</p>
+<p>Some of these activities are what we call “error mode”. You never stop making errors when coding - we still make them all the time - but you get faster at recognising and fixing common sources of error. <span class="citation" data-cites="hoffman_students_2021">Hoffman &amp; Elmi (<a href="references.html#ref-hoffman_students_2021" role="doc-biblioref">2021</a>)</span> demonstrated incorporating errors in learning materials can be useful to students, so we will give you a few segments of code containing errors that you need to fix. Seeing errors can be one of the most intimidating parts of learning to code, so this activity will normalise making errors and develop your problem solving skills.</p>
+<p>Finally, there are four data analysis journeys we will direct you to at key points throughout the book. We will tell you the end product you are aiming for from a new raw data set we provide, and your job is to break that end product down and identify a list of tasks to get there. Completing an independent data analysis task is the skill set you will need once it comes to assessments and your dissertation, as this is the point where you are the one making decisions.</p>
+<p>In contrast to assignments, for all of these activities and data analysis journeys we provide solutions at the end of each chapter. No one is going to check whether you tried to figure out an activity yourself, rather than going straight to the solution, but if you copy and paste without thinking, you will learn nothing. Developing data skills and the knowledge that underpins those skills is like learning a language: the more you practice and the more you use it, the better you become.</p>
+</section>
+<section id="accompanying-videos" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="accompanying-videos">Accompanying videos</h2>
+<p>Most of the chapters of this book have an associated video that you can access via Moodle. These videos are there to support you as you get comfortable in your data skills as you can see how someone else interacts with R / R Studio. However, it is important that you use them wisely. You should always try to work through each chapter of the book on your own first, and only then watch the video if you get stuck, or for extra information.</p>
+<p>Finally, this book is a living document. That means occasionally we will make updates to the book such as fixing typos and including additional detail or activities. When we make substantial changes, we will create new support materials such as the videos. However, it would be impossible to record a new video every time we make a minor change to an activity, so you may notice slight differences between the videos and the content of this book. Where there are differences between the book and the video, the book should always be considered the definitive version.</p>
+</section>
+<section id="data-set-acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="data-set-acknowledgements">Data set acknowledgements</h2>
+<p>Almost all the demonstrations and activities in this book use real data from published research to reinforce how these skills are the same ones researchers use behind the scenes of their articles. We use a range of data from our own research, open data that researchers share with their papers, and some we adapted from the <a href="https://sites.trinity.edu/osl/data-sets-and-activities/t-test-activities" target="_blank">Open Stats Lab</a> who created activities using open data.</p>
 </section>
 <section id="intended-learning-outcomes" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
-<p>By the end of this course students will be able to:</p>
+<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended learning outcomes</h2>
+<p>By the end of the courses associated with this book, students will be able to:</p>
 <ul>
-<li>Clean and wrangle data into appropriate forms for analysis.</li>
-<li>Visualise data using a range of plots.</li>
-<li>Conduct and interpret a core set of statistical tests (t-test, correlation, ANOVA, regression).</li>
+<li><p>Write reproducible reports using R Markdown.</p></li>
+<li><p>Clean and wrangle data into appropriate forms for analysis.</p></li>
+<li><p>Visualise data using a range of plots.</p></li>
+<li><p>Conduct and interpret a core set of statistical tests from the general linear model (regression, ANOVA).</p></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-hoffman_students_2021" class="csl-entry" role="listitem">
+Hoffman, H. J., &amp; Elmi, A. F. (2021). Do <span>Students</span> <span>Learn</span> <span>More</span> from <span>Erroneous</span> <span>Code</span>? <span>Exploring</span> <span>Student</span> <span>Performance</span> and <span>Satisfaction</span> in an <span>Error</span>-<span>Free</span> <span>Versus</span> an <span>Error</span>-full <span>SAS</span>® <span>Programming</span> <span>Environment</span>. <em>Journal of Statistics and Data Science Education</em>, <em>0</em>(0), 1–13. <a href="https://doi.org/10.1080/26939169.2021.1967229">https://doi.org/10.1080/26939169.2021.1967229</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
