@@ -4,7 +4,7 @@
 
 In the lecture reading materials you have worked through calculating an ANOVA by hand in order to gain a conceptual understanding. However, when you run an ANOVA, typically the computer does all of these calculations for you. In this chapter we'll show you how to run a one-factor and factorial ANOVA using the `afex` package and post-hoc tests using a package called `emmeans`. 
 
-In this example we will be using data from experiment 2 of [James, E. L., Bonsall, M. B., Hoppitt, L., Tunbridge, E. M., Geddes, J. R., Milton, A. L., & Holmes, E. A. (2015). Computer game play reduces intrusive memories of experimental trauma via reconsolidation-update mechanisms. Psychological Science, 26, 1201-1215](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4526368/).
+In this example, we will be using data from experiment 2 of ['Computer game play reduces intrusive memories of experimental trauma via reconsolidation-update mechanisms'](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4526368/){target="_blank"} [@james_computer_2015].
 
 The abstract for the paper is as follows:
 

@@ -52,7 +52,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -393,10 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><p>There is currently much debate (and hype) surrounding smartphones and their effects on well-being, especially with regard to children and teenagers. We’ll be looking at data from this recent study of English adolescents:</p>
-<blockquote class="blockquote">
-<p>Przybylski, A. &amp; Weinstein, N. (2017). A Large-Scale Test of the Goldilocks Hypothesis. <em>Psychological Science</em>, <em>28</em>, 204–215.</p>
-</blockquote>
+</header><p>There is currently much debate (and hype) surrounding smartphones and their effects on well-being, especially with regard to children and teenagers. We will be looking at data from <a href="https://journals.sagepub.com/doi/abs/10.1177/0956797614542274" target="_blank">‘A Large-Scale Test of the Goldilocks Hypothesis’</a> <span class="citation" data-cites="przybylski_large-scale_2017">(<a href="references.html#ref-przybylski_large-scale_2017" role="doc-biblioref">Przybylski &amp; Weinstein, 2017</a>)</span> who studied English adolescents.</p>
 <p>This was a large-scale study that found support for the “Goldilocks” hypothesis among adolescents: that there is a “just right” amount of screen time, such that any amount more or less than this amount is associated with lower well-being. This was a huge survey study: the data contain responses from over 120,000 participants!</p>
 <p>Fortunately, the authors made the data from this study openly available, which allows us to dig deeper into their results. In this exercise, we will look at whether the relationship between screen time and well-being is modulated by participants’ (self-reported) gender.</p>
 <p>The dependent measure used in the study was the <a href="https://warwick.ac.uk/fac/med/research/platform/wemwbs/">Warwick-Edinburgh Mental Well-Being Scale (WEMWBS)</a>. This is a 14-item scale with 5 response categories, summed together to form a single score ranging from 14-70.</p>
@@ -960,6 +976,11 @@ Solution
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-przybylski_large-scale_2017" class="csl-entry" role="listitem">
+Przybylski, A. K., &amp; Weinstein, N. (2017). A <span>Large</span>-<span>Scale</span> <span>Test</span> of the <span>Goldilocks</span> <span>Hypothesis</span>: <span>Quantifying</span> the <span>Relations</span> <span>Between</span> <span>Digital</span>-<span>Screen</span> <span>Use</span> and the <span>Mental</span> <span>Well</span>-<span>Being</span> of <span>Adolescents</span>. <em>Psychological Science</em>, <em>28</em>(2), 204–215. <a href="https://doi.org/10.1177/0956797616678438">https://doi.org/10.1177/0956797616678438</a>
+</div>
+</div>
 </section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */

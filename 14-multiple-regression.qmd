@@ -1,8 +1,6 @@
 # Multiple Regression
 
-There is currently much debate (and hype) surrounding smartphones and their effects on well-being, especially with regard to children and teenagers.  We'll be looking at data from this recent study of English adolescents:
-
-> Przybylski, A. & Weinstein, N. (2017). A Large-Scale Test of the Goldilocks Hypothesis. *Psychological Science*, *28*, 204--215.
+There is currently much debate (and hype) surrounding smartphones and their effects on well-being, especially with regard to children and teenagers. We will be looking at data from ['A Large-Scale Test of the Goldilocks Hypothesis'](https://journals.sagepub.com/doi/abs/10.1177/0956797614542274){target="_blank"} [@przybylski_large-scale_2017] who studied English adolescents. 
 
 This was a large-scale study that found support for the "Goldilocks" hypothesis among adolescents: that there is a "just right" amount of screen time, such that any amount more or less than this amount is associated with lower well-being.  This was a huge survey study: the data contain responses from over 120,000 participants! 
 

@@ -52,7 +52,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -384,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><section id="background-intrusive-memories" class="level3" data-number="12.0.1"><h3 data-number="12.0.1" class="anchored" data-anchor-id="background-intrusive-memories">
 <span class="header-section-number">12.0.1</span> Background: Intrusive memories</h3>
 <p>In the lecture reading materials you have worked through calculating an ANOVA by hand in order to gain a conceptual understanding. However, when you run an ANOVA, typically the computer does all of these calculations for you. In this chapter we’ll show you how to run a one-factor and factorial ANOVA using the <code>afex</code> package and post-hoc tests using a package called <code>emmeans</code>.</p>
-<p>In this example we will be using data from experiment 2 of <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4526368/">James, E. L., Bonsall, M. B., Hoppitt, L., Tunbridge, E. M., Geddes, J. R., Milton, A. L., &amp; Holmes, E. A. (2015). Computer game play reduces intrusive memories of experimental trauma via reconsolidation-update mechanisms. Psychological Science, 26, 1201-1215</a>.</p>
+<p>In this example, we will be using data from experiment 2 of <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4526368/" target="_blank">‘Computer game play reduces intrusive memories of experimental trauma via reconsolidation-update mechanisms’</a> <span class="citation" data-cites="james_computer_2015">(<a href="references.html#ref-james_computer_2015" role="doc-biblioref">James et al., 2015</a>)</span>.</p>
 <p>The abstract for the paper is as follows:</p>
 <blockquote class="blockquote">
 <p>Memory of a traumatic event becomes consolidated within hours. Intrusive memories can then flash back repeatedly into the mind’s eye and cause distress. We investigated whether reconsolidation - the process during which memories become malleable when recalled - can be blocked using a cognitive task and whether such an approach can reduce these unbidden intrusions. We predicted that reconsolidation of a reactivated visual memory of experimental trauma could be disrupted by engaging in a visuospatial task that would compete for visual working memory resources. We showed that intrusive memories were virtually abolished by playing the computer game Tetris following a memory-reactivation task 24 hr after initial exposure to experimental trauma. Furthermore, both memory reactivation and playing Tetris were required to reduce subsequent intrusions (Experiment 2), consistent with reconsolidation-update mechanisms. A simple, non-invasive cognitive-task procedure administered after emotional memory has already consolidated (i.e., &gt; 24 hours after exposure to experimental trauma) may prevent the recurrence of intrusive memories of those emotional events.</p>
@@ -810,6 +829,11 @@ Solution
 <p>** Click tab to see solution **</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-james_computer_2015" class="csl-entry" role="listitem">
+James, E. L., Bonsall, M. B., Hoppitt, L., Tunbridge, E. M., Geddes, J. R., Milton, A. L., &amp; Holmes, E. A. (2015). Computer <span>Game</span> <span>Play</span> <span>Reduces</span> <span>Intrusive</span> <span>Memories</span> of <span>Experimental</span> <span>Trauma</span> via <span>Reconsolidation</span>-<span>Update</span> <span>Mechanisms</span>: <em>Psychological Science</em>, <em>26</em>(8), 1201–1215. <a href="https://doi.org/10.1177/0956797615583071">https://doi.org/10.1177/0956797615583071</a>
+</div>
+</div>
 </section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
