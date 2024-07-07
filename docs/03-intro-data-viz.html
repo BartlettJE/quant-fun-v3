@@ -52,7 +52,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -209,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-lm-continuous.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one contiuous predictor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one continuous predictor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -256,26 +275,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-analysis-journey-1.html" class="sidebar-item-text sidebar-link">
+  <a href="./16-analysis-journeys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Analysis Journeys</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-analysis-journey-1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./17-analysis-journey-2.html" class="sidebar-item-text sidebar-link">
+  <a href="./18-analysis-journey-2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./18-analysis-journey-3.html" class="sidebar-item-text sidebar-link">
+  <a href="./19-analysis-journey-3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Analysis Journey 3: ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./19-analysis-journey-4.html" class="sidebar-item-text sidebar-link">
+  <a href="./20-analysis-journey-4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Analysis Journey 4: Multiple Linear Regression.</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -385,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Visualisation is a fundamentally human activity. A good visualisation will show you things that you did not expect, or raise new questions about the data. A good visualisation might also hint that you’re asking the wrong question, or you need to collect different data. Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.</p>
 </blockquote>
-<p>The main package we use for visualisation within the <code>tidyverse</code> umbrella is called <strong><code>ggplot2</code></strong> and the main starting function of all visualisations is <code>ggplot()</code>. The reason we say the “main starting function” is that <code>ggplot()</code> builds plots by combining layers (see, for example, Figure @ref(fig:img-layers) from <span class="citation" data-cites="nordmann2021">(<a href="#ref-nordmann2021" role="doc-biblioref"><strong>nordmann2021?</strong></a>)</span>) - i.e.&nbsp;one function creates the first layer, the basic plot area, and you add functions and arguments to add additional layers such as the data, the labels, the colors, etc. If you’re used to making plots in other software this might seem a bit odd at first, however, it means that you can customise each layer separately in order to make very complex and beautiful figures with relative ease. You can get a sense of what is possible from (<a href="https://www.data-to-viz.com/">this website</a> but we will start off slow and build as we go!</p>
+<p>The main package we use for visualisation within the <code>tidyverse</code> umbrella is called <strong><code>ggplot2</code></strong> and the main starting function of all visualisations is <code>ggplot()</code>. The reason we say the “main starting function” is that <code>ggplot()</code> builds plots by combining layers (see, for example, Figure @ref(fig:img-layers) from <span class="citation" data-cites="nordmann2021">(<a href="references.html#ref-nordmann2021" role="doc-biblioref">Nordmann et al., 2021</a>)</span>) - i.e.&nbsp;one function creates the first layer, the basic plot area, and you add functions and arguments to add additional layers such as the data, the labels, the colors, etc. If you’re used to making plots in other software this might seem a bit odd at first, however, it means that you can customise each layer separately in order to make very complex and beautiful figures with relative ease. You can get a sense of what is possible from (<a href="https://www.data-to-viz.com/">this website</a> but we will start off slow and build as we go!</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -934,6 +965,11 @@ Explain these answers
 <p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-nordmann2021" class="csl-entry" role="listitem">
+Nordmann, E., McAleer, P., Toivo, W., Paterson, H., &amp; DeBruine, L. M. (2021). <em>Data visualisation using r, for researchers who don’t use r</em>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/4huvw">https://doi.org/10.31234/osf.io/4huvw</a>
+</div>
+</div>
 </section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */

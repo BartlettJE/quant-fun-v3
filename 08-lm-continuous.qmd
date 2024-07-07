@@ -1,4 +1,4 @@
-# Regression with one contiuous predictor
+# Regression with one continuous predictor
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(patchwork)

@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
-<title>Fundamentals of Quantitative Analysis - 8&nbsp; Regression with one contiuous predictor</title>
+<title>Fundamentals of Quantitative Analysis - 8&nbsp; Regression with one continuous predictor</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Overview</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-lm-continuous.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one continuous predictor</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-lm-continuous.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one contiuous predictor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one continuous predictor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one contiuous predictor</span>
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one continuous predictor</span>
 </h1>
 </div>
 
@@ -1141,31 +1141,31 @@ Explain these answers
 </div>
 <ol type="1">
 <li>What would this analysis show?
-<div id="radio_HJRMUDBXOU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HJRMUDBXOU" value=""><span>the effect of IQ on time spent reading at Home</span></label><label><input type="radio" autocomplete="off" name="radio_HJRMUDBXOU" value="answer"><span>the relationship between IQ and the time spent reading at home</span></label><label><input type="radio" autocomplete="off" name="radio_HJRMUDBXOU" value=""><span>the relationship between IQ and the time spent watching TV at home</span></label><label><input type="radio" autocomplete="off" name="radio_HJRMUDBXOU" value=""><span>the relationship between IQ and Reading Ability</span></label>
+<div id="radio_ZGWRCHUQOO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZGWRCHUQOO" value=""><span>the relationship between IQ and the time spent watching TV at home</span></label><label><input type="radio" autocomplete="off" name="radio_ZGWRCHUQOO" value=""><span>the effect of IQ on time spent reading at Home</span></label><label><input type="radio" autocomplete="off" name="radio_ZGWRCHUQOO" value="answer"><span>the relationship between IQ and the time spent reading at home</span></label><label><input type="radio" autocomplete="off" name="radio_ZGWRCHUQOO" value=""><span>the relationship between IQ and Reading Ability</span></label>
 </div>
 </li>
 <li>What type of correlation analysis is it?
-<div id="radio_QKTMIPSLJU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QKTMIPSLJU" value="answer"><span>two-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_QKTMIPSLJU" value=""><span>two-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_QKTMIPSLJU" value=""><span>one-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_QKTMIPSLJU" value=""><span>one-tailed pearson analysis</span></label>
+<div id="radio_SPMZCBJECX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SPMZCBJECX" value="answer"><span>two-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_SPMZCBJECX" value=""><span>two-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_SPMZCBJECX" value=""><span>one-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_SPMZCBJECX" value=""><span>one-tailed spearman analysis</span></label>
 </div>
 </li>
 </ol>
 <p>Now try running the code and then answering the following questions.</p>
 <ol start="3" type="1">
 <li>To three decimal places, what is the r-value of the correlation between IQ and the time spent reading at Home?
-<div id="radio_BLPZFVGNRP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BLPZFVGNRP" value=""><span>0.988</span></label><label><input type="radio" autocomplete="off" name="radio_BLPZFVGNRP" value="answer"><span>0.202</span></label><label><input type="radio" autocomplete="off" name="radio_BLPZFVGNRP" value=""><span>0.553</span></label><label><input type="radio" autocomplete="off" name="radio_BLPZFVGNRP" value=""><span>0.334</span></label>
+<div id="radio_XAFSDHQCZB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XAFSDHQCZB" value="answer"><span>0.202</span></label><label><input type="radio" autocomplete="off" name="radio_XAFSDHQCZB" value=""><span>0.553</span></label><label><input type="radio" autocomplete="off" name="radio_XAFSDHQCZB" value=""><span>0.334</span></label><label><input type="radio" autocomplete="off" name="radio_XAFSDHQCZB" value=""><span>0.988</span></label>
 </div>
 </li>
 <li>To three decimal places, what is the p-value of the correlation between IQ and the time spent reading at Home?
-<div id="radio_XAUMYWGQAP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XAUMYWGQAP" value=""><span>0.553</span></label><label><input type="radio" autocomplete="off" name="radio_XAUMYWGQAP" value=""><span>0.202</span></label><label><input type="radio" autocomplete="off" name="radio_XAUMYWGQAP" value=""><span>0.988</span></label><label><input type="radio" autocomplete="off" name="radio_XAUMYWGQAP" value="answer"><span>0.334</span></label>
+<div id="radio_OOMNCSOBKQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OOMNCSOBKQ" value=""><span>0.202</span></label><label><input type="radio" autocomplete="off" name="radio_OOMNCSOBKQ" value=""><span>0.988</span></label><label><input type="radio" autocomplete="off" name="radio_OOMNCSOBKQ" value="answer"><span>0.334</span></label><label><input type="radio" autocomplete="off" name="radio_OOMNCSOBKQ" value=""><span>0.553</span></label>
 </div>
 </li>
 <li>What is the degrees of freedom of the correlation between IQ and the time spent reading at Home?
-<div id="radio_HCBKMXWCHP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HCBKMXWCHP" value=""><span>25</span></label><label><input type="radio" autocomplete="off" name="radio_HCBKMXWCHP" value=""><span>0.988</span></label><label><input type="radio" autocomplete="off" name="radio_HCBKMXWCHP" value=""><span>0.553</span></label><label><input type="radio" autocomplete="off" name="radio_HCBKMXWCHP" value="answer"><span>23</span></label>
+<div id="radio_CQORMGTRPV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CQORMGTRPV" value=""><span>0.988</span></label><label><input type="radio" autocomplete="off" name="radio_CQORMGTRPV" value=""><span>25</span></label><label><input type="radio" autocomplete="off" name="radio_CQORMGTRPV" value=""><span>0.553</span></label><label><input type="radio" autocomplete="off" name="radio_CQORMGTRPV" value="answer"><span>23</span></label>
 </div>
 </li>
 </ol>
