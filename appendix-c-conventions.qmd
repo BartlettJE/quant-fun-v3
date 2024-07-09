@@ -21,20 +21,26 @@ This book will use the following conventions:
 You found it!
 ```
 
-::: {.info data-latex=""}
-Informational asides.
+::: {.callout-note}
+These boxes have little interesting - but not critical - bits of information. 
 :::
 
-::: {.warning data-latex=""}
-Notes to warn you about something.
+::: {.callout-important}
+These boxes warn you about something important in R / R Studio, so you pay attention when you use it. 
 :::
 
-::: {.dangerous data-latex=""}
-Notes about things that could cause serious errors.
+::: {.callout-warning}
+These boxes highlight where you need to be cautious when using or interpreting something, as it might be easy to make an error. 
 :::
 
-::: {.try data-latex=""}
-Try it yourself.
+::: {.callout-tip}
+# Try this
+These boxes will invite you to try something yourself, like complete independent activities or answer questions. 
+:::
+
+::: {.callout-caution collapse="true"} 
+# Solution
+These boxes will include small hints or solutions to check your understanding
 :::
 
 ```{r}
