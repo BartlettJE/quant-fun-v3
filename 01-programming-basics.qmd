@@ -1,36 +1,38 @@
 # Introduction to programming with R/R Studio
 
-In this chapter, we will cover how to use R and RStudio at the University of Glasgow, as well as some basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, however, even if you've used R before, or have experience in programming, there may be some helpful hints and tips so please make sure you read through this chapter before the moving on.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 
-This is a long chapter but we don't expect you to memorise all the information that is contained in it and some sections of it will not make sense until you start writing your own code - just make sure you know what help is available!
+In this chapter, we will cover interacting with R and RStudio. We will provide an overview of basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, but there should be helpful hints and tips even if you have used R or another programming language before before.
+
+**Chapter Intended Learning Outcomes**
+
+- ILO1
 
 ## R and RStudio
 
-In short, R is a programming language that you will write code in and **`r glossary("RStudio")`** is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it wouldn't look as good and it would be much harder without things like spell-checking and formatting. In a similar way, you can use R without RStudio but we wouldn't recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using two pieces of software which means that you will need both, you need to keep both up-to-date, and you should cite both in any work you do (see the Appendix on [citing R and RStudio](#citing-r-rstudio){target="_blank"} when needed).
+R is a programming language that you will write code in and **`r glossary("RStudio")`** is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it would not look as good and it would be much harder without things like spell-checking and formatting. 
+
+In a similar way, you can use R without RStudio but we wouldn not recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using two pieces of software. This means that you will need both, you need to keep both up-to-date, and you should cite both in any work you do (see the Appendix on [citing R and RStudio](#citing-r-rstudio){target="_blank"} when needed).
 
 But first we need to look at starting up R and RStudio. There are two ways you can use R for Psychology as a student here at the University of Glasgow. First, you can use a online version of R and R through your web browser and we will refer to this as the **R server**. Second, you can download and install R and RStudio for free on your laptop or desktop computer.
 
-**Which version of R should you use?**
-
-The advantage of using the **R server** is that you do not need to install anything on your machine, you simply access it through your web browser. On our server we have already installed all the software you need for this course. We recommend using the server if you have a computer that you cannot install R on (e.g., a Chromebook), or if you have problems with installing R on your computer. 
-
-The advantage to installing R on your computer (what we call a local installation) is that you do not need to be connected to the internet to use it, it is easier to save and manage your files, and there are no problems caused if the server stops working (a rare and short occurrence, but it does happen from time to time). 
-
-With the exception of saving files, both approaches are largely identical in how they work, however, our experience tells us that **if you can install R on your computer, you should**. If your computer cannot install R, or if you have technical problems during the installation you cannot resolve, then you should use the server. So in short we would highly recommend installing R and RStudio on your own machine as soon as you can. However, if you can't install them for some reason, or want to use the R server to get up and running on these first couple of chapters, whilst you install R in your own time, then that is also OK!
-
 ### Installing R and RStudio on your computer
 
-To use R and RStudio on your computer, please see [Installing R](https://psyteachr.github.io/ug1-practical/installing-r.html) which has links to detailed instructions and links to the files you need to download, as well as a links to a series of walkthroughs for installing R on different types of computers. Note that you need to install R, then RStudio, and most likely RTools.  These are all free software and do not take a lot of space on your computer. This video by [Danielle Navarro (choose the one for your own machine type)](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd){target="_blank"} is also highly recommended
+We recommend wherever possible installing R and RStudio on your own computer. This is known as a local installation as you do not need to be connected to the internet to use it. We find it is easier to save and manage your files, and you can take your computer wherever you go. 
 
-### R server
+However, we appreciate not everyone has a computer that will support R and RStudio. All of our computer lab and library spaces have R and RStudio installed, so you will always be able to access those for working through the materials and your assignments. If you cannot install R and RStudio on your computer and there are accessibility issues preventing you from using the university computers, please come and speak with your course leads who will advise alternative options.  
 
-If you prefer to use the R server for now, you will find the link to the R server on Moodle. Please note that the R server is only for use by students and staff in the School of Psychology and Neuroscience, University of Glasgow, and you will need your GUID and password to login. 
+To use R and RStudio on your computer, please see [Installing R](https://psyteachr.github.io/ug1-practical/installing-r.html){target="_blank"} which has detailed instructions and links to the files you need to download, as well as links to a series of walkthroughs for installing R and RStudio on different types of computers. This video by [Danielle Navarro (choose the one for your own machine type)](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd){target="_blank"} is also highly recommended
 
 ## Getting to know R Studio
 
-Whether on the server or your own machine, the first thing to do is to get ourselves orientated in RStudio. You will know in RStudio is that it has a number of windows. RStudio has a **`r glossary("console", display = "console window")`** that you can try out code in (appearing as the bottom left window in Figure \@ref(fig:img-rstudio)), there may be a **`r glossary("script")`** editor (top left - not show when you first open RStudio), a window showing functions and objects you have created in the **`r glossary("environment", display = "Environment")`** tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
+The first thing to do is to get ourselves orientated in RStudio. You will know in RStudio is that it has a number of windows. RStudio has a **`r glossary("console", display = "console window")`** that you can try out code in (appearing as the bottom left window in Figure @fig-img-rstudio, there may be a **`r glossary("script")`** editor (top left - not show when you first open RStudio), a window showing functions and objects you have created in the **`r glossary("environment", display = "Environment")`** tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
 
-```{r img-rstudio, echo=FALSE, fig.cap="RStudio interface"}
+```{r img-rstudio}
+#| label: img-rstudio
+#| fig.cap: "RStudio interface"
 
 knitr::include_graphics("images/rstudio.png")
 
