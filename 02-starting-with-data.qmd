@@ -1,4 +1,4 @@
-# Creating reproducible documents
+# Creating reproducible documents {#C2-repro-docs}
 
 Part of becoming a psychologist is formulating and asking research questions and then gathering data to enable you to answer those questions effectively. In order to do that, it is very important that you understand all aspects of the research process such as experimental design, ethics, data management and visualisation. 
 

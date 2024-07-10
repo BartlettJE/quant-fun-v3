@@ -1,7 +1,7 @@
 # Introduction to programming with R/R Studio
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 In this chapter, we will cover interacting with R and RStudio. We will provide an overview of basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, but there should be helpful hints and tips even if you have used R or another programming language before before.
@@ -28,39 +28,54 @@ To use R and RStudio on your computer, please see [Installing R](https://psyteac
 
 ## Getting to know R Studio
 
-The first thing to do is to get ourselves orientated in RStudio. You will know in RStudio is that it has a number of windows. RStudio has a **`r glossary("console", display = "console window")`** that you can try out code in (appearing as the bottom left window in Figure @fig-img-rstudio, there may be a **`r glossary("script")`** editor (top left - not show when you first open RStudio), a window showing functions and objects you have created in the **`r glossary("environment", display = "Environment")`** tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
+By default, RStudio has four windows:
 
-```{r img-rstudio}
-#| label: img-rstudio
+1. The **`r glossary("console")`**, where you can type R code in the bottom left (as shown in Figure @fig-img-rstudio).
+
+2. Eventually, there will be a **`r glossary("script")`** editor in the top left, but you will not see this when you open RStudio for the first time.
+
+3. The **`r glossary("environment")`** window in top right, where you will see things like data, functions, and objects that you create. 
+
+4. Finally, the bottom right window shows files, plots, packages, and help documentation. 
+
+```{r img-rstudio, echo=FALSE}
+#| label: fig-img-rstudio
 #| fig.cap: "RStudio interface"
 
 knitr::include_graphics("images/rstudio.png")
 
 ```
 
-You will learn more about how to use the features included in RStudio throughout this course, however, we would highly recommend at some point watching [RStudio Essentials 1](https://rstudio.com/resources/webinars/programming-part-1-writing-code-in-rstudio/) from the RStudio team. The video lasts ~30 minutes and gives a tour of the main parts of RStudio. 
+You will learn more about how to use the features included in RStudio throughout this course, but we recommend watching the [RStudio Essentials 1](https://posit.co/resources/videos/programming-part-1-writing-code-in-rstudio/){target="_blank"} series of videos from the Posit team (the company who maintain RStudio). The video we link here lasts around 30 minutes and gives a tour of the main parts of RStudio. 
 
 ### Console vs. scripts
 
-When you first open up RStudio you won't see a script like above, there will just be a single pane on the left, which is the console window. You can write code in the console window to test it out, but the key thing to note is that you can't save that code anywhere - if you shut down RStudio you lose your code. For this chapter only, we'll use the console window to show you some simple code examples but moving forward we will tell you to work in script files or what are called **`r glossary("R markdown", display = "R Markdown")`** files. We will look at these in later chapters but you can open a new script file a number of ways, the simplest of which is on the top menu of RStudio, selecting **`File >> New File >> R Script`**, and then you'll see the extra pane appear.
+When you first open up RStudio, you will not see an R script like above, there will just be the console window taking up the whole left half. You can write code in the console to test it out, but you cannot save that code anywhere, and you would lose all your code if you closed down RStudio. 
+
+For this chapter only, we will use the console window to show you some simple R code, but from Chapter 2 - [Creating reproducible documents ](#C2-repro-docs) - we will teach you to work in a type of R script called an **`r glossary("R markdown", display = "R Markdown")`** document which ends with the file name .Rmd. 
+
+You can open a new file in a number of ways, but the simplest is in the top menu of RStudio, selecting **`File >> New File >> R Markdown`** and clicking OK. You will then be able to see the extra pane in the top left like Figure @fig-img-rstudio.
 
 ## Writing code with functions and arguments
 
-Code in R is made up of **`r glossary("function", display = "functions")`**, and **`r glossary("argument", display = "arguments")`** that go into the functions, to create outputs. **Functions** in R execute specific tasks and normally take a number of **arguments**. If you're into linguistics you might want to think as these as verbs (function) that require a subject and an object (arguments). Another analogy is that of a toaster - a function would be the toaster and the type of bread and the setting would be the arguments, and the output would be your toast. But a key thing to spot is that functions end in brackets or parentheses, and the arguments go within the parenthesis. They tend to look a bit like this:
+R code is made up of **`r glossary("function", display = "functions")`** and **`r glossary("argument", display = "arguments")`** that go into the functions to create outputs. 
+**Functions** in R execute specific tasks and normally take one or more **arguments**. You can think of these concepts like a spoken language as verbs (function) that require a subject and an object (arguments). You could also think of them as a kind of recipe. Some recipes (function) are quite simple and have one or two ingredients (arguments), while other recipes are more complicated with many ingredients (arguments). 
+
+You can spot functions as they end in round brackets (known as parentheses, `()`), and the arguments go within the round brackets. They tend to look a bit like this:
 
 ```{r fake-function, eval = FALSE}
 function_name(argument1 = value, argument2 = value)
 ```
 
-That would be the layout of a function with two arguments and each argument takes a value. This will make more sense as you read on.
+That would be the layout of a function with two arguments and each argument takes a value. Bare with us as these concepts might feel super abstract until you start using them. 
 
-You will learn to use a lot of functions throughout this book and you can look up all the arguments that a function takes in the help documentation by using the format `?function`. As you will see, in functions, some arguments are required, and some are optional. Optional arguments will often use what is known as a default setting, value, or option (normally specified in the help documentation) if you do not enter any value. Again, like always leaving your toaster on the same setting - the toaster does the same task each time without you changing it.
+You will learn to use many functions throughout this book and you can look up all the arguments that a function takes in the help documentation by using the format `?function`. You will see some arguments are required while others are optional. Optional arguments will often use what is known as a default setting, value, or option (normally specified in the help documentation) if you do not enter any value.
 
-As an example, let’s look at the help documentation for the function `rnorm()` - a function which randomly generates a set of numbers from what is known as the **`r glossary("normal distribution", display = "Normal Distribution")`**. 
+As an example, let us look at the help documentation for the function `rnorm()` - a function which randomly generates a set of numbers from what is known as the **`r glossary("normal distribution", display = "Normal Distribution")`**. 
 
-### Activity 1
+### Activity 1 - Finding help documentation for functions
 
-* Open up RStudio (either on the server or on your machine) and in the console window, type the following code:  
+Open up RStudio and in the console window (bottom left), type the following code:  
 
 ```{r help-doc, eval=FALSE}
 
@@ -76,64 +91,76 @@ rnorm(n, mean = 0, sd = 1)
 
 In the **Arguments** section of the help, there are explanations for each of the arguments: 
 
-* `n` is the number of observations/numbers/data points we want to create, 
-* `mean` is the **`r glossary("mean")`** of the observations/numbers/data points we will create. 
-* and `sd` is the **`r glossary("standard deviation")`** of the observations/numbers/data points. 
+- `n` is the number of observations/numbers/data points we want to create, 
 
-In the **Details** section of the help it notes that if no values are entered for `mean` and `sd` it will use a default of 0 for the mean and 1 for the standard deviation. So these are the values the function will use for its arguments of `mean` and `sd` if you don't state any. However, because there is no **`r glossary("default value")`** for `n`, this means that you must state a value for the arguments `n`, otherwise the code won't run.
+- `mean` is the **`r glossary("mean")`** of the observations/numbers/data points we will create. 
 
-That might sound a little bit confusing so let's try an example. Still using `rnorm()` let's set the required argument `n` to ask R to produce 5 random numbers. 
+- and `sd` is the **`r glossary("standard deviation")`** of the observations/numbers/data points we will create. 
 
-### Activity 2
+In the **Details** section of the help, it notes that if no values are entered for `mean` and `sd` it will use a default of 0 for the mean and 1 for the standard deviation. So, these are the values the function will use for its arguments of `mean` and `sd` if you do not state any. However, because there is no **`r glossary("default value")`** for `n`, this means that you must state a value for the arguments `n`, otherwise the code will not run.
 
-* Type the following two lines of code into your console window. Press enter/return at the end of each line to "run" that line. So, type `set.seed(12042016)` and press enter/return and then type `rnorm(n = 5)` and press enter/return.  
+This is all still a little abstract, so let us try an example. Still using `rnorm()` let us set the required argument `n` to ask R to produce 5 random numbers. 
 
-```{r rnorm-n1, eval = FALSE}
-set.seed(12042016)
-rnorm(n = 5)
-```
+### Activity 2 - Running your first function
 
-And you will now see these numbers in your console window:
+Type the following two lines of code into your console window. Press enter/return on your keyboard at the end of each line to "run" that line. So, type `set.seed(10072024)` and press enter/return and then type `rnorm(n = 5)` and press enter/return. You will now see these numbers in your console window:
 
 ```{r rnorm-n2, echo = FALSE}
-set.seed(12042016)
+set.seed(10072024)
 rnorm(n = 5)
 ```
 
 ```{r rnorm-n3, echo = FALSE}
-set.seed(12042016)
+set.seed(10072024)
 mydat <- rnorm(5)
 
-mr <- round(mean(mydat),3)
-sdr <- round(sd(mydat),3)
+mr <- round(mean(mydat), 3)
+sdr <- round(sd(mydat), 3)
 ```
 
-These numbers have a mean close to 0 (M = `r mr`) and an SD close to 1 (SD = `r sdr`) - they are not exact because you only sampled a very small set and that sampling is random. But now we can play with the function and let's change the additional arguments to produce a different set of numbers. This time we will say we want 5 numbers again (`n = 5`) but we want our mean closer to 10 (`mean = 10`) and our standard deviation closer to 2 (`sd = 2`). We would do that as follows and you see the output numbers below.
+These numbers have a mean close to 0 (*M* = `r mr`) and a standard deviation (*SD*) close to 1 (*SD* = `r sdr`) - they are not exact because you only sampled a very small set and that sampling is random. 
+
+::: {.callout-note collapse="true"}
+# What does set.seed() do?
+You can get R to generate seemingly random numbers, but they are not totally random. Computers generate random numbers through a predictable process, but they pick a starting point based on something like the clock time. If you run `rnorm(n = 5)` several times in the console, you will see the five numbers are different each time. However, when you run `set.seed(10072024)` first, you will get the same five numbers every time, which is useful when you want a random but reproducible set of numbers. 
+:::
+
+Now, we can play with the function and change the additional arguments to produce a different set of numbers. This time we will say we want 5 numbers again (`n = 5`) but we want our mean closer to 10 (`mean = 10`) and our standard deviation closer to 2 (`sd = 2`). We would do that as follows and you should see the output numbers below.
 
 ```{r rnorm-n4}
-set.seed(12042016)
+set.seed(10072024)
+
 rnorm(n = 5, mean = 10, sd = 2)
 ```
 
 ```{r rnorm-n5, echo=FALSE}
-set.seed(12042016)
+set.seed(10072024)
 mydat <- rnorm(n = 5, mean = 10, sd = 2)
 
-mr <- round(mean(mydat),3)
-sdr <- round(sd(mydat),3)
+mr <- round(mean(mydat), 3)
+sdr <- round(sd(mydat), 3)
 ```
 
-This time, again we have produced 5 random numbers, but now this set of numbers has a mean close to 10 (M = `r mr`) and an sd close to 2 (`r sdr`) as specified. So from this we start to get a sense of arguments within functions and how we can change them, and how we can always remember to use the help documentation to help us understand what arguments a function requires.
+This time, we created 5 random numbers again, but this set has a mean close to 10 (*M* = `r mr`) and a SD close to 2 (*SD* = `r sdr`). Hopefully, you are starting to get a sense of arguments within functions, how you can change them, and how you can always remember to use the help documentation to understand what arguments a function requires. 
 
-```{block, type="info"}
-**`set.seed()`** function
+Over time, you start to remember which arguments you need within functions you commonly use, but even experienced R users have to regularly check the documentation. Coding is not a memory test, so do not worry if you find yourself needing to constantly look up the name of arguments.  
 
-If you're looking up examples of code online, you may often see code that starts with the function `set.seed()`. This function controls the random number generator - if you're using any functions that generate numbers randomly (such as `rnorm()`), running `set.seed()` will ensure that you get the same result (in some cases this may not be what you want to do). We call `set.seed()` in this example because it means that you will get the same random numbers as this book.
+::: {.callout-important}
+# Error mode
+One thing that can be intimidating at first is making **`r glossary("error", display = "errors")`**. They have little red marks and produce sometimes vague messages to try and explain what went wrong. You will make many errors as you learn and over time, you do not stop making errors, but you get faster at working out what went wrong and how you can fix it. So, we will introduce you to common errors as we work through the book to help with problem solving.  
+
+Try and run the following code in the console: 
+
+```{r rnorm error, eval=FALSE}
+rnorm(mean = 10, sd = 2)
 ```
+
+You should get an error saying something like `Error in rnorm(mean = 10, sd = 2): argument "n" is missing, with no default`. This error message is useful as it is telling us we forget to state the `n` argument which has no default value, so the function has no idea how many observations to give you. You would fix this error by adding a value for `n` within the function. 
+:::
 
 ### Stating argument names
 
-In the above examples, we have written out the argument names in our code (for example, we wrote `n = 5`, `mean = 10`, `sd = 2`), however, this is not strictly necessary. The following two lines of code would produce very similar outputs with the same number of values and similar means and standard deviations - although each time you run `rnorm()` it will produce a slightly different set of numbers, because it's random.
+In the examples above, we have written out the argument names in our code (for example, we wrote `n = 5`, `mean = 10`, `sd = 2`), however, this is not strictly necessary. The following two lines of code would produce very similar outputs with the same number of values and similar means and standard deviations. Remember though: each time you run `rnorm()`, it will produce a slightly different set of numbers unless you set a seed.
 
 ```{r argument-names, eval = FALSE}
 
@@ -142,27 +169,35 @@ rnorm(6, 3, 1)
 
 ```
 
-The main thing is that both lines of code would still work - the code knows what to do with the numbers. Importantly, however, it is key to realise that the code is following a set order of arguments - `n` then `mean` then `sd`. If you do not write out the argument names the code will use the default order of arguments: for `rnorm` it will assume that the first number you enter is `n`, the second number is `mean` and the third number is `sd`. So you can write the arguments names or not, but it is important to know the default order if you choose not to write the argument names. If however you write out the argument names then you can write the arguments in whatever order you like - the below will still work and produce six numbers with a mean close to 3 and a standard deviation close to 1.
+The main thing is that both lines of code would still work - the code knows what to do with the numbers. Both options work as the code is following a set order of arguments: `n` then `mean` then `sd`. If you do not write out the argument names, the code will use the default order of arguments, which for `rnorm` will assume that the first number you enter is `n`, the second number is `mean`, and the third number is `sd`. 
+
+So, you can write the argument names or not, but it is important to know the default order if you choose not to write the argument names. Alternatively, if you write out the argument names, then you can write the arguments in whatever order you like. The code below will still work and produce six numbers with a mean close to 3 and a standard deviation close to 1.
 
 ```{r argument-order, eval = FALSE}
-rnorm(sd = 1, n = 6, mean = 3)
+rnorm(sd = 1, 
+      n = 6, 
+      mean = 3)
 ```
 
-When you are first learning R, you may find it useful to write out the argument names as it can help you remember and understand what each part of the function is doing. However, as your skills progress you may find it quicker to omit the argument names and you will also see examples of code online that do not use argument names so it is important to be able to understand which argument each bit of code is referring to (or look up the help documentation to check).
+When you are first learning R, we recommend writing out the argument names every time as it can help you remember and understand what each part of the function is doing. However, as your skills progress you may find it quicker to omit the argument names and you will also see examples of code online that do not use argument names. In this course, we will always write out the argument names the first time we use each function, but afterwards, we may omit them.
 
-In this course, we will always write out the argument names the first time we use each function, however, in subsequent uses they may be omitted.
+::: {.callout-warning}
+If you do omit argument names, it is important to check the values you use for arguments are the ones you intended to you. The sneakiest errors are the ones that "work" in that they do not produce an error, but they are doing something different to what you expect. For example, if you wanted five numbers with a mean of 1 and *SD* of 2, `rnorm(5, 2, 1)` would work, but we accidentally entered the mean and SD the wrong way around. 
+:::
 
 ### Tab auto-complete
 
-When writing code, one very useful feature of RStudio is the tab auto-complete for functions (see Figure \@ref(fig:img-autocomplete)). If you write the name of the function and then press the tab key on your keyboard, RStudio will show you the arguments that function takes along with a brief description. If you press enter on the argument name it will fill in the name for you, just like auto-complete on your phone. You can also use the tab button when writing a function name to auto-complete that function name or to find functions that start with certain letters - if maybe you can't quite remember how to spell a function for example!
+One very useful feature of RStudio is the tab auto-complete for functions (see Figure @fig-img-autocomplete). If you write the name of the function and then press the tab key on your keyboard, RStudio will show you the arguments that function takes along with a brief description. If you press enter on the argument name, it will fill in the name for you, just like auto-complete on your phone. 
 
-```{r img-autocomplete, echo=FALSE, fig.cap="Tab auto-complete"}
+You can also use the tab button when writing a function name to auto-complete that function name or to find functions that start with certain letters. This feature can be really helpful if you cannot quite remember the name of a function or argument. 
+
+```{r img-autocomplete, echo=FALSE}
+#| label: fig-img-autocomplete
+#| fig.cap: "Tab auto-complete"
 
 knitr::include_graphics("images/autocomplete.png")
 
 ```
-
-The auto-complete is incredibly useful when you are first learning R and you should remember to use this feature frequently. 
 
 ## Base R and packages {#packages}
 
