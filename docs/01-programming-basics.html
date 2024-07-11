@@ -375,8 +375,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">1.4</span> Base R and packages</a>
   <ul class="collapse">
-<li><a href="#activity-3-install-the-tidyverse-optional" id="toc-activity-3-install-the-tidyverse-optional" class="nav-link" data-scroll-target="#activity-3-install-the-tidyverse-optional"><span class="header-section-number">1.4.1</span> Activity 3: Install the tidyverse (optional)</a></li>
-  <li><a href="#activity-4-load-the-tidyverse" id="toc-activity-4-load-the-tidyverse" class="nav-link" data-scroll-target="#activity-4-load-the-tidyverse"><span class="header-section-number">1.4.2</span> Activity 4: Load the tidyverse</a></li>
+<li><a href="#activity-3---install-the-tidyverse-to-your-own-computer" id="toc-activity-3---install-the-tidyverse-to-your-own-computer" class="nav-link" data-scroll-target="#activity-3---install-the-tidyverse-to-your-own-computer"><span class="header-section-number">1.4.1</span> Activity 3 - Install the tidyverse to your own computer</a></li>
+  <li><a href="#activity-4---load-the-tidyverse" id="toc-activity-4---load-the-tidyverse" class="nav-link" data-scroll-target="#activity-4---load-the-tidyverse"><span class="header-section-number">1.4.2</span> Activity 4 - Load the tidyverse</a></li>
   <li><a href="#package-updates" id="toc-package-updates" class="nav-link" data-scroll-target="#package-updates"><span class="header-section-number">1.4.3</span> Package updates</a></li>
   <li><a href="#conflicts" id="toc-conflicts" class="nav-link" data-scroll-target="#conflicts"><span class="header-section-number">1.4.4</span> Package conflicts</a></li>
   </ul>
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#objects" id="toc-objects" class="nav-link" data-scroll-target="#objects"><span class="header-section-number">1.5</span> Objects</a>
   <ul class="collapse">
-<li><a href="#activity-5-create-some-objects" id="toc-activity-5-create-some-objects" class="nav-link" data-scroll-target="#activity-5-create-some-objects"><span class="header-section-number">1.5.1</span> Activity 5: Create some objects</a></li>
+<li><a href="#activity-5---create-some-objects" id="toc-activity-5---create-some-objects" class="nav-link" data-scroll-target="#activity-5---create-some-objects"><span class="header-section-number">1.5.1</span> Activity 5 - Create some objects</a></li>
   <li><a href="#look-env" id="toc-look-env" class="nav-link" data-scroll-target="#look-env"><span class="header-section-number">1.5.2</span> Looking after the environment</a></li>
   </ul>
 </li>
@@ -394,8 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
 <li><a href="#help-and-additional-resources" id="toc-help-and-additional-resources" class="nav-link" data-scroll-target="#help-and-additional-resources"><span class="header-section-number">1.7.1</span> Help and additional resources</a></li>
   <li><a href="#debugging-tips" id="toc-debugging-tips" class="nav-link" data-scroll-target="#debugging-tips"><span class="header-section-number">1.7.2</span> Debugging tips</a></li>
-  <li><a href="#reset-your-r-sessions" id="toc-reset-your-r-sessions" class="nav-link" data-scroll-target="#reset-your-r-sessions"><span class="header-section-number">1.7.3</span> Reset your R sessions</a></li>
-  <li><a href="#activity-6" id="toc-activity-6" class="nav-link" data-scroll-target="#activity-6"><span class="header-section-number">1.7.4</span> Activity 6</a></li>
+  <li><a href="#activity-6---reset-your-r-session" id="toc-activity-6---reset-your-r-session" class="nav-link" data-scroll-target="#activity-6---reset-your-r-session"><span class="header-section-number">1.7.3</span> Activity 6 - Reset your R session</a></li>
   </ul>
 </li>
   <li><a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">1.8</span> Test yourself</a></li>
@@ -422,7 +421,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header><p>In this chapter, we will cover interacting with R and RStudio. We will provide an overview of basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, but there should be helpful hints and tips even if you have used R or another programming language before before.</p>
 <p><strong>Chapter Intended Learning Outcomes</strong></p>
 <ul>
-<li>ILO1</li>
+<li><p>How to navigate and interact with RStudio.</p></li>
+<li><p>How to use an R function and find help documentation.</p></li>
+<li><p>How to install and load R packages.</p></li>
+<li><p>Learn how to assign content to an object.</p></li>
+<li><p>Learn where to find support from online resources and from the course team.</p></li>
 </ul>
 <section id="r-and-rstudio" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="r-and-rstudio">
 <span class="header-section-number">1.1</span> R and RStudio</h2>
@@ -455,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="console-vs.-scripts" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="console-vs.-scripts">
 <span class="header-section-number">1.2.1</span> Console vs.&nbsp;scripts</h3>
 <p>When you first open up RStudio, you will not see an R script like above, there will just be the console window taking up the whole left half. You can write code in the console to test it out, but you cannot save that code anywhere, and you would lose all your code if you closed down RStudio.</p>
-<p>For this chapter only, we will use the console window to show you some simple R code, but from Chapter 2 - <a href="#C2-repro-docs">Creating reproducible documents</a> - we will teach you to work in a type of R script called an <strong><a class="glossary">R Markdown<span class="def"></span></a></strong> document which ends with the file name .Rmd.</p>
+<p>For this chapter only, we will use the console window to show you some simple R code, but from Chapter 2 - <a href="02-starting-with-data.html">Creating reproducible documents</a> - we will teach you to work in a type of R script called an <strong><a class="glossary">R Markdown<span class="def"></span></a></strong> document which ends with the file name .Rmd.</p>
 <p>You can open a new file in a number of ways, but the simplest is in the top menu of RStudio, selecting <strong><code>File &gt;&gt; New File &gt;&gt; R Markdown</code></strong> and clicking OK. You will then be able to see the extra pane in the top left like Figure <a href="#fig-img-rstudio">Figure&nbsp;<span>1.1</span></a>.</p>
 </section></section><section id="writing-code-with-functions-and-arguments" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="writing-code-with-functions-and-arguments">
 <span class="header-section-number">1.3</span> Writing code with functions and arguments</h2>
@@ -581,51 +584,79 @@ Warning
 </div>
 </section></section><section id="packages" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="packages">
 <span class="header-section-number">1.4</span> Base R and packages</h2>
-<p>When you install R you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation of R are typically referred to as <strong><a class="glossary">Base R<span class="def"></span></a></strong> and there is a useful cheat sheet that shows many Base R functions which can be found about halfway down <a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">this page under Contributed Cheatsheets here</a> along with a host of other cheatsheets.</p>
-<p>However, the power of R is that it is extendable and open source - put simply, if a function doesn’t exist or doesn’t work very well, anyone can create a new <strong><a class="glossary">package<span class="def"></span></a></strong> that contains data and code to allow you to perform new tasks. You may find it useful to think of <strong>Base R</strong> as the default apps that come on your phone and other packages as additional apps - the ones that you really want to use to make the phone your own - that you need to download separately.</p>
-<section id="activity-3-install-the-tidyverse-optional" class="level3" data-number="1.4.1"><h3 data-number="1.4.1" class="anchored" data-anchor-id="activity-3-install-the-tidyverse-optional">
-<span class="header-section-number">1.4.1</span> Activity 3: Install the tidyverse (optional)</h3>
-<p>In order to use a package, you must first install it. The following code installs the package <code>tidyverse</code>, a package we will use very a lot on this course and we will introduce in later chapters.</p>
-<p><strong>PLEASE NOTE: Do not need to do this activity if you are working on the R server or if you are using the computers in a University lab or Boyd Orr Building</strong>. This activity should only be performed on your own device.</p>
-<ul>
-<li>If you are working on your own computer, use the below code to install the <strong><a class="glossary">tidyverse<span class="def"></span></a></strong>. If you are using the R server or using the Boyd Orr lab machine then skip this activity.</li>
-</ul>
+<p>When you install R, you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation of R are typically referred to as <strong><a class="glossary">Base R<span class="def"></span></a></strong> and there is a useful cheat sheet that shows many Base R functions about halfway down <a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">this page under Contributed Cheatsheets here</a>, along with a host of other cheatsheets you might find useful.</p>
+<p>However, the power of R is that it is extendable and open source. If a function does not exist or does not work very well, anyone can create a new <strong><a class="glossary">package<span class="def"></span></a></strong> that contains data and/or code to allow you to perform new tasks. You can think of <strong>Base R</strong> as the default apps that come on your phone and other packages as additional apps; the ones that you really want to use to make the phone your own, but you need to download them separately.</p>
+<section id="activity-3---install-the-tidyverse-to-your-own-computer" class="level3" data-number="1.4.1"><h3 data-number="1.4.1" class="anchored" data-anchor-id="activity-3---install-the-tidyverse-to-your-own-computer">
+<span class="header-section-number">1.4.1</span> Activity 3 - Install the tidyverse to your own computer</h3>
+<p>To use a package, you must first install it. The following code installs the package <code>tidyverse</code>, a package we will use extensively throughout this course and introduce in the next chapter.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Please do not complete this activity if you are working on the online R server or if you are using the computers in a University lab or Boyd Orr Building</strong>. You should only complete this activity on your own device. The university computers and server already have a version of all the packages we introduce you to, and installing a new version can cause problems by having a conflict between one version on your user profile and another version on the system profile.</p>
+</div>
+</div>
+<p>If you are working on your own computer, use the code below to install the <strong><a class="glossary">tidyverse<span class="def"></span></a></strong> and typing it into the console and pressing enter/return. Remember: if you are using the online R server or using a university computer, then skip this activity.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-layout-align="center" type="danger">
-<div class="danger">
-<p>
-If you get an error message that says something like “WARNING: Rtools is required to build R packages” you may need to download and install an extra bit of software called <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> (this is one of the many reasons why using the server can be easier).
-</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
 </div>
 </div>
-<p>But how do we go about using a packge? Note that you only need to install a package once, however, each time you start R you need to load the packages you want to use. Again this is a bit like how you need to install an app on your phone once, but you need to open it every time you want to use it.</p>
-<p>To load packages we use the function <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> - this loads packages into your working library. Typically you would start any analysis script by loading all of the packages you need, but we will come back to that in the next chapter.</p>
-</section><section id="activity-4-load-the-tidyverse" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="activity-4-load-the-tidyverse">
-<span class="header-section-number">1.4.2</span> Activity 4: Load the tidyverse</h3>
-<ul>
-<li>Run the below code to load the tidyverse in to your working library.</li>
-<li>Do this activity regardless of whether you are using your own computer or the server.</li>
-</ul>
+<div class="callout-body-container callout-body">
+<p>If you have a Windows computer and get an error message that says something like “WARNING: Rtools is required to build R packages” you may need to download and install an extra bit of software called <a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">Rtools</a>. This was part of the R/RStudio installation instructions, so please see <a href="https://psyteachr.github.io/ug1-practical/installing-r.html" target="_blank">Installing R</a> for more detailed instructions.</p>
+</div>
+</div>
+<p>You only need to install a package once, but each time you start R / RStudio, you must load the packages you want to use. This is like how you need to install an app on your phone once, but you need to open it every time you want to use it.</p>
+<p>To load packages, we use the function <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> which loads packages into your working library. Typically, you would start any analysis script by loading all of the packages you need, but we will come back to that in the next chapter.</p>
+</section><section id="activity-4---load-the-tidyverse" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="activity-4---load-the-tidyverse">
+<span class="header-section-number">1.4.2</span> Activity 4 - Load the tidyverse</h3>
+<p>Run the code below to load the tidyverse into your working library. You must complete this activity regardless of whether you are using your own computer or the university computers / online server.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Often when you load packages you get information in your console window. You don’t always get a message but often you will. It does also tend to look like an error message at first - it’s not. It’s just R telling you what it’s done.</p>
-<p>Now that we’ve loaded the <code>tidyverse</code> package we can use any of the functions it contains but remember, you need to run the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function every time you start R.</p>
+<p>Often when you load packages you get information in your console window. Some packages will provide little messages to tell you what it has done or warn you about something. Sometimes these messages can look like errors and make you panic, but try and read over what it is saying first. For example, you should have something that looks like Figure <a href="#fig-img-load-tidyverse">Figure&nbsp;<span>1.3</span></a> when you load <code>tidyverse</code>. You might think you have done something wrong as it has little red crosses, but it is just telling you that it has loaded a set of packages and there are some <strong><a class="glossary">conflicts<span class="def"></span></a></strong>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-img-load-tidyverse" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/tidyverse-loading.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1.3: Example loading message from tidyverse.</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Now that we have loaded the <code>tidyverse</code> package, we can use any of the functions it contains but remember, you must run the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function every time you start R.</p>
 </section><section id="package-updates" class="level3" data-number="1.4.3"><h3 data-number="1.4.3" class="anchored" data-anchor-id="package-updates">
 <span class="header-section-number">1.4.3</span> Package updates</h3>
-<p>In addition to updates to R and R Studio, the creators of packages also sometimes update their code. This can be to add functions to a package, or it can be to fix errors. One thing to avoid is unintentionally updating an installed package. When you run <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> it will always install the latest version of the package and it will overwrite any older versions you may have installed. Sometimes this isn’t a problem, however, sometimes you will find that the update means your code no longer works as the package has changed substantially. It is possible to revert back to an older version of a package but try to avoid this anyway.</p>
-<div class="cell" data-layout-align="center" type="danger">
-<div class="danger">
-<p>
-To avoid accidentally overwriting a package with a later version, you should <strong>never</strong> include <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> in your analysis scripts in case you, or someone else runs the code by mistake. Remember, the server will already have all of the packages you need for this course so you only need to install packages if you are using your own machine.
-</p>
+<p>In addition to updates to R and R Studio, the creators of packages also update their code. This can be to add additional functions to a package, or it can be to fix errors.</p>
+<p>One thing to avoid is unintentionally updating an installed package. When you run <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>, it will always install the latest version of the package and it will overwrite any older versions you may have installed. Often this is not a problem, but sometimes you will find that the update means your code no longer works as the package has changed substantially. It is possible to revert back to an older version of a package but try to avoid updating a package unintentionally.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To avoid accidentally overwriting a package with a later version, you should <strong>never</strong> include <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> in your analysis scripts in case you, or someone else runs the code by mistake. Remember, the online server and university computers will already have all of the packages you need for this course, so you only need to install packages if you are using your own computer.</p>
 </div>
 </div>
 </section><section id="conflicts" class="level3" data-number="1.4.4"><h3 data-number="1.4.4" class="anchored" data-anchor-id="conflicts">
 <span class="header-section-number">1.4.4</span> Package conflicts</h3>
-<p>There are thousands of different R packages and each package has lots and lots of functions. Unfortunately, because packages are developed by different people, sometimes different packages have the same name for different functions. For example, the packages <code>dplyr</code> and <code>MASS</code> both have a function named <code>select()</code>. <strong>Do not run the below code</strong> but if you did you would see a warning telling you that there is a conflict.</p>
+<p>There are thousands of different R packages and each package has many functions. Unfortunately, different people develop different packages and sometimes they use the same name for different functions. For example, the packages <code>dplyr</code> and <code>MASS</code> both have a function called <code>select()</code>. <strong>Do not run the below code</strong>, but if you did you would see a warning telling you that there is a conflict.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -653,254 +684,336 @@ Attaching package: 'MASS'</code></pre>
     select</code></pre>
 </div>
 </div>
-<p>You would see a warning that <strong>The following object is masked from ‘package:dplyr’: select</strong>. In this case, R is telling you that the function <code>select()</code> in the <code>dplyr</code> package is being hidden (or ‘masked’) by another function with the same name from the <code>MASS</code> package. If you were to try and use <code>select()</code>, R would use the function from the package that was loaded most recently - in this case it would use the function from <code>MASS</code>. This is an issue because you think you are using one function but really you are using another - and they often work differently and you get odd issues in your code that you don’t expect. There are various solutions but one simple one, if you already know of the clash, is to specify which package you want to use for a particular function by writing the code in the format <code>package::function</code>, meaning “use the function from the package”, for example:</p>
+<p>You would see a warning that <code>The following object is masked from 'package:dplyr': select</code>.</p>
+<p>In this case, R is telling you that the function <code>select()</code> in the <code>dplyr</code> package is being hidden (or ‘masked’) by another function with the same name from the <code>MASS</code> package. If you were to try and use <code>select()</code>, R would use the function from the package that was loaded most recently - in this case it would use the function from <code>MASS</code>. This can be an issue because you think you are using one function but really you are using another. They often work differently and you get odd issues in your code that you do not expect.</p>
+<p>There are various solutions but one simple one - if you already know of the clash - is to specify which package you want to use for a particular function by writing the code in the format <code>package::function</code>, meaning “use the function from the package”, for example:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>()</span>
 <span id="cb19-2"><a href="#cb19-2"></a>MASS<span class="sc">::</span><span class="fu">select</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Clashes are inevitable in your learning and when you see one you will probably not spot it at first but you will learn to resolve them quickly.</p>
+<p>Clashes are inevitable in your learning and when you see one, you will probably not spot it at first but you will learn to resolve them quickly.</p>
 </section></section><section id="objects" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="objects">
 <span class="header-section-number">1.5</span> Objects</h2>
-<p>So we have learnt about functions and arguments and earlier we said functions give us outputs. Another name for outputs, or at least specific types of outputs, are <strong><a class="glossary">objects<span class="def"></span></a></strong>. Objects are the output of functions basically - but really you can create objects without functions as well. A large part of your coding will involve creating and manipulating objects. Objects contain stuff. That stuff can be numbers, words, or the result of functions, operations and analyses. But the first key thing to know about object is how to create them and to give them content. You assign content to an object using <code>&lt;-</code> - often called the “left arrow” or the <strong><a class="glossary">assignment operator<span class="def"></span></a></strong> or stated as “assigned to”. Note that we don’t use <code>=</code>. There is a very large discussion on why objects are assigned content and not equal to content but that is for another time. For now, just remember that we assign (<code>&lt;-</code>) content, be it words, numbers, or function output, to objects. Let’s try that now.</p>
-<section id="activity-5-create-some-objects" class="level3" data-number="1.5.1"><h3 data-number="1.5.1" class="anchored" data-anchor-id="activity-5-create-some-objects">
-<span class="header-section-number">1.5.1</span> Activity 5: Create some objects</h3>
-<ul>
-<li>Type the following code into the console window and run each line. You should see that <code>name</code>, <code>age</code>, <code>today</code>, <code>new_year</code>, and <code>data</code> appear in the environment pane.</li>
-</ul>
+<p>So far, you have learnt about packages, and functions and arguments. Earlier we said functions give us outputs and another name for outputs - or at least specific types of outputs - are <strong><a class="glossary">objects<span class="def"></span></a></strong>.</p>
+<p>Objects are the output of functions but you can also create objects without functions. Most of your coding will involve creating and manipulating objects. Objects contain stuff, which could be numbers, words, or the result of functions, operations, and analyses.</p>
+<p>The first key thing to know about objects is how to create them and to give them content. You assign content to an object using <code>&lt;-</code> - often called the “left arrow” or the <strong><a class="glossary">assignment operator<span class="def"></span></a></strong> which you can read as “assigned to”. Note that we do not use the <code>=</code> symbol as an assignment operator. There is a large discussion on why objects are assigned content and not equal to content but that is for another time. For now, just remember that we assign (<code>&lt;-</code>) content, be it words, numbers, or function output, to objects.</p>
+<section id="activity-5---create-some-objects" class="level3" data-number="1.5.1"><h3 data-number="1.5.1" class="anchored" data-anchor-id="activity-5---create-some-objects">
+<span class="header-section-number">1.5.1</span> Activity 5 - Create some objects</h3>
+<p>Type the following code into the console window and run each line. You should see that <code>name</code>, <code>age</code>, <code>today</code>, <code>new_year</code>, and <code>data</code> appear in the environment pane like Figure <a href="#fig-img-objects-enviro">Figure&nbsp;<span>1.4</span></a>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>name <span class="ot">&lt;-</span> <span class="st">"emily"</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>age <span class="ot">&lt;-</span> <span class="dv">16</span> <span class="sc">+</span> <span class="dv">17</span> </span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>name <span class="ot">&lt;-</span> <span class="st">"James"</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>age <span class="ot">&lt;-</span> <span class="dv">16</span> <span class="sc">+</span> <span class="dv">14</span> </span>
 <span id="cb20-3"><a href="#cb20-3"></a>today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
-<span id="cb20-4"><a href="#cb20-4"></a>new_year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2020-01-01"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a>new_year <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2025-01-01"</span>)</span>
 <span id="cb20-5"><a href="#cb20-5"></a>data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">15</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-img-objects-enviro" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/objects-enviro.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Objects in the environment. Feel free to change your numbers and check that they match the environment!</figcaption></figure>
+<figcaption class="figure-caption">Figure&nbsp;1.4: Objects in the environment. Feel free to change your numbers and check that they match the environment!</figcaption></figure>
 </div>
 </div>
 </div>
-<p>Note that in these examples, <code>name</code>,<code>age</code>, and <code>new_year</code> would always contain the values <code>emily</code>, 33, and the date of New Year’s Day 2020, however, <code>today</code> will draw the date from the operating system on the day you are using the computer, and <code>data</code> will be a randomly generated set of data - as we saw earlier - so the values of these objects will not be static.</p>
-<ul>
-<li>Why don’t you try changing the name to your name and the age to your age, and seeing if they update in the environment window.</li>
-</ul>
-<p>Importantly, for what we will learn in future chapters, objects can be involved in calculations and can interact with each other. For example:</p>
+<p>Note that in these examples, <code>name</code>,<code>age</code>, and <code>new_year</code> would always contain the values <code>James</code>, 30, and the date of New Year’s Day 2025, but <code>today</code> will draw the date from the operating system on the day you are using the computer, and <code>data</code> will be a randomly generated set of data - as we saw earlier - so the values of these objects will not be static.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try changing the name to your name and the age to your age, and seeing if they update in the environment window.</p>
+</div>
+</div>
+<p>Importantly, for what we will learn in future chapters, you can use different objects in calculations and interact with each other. For example:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>age <span class="sc">+</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 43</code></pre>
+<pre><code>[1] 40</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>new_year <span class="sc">-</span> today</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of -1652 days</code></pre>
+<pre><code>Time difference of 174 days</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">mean</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14.97726</code></pre>
+<pre><code>[1] 15.02667</code></pre>
 </div>
 </div>
 <p>Finally, you can store the result of these operations on objects in a new object as below:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>decade <span class="ot">&lt;-</span> age <span class="sc">+</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-layout-align="center" type="try">
-<div class="try">
-<p>
-Remember that you may find it helpful to read <code>&lt;-</code> as <code>contains</code> or <code>assigned to</code>, e.g., <code>name</code> contains the text <code>emily</code> or <code>emily</code> is assigned to the object <code>name</code>.
-</p>
+<p>Remember that you may find it helpful to read <code>&lt;-</code> as <code>contains</code> or <code>assigned to</code>, e.g., <code>name</code> contains the text <code>James</code> or <code>James</code> is assigned to the object <code>name</code>.</p>
+<p>You will constantly be creating objects throughout this course and you will learn more about them and how they behave as we go along. For now, it is enough to understand that they are a way of saving values, that these values can be numbers, text, or the result of operations, and that you can use objects in further operations to create new objects or variables.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
 </div>
 </div>
-<p>You will constantly be creating objects throughout this course and you will learn more about them and how they behave as we go along, however, for now it is enough to understand that they are a way of saving values, that these values can be numbers, text, or the result of operations, and that they can be used in further operations to create new variables.</p>
-<div class="cell" data-layout-align="center" type="info">
-<div class="info">
-<p>
-You may also see objects referred to as ‘variables’. There is a difference between the two in programming terms, however, they are used synchronously very frequently.
-</p>
+<div class="callout-body-container callout-body">
+<p>You may also see people refer to objects as ‘variables’. There is a difference between the two in programming terms but they are often used synonymously.</p>
 </div>
 </div>
 </section><section id="look-env" class="level3" data-number="1.5.2"><h3 data-number="1.5.2" class="anchored" data-anchor-id="look-env">
 <span class="header-section-number">1.5.2</span> Looking after the environment</h3>
-<p>Now that we are starting to learn about the other windows and in particular the environment window, if you’ve been writing a lot of code you may find that the environment window (or workspace) has become cluttered with many objects. This can make it difficult to figure out which object you need and therefore you run the risk of using the wrong data frame. If you’re working on a new dataset, or if you’ve tried lots of different code before getting the final version, it is good practice to remember to clear the environment to avoid using the wrong object. You can do this in several way.</p>
+<p>Now that you are starting to learn about the other windows in RStudio like the environment window, if you have been writing a lot of code, you may find that the environment window (or workspace) becomes cluttered with many objects. This can make it difficult to figure out which object you need and you run the risk of using the wrong value or data frame. If you are working on a new dataset, or if you have tried lots of different code before getting the final version, it is good practice to remember to clear the environment to avoid using the wrong object. You can do this in several ways.</p>
 <ol type="1">
-<li>To remove individual objects, you can type <code>rm(object_name)</code> in the console. Try this now to remove one of the objects you created in the previous section. For example, you would remove the object <code>age</code> by writing <code>rm(age)</code>
-</li>
-<li>To clear all objects from the environment run <code>rm(list = ls())</code> in the console.</li>
-<li>To clear all objects from the environment you can also click the broom icon in the environment pane.</li>
+<li><p>To remove individual objects, you can type <code>rm(object_name)</code> in the console. Try this now to remove one of the objects you created in the previous section. For example, you would remove the object <code>age</code> by writing <code>rm(age)</code>.</p></li>
+<li><p>To clear all objects from the environment, run <code>rm(list = ls())</code> in the console.</p></li>
+<li><p>To clear all objects from the environment, you can also click the broom icon in the environment pane like Figure <a href="#fig-img-broom">Figure&nbsp;<span>1.5</span></a>.</p></li>
 </ol>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-img-broom" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/broom.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Clearing the workspace</figcaption></figure>
+<figcaption class="figure-caption">Figure&nbsp;1.5: Clearing the workspace.</figcaption></figure>
 </div>
 </div>
 </div>
-<p>So it is a good idea to keep your environment clean and tidy. Which leads us on to setting up some global options so that you don’t get confused.</p>
 </section></section><section id="global-options" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="global-options">
 <span class="header-section-number">1.6</span> Global options</h2>
-<p>When you open RStudio it will show you what you were last working on, including your code and any objects you have created, assuming this is not the first time you have used RStudio. This might sound helpful, but actually it tends to cause more problems than it’s worth because it means that you risk accidentally using an old version of an object - say <code>Date</code> is kept over in the environment from the last time you did some work and you don’t realise and you start working on the wrong <code>Date</code> because you wanted a new one etc etc etc. In reality, we recommend changing the settings so that each time you start RStudio, it opens a fresh new environment. You can do this by clicking on the top menu <strong><code>Tools &gt;&gt; Global Options</code></strong> and then deselecting boxes so that your box looks like the below and saving/applying the changes.</p>
+<p>When you open RStudio, it will show you what you were last working on, including your code and any objects you have created, assuming this is not the first time you have used RStudio. This might sound helpful, but it can cause more problems than it is worth because it means that you risk accidentally using an old version of an object.</p>
+<p>For example, you might have <code>Date</code> in the environment from the last time you did some work and you start working on the wrong <code>Date</code> without realising. In reality, we recommend changing the settings so that each time you start RStudio, it opens a fresh new environment.</p>
+<p>You can do this by clicking on the top menu <strong><code>Tools &gt;&gt; Global Options...</code></strong> and then deselecting boxes so that your General box looks like Figure <a href="#fig-img-options">Figure&nbsp;<span>1.6</span></a> and applying the changes to save your selections.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/global_options.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Global options - you are aiming to make your global options look similar, in terms of what is ticked, to the above. The main thing is to make sure that Restore RData into workspace is not ticked, and we would set Save workspace to Never. The History options are optional but can help. The update options are really just in case you want to.</figcaption></figure>
+<div id="fig-img-options" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/global_options.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1.6: Global options - you want to make your global options look similar, in terms of what is ticked, to the above. The main thing is to make sure that you untick Restore RData into workspace at startup, and set Save workspace to .RData on exit to Never. Unticking the History options are optional but can help. The update option is really just in case you want to.</figcaption></figure>
 </div>
 </div>
 </div>
-<p>That should save a lot of hassle going forward. You will still encounter issues of course and so we are going to end this chapter by having a quick look at getting help.</p>
+<p>That should save a lot of hassle going forward. You will still encounter issues of course, so we are going to end this chapter by outlining where you can get help.</p>
 </section><section id="getting-help" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="getting-help">
 <span class="header-section-number">1.7</span> Getting Help</h2>
 <section id="help-and-additional-resources" class="level3" data-number="1.7.1"><h3 data-number="1.7.1" class="anchored" data-anchor-id="help-and-additional-resources">
 <span class="header-section-number">1.7.1</span> Help and additional resources</h3>
-<p>Getting good at programming really means getting good trying stuff out, searching for help online, and finding examples of code to use as a basis of your own. If you are having difficulty with any of the exercises contained in this book then you can of course ask for help from the team, however, learning to problem solve effectively is a key skill that you will develop throughout this course. There are a wealth of additional resources in the Appendix of this book so it might be worth checking them out, but here are four approaches we take to resolving an issue when we hit a problem.</p>
+<p>Learning to code really means trying stuff out, searching for help online when it does not work, and finding examples of code to adapt to your own needs.</p>
+<p>If you are having difficulty with any of the content in this book, then you can of course ask for help from the course team but learning to problem solve effectively is a key skill that you will develop throughout this course and beyond.</p>
+<p>There are a wealth of <a href="appendix-a2-additional-learning-resources.html">additional resources</a> in the Appendix of this book, so it might be worth checking them out, but here are four approaches we take to resolving an issue when we hit a problem.</p>
 <ul>
-<li>Use the help documentation. If you’re struggling to understand how a function works, remember the <code>?function</code> command.</li>
-<li>Think when did you last run this function or code successfully? Look back on what you did then and see what is the difference. The skills build on each other so you should always look back to go forward!</li>
-<li>If you get an error message, copy and paste it in to Google - it’s very likely someone else has had the same problem.</li>
-<li>Trying googling your question in the style of the package name or function name and what you want to do. For example, <strong>arrange data tidyverse</strong> or maybe <strong>sort data in r</strong>
-</li>
+<li><p>Use the help documentation. If you are struggling to understand how a function works or what the arguments are, remember the <code>?function</code> command.</p></li>
+<li><p>Think about when you last had to use this function or code successfully. Look back on what you did then and see what is the difference.</p></li>
+<li><p>If you get an error message, copy and paste it into Google. It is very likely someone else has had the same problem.</p></li>
+<li><p>Trying Googling your question in the style of the package name or function name and what you want to do. For example, <strong>arrange data tidyverse</strong> or maybe <strong>sort data in R</strong>.</p></li>
 </ul>
-<p>And if those approaches don’t work, then, in addition to these course materials and the other <a href="https://psyteachr.github.io/" target="_blank">PsyTeachR books</a>, there are a number of excellent online resources for learning data skills that can serve as quick guides:</p>
+<p>If those approaches do not work, in addition to these course materials and the other <a href="https://psyteachr.github.io/" target="_blank">PsyTeachR books</a> from other courses we run, there are many excellent online resources for learning data skills that can serve as quick guides:</p>
 <ul>
-<li>individual package quickguides found via the top menu: <strong><code>Help &gt;&gt; Cheat Sheets</code></strong>
-</li>
-<li><a href="http://www.cookbook-r.com/">R Cookbook</a></li>
-<li><a href="https://stackoverflow.com/">StackOverflow</a></li>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li>Search or use the <a href="https://twitter.com/search?f=tweets&amp;q=%23rstats&amp;src=typd">#rstats</a> hashtag on Twitter</li>
-</ul>
-<p>You will find that the #rstats community as it is referred to is very helpful and create a lot of excellent materials.</p>
-</section><section id="debugging-tips" class="level3" data-number="1.7.2"><h3 data-number="1.7.2" class="anchored" data-anchor-id="debugging-tips">
+<li><p>Individual package cheat sheets which you can find via the top menu: <strong><code>Help &gt;&gt; Cheat Sheets</code></strong>.</p></li>
+<li><p><a href="http://www.cookbook-r.com/">R Cookbook</a>.</p></li>
+<li><p><a href="https://stackoverflow.com/">StackOverflow</a>.</p></li>
+<li><p><a href="https://r4ds.had.co.nz/">R for Data Science</a>.</p></li>
+</ul></section><section id="debugging-tips" class="level3" data-number="1.7.2"><h3 data-number="1.7.2" class="anchored" data-anchor-id="debugging-tips">
 <span class="header-section-number">1.7.2</span> Debugging tips</h3>
-<p>Another top skill for resolving issues is what is known as debugging - fixing your coding mistakes. In fact a large part of coding is trying to figure why your code doesn’t work and this is true whether you are a novice or an expert. As you progress through this course you should keep a record of mistakes you make and how you fixed them. In the early chapters we will provide a number of common mistakes to look out for but you will undoubtedly make (and fix!) new mistakes yourself. Thing to keep in mind when coding are:</p>
+<p>Another top skill for resolving issues is what is known as debugging - fixing your coding mistakes. A large part of coding is trying to figure why your code does not work and this is true whether you are a novice or an expert. As you progress through this course, try and keep a record of mistakes you make and how you fixed them. We will highlight common mistakes to look out for throughout the book but you will undoubtedly make (and fix) new mistakes yourself.</p>
+<p>You never stop making mistakes, you just get better at problem solving and having a list of strategies that worked in the past. That is why we include <strong>error mode</strong> as a set of activities to develop your problem solving skills and normalise making errors.</p>
+<p>As a short list of suggestions when you come across an error, keep in mind:</p>
 <ul>
-<li>Have you loaded the correct packages for the functions you are trying to use? One very common mistake is to write the code to load the package, e.g., <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> but then forget to run it.</li>
-<li>Have you made a typo? Coding has to be specific on spelling and <code>data</code> is not the same as <code>DATA</code>, and <code>t.test</code> is not the same as <code>t_test</code>.</li>
-<li>Is there a package conflict? Have you tried specifying the package and function with <code>package::function</code>?</li>
-<li>Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information.</li>
-</ul></section><section id="reset-your-r-sessions" class="level3" data-number="1.7.3"><h3 data-number="1.7.3" class="anchored" data-anchor-id="reset-your-r-sessions">
-<span class="header-section-number">1.7.3</span> Reset your R sessions</h3>
-<p>Finally, if you find that your code isn’t working and you can’t figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.When you open up R and start writing code, loading packages, and creating objects, you’re typically doing so in a new <strong>session</strong>. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the server.</p>
-</section><section id="activity-6" class="level3" data-number="1.7.4"><h3 data-number="1.7.4" class="anchored" data-anchor-id="activity-6">
-<span class="header-section-number">1.7.4</span> Activity 6</h3>
-<ul>
-<li>This last activity shows a quick way to restart R from inside RStudio. On the Top Menu, click <strong><code>Session &gt;&gt; Restart R</code></strong>.</li>
-</ul>
+<li><p>Have you loaded the correct packages for the functions you are trying to use? One common mistake is to write the code to load the package, e.g., <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> but then forget to press enter/return to run it.</p></li>
+<li><p>Have you made a typo? Coding has to be specific on spelling and <code>data</code> is not the same as <code>DATA</code>, and <code>t.test</code> is not the same as <code>t_test</code>.</p></li>
+<li><p>Is there a package conflict? Have you tried specifying the package and function with <code>package::function</code>?</p></li>
+<li><p>Is it definitely an error? Not all red text in R / RStudio means an error. Sometimes it is just giving you a message with information.</p></li>
+</ul></section><section id="activity-6---reset-your-r-session" class="level3" data-number="1.7.3"><h3 data-number="1.7.3" class="anchored" data-anchor-id="activity-6---reset-your-r-session">
+<span class="header-section-number">1.7.3</span> Activity 6 - Reset your R session</h3>
+<p>Finally, if you find that your code is not working and you cannot figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages. Think of it like restarting your phone.</p>
+<p>When you open up R and start writing code, loading packages, and creating objects, you are typically doing so in a new <strong><a class="glossary">session<span class="def"></span></a></strong>. In addition to clearing your environment workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start RStudio on your computer, although sessions can persist if you use the online server.</p>
+<p>This last activity shows a quick way to restart R from inside RStudio. On the Top Menu, click <strong><code>Session &gt;&gt; Restart R</code></strong> like Figure <a href="#fig-img-session">Figure&nbsp;<span>1.7</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-img-session" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/new_session.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">The truth about programming</figcaption></figure>
+<figcaption class="figure-caption">Figure&nbsp;1.7: Restarting your R session from within RStudio.</figcaption></figure>
 </div>
 </div>
 </div>
-<p>All that said, don’t worry about making mistakes. Accept that you will make them and learn from them. And remember we are here to help.</p>
+<p>Try not to worry about making mistakes. Accept that you will make them and learn from them. We are always here to help if you are struggling, so reach out to the course team, post on Teams, or attend a graduate teaching assistant (GTA) session.</p>
 </section></section><section id="test-yourself" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="test-yourself">
 <span class="header-section-number">1.8</span> Test yourself</h2>
-<p>Finally, throughout the book you will find additional questions like these to help you check your understanding. Some will have blanks to fill in, some will be Multiple Choice, but the answers will be revealed in the chapter. If you are unsure of the answer and can’t find the explanation, just ask!</p>
+<p>Throughout the book, you will find additional questions and activities like these to help you check your understanding. Some will have blanks to fill in, some will be multiple choice, but the chapters include the answers and explanations to check your understanding against. You are always welcome to ask further questions to the course team though.</p>
 <strong>Question 1.</strong> Why should you never include the code <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> in your analysis scripts?
-<div id="radio_QVXPXWLCUD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QVXPXWLCUD" value=""><span>You should use library() instead</span></label><label><input type="radio" autocomplete="off" name="radio_QVXPXWLCUD" value=""><span>Packages are already part of Base R</span></label><label><input type="radio" autocomplete="off" name="radio_QVXPXWLCUD" value="answer"><span>You (or someone else) may accidentally install a package update that stops your code working</span></label><label><input type="radio" autocomplete="off" name="radio_QVXPXWLCUD" value=""><span>You already have the latest version of the package</span></label>
+<div id="radio_WLCUDRTQPR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WLCUDRTQPR" value=""><span>You should use library() instead</span></label><label><input type="radio" autocomplete="off" name="radio_WLCUDRTQPR" value=""><span>Packages are already part of Base R</span></label><label><input type="radio" autocomplete="off" name="radio_WLCUDRTQPR" value="answer"><span>You (or someone else) may accidentally install a package update that stops your code working</span></label><label><input type="radio" autocomplete="off" name="radio_WLCUDRTQPR" value=""><span>You already have the latest version of the package</span></label>
 </div>
-<div class="webex-solution">
-<button>
-Explain This Answer
-</button>
-<div class="cell" data-layout-align="center">
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Remember, when you run <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> it will always install the latest version of the package and it will overwrite any older versions of the package you may have installed.</p>
 </div>
 </div>
-<p><br></p>
-<p><strong>Question 2.</strong>What will the following code produce?</p>
+</div>
+<p><strong>Question 2.</strong> What will the following code produce?</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="dv">50</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="radio_RTQPRJQCBG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RTQPRJQCBG" value=""><span>A dataset with 10 numbers that has a mean of 6 and an SD of 50</span></label><label><input type="radio" autocomplete="off" name="radio_RTQPRJQCBG" value="answer"><span>A dataset with 6 numbers that has a mean of 50 and an SD of 10</span></label><label><input type="radio" autocomplete="off" name="radio_RTQPRJQCBG" value=""><span>A dataset with 50 numbers that has a mean of 10 and an SD of 6</span></label><label><input type="radio" autocomplete="off" name="radio_RTQPRJQCBG" value=""><span>A dataset with 50 numbers that has a mean of 10 and an SD of 6</span></label>
+<div id="radio_JQCBGQTEYM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JQCBGQTEYM" value=""><span>A dataset with 10 numbers that has a mean of 6 and an SD of 50</span></label><label><input type="radio" autocomplete="off" name="radio_JQCBGQTEYM" value="answer"><span>A dataset with 6 numbers that has a mean of 50 and an SD of 10</span></label><label><input type="radio" autocomplete="off" name="radio_JQCBGQTEYM" value=""><span>A dataset with 50 numbers that has a mean of 10 and an SD of 6</span></label><label><input type="radio" autocomplete="off" name="radio_JQCBGQTEYM" value=""><span>A dataset with 50 numbers that has a mean of 10 and an SD of 6</span></label>
 </div>
-<div class="webex-solution">
-<button>
-Explain This Answer
-</button>
-<div class="cell" data-layout-align="center">
-<p>The default form for <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> is <code>rnorm(n, mean, sd)</code>. If you need help remembering what each argument of a function does, look up the help documentation by running <code><a href="https://rdrr.io/r/stats/Normal.html">?rnorm</a></code></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The default form for <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> is <code>rnorm(n, mean, sd)</code>. If you need help remembering what each argument of a function does, look up the help documentation by running <code><a href="https://rdrr.io/r/stats/Normal.html">?rnorm</a></code>.</p>
 </div>
 </div>
-<p><br></p>
+</div>
 <p><strong>Question 3.</strong> If you have two packages that have functions with the same name and you want to specify exactly which package to use, what code would you use?</p>
-<div id="radio_QTEYMPMEQB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QTEYMPMEQB" value="answer"><span>package::function</span></label><label><input type="radio" autocomplete="off" name="radio_QTEYMPMEQB" value=""><span>function::package</span></label><label><input type="radio" autocomplete="off" name="radio_QTEYMPMEQB" value=""><span>library(package)</span></label><label><input type="radio" autocomplete="off" name="radio_QTEYMPMEQB" value=""><span>install.packages(package)</span></label>
+<div id="radio_PMEQBERGJT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PMEQBERGJT" value="answer"><span>package::function</span></label><label><input type="radio" autocomplete="off" name="radio_PMEQBERGJT" value=""><span>function::package</span></label><label><input type="radio" autocomplete="off" name="radio_PMEQBERGJT" value=""><span>library(package)</span></label><label><input type="radio" autocomplete="off" name="radio_PMEQBERGJT" value=""><span>install.packages(package)</span></label>
 </div>
-<div class="webex-solution">
-<button>
-Explain This Answer
-</button>
-<div class="cell" data-layout-align="center">
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>You should use the form <code>package::function</code>, for example <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code>. Remember that when you first load your packages R will warn you if any functions have the same name - remember to look out for this!</p>
 </div>
 </div>
-<p><br></p>
+</div>
 <strong>Question 4.</strong> Which of the following is most likely to be the input to an argument?
-<div id="radio_GJTVNBATZI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GJTVNBATZI" value=""><span>read_csv()</span></label><label><input type="radio" autocomplete="off" name="radio_GJTVNBATZI" value=""><span>&lt;-</span></label><label><input type="radio" autocomplete="off" name="radio_GJTVNBATZI" value="answer"><span>35</span></label>
+<div id="radio_ATZIWKLSIM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ATZIWKLSIM" value="answer"><span>35</span></label><label><input type="radio" autocomplete="off" name="radio_ATZIWKLSIM" value=""><span>&lt;-</span></label><label><input type="radio" autocomplete="off" name="radio_ATZIWKLSIM" value=""><span>read_csv()</span></label>
 </div>
-<div class="webex-solution">
-<button>
-Explain This Answer
-</button>
-<div class="cell" data-layout-align="center">
-<p>read_csv() looks like a function as it has the brackets at the end of it and the &lt;- is the assignment symbol so it is most likely that 35 might be the input to an argument as it is just a value.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>read_csv() looks like a function as it has the round brackets at the end and the &lt;- is the assignment symbol, so it is most likely that 35 might be the input to an argument as it is just a value.</p>
 </div>
 </div>
-<p><br></p>
+</div>
 <strong>Question 5.</strong> An easy way to spot functions is to look for
-<div id="radio_LSIMCOYVGZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LSIMCOYVGZ" value=""><span>computers</span></label><label><input type="radio" autocomplete="off" name="radio_LSIMCOYVGZ" value=""><span>numbers</span></label><label><input type="radio" autocomplete="off" name="radio_LSIMCOYVGZ" value="answer"><span>brackets</span></label>
+<div id="radio_YVGZZZYZGC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YVGZZZYZGC" value=""><span>computers</span></label><label><input type="radio" autocomplete="off" name="radio_YVGZZZYZGC" value=""><span>numbers</span></label><label><input type="radio" autocomplete="off" name="radio_YVGZZZYZGC" value="answer"><span>round brackets</span></label>
 </div>
-<div class="webex-solution">
-<button>
-Explain This Answer
-</button>
-<div class="cell" data-layout-align="center">
-<p>Remember that functions tend to have brackets or parentheses at the end of their name and the arguments and values go inside the parentheses.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Remember that functions tend to have round brackets or parentheses at the end of their name and the arguments and values go inside the parentheses.</p>
 </div>
 </div>
-<p><br></p>
+</div>
 <strong>Question 6.</strong> The job of <code>&lt;-</code> is to send the output from the function to a/an
-<div id="radio_ZGCHBNNDIY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZGCHBNNDIY" value=""><span>argument</span></label><label><input type="radio" autocomplete="off" name="radio_ZGCHBNNDIY" value="answer"><span>object</span></label><label><input type="radio" autocomplete="off" name="radio_ZGCHBNNDIY" value=""><span>assignment</span></label>
+<div id="radio_DIYXKLHRTU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DIYXKLHRTU" value=""><span>argument</span></label><label><input type="radio" autocomplete="off" name="radio_DIYXKLHRTU" value="answer"><span>object</span></label><label><input type="radio" autocomplete="off" name="radio_DIYXKLHRTU" value=""><span>assignment</span></label>
 </div>
-<div class="webex-solution">
-<button>
-Explain This Answer
-</button>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is the assignment operator (<code>&lt;-</code>) and we use it to assign content such as the output of functions to an object.</p>
+</div>
+</div>
+</div>
+<p><strong>Error mode</strong></p>
+<p>The following questions are designed to introduce you to making and fixing errors. Try and run the code, look at the error message, and see if you can fix it before checking the answer.</p>
+<p><strong>Question 7.</strong> Type the following code into the console and press enter/return: <code>rnorm(n = 10, meen = 5, sd = 1)</code>. You should get an error saying something like <code>Error in rnorm(n = 10, meen = 5, sd = 1) : unused argument (meen = 5)</code>. How can you fix it?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We accidentally spelt one of the arguments incorrectly. If you look closely, you will see that we typed <code>meen</code> spelt with two es instead of one e when we should have typed <code>mean</code>.</p>
+</div>
+</div>
+</div>
+<p><strong>Question 8.</strong> To end on a sneaky one that we have not covered in this chapter, type the following code into the console and press enter/return: <code>rnorm(n = 10, mean = 5, sd = 1</code>. What happened and how can you fix it? Before checking the explain this answer box below, maybe try and Google what happens to see if you can describe it and find a solution.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We missed the final bracket, so we start the function name <code>rnorm(</code>, enter our arguments, but there is no closing bracket. You will see in the console like Figure <a href="#fig-img-unfinished-bracket">Figure&nbsp;<span>1.8</span></a>, there is a little <code>+</code> symbol and you can enter new code, but there is no output.</p>
 <div class="cell" data-layout-align="center">
-<p>This is the assignment operator and we use it, <code>&lt;-</code>, to assign content such as the output of functions to an object.</p>
+<div class="cell-output-display">
+<div id="fig-img-unfinished-bracket" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/unfinished-bracket.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1.8: An R function without a closing bracket in the console.</figcaption></figure>
 </div>
 </div>
-<p><br></p>
-<strong>Question 7.</strong> Why won’t the following code give me 10 values with a mean close to 5 and an sd close to 1: <code>rnorm(n = 10, meen = 5, sd = 1)</code>?
-<div id="radio_RTUCBAHYYD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RTUCBAHYYD" value=""><span>d.&nbsp;The argument names have been included</span></label><label><input type="radio" autocomplete="off" name="radio_RTUCBAHYYD" value="answer"><span>c.&nbsp;One of the arguments is spelt incorrectly</span></label><label><input type="radio" autocomplete="off" name="radio_RTUCBAHYYD" value=""><span>b. The order of arguments is not correct</span></label><label><input type="radio" autocomplete="off" name="radio_RTUCBAHYYD" value=""><span>a. The values do not match what I wanted</span></label>
 </div>
-<div class="webex-solution">
-<button>
-Explain This Answer
-</button>
-<div class="cell" data-layout-align="center">
-<p>The answer is c - One of the arguments is spelt incorrectly. If you look closely you will see that the argument <code>mean</code> has been spelt with two e’s instead of one e, <code>meen</code>. This will create an error and the code will crash. This is a typical debugging issue in coding and just shows you need to be careful with spelling.</p>
+<p>This can be really frustrating as it looks like nothing is happening, but when you did not add a closing bracket, R is just sitting there waiting for you to add something else. To fix it, you can either type <code>)</code> and press enter/return to finish the function and it should work, or you can press the escape (esc) key to cancel the code and start again.</p>
 </div>
 </div>
-<p><br></p>
+</div>
 </section><section id="words-from-this-chapter" class="level2" data-number="1.9"><h2 data-number="1.9" class="anchored" data-anchor-id="words-from-this-chapter">
 <span class="header-section-number">1.9</span> Words from this Chapter</h2>
-<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
+<p>Below, you will find a list of words that we used in this chapter that might be new to you in case you need to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that numerous members of the team wrote entries in the Glossary and as such the entries may use slightly different terminology from what we used in the chapter.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
@@ -922,51 +1035,59 @@ Explain This Answer
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">conflict</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">console</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">default value</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">environment</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">error</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">function</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">mean</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">normal distribution</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">object</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">package</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">R markdown</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">RStudio</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">script</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">session</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
@@ -982,7 +1103,7 @@ Explain This Answer
 </div>
 </div>
 <p><strong>End of Chapter</strong></p>
-<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
+<p>Well done on reaching the end of the first chapter! This was one of the longest chapters in the book to introduce you to several foundational concepts of coding in R and RStudio. The next chapter builds on these skills to produce something a little more concrete by showing you how to create reproducible documents.</p>
 
 
 </section></main><!-- /main --><script>

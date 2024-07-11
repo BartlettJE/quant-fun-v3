@@ -59,8 +59,8 @@ Now that we have our data in our folder we need to read in the data - "read" in 
     * and remember that `<-` is called the **`r glossary("assignment operator")`** but we can read it as "assigned to". For example, the first line can be read as the data in `ahi-cesd.csv` is assigned to the object called `dat`.
 
 ```{r T3, warning = FALSE, message = FALSE}
-dat <- read_csv("ahi-cesd.csv")
-pinfo <- read_csv("participant-info.csv")
+dat <- read_csv("data/ahi-cesd.csv")
+pinfo <- read_csv("data/participant-info.csv")
 ```
 
 If you have done this activity correctly, and the preceding activities, you should now see that the objects `dat` and `pinfo` have appeared in the **`r glossary("Environment", display = "environment")`** pane. If they are not there then you should check the spelling of the filenames and the structure of the code lines as well as maybe the working directory.

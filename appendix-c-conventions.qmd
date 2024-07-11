@@ -43,6 +43,16 @@ These boxes will invite you to try something yourself, like complete independent
 These boxes will include small hints or solutions to check your understanding
 :::
 
+Image example
+
+```{r load-tidyverse, echo=FALSE}
+#| label: fig-img-load-tidyverse
+#| fig.cap: "Example loading message from tidyverse."
+
+knitr::include_graphics("images/tidyverse-loading.png")
+
+```
+
 ```{r}
 # code chunks
 paste("Applied", "Data", "Skills", 1, sep = " ")

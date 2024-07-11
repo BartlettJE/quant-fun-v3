@@ -421,9 +421,7 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span>
-</h1>
+<h1 class="title"><span id="C2-repro-docs" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span></h1>
 </div>
 
 
@@ -501,8 +499,8 @@ div.csl-indent {
 </li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ahi-cesd.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/participant-info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you have done this activity correctly, and the preceding activities, you should now see that the objects <code>dat</code> and <code>pinfo</code> have appeared in the <strong><a class="glossary">environment<span class="def"></span></a></strong> pane. If they are not there then you should check the spelling of the filenames and the structure of the code lines as well as maybe the working directory.</p>
 <div class="cell" data-layout-align="center" type="danger">
@@ -717,8 +715,8 @@ WATCH OUT! There is also a function called <code><a href="https://rdrr.io/r/util
 <span class="header-section-number">2.9.1</span> Knowledge Questions</h3>
 <ol type="1">
 <li>When loading in a .csv file, which function should you use?
-<div id="radio_AGRLTVTSHG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AGRLTVTSHG" value="answer"><span>read_csv()</span></label><label><input type="radio" autocomplete="off" name="radio_AGRLTVTSHG" value=""><span>read.csv()</span></label><label><input type="radio" autocomplete="off" name="radio_AGRLTVTSHG" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_AGRLTVTSHG" value=""><span>library()</span></label>
+<div id="radio_JYPIYZWLNI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JYPIYZWLNI" value="answer"><span>read_csv()</span></label><label><input type="radio" autocomplete="off" name="radio_JYPIYZWLNI" value=""><span>read.csv()</span></label><label><input type="radio" autocomplete="off" name="radio_JYPIYZWLNI" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_JYPIYZWLNI" value=""><span>library()</span></label>
 </div>
 </li>
 </ol>
@@ -732,8 +730,8 @@ Explain this answer
 </div>
 <ol start="2" type="1">
 <li>The function <code>inner_join()</code> takes the arguments <code>x</code>, <code>y</code>, <code>by</code>. What does <code>by</code> do?
-<div id="radio_MMFWVEEOWU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MMFWVEEOWU" value=""><span>Specifies the first object to join</span></label><label><input type="radio" autocomplete="off" name="radio_MMFWVEEOWU" value=""><span>Specifies the second object to join</span></label><label><input type="radio" autocomplete="off" name="radio_MMFWVEEOWU" value="answer"><span>Specifies the column to join by that both objects have in common</span></label>
+<div id="radio_LMMTZYFRJG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LMMTZYFRJG" value=""><span>Specifies the first object to join</span></label><label><input type="radio" autocomplete="off" name="radio_LMMTZYFRJG" value=""><span>Specifies the second object to join</span></label><label><input type="radio" autocomplete="off" name="radio_LMMTZYFRJG" value="answer"><span>Specifies the column to join by that both objects have in common</span></label>
 </div>
 </li>
 </ol>
@@ -747,8 +745,8 @@ Explain this answer
 </div>
 <ol start="3" type="1">
 <li>What does the function <code>select()</code> do?
-<div id="radio_FVIIEBVSWI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FVIIEBVSWI" value=""><span>Keeps only the observations you specify</span></label><label><input type="radio" autocomplete="off" name="radio_FVIIEBVSWI" value="answer"><span>Keeps only the columns you specify</span></label><label><input type="radio" autocomplete="off" name="radio_FVIIEBVSWI" value=""><span>Keeps only the objects you specify</span></label>
+<div id="radio_KZACPRATGL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KZACPRATGL" value=""><span>Keeps only the observations you specify</span></label><label><input type="radio" autocomplete="off" name="radio_KZACPRATGL" value="answer"><span>Keeps only the columns you specify</span></label><label><input type="radio" autocomplete="off" name="radio_KZACPRATGL" value=""><span>Keeps only the objects you specify</span></label>
 </div>
 </li>
 </ol>

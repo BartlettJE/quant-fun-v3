@@ -1,4 +1,4 @@
-# Additional Resources
+# Additional Resources {#additional-resources}
 
 ```{r img-kitteh, echo=FALSE, fig.cap="The truth about programming", output.width = "25%", fig.align="center"}
 
