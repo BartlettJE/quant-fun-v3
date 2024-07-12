@@ -19,6 +19,8 @@ book:
   google-analytics: ''
   page-navigation: true
   search: true
+  repo-url: https://github.com/BartlettJE/quant-fun-v3/
+  repo-actions: [edit, issue, source]
   sharing:
   - twitter
   - facebook
@@ -89,6 +91,7 @@ format:
     - include/glossary.css
     - include/style.css
     df-print: kable
+    html-table-processing: none
     code-link: true
     code-fold: false
     code-line-numbers: true

@@ -117,7 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/BartlettJE/quant-fun-v3/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -399,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
   <li><a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">1.8</span> Test yourself</a></li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">1.9</span> Words from this Chapter</a></li>
-  </ul></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/01-programming-basics.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/01-programming-basics.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -419,17 +420,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 </header><p>In this chapter, we will cover interacting with R and RStudio. We will provide an overview of basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, but there should be helpful hints and tips even if you have used R or another programming language before before.</p>
-<p><strong>Chapter Intended Learning Outcomes</strong></p>
+<p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
+<p>By the end of this chapter, you will be able to:</p>
 <ul>
-<li><p>How to navigate and interact with RStudio.</p></li>
-<li><p>How to use an R function and find help documentation.</p></li>
-<li><p>How to install and load R packages.</p></li>
-<li><p>Learn how to assign content to an object.</p></li>
-<li><p>Learn where to find support from online resources and from the course team.</p></li>
+<li><p>Navigate and interact with RStudio.</p></li>
+<li><p>Use an R function and find help documentation.</p></li>
+<li><p>Install and load R packages.</p></li>
+<li><p>Assign content to an object.</p></li>
+<li><p>Know where to find support from online resources and from the course team.</p></li>
 </ul>
 <section id="r-and-rstudio" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="r-and-rstudio">
 <span class="header-section-number">1.1</span> R and RStudio</h2>
-<p>R is a programming language that you will write code in and <strong><a class="glossary">RStudio<span class="def"></span></a></strong> is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it would not look as good and it would be much harder without things like spell-checking and formatting.</p>
+<p>R is a programming language that you will write code in and <strong><a href="https://psyteachr.github.io/glossary/r#rstudio" target="_blank" class="glossary" title="An integrated development environment (IDE) that helps you process R code.">RStudio</a></strong> is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it would not look as good and it would be much harder without things like spell-checking and formatting.</p>
 <p>In a similar way, you can use R without RStudio but we wouldn not recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using two pieces of software. This means that you will need both, you need to keep both up-to-date, and you should cite both in any work you do (see the Appendix on <a href="appendix-a3-How-to-cite-R.html" target="_blank">citing R and RStudio</a> when needed).</p>
 <p>But first we need to look at starting up R and RStudio. There are two ways you can use R for Psychology as a student here at the University of Glasgow. First, you can use a online version of R and R through your web browser and we will refer to this as the <strong>R server</strong>. Second, you can download and install R and RStudio for free on your laptop or desktop computer.</p>
 <section id="installing-r-and-rstudio-on-your-computer" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" class="anchored" data-anchor-id="installing-r-and-rstudio-on-your-computer">
@@ -441,9 +443,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">1.2</span> Getting to know R Studio</h2>
 <p>By default, RStudio has four windows:</p>
 <ol type="1">
-<li><p>The <strong><a class="glossary">console<span class="def"></span></a></strong>, where you can type R code in the bottom left (as shown in Figure <a href="#fig-img-rstudio">Figure&nbsp;<span>1.1</span></a>).</p></li>
-<li><p>Eventually, there will be a <strong><a class="glossary">script<span class="def"></span></a></strong> editor in the top left, but you will not see this when you open RStudio for the first time.</p></li>
-<li><p>The <strong><a class="glossary">environment<span class="def"></span></a></strong> window in top right, where you will see things like data, functions, and objects that you create.</p></li>
+<li><p>The <strong><a href="https://psyteachr.github.io/glossary/c#console" target="_blank" class="glossary" title="The pane in RStudio where you can type in commands and view output messages.">console</a></strong>, where you can type R code in the bottom left (as shown in Figure <a href="#fig-img-rstudio">Figure&nbsp;<span>1.1</span></a>).</p></li>
+<li><p>Eventually, there will be a <strong><a href="https://psyteachr.github.io/glossary/s#script" target="_blank" class="glossary" title="A plain-text file that contains commands in a coding language, such as R.">script</a></strong> editor in the top left, but you will not see this when you open RStudio for the first time.</p></li>
+<li><p>The <strong><a href="https://psyteachr.github.io/glossary/e#environment" target="_blank" class="glossary" title="A data structure that contains R objects such as variables and functions">environment</a></strong> window in top right, where you will see things like data, functions, and objects that you create.</p></li>
 <li><p>Finally, the bottom right window shows files, plots, packages, and help documentation.</p></li>
 </ol>
 <div class="cell" data-layout-align="center">
@@ -458,18 +460,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="console-vs.-scripts" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="console-vs.-scripts">
 <span class="header-section-number">1.2.1</span> Console vs.&nbsp;scripts</h3>
 <p>When you first open up RStudio, you will not see an R script like above, there will just be the console window taking up the whole left half. You can write code in the console to test it out, but you cannot save that code anywhere, and you would lose all your code if you closed down RStudio.</p>
-<p>For this chapter only, we will use the console window to show you some simple R code, but from Chapter 2 - <a href="02-starting-with-data.html">Creating reproducible documents</a> - we will teach you to work in a type of R script called an <strong><a class="glossary">R Markdown<span class="def"></span></a></strong> document which ends with the file name .Rmd.</p>
+<p>For this chapter only, we will use the console window to show you some simple R code, but from Chapter 2 - <a href="02-starting-with-data.html">Creating reproducible documents</a> - we will teach you to work in a type of R script called an <strong><a href="https://psyteachr.github.io/glossary/r#r-markdown" target="_blank" class="glossary" title="The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.">R Markdown</a></strong> document which ends with the file name .Rmd.</p>
 <p>You can open a new file in a number of ways, but the simplest is in the top menu of RStudio, selecting <strong><code>File &gt;&gt; New File &gt;&gt; R Markdown</code></strong> and clicking OK. You will then be able to see the extra pane in the top left like Figure <a href="#fig-img-rstudio">Figure&nbsp;<span>1.1</span></a>.</p>
 </section></section><section id="writing-code-with-functions-and-arguments" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="writing-code-with-functions-and-arguments">
 <span class="header-section-number">1.3</span> Writing code with functions and arguments</h2>
-<p>R code is made up of <strong><a class="glossary">functions<span class="def"></span></a></strong> and <strong><a class="glossary">arguments<span class="def"></span></a></strong> that go into the functions to create outputs. <strong>Functions</strong> in R execute specific tasks and normally take one or more <strong>arguments</strong>. You can think of these concepts like a spoken language as verbs (function) that require a subject and an object (arguments). You could also think of them as a kind of recipe. Some recipes (function) are quite simple and have one or two ingredients (arguments), while other recipes are more complicated with many ingredients (arguments).</p>
+<p>R code is made up of <strong><a href="https://psyteachr.github.io/glossary/f#function" target="_blank" class="glossary" title="A named section of code that can be reused.">functions</a></strong> and <strong><a href="https://psyteachr.github.io/glossary/a#argument" target="_blank" class="glossary" title="A variable that provides input to a function.">arguments</a></strong> that go into the functions to create outputs. <strong>Functions</strong> in R execute specific tasks and normally take one or more <strong>arguments</strong>. You can think of these concepts like a spoken language as verbs (function) that require a subject and an object (arguments). You could also think of them as a kind of recipe. Some recipes (function) are quite simple and have one or two ingredients (arguments), while other recipes are more complicated with many ingredients (arguments).</p>
 <p>You can spot functions as they end in round brackets (known as parentheses, <code>()</code>), and the arguments go within the round brackets. They tend to look a bit like this:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">function_name</span>(<span class="at">argument1 =</span> value, <span class="at">argument2 =</span> value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That would be the layout of a function with two arguments and each argument takes a value. Bare with us as these concepts might feel super abstract until you start using them.</p>
 <p>You will learn to use many functions throughout this book and you can look up all the arguments that a function takes in the help documentation by using the format <code>?function</code>. You will see some arguments are required while others are optional. Optional arguments will often use what is known as a default setting, value, or option (normally specified in the help documentation) if you do not enter any value.</p>
-<p>As an example, let us look at the help documentation for the function <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> - a function which randomly generates a set of numbers from what is known as the <strong><a class="glossary">Normal Distribution<span class="def"></span></a></strong>.</p>
+<p>As an example, let us look at the help documentation for the function <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> - a function which randomly generates a set of numbers from what is known as the <strong><a href="https://psyteachr.github.io/glossary/n#normal-distribution" target="_blank" class="glossary" title="A symmetric distribution of data where values near the centre are most probable.">Normal Distribution</a></strong>.</p>
 <section id="activity-1---finding-help-documentation-for-functions" class="level3" data-number="1.3.1"><h3 data-number="1.3.1" class="anchored" data-anchor-id="activity-1---finding-help-documentation-for-functions">
 <span class="header-section-number">1.3.1</span> Activity 1 - Finding help documentation for functions</h3>
 <p>Open up RStudio and in the console window (bottom left), type the following code:</p>
@@ -483,10 +485,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the <strong>Arguments</strong> section of the help, there are explanations for each of the arguments:</p>
 <ul>
 <li><p><code>n</code> is the number of observations/numbers/data points we want to create,</p></li>
-<li><p><code>mean</code> is the <strong><a class="glossary">mean<span class="def"></span></a></strong> of the observations/numbers/data points we will create.</p></li>
-<li><p>and <code>sd</code> is the <strong><a class="glossary">standard deviation<span class="def"></span></a></strong> of the observations/numbers/data points we will create.</p></li>
+<li><p><code>mean</code> is the <strong><a href="https://psyteachr.github.io/glossary/m#mean" target="_blank" class="glossary" title="A descriptive statistic that measures the average value of a set of numbers.">mean</a></strong> of the observations/numbers/data points we will create.</p></li>
+<li><p>and <code>sd</code> is the <strong><a href="https://psyteachr.github.io/glossary/s#standard-deviation" target="_blank" class="glossary" title="A descriptive statistic that measures how spread out data are relative to the mean.">standard deviation</a></strong> of the observations/numbers/data points we will create.</p></li>
 </ul>
-<p>In the <strong>Details</strong> section of the help, it notes that if no values are entered for <code>mean</code> and <code>sd</code> it will use a default of 0 for the mean and 1 for the standard deviation. So, these are the values the function will use for its arguments of <code>mean</code> and <code>sd</code> if you do not state any. However, because there is no <strong><a class="glossary">default value<span class="def"></span></a></strong> for <code>n</code>, this means that you must state a value for the arguments <code>n</code>, otherwise the code will not run.</p>
+<p>In the <strong>Details</strong> section of the help, it notes that if no values are entered for <code>mean</code> and <code>sd</code> it will use a default of 0 for the mean and 1 for the standard deviation. So, these are the values the function will use for its arguments of <code>mean</code> and <code>sd</code> if you do not state any. However, because there is no <strong><a href="https://psyteachr.github.io/glossary/d#default-value" target="_blank" class="glossary" title="A value that a function uses for an argument if it is skipped.">default value</a></strong> for <code>n</code>, this means that you must state a value for the arguments <code>n</code>, otherwise the code will not run.</p>
 <p>This is all still a little abstract, so let us try an example. Still using <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> let us set the required argument <code>n</code> to ask R to produce 5 random numbers.</p>
 </section><section id="activity-2---running-your-first-function" class="level3" data-number="1.3.2"><h3 data-number="1.3.2" class="anchored" data-anchor-id="activity-2---running-your-first-function">
 <span class="header-section-number">1.3.2</span> Activity 2 - Running your first function</h3>
@@ -534,7 +536,7 @@ Error mode
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One thing that can be intimidating at first is making <strong><a class="glossary">errors<span class="def"></span></a></strong>. They have little red marks and produce sometimes vague messages to try and explain what went wrong. You will make many errors as you learn and over time, you do not stop making errors, but you get faster at working out what went wrong and how you can fix it. So, we will introduce you to common errors as we work through the book to help with problem solving.</p>
+<p>One thing that can be intimidating at first is making **&lt;a href=‘https://psyteachr.github.io/glossary/e#error’ target=’_blank’ class=‘glossary’ title=‘The statistical error in a linear model is how much an observation’s value differs from the (typically unobserved) true value of a population parameter.’&gt;errors**. They have little red marks and produce sometimes vague messages to try and explain what went wrong. You will make many errors as you learn and over time, you do not stop making errors, but you get faster at working out what went wrong and how you can fix it. So, we will introduce you to common errors as we work through the book to help with problem solving.</p>
 <p>Try and run the following code in the console:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">rnorm</span>(<span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -584,8 +586,8 @@ Warning
 </div>
 </section></section><section id="packages" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="packages">
 <span class="header-section-number">1.4</span> Base R and packages</h2>
-<p>When you install R, you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation of R are typically referred to as <strong><a class="glossary">Base R<span class="def"></span></a></strong> and there is a useful cheat sheet that shows many Base R functions about halfway down <a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">this page under Contributed Cheatsheets here</a>, along with a host of other cheatsheets you might find useful.</p>
-<p>However, the power of R is that it is extendable and open source. If a function does not exist or does not work very well, anyone can create a new <strong><a class="glossary">package<span class="def"></span></a></strong> that contains data and/or code to allow you to perform new tasks. You can think of <strong>Base R</strong> as the default apps that come on your phone and other packages as additional apps; the ones that you really want to use to make the phone your own, but you need to download them separately.</p>
+<p>When you install R, you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation of R are typically referred to as <strong><a href="https://psyteachr.github.io/glossary/b#base-r" target="_blank" class="glossary" title="The set of R functions that come with a basic installation of R, before you add external packages.">Base R</a></strong> and there is a useful cheat sheet that shows many Base R functions about halfway down <a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">this page under Contributed Cheatsheets here</a>, along with a host of other cheatsheets you might find useful.</p>
+<p>However, the power of R is that it is extendable and open source. If a function does not exist or does not work very well, anyone can create a new <strong><a href="https://psyteachr.github.io/glossary/p#package" target="_blank" class="glossary" title="A group of R functions.">package</a></strong> that contains data and/or code to allow you to perform new tasks. You can think of <strong>Base R</strong> as the default apps that come on your phone and other packages as additional apps; the ones that you really want to use to make the phone your own, but you need to download them separately.</p>
 <section id="activity-3---install-the-tidyverse-to-your-own-computer" class="level3" data-number="1.4.1"><h3 data-number="1.4.1" class="anchored" data-anchor-id="activity-3---install-the-tidyverse-to-your-own-computer">
 <span class="header-section-number">1.4.1</span> Activity 3 - Install the tidyverse to your own computer</h3>
 <p>To use a package, you must first install it. The following code installs the package <code>tidyverse</code>, a package we will use extensively throughout this course and introduce in the next chapter.</p>
@@ -602,7 +604,7 @@ Warning
 <p><strong>Please do not complete this activity if you are working on the online R server or if you are using the computers in a University lab or Boyd Orr Building</strong>. You should only complete this activity on your own device. The university computers and server already have a version of all the packages we introduce you to, and installing a new version can cause problems by having a conflict between one version on your user profile and another version on the system profile.</p>
 </div>
 </div>
-<p>If you are working on your own computer, use the code below to install the <strong><a class="glossary">tidyverse<span class="def"></span></a></strong> and typing it into the console and pressing enter/return. Remember: if you are using the online R server or using a university computer, then skip this activity.</p>
+<p>If you are working on your own computer, use the code below to install the <strong><a href="https://psyteachr.github.io/glossary/t#tidyverse" target="_blank" class="glossary" title="A set of R packages that help you create and work with tidy data">tidyverse</a></strong> and typing it into the console and pressing enter/return. Remember: if you are using the online R server or using a university computer, then skip this activity.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -627,7 +629,7 @@ Important
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Often when you load packages you get information in your console window. Some packages will provide little messages to tell you what it has done or warn you about something. Sometimes these messages can look like errors and make you panic, but try and read over what it is saying first. For example, you should have something that looks like Figure <a href="#fig-img-load-tidyverse">Figure&nbsp;<span>1.3</span></a> when you load <code>tidyverse</code>. You might think you have done something wrong as it has little red crosses, but it is just telling you that it has loaded a set of packages and there are some <strong><a class="glossary">conflicts<span class="def"></span></a></strong>.</p>
+<p>Often when you load packages you get information in your console window. Some packages will provide little messages to tell you what it has done or warn you about something. Sometimes these messages can look like errors and make you panic, but try and read over what it is saying first. For example, you should have something that looks like Figure <a href="#fig-img-load-tidyverse">Figure&nbsp;<span>1.3</span></a> when you load <code>tidyverse</code>. You might think you have done something wrong as it has little red crosses, but it is just telling you that it has loaded a set of packages and there are some <strong><a href="https://psyteachr.github.io/glossary/c#conflict" target="_blank" class="glossary" title="Having two packages loaded that have a function with the same name.">conflicts</a></strong>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-load-tidyverse" class="quarto-figure quarto-figure-center anchored">
@@ -694,9 +696,9 @@ Attaching package: 'MASS'</code></pre>
 <p>Clashes are inevitable in your learning and when you see one, you will probably not spot it at first but you will learn to resolve them quickly.</p>
 </section></section><section id="objects" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="objects">
 <span class="header-section-number">1.5</span> Objects</h2>
-<p>So far, you have learnt about packages, and functions and arguments. Earlier we said functions give us outputs and another name for outputs - or at least specific types of outputs - are <strong><a class="glossary">objects<span class="def"></span></a></strong>.</p>
+<p>So far, you have learnt about packages, and functions and arguments. Earlier we said functions give us outputs and another name for outputs - or at least specific types of outputs - are <strong><a href="https://psyteachr.github.io/glossary/o#object" target="_blank" class="glossary" title="A word that identifies and stores the value of some data for later use.">objects</a></strong>.</p>
 <p>Objects are the output of functions but you can also create objects without functions. Most of your coding will involve creating and manipulating objects. Objects contain stuff, which could be numbers, words, or the result of functions, operations, and analyses.</p>
-<p>The first key thing to know about objects is how to create them and to give them content. You assign content to an object using <code>&lt;-</code> - often called the “left arrow” or the <strong><a class="glossary">assignment operator<span class="def"></span></a></strong> which you can read as “assigned to”. Note that we do not use the <code>=</code> symbol as an assignment operator. There is a large discussion on why objects are assigned content and not equal to content but that is for another time. For now, just remember that we assign (<code>&lt;-</code>) content, be it words, numbers, or function output, to objects.</p>
+<p>The first key thing to know about objects is how to create them and to give them content. You assign content to an object using <code>&lt;-</code> - often called the “left arrow” or the <strong><a href="https://psyteachr.github.io/glossary/a#assignment-operator" target="_blank" class="glossary" title="The symbol <-, which functions like = and assigns the value on the right to the object on the left">assignment operator</a></strong> which you can read as “assigned to”. Note that we do not use the <code>=</code> symbol as an assignment operator. There is a large discussion on why objects are assigned content and not equal to content but that is for another time. For now, just remember that we assign (<code>&lt;-</code>) content, be it words, numbers, or function output, to objects.</p>
 <section id="activity-5---create-some-objects" class="level3" data-number="1.5.1"><h3 data-number="1.5.1" class="anchored" data-anchor-id="activity-5---create-some-objects">
 <span class="header-section-number">1.5.1</span> Activity 5 - Create some objects</h3>
 <p>Type the following code into the console window and run each line. You should see that <code>name</code>, <code>age</code>, <code>today</code>, <code>new_year</code>, and <code>data</code> appear in the environment pane like Figure <a href="#fig-img-objects-enviro">Figure&nbsp;<span>1.4</span></a>.</p>
@@ -739,7 +741,7 @@ Try this
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>new_year <span class="sc">-</span> today</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 174 days</code></pre>
+<pre><code>Time difference of 173 days</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -829,7 +831,7 @@ Note
 </ul></section><section id="activity-6---reset-your-r-session" class="level3" data-number="1.7.3"><h3 data-number="1.7.3" class="anchored" data-anchor-id="activity-6---reset-your-r-session">
 <span class="header-section-number">1.7.3</span> Activity 6 - Reset your R session</h3>
 <p>Finally, if you find that your code is not working and you cannot figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages. Think of it like restarting your phone.</p>
-<p>When you open up R and start writing code, loading packages, and creating objects, you are typically doing so in a new <strong><a class="glossary">session<span class="def"></span></a></strong>. In addition to clearing your environment workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start RStudio on your computer, although sessions can persist if you use the online server.</p>
+<p>When you open up R and start writing code, loading packages, and creating objects, you are typically doing so in a new <strong><a class="glossary" title="When you start R/RStudio and executive code to fill the workspace until you close R/RStudio">session</a></strong>. In addition to clearing your environment workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start RStudio on your computer, although sessions can persist if you use the online server.</p>
 <p>This last activity shows a quick way to restart R from inside RStudio. On the Top Menu, click <strong><code>Session &gt;&gt; Restart R</code></strong> like Figure <a href="#fig-img-session">Figure&nbsp;<span>1.7</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1023,80 +1025,80 @@ Explain this answer
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">argument</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/a#argument' target='_blank'&gt;argument&lt;/a&gt;</td>
+<td style="text-align: left;">A variable that provides input to a function.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">assignment operator</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/a#assignment-operator' target='_blank'&gt;assignment-operator&lt;/a&gt;</td>
+<td style="text-align: left;">The symbol &lt;-, which functions like = and assigns the value on the right to the object on the left</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">base R</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/b#base-r' target='_blank'&gt;base-r&lt;/a&gt;</td>
+<td style="text-align: left;">The set of R functions that come with a basic installation of R, before you add external packages.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">conflict</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/c#conflict' target='_blank'&gt;conflict&lt;/a&gt;</td>
+<td style="text-align: left;">Having two packages loaded that have a function with the same name.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">console</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/c#console' target='_blank'&gt;console&lt;/a&gt;</td>
+<td style="text-align: left;">The pane in RStudio where you can type in commands and view output messages.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">default value</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/d#default-value' target='_blank'&gt;default-value&lt;/a&gt;</td>
+<td style="text-align: left;">A value that a function uses for an argument if it is skipped.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">environment</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/e#environment' target='_blank'&gt;environment&lt;/a&gt;</td>
+<td style="text-align: left;">A data structure that contains R objects such as variables and functions</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">error</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/e#error' target='_blank'&gt;error&lt;/a&gt;</td>
+<td style="text-align: left;">The statistical error in a linear model is how much an observation&amp;#39;s value differs from the (typically unobserved) true value of a population parameter.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">function</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/f#function' target='_blank'&gt;function&lt;/a&gt;</td>
+<td style="text-align: left;">A named section of code that can be reused.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">mean</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/m#mean' target='_blank'&gt;mean&lt;/a&gt;</td>
+<td style="text-align: left;">A descriptive statistic that measures the average value of a set of numbers.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">normal distribution</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/n#normal-distribution' target='_blank'&gt;normal-distribution&lt;/a&gt;</td>
+<td style="text-align: left;">A symmetric distribution of data where values near the centre are most probable.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">object</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/o#object' target='_blank'&gt;object&lt;/a&gt;</td>
+<td style="text-align: left;">A word that identifies and stores the value of some data for later use.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">package</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/p#package' target='_blank'&gt;package&lt;/a&gt;</td>
+<td style="text-align: left;">A group of R functions.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">R markdown</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/r#r-markdown' target='_blank'&gt;r-markdown&lt;/a&gt;</td>
+<td style="text-align: left;">The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">RStudio</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/r#rstudio' target='_blank'&gt;rstudio&lt;/a&gt;</td>
+<td style="text-align: left;">An integrated development environment (IDE) that helps you process R code.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">script</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/s#script' target='_blank'&gt;script&lt;/a&gt;</td>
+<td style="text-align: left;">A plain-text file that contains commands in a coding language, such as R.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">session</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/s#session' target='_blank'&gt;session&lt;/a&gt;</td>
+<td style="text-align: left;">When you start R/RStudio and executive code to fill the workspace until you close R/RStudio</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">standard deviation</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/s#standard-deviation' target='_blank'&gt;standard-deviation&lt;/a&gt;</td>
+<td style="text-align: left;">A descriptive statistic that measures how spread out data are relative to the mean.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">tidyverse</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">&lt;a href='https://psyteachr.github.io/glossary/t#tidyverse' target='_blank'&gt;tidyverse&lt;/a&gt;</td>
+<td style="text-align: left;">A set of R packages that help you create and work with tidy data</td>
 </tr>
 </tbody>
 </table>

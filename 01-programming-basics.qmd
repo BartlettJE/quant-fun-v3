@@ -6,17 +6,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 In this chapter, we will cover interacting with R and RStudio. We will provide an overview of basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, but there should be helpful hints and tips even if you have used R or another programming language before before.
 
-**Chapter Intended Learning Outcomes**
+**Chapter Intended Learning Outcomes (ILOs)**
 
-- How to navigate and interact with RStudio. 
+By the end of this chapter, you will be able to: 
 
-- How to use an R function and find help documentation. 
+- Navigate and interact with RStudio. 
 
-- How to install and load R packages. 
+- Use an R function and find help documentation. 
 
-- Learn how to assign content to an object.
+- Install and load R packages. 
 
-- Learn where to find support from online resources and from the course team. 
+- Assign content to an object.
+
+- Know where to find support from online resources and from the course team. 
 
 ## R and RStudio
 
@@ -438,7 +440,7 @@ As a short list of suggestions when you come across an error, keep in mind:
 
 Finally, if you find that your code is not working and you cannot figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages. Think of it like restarting your phone. 
 
-When you open up R and start writing code, loading packages, and creating objects, you are typically doing so in a new **`r glossary("session")`**. In addition to clearing your environment workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start RStudio on your computer, although sessions can persist if you use the online server. 
+When you open up R and start writing code, loading packages, and creating objects, you are typically doing so in a new **`r glossary("session", def = "When you start R/RStudio and executive code to fill the workspace until you close R/RStudio")`**. In addition to clearing your environment workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start RStudio on your computer, although sessions can persist if you use the online server. 
 
 This last activity shows a quick way to restart R from inside RStudio. On the Top Menu, click **`Session >> Restart R`** like Figure @fig-img-session. 
 
