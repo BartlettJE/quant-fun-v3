@@ -173,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-starting-with-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -448,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-rstudio" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/rstudio.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/rstudio.png" class="img-fluid figure-img" style="width:100.0%" alt="The default RStudio interface on a Windows computer. You can see an example script in the top left, the console bottom left, environment with objects in the top right, and example scatterplot in the plots bottom right."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.1: RStudio interface</figcaption></figure>
 </div>
 </div>
@@ -457,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="console-vs.-scripts" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="console-vs.-scripts">
 <span class="header-section-number">1.2.1</span> Console vs.&nbsp;scripts</h3>
 <p>When you first open up RStudio, you will not see an R script like above, there will just be the console window taking up the whole left half. You can write code in the console to test it out, but you cannot save that code anywhere, and you would lose all your code if you closed down RStudio.</p>
-<p>For this chapter only, we will use the console window to show you some simple R code, but from Chapter 2 - <a href="02-starting-with-data.html">Creating reproducible documents</a> - we will teach you to work in a type of R script called an <strong><a href="https://psyteachr.github.io/glossary/r#r-markdown" target="_blank" class="glossary" title="The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.">R Markdown</a></strong> document which ends with the file name .Rmd.</p>
+<p>For this chapter only, we will use the console window to show you some simple R code, but from Chapter 2 - <a href="#C2-repro-docs">Creating reproducible documents</a> - we will teach you to work in a type of R script called an <strong><a href="https://psyteachr.github.io/glossary/r#r-markdown" target="_blank" class="glossary" title="The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.">R Markdown</a></strong> document which ends with the file name .Rmd.</p>
 <p>You can open a new file in a number of ways, but the simplest is in the top menu of RStudio, selecting <strong><code>File &gt;&gt; New File &gt;&gt; R Markdown</code></strong> and clicking OK. You will then be able to see the extra pane in the top left like Figure <a href="#fig-img-rstudio">Figure&nbsp;<span>1.1</span></a>.</p>
 </section></section><section id="writing-code-with-functions-and-arguments" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="writing-code-with-functions-and-arguments">
 <span class="header-section-number">1.3</span> Writing code with functions and arguments</h2>
@@ -576,7 +576,7 @@ Warning
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-autocomplete" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/autocomplete.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/autocomplete.png" class="img-fluid figure-img" style="width:100.0%" alt="Example of pressing tab to autocomplete function arguments. You can see an example where the arguments n, mean, and sd are visible for the mean function."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.2: Tab auto-complete</figcaption></figure>
 </div>
 </div>
@@ -630,7 +630,7 @@ Important
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-load-tidyverse" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/tidyverse-loading.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/tidyverse-loading.png" class="img-fluid figure-img" style="width:100.0%" alt="The loading messages from tidyverse. You can see all the packages it loads under attaching core packages, such as dplyr and ggplot2. You can then see conflicts between functions in these packages and others already loaded."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.3: Example loading message from tidyverse.</figcaption></figure>
 </div>
 </div>
@@ -709,7 +709,7 @@ Attaching package: 'MASS'</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-objects-enviro" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/objects-enviro.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/objects-enviro.png" class="img-fluid figure-img" style="width:100.0%" alt="Example of objects in the environment, for example showing values as age equals 30 and name equals James."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.4: Objects in the environment. Feel free to change your numbers and check that they match the environment!</figcaption></figure>
 </div>
 </div>
@@ -777,7 +777,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-broom" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/broom.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/broom.png" class="img-fluid figure-img" style="width:100.0%" alt="Highlighting the broom symbol and hovering over the text which says clears objects from the workspace."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.5: Clearing the workspace.</figcaption></figure>
 </div>
 </div>
@@ -790,7 +790,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-options" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/global_options.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/global_options.png" class="img-fluid figure-img" style="width:100.0%" alt="Global options in RStudio where you can see the General tab. For example, we untick Restore RData into workspace at startup, and set Save workspace to .RData on exit to Never."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.6: Global options - you want to make your global options look similar, in terms of what is ticked, to the above. The main thing is to make sure that you untick Restore RData into workspace at startup, and set Save workspace to .RData on exit to Never. Unticking the History options are optional but can help. The update option is really just in case you want to.</figcaption></figure>
 </div>
 </div>
@@ -833,7 +833,7 @@ Note
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-session" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/new_session.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/new_session.png" class="img-fluid figure-img" style="width:100.0%" alt="Highlighting how to restart R by using the menus Session >> Restart R."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.7: Restarting your R session from within RStudio.</figcaption></figure>
 </div>
 </div>
@@ -1001,7 +1001,7 @@ Explain this answer
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-img-unfinished-bracket" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/unfinished-bracket.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="images/unfinished-bracket.png" class="img-fluid figure-img" style="width:100.0%" alt="In the R console, you can see rnorm(n = 10, mean = 5, sd = 1 types into the console on one line but no output. The second line just shows the + symbol for expecting more input."></p>
 <figcaption class="figure-caption">Figure&nbsp;1.8: An R function without a closing bracket in the console.</figcaption></figure>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./02-starting-with-data.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -51,6 +51,7 @@ By default, RStudio has four windows:
 ```{r img-rstudio, echo=FALSE}
 #| label: fig-img-rstudio
 #| fig.cap: "RStudio interface"
+#| fig-alt: "The default RStudio interface on a Windows computer. You can see an example script in the top left, the console bottom left, environment with objects in the top right, and example scatterplot in the plots bottom right."
 
 knitr::include_graphics("images/rstudio.png")
 
@@ -204,6 +205,7 @@ You can also use the tab button when writing a function name to auto-complete th
 ```{r img-autocomplete, echo=FALSE}
 #| label: fig-img-autocomplete
 #| fig.cap: "Tab auto-complete"
+#| fig-alt: "Example of pressing tab to autocomplete function arguments. You can see an example where the arguments n, mean, and sd are visible for the mean function."
 
 knitr::include_graphics("images/autocomplete.png")
 
@@ -250,6 +252,7 @@ Often when you load packages you get information in your console window. Some pa
 ```{r load-tidyverse, echo=FALSE}
 #| label: fig-img-load-tidyverse
 #| fig.cap: "Example loading message from tidyverse."
+#| fig-alt: "The loading messages from tidyverse. You can see all the packages it loads under attaching core packages, such as dplyr and ggplot2. You can then see conflicts between functions in these packages and others already loaded."
 
 knitr::include_graphics("images/tidyverse-loading.png")
 
@@ -314,6 +317,7 @@ data <- rnorm(n = 10, mean = 15, sd = 3)
 ```{r objects-enviro, echo=FALSE}
 #| label: fig-img-objects-enviro
 #| fig.cap: "Objects in the environment. Feel free to change your numbers and check that they match the environment!"
+#| fig-alt: "Example of objects in the environment, for example showing values as age equals 30 and name equals James."
 
 knitr::include_graphics("images/objects-enviro.png")
 
@@ -369,6 +373,7 @@ Now that you are starting to learn about the other windows in RStudio like the e
 ```{r img-broom, echo=FALSE}
 #| label: fig-img-broom
 #| fig.cap: "Clearing the workspace."
+#| fig-alt: "Highlighting the broom symbol and hovering over the text which says clears objects from the workspace."
 
 knitr::include_graphics("images/broom.png")
 
@@ -385,6 +390,7 @@ You can do this by clicking on the top menu **`Tools >> Global Options...`** and
 ```{r img-options, echo=FALSE}
 #| label: fig-img-options
 #| fig.cap: "Global options - you want to make your global options look similar, in terms of what is ticked, to the above. The main thing is to make sure that you untick Restore RData into workspace at startup, and set Save workspace to .RData on exit to Never. Unticking the History options are optional but can help. The update option is really just in case you want to."
+#| fig-alt: "Global options in RStudio where you can see the General tab. For example, we untick Restore RData into workspace at startup, and set Save workspace to .RData on exit to Never."
 
 knitr::include_graphics("images/global_options.png")
 
@@ -447,6 +453,7 @@ This last activity shows a quick way to restart R from inside RStudio. On the To
 ```{r img-session, echo=FALSE}
 #| label: fig-img-session
 #| fig.cap: "Restarting your R session from within RStudio."
+#| fig-alt: "Highlighting how to restart R by using the menus Session >> Restart R."
 
 knitr::include_graphics("images/new_session.png")
 
@@ -530,6 +537,7 @@ We missed the final bracket, so we start the function name `rnorm(`, enter our a
 ```{r img-unfinished-bracket, echo=FALSE}
 #| label: fig-img-unfinished-bracket
 #| fig.cap: "An R function without a closing bracket in the console."
+#| fig-alt: "In the R console, you can see rnorm(n = 10, mean = 5, sd = 1 types into the console on one line but no output. The second line just shows the + symbol for expecting more input."
 
 knitr::include_graphics("images/unfinished-bracket.png")
 
