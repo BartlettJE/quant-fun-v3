@@ -14,7 +14,12 @@ We follow a scaffolding approach in this book to build your skills from followin
 
 In each chapter, we first guide you through a set of demonstrations focused on different data skills, highlighting key parts of the output and what it means (just keep in mind we focus on the practical side of doing and interpreting in this book, the course lectures cover the conceptual background). We strongly encourage you to type out the code yourself, as this is good practice for learning to code, but remember you can copy and paste from the book if you need to. Typing the code will seem much slower at first and you will make lots errors, but you will learn much more quickly this way.
 
-As you work through the book, you will see different colour-coded boxes to emphasise different content. These provide information, warn you about something, highlight if something is dangerous and you should really pay attention, and try it yourself boxes when we have activities for you to complete. 
+```{r, echo=FALSE}
+# Does not render inline in this chapter for some reason?
+example_glossary <- glossary("console")
+```
+
+As you work through the book, you will see technical terms highlighted like `r example_glossary` which link to a glossary we have developed as a team. If you hover the cursor over the highlighted word, it will show you a little definition, and you will be able to see a full list of words we highlighted at the bottom of each chapter. There are also different colour-coded boxes to emphasise different content. These provide information, warn you about something, highlight if something is dangerous and you should really pay attention, and try it yourself boxes when we have activities for you to complete. 
 
 ::: {.callout-note}
 These boxes have little interesting - but not critical - bits of information. 
@@ -56,9 +61,9 @@ Finally, this book is a living document. That means occasionally we will make up
 
 Almost all the demonstrations and activities in this book use real data from published research to reinforce how these skills are the same ones researchers use behind the scenes of their articles. We use a range of data from our own research, open data that researchers share with their papers, and some we adapted from the [Open Stats Lab](https://sites.trinity.edu/osl/data-sets-and-activities/t-test-activities){target="_blank"} who created activities using open data.
 
-## Intended learning outcomes {-}
+## Intended learning outcomes (ILOs) {-}
 
-By the end of the courses associated with this book, students will be able to:
+By the end of the courses associated with this book, you will be able to:
 
 - Write reproducible reports using R Markdown. 
 
