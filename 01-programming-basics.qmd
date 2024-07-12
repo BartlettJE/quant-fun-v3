@@ -132,7 +132,7 @@ sdr <- round(sd(mydat), 3)
 These numbers have a mean close to 0 (*M* = `r mr`) and a standard deviation (*SD*) close to 1 (*SD* = `r sdr`) - they are not exact because you only sampled a very small set and that sampling is random. 
 
 ::: {.callout-note collapse="true"}
-# What does set.seed() do?
+#### What does set.seed() do?
 You can get R to generate seemingly random numbers, but they are not totally random. Computers generate random numbers through a predictable process, but they pick a starting point based on something like the clock time. If you run `rnorm(n = 5)` several times in the console, you will see the five numbers are different each time. However, when you run `set.seed(10072024)` first, you will get the same five numbers every time, which is useful when you want a random but reproducible set of numbers. 
 :::
 
@@ -157,7 +157,7 @@ This time, we created 5 random numbers again, but this set has a mean close to 1
 Over time, you start to remember which arguments you need within functions you commonly use, but even experienced R users have to regularly check the documentation. Coding is not a memory test, so do not worry if you find yourself needing to constantly look up the name of arguments.  
 
 ::: {.callout-important}
-# Error mode
+#### Error mode
 One thing that can be intimidating at first is making **`r glossary("error", display = "errors")`**. They have little red marks and produce sometimes vague messages to try and explain what went wrong. You will make many errors as you learn and over time, you do not stop making errors, but you get faster at working out what went wrong and how you can fix it. So, we will introduce you to common errors as we work through the book to help with problem solving.  
 
 Try and run the following code in the console: 
@@ -326,7 +326,7 @@ knitr::include_graphics("images/objects-enviro.png")
 Note that in these examples, `name`,`age`, and `new_year` would always contain the values `James`, `r age`, and the date of New Year's Day 2025, but `today` will draw the date from the operating system on the day you are using the computer, and `data` will be a randomly generated set of data - as we saw earlier - so the values of these objects will not be static. 
 
 ::: {.callout-tip}
-# Try this
+#### Try this
 Try changing the name to your name and the age to your age, and seeing if they update in the environment window.
 :::
 
@@ -354,10 +354,13 @@ decade <- age + 10
 
 Remember that you may find it helpful to read `<-` as `contains` or `assigned to`, e.g., `name` contains the text `James` or `James` is assigned to the object `name`.
 
-You will constantly be creating objects throughout this course and you will learn more about them and how they behave as we go along. For now, it is enough to understand that they are a way of saving values, that these values can be numbers, text, or the result of operations, and that you can use objects in further operations to create new objects or variables.
+You will constantly be creating objects throughout this course and you will learn more about them and how they behave as we go along. For now, it is enough to understand that they are a way of saving values, that these values can be numbers, text, or the result of operations, and that you can use objects in further operations to create new objects.
 
 ::: {.callout-note}
-You may also see people refer to objects as 'variables'. There is a difference between the two in programming terms but they are often used synonymously.
+#### What should I call objects?
+In coding, we are trying to balance keeping objects names as short as possible to be easy to type repeatedly, while being informative enough that you know what they represent days, weeks, or months later when they are not fresh in your memory. 
+
+For example, `dob` might save time now, but `birth_date` will be easier to understand in future.
 :::
 
 ### Looking after the environment {#look-env}
@@ -468,7 +471,7 @@ Throughout the book, you will find additional questions and activities like thes
 **Question 1.** Why should you never include the code `install.packages()` in your analysis scripts? `r longmcq(c("You should use library() instead", "Packages are already part of Base R", answer = "You (or someone else) may accidentally install a package update that stops your code working", "You already have the latest version of the package"))` 
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 Remember, when you run `install.packages()` it will always install the latest version of the package and it will overwrite any older versions of the package you may have installed.
 :::
 
@@ -483,7 +486,7 @@ rnorm(6, 50, 10)
 `r longmcq(c("A dataset with 10 numbers that has a mean of 6 and an SD of 50",answer = "A dataset with 6 numbers that has a mean of 50 and an SD of 10", "A dataset with 50 numbers that has a mean of 10 and an SD of 6", "A dataset with 50 numbers that has a mean of 10 and an SD of 6"))`  
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 The default form for `rnorm()` is `rnorm(n, mean, sd)`. If you need help remembering what each argument of a function does, look up the help documentation by running `?rnorm`.
 :::
 
@@ -492,28 +495,28 @@ The default form for `rnorm()` is `rnorm(n, mean, sd)`. If you need help remembe
 `r longmcq(c(answer = "package::function", "function::package", "library(package)", "install.packages(package)"))`  
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 You should use the form `package::function`, for example `dplyr::select`. Remember that when you first load your packages R will warn you if any functions have the same name - remember to look out for this!
 :::
 
 **Question 4.** Which of the following is most likely to be the input to an argument? `r longmcq(sample(c("read_csv()", answer = "35", "<-")))`
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 read_csv() looks like a function as it has the round brackets at the end and the <- is the assignment symbol, so it is most likely that 35 might be the input to an argument as it is just a value.
 :::
 
 **Question 5.** An easy way to spot functions is to look for `r longmcq(sample(c(answer = "round brackets", "numbers", "computers")))`
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 Remember that functions tend to have round brackets or parentheses at the end of their name and the arguments and values go inside the parentheses.
 :::
 
 **Question 6.** The job of `<-` is to send the output from the function to a/an `r longmcq(sample(c("assignment", "argument", answer = "object")))`
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 This is the assignment operator (`<-`) and we use it to assign content such as the output of functions to an object.
 :::
 
@@ -524,14 +527,14 @@ The following questions are designed to introduce you to making and fixing error
 **Question 7.** Type the following code into the console and press enter/return: `rnorm(n = 10, meen = 5, sd = 1)`. You should get an error saying something like `Error in rnorm(n = 10, meen = 5, sd = 1) : unused argument (meen = 5)`. How can you fix it? 
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 We accidentally spelt one of the arguments incorrectly. If you look closely, you will see that we typed `meen` spelt with two es instead of one e when we should have typed `mean`.
 :::
 
 **Question 8.** To end on a sneaky one that we have not covered in this chapter, type the following code into the console and press enter/return: `rnorm(n = 10, mean = 5, sd = 1`. What happened and how can you fix it? Before checking the explain this answer box below, maybe try and Google what happens to see if you can describe it and find a solution. 
 
 ::: {.callout-caution collapse="true"} 
-# Explain this answer
+#### Explain this answer
 We missed the final bracket, so we start the function name `rnorm(`, enter our arguments, but there is no closing bracket. You will see in the console like Figure @fig-img-unfinished-bracket, there is a little `+` symbol and you can enter new code, but there is no output. 
 
 ```{r img-unfinished-bracket, echo=FALSE}
