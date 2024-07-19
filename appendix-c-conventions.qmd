@@ -34,12 +34,12 @@ These boxes highlight where you need to be cautious when using or interpreting s
 :::
 
 ::: {.callout-tip}
-# Try this
+#### Try this
 These boxes will invite you to try something yourself, like complete independent activities or answer questions. 
 :::
 
 ::: {.callout-caution collapse="true"} 
-# Solution
+#### Solution
 These boxes will include small hints or solutions to check your understanding
 :::
 
@@ -52,6 +52,25 @@ Image example
 knitr::include_graphics("images/tidyverse-loading.png")
 
 ```
+
+Multiple pane image example
+
+::: {#fig-img layout-ncol=2}
+
+![](images/Image1)
+
+![](images/Image2)
+
+Caption
+:::
+
+Pop out link
+
+[http://rmarkdown.rstudio.com](http://rmarkdown.rstudio.com){target="_blank"}
+
+Glossary
+
+**`r glossary("normal distribution", display = "Normal Distribution", def = "Definition")`**
 
 ```{r}
 # code chunks
