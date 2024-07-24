@@ -417,52 +417,83 @@ To end the chapter, we have some knowledge check questions to test your understa
 
 ### Knowledge check 
 
-1. One of the key first steps when we open RStudio is to: `r longmcq(c(answer = "set your working directory", "put on some top tunes as we will be here a while", "build some folders", "make a coffee"))`
+1. One of the key first steps when we open RStudio is to: `r longmcq(c(answer = "set your working directory/open a project", "put on some music as we will be here a while", "check out the news", "make a coffee"))`
 
-`r hide("Explain This Answers")`
-```{r, echo = FALSE, results='asis'}
-cat("One of the most common issues we see is that code doesn't work first time because people have forgotten to set the working directory. The working directory is the file you want to save any files to, or any output, or contains your data. Code needs to know where the data is so we set the working directory as the first step when we open RStudio")
-```
-`r unhide()`
-
-<br>
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
+One of the most common issues we see where code does not work the first time is because people have forgotten to set the working directory. The working directory is the starting folder on your computer where you want to save any files, any output, or contains your data. R/RStudio needs to know where you want it to look, so you must either manually set your working directory, or open a .Rproj file. 
+:::
   
-2. When using the default environment color settings for RStudio what color would the background of a code chunk be in R Markdown? `r mcq(c("white","red","green",answer = "grey"))`
+2. When using the default environment color settings for RStudio, what color would the background of a code chunk be in R Markdown? `r mcq(c("white","red","green",answer = "grey"))`
 
-3. When using the default environment color settings for RStudio what color would the background of normal text be in R Markdown? `r mcq(c(answer = "white","red","green","grey"))`
+3. When using the default environment color settings for RStudio, what color would the background of normal text be in R Markdown? `r mcq(c(answer = "white","red","green","grey"))`
 
-`r hide("Explain These Answers")`
-```{r, echo = FALSE, results='asis'}
-cat("Assuming you haven't changed any of the settings in RStudio, code chunks will tend to have a grey background and normal text will tend to have a white background. This is a good way to check that you have closed and opened code chunks correctly.")
-```
-`r unhide()`
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
 
-<br>
+Assuming you have not changed any of the settings in RStudio, code chunks will tend to have a grey background and normal text will tend to have a white background. This is a good way to check that you have closed and opened code chunks correctly.
+:::
 
-4. Code chunks are started with: `r longmcq(c("three single quotes", answer = "three backticks", "three double quotes", "three single clefs"))`
+4. Code chunks start and end with: `r longmcq(c("three single quotes", answer = "three backticks", "three double quotes", "three single clefs"))`
 
-`r hide("Explain This Answers")`
-```{r, echo = FALSE, results='asis'}
-cat("Code chunks always take the same general format of three backticks followed by curly parentheses and a lower case r inside the parentheses. Often people mistake these backticks for single quotes but that won't work. If you have set your code chunk correctly, using backticks, the background color will change!")
-```
-`r unhide()`
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
 
-<br>
-  
-5. Inline coding is: `r longmcq(c("where you nicely organise your code in a line","where you make sure all the code is nicely indented from the side","an exuberant way of exclaiming you have written good code!", answer = "an approach of intergrating code and text in a sentence outside of a code chunk"))`
+Code chunks always take the same general format of three backticks followed by curly parentheses and a lower case r inside the parentheses (`{r}`). People often mistake these backticks for single quotes but that will not work. If you have set your code chunk correctly using backticks, the background color should change to grey from white
+:::
 
-`r hide("Explain This Answers")`
-```{r, echo = FALSE, results='asis'}
-cat("Inline coding is an incredibly useful approach for merging text and code in a sentence outside of a code chunk. It can be really useful for when you want to add values from your code directly into your text. Copying and pasting can create errors easily so better to code it when you can!")
-```
-`r unhide()`
+5. Inline code is: `r longmcq(c("where you nicely organise your code in a line.","where you make sure all the code is nicely indented from the side.","a fancy way of saying you have written good code.", answer = "an approach of integrating code and text in a sentence outside of a code chunk."))`
+
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
+
+Inline coding is an incredibly useful approach for merging text and code in a sentence outside of a code chunk. It can be really useful for when you want to add values from your code directly into your text. If you copy and paste values, you can easily create errors, so it's useful to add inline code where possible. 
+:::
 
 ### Error mode
 
 - Code outside of a code chunk
 
+````{verbatim, lang = "markdown"}
+city <- "Glasgow"
+
+```{{r}}
+
+```
+`r city` is a city in Scotland. 
+````
+
 - Missing backtick 
+
+````{verbatim, lang = "markdown"}
+
+```{{r}}
+city <- "Glasgow"
+``
+
+`r city` is a city in Scotland. 
+````
 
 - Object before inline code
 
+````{verbatim, lang = "markdown"}
+
+`r city` is a city in Scotland. 
+
+```{r}
+city <- "Glasgow"
+```
+
+````
+
 - inline code without the r
+
+````{verbatim, lang = "markdown"}
+
+```{{r}}
+city <- "Glasgow"
+```
+
+`city` is a city in Scotland. 
+
+````
