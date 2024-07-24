@@ -217,7 +217,7 @@ When you install R, you will have access to a range of functions including optio
 
 However, the power of R is that it is extendable and open source. If a function does not exist or does not work very well, anyone can create a new **`r glossary("package")`** that contains data and/or code to allow you to perform new tasks. You can think of **Base R** as the default apps that come on your phone and other packages as additional apps; the ones that you really want to use to make the phone your own, but you need to download them separately.
 
-### Activity 3 - Install the tidyverse to your own computer
+### Activity 3 - Install the tidyverse to your own computer {#install-tidy}
 
 To use a package, you must first install it. The following code installs the package `tidyverse`, a package we will use extensively throughout this course and introduce in the next chapter.
 
@@ -468,6 +468,8 @@ Try not to worry about making mistakes. Accept that you will make them and learn
 
 Throughout the book, you will find additional questions and activities like these to help you check your understanding. Some will have blanks to fill in, some will be multiple choice, but the chapters include the answers and explanations to check your understanding against. You are always welcome to ask further questions to the course team though. 
 
+### Knowledge check
+
 **Question 1.** Why should you never include the code `install.packages()` in your analysis scripts? `r longmcq(c("You should use library() instead", "Packages are already part of Base R", answer = "You (or someone else) may accidentally install a package update that stops your code working", "You already have the latest version of the package"))` 
 
 ::: {.callout-caution collapse="true"} 
@@ -520,7 +522,7 @@ Remember that functions tend to have round brackets or parentheses at the end of
 This is the assignment operator (`<-`) and we use it to assign content such as the output of functions to an object.
 :::
 
-**Error mode** 
+### Error mode
 
 The following questions are designed to introduce you to making and fixing errors. Try and run the code, look at the error message, and see if you can fix it before checking the answer. 
 

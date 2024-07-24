@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
 <title>Fundamentals of Quantitative Analysis - 2&nbsp; Creating Reproducible Documents</title>
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -52,26 +52,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -98,7 +79,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -107,8 +94,10 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
@@ -120,19 +109,19 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-starting-with-data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-starting-with-data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -364,7 +353,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -389,57 +378,20 @@ div.csl-indent {
   <li><a href="#intro-a8" id="toc-intro-a8" class="nav-link" data-scroll-target="#intro-a8"><span class="header-section-number">2.2.6</span> Activity 8: Knitting your file</a></li>
   </ul>
 </li>
-  <li><a href="#demonstrating-reproducibility" id="toc-demonstrating-reproducibility" class="nav-link" data-scroll-target="#demonstrating-reproducibility"><span class="header-section-number">2.3</span> Demonstrating reproducibility</a></li>
-  <li><a href="#finished" id="toc-finished" class="nav-link" data-scroll-target="#finished"><span class="header-section-number">2.4</span> Finished</a></li>
-  <li><a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">2.5</span> Test Yourself</a></li>
   <li>
-<a href="#getting-ready-to-work-with-data" id="toc-getting-ready-to-work-with-data" class="nav-link" data-scroll-target="#getting-ready-to-work-with-data"><span class="header-section-number">2.6</span> Getting ready to work with data</a>
+<a href="#demonstrating-reproducibility" id="toc-demonstrating-reproducibility" class="nav-link" data-scroll-target="#demonstrating-reproducibility"><span class="header-section-number">2.3</span> Demonstrating reproducibility</a>
   <ul class="collapse">
-<li><a href="#ld-a1" id="toc-ld-a1" class="nav-link" data-scroll-target="#ld-a1"><span class="header-section-number">2.6.1</span> Activity 1: Set-up the data, working directory and Rmd file</a></li>
-  <li><a href="#ld-a2" id="toc-ld-a2" class="nav-link" data-scroll-target="#ld-a2"><span class="header-section-number">2.6.2</span> Activity 2: Loading a package to our library</a></li>
+<li><a href="#activity-9---knit-the-reproducibility-demonstration-document" id="toc-activity-9---knit-the-reproducibility-demonstration-document" class="nav-link" data-scroll-target="#activity-9---knit-the-reproducibility-demonstration-document"><span class="header-section-number">2.3.1</span> Activity 9 - Knit the reproducibility demonstration document</a></li>
   </ul>
 </li>
   <li>
-<a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">2.7</span> The data</a>
+<a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">2.4</span> Test yourself</a>
   <ul class="collapse">
-<li><a href="#ld-a3" id="toc-ld-a3" class="nav-link" data-scroll-target="#ld-a3"><span class="header-section-number">2.7.1</span> Activity 3: Read in data</a></li>
+<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">2.4.1</span> Knowledge check</a></li>
+  <li><a href="#error-mode-2" id="toc-error-mode-2" class="nav-link" data-scroll-target="#error-mode-2"><span class="header-section-number">2.4.2</span> Error mode</a></li>
   </ul>
 </li>
-  <li>
-<a href="#looking-at-data" id="toc-looking-at-data" class="nav-link" data-scroll-target="#looking-at-data"><span class="header-section-number">2.8</span> Looking at Data</a>
-  <ul class="collapse">
-<li><a href="#ld-a4" id="toc-ld-a4" class="nav-link" data-scroll-target="#ld-a4"><span class="header-section-number">2.8.1</span> Activity 4: Look at your data</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#joining-data" id="toc-joining-data" class="nav-link" data-scroll-target="#joining-data"><span class="header-section-number">2.9</span> Joining Data</a>
-  <ul class="collapse">
-<li><a href="#ld-a5" id="toc-ld-a5" class="nav-link" data-scroll-target="#ld-a5"><span class="header-section-number">2.9.1</span> Activity 5: Join the files together</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#selecting-data" id="toc-selecting-data" class="nav-link" data-scroll-target="#selecting-data"><span class="header-section-number">2.10</span> Selecting Data</a>
-  <ul class="collapse">
-<li><a href="#ld-a6" id="toc-ld-a6" class="nav-link" data-scroll-target="#ld-a6"><span class="header-section-number">2.10.1</span> Activity 6: Pull out variables of interest</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#knitting-our-reproducible-code" id="toc-knitting-our-reproducible-code" class="nav-link" data-scroll-target="#knitting-our-reproducible-code"><span class="header-section-number">2.11</span> Knitting our Reproducible code</a>
-  <ul class="collapse">
-<li><a href="#ld-debug" id="toc-ld-debug" class="nav-link" data-scroll-target="#ld-debug"><span class="header-section-number">2.11.1</span> Debugging tips</a></li>
-  </ul>
-</li>
-  <li><a href="#code-layout" id="toc-code-layout" class="nav-link" data-scroll-target="#code-layout"><span class="header-section-number">2.12</span> Code Layout</a></li>
-  <li><a href="#ld-fin" id="toc-ld-fin" class="nav-link" data-scroll-target="#ld-fin"><span class="header-section-number">2.13</span> Finished!</a></li>
-  <li>
-<a href="#ld-test" id="toc-ld-test" class="nav-link" data-scroll-target="#ld-test"><span class="header-section-number">2.14</span> Test yourself</a>
-  <ul class="collapse">
-<li><a href="#knowledge-questions" id="toc-knowledge-questions" class="nav-link" data-scroll-target="#knowledge-questions"><span class="header-section-number">2.14.1</span> Knowledge Questions</a></li>
-  <li><a href="#ld-debugex" id="toc-ld-debugex" class="nav-link" data-scroll-target="#ld-debugex"><span class="header-section-number">2.14.2</span> Debugging exercises</a></li>
-  </ul>
-</li>
-  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">2.15</span> Words from this Chapter</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/02-starting-with-data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/02-starting-with-data.qmd" class="toc-action">View source</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/02-starting-with-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/02-starting-with-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -455,6 +407,7 @@ div.csl-indent {
     
   </div>
   
+
 
 </header><p>In this chapter, we introduce you to using code to create <strong><a href="https://psyteachr.github.io/glossary/r#reproducible-research" target="_blank" class="glossary" title="Research that documents all of the steps between raw data and results in a way that can be verified.">reproducible research</a></strong>. Creating reproducible research means you will write text and code that completely and transparently performs an analysis from start to finish in a way that produces the same result for different people using the same software on different computers. We will cover things such as file structure and setting a working directory, using <strong><a href="https://psyteachr.github.io/glossary/r#r-markdown" target="_blank" class="glossary" title="The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.">R Markdown</a></strong> files, and writing code chunks.</p>
 <p>As well as improving transparency with others researchers, reproducible research benefits <strong>you</strong>. When you return to an analysis or task after days, weeks, or months, you will thank past you for doing things in a transparent, reproducible way, as you can easily pick up right where you left off.</p>
@@ -485,12 +438,16 @@ Top tip
 </div>
 </div>
 <p>Within that folder, create two new folders called <code>Assessments</code> and <code>Quant_Fundamentals</code>. In <code>Assessments</code>, you can save all your assessments for RM1 and RM2 as you come to them. In <code>Quant_Fundamentals</code>, that is where you will save all your work as you progress through this book.</p>
-<p>Within <code>Quant_Fundamentals</code>, create a new folder called <code>Chapter_02_reproducible_docs</code>. As you work through the book, you will create a new chapter folder each time you start a new chapter and the sub-folders will always be the same. Within <code>Chapter_02_reproducible_docs</code>, create two new folders called <code>data</code> and <code>figures</code>. As a diagram, it should look like <a href="#fig-img-file-structure">Figure&nbsp;<span>2.1</span></a>.</p>
+<p>Within <code>Quant_Fundamentals</code>, create a new folder called <code>Chapter_02_reproducible_docs</code>. As you work through the book, you will create a new chapter folder each time you start a new chapter and the sub-folders will always be the same. Within <code>Chapter_02_reproducible_docs</code>, create two new folders called <code>data</code> and <code>figures</code>. As a diagram, it should look like <a href="#fig-img-file-structure" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-file-structure" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/file-structure.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.1: Prescribed file structure for RM 1 and RM 2.</figcaption></figure>
+<div id="fig-img-file-structure" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-file-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/file-structure.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-file-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Prescribed file structure for RM 1 and RM 2.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -549,19 +506,23 @@ File management when using the online server
 </section><section id="intro-a2" class="level3" data-number="2.1.2"><h3 data-number="2.1.2" class="anchored" data-anchor-id="intro-a2">
 <span class="header-section-number">2.1.2</span> Manually setting the working directory</h3>
 <p>Now that you have a folder structure that will keep everything nice and organised, we will demonstrate how you can manually <strong>set the working directory</strong>. If you open RStudio, you can check where the current working directory is by typing the function <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> into the console and pressing enter/return. That will show you the current file path R is using to navigate files. If you look at the Files window in the bottom right, this will also show you the files and folders available from your working directory.</p>
-<p>If you click on the top menu <strong><code>Session &gt;&gt; Set Working Directory &gt;&gt; Choose Directory...</code></strong>, (<a href="#fig-img-working-dir">Figure&nbsp;<span>2.2</span></a>) you can navigate through your documents or OneDrive until you can select <code>Chapter_02_reproducible_docs</code>. Click open and that will set the folder as your working directory. You can double check this worked by running <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> again in the console.</p>
+<p>If you click on the top menu <strong><code>Session &gt;&gt; Set Working Directory &gt;&gt; Choose Directory...</code></strong>, (<a href="#fig-img-working-dir" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>) you can navigate through your documents or OneDrive until you can select <code>Chapter_02_reproducible_docs</code>. Click open and that will set the folder as your working directory. You can double check this worked by running <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> again in the console.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-working-dir" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/working-dir.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.2: Manually setting the working directory.</figcaption></figure>
+<div id="fig-img-working-dir" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-working-dir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/working-dir.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-working-dir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: Manually setting the working directory.
+</figcaption></figure>
 </div>
 </div>
 </div>
 </section><section id="activity-2---creating-an-r-project" class="level3" data-number="2.1.3"><h3 data-number="2.1.3" class="anchored" data-anchor-id="activity-2---creating-an-r-project">
 <span class="header-section-number">2.1.3</span> Activity 2 - Creating an R Project</h3>
 <p>Knowing how to check and manually set your working directory is useful, but there is a more efficient way of setting your working directory alongside organised file management. You are going to create something called an <strong><a class="glossary" title="A project is simply a working directory designated with a .RProj file. When you open an R project, it automatically sets the working directory to the folder the project is located in.">R Project</a></strong>.</p>
-<p>To create a new project for the work you will do in this chapter (<a href="#fig-new-proj">Figure&nbsp;<span>2.3</span></a>):</p>
+<p>To create a new project for the work you will do in this chapter (<a href="#fig-new-proj" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>):</p>
 <ol type="1">
 <li><p>Click on the top menu and navigate to <code>File &gt;&gt; New Project...</code>.</p></li>
 <li><p>You have the option to select from New Directory, Existing Directory, or Version Control. You already created a folder for <code>Chapter_02_reproducible_docs</code>, so select Existing Directory.</p></li>
@@ -569,7 +530,8 @@ File management when using the online server
 <li><p>When you have navigated to <code>Chapter_02_reproducible_docs</code> for this chapter, click Open and then Create Project.</p></li>
 </ol>
 <div id="fig-new-proj" class="quarto-layout-panel">
-<figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-new-proj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/project-pageone.png" class="img-fluid figure-img"></p>
 </div>
@@ -577,15 +539,21 @@ File management when using the online server
 <p><img src="images/project-pagetwo.png" class="img-fluid figure-img"></p>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.3: Starting a new project.</figcaption><p></p>
-</figure>
 </div>
-<p>RStudio will restart itself and open with this new project directory as the working directory. You should see something like <a href="#fig-img-project-screen">Figure&nbsp;<span>2.4</span></a>.</p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-new-proj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Starting a new project.
+</figcaption></figure>
+</div>
+<p>RStudio will restart itself and open with this new project directory as the working directory. You should see something like <a href="#fig-img-project-screen" class="quarto-xref">Figure&nbsp;<span>2.4</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-project-screen" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/new_project.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.4: RStudio screen in a new project in your chapter 2 folder.</figcaption></figure>
+<div id="fig-img-project-screen" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-project-screen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/new_project.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-project-screen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: RStudio screen in a new project in your chapter 2 folder.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -612,9 +580,10 @@ Warning
 <p>For more information about R Markdown, feel free to have a look at their main webpage <a href="http://rmarkdown.rstudio.com" target="_blank">http://rmarkdown.rstudio.com</a>, but for now the key advantage to know about is that it allows you to write code into a document, along with regular text, and then <strong><a href="https://psyteachr.github.io/glossary/k#knit" target="_blank" class="glossary" title="To create an HTML, PDF, or Word document from an R Markdown (Rmd) document">knit</a></strong> it to create your document as either a webpage (<strong><a href="https://psyteachr.github.io/glossary/h#html" target="_blank" class="glossary" title="Hyper-Text Markup Language: A system for semantically tagging structure and information on web pages.">html</a></strong>), a PDF, or Word document (.docx).</p>
 <section id="intro-a3" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="intro-a3">
 <span class="header-section-number">2.2.1</span> Activity 3: Open, save, and knit a new R Markdown document</h3>
-<p>Open a new R Markdown document by clicking the ‘new item’ icon and then click ‘R Markdown’ like <a href="#fig-img-new-markdown">Figure&nbsp;<span>2.5</span></a>.</p>
+<p>Open a new R Markdown document by clicking the ‘new item’ icon and then click ‘R Markdown’ like <a href="#fig-img-new-markdown" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>.</p>
 <div id="fig-img-new-markdown" class="quarto-layout-panel">
-<figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-new-markdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/Create_Rmd_menu.png" class="img-fluid figure-img"></p>
 </div>
@@ -622,8 +591,10 @@ Warning
 <p><img src="images/Create_Rmd_options.png" class="img-fluid figure-img"></p>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.5: Creating a new R Markdown document from the menu (left) and setting title, author, date, and output (right).</figcaption><p></p>
-</figure>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-new-markdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: Creating a new R Markdown document from the menu (left) and setting title, author, date, and output (right).
+</figcaption></figure>
 </div>
 <p>After selecting R Markdown, there are different format options you can explore in time, but Select Document and there are four boxes to complete:</p>
 <ul>
@@ -634,37 +605,50 @@ Warning
 </ul>
 <p>Once you click <strong>OK</strong>, this will open a new R Markdown document.</p>
 <p>Save this R Markdown document by clicking <strong><code>File &gt;&gt; Save as</code></strong> from the top menu, and name this file “<code>02_reproducible_docs</code>”. Note the document title and file name are separate, so you still have to name the file when you save it.</p>
-<p>If you have set the working directory correctly, you should now see this file appear in your Files window in the bottom right hand corner like <a href="#fig-img-file-dir">Figure&nbsp;<span>2.6</span></a>, alongside your .Rproj file and two folders.</p>
+<p>If you have set the working directory correctly, you should now see this file appear in your Files window in the bottom right hand corner like <a href="#fig-img-file-dir" class="quarto-xref">Figure&nbsp;<span>2.6</span></a>, alongside your .Rproj file and two folders.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-file-dir" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/Files_newRmd.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.6: New .Rmd file in your working directory.</figcaption></figure>
+<div id="fig-img-file-dir" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-file-dir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Files_newRmd.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-file-dir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.6: New .Rmd file in your working directory.
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p>Now you have the default version of the R Markdown file, you have a bunch of text and code to show its capabilities (<a href="#fig-img-markdown-default">Figure&nbsp;<span>2.7</span></a>).</p>
+<p>Now you have the default version of the R Markdown file, you have a bunch of text and code to show its capabilities (<a href="#fig-img-markdown-default" class="quarto-xref">Figure&nbsp;<span>2.7</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-markdown-default" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/Default_Rmd.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.7: Default text and code in a new R Markdown document.</figcaption></figure>
+<div id="fig-img-markdown-default" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-markdown-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Default_Rmd.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-markdown-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.7: Default text and code in a new R Markdown document.
+</figcaption></figure>
 </div>
 </div>
 </div>
 <p>We will now demonstrate what it looks like to <strong><a href="https://psyteachr.github.io/glossary/k#knit" target="_blank" class="glossary" title="To create an HTML, PDF, or Word document from an R Markdown (Rmd) document">knit</a></strong> a document. This means that we are going to compile (i.e., turn) our code into a document that is more presentable. This way, you can check it knits and there are no errors. So, as we add changes in the following activities, you can identify if and when any errors appear and fix them quicker.</p>
-<p>At the top of your R Markdown window, you should see a Knit button next to a little ball of yarn (<a href="#fig-img-knit-document">Figure&nbsp;<span>2.8</span></a>). If you click that, the document will knit and produce a html file.</p>
+<p>At the top of your R Markdown window, you should see a Knit button next to a little ball of yarn (<a href="#fig-img-knit-document" class="quarto-xref">Figure&nbsp;<span>2.8</span></a>). If you click that, the document will knit and produce a html file.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-knit-document" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/knit_document.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.8: Clicking the knit button on a .Rmd document.</figcaption></figure>
+<div id="fig-img-knit-document" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-knit-document-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/knit_document.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-knit-document-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.8: Clicking the knit button on a .Rmd document.
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p>You will see a small version of the knitted document appear in the Viewer tab in the bottom right of your screen. You will also see it has created a new file in your working directory. It will have the same name as your R Markdown file, but with .html as the file ending. You can view the knitted document by clicking the “Show in new window” button or opening the file from your folder (<a href="#fig-img-knitted-default">Figure&nbsp;<span>2.9</span></a>). This should open the document in your default internet browser as websites are created in html.</p>
+<p>You will see a small version of the knitted document appear in the Viewer tab in the bottom right of your screen. You will also see it has created a new file in your working directory. It will have the same name as your R Markdown file, but with .html as the file ending. You can view the knitted document by clicking the “Show in new window” button or opening the file from your folder (<a href="#fig-img-knitted-default" class="quarto-xref">Figure&nbsp;<span>2.9</span></a>). This should open the document in your default internet browser as websites are created in html.</p>
 <div id="fig-img-knitted-default" class="quarto-layout-panel">
-<figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-knitted-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="images/Knitted_default_files.png" class="img-fluid figure-img"></p>
 </div>
@@ -672,8 +656,10 @@ Warning
 <p><img src="images/Knitted_default_browser.png" class="img-fluid figure-img"></p>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.9: On the left, you can see a small version of the knitted document in the Viewer tab. On the right, you can see the full version open in your internet browser.</figcaption><p></p>
-</figure>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-knitted-default-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.9: On the left, you can see a small version of the knitted document in the Viewer tab. On the right, you can see the full version open in your internet browser.
+</figcaption></figure>
 </div>
 <p>Now everything is working and knitting, we can start editing the R Markdown file to add new content.</p>
 </section><section id="intro-a4" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="intro-a4">
@@ -703,12 +689,16 @@ What does the {r setup} chunk do?
 <li><p>On line 12, type “## About me”.</p></li>
 <li><p>With your cursor on line 14, insert a blank code chunk by clicking on the top menu <strong><code>Code &gt;&gt; Insert Chunk</code></strong> or using the shortcut at the top of the R Markdown window that looks like a small green c and select R.</p></li>
 </ol>
-<p>Your document should now look something like <a href="#fig-img-new-chunk">Figure&nbsp;<span>2.10</span></a>.</p>
+<p>Your document should now look something like <a href="#fig-img-new-chunk" class="quarto-xref">Figure&nbsp;<span>2.10</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-new-chunk" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/Rmd_blank_insert_chunk.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.10: Creating a new R chunk in your blank R Markdown document</figcaption></figure>
+<div id="fig-img-new-chunk" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-new-chunk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Rmd_blank_insert_chunk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-new-chunk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.10: Creating a new R chunk in your blank R Markdown document
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -772,24 +762,32 @@ Error mode
 <p>We now have code in our code chunk and now we are going to <strong>run</strong> the code. Running the code just means making it do what you told it, such as creating objects or using functions. Remember you need to write the code first, then tell RStudio to run the code.</p>
 <p>When you are working in an R Markdown document, there are several ways to run your lines of code.</p>
 <ol type="1">
-<li>One option is you can highlight the code you want to run and then click <strong><code>Run &gt;&gt; Run Selected Line(s)</code></strong> (<a href="#fig-img-run1">Figure&nbsp;<span>2.11</span></a>).</li>
+<li>One option is you can highlight the code you want to run and then click <strong><code>Run &gt;&gt; Run Selected Line(s)</code></strong> (<a href="#fig-img-run1" class="quarto-xref">Figure&nbsp;<span>2.11</span></a>).</li>
 </ol>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-run1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/run1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.11: Slower method of running code by highlighting and clicking Run Selected Line(s).</figcaption></figure>
+<div id="fig-img-run1" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-run1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/run1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-run1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.11: Slower method of running code by highlighting and clicking Run Selected Line(s).
+</figcaption></figure>
 </div>
 </div>
 </div>
 <ol start="2" type="1">
-<li>You can press the green “play” button at the top-right of the code chunk and this will run <strong>all</strong> lines of code in that chunk (<a href="#fig-img-run2">Figure&nbsp;<span>2.12</span></a>).</li>
+<li>You can press the green “play” button at the top-right of the code chunk and this will run <strong>all</strong> lines of code in that chunk (<a href="#fig-img-run2" class="quarto-xref">Figure&nbsp;<span>2.12</span></a>).</li>
 </ol>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-run2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/run2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.12: Slightly faster method of running all code in a chunk by clicking the green “play” button.</figcaption></figure>
+<div id="fig-img-run2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-run2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/run2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-run2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.12: Slightly faster method of running all code in a chunk by clicking the green “play” button.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -833,12 +831,16 @@ Try this
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a>It is <span class="st">`</span><span class="at">r next_birthday - today</span><span class="st">`</span> days until my birthday.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Your .Rmd should look like <a href="#fig-img-aboutme-rmd">Figure&nbsp;<span>2.13</span></a> but nothing will happen yet. Unlike code chunks, you cannot run inline code. You need to knit your document for it to do it’s magic.</p>
+<p>Your .Rmd should look like <a href="#fig-img-aboutme-rmd" class="quarto-xref">Figure&nbsp;<span>2.13</span></a> but nothing will happen yet. Unlike code chunks, you cannot run inline code. You need to knit your document for it to do it’s magic.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-img-aboutme-rmd" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/Rmd_about_me.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.13: Complete .Rmd file with your about me section and inline code.</figcaption></figure>
+<div id="fig-img-aboutme-rmd" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-img-aboutme-rmd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Rmd_about_me.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img-aboutme-rmd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.13: Complete .Rmd file with your about me section and inline code.
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -872,28 +874,38 @@ How does inline code work?
 <span class="header-section-number">2.2.6</span> Activity 8: Knitting your file</h3>
 <p>As our final step in this part, we are going to knit our file again to see how it looks now. So, click the Knit button to regenerate your knitted .html version.</p>
 <p>If you look at the knitted .html document in the Viewer tab or in your browser, you should see the sentence we copied in from Activity 7. As if by magic, that slightly odd bit of text you copied and pasted now appears as a normal sentence with the values pulled in from the objects you created:</p>
-<p>My name is <strong>James</strong> and I am <strong>30</strong> years old. <br><br>It is <strong>210</strong> days until my birthday.</p>
+<p>My name is <strong>James</strong> and I am <strong>30</strong> years old. <br><br>It is <strong>209</strong> days until my birthday.</p>
 <p>R Markdown is an incredibly powerful and flexible format, we wrote this whole book using it! There are a few final things to note about knitting that will be useful going forward for your data skills learning and assessments:</p>
 <ul>
 <li><p>R Markdown will only knit if your code works. If you have an error, it will stop and tell you to fix the error before you can click knit and try again. This is a good way of checking whether you have written functioning code in your assessments.</p></li>
-<li><p>When you knit an R Markdown document, it runs the code from the start of the document to the end in order, and in a fresh session. This means it cannot access your environment, just the objects you create within that R Markdown. One common error can be writing and running code as you work on the document, but the code chunks are in the wrong order, or you created an object in the console. This means R Markdown would not know the object exists yet, or it does not have access to it at all.</p></li>
-<li><p>You can choose to knit to a Word document rather than HTML. This can be useful for sharing with others or adding further edits, but you might lose some functionality. By default, html looks good and is accessible, so that will be our default throughout this book.</p></li>
-<li><p>You can choose to knit to PDF, however, unless you are using the server this requires a <strong><a href="https://psyteachr.github.io/glossary/l#latex" target="_blank" class="glossary" title="A typesetting program needed to create PDF files from R Markdown documents.">LaTeX</a></strong> installation and can be quite complicated. If you do not already know what LaTeX is and how to use it, we do not recommend knitting to PDF. If you do know how to use LaTeX, you probably do not need us to give you instructions!</p></li>
+<li><p>When you knit an R Markdown document, it runs the code from the start of the document to the end in order, and in a fresh session. This means it cannot access your environment, just the objects you create within that R Markdown. One common error can be writing and running code as you work on the document, but the code chunks are in the wrong order, or you created an object in the console but not in the code chunks. This means R Markdown would not know the object exists yet, or it does not have access to it at all.</p></li>
+<li><p>You can choose to knit to a Word document rather than HTML. This can be useful for sharing with others or adding further edits, but you might lose some functionality. By default, html looks good and is accessible, so that will be our default throughout this book, but look out for our instructions on what output format we want your assessments in.</p></li>
+<li><p>You can choose to knit to PDF, however, unless you are using the server this requires a <strong><a href="https://psyteachr.github.io/glossary/l#latex" target="_blank" class="glossary" title="A typesetting program needed to create PDF files from R Markdown documents.">LaTeX</a></strong> installation and can be quite complicated. If you do not already know what LaTeX is and how to use it, we do not recommend trying to knit to PDF just yet. If you do know how to use LaTeX, you probably do not need us to give you instructions!</p></li>
 </ul>
-<p>We will test some of these warnings in error mode in the test yourself section, but we have one final demonstration for how R Markdown files can be reproducible.</p>
+<p>We will test some of these warnings in error mode in the test yourself section, but we have one final demonstration for how R Markdown files support reproducibility.</p>
 </section></section><section id="demonstrating-reproducibility" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="demonstrating-reproducibility">
 <span class="header-section-number">2.3</span> Demonstrating reproducibility</h2>
-</section><section id="finished" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="finished">
-<span class="header-section-number">2.4</span> Finished</h2>
-<p>And you’re done! On your very first time using R you’ve not only written functioning code but you’ve written a reproducible output! You could send someone else your R Markdown document and they would be able to produce exactly the same HTML document as you, just by pressing knit.</p>
-<p>The key thing we want you to take away from this chapter is that the data skills that you are going to learn can be broken down into manageable chunks and that is how we are going to teach you to help you learn them. The skills might be very new to a lot of you, but we’re going to take you through it step-by-step. You’ll be amazed at how quickly you can start producing professional-looking data visualisations and analysis.</p>
-<p>If you have any questions about anything contained in this chapter or in Programming Basics, please remember to ask us!</p>
-</section><section id="test-yourself" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="test-yourself">
-<span class="header-section-number">2.5</span> Test Yourself</h2>
+<p>At the start of this chapter, we plugged the benefits of reproducible research as the ability to produce the same result for different people using the same software on different computers. We are going to end the chapter on a demonstration of this by giving you an R Markdown document and data. You should be able to click knit and see the results without editing anything. We do not expect you to understand the code included in it, we are previewing the skills you will develop over the next four chapters on visualisation and data wrangling.</p>
+<section id="activity-9---knit-the-reproducibility-demonstration-document" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="activity-9---knit-the-reproducibility-demonstration-document">
+<span class="header-section-number">2.3.1</span> Activity 9 - Knit the reproducibility demonstration document</h3>
+<p>Please follow these steps and you should be able to knit the document without editing anything. Make sure you are still in your <code>Chapter_02_reproducible_docs</code> folder. If you are coming back to this activity, remember to set your working directory by opening the .Rproj file.</p>
+<ol type="1">
+<li><p>If you are working on your own computer, make sure you installed the <code>tidyverse</code> package. Please refer to <a href="01-programming-basics.html#install-tidy">Chapter 1 - Activity 3</a> if you have not completed this step yet. If you are working on a university computer or the online server, you <strong>do not</strong> need to complete this step as <code>tidyverse</code> will already be installed.</p></li>
+<li><p>Download the R Markdown document through the following link: <a href="activity_files/02_reproducibility_demo.Rmd">02_reproducibility_demo.Rmd</a>. To download a file from this book, right click the link and select “save link as”, or just clicking the link will save the file to your Downloads. Save or copy the file to your <code>Chapter_02_reproducible_docs</code> folder.</p></li>
+<li><p>Download these two data files. Data file one: <a href="data/ahi-cesd.csv">ahi-cesd.csv</a>. Data file two: <a href="data/participant_info.csv">participant-info.csv</a>. Right click the links and select “save link as”, or clicking the links will save the files to your Downloads. Make sure that both files are saved as “.csv”. Do not open them on your machine as often other software like Excel can change setting and ruin the files. Save or copy the file to your <code>data/</code> folder within <code>Chapter_02_reproducible_docs</code>.</p></li>
+</ol>
+<p>At this point, you should have “02_reproducibility_demo.Rmd” within your <code>Chapter_02_reproducible_docs</code> folder. You should have “ahi-cesd.csv” and “participant_info.csv” within the <code>data/</code> folder within <code>Chapter_02_reproducible_docs</code>.</p>
+<p>If you open “02_reproducibility_demo.Rmd” and followed all the steps above, you should be able to click knit. This will turn the R Markdown file into a knitted html file, showing some data wrangling, summary statistics, and two graphs. Starting in the next chapter, you will learn how to write this code yourself.</p>
+<p>If you have any questions or problems about anything contained in this chapter, please remember you are always welcome to post on the course Teams channel, attend a GTA support session, or attend the office hours of one of the team.</p>
+</section></section><section id="test-yourself" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="test-yourself">
+<span class="header-section-number">2.4</span> Test yourself</h2>
+<p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you find the solution to some common errors in the concepts we covered in this chapter.</p>
+<section id="knowledge-check" class="level3" data-number="2.4.1"><h3 data-number="2.4.1" class="anchored" data-anchor-id="knowledge-check">
+<span class="header-section-number">2.4.1</span> Knowledge check</h3>
 <ol type="1">
 <li>One of the key first steps when we open RStudio is to:
-<div id="radio_WSHQRVWCAJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WSHQRVWCAJ" value="answer"><span>set your working directory</span></label><label><input type="radio" autocomplete="off" name="radio_WSHQRVWCAJ" value=""><span>put on some top tunes as we will be here a while</span></label><label><input type="radio" autocomplete="off" name="radio_WSHQRVWCAJ" value=""><span>build some folders</span></label><label><input type="radio" autocomplete="off" name="radio_WSHQRVWCAJ" value=""><span>make a coffee</span></label>
+<div id="radio_FWSKUOGXCT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FWSKUOGXCT" value="answer"><span>set your working directory</span></label><label><input type="radio" autocomplete="off" name="radio_FWSKUOGXCT" value=""><span>put on some top tunes as we will be here a while</span></label><label><input type="radio" autocomplete="off" name="radio_FWSKUOGXCT" value=""><span>build some folders</span></label><label><input type="radio" autocomplete="off" name="radio_FWSKUOGXCT" value=""><span>make a coffee</span></label>
 </div>
 </li>
 </ol>
@@ -929,8 +941,8 @@ Explain These Answers
 <p><br></p>
 <ol start="4" type="1">
 <li>Code chunks are started with:
-<div id="radio_CAEAQBFVZM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CAEAQBFVZM" value=""><span>three single quotes</span></label><label><input type="radio" autocomplete="off" name="radio_CAEAQBFVZM" value="answer"><span>three backticks</span></label><label><input type="radio" autocomplete="off" name="radio_CAEAQBFVZM" value=""><span>three double quotes</span></label><label><input type="radio" autocomplete="off" name="radio_CAEAQBFVZM" value=""><span>three single clefs</span></label>
+<div id="radio_QZCCLFMCMN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QZCCLFMCMN" value=""><span>three single quotes</span></label><label><input type="radio" autocomplete="off" name="radio_QZCCLFMCMN" value="answer"><span>three backticks</span></label><label><input type="radio" autocomplete="off" name="radio_QZCCLFMCMN" value=""><span>three double quotes</span></label><label><input type="radio" autocomplete="off" name="radio_QZCCLFMCMN" value=""><span>three single clefs</span></label>
 </div>
 </li>
 </ol>
@@ -945,8 +957,8 @@ Explain This Answers
 <p><br></p>
 <ol start="5" type="1">
 <li>Inline coding is:
-<div id="radio_TSJUJKRFSH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TSJUJKRFSH" value=""><span>where you nicely organise your code in a line</span></label><label><input type="radio" autocomplete="off" name="radio_TSJUJKRFSH" value=""><span>where you make sure all the code is nicely indented from the side</span></label><label><input type="radio" autocomplete="off" name="radio_TSJUJKRFSH" value=""><span>an exuberant way of exclaiming you have written good code!</span></label><label><input type="radio" autocomplete="off" name="radio_TSJUJKRFSH" value="answer"><span>an approach of intergrating code and text in a sentence outside of a code chunk</span></label>
+<div id="radio_ACCHFRJOLM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ACCHFRJOLM" value=""><span>where you nicely organise your code in a line</span></label><label><input type="radio" autocomplete="off" name="radio_ACCHFRJOLM" value=""><span>where you make sure all the code is nicely indented from the side</span></label><label><input type="radio" autocomplete="off" name="radio_ACCHFRJOLM" value=""><span>an exuberant way of exclaiming you have written good code!</span></label><label><input type="radio" autocomplete="off" name="radio_ACCHFRJOLM" value="answer"><span>an approach of intergrating code and text in a sentence outside of a code chunk</span></label>
 </div>
 </li>
 </ol>
@@ -958,496 +970,17 @@ Explain This Answers
 <p>Inline coding is an incredibly useful approach for merging text and code in a sentence outside of a code chunk. It can be really useful for when you want to add values from your code directly into your text. Copying and pasting can create errors easily so better to code it when you can!</p>
 </div>
 </div>
-<p>Error mode:</p>
+</section><section id="error-mode-2" class="level3" data-number="2.4.2"><h3 data-number="2.4.2" class="anchored" data-anchor-id="error-mode-2">
+<span class="header-section-number">2.4.2</span> Error mode</h3>
 <ul>
 <li><p>Code outside of a code chunk</p></li>
 <li><p>Missing backtick</p></li>
 <li><p>Object before inline code</p></li>
 <li><p>inline code without the r</p></li>
-</ul></section><section id="getting-ready-to-work-with-data" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="getting-ready-to-work-with-data">
-<span class="header-section-number">2.6</span> Getting ready to work with data</h2>
-<p>In this chapter you will learn how to load the <strong><a href="https://psyteachr.github.io/glossary/p#package" target="_blank" class="glossary" title="A group of R functions.">packages</a></strong> required to work with the data. You’ll then load the data into RStudio before getting it organised into a format (or structure) that helps us answer our research question. And a top tip to remember is to always think back to what we have done before - for instance, if you can’t remember what packages are, go back and revise the <a href="programming-basics.html" target="_blank">Programming Basics</a>.</p>
-<p>Before we begin working with the data we need to do some set-up and get the data into our working directory.</p>
-<section id="ld-a1" class="level3" data-number="2.6.1"><h3 data-number="2.6.1" class="anchored" data-anchor-id="ld-a1">
-<span class="header-section-number">2.6.1</span> Activity 1: Set-up the data, working directory and Rmd file</h3>
-<ul>
-<li>Download <a href="ahi-cesd.csv" download=""><code>ahi-cesd.csv</code></a> and <a href="participant-info.csv"><code>participant-info.csv</code></a> into the folder on your computer you want to use for this chapter!
-<ul>
-<li>To download a file from this book, right click the link and select “save link as”. Make sure that both files are saved as “.csv”. Do not open them on your machine as often other software like Excel can change setting and ruin the files and cause you problems. We will look at the data once we load it into R and RStudio.</li>
-<li>If you are working on the server, you will need to upload the files to the server as well.</li>
 </ul>
-</li>
-<li>Next, open RStudio and ensure the environment is clear.
-<ul>
-<li>If you’re on the server, avoid a number of issues by restarting the session - click <code>Session</code> - <code>Restart R</code>
-</li>
-</ul>
-</li>
-<li>Set the working directory to your chapter folder. You might want to refer to <a href="#intro-a2" target="_blank">Activity 2 in Chapter 2</a> if you are unsure about this step.</li>
-<li>Now open a new R Markdown document (.Rmd file) and save it in your working directory. Call the file “LoadingData”. You can refer to <a href="#intro-a3" target="_blank">Activity 3 in Chapter 2</a>
-<ul>
-<li>
-<strong>Note:</strong> Your R Markdown file (<code>LoadingData.Rmd</code>) must be in the same folder as the datafiles or the code we are going to write will not work.</li>
-</ul>
-</li>
-<li>Finally, delete the default R Markdown text and insert a new code chunk. Remember to only delete the text and code that comes below/after line 7.</li>
-</ul>
-<p>We are now ready to begin working with the data. A <strong>top tip</strong> is to use the white space to take any notes that might help you for each activity and to make reminders to yourself about what things do!</p>
-</section><section id="ld-a2" class="level3" data-number="2.6.2"><h3 data-number="2.6.2" class="anchored" data-anchor-id="ld-a2">
-<span class="header-section-number">2.6.2</span> Activity 2: Loading a package to our library</h3>
-<p>Today we need to use the <strong><a href="https://psyteachr.github.io/glossary/t#tidyverse" target="_blank" class="glossary" title="A set of R packages that help you create and work with tidy data">tidyverse</a></strong> package. You will use this package in almost every single chapter of this course as the functions it contains are those we use for <strong><a href="https://psyteachr.github.io/glossary/d#data-wrangling" target="_blank" class="glossary" title="The process of preparing data for visualisation and statistical analysis.">data wrangling</a></strong>, <strong><a href="https://psyteachr.github.io/glossary/d#descriptive" target="_blank" class="glossary" title="Statistics that describe an aspect of data (e.g., mean, median, mode, variance, range)">descriptive</a></strong> statistics, and visualisation. So let’s load that package into our library using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</p>
-<ul>
-<li>To load the <code>tidyverse</code> type the following code into your code chunk and then run it.</li>
-<li>Remember that sometimes in the <strong><a href="https://psyteachr.github.io/glossary/c#console" target="_blank" class="glossary" title="The pane in RStudio where you can type in commands and view output messages.">console window</a></strong> you will see information about the package you have loaded, but sometimes you won’t. You should however see the line of code you have just run repeated in the console window. If you see any red text, be sure to read it as it might be a warning, an error or a message.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="the-data" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="the-data">
-<span class="header-section-number">2.7</span> The data</h2>
-<p>For this chapter, we use real data from <span class="citation" data-cites="woodworth_data_2018">Woodworth et al. (<a href="references.html#ref-woodworth_data_2018" role="doc-biblioref">2018</a>)</span> ‘<a href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.35" target="_blank">Web-based Positive Psychology Interventions: A Reexamination of Effectiveness</a>’. It would be useful to read the abstract to give you a sense of what the paper is about and what the data might look like, but in summary, the files contain data from two scales as well as demographic information about participants. The two scales are:</p>
-<ul>
-<li><p>The Authentic Happiness Inventory (AHI).</p></li>
-<li><p>The Center for Epidemiological Studies Depression (CES-D) scale.</p></li>
-</ul>
-<section id="ld-a3" class="level3" data-number="2.7.1"><h3 data-number="2.7.1" class="anchored" data-anchor-id="ld-a3">
-<span class="header-section-number">2.7.1</span> Activity 3: Read in data</h3>
-<p>Now that we have our data in our folder we need to read in the data - “read” in this sense just means to bring the data into RStudio and store it in an <strong><a href="https://psyteachr.github.io/glossary/o#object" target="_blank" class="glossary" title="A word that identifies and stores the value of some data for later use.">object</a></strong> so we can work with it. To do this we will use the function <code>read_csv()</code> that allows us to read in <strong><a href="https://psyteachr.github.io/glossary/c#csv" target="_blank" class="glossary" title="Comma-separated variable: a file type for representing data where each variable is separated from the next by a comma.">.csv files</a></strong>. There are also functions that allow you to read in Excel files (e.g.&nbsp;.xlsx) and other formats, however in this course we will only use .csv files as they are not software specific and therefore are better for when looking to practice open science! A .csv file can be read by any basic text editor on nearly all machines.</p>
-<ul>
-<li>The code chunk below reads in both datafiles. Type it into your code chunk and run them. Let’s look at what they do.</li>
-<li>First, we create an object called <code>dat</code> that contains the data in the <code>ahi-cesd.csv</code> file.</li>
-<li>Next we then create an object called <code>info</code> that contains the data in the <code>participant-info.csv</code>.</li>
-<li>Note how both lines have the same format of <code>object &lt;- function("datafile_name.csv")</code>
-<ul>
-<li>it is imperative that you have the double quotation marks around the datafile name and that the datafile name is spelt correctly and includes the .csv part.</li>
-<li>and remember that <code>&lt;-</code> is called the <strong><a href="https://psyteachr.github.io/glossary/a#assignment-operator" target="_blank" class="glossary" title="The symbol <-, which functions like = and assigns the value on the right to the object on the left">assignment operator</a></strong> but we can read it as “assigned to”. For example, the first line can be read as the data in <code>ahi-cesd.csv</code> is assigned to the object called <code>dat</code>.</li>
-</ul>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ahi-cesd.csv"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/participant-info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If you have done this activity correctly, and the preceding activities, you should now see that the objects <code>dat</code> and <code>pinfo</code> have appeared in the <strong><a href="https://psyteachr.github.io/glossary/e#environment" target="_blank" class="glossary" title="A data structure that contains R objects such as variables and functions">environment</a></strong> pane. If they are not there then you should check the spelling of the filenames and the structure of the code lines as well as maybe the working directory.</p>
-<div class="cell" data-layout-align="center" type="danger">
-<div class="danger">
-<p>
-WATCH OUT! There is also a function called <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>. Be very careful NOT to use this function instead of <code>read_csv()</code> as they have different ways of naming columns. For the activities and the assignments we will always ask and expect you to use <code>read_csv()</code>. This is really a reminder to watch spelling on functions and to be careful to use the right functions.
-</p>
-</div>
-</div>
-</section></section><section id="looking-at-data" class="level2" data-number="2.8"><h2 data-number="2.8" class="anchored" data-anchor-id="looking-at-data">
-<span class="header-section-number">2.8</span> Looking at Data</h2>
-<p>Great! Now that we have our data read in the first step you should always do is to have an initial check to see what your data looks like. Normally you will have an idea already from the experiment you ran but if you are using someones data you might not, so best to check it out. There are several ways you can look at your data and these are listed in Activity 4 below. Try them all to see how the results differ.</p>
-<section id="ld-a4" class="level3" data-number="2.8.1"><h3 data-number="2.8.1" class="anchored" data-anchor-id="ld-a4">
-<span class="header-section-number">2.8.1</span> Activity 4: Look at your data</h3>
-<ul>
-<li>
-<strong>Option 1:</strong> In the environment pane, click on the name of the object you want to look at. For example, click the names <code>dat</code> and <code>pinfo</code>. This will open the data to give you a spreadsheet-like view (although you can’t edit it like in Excel)<br>
-</li>
-<li>
-<strong>Option 2:</strong> In the environment pane, click the small blue play button to the left of <code>dat</code> and <code>pinfo</code>. This will show you the structure of the object information including the names of all the variables in that object and what type they are (also see <code>str(pinfo)</code>)</li>
-<li>
-<strong>Option 3:</strong> In the console window, type and run <code>str(pinfo)</code> and then <code>str(dat)</code>
-</li>
-<li>
-<strong>Option 4:</strong> Repeat option 3 but this time use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function - e.g.&nbsp;<code>summary(dat)</code>
-</li>
-<li>
-<strong>Option 5:</strong> Repeat option 3 but this time use the <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> function</li>
-<li>
-<strong>Option 6:</strong> Type the name of the object you want to view in the console window and run it, e.g., type <code>dat</code> in the console window and run it.</li>
-</ul>
-<p>As you can see there are various different ways to get an idea of what your data looks like. Each tells you similar but also different info. We will explore more as we get further into the book but for now just be aware that you can use all of these approaches to see your data. More often than not Option 1 and Option 2 give you the info you need, the quickest.</p>
-</section></section><section id="joining-data" class="level2" data-number="2.9"><h2 data-number="2.9" class="anchored" data-anchor-id="joining-data">
-<span class="header-section-number">2.9</span> Joining Data</h2>
-<p>So far so awesome! We have our data and we know what it looks like, so let’s start trying to do things with our data! The first thing we will do is combine datafiles! We have two files, <code>dat</code> and <code>info</code> but what we really want is a single file that has both the data and the demographic information about the participants as it makes it easier to work with the data when it is all combined together. To do this we are going to use the function <code>inner_join()</code> which comes from the <code>dplyr</code> package - one of the packages loaded in as part of the <code>tidyverse</code>. But don’t worry to much about deliberately trying to remember all the different packages and functions as it will come naturally with the practice we give you.</p>
-<ul>
-<li>
-<strong>Top tip:</strong> Remember to use the help function <code>?inner_join</code> if you want more information about how to use a function and to use tab auto-complete to help you write your code.</li>
-</ul>
-<section id="ld-a5" class="level3" data-number="2.9.1"><h3 data-number="2.9.1" class="anchored" data-anchor-id="ld-a5">
-<span class="header-section-number">2.9.1</span> Activity 5: Join the files together</h3>
-<p>The below code will create a new object, called <code>all_dat</code>, that combines the data from both <code>dat</code> and <code>pinfo</code> using the information in the columns <code>id</code> and <code>intervention</code> to match the participants’ data across the two sets of data. This is going to be an <strong><a href="https://psyteachr.github.io/glossary/i#inner-join" target="_blank" class="glossary" title="A mutating join that returns all the rows that have a match in the other table.">inner join approach</a></strong> - data will only be kept for a participant if they exist in both datafiles. There are lots of different joins but we will see them as we go further into the book.</p>
-<ul>
-<li>Type and run the below code in a new code chunk to inner join the two sets of data.</li>
-<li>Let’s see if we can make sense of what is happening
-<ul>
-<li>
-<code>all_dat</code> is the new object that has the data combined</li>
-<li>
-<code>x</code> is the first argument and it should be the first data/object you want to combine</li>
-<li>
-<code>y</code> is the second argument and it should be the second data/object you want to combine</li>
-<li>
-<code>by</code> is the third argument and it lists the names of the columns you want to combine the data by. It uses an additional function <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> to say that there is more than one column to combine by.</li>
-</ul>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> dat, </span>
-<span id="cb7-2"><a href="#cb7-2"></a>                      <span class="at">y =</span> pinfo, </span>
-<span id="cb7-3"><a href="#cb7-3"></a>                      <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Once you have run this code you should now see the <code>all_dat</code> in the environment pane. View the new dataset using one of the methods from Activity 4. In fact, try to remember that you should always view any new object or data that you create. Code often can run but that doesn’t necessarily mean it is correct. The programme only ever knows what the code says not what you thought you said. Get into the habit of always checking output!</p>
-</section></section><section id="selecting-data" class="level2" data-number="2.10"><h2 data-number="2.10" class="anchored" data-anchor-id="selecting-data">
-<span class="header-section-number">2.10</span> Selecting Data</h2>
-<p>Excellent! We have now combined our data into one big object! However, Very frequently, datasets will have more variables, information, and data than you actually want to use and it can make life easier to create a new object with just the data you need. So, our final step today is to select just some variables of interest! In our case, the <code>all_dat</code> contains the responses to each individual question on both the AHI scale and the CESD scale, as well as the total score (i.e., the sum of all the individual responses). Let’s say for our analysis all we care about is the total scores and the demographic information about participants. We are going to use a new function called the <code>select()</code> function, again from the <code>dplyr</code> package, to select only the columns we are interested in and store them in (i.e.&nbsp;assign them to) a new object called <code>summarydata</code></p>
-<section id="ld-a6" class="level3" data-number="2.10.1"><h3 data-number="2.10.1" class="anchored" data-anchor-id="ld-a6">
-<span class="header-section-number">2.10.1</span> Activity 6: Pull out variables of interest</h3>
-<ul>
-<li>Type and run the below code in a new code chunk. Let’s also have a quick look at the code.
-<ul>
-<li>summarydata is the new object we are creating using the <code>select()</code> function</li>
-<li>
-<code>.data</code> is the first argument and it wants to know what object are we going to select columns from. In this instance <code>all_dat</code>.</li>
-<li>next we have a list of columns that we want to keep. Every column must be spelt correctly and must exist in the object you are selecting it from. Makes sense really; otherwise the function wouldn’t know what you wanted!</li>
-</ul>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>summarydata <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> all_dat, </span>
-<span id="cb8-2"><a href="#cb8-2"></a>                      ahiTotal, </span>
-<span id="cb8-3"><a href="#cb8-3"></a>                      cesdTotal, </span>
-<span id="cb8-4"><a href="#cb8-4"></a>                      sex, </span>
-<span id="cb8-5"><a href="#cb8-5"></a>                      age, </span>
-<span id="cb8-6"><a href="#cb8-6"></a>                      educ, </span>
-<span id="cb8-7"><a href="#cb8-7"></a>                      income, </span>
-<span id="cb8-8"><a href="#cb8-8"></a>                      occasion,</span>
-<span id="cb8-9"><a href="#cb8-9"></a>                      elapsed.days)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If that has worked correctly you should see <code>summarydata</code> in the environment pane and can run <code>head(summarydata)</code> now in the console window to get a view of the output. If you see any red text in the console window it would be worth checking the spelling of the objects and columns you wanted to select. If everything has gone to plan the output should look something like this:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 15%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 14%">
-<col style="width: 20%">
-</colgroup>
-<thead><tr class="header">
-<th style="text-align: center;">ahiTotal</th>
-<th style="text-align: center;">cesdTotal</th>
-<th style="text-align: center;">sex</th>
-<th style="text-align: center;">age</th>
-<th style="text-align: center;">educ</th>
-<th style="text-align: center;">income</th>
-<th style="text-align: center;">occasion</th>
-<th style="text-align: center;">elapsed.days</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">32</td>
-<td style="text-align: center;">50</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">46</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">182.03</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">34</td>
-<td style="text-align: center;">49</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">37</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">14.19</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">34</td>
-<td style="text-align: center;">47</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">37</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">33.03</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">35</td>
-<td style="text-align: center;">41</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">19</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.00</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">36</td>
-<td style="text-align: center;">36</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">40</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">202.10</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">37</td>
-<td style="text-align: center;">35</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">49</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.00</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section></section><section id="knitting-our-reproducible-code" class="level2" data-number="2.11"><h2 data-number="2.11" class="anchored" data-anchor-id="knitting-our-reproducible-code">
-<span class="header-section-number">2.11</span> Knitting our Reproducible code</h2>
-<p>As we saw in <a href="##intro-a8-a3" target="_blank">Activity 8 in Chapter 2</a> our final step to making a reproducible document is to knit it to HTML! Try knitting your file to HTML now! If all the code is working correctly then you should get an html document showing all your code! If you don’t get the output there could be a few issues either relating to your code or to your installation. You can use the below debugging tips to ask yourself some questions about your code. If all the code looks correct be sure to speak to one of the TEAM to see what might be wrong.</p>
-<section id="ld-debug" class="level3" data-number="2.11.1"><h3 data-number="2.11.1" class="anchored" data-anchor-id="ld-debug">
-<span class="header-section-number">2.11.1</span> Debugging tips</h3>
-<ul>
-<li>When you downloaded the files did you save the file names <strong>exactly</strong> as they were originally? If you download the file more than once you will find your computer may automatically add a number to the end of the file name. <code>data.csv</code> is not the same as <code>data(1).csv</code>. Pay close attention to names!</li>
-<li>Have you used the <strong>exact</strong> same object names as we did in each activity? Remember, <code>name</code> is different to <code>Name</code>. In order to make sure you can follow along with this book, pay special attention to ensuring you use the same object names as we do.<br>
-</li>
-<li>Have you used quotation marks where needed?<br>
-</li>
-<li>Have you accidentally deleted any back ticks (```) from the beginning or end of code chunks?</li>
-</ul></section></section><section id="code-layout" class="level2" data-number="2.12"><h2 data-number="2.12" class="anchored" data-anchor-id="code-layout">
-<span class="header-section-number">2.12</span> Code Layout</h2>
-<p>And one very quick point before we end for the day. You may have noticed we wrote code as such:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> dat, </span>
-<span id="cb9-2"><a href="#cb9-2"></a>                      <span class="at">y =</span> pinfo, </span>
-<span id="cb9-3"><a href="#cb9-3"></a>                      <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>But we could also have written it as:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> dat, <span class="at">y =</span> pinfo, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Both do exactly the same! In a code chunk you can take a new line after a comma (,) and the code nicely idents for you. It can make it easier to read and to debug if the code is nicely presented but it isn’t essential!</p>
-</section><section id="ld-fin" class="level2" data-number="2.13"><h2 data-number="2.13" class="anchored" data-anchor-id="ld-fin">
-<span class="header-section-number">2.13</span> Finished!</h2>
-<p>And that’s it, well done! Remember to save your work in your chapter folder and make a note of any mistakes you made and how you fixed them. You have started on your journey to become a confident and competent member of the open scientific community!</p>
-<p>Now would be a good time to get comfortable with what we’ve covered already and revise the activities and support materials presented so far if needed. If you’re feeling comfortable with you can work your way through this book at your own pace or push yourself by using the additional resources highlighted in Programming Basics. And don’t forget to try out the tasks below to check your understanding and knowledge of the skills you are learning!</p>
-<p>Finally, if you’re using the R server, we strongly recommend that you download a copy of any files you have been working on and save them on your machine so that you have a local back-up.</p>
-</section><section id="ld-test" class="level2" data-number="2.14"><h2 data-number="2.14" class="anchored" data-anchor-id="ld-test">
-<span class="header-section-number">2.14</span> Test yourself</h2>
-<section id="knowledge-questions" class="level3" data-number="2.14.1"><h3 data-number="2.14.1" class="anchored" data-anchor-id="knowledge-questions">
-<span class="header-section-number">2.14.1</span> Knowledge Questions</h3>
-<ol type="1">
-<li>When loading in a .csv file, which function should you use?
-<div id="radio_YEQAOQAHVC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YEQAOQAHVC" value="answer"><span>read_csv()</span></label><label><input type="radio" autocomplete="off" name="radio_YEQAOQAHVC" value=""><span>read.csv()</span></label><label><input type="radio" autocomplete="off" name="radio_YEQAOQAHVC" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_YEQAOQAHVC" value=""><span>library()</span></label>
-</div>
-</li>
-</ol>
-<div class="webex-solution">
-<button>
-Explain this answer
-</button>
-<div class="cell" data-layout-align="center">
-<p>Remember, in this course we use <code>read_csv()</code> and it is important that you use this function otherwise you may find that the data does not work as expected.</p>
-</div>
-</div>
-<ol start="2" type="1">
-<li>The function <code>inner_join()</code> takes the arguments <code>x</code>, <code>y</code>, <code>by</code>. What does <code>by</code> do?
-<div id="radio_AMVKFXLJGF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AMVKFXLJGF" value=""><span>Specifies the first object to join</span></label><label><input type="radio" autocomplete="off" name="radio_AMVKFXLJGF" value=""><span>Specifies the second object to join</span></label><label><input type="radio" autocomplete="off" name="radio_AMVKFXLJGF" value="answer"><span>Specifies the column to join by that both objects have in common</span></label>
-</div>
-</li>
-</ol>
-<div class="webex-solution">
-<button>
-Explain this answer
-</button>
-<div class="cell" data-layout-align="center">
-<p>Remember, functions have arguments and the arguments all do something slightly different. In the <code>inner_join()</code> the <code>by</code> argument says which columns to join by. If you want to join by more than one column you need to put both columns inside the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function.</p>
-</div>
-</div>
-<ol start="3" type="1">
-<li>What does the function <code>select()</code> do?
-<div id="radio_DDNTTYMCAT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DDNTTYMCAT" value=""><span>Keeps only the observations you specify</span></label><label><input type="radio" autocomplete="off" name="radio_DDNTTYMCAT" value="answer"><span>Keeps only the columns you specify</span></label><label><input type="radio" autocomplete="off" name="radio_DDNTTYMCAT" value=""><span>Keeps only the objects you specify</span></label>
-</div>
-</li>
-</ol>
-<div class="webex-solution">
-<button>
-Explain this answer
-</button>
-<div class="cell" data-layout-align="center">
-<p>The <code>select()</code> function comes from one of the tidyverse packages - dplyr to be precise. It is the main function we use to keep and remove columns we want or don’t want. You will start to remember functions you need as you work more with them. Remember the best approach is to think back to what you did!</p>
-</div>
-</div>
-</section><section id="ld-debugex" class="level3" data-number="2.14.2"><h3 data-number="2.14.2" class="anchored" data-anchor-id="ld-debugex">
-<span class="header-section-number">2.14.2</span> Debugging exercises</h3>
-<p>One key skill is learning how to fix errors in your code. These exercises below are specifically design to create errors. Ruun each exercise and try to solve the errors yourself before moving on to the next one. Make a note of what the error message was and how you solved it - you might find it helpful to create a new file just for error solving notes. You will find that you often make the same errors in over and over again when running analyses; experts also make tonnes of errors. The difference between a novice and an expert is that when you are first learning, an error might slow you down, but you will greatly speed you up with practice. Don’t be put off by errors!</p>
-<ol type="1">
-<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code:</li>
-</ol>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This will produce the error:</p>
-<pre><code>`could not find function "read_csv"`</code></pre>
-<p>Once you figure out how to fix this error, make a note of it.</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<div class="cell" data-layout-align="center">
-<p>When you restarted the session you unloaded all the packages you previously had loaded - i.e.&nbsp;the <code>tidyverse</code>. The function <code>read_csv()</code> is part of the <code>tidyverse</code> package which means that in order for the code to run you need to run <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> to reload the package so that you can use the function. Remember that we always need to load packages into our library but we only install them once. Again, think about apps on your phone!</p>
-</div>
-</div>
-<ol start="2" type="1">
-<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code:</li>
-</ol>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb13-2"><a href="#cb13-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This will produce the error:</p>
-<pre><code>`Error: 'ahi-cesd' does not exist in current working directory`.</code></pre>
-<p>Once you figure out how to fix this error, make a note of it.</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<div class="cell" data-layout-align="center">
-<p>When loading data you need to provide the full file name including the file extension. In this case the error was caused by writing <code>ahi-cesd</code> instead of <code>ahi-cesd.csv</code>. As far as coding goes, these are two completely different files and only one of them exists in the working directory.</p>
-</div>
-</div>
-<ol start="3" type="1">
-<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code:</li>
-</ol>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb15-2"><a href="#cb15-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span> (<span class="st">"ahi-cesd.csv"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> dat, </span>
-<span id="cb15-5"><a href="#cb15-5"></a>                      <span class="at">y =</span> pinfo, </span>
-<span id="cb15-6"><a href="#cb15-6"></a>                      <span class="at">by =</span> <span class="st">"id"</span>, <span class="st">"intervention"</span>) </span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="fu">summary</span>(all_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Look at the summary for <code>all_dat</code>. You will see that R has duplicated the <code>intervention</code> variable, so that there is now an <code>intervention.x</code> and an <code>intervention.y</code> that contain the same data. Once you figure out how to fix this error, make a note of it.</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<div class="cell" data-layout-align="center">
-<p>If you want to join two objects that have mulitple columns in common you need to use the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> command to list all of the columns. The code above hasn’t done this, it’s just listed <code>id</code> and <code>intervention</code> without enclosing them with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> so it defaults to using just the first one and ignores the other column. When it does this both objects had an <code>intervention</code> column so it keeps both. The rule is, when joining objects, join them by all common columns!.</p>
-</div>
-</div>
-</section></section><section id="words-from-this-chapter" class="level2" data-number="2.15"><h2 data-number="2.15" class="anchored" data-anchor-id="words-from-this-chapter">
-<span class="header-section-number">2.15</span> Words from this Chapter</h2>
-<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: left;">definition</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/a#assignment-operator" class="glossary" target="_blank">assignment-operator</a></td>
-<td style="text-align: left;">The symbol &lt;-, which functions like = and assigns the value on the right to the object on the left</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#chunk" class="glossary" target="_blank">chunk</a></td>
-<td style="text-align: left;">A section of code in an R Markdown file</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#console" class="glossary" target="_blank">console</a></td>
-<td style="text-align: left;">The pane in RStudio where you can type in commands and view output messages.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#csv" class="glossary" target="_blank">csv</a></td>
-<td style="text-align: left;">Comma-separated variable: a file type for representing data where each variable is separated from the next by a comma.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#data-wrangling" class="glossary" target="_blank">data-wrangling</a></td>
-<td style="text-align: left;">The process of preparing data for visualisation and statistical analysis.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#descriptive" class="glossary" target="_blank">descriptive</a></td>
-<td style="text-align: left;">Statistics that describe an aspect of data (e.g., mean, median, mode, variance, range)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/e#environment" class="glossary" target="_blank">environment</a></td>
-<td style="text-align: left;">A data structure that contains R objects such as variables and functions</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/h#html" class="glossary" target="_blank">html</a></td>
-<td style="text-align: left;">Hyper-Text Markup Language: A system for semantically tagging structure and information on web pages.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/i#inline-code" class="glossary" target="_blank">inline-code</a></td>
-<td style="text-align: left;">Directly inserting the result of code into the text of a .Rmd file.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/i#inner-join" class="glossary" target="_blank">inner-join</a></td>
-<td style="text-align: left;">A mutating join that returns all the rows that have a match in the other table.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/k#knit" class="glossary" target="_blank">knit</a></td>
-<td style="text-align: left;">To create an HTML, PDF, or Word document from an R Markdown (Rmd) document</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/l#latex" class="glossary" target="_blank">latex</a></td>
-<td style="text-align: left;">A typesetting program needed to create PDF files from R Markdown documents.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/m#markdown" class="glossary" target="_blank">markdown</a></td>
-<td style="text-align: left;">A way to specify formatting, such as headers, paragraphs, lists, bolding, and links.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/o#object" class="glossary" target="_blank">object</a></td>
-<td style="text-align: left;">A word that identifies and stores the value of some data for later use.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#package" class="glossary" target="_blank">package</a></td>
-<td style="text-align: left;">A group of R functions.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#r-markdown" class="glossary" target="_blank">r-markdown</a></td>
-<td style="text-align: left;">The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#r-project" class="glossary" target="_blank">r-project</a></td>
-<td style="text-align: left;">A project is simply a working directory designated with a .RProj file. When you open an R project, it automatically sets the working directory to the folder the project is located in.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#reproducible-research" class="glossary" target="_blank">reproducible-research</a></td>
-<td style="text-align: left;">Research that documents all of the steps between raw data and results in a way that can be verified.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tidyverse" class="glossary" target="_blank">tidyverse</a></td>
-<td style="text-align: left;">A set of R packages that help you create and work with tidy data</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#working-directory" class="glossary" target="_blank">working-directory</a></td>
-<td style="text-align: left;">The filepath where R is currently loading files from and saving files to.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><strong>End of Chapter</strong></p>
-<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-woodworth_data_2018" class="csl-entry" role="listitem">
-Woodworth, R. J., O’Brien-Malone, A., Diamond, M. R., &amp; Schüz, B. (2018). Data from, <span>“<span>Web</span>-based <span>Positive</span> <span>Psychology</span> <span>Interventions</span>: <span>A</span> <span>Reexamination</span> of <span>Effectiveness</span>.”</span> <em>Journal of Open Psychology Data</em>, <em>6</em>(1), 1. <a href="https://doi.org/10.5334/jopd.35">https://doi.org/10.5334/jopd.35</a>
-</div>
-</div>
-</section></main><!-- /main --><script>
+</section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -1722,6 +1255,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1788,13 +1348,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1873,10 +1435,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1886,8 +1465,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1899,7 +1487,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1943,6 +1654,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1968,6 +1680,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2027,12 +1765,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./01-programming-basics.html" class="pagination-link">
+      <a href="./01-programming-basics.html" class="pagination-link" aria-label="Introduction to programming with R/R Studio">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to programming with R/R Studio</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-intro-data-viz.html" class="pagination-link">
+      <a href="./03-intro-data-viz.html" class="pagination-link" aria-label="Introduction to Data Visualisation">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Data Visualisation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -2042,7 +1780,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
+    <div class="nav-footer-center">
+<p>CC-BY (2024) James Bartlett &amp; Wil Toivo</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/02-starting-with-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/02-starting-with-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
