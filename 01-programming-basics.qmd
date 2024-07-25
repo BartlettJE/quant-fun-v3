@@ -524,7 +524,7 @@ This is the assignment operator (`<-`) and we use it to assign content such as t
 
 ### Error mode
 
-The following questions are designed to introduce you to making and fixing errors. Try and run the code, look at the error message, and see if you can fix it before checking the answer. 
+The following questions are designed to introduce you to making and fixing errors. Try and run the code, look at the error message, and see if you can fix it before checking the answer. Consider keeping a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
 
 **Question 7.** Type the following code into the console and press enter/return: `rnorm(n = 10, meen = 5, sd = 1)`. You should get an error saying something like `Error in rnorm(n = 10, meen = 5, sd = 1) : unused argument (meen = 5)`. How can you fix it? 
 
@@ -559,6 +559,6 @@ Below, you will find a list of words that we used in this chapter that might be 
 glossary_table()
 ```
 
-**End of Chapter**
+## End of chapter 
 
 Well done on reaching the end of the first chapter! This was one of the longest chapters in the book to introduce you to several foundational concepts of coding in R and RStudio. The next chapter builds on these skills to produce something a little more concrete by showing you how to create reproducible documents. 

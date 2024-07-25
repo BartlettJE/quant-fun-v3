@@ -383,6 +383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#error-mode-2" id="toc-error-mode-2" class="nav-link" data-scroll-target="#error-mode-2"><span class="header-section-number">2.4.2</span> Error mode</a></li>
   </ul>
 </li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">2.5</span> Words from this Chapter</a></li>
+  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">2.6</span> End of chapter</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/02-starting-with-data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/02-starting-with-data.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -405,7 +407,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
 <p>By the end of this chapter, you will be able to:</p>
 <ul>
-<li>ILO1.</li>
+<li><p>Understand and set your working directory, either manually or through creating an R project.</p></li>
+<li><p>Create a knit an R Markdown file to create a reproducible document.</p></li>
+<li><p>Use inline code to combine text and code output in your reproducible documents.</p></li>
+<li><p>Identify and fix common errors in knitting R Markdown files.</p></li>
 </ul>
 <section id="file-structure-working-directories-and-r-projects" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="file-structure-working-directories-and-r-projects">
 <span class="header-section-number">2.1</span> File structure, working directories, and R Projects</h2>
@@ -816,7 +821,7 @@ How does inline code work?
 <span class="header-section-number">2.2.6</span> Activity 8: Knitting your file</h3>
 <p>As our final step in this part, we are going to knit our file again to see how it looks now. So, click the Knit button to regenerate your knitted .html version.</p>
 <p>If you look at the knitted .html document in the Viewer tab or in your browser, you should see the sentence we copied in from Activity 7. As if by magic, that slightly odd bit of text you copied and pasted now appears as a normal sentence with the values pulled in from the objects you created:</p>
-<p>My name is <strong>James</strong> and I am <strong>30</strong> years old. <br><br>It is <strong>209</strong> days until my birthday.</p>
+<p>My name is <strong>James</strong> and I am <strong>30</strong> years old. <br><br>It is <strong>208</strong> days until my birthday.</p>
 <p>R Markdown is an incredibly powerful and flexible format, we wrote this whole book using it! There are a few final things to note about knitting that will be useful going forward for your data skills learning and assessments:</p>
 <ul>
 <li><p>R Markdown will only knit if your code works. If you have an error, it will stop and tell you to fix the error before you can click knit and try again. This is a good way of checking whether you have written functioning code in your assessments.</p></li>
@@ -832,7 +837,7 @@ How does inline code work?
 <span class="header-section-number">2.3.1</span> Activity 9 - Knit the reproducibility demonstration document</h3>
 <p>Please follow these steps and you should be able to knit the document without editing anything. Make sure you are still in your <code>Chapter_02_reproducible_docs</code> folder. If you are coming back to this activity, remember to set your working directory by opening the .Rproj file.</p>
 <ol type="1">
-<li><p>If you are working on your own computer, make sure you installed the <code>tidyverse</code> package. Please refer to <a href="#install-tidy">Chapter 1 - Activity 3</a> if you have not completed this step yet. If you are working on a university computer or the online server, you <strong>do not</strong> need to complete this step as <code>tidyverse</code> will already be installed.</p></li>
+<li><p>If you are working on your own computer, make sure you installed the <code>tidyverse</code> package. Please refer to <a href="01-programming-basics.html#install-tidy">Chapter 1 - Activity 3</a> if you have not completed this step yet. If you are working on a university computer or the online server, you <strong>do not</strong> need to complete this step as <code>tidyverse</code> will already be installed.</p></li>
 <li><p>Download the R Markdown document through the following link: <a href="activity_files/02_reproducibility_demo.Rmd">02_reproducibility_demo.Rmd</a>. To download a file from this book, right click the link and select “save link as”, or just clicking the link will save the file to your Downloads. Save or copy the file to your <code>Chapter_02_reproducible_docs</code> folder.</p></li>
 <li><p>Download these two data files. Data file one: <a href="data/ahi-cesd.csv">ahi-cesd.csv</a>. Data file two: <a href="data/participant_info.csv">participant-info.csv</a>. Right click the links and select “save link as”, or clicking the links will save the files to your Downloads. Make sure that both files are saved as “.csv”. Do not open them on your machine as often other software like Excel can change setting and ruin the files. Save or copy the file to your <code>data/</code> folder within <code>Chapter_02_reproducible_docs</code>.</p></li>
 </ol>
@@ -845,13 +850,10 @@ How does inline code work?
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you find the solution to some common errors in the concepts we covered in this chapter.</p>
 <section id="knowledge-check" class="level3" data-number="2.4.1"><h3 data-number="2.4.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">2.4.1</span> Knowledge check</h3>
-<ol type="1">
-<li>One of the key first steps when we open RStudio is to:
-<div id="radio_FQAAEBYUKQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FQAAEBYUKQ" value="answer"><span>set your working directory/open a project</span></label><label><input type="radio" autocomplete="off" name="radio_FQAAEBYUKQ" value=""><span>put on some music as we will be here a while</span></label><label><input type="radio" autocomplete="off" name="radio_FQAAEBYUKQ" value=""><span>check out the news</span></label><label><input type="radio" autocomplete="off" name="radio_FQAAEBYUKQ" value=""><span>make a coffee</span></label>
+<strong>Question 1</strong>. One of the key first steps when we open RStudio is to:
+<div id="radio_UUEPQHTGSB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UUEPQHTGSB" value="answer"><span>set your working directory/open a project</span></label><label><input type="radio" autocomplete="off" name="radio_UUEPQHTGSB" value=""><span>put on some music as we will be here a while</span></label><label><input type="radio" autocomplete="off" name="radio_UUEPQHTGSB" value=""><span>check out the news</span></label><label><input type="radio" autocomplete="off" name="radio_UUEPQHTGSB" value=""><span>make a coffee</span></label>
 </div>
-</li>
-</ol>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -868,18 +870,16 @@ Explain this answer
 </div>
 </div>
 </div>
-<ol start="2" type="1">
-<li><p>When using the default environment color settings for RStudio, what color would the background of a code chunk be in R Markdown? <select class="webex-select"><option value="blank"></option>
+<p><strong>Question 2</strong>. When using the default environment color settings for RStudio, what color would the background of a code chunk be in R Markdown? <select class="webex-select"><option value="blank"></option>
 <option value="">white</option>
 <option value="">red</option>
 <option value="">green</option>
-<option value="answer">grey</option></select></p></li>
-<li><p>When using the default environment color settings for RStudio, what color would the background of normal text be in R Markdown? <select class="webex-select"><option value="blank"></option>
+<option value="answer">grey</option></select></p>
+<p><strong>Question 3</strong>. When using the default environment color settings for RStudio, what color would the background of normal text be in R Markdown? <select class="webex-select"><option value="blank"></option>
 <option value="answer">white</option>
 <option value="">red</option>
 <option value="">green</option>
-<option value="">grey</option></select></p></li>
-</ol>
+<option value="">grey</option></select></p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -896,13 +896,10 @@ Explain this answer
 </div>
 </div>
 </div>
-<ol start="4" type="1">
-<li>Code chunks start and end with:
-<div id="radio_PQXPOCHSKG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PQXPOCHSKG" value=""><span>three single quotes</span></label><label><input type="radio" autocomplete="off" name="radio_PQXPOCHSKG" value="answer"><span>three backticks</span></label><label><input type="radio" autocomplete="off" name="radio_PQXPOCHSKG" value=""><span>three double quotes</span></label><label><input type="radio" autocomplete="off" name="radio_PQXPOCHSKG" value=""><span>three single clefs</span></label>
+<strong>Question 4</strong>. Code chunks start and end with:
+<div id="radio_ABOWETQLIS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ABOWETQLIS" value=""><span>three single quotes</span></label><label><input type="radio" autocomplete="off" name="radio_ABOWETQLIS" value="answer"><span>three backticks</span></label><label><input type="radio" autocomplete="off" name="radio_ABOWETQLIS" value=""><span>three double quotes</span></label><label><input type="radio" autocomplete="off" name="radio_ABOWETQLIS" value=""><span>three single clefs</span></label>
 </div>
-</li>
-</ol>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -919,13 +916,10 @@ Explain this answer
 </div>
 </div>
 </div>
-<ol start="5" type="1">
-<li>Inline code is:
-<div id="radio_NVZYTIZLGT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NVZYTIZLGT" value=""><span>where you nicely organise your code in a line.</span></label><label><input type="radio" autocomplete="off" name="radio_NVZYTIZLGT" value=""><span>where you make sure all the code is nicely indented from the side.</span></label><label><input type="radio" autocomplete="off" name="radio_NVZYTIZLGT" value=""><span>a fancy way of saying you have written good code.</span></label><label><input type="radio" autocomplete="off" name="radio_NVZYTIZLGT" value="answer"><span>an approach of integrating code and text in a sentence outside of a code chunk.</span></label>
+<strong>Question 5</strong>. Inline code is:
+<div id="radio_IDTODVMPIS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IDTODVMPIS" value=""><span>where you nicely organise your code in a line.</span></label><label><input type="radio" autocomplete="off" name="radio_IDTODVMPIS" value=""><span>where you make sure all the code is nicely indented from the side.</span></label><label><input type="radio" autocomplete="off" name="radio_IDTODVMPIS" value=""><span>a fancy way of saying you have written good code.</span></label><label><input type="radio" autocomplete="off" name="radio_IDTODVMPIS" value="answer"><span>an approach of integrating code and text in a sentence outside of a code chunk.</span></label>
 </div>
-</li>
-</ol>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -944,9 +938,9 @@ Explain this answer
 </div>
 </section><section id="error-mode-2" class="level3" data-number="2.4.2"><h3 data-number="2.4.2" class="anchored" data-anchor-id="error-mode-2">
 <span class="header-section-number">2.4.2</span> Error mode</h3>
-<ul>
-<li>Code outside of a code chunk</li>
-</ul>
+<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on R Markdown and potential errors in using code blocks and inline code. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
+<p>Create and save a new R Markdown file by following the instructions in <a href="#intro-a3">activity 3</a> and <a href="#intro-a4">activity 4</a>. You should have a blank R Markdown file below line 10. Below, we have several variations of a code chunk and inline code errors. Copy and paste them into your R Markdown file, click knit, and look at the error message you receive. See if you can fix the error and get it working before checking the answer.</p>
+<p><strong>Question 5</strong>. Copy the following text/code/code chunk into your R Markdown file and press knit. You should receive an error like <code>Error while opening file. No such file or directory</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a>city &lt;- "Glasgow"</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="in">```{r}</span></span>
@@ -954,36 +948,157 @@ Explain this answer
 <span id="cb5-5"><a href="#cb5-5"></a><span class="in">```</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="in">`r city`</span> is a city in Scotland. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Missing backtick</li>
-</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here, we wrote <code>city &lt;- "Glasgow"</code> outside the code chunk. So, when we try and knit, it is not evaluated as code, and city does not exist as an object to be referenced in inline code. If you copy <code>city &lt;- "Glasgow"</code> into the code chunk and press knit, it should work.</p>
+</div>
+</div>
+</div>
+<p><strong>Question 6</strong>. Copy the following text/code/code chunk into your R Markdown file and press knit. You should receive an error like <code>Error in parse(): ! attempt to use zero-length variable name</code> which is not very helpful for diagnosing the problem.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="in">```{r}</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>city <span class="ot">&lt;-</span> <span class="st">"Glasgow"</span></span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="st">``</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a></span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="st">`</span><span class="at">r city</span><span class="st">`</span> is a city <span class="cf">in</span> Scotland. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Object before inline code</li>
-</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here, we missed a final backtick in the code chunk. You might have noticed all the text had a grey background, so R Markdown thought everything was code. So, when it reached the inline code and text, it tried interpreting it as code and caused the error. If you add the final backtick to the code chunk, you should be able to click knit successfully.</p>
+</div>
+</div>
+</div>
+<p><strong>Question 7</strong>. Copy the following text/code/code chunk into your R Markdown file and press knit. You should receive an error like <code>Error while opening file. No such file or directory</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="in">`r city`</span> is a city in Scotland. </span>
 <span id="cb7-3"><a href="#cb7-3"></a></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="in">```{r}</span></span>
 <span id="cb7-5"><a href="#cb7-5"></a>city <span class="ot">&lt;-</span> <span class="st">"Glasgow"</span></span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>inline code without the r</li>
-</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here, we tried using inline code before the code chunk. R Markdown runs the code from start to finish in a fresh environment. We tried referencing <code>city</code> in inline code, but R Markdown did not know it existed yet. To fix it, you need to move the inline code below the code chunk, so you create <code>city</code> before referencing it in inline code.</p>
+</div>
+</div>
+</div>
+<p><strong>Question 8</strong>. Copy the following text/code/code chunk into your R Markdown file and press knit. This…works?</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="in">```{r}</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>city <span class="ot">&lt;-</span> <span class="st">"Glasgow"</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="in">```</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a></span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="in">`city`</span> is a city in Scotland. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here, we have a sneaky kind of “error” where it knits, but it is not doing what we wanted it to do. In the inline code part, we only added code formatting <code>city</code>, we did not add the r to get R Markdown to interpret it as R code:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="st">`</span><span class="at">r city</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you add the after the first backtick, it should knit and add the city object in.</p>
+</div>
+</div>
+</div>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">2.5</span> Words from this Chapter</h2>
+<p>Below, you will find a list of words that we used in this chapter that might be new to you in case you need to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that numerous members of the team wrote entries in the Glossary and as such the entries may use slightly different terminology from what we used in the chapter.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#chunk" class="glossary" target="_blank">chunk</a></td>
+<td style="text-align: left;">A section of code in an R Markdown file</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/h#html" class="glossary" target="_blank">html</a></td>
+<td style="text-align: left;">Hyper-Text Markup Language: A system for semantically tagging structure and information on web pages.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/i#inline-code" class="glossary" target="_blank">inline-code</a></td>
+<td style="text-align: left;">Directly inserting the result of code into the text of a .Rmd file.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/k#knit" class="glossary" target="_blank">knit</a></td>
+<td style="text-align: left;">To create an HTML, PDF, or Word document from an R Markdown (Rmd) document</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/l#latex" class="glossary" target="_blank">latex</a></td>
+<td style="text-align: left;">A typesetting program needed to create PDF files from R Markdown documents.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/m#markdown" class="glossary" target="_blank">markdown</a></td>
+<td style="text-align: left;">A way to specify formatting, such as headers, paragraphs, lists, bolding, and links.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#r-markdown" class="glossary" target="_blank">r-markdown</a></td>
+<td style="text-align: left;">The R-specific version of markdown: a way to specify formatting, such as headers, paragraphs, lists, bolding, and links, as well as code blocks and inline code.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#r-project" class="glossary" target="_blank">r-project</a></td>
+<td style="text-align: left;">A project is simply a working directory designated with a .RProj file. When you open an R project, it automatically sets the working directory to the folder the project is located in.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#reproducible-research" class="glossary" target="_blank">reproducible-research</a></td>
+<td style="text-align: left;">Research that documents all of the steps between raw data and results in a way that can be verified.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#working-directory" class="glossary" target="_blank">working-directory</a></td>
+<td style="text-align: left;">The filepath where R is currently loading files from and saving files to.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section id="end-of-chapter" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="end-of-chapter">
+<span class="header-section-number">2.6</span> End of chapter</h2>
+<p>Well done on reaching the end of the second chapter! This was another long chapter as we had to cover a range of foundational skills to prepare you for learning more of the coding element in future chapters.</p>
+<p>The next chapter builds on all the skills you have developed so far in R programming and creating reproducible documents to focus on something more tangible: data visualisation in R to create plots of your data.</p>
 
 
-</section></section></main><!-- /main --><script>
+</section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
