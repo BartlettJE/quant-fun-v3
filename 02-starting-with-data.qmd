@@ -411,9 +411,16 @@ Please follow these steps and you should be able to knit the document without ed
 
 At this point, you should have "**02_reproducibility_demo.Rmd**" within your `Chapter_02_reproducible_docs` folder. You should have "**ahi-cesd.csv**" and "**participant_info.csv**" in the `data/` folder within `Chapter_02_reproducible_docs`. 
 
-If you open "02_reproducibility_demo.Rmd" and followed all the steps above, you should be able to click knit. This will turn the R Markdown file into a knitted html file, showing some data wrangling, summary statistics, and two graphs. In the next chapter, you will learn how to write this code yourself, starting with creating graphs.
+If you open "02_reproducibility_demo.Rmd" and followed all the steps above, you should be able to click knit. This will turn the R Markdown file into a knitted html file, showing some data wrangling, summary statistics, and two graphs (@fig-img-repro-demo). In the next chapter, you will learn how to write this code yourself, starting with creating graphs.
 
-**Add picture demos here.** 
+::: {#fig-img-repro-demo layout-ncol=2}
+
+![](images/repro_demo_Rmd.png)
+
+![](images/repro_demo_html.png)
+
+You should see the reproducibility demonstration as the .Rmd (left) and be able to knit it into a html file (right).
+:::
 
 If you have any questions or problems about anything contained in this chapter, please remember you are always welcome to post on the course Teams channel, attend a GTA support session, or attend the office hours of one of the team. 
 
