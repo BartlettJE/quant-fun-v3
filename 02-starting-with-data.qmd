@@ -20,7 +20,7 @@ By the end of this chapter, you will be able to:
 
 - Identify and fix common errors in knitting R Markdown files. 
 
-## File structure, working directories, and R Projects
+## File structure, working directories, and R Projects {#02-projects}
 
 In chapter 1, we never worked with files, so you did not have to worry about where you put things on your computer. Before we can start working with R Markdown files, we must explain what a **`r glossary("working directory", def = "The filepath where R is currently loading files from and saving files to.")`** is and how your computer knows where to find things. 
 
