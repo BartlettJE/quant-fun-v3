@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
 <title>Fundamentals of Quantitative Analysis - 3&nbsp; Introduction to Data Visualisation</title>
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -56,7 +56,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,13 +98,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,10 +107,8 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
@@ -129,19 +120,19 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-intro-data-viz.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Data Visualisation</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-intro-data-viz.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Data Visualisation</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -373,7 +364,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -391,33 +382,41 @@ div.csl-indent {
   <ul class="collapse">
 <li><a href="#activity-1---loading-the-tidyverse-package" id="toc-activity-1---loading-the-tidyverse-package" class="nav-link" data-scroll-target="#activity-1---loading-the-tidyverse-package"><span class="header-section-number">3.2.1</span> Activity 1 - Loading the <code>tidyverse</code> package</a></li>
   <li><a href="#activity-2---reading-data-files-using-read_csv" id="toc-activity-2---reading-data-files-using-read_csv" class="nav-link" data-scroll-target="#activity-2---reading-data-files-using-read_csv"><span class="header-section-number">3.2.2</span> Activity 2 - Reading data files using <code>read_csv()</code></a></li>
-  <li><a href="#wrangling-the-two-data-sets" id="toc-wrangling-the-two-data-sets" class="nav-link" data-scroll-target="#wrangling-the-two-data-sets"><span class="header-section-number">3.2.3</span> Wrangling the two data sets</a></li>
+  <li><a href="#activity-3---wrangling-the-two-data-sets" id="toc-activity-3---wrangling-the-two-data-sets" class="nav-link" data-scroll-target="#activity-3---wrangling-the-two-data-sets"><span class="header-section-number">3.2.3</span> Activity 3 - Wrangling the two data sets</a></li>
+  <li><a href="#activity-4---exploring-the-data-set" id="toc-activity-4---exploring-the-data-set" class="nav-link" data-scroll-target="#activity-4---exploring-the-data-set"><span class="header-section-number">3.2.4</span> Activity 4 - Exploring the data set</a></li>
   </ul>
 </li>
-  <li><a href="#ggplot2-and-the-layer-system" id="toc-ggplot2-and-the-layer-system" class="nav-link" data-scroll-target="#ggplot2-and-the-layer-system"><span class="header-section-number">3.3</span> ggplot2 and the layer system</a></li>
-  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"><span class="header-section-number">3.4</span> Histogram</a></li>
-  <li><a href="#density-plot" id="toc-density-plot" class="nav-link" data-scroll-target="#density-plot"><span class="header-section-number">3.5</span> Density plot</a></li>
-  <li><a href="#data-visualisation" id="toc-data-visualisation" class="nav-link" data-scroll-target="#data-visualisation"><span class="header-section-number">3.6</span> Data visualisation</a></li>
-  <li><a href="#setting-up-to-visaulise" id="toc-setting-up-to-visaulise" class="nav-link" data-scroll-target="#setting-up-to-visaulise"><span class="header-section-number">3.7</span> Setting up to Visaulise</a></li>
+  <li><a href="#ggplot2-and-the-layer-system" id="toc-ggplot2-and-the-layer-system" class="nav-link" data-scroll-target="#ggplot2-and-the-layer-system"><span class="header-section-number">3.3</span> <code>ggplot2</code> and the layer system</a></li>
   <li>
-<a href="#dealing-with-factors-and-categories" id="toc-dealing-with-factors-and-categories" class="nav-link" data-scroll-target="#dealing-with-factors-and-categories"><span class="header-section-number">3.8</span> Dealing with Factors and Categories</a>
+<a href="#histograms-and-density-plots" id="toc-histograms-and-density-plots" class="nav-link" data-scroll-target="#histograms-and-density-plots"><span class="header-section-number">3.4</span> Histograms and density plots</a>
   <ul class="collapse">
-<li><a href="#introviz-a2" id="toc-introviz-a2" class="nav-link" data-scroll-target="#introviz-a2"><span class="header-section-number">3.8.1</span> Activity 2: Factors</a></li>
+<li><a href="#step-1-start-with-the-ggplot-function" id="toc-step-1-start-with-the-ggplot-function" class="nav-link" data-scroll-target="#step-1-start-with-the-ggplot-function"><span class="header-section-number">3.4.1</span> Step 1: Start with the <code>ggplot</code> function</a></li>
+  <li><a href="#step-2-add-the-geom_histogram-layer" id="toc-step-2-add-the-geom_histogram-layer" class="nav-link" data-scroll-target="#step-2-add-the-geom_histogram-layer"><span class="header-section-number">3.4.2</span> Step 2: Add the geom_histogram layer</a></li>
+  <li><a href="#step-3-edit-the-histogram-bins" id="toc-step-3-edit-the-histogram-bins" class="nav-link" data-scroll-target="#step-3-edit-the-histogram-bins"><span class="header-section-number">3.4.3</span> Step 3: Edit the histogram bins</a></li>
+  <li><a href="#step-4-edit-the-axis-names" id="toc-step-4-edit-the-axis-names" class="nav-link" data-scroll-target="#step-4-edit-the-axis-names"><span class="header-section-number">3.4.4</span> Step 4: Edit the axis names</a></li>
+  <li><a href="#step-5-change-the-plot-theme" id="toc-step-5-change-the-plot-theme" class="nav-link" data-scroll-target="#step-5-change-the-plot-theme"><span class="header-section-number">3.4.5</span> Step 5: Change the plot theme</a></li>
+  <li><a href="#switch-the-geom-layer" id="toc-switch-the-geom-layer" class="nav-link" data-scroll-target="#switch-the-geom-layer"><span class="header-section-number">3.4.6</span> Switch the geom layer</a></li>
+  <li><a href="#activity-5---apply-your-plotting-skills-to-a-new-variable" id="toc-activity-5---apply-your-plotting-skills-to-a-new-variable" class="nav-link" data-scroll-target="#activity-5---apply-your-plotting-skills-to-a-new-variable"><span class="header-section-number">3.4.7</span> Activity 5 - Apply your plotting skills to a new variable</a></li>
   </ul>
 </li>
-  <li><a href="#barplots" id="toc-barplots" class="nav-link" data-scroll-target="#barplots"><span class="header-section-number">3.9</span> Barplots</a></li>
-  <li><a href="#saving-your-figures" id="toc-saving-your-figures" class="nav-link" data-scroll-target="#saving-your-figures"><span class="header-section-number">3.10</span> Saving your Figures</a></li>
-  <li><a href="#introviz-fin" id="toc-introviz-fin" class="nav-link" data-scroll-target="#introviz-fin"><span class="header-section-number">3.11</span> Finished!</a></li>
   <li>
-<a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">3.12</span> Test Yourself</a>
+<a href="#barplots" id="toc-barplots" class="nav-link" data-scroll-target="#barplots"><span class="header-section-number">3.5</span> Barplots</a>
   <ul class="collapse">
-<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">3.12.1</span> Knowledge check</a></li>
-  <li><a href="#error-mode-1" id="toc-error-mode-1" class="nav-link" data-scroll-target="#error-mode-1"><span class="header-section-number">3.12.2</span> Error mode</a></li>
+<li><a href="#introviz-a2" id="toc-introviz-a2" class="nav-link" data-scroll-target="#introviz-a2"><span class="header-section-number">3.5.1</span> Activity 2: Factors</a></li>
   </ul>
 </li>
-  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">3.13</span> Words from this Chapter</a></li>
-  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">3.14</span> End of chapter</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/03-intro-data-viz.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/03-intro-data-viz.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  <li><a href="#saving-your-figures" id="toc-saving-your-figures" class="nav-link" data-scroll-target="#saving-your-figures"><span class="header-section-number">3.6</span> Saving your Figures</a></li>
+  <li><a href="#introviz-fin" id="toc-introviz-fin" class="nav-link" data-scroll-target="#introviz-fin"><span class="header-section-number">3.7</span> Finished!</a></li>
+  <li>
+<a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">3.8</span> Test Yourself</a>
+  <ul class="collapse">
+<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">3.8.1</span> Knowledge check</a></li>
+  <li><a href="#error-mode-1" id="toc-error-mode-1" class="nav-link" data-scroll-target="#error-mode-1"><span class="header-section-number">3.8.2</span> Error mode</a></li>
+  </ul>
+</li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">3.9</span> Words from this Chapter</a></li>
+  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">3.10</span> End of chapter</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/03-intro-data-viz.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/03-intro-data-viz.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -434,25 +433,27 @@ div.csl-indent {
   </div>
   
 
-
-</header><p>In this chapter, we introduce you to…</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+</header><p>In this chapter, we introduce you to <a class="glossary" title="A graphical representation of your data set.">data visualisation</a>. Visualising our data and the relationships between our variables is an incredibly useful and important skill.</p>
+<p>It is important for <strong>you</strong> before you conduct any statistical analyses or present any summary statistics. We should always visualise our data as it is a quick and easy way to check our data make sense and identify any unusual trends. It is also important for <strong>others</strong> who read your work. Data visualisation can honestly present the features of our data to anyone who reads our research and provides a faster overview of our findings than reading a wall of numbers.</p>
+<p>Across several chapters, we introduce you to the extremely flexible <code>ggplot2</code> package for data visualisation as part of the <code>tidyverse</code> family. In two or three lines of code, you can create plots like <a href="#fig-ggplotdemo">Figure&nbsp;<span>3.1</span></a> for exploratory data analysis. With a few extra lines, you can create publication quality plots that could go into a report.</p>
+<p>In this chapter, we introduce you to the <code>ggplot2</code> system of creating plots and cover histograms and bar plots. In future chapters, we cover different types of plot to communicate more complex data and analyses.</p>
 <p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
 <ul>
 <li>ILO1</li>
 </ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-ggplotdemo" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/fig-ggplotdemo-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: Preview of the kind of plots you can quickly create using the ggplot2 package. On the left, a histogram of responses to a happiness questionnaire. On the right, a bar plot showing the frequency men and women in the study.</figcaption></figure>
+</div>
+</div>
+</div>
 <section id="chapter-preparation" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="chapter-preparation">
 <span class="header-section-number">3.1</span> Chapter preparation</h2>
 <section id="introduction-to-the-data-set" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
 <span class="header-section-number">3.1.1</span> Introduction to the data set</h3>
-<p>From now on, we are going to use different data sets from psychology to develop and practice your data skills. This will prepare you for working with different kinds of psychology data and introduce you to different kinds of research questions they might ask. For this chapter, we are using <span class="citation" data-cites="woodworth_data_2018">Woodworth et al. (<a href="references.html#ref-woodworth_data_2018" role="doc-biblioref">2018</a>)</span>. The abstract of their article is:</p>
+<p>From now on, we are going to use different data sets from psychology to develop and practice your data skills. This will prepare you for working with different kinds of psychology data and introduce you to different kinds of research questions they might ask. For this chapter, we are using open data from <span class="citation" data-cites="woodworth_data_2018">Woodworth et al. (<a href="references.html#ref-woodworth_data_2018" role="doc-biblioref">2018</a>)</span>. The abstract of their article is:</p>
 <blockquote class="blockquote">
 <p>We present two datasets. The first dataset comprises 992 point-in-time records of self-reported happiness and depression in 295 participants, each assigned to one of four intervention groups, in a study of the effect of web-based positive-psychology interventions. Each point-in-time measurement consists of a participant’s responses to the 24 items of the Authentic Happiness Inventory and to the 20 items of the Center for Epidemiological Studies Depression (CES-D) scale. Measurements were sought at the time of each participant’s enrolment in the study and on five subsequent occasions, the last being approximately 189 days after enrolment. The second dataset contains basic demographic information about each participant.</p>
 </blockquote>
@@ -462,7 +463,7 @@ div.csl-indent {
 <li><p>The Center for Epidemiological Studies Depression (CES-D) scale.</p></li>
 </ul></section><section id="organising-your-files-and-project-for-the-chapter" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-chapter">
 <span class="header-section-number">3.1.2</span> Organising your files and project for the chapter</h3>
-<p>Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order. If you need a refresher of this process, you can look back over Chapter 2 - <a href="02-starting-with-data.html#02-projects">File structure, working directories, and R Projects</a>.</p>
+<p>Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order. If you need a refresher of this process, you can look back over Chapter 2 - <a href="#02-projects">File structure, working directories, and R Projects</a>.</p>
 <ol type="1">
 <li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, create a new folder called <code>Chapter_03_intro_data_viz</code>. Within <code>Chapter_03_intro_data_viz</code>, create two new folders called <code>data</code> and <code>figures</code>.</p></li>
 <li><p>Create an R Project for <code>Chapter_03_intro_data_viz</code> as an existing directory for your chapter folder. This should now be your working directory.</p></li>
@@ -480,7 +481,7 @@ div.csl-indent {
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Remember that sometimes in the <strong><a href="https://psyteachr.github.io/glossary/c#console" target="_blank" class="glossary" title="The pane in RStudio where you can type in commands and view output messages.">console</a></strong> or below your code chunk, you will see information about the package you have loaded. If you see an error message, be sure to read it and try to identify what the problem is. For example, if you are working on your own computer, have you installed <code>tidyverse</code> so R/RStudio can access it? Are there any spelling mistakes?</p>
+<p>Remember that sometimes in the <strong><a href="https://psyteachr.github.io/glossary/c#console" target="_blank" class="glossary" title="The pane in RStudio where you can type in commands and view output messages.">console</a></strong> or below your code chunk, you will see information about the package you have loaded. If you see an error message, be sure to read it and try to identify what the problem is. For example, if you are working on your own computer, have you installed <code>tidyverse</code> so R/RStudio can access it? Are there any spelling mistakes in the function or package?</p>
 <p>Remember though, not all messages are errors, <code>tidyverse</code> explains what packages it loaded and highlights function name clashes. See <a href="01-programming-basics.html#install-tidy">activity 3</a> and 4 from Chapter 1 if you need a refresher.</p>
 </section><section id="activity-2---reading-data-files-using-read_csv" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="activity-2---reading-data-files-using-read_csv">
 <span class="header-section-number">3.2.2</span> Activity 2 - Reading data files using <code>read_csv()</code>
@@ -514,6 +515,7 @@ Where does <code>read_csv()</code> come from?
 <li><p>First, we create an object called <code>dat</code> that contains the data in the <code>ahi-cesd.csv</code> file within <code>data/</code>.</p></li>
 <li><p>Next, we create an object called <code>pinfo</code> that contains the data in the <code>participant-info.csv</code> file within <code>data/</code>.</p></li>
 <li><p>Both lines have the same format of <code>object &lt;- function("folder/datafile_name.csv")</code></p></li>
+<li><p>Remember that <code>&lt;-</code> is called the <strong><a href="https://psyteachr.github.io/glossary/a#assignment-operator" target="_blank" class="glossary" title="The symbol <-, which functions like = and assigns the value on the right to the object on the left">assignment operator</a></strong> but we can read it as “assigned to”. For example, the first line can be read as the data in <code>data/ahi-cesd.csv</code> is assigned to the object called <code>dat</code>.</p></li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -534,10 +536,7 @@ Error mode
 </ul>
 </div>
 </div>
-<ul>
-<li>Remember that <code>&lt;-</code> is called the <strong><a href="https://psyteachr.github.io/glossary/a#assignment-operator" target="_blank" class="glossary" title="The symbol <-, which functions like = and assigns the value on the right to the object on the left">assignment operator</a></strong> but we can read it as “assigned to”. For example, the first line can be read as the data in <code>data/ahi-cesd.csv</code> is assigned to the object called <code>dat</code>.</li>
-</ul>
-<p>If you have done this activity correctly, you should now see the objects <code>dat</code> and <code>pinfo</code> in the <strong><a href="https://psyteachr.github.io/glossary/e#environment" target="_blank" class="glossary" title="A data structure that contains R objects such as variables and functions">environment</a></strong> window in the top right of RStudio. If they are not there, check there are no error messages, check the spelling of the code and file names, and check your working directory is set to <code>Chapter_03_intro_data_viz</code>.</p>
+<p>If you have done this activity correctly, you should now see the objects <code>dat</code> and <code>pinfo</code> in the <strong><a href="https://psyteachr.github.io/glossary/e#environment" target="_blank" class="glossary" title="A data structure that contains R objects such as variables and functions">environment</a></strong> window in the top right of RStudio. If they are not there, check there are no error messages, check the spelling of the code and file names, and check your working directory is <code>Chapter_03_intro_data_viz</code>.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -548,12 +547,12 @@ Be careful to use the right <code>read_csv()</code> function
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There is also a function called <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>. Be very careful <strong>not</strong> to use this function instead of <code>read_csv()</code> as they have different ways of naming columns. For the activities and the assignments in RM1 and RM2, we will always ask and expect you to use <code>read_csv()</code>. This is really a reminder to watch spelling on functions and to be careful to use the right functions, especially when the names are so close.</p>
+<p>There is also a function called <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>. Be very careful <strong>not</strong> to use this function instead of <code>read_csv()</code> as they have different ways of naming columns. For the activities and the assignments in RM1 and RM2, we will <strong>always</strong> ask and expect you to use <code>read_csv()</code>. This is really a reminder to watch spelling on functions and to be careful to use the right functions, especially when the names are so close.</p>
 </div>
 </div>
-</section><section id="wrangling-the-two-data-sets" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="wrangling-the-two-data-sets">
-<span class="header-section-number">3.2.3</span> Wrangling the two data sets</h3>
-<p>For this final preparation step, we would like you to add the following to the code chunk below where you read the two data files. We are not tackling data wrangling until the next chapter, so we are not going to fully explain the code just yet.</p>
+</section><section id="activity-3---wrangling-the-two-data-sets" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="activity-3---wrangling-the-two-data-sets">
+<span class="header-section-number">3.2.3</span> Activity 3 - Wrangling the two data sets</h3>
+<p>For this final preparation step, we would like you to add the following code. We are not tackling data wrangling until the next chapter, so we are not going to fully explain the code just yet. Copy the code (if you hover over the code, there is a copy to clipboard icon in the top right) and paste it into the code chunk below where you read the two data files, then run the code again.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(dat, </span>
 <span id="cb3-2"><a href="#cb3-2"></a>                      pinfo, </span>
@@ -569,159 +568,14 @@ Be careful to use the right <code>read_csv()</code> function
 <span id="cb3-12"><a href="#cb3-12"></a>                      occasion, </span>
 <span id="cb3-13"><a href="#cb3-13"></a>                      elapsed.days)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For a brief overview, we are joining the two data files by common columns (“id” and “intervention”) to create the object <code>all_dat</code>. We are then selecting 8 columns from the original 54 to make the data easier to work with in <code>summarydata</code>. This final object <code>summarydata</code> is the source of the data we will be working with for the rest of this chapter.</p>
-</section></section><section id="ggplot2-and-the-layer-system" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="ggplot2-and-the-layer-system">
-<span class="header-section-number">3.3</span> ggplot2 and the layer system</h2>
-<p>There are multiple approaches to data visualisation in R; in this workshop we use <code>ggplot2</code>, which uses a layered grammar of graphics, in which plots are built up in a series of layers. It may be helpful to think about any picture as having multiple elements that sit over each other.</p>
-<p>Importantly, each layer is independent and independently customisable. For example, the size, colour, and position of each component can be adjusted. The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code. Each layer is separated by a <code>+</code>. We’ll try this by making a simple histogram next!</p>
-</section><section id="histogram" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="histogram">
-<span class="header-section-number">3.4</span> Histogram</h2>
-<p>We are going to plot the distribution of participant age in a histogram, and add layers one-by-one to demonstrate how the plot is built step-by-step.</p>
-<p>Step 1: This code tells R to access the <code>ggplot</code> function. The first argument tells R to plot the <code>dat</code> dataframe. In the <code>aes</code> function, you specify the aesthetics of the plot, such as the axes and colours. What you need to specify depends on the plot you want to make (you’ll learn more about this later) - for a basic histogram you only need to specify the x-axis (the y-axis will automatically be counts).</p>
+<p>For a brief overview, we are joining the two data files by common columns (“id” and “intervention”) to create the object <code>all_dat</code>. We are then selecting 8 columns from the original 54 to make the data easier to work with in <code>summarydata</code>.</p>
+<p>This final object <code>summarydata</code> is the source of the data we will be working with for the rest of this chapter.</p>
+</section><section id="activity-4---exploring-the-data-set" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="activity-4---exploring-the-data-set">
+<span class="header-section-number">3.2.4</span> Activity 4 - Exploring the data set</h3>
+<p>Before we start plotting, it is a good idea to explore the data set you are working with. There is a handy function called <code>glimpse()</code> which provides an overview of the columns and responses in your data set.</p>
+<p>Create a new code chunk below where you read and wrangled the data, and type and run the following code:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Step 2: You can see that the code above produces an empty plot - that’s because we haven’t specified which type of plot we want to make. We’ll do this by adding another layer: <code>geom_histogram()</code>. <code>Geom</code> is an expression of the type of plot you want to create.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Step 3: By adding a new layer we can change the axis names:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_histogram</span>()<span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Step 4: We can also change the theme of the plot:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_histogram</span>()<span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Age"</span>)<span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="density-plot" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="density-plot">
-<span class="header-section-number">3.5</span> Density plot</h2>
-<p>The layer system makes it easy to create new types of plots by adapting existing recipes. For example, rather than creating a histogram, we can create a smoothed density plot by calling <code>geom_density()</code> rather than <code>geom_histogram()</code>. The rest of the code remains identical.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_density</span>()<span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)<span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/density-rt-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Density plot of age.</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="data-visualisation" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="data-visualisation">
-<span class="header-section-number">3.6</span> Data visualisation</h2>
-<p><a class="glossary" title="A graphical representation of your data set.">Data Visualisation</a>. Being able to visualise our data, and relationships between our variables, is an incredibly useful and important skill. Before we do any statistical analyses or present any summary statistics, we should visualise our data as it is:</p>
-<ol type="1">
-<li><p>A quick and easy way to check our data make sense, and to identify any unusual trends.</p></li>
-<li><p>A way to honestly present the features of our data to anyone who reads our research.</p></li>
-<li><p>A means of checking that our data fits with the assumptions of our <a href="https://psyteachr.github.io/glossary/d#descriptive" target="_blank" class="glossary" title="Statistics that describe an aspect of data (e.g., mean, median, mode, variance, range)">descriptive</a> and <a href="https://psyteachr.github.io/glossary/i#inferential" target="_blank" class="glossary" title="Statistics that allow you to make predictions about or comparisons between data (e.g., t-value, F-value, rho)">inferential</a> tests and of the statistical analyses that we intend to use.</p></li>
-</ol>
-<p>As Grolemund and Wickham tell us in <a href="http://r4ds.had.co.nz/introduction.html" target="_blank">R for Data Science</a>:</p>
-<blockquote class="blockquote">
-<p>Visualisation is a fundamentally human activity. A good visualisation will show you things that you did not expect, or raise new questions about the data. A good visualisation might also hint that you’re asking the wrong question, or you need to collect different data. Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.</p>
-</blockquote>
-<p>The main package we use for visualisation within the <code>tidyverse</code> umbrella is called <strong><code>ggplot2</code></strong> and the main starting function of all visualisations is <code>ggplot()</code>. The reason we say the “main starting function” is that <code>ggplot()</code> builds plots by combining layers (see, for example, Figure @ref(fig:img-layers) from <span class="citation" data-cites="nordmann2021">(<a href="references.html#ref-nordmann2021" role="doc-biblioref">Nordmann et al., 2021</a>)</span>) - i.e.&nbsp;one function creates the first layer, the basic plot area, and you add functions and arguments to add additional layers such as the data, the labels, the colors, etc. If you’re used to making plots in other software this might seem a bit odd at first, however, it means that you can customise each layer separately in order to make very complex and beautiful figures with relative ease. You can get a sense of what is possible from (<a href="https://www.data-to-viz.com/">this website</a> but we will start off slow and build as we go!</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/layers2.PNG" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Building a figure using the ggplot2 layers system as shown in Nordmann et al.&nbsp;(2021)</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="setting-up-to-visaulise" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="setting-up-to-visaulise">
-<span class="header-section-number">3.7</span> Setting up to Visaulise</h2>
-<p>We will use the same files from <span class="citation" data-cites="woodworth_data_2018">Woodworth et al. (<a href="references.html#ref-woodworth_data_2018" role="doc-biblioref">2018</a>)</span> as in Chapter 2 - Creating reproducible documents - as you already know what the data contains, so we can focus just on visualising it.</p>
-<section id="introviz-a1" class="level4" data-number="3.7.0.1"><h4 data-number="3.7.0.1" class="anchored" data-anchor-id="introviz-a1">
-<span class="header-section-number">3.7.0.1</span> Activity 1: Set-up</h4>
-<p>This data contains happiness and depression scores:</p>
-<ul>
-<li>Download <a href="ahi-cesd.csv" download=""><code>ahi-cesd.csv</code></a> and <a href="participant-info.csv"><code>participant-info.csv</code></a> into the folder on your computer for this chapter!
-<ul>
-<li>Make sure that you have downloaded both .csv files above and saved them in your chapter folder. Remember not to change the file names at all and that <code>data.csv</code> is not the same as <code>data (1).csv</code>.</li>
-</ul>
-</li>
-<li>Open RStudio and set the working directory to your chapter folder. Ensure the environment is clear.
-<ul>
-<li>If you’re on the server, avoid a number of issues by restarting the session - click <code>Session</code> - <code>Restart R</code>
-</li>
-</ul>
-</li>
-<li>Open a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.<br>
-</li>
-<li>Delete the default R Markdown welcome text and insert a new code chunk.</li>
-<li>Type and run the below code to load the <code>tidyverse</code> package and to load in the data files.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">library</span>(tidyverse) </span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span>
-<span id="cb12-4"><a href="#cb12-4"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(dat, </span>
-<span id="cb12-7"><a href="#cb12-7"></a>                      pinfo, </span>
-<span id="cb12-8"><a href="#cb12-8"></a>                      <span class="at">by=</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>))</span>
-<span id="cb12-9"><a href="#cb12-9"></a>summarydata <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> all_dat, </span>
-<span id="cb12-10"><a href="#cb12-10"></a>                      ahiTotal, </span>
-<span id="cb12-11"><a href="#cb12-11"></a>                      cesdTotal, </span>
-<span id="cb12-12"><a href="#cb12-12"></a>                      sex, </span>
-<span id="cb12-13"><a href="#cb12-13"></a>                      age, </span>
-<span id="cb12-14"><a href="#cb12-14"></a>                      educ, </span>
-<span id="cb12-15"><a href="#cb12-15"></a>                      income, </span>
-<span id="cb12-16"><a href="#cb12-16"></a>                      occasion, </span>
-<span id="cb12-17"><a href="#cb12-17"></a>                      elapsed.days) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You should have a good idea about what this code is doing but if not here is a brief summary:</p>
-<ol type="1">
-<li>It loads in the tidyverse</li>
-<li>It reads both datafiles as tibbles into separate objects, <code>dat</code> and <code>pinfo</code>.</li>
-<li>Joins the data together into one larger tibble and stores it in the object called <code>all_dat</code>
-</li>
-<li>Select a number of columns to keep in our data and discards others.</li>
-</ol></section></section><section id="dealing-with-factors-and-categories" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="dealing-with-factors-and-categories">
-<span class="header-section-number">3.8</span> Dealing with Factors and Categories</h2>
-<p>Before we go any further we need to perform an additional step of data processing that we have glossed over up until this point. First, run the below code to look at the structure of the dataset:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">glimpse</span>(summarydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">glimpse</span>(summarydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 992
 Columns: 8
@@ -735,9 +589,237 @@ $ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5,
 $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…</code></pre>
 </div>
 </div>
-<p>You can see that all the variables are automatically considered as <a href="https://psyteachr.github.io/glossary/n#numeric" target="_blank" class="glossary" title="A data type representing a real decimal number or integer.">numeric</a> (in this case <a href="https://psyteachr.github.io/glossary/d#double" target="_blank" class="glossary" title="A data type representing a real decimal number">double</a> represented by <code>&lt;dbl&gt;</code>). This is going to be a problem because whilst the different categories within <code>sex</code>, <code>educ</code>, and <code>income</code> are represented by numbers, we don’t want to treat them as such because they are categories, or what we call <strong>factors</strong>. So to get around this, we need to convert these variables into <a href="https://psyteachr.github.io/glossary/f#factor-data-type" target="_blank" class="glossary" title="A data type where a specific set of values are stored with labels">factor data type</a>. Fortunately we already know a good function for this! We can use <code>mutate()</code> to do this by overriding the original variable with the same data but classified as a factor.</p>
-<section id="introviz-a2" class="level3" data-number="3.8.1"><h3 data-number="3.8.1" class="anchored" data-anchor-id="introviz-a2">
-<span class="header-section-number">3.8.1</span> Activity 2: Factors</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Where does <code>glimpse()</code> come from?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>glimpse()</code> function comes from a package called <code>dplyr</code>, which is part of the tidyverse. This package contains many functions for wrangling data like joining data sets and selecting columns. We will explore loads of functions within <code>dplyr</code> in the next few chapters on data wrangling.</p>
+</div>
+</div>
+</div>
+<p>This function provides a condensed summary of your data. You can see there are 992 rows and 8 columns. You see all the columns names for each variable in the data set. You can also see that all the variables are automatically considered as <a href="https://psyteachr.github.io/glossary/n#numeric" target="_blank" class="glossary" title="A data type representing a real decimal number or integer.">numeric</a> (in this case <a href="https://psyteachr.github.io/glossary/d#double" target="_blank" class="glossary" title="A data type representing a real decimal number">double</a> represented by <code>&lt;dbl&gt;</code>). Treating categorical variables like “sex” and “income” as numbers will cause us problems later, but it is fine for the variables we will be working on now.</p>
+</section></section><section id="ggplot2-and-the-layer-system" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="ggplot2-and-the-layer-system">
+<span class="header-section-number">3.3</span> <code>ggplot2</code> and the layer system</h2>
+<p>There are multiple approaches to data visualisation in R but we will use <code>ggplot2</code> which uses a layered grammar of graphics where you build up plots in a series of layers. You can think of it as building a picture with multiple elements that sit over each other.</p>
+<p><a href="#fig-img-layers">Figure&nbsp;<span>3.2</span></a> adapted from <span class="citation" data-cites="nordmann_data_2022">Nordmann et al. (<a href="references.html#ref-nordmann_data_2022" role="doc-biblioref">2022</a>)</span> demonstrates the idea of building up a plot by adding layers. One function creates the first layer, the basic plot area, and you add functions and arguments to add additional layers such as the data, the labels, the colors etc. If you are used to making plots in other software, this might seem a bit odd at first, but it means that you can customise each layer separately to make complex and beautiful figures with relative ease.</p>
+<p>You can get a sense of what plots are possible from (<a href="https://www.data-to-viz.com/" target="_blank">the website data-to-viz</a>, but we will build up your data visualisation skills over the courses.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-img-layers" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/layers2.PNG" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.2: Building a figure using the ggplot2 layering system from Nordmann et al.&nbsp;(2022).</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="histograms-and-density-plots" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="histograms-and-density-plots">
+<span class="header-section-number">3.4</span> Histograms and density plots</h2>
+<p>We are going to plot the distribution of participant age in a histogram, and add layers one-by-one to demonstrate how we build the plot step-by-step.</p>
+<section id="step-1-start-with-the-ggplot-function" class="level3" data-number="3.4.1"><h3 data-number="3.4.1" class="anchored" data-anchor-id="step-1-start-with-the-ggplot-function">
+<span class="header-section-number">3.4.1</span> Step 1: Start with the <code>ggplot</code> function</h3>
+<p>This first layer tells R to access the <code>ggplot</code> function.</p>
+<p>The first argument tells R to plot the <code>summarydata</code> dataframe. In the <code>aes</code> function, you specify the aesthetics of the plot, such as the axes and colours. What you need to specify depends on the plot you want to make (you will learn more about this later).</p>
+<p>For a basic histogram, you only need to specify the x-axis (the y-axis will automatically be counts).</p>
+<p>For each step, type the code in a new code chunk and run it after we add each layer to see it’s effect.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Plot the variable age from summarydata</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="co"># Plot age on the x axis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Markdown tip of the chapter: Add code comments
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After we introduced you to R Markdown to create reproducible documents in Chapter 2, we are going to add a tip in every chapter to demonstrate extra functionality.</p>
+<p>In the code chunk above, we added a code <a href="https://psyteachr.github.io/glossary/c#comment" target="_blank" class="glossary" title="Comments are text that R will not run as code. You can annotate .R files or chunks in R Markdown files with comments by prefacing each line of the comment with one or more hash symbols (#).">comment</a> by adding a hash (<code>#</code>). In code chunks and scripts, you can add a comment which R will ignore, so you can explain to yourself what the code is doing. In R Markdown, you can combine adding notes to yourself outside and inside the code chunks.</p>
+<p>Code comments help explain what the code is doing and why you added certain values. It might seem redundant for simple functions, but as your code becomes more complex, you will forget what it is doing when you return to it after days, months, or years. Future you will thank past you.</p>
+</div>
+</div>
+</section><section id="step-2-add-the-geom_histogram-layer" class="level3" data-number="3.4.2"><h3 data-number="3.4.2" class="anchored" data-anchor-id="step-2-add-the-geom_histogram-layer">
+<span class="header-section-number">3.4.2</span> Step 2: Add the geom_histogram layer</h3>
+<p>You can see that the code above produces an empty plot, because we have not specified which type of plot we want to make.</p>
+<p>We will do this by adding another layer: <code>geom_histogram()</code>. A <a href="https://psyteachr.github.io/glossary/g#geom" target="_blank" class="glossary" title="The geometric style in which data are displayed, such as boxplot, density, or histogram.">geom</a> is an expression of the type of plot you want to create. For this variable, we want to create a <a class="glossary" title="A type of plot showing the frequency of each observation organised into bins. Bins control the width of each bar and how many observations it represents.">histogram</a> which is a type of plot showing the frequency of each observation.</p>
+<p>You will see that you add the layers by adding a <code>+</code> at the end of each layer. As you read new code, try and read it line by line to walk through what it is doing. You can interpret <code>+</code> as “and then”. So, you could describe the plot as currently saying “plot the age variable from summary data, and then add a histogram”.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Plot the variable age from summarydata</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span>  <span class="co"># Plot age on the x axis</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="step-3-edit-the-histogram-bins" class="level3" data-number="3.4.3"><h3 data-number="3.4.3" class="anchored" data-anchor-id="step-3-edit-the-histogram-bins">
+<span class="header-section-number">3.4.3</span> Step 3: Edit the histogram bins</h3>
+<p>In just two lines of code, we have a histogram! For exploratory data analysis, this is how <code>ggplot2</code> is such a flexible and quick tool to get a visual overview of your data.</p>
+<p>After running the last code chunk, you might have noticed a message warning you about the bin width: <code>stat_bin() using bins = 30</code>. A histogram describes the frequency of values within your variable. To do so, it must collect the values into “bins”. By default - the warning <code>ggplot2</code> gives you - it uses 30 bins, meaning it tries to plot 30 bars. Depending on the granularity of your data, you might want more or fewer bins.</p>
+<p>You can control this using one of two arguments. First, you can add an argument called <code>binwidth</code> which sets the bins by how wide you want the bars on your x-axis scale. For example, we can plot the data for every 5 years:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Plot the variable age from summarydata</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span>  <span class="co"># Plot age on the x axis</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>) <span class="co"># collate bins into a 5-year span</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram3a-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Alternatively, you can control precisely how many bars the histograms uses through the <code>bins</code> argument. For example, we can plot age by collecting the observations into 10 bars:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Plot the variable age from summarydata</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span>  <span class="co"># Plot age on the x axis</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) <span class="co"># Plot age using 10 bars</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram3b-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Play around with the <code>bin</code> and <code>binwidth</code> arguments to see what effect it has on the plot. One of the best ways of learning is through trial and error to see what effect your changes have on the result.</p>
+</div>
+</div>
+</section><section id="step-4-edit-the-axis-names" class="level3" data-number="3.4.4"><h3 data-number="3.4.4" class="anchored" data-anchor-id="step-4-edit-the-axis-names">
+<span class="header-section-number">3.4.4</span> Step 4: Edit the axis names</h3>
+<p>By default, the axis names come from the variable names in your data. When you are making quick plots for yourself, you rarely need to worry about this. However, as you edit your plot for a report to show other people, it is normally a good idea to edit the names so they clearly communicate what they represent.</p>
+<p>There are different layers to control the axes depending on the type of variable you use. Both the x- and y-axis here are continuous numbers, so we can use the <code>scale_x_continuous</code> and <code>scale_y_continuous</code> layers to control them.</p>
+<p>There are many options available in <code>ggplot2</code>, but you will learn through experience and searching what you need in different scenarios.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Plot the variable age from summarydata</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span>  <span class="co"># Plot age on the x axis</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="co"># collate bins into a 5-year span</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="step-5-change-the-plot-theme" class="level3" data-number="3.4.5"><h3 data-number="3.4.5" class="anchored" data-anchor-id="step-5-change-the-plot-theme">
+<span class="header-section-number">3.4.5</span> Step 5: Change the plot theme</h3>
+<p>So far, we used the default plot theme which has the grey gridlines as a background. This looks pretty ugly, so we can edit the plot them by adding a <code>theme_</code> layer. For example, we can add a black-and-white theme:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Plot the variable age from summarydata</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span>  <span class="co"># Plot age on the x axis</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="co"># collate bins into a 5-year span</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/histogram5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are loads of themes available. As you start typing <code>theme_</code>, you should see the full range appear as a drop-down to autocomplete. Try one or two alternatives such as <code>theme_classic()</code> or <code>theme_minimal()</code> to see how they look.</p>
+</div>
+</div>
+</section><section id="switch-the-geom-layer" class="level3" data-number="3.4.6"><h3 data-number="3.4.6" class="anchored" data-anchor-id="switch-the-geom-layer">
+<span class="header-section-number">3.4.6</span> Switch the geom layer</h3>
+<p>The layer system makes it easy to create new types of plots by adapting existing recipes. For example, rather than creating a histogram, we can create a smoothed density plot by calling <code>geom_density()</code> rather than <code>geom_histogram()</code>. Apart from the name of the y-axis, the rest of the code remains identical to demonstrate how easy it is to customise your <code>ggplot2</code> layers.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Plot the variable age from summarydata</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span>  <span class="co"># Plot age on the x axis</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="co"># summarise age as a smoothed density plot</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Density"</span>) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/density-rt-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="activity-5---apply-your-plotting-skills-to-a-new-variable" class="level3" data-number="3.4.7"><h3 data-number="3.4.7" class="anchored" data-anchor-id="activity-5---apply-your-plotting-skills-to-a-new-variable">
+<span class="header-section-number">3.4.7</span> Activity 5 - Apply your plotting skills to a new variable</h3>
+<p>Before we move on to barplots, an important learning step is being able to apply or transfer what you learnt in one scenario to something new.</p>
+<p>In the data set, there is a variable for The Authentic Happiness Inventory (AHI): <code>ahiTotal</code>. Plot the new variable and try to recreate the customisation layers before checking the solution below.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To recreate the plot, this is the code:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Plot the variable ahi total from summarydata</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> ahiTotal)) <span class="sc">+</span>  <span class="co"># Plot ahi total on the x axis</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Authentic Happiness Inventory (AHI)"</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We were a little sneaky with using the classic theme to get you exploring.</p>
+</div>
+</div>
+</div>
+</section></section><section id="barplots" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="barplots">
+<span class="header-section-number">3.5</span> Barplots</h2>
+<section id="introviz-a2" class="level3" data-number="3.5.1"><h3 data-number="3.5.1" class="anchored" data-anchor-id="introviz-a2">
+<span class="header-section-number">3.5.1</span> Activity 2: Factors</h3>
+<p>This is going to be a problem because whilst the different categories within <code>sex</code>, <code>educ</code>, and <code>income</code> are represented by numbers, we don’t want to treat them as such because they are categories, or what we call <strong>factors</strong>. So to get around this, we need to convert these variables into <a href="https://psyteachr.github.io/glossary/f#factor-data-type" target="_blank" class="glossary" title="A data type where a specific set of values are stored with labels">factor data type</a>. Fortunately we already know a good function for this! We can use <code>mutate()</code> to do this by overriding the original variable with the same data but classified as a factor.</p>
 <ul>
 <li>Type and run the below code to change the categories to factors.
 <ul>
@@ -754,11 +836,9 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb15-4"><a href="#cb15-4"></a>         <span class="at">income =</span> <span class="fu">as.factor</span>(income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is a very important step to remember if, when you look at your data, some of your categories are represented as numbers and not factors. If you do not do this then you might end up with some really confused looking figures!</p>
-</section></section><section id="barplots" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="barplots">
-<span class="header-section-number">3.9</span> Barplots</h2>
 <p>Ok great, we are now ready to do some visualising and some plotting. For our first example we will create a barplot of our data showing the number of male and female participants within our data. A <a class="glossary" title="also known as a bar chart, barplots represent the frequency or count of a variable through the height of one or more bars.">barplot</a> is a plot that shows counts of categorical data, or factors, where the height of each bar represents the count of that particular variable.</p>
-<section id="introviz-a3" class="level4" data-number="3.9.0.1"><h4 data-number="3.9.0.1" class="anchored" data-anchor-id="introviz-a3">
-<span class="header-section-number">3.9.0.1</span> Activity 3: Bar plot</h4>
+<section id="introviz-a3" class="level4" data-number="3.5.1.1"><h4 data-number="3.5.1.1" class="anchored" data-anchor-id="introviz-a3">
+<span class="header-section-number">3.5.1.1</span> Activity 3: Bar plot</h4>
 <p>Read through the following section and try the different code chunks. Following this, and changing parts of the code to see what happens, will help you to see how the layers build up.</p>
 <p><strong>The first layer</strong></p>
 <ul>
@@ -772,7 +852,7 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/layer1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>First ggplot() layer sets the axes</figcaption></figure>
+<figcaption class="figure-caption">First ggplot() layer sets the axes</figcaption></figure>
 </div>
 </div>
 </div>
@@ -788,8 +868,8 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Basic barplot with geom_bar() added</figcaption></figure>
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Basic barplot with geom_bar() added</figcaption></figure>
 </div>
 </div>
 </div>
@@ -801,8 +881,8 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Barplot with colour</figcaption></figure>
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Barplot with colour</figcaption></figure>
 </div>
 </div>
 </div>
@@ -814,8 +894,8 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Barplot without legend</figcaption></figure>
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Barplot without legend</figcaption></figure>
 </div>
 </div>
 </div>
@@ -857,8 +937,8 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb20-6"><a href="#cb20-6"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Barplot with axis labels</figcaption></figure>
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Barplot with axis labels</figcaption></figure>
 </div>
 </div>
 </div>
@@ -880,8 +960,8 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Barplot with minimal theme</figcaption></figure>
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Barplot with minimal theme</figcaption></figure>
 </div>
 </div>
 </div>
@@ -900,8 +980,8 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Barplot with colour-blind friendly colour scheme</figcaption></figure>
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Barplot with colour-blind friendly colour scheme</figcaption></figure>
 </div>
 </div>
 </div>
@@ -918,8 +998,8 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <span id="cb23-9"><a href="#cb23-9"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Barplot with adjusted alpha</figcaption></figure>
+<figure class="figure"><p><img src="03-intro-data-viz_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Barplot with adjusted alpha</figcaption></figure>
 </div>
 </div>
 </div>
@@ -940,11 +1020,11 @@ Do watch out for that as it is a very common error we see when people are first 
 </p>
 </div>
 </div>
-</section></section><section id="saving-your-figures" class="level2" data-number="3.10"><h2 data-number="3.10" class="anchored" data-anchor-id="saving-your-figures">
-<span class="header-section-number">3.10</span> Saving your Figures</h2>
+</section></section></section><section id="saving-your-figures" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="saving-your-figures">
+<span class="header-section-number">3.6</span> Saving your Figures</h2>
 <p>Great work today! We just want to show you one last very helpful function on how to save and export your figures. Much like your favourite jumper, there is no point having it if nobody gets to see it! It is so useful to be able to save a copy of your plots as an image file so that you can use them in a presentation or report. One approach we can use is the function <code>ggsave()</code>.</p>
-<section id="introviz-a6" class="level4" data-number="3.10.0.1"><h4 data-number="3.10.0.1" class="anchored" data-anchor-id="introviz-a6">
-<span class="header-section-number">3.10.0.1</span> Activity 6: Saving plots</h4>
+<section id="introviz-a6" class="level4" data-number="3.6.0.1"><h4 data-number="3.6.0.1" class="anchored" data-anchor-id="introviz-a6">
+<span class="header-section-number">3.6.0.1</span> Activity 6: Saving plots</h4>
 <p>There are two ways you can use <code>ggsave()</code>. If you don’t tell <code>ggsave()</code> which plot you want to save, by default it will save <strong>the last plot you created</strong>. To demonstrate this let’s run the code from Activity 5 again to produce the nice violin-boxplot:</p>
 <p>Now that we’ve got the plot we want to save as our last produced plot, all that <code>ggsave()</code> requires is for you to tell it what file name it should save the plot to and the type of image file you want to create (the below example uses .png but you could also use e.g., .jpeg and other image types).</p>
 <ul>
@@ -1001,18 +1081,18 @@ Do watch out for that as it is a very common error we see when people are first 
 <span id="cb26-20"><a href="#cb26-20"></a><span class="fu">ggsave</span>(<span class="st">"violin-boxplot-stored.png"</span>, <span class="at">plot =</span> viobox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finall, note that when you save a plot to an object, you will not see the plot displayed anywhere. To get the figure to display you need to type the object name in the console (i.e., <code>viobox</code>). The benefit of saving figures this way is that if you are making lots of plots, you can’t accidentally save the wrong one because you are explicitly specifying which plot to save rather than just saving the last one.</p>
-</section></section><section id="introviz-fin" class="level2" data-number="3.11"><h2 data-number="3.11" class="anchored" data-anchor-id="introviz-fin">
-<span class="header-section-number">3.11</span> Finished!</h2>
+</section></section><section id="introviz-fin" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="introviz-fin">
+<span class="header-section-number">3.7</span> Finished!</h2>
 <p>Well done! <code>ggplot</code> can be a bit difficult to get your head around at first, particularly if you’ve been used to making graphs a different way. But once it clicks, you’ll be able to make informative and professional visualisations with ease, which, amongst other things, will make any report you write look more professional!</p>
-</section><section id="test-yourself" class="level2" data-number="3.12"><h2 data-number="3.12" class="anchored" data-anchor-id="test-yourself">
-<span class="header-section-number">3.12</span> Test Yourself</h2>
+</section><section id="test-yourself" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="test-yourself">
+<span class="header-section-number">3.8</span> Test Yourself</h2>
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you find the solution to some common errors in the concepts we covered in this chapter.</p>
-<section id="knowledge-check" class="level3" data-number="3.12.1"><h3 data-number="3.12.1" class="anchored" data-anchor-id="knowledge-check">
-<span class="header-section-number">3.12.1</span> Knowledge check</h3>
+<section id="knowledge-check" class="level3" data-number="3.8.1"><h3 data-number="3.8.1" class="anchored" data-anchor-id="knowledge-check">
+<span class="header-section-number">3.8.1</span> Knowledge check</h3>
 <ol type="1">
 <li>Which of these is the appropriate order of functions to create a boxplot?
-<div id="radio_PAHOUHPCJB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PAHOUHPCJB" value=""><span>geom_plot() + geom_boxplot()</span></label><label><input type="radio" autocomplete="off" name="radio_PAHOUHPCJB" value=""><span>geom_boxplot() + ggplot()</span></label><label><input type="radio" autocomplete="off" name="radio_PAHOUHPCJB" value=""><span>ggplot() %&gt;% geom_boxplot()</span></label><label><input type="radio" autocomplete="off" name="radio_PAHOUHPCJB" value="answer"><span>ggplot() + geom_boxplot()</span></label>
+<div id="radio_PFBOYVQNEN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PFBOYVQNEN" value=""><span>geom_boxplot() + ggplot()</span></label><label><input type="radio" autocomplete="off" name="radio_PFBOYVQNEN" value="answer"><span>ggplot() + geom_boxplot()</span></label><label><input type="radio" autocomplete="off" name="radio_PFBOYVQNEN" value=""><span>geom_plot() + geom_boxplot()</span></label><label><input type="radio" autocomplete="off" name="radio_PFBOYVQNEN" value=""><span>ggplot() %&gt;% geom_boxplot()</span></label>
 </div>
 </li>
 <li>Would this line of code run, assuming all data and libraries had been loaded in and the data and column names were spelt correctly?</li>
@@ -1021,8 +1101,8 @@ Do watch out for that as it is a very common error we see when people are first 
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="radio_SWHQWHCHUQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SWHQWHCHUQ" value=""><span>Yes, as the code looks perfectly acceptable and no errors are visible</span></label><label><input type="radio" autocomplete="off" name="radio_SWHQWHCHUQ" value="answer"><span>No, because you have piped the geom_bar() instead of adding it</span></label>
+<div id="radio_ADJBUURMZW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ADJBUURMZW" value=""><span>Yes, as the code looks perfectly acceptable and no errors are visible</span></label><label><input type="radio" autocomplete="off" name="radio_ADJBUURMZW" value="answer"><span>No, because you have piped the geom_bar() instead of adding it</span></label>
 </div>
 <ol start="3" type="1">
 <li>Why would this line of code not create a barplot, assuming all data and libraries had been loaded in and the data and column names were spelt correctly?</li>
@@ -1031,13 +1111,13 @@ Do watch out for that as it is a very common error we see when people are first 
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
 <span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_barplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="radio_IDPVPUULTP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IDPVPUULTP" value="answer"><span>because there is no geom_barplot() and it should be geom_bar()</span></label><label><input type="radio" autocomplete="off" name="radio_IDPVPUULTP" value=""><span>because this would create a boxplot</span></label><label><input type="radio" autocomplete="off" name="radio_IDPVPUULTP" value=""><span>because you have piped the barplot and not added it</span></label><label><input type="radio" autocomplete="off" name="radio_IDPVPUULTP" value=""><span>because you have not included a y axis</span></label>
+<div id="radio_KMAQEORKGJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KMAQEORKGJ" value="answer"><span>because there is no geom_barplot() and it should be geom_bar()</span></label><label><input type="radio" autocomplete="off" name="radio_KMAQEORKGJ" value=""><span>because this would create a boxplot</span></label><label><input type="radio" autocomplete="off" name="radio_KMAQEORKGJ" value=""><span>because you have piped the barplot and not added it</span></label><label><input type="radio" autocomplete="off" name="radio_KMAQEORKGJ" value=""><span>because you have not included a y axis</span></label>
 </div>
 <ol start="4" type="1">
 <li>If I wanted a boxplot on top of a violin plot, what order of functions would I write?
-<div id="radio_IDMVKAJJRQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IDMVKAJJRQ" value="answer"><span>ggplot() + geom_violin() + geom_boxplot()</span></label><label><input type="radio" autocomplete="off" name="radio_IDMVKAJJRQ" value=""><span>ggplot() %&gt;% geom_violin() %&gt;% geom_boxplot()</span></label><label><input type="radio" autocomplete="off" name="radio_IDMVKAJJRQ" value=""><span>ggplot() + geom_boxplot() + geom_violin()</span></label><label><input type="radio" autocomplete="off" name="radio_IDMVKAJJRQ" value=""><span>ggplot() %&gt;% geom_boxplot() %&gt;% geom_violin()</span></label>
+<div id="radio_WZWHUDJGUT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WZWHUDJGUT" value=""><span>ggplot() + geom_boxplot() + geom_violin()</span></label><label><input type="radio" autocomplete="off" name="radio_WZWHUDJGUT" value=""><span>ggplot() %&gt;% geom_boxplot() %&gt;% geom_violin()</span></label><label><input type="radio" autocomplete="off" name="radio_WZWHUDJGUT" value="answer"><span>ggplot() + geom_violin() + geom_boxplot()</span></label><label><input type="radio" autocomplete="off" name="radio_WZWHUDJGUT" value=""><span>ggplot() %&gt;% geom_violin() %&gt;% geom_boxplot()</span></label>
 </div>
 </li>
 </ol>
@@ -1057,14 +1137,21 @@ Explain these answers
 </ol>
 </div>
 </div>
-</section><section id="error-mode-1" class="level3" data-number="3.12.2"><h3 data-number="3.12.2" class="anchored" data-anchor-id="error-mode-1">
-<span class="header-section-number">3.12.2</span> Error mode</h3>
+</section><section id="error-mode-1" class="level3" data-number="3.8.2"><h3 data-number="3.8.2" class="anchored" data-anchor-id="error-mode-1">
+<span class="header-section-number">3.8.2</span> Error mode</h3>
 <p>Q5.</p>
-</section></section><section id="words-from-this-chapter" class="level2" data-number="3.13"><h2 data-number="3.13" class="anchored" data-anchor-id="words-from-this-chapter">
-<span class="header-section-number">3.13</span> Words from this Chapter</h2>
+<ul>
+<li><p>Wrong working directory</p></li>
+<li><p>Not loading tidyverse</p></li>
+<li><p>Typo in file name</p></li>
+<li><p>Missing aes</p></li>
+<li><p>Missing + in layers</p></li>
+</ul></section></section><section id="words-from-this-chapter" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">3.9</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
-<table class="caption-top table table-sm table-striped small">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">term</th>
 <th style="text-align: left;">definition</th>
@@ -1079,40 +1166,48 @@ Explain these answers
 <td style="text-align: left;">also known as a bar chart, barplots represent the frequency or count of a variable through the height of one or more bars.</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#comment" class="glossary" target="_blank">comment</a></td>
+<td style="text-align: left;">Comments are text that R will not run as code. You can annotate .R files or chunks in R Markdown files with comments by prefacing each line of the comment with one or more hash symbols (#).</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#console" class="glossary" target="_blank">console</a></td>
 <td style="text-align: left;">The pane in RStudio where you can type in commands and view output messages.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#csv" class="glossary" target="_blank">csv</a></td>
 <td style="text-align: left;">Comma-separated variable: a file type for representing data where each variable is separated from the next by a comma.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#data-visualisation" class="glossary" target="_blank">data-visualisation</a></td>
 <td style="text-align: left;">A graphical representation of your data set.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#data-wrangling" class="glossary" target="_blank">data-wrangling</a></td>
 <td style="text-align: left;">The process of preparing data for visualisation and statistical analysis.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#descriptive" class="glossary" target="_blank">descriptive</a></td>
 <td style="text-align: left;">Statistics that describe an aspect of data (e.g., mean, median, mode, variance, range)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#double" class="glossary" target="_blank">double</a></td>
 <td style="text-align: left;">A data type representing a real decimal number</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/e#environment" class="glossary" target="_blank">environment</a></td>
 <td style="text-align: left;">A data structure that contains R objects such as variables and functions</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/f#factor-data-type" class="glossary" target="_blank">factor-data-type</a></td>
 <td style="text-align: left;">A data type where a specific set of values are stored with labels</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/g#geom" class="glossary" target="_blank">geom</a></td>
+<td style="text-align: left;">The geometric style in which data are displayed, such as boxplot, density, or histogram.</td>
+</tr>
 <tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/i#inferential" class="glossary" target="_blank">inferential</a></td>
-<td style="text-align: left;">Statistics that allow you to make predictions about or comparisons between data (e.g., t-value, F-value, rho)</td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/h#histogram" class="glossary" target="_blank">histogram</a></td>
+<td style="text-align: left;">A type of plot showing the frequency of each observation organised into bins. Bins control the width of each bar and how many observations it represents.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/n#numeric" class="glossary" target="_blank">numeric</a></td>
@@ -1129,14 +1224,15 @@ Explain these answers
 </tbody>
 </table>
 </div>
-</section><section id="end-of-chapter" class="level2" data-number="3.14"><h2 data-number="3.14" class="anchored" data-anchor-id="end-of-chapter">
-<span class="header-section-number">3.14</span> End of chapter</h2>
+</div>
+</section><section id="end-of-chapter" class="level2" data-number="3.10"><h2 data-number="3.10" class="anchored" data-anchor-id="end-of-chapter">
+<span class="header-section-number">3.10</span> End of chapter</h2>
 <p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-nordmann2021" class="csl-entry" role="listitem">
-Nordmann, E., McAleer, P., Toivo, W., Paterson, H., &amp; DeBruine, L. M. (2021). <em>Data visualisation using r, for researchers who don’t use r</em>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/4huvw">https://doi.org/10.31234/osf.io/4huvw</a>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-nordmann_data_2022" class="csl-entry" role="listitem">
+Nordmann, E., McAleer, P., Toivo, W., Paterson, H., &amp; DeBruine, L. M. (2022). Data <span>Visualization</span> <span>Using</span> <span>R</span> for <span>Researchers</span> <span>Who</span> <span>Do</span> <span>Not</span> <span>Use</span> <span>R</span>. <em>Advances in Methods and Practices in Psychological Science</em>, <em>5</em>(2), 25152459221074654. <a href="https://doi.org/10.1177/25152459221074654">https://doi.org/10.1177/25152459221074654</a>
 </div>
 <div id="ref-woodworth_data_2018" class="csl-entry" role="listitem">
 Woodworth, R. J., O’Brien-Malone, A., Diamond, M. R., &amp; Schüz, B. (2018). Data from, <span>“<span>Web</span>-based <span>Positive</span> <span>Psychology</span> <span>Interventions</span>: <span>A</span> <span>Reexamination</span> of <span>Effectiveness</span>.”</span> <em>Journal of Open Psychology Data</em>, <em>6</em>(1), 1. <a href="https://doi.org/10.5334/jopd.35">https://doi.org/10.5334/jopd.35</a>
@@ -1417,33 +1513,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1510,15 +1579,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1597,27 +1664,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1627,17 +1677,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1649,130 +1690,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -1816,7 +1734,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1842,32 +1759,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1927,12 +1818,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./02-starting-with-data.html" class="pagination-link" aria-label="Creating Reproducible Documents">
+      <a href="./02-starting-with-data.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04-wrangling-1.html" class="pagination-link" aria-label="Data wrangling 1">
+      <a href="./04-wrangling-1.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1942,9 +1833,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">
-<p>CC-BY (2024) James Bartlett &amp; Wil Toivo</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/03-intro-data-viz.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/03-intro-data-viz.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
