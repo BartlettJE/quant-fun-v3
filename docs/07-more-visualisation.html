@@ -135,7 +135,8 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/BartlettJE/quant-fun-v3/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -191,7 +192,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-starting-with-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -429,13 +430,11 @@ div.csl-indent {
   <li><a href="#viz-fin" id="toc-viz-fin" class="nav-link" data-scroll-target="#viz-fin"><span class="header-section-number">7.10.4</span> Finished!</a></li>
   </ul>
 </li>
-  </ul></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/07-more-visualisation.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/07-more-visualisation.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span>
-</h1>
+<h1 class="title"><span id="07-more-viz" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span></span></h1>
 </div>
 
 
@@ -470,7 +469,7 @@ div.csl-indent {
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>zhang_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Zhang et al. 2014 Study 3.csv"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>zhang_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Zhang et al. 2014 Study 3.csv"</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">select</span>(Gender, Age,Condition, T1_Predicted_Interest_Composite, T2_Actual_Interest_Composite)<span class="sc">%&gt;%</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="fu">row_number</span>())<span class="sc">%&gt;%</span></span>
 <span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"time"</span>,<span class="at">values_to =</span> <span class="st">"interest"</span>,</span>

@@ -337,7 +337,7 @@ ggplot(summarydata, aes(x = age)) +  # Plot age on the x axis
 
 Before we move on to barplots, an important learning step is being able to apply or transfer what you learnt in one scenario to something new. 
 
-In the data set, there is a variable for The Authentic Happiness Inventory (AHI): `ahiTotal`. Plot the new variable and try to recreate the customisation layers before checking the solution below.
+In the data set, there is a variable for The Authentic Happiness Inventory (AHI): `ahiTotal`. Plot the new variable and try to recreate the customisation layers before checking the solution below. It make take some trial-and-error to get some features right, so do not worry if it does not immediately look the same. 
 
 ```{r echo=FALSE}
 # Plot the variable ahi total from summarydata
@@ -366,207 +366,194 @@ We were a little sneaky with using the classic theme to get you exploring.
 :::
 ## Barplots
 
-### Activity 2: Factors {#introviz-a2}
+In the next section, we are going to cover making barplots - potentially the most common type of visualisation you will see in published research. A `r glossary("barplot", def = "also known as a bar chart, barplots represent the frequency or count of a variable through the height of one or more bars.")` shows counts of categorical data, or factors, where the height of each bar represents the count of that particular variable. 
 
-This is going to be a problem because whilst the different categories within `sex`, `educ`, and `income` are represented by numbers, we don't want to treat them as such because they are categories, or what we call **factors**. So to get around this, we need to convert these variables into `r glossary("factor data type")`. Fortunately we already know a good function for this! We can use `mutate()` to do this by overriding the original variable with the same data but classified as a factor. 
+You will see people use them to represent continuous outcomes, such as showing the mean on the y-axis, but there is good reason to never use bar plots to communicate continuous data we will cover in the course materials [see @weissgerber_reveal_2019 if you are interested]. We will cover more advanced plots for continuous data in [Chapter 7 - Building your data visualisation skills](#07-more-viz). 
 
-* Type and run the below code to change the categories to factors.
-    * You can read each line of the mutate as "overwrite the data that is in that column with the same values now considered factors and not doubles"
-    * So for example, the 1s in `sex` change to categorical factors instead of numerical 1s.
-    * Remember if you mutate a new column with the same name as the old one, it will overwrite the column.
+### Activity 6 - Covert to factors {#introviz-a2}
+
+Earlier, we highlighted that all the variables were processed as numbers. This was fine for most of the variables, but  `sex`, `educ`, and `income` should be categories or what we call **`r glossary("factor data type", display = "factors")`**. 
+
+To get around this, we need to convert these variables into factors. This is relates to data wrangling, so this is one final time we would like you to copy and run code, before we fully explain how to write this kind of code independently in the next chapter. 
+
+Copy and run the following code in your R Markdown document, at least below where you read and wrangled the data: 
 
 ```{r factors}
-summarydata <- summarydata %>%
-  mutate(sex = as.factor(sex),
+# Overwrite summary data 
+summarydata <- mutate(summarydata, # mutate to change columns in the data
+         sex = as.factor(sex), # save sex as a factor, using the original values of sex
          educ = as.factor(educ),
          income = as.factor(income))
 ```
 
-This is a very important step to remember if, when you look at your data, some of your categories are represented as numbers and not factors. If you do not do this then you might end up with some really confused looking figures!
+You can interpret this code as "overwrite `summarydata` and transform three columns (`sex`, `educ`, and `income`) into the same values but now considered factors and not doubles". 
 
-Ok great, we are now ready to do some visualising and some plotting. For our first example we will create a barplot of our data showing the number of male and female participants within our data. A `r glossary("barplot", def = "also known as a bar chart, barplots represent the frequency or count of a variable through the height of one or more bars.")` is a plot that shows counts of categorical data, or factors, where the height of each bar represents the count of that particular variable.
+::: {.callout-important}
+#### Error mode
 
-#### Activity 3: Bar plot {#introviz-a3}
+If you do not do convert numbers to factors when they should represent distinct categories, you can get some weird looking figures. Instead of treating the numbers as categories, it will try and plot the full range of numerical values. If you notice this, just go back convert your variables to factors (which we will break down in the next chapter).
+:::
 
-Read through the following section and try the different code chunks. Following this, and changing parts of the code to see what happens, will help you to see how the layers build up.
+### Activity 7 - Create a bar plot {#introviz-a3}
 
-**The first layer**
+Now you are familiar with the layering system, we will jump straight into creating the barplot. As before, type and run the code in each step, making notes to yourself either in the R Markdown document outside the code chunks, or using code comments. 
 
-* The first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).    
-* `aes()` can take both an `x` and `y` argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don't need to specify this. 
-
-```{r layer1, fig.cap="First ggplot() layer sets the axes"}
-ggplot(summarydata, aes(x = sex))
-```
-
-* The next layer adds a **geom** or a shape, in this case we use `geom_bar()` as we want to draw a bar plot. 
-    * Note that we are adding layers, using a `+` between layers. This is a very important difference between pipes and visualisation. We will mention this again later but we add layers (`+`), we do not pipe them!
-
-```{r, fig.cap="Basic barplot with geom_bar() added"}
-ggplot(summarydata, aes(x = sex)) +
-  geom_bar()
-```
-
-* Adding `fill` to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of `sex`.
-
-```{r, fig.cap="Barplot with colour"}
-ggplot(summarydata, aes(x = sex, fill = sex)) +
-  geom_bar()
-```
-
-* As you can see, adding the `fill()` has also produced a plot legend to the right of the graph. When you have multiple grouping variables you want legends to know which groups each color or part of the plot is referring to, but in this case it is redundant because it doesn't tell us anything that the axes labels don't already. We can get rid of it by adding `show.legend = FALSE` to the `geom_bar()` code.
-
-```{r, fig.cap="Barplot without legend"}
-ggplot(summarydata, aes(x = sex, fill = sex)) +
-  geom_bar(show.legend = FALSE)
-```
-
-Excellent. So far so good! But we might want to tidy up our plot to make it look a bit nicer. First we can edit the axis labels to be more informative. The most common functions you will use are:
-
-* `scale_x_continuous()` for adjusting the x-axis for a continuous variable
-* `scale_y_continuous()` for adjusting the y-axis for a continuous variable
-* `scale_x_discrete()` for adjusting the x-axis for a discrete/categorical variable
-* `scale_y_discrete()` for adjusting the y-axis for a discrete/categorical variable
-
-And in those functions the two most common arguments you will use are:
-
-* `name` which controls the name of each axis - i.e. what is the overall variable called for example (e.g. Groups)
-* `labels` which controls the names of the break points on the axis - i.e. what are the conditions within a variable called for example (e.g. dogs and cats)
-
-There are lots more ways you can customise your axes but we will stick with these for now. 
-
-* Type out and and run the below code to change the axes labels and change the numeric sex codes (the 1s and 2s) into words (Female and Male).
-    * **Note:** We are using `scale_x_discrete()` because our x-axis is a discrete variable in this data (Female or Male), and we are using `scale_y_continuous()` because our y-axis is continuous in this data (a count of how many people there are)
-    * **Note:** The `labels` arguments must be written in the correct order of your data. Here it will make the 1's Female and the 2's Male, but if you flipped the order of Male and Female, it would make the 1's Male and the 2's Female. Remember the code does what you tell it to do so always check your output!
-
-```{r, fig.cap="Barplot with axis labels"}
-ggplot(summarydata, aes(x = sex, fill = sex)) +
-  geom_bar(show.legend = FALSE) +
-  scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", 
-                              "Male")) +
-  scale_y_continuous(name = "Number of participants")
-```
-
-Now the default colors are ok but you might want to adjust the colours and the visual style of the plot. `ggplot2` comes built a number of different built-in themes as they are called. 
-
-* Type the code below into a new code chunk and run it.
-    * Here we use `theme_minimal()` but try changing it to others and see what happens. You start by typing `theme_` into the code chunk, instead of `theme_minimal()`, and trying the options that come up on auto-complete. Examples include, `theme_bw()`, `theme_classic()`, `theme_light()`, etc. 
-
-```{r, fig.cap="Barplot with minimal theme"}
-ggplot(summarydata, aes(x = sex, fill = sex)) +
-  geom_bar(show.legend = FALSE) +
-  scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", 
-                              "Male")) +
-  scale_y_continuous(name = "Number of participants") +
+```{r barplot1}
+# Plot the variable sex from summarydata
+ggplot(summarydata, aes(x = sex)) + 
+  geom_bar() + 
   theme_minimal()
 ```
 
-Ok but what about the color of the individual bars of the plot? Well, there are various options to adjust the colours but a good way to be inclusive is to use a colour-blind friendly palette that can also be read if printed in black-and-white. To do this, we can add on the function `scale_fill_viridis_d()`. This function has 5 colour options, A, B, C, D, and E. We like `option = "E"` but you can play around with them and choose the one you prefer.
+Compared to the histogram plot, the only difference here is using the `geom_bar()` as the layer instead. Rather than plot the frequency of your variable in bins, we plot the frequency of each unique category. 
 
-* Type and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!
+We can see 1s are way more frequent than 2s, but for this to make sense to you and your reader, we need to edit the axis labels. 
 
-```{r, fig.cap="Barplot with colour-blind friendly colour scheme"}
-ggplot(summarydata, aes(x = sex, fill = sex)) +
-  geom_bar(show.legend = FALSE) +
+### Activity 8 - Edit the axis labels
+
+In the histogram section, we demonstrated how to edit the axis labels. We used `scale_y_continuous` and `scale_x_continuous` as we had two continuous variables for the x-axis range and the y-axis frequency. This time, we need a slightly different layer since the x-axis now represents distinct groups: `scale_x_discrete`. 
+
+Type and run the following code: 
+
+```{r}
+# Plot the variable sex from summarydata
+ggplot(summarydata, aes(x = sex)) + 
+  geom_bar() + 
+  theme_minimal() + 
   scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", 
-                              "Male")) +
-  scale_y_continuous(name = "Number of participants") +
-  theme_minimal() +
-  scale_fill_viridis_d(option = "E")
+                   labels = c("Female", # 1 = Female
+                              "Male")) + # 2 = Male
+  scale_y_continuous(name = "Number of Participants")
 ```
 
-Finally, you can also adjust the transparency of the bars by adding `alpha` to `geom_bar()`. Play around with the value and see what value you prefer.
+Within `scale_x_discrete`, we have a new argument called "labels". This is where we can edit the labels for each category. Instead of 1 and 2, we labelled the x-axis clearer as "Female" and "Male", making it easier to understand there are way more female participants compared to male. 
 
-```{r, fig.cap="Barplot with adjusted alpha"}
-ggplot(summarydata, aes(x = sex, fill = sex)) +
-  geom_bar(show.legend = FALSE, 
-           alpha = .8) +
-  scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", 
-                              "Male")) +
-  scale_y_continuous(name = "Number of participants") +
-  theme_minimal() +
-  scale_fill_viridis_d(option = "E")
+::: {.callout-note collapse="true"}
+#### What does `c()` mean in labels? 
+
+When we specified the labels, you might have noticed the `c("Female", "Male")` format. `c()` stands for concatenate and you will see it a lot in R. When we give a value to a function argument, we must provide one "value". However, in scenarios like this, we want to apply multiple values since we have several categories. 
+
+We can do this by adding all of our categories within `c()`, separated by a comma between each category. 
+:::
+
+::: {.callout-important}
+#### Error mode
+
+When you edit "labels", it is crucial the values you give it are in the right order. There would be nothing stopping us from writing `c("Male", "Female")` and R will gladly listen to you and add those labels. However, that would be inaccurate as 1s mean Female and 2s mean Male. We are only editing the labels and not the underlying values in the data. 
+
+These errors are the most sneaky as it will not cause an error to fix, but they are still incorrect.
+:::
+
+### Activity 9 - Apply your plotting skills to a new variable
+
+An important learning step is being able to apply or transfer what you learnt in one scenario to something new. 
+
+In the data set, there is a variable for the level of education: `educ`. Plot the new variable and try to recreate the customisation layers before checking the solution below. 
+
+```{r echo=FALSE}
+# Plot the variable educ from summarydata
+ggplot(summarydata, aes(x = educ)) + 
+  geom_bar() + 
+  theme_classic() + 
+  scale_x_discrete(name = "Level of Education", 
+                   labels = c("Less than year 12", # 1
+                              "Year 12", # 2 
+                              "Vocational training", # 3
+                              "Bachelor's degree", # 4
+                              "Postgraduate degree")) + # 5 
+  scale_y_continuous(name = "Number of Participants")
 ```
 
-So as you can see, with just a few lines of code you can create a very effective figure. The **top tip** we have is to remember a figure is a series of layers, so write the code like that. Avoid trying to write the whole figure from a blank code chunk. Instead, create the first code chunk, run it, add the next layer, run it, add the next layer, run it, etc., etc. That will make it much easier for you to follow what your code is doing and to debug any issues.
+::: {.callout-tip collapse="true"} 
+#### Show me the solution code
 
-```{block, type="info"}
+To recreate the plot, this is the code:
 
-**We add layers, we don't pipe them**
-
-We just wanted to remind you of a key point here - that you add layers through `+` and you do not pipe layers with `%>%`.  If you try to pip on a layer you will probably see an error that looks something like this:
-
-**Error: `mapping` must be created by `aes()`. Did you use %>% instead of +?**
-
-Do watch out for that as it is a very common error we see when people are first starting to learn to visualise through ggplot2
+```{r eval=FALSE}
+# Plot the variable educ from summarydata
+ggplot(summarydata, aes(x = educ)) + 
+  geom_bar() + 
+  theme_classic() + 
+  scale_x_discrete(name = "Level of Education", 
+                   labels = c("Less than year 12", # 1
+                              "Year 12", # 2 
+                              "Vocational training", # 3
+                              "Bachelor's degree", # 4
+                              "Postgraduate degree")) + # 5 
+  scale_y_continuous(name = "Number of Participants")
 ```
+:::
 
 ## Saving your Figures
 
-Great work today! We just want to show you one last very helpful function on how to save and export your figures. Much like your favourite jumper, there is no point having it if nobody gets to see it! It is so useful to be able to save a copy of your plots as an image file so that you can use them in a presentation or report. One approach we can use is the function `ggsave()`.
+The final step today will be to demonstrate how to save plots you create in `ggplot2`. It is so useful to be able to save a copy of your plots as an image file so that you can use them in a presentation or report. One approach we can use is the function `ggsave()`.
 
-#### Activity 6: Saving plots {#introviz-a6}
+### Activity 10 - Saving your last plot {#introviz-a6}
 
-There are two ways you can use `ggsave()`. If you don't tell `ggsave()` which plot you want to save, by default it will save **the last plot you created**. To demonstrate this let's run the code from Activity 5 again to produce the nice violin-boxplot:
+There are two ways you can use `ggsave()`. If you do not tell `ggsave()` which plot you want to save, by default it will save **the last plot you created**. 
 
-Now that we've got the plot we want to save as our last produced plot, all that `ggsave()` requires is for you to tell it what file name it should save the plot to and the type of image file you want to create (the below example uses .png but you could also use e.g., .jpeg and other image types).
+To demonstrate this, let us run the code again from Activity 8 to produce the final version of our barplot. You do not need to write the code again if you already have it available in a code chunk, but make sure you run the code: 
 
-* Type and run the below code into a new code chunk and then check your chapter folder. If you have performed this correctly then you see the saved image file.
-
-```{r, eval = FALSE}
-#ggsave("violin-boxplot.png")
+```{r bar for save, eval=FALSE}
+# Plot the variable sex from summarydata
+ggplot(summarydata, aes(x = sex)) + 
+  geom_bar() + 
+  theme_minimal() + 
+  scale_x_discrete(name = "Participant Sex", 
+                   labels = c("Female", # 1 = Female
+                              "Male")) + # 2 = Male
+  scale_y_continuous(name = "Number of Participants")
 ```
 
-Note that the image tends to save at a default size, or the size that the image is displayed in your viewer, but you can change this manually if you think that the dimensions of the plot are not correct or if you need a particular size or file type.
+Now that we have the plot we want to save as our last produced plot, all that `ggsave()` requires is for you to tell it the file path / name that it should save the plot to and the type of image file you want to create. The example below uses .png but you could also use .jpeg or another image type.
 
-* Type and run the below code to overwrite the image file with new dimensions.
-    * try different dimensions and units to see the difference. You might want to create violin-boxplot-v1, ...-v2, ...-v3, and compare them. Remeber you can use `?ggsave()` in the console window to bring up the help on this function.
+Type and run the following code into a new code chunk and then check your `figures` folder. If you have performed this correctly, then you should see the saved image. This is why we include a `figures` folder as part of the chapter structure, so you know exactly where your figures will be if you want to find them again. 
 
-```{r, eval = FALSE}
-# ggsave("violin-boxplot.png", 
-#        width = 10, 
-#        height = 8, 
-#        units = "in")
+```{r save plot, eval = FALSE}
+ggsave("figures/participant_sex_barplot.png")
 ```
 
-Alternatively, the second way of using `ggsave()` is to save your plot as an object, just like we have done with tibbles, and then tell `ggsave()` which object you want to save. 
+The image tends to save at a default size, or the size that the image is displayed in your viewer, but you can change this manually if you think that the dimensions of the plot are not correct or if you need a particular size or file type. Sometimes the dimensions look a little off when you save them, so you might need to play around with the size. 
 
-* Type and run the below code and then check your folder for the image file. Resize the plot if you think it needs it.
-    * The below code saves the plot from Activity 5 into an object named `viobox` and then saves it to an image file "violin-boxplot-stored.png". 
-    * **Note:** We do not add on `ggsave()`. Instead it is a separate line of code and we tell it which object to save. So, do not do `+ ggsave()`   
+Type and run the following code to overwrite the image file with new dimensions. Try different dimensions and units to see the difference. You might want to create `participant_sex_barplot-v1.png`, `participant_sex_barplot-v2.png` etc. and compare them. 
+
+One final tip, by default, the plot has a transparent background which you do not notice on a white document, but looks odd on anything else. So, you can set a specific background colour through the argument `bg`. 
 
 ```{r, eval = FALSE}
-viobox <- summarydata %>%
-  ggplot(aes(x = income,
-             y = ahiTotal,
-             fill = income)) +
-  geom_violin(trim = FALSE, 
-              show.legend = FALSE, 
-              alpha = .4) +
-  geom_boxplot(width = .2, 
-               show.legend = FALSE, 
-               alpha = .7)+
-  scale_x_discrete(name = "Income",
-                   labels = c("Below Average", 
-                              "Average", 
-                              "Above Average")) +
-  scale_y_continuous(name = "Authentic Happiness Inventory Score")+
+ ggsave("participant_sex_barplot", 
+        width = 10, # 10 inches wide
+        height = 8, # 8 inches high
+        units = "in", 
+        bg = "white") # Make sure the background is white
+```
+
+Remember, you can use `?ggsave()` in the console window to bring up the help file for this function if you want to look at what other arguments are available.
+
+### Saving a specific plot
+
+Alternatively, the second way of using `ggsave()` is to save your plot as an object, and then tell it which object you want to save. 
+
+Type and run the code below and then check your folder for the image file. Resize the plot if you think it needs it.
+
+::: {.callout-warning}
+We do not add on `ggsave()` as a plot layer. Instead it is a separate line of code and we tell it which object to save. So, do not add `+ ggsave()` as a layer to your plot.   
+:::
+
+```{r ggsave object, eval = FALSE}
+sex_barplot <- ggplot(summarydata, aes(x = sex)) +
+  geom_bar() +
   theme_minimal() +
-  scale_fill_viridis_d()
+  scale_x_discrete(name = "Participant Sex",
+                   labels = c("Female", # 1 = Female
+                              "Male")) + # 2 = Male
+  scale_y_continuous(name = "Number of Participants")
 
 
-ggsave("violin-boxplot-stored.png", plot = viobox)
+ggsave("figures/participant-sex-barplot.png", 
+       plot = sex_barplot)
 ```
 
-Finall, note that when you save a plot to an object, you will not see the plot displayed anywhere. To get the figure to display you need to type the object name in the console (i.e., `viobox`). The benefit of saving figures this way is that if you are making lots of plots, you can't accidentally save the wrong one because you are explicitly specifying which plot to save rather than just saving the last one.
-
-## Finished! {#introviz-fin}
-
-Well done! `ggplot` can be a bit difficult to get your head around at first, particularly if you've been used to making graphs a different way. But once it clicks, you'll be able to make informative and professional visualisations with ease, which, amongst other things, will make any report you write look more professional!
+Note that when you save a plot to an object, you will not see the plot displayed anywhere. To get the figure to display, you need to type the object name in the console (i.e., `sex_barplot`). The benefit of saving figures this way is that if you are making several plots, you cannot accidentally save the wrong one because you are explicitly specifying which plot to save rather than just saving the last one.
 
 ## Test Yourself
 
@@ -622,6 +609,10 @@ Q5.
 - Missing aes
 
 - Missing + in layers
+
+- overriding x labels but not order 
+
+- Wrong axis setting 
 
 ## Words from this Chapter
 

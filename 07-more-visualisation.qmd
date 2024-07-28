@@ -1,4 +1,4 @@
-# Building your data visualisation skills
+# Building your data visualisation skills {#07-more-viz}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
@@ -25,7 +25,7 @@ To help you understand the data we're visualising, here is the abstract:
 
 ```{r load_data, message = FALSE, warning = FALSE}
 library(tidyverse)
-zhang_data <- read_csv("Zhang et al. 2014 Study 3.csv")%>%
+zhang_data <- read_csv("data/Zhang et al. 2014 Study 3.csv")%>%
   select(Gender, Age,Condition, T1_Predicted_Interest_Composite, T2_Actual_Interest_Composite)%>%
   mutate(subject = row_number())%>%
   pivot_longer(names_to = "time",values_to = "interest",
