@@ -36,7 +36,17 @@ In this chapter, we introduce you to the `ggplot2` system of creating plots and 
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
-- ILO1
+By the end of this chapter, you will be able to: 
+
+- Read data files into R/RStudio. 
+
+- Understand the `ggplot2` layering system of creating plots.
+
+- Create and edit histograms to visualise the frequency of observations collated into bins.
+
+- Create and edit barplots to visualise the frequency of different categories. 
+
+- Save plots as an image to use in reports or presentations. 
 
 ```{r ggplotdemo, echo=FALSE, message=FALSE, warning=FALSE}
 #| label: fig-ggplotdemo
@@ -87,7 +97,24 @@ Before we can get started, you need to organise your files and project for the c
 
 You are now ready to start working on the chapter! 
 
-**Add hidden guidance for people using the server** 
+::: {.callout-note collapse="true"}
+#### Reminder of file management if you use the online server
+If we support you to use the online University of Glasgow R Server, working with files is a little different. If you downloaded R / RStudio to your own computer or you are using one of the library/lab computers, please ignore this section. 
+
+The main disadvantage to using the R server is that you will need create folders on the server and then upload and download any files you are working on to and from the server. Please be aware that **there is no link between your computer and the R server**. If you change files on the server, they will not appear on your computer until you download them from the server, and you need to be very careful when you submit your assessment files that you are submitting the right file. This is the main reason we recommend installing R / RStudio on your computer wherever possible.
+
+Going forward throughout this book, if you are using the server, you will need to follow an extra step where you also upload them to the sever. As an example: 
+
+1. Log on to the **R server** using the link we provided to you.
+
+2. In the file pane, click `New folder` and create the same structure we demonstrated above.
+
+3. Download these two data files which we used at the end of Chapter 2. Data file one: [ahi-cesd.csv](data/ahi-cesd.csv). Data file two: [participant-info.csv](data/participant_info.csv). Save the two files into the `data` folder you created for chapter 3. To download a file from this book, right click the link and select "save link as". Make sure that both files are saved as ".csv". Do not open them on your machine as often other software like Excel can change setting and ruin the files.
+
+4. Now that the files are stored on your computer, go to RStudio on the server and click `Upload` then `Browse` and choose the folder for the chapter you are working on.
+
+5. Click `Choose file` and go and find the data you want to upload.
+:::
 
 ## Loading the `tidyverse` and reading data files 
 
@@ -159,7 +186,7 @@ There is also a function called `read.csv()`. Be very careful **not** to use thi
 
 ### Activity 3 - Wrangling the two data sets
 
-For this final preparation step, we would like you to add the following code. We are not tackling data wrangling until the next chapter, so we are not going to fully explain the code just yet. Copy the code (if you hover over the code, there is a copy to clipboard icon in the top right) and paste it into the code chunk below where you read the two data files, then run the code again. 
+For this final preparation step, we would like you to add the following code. We are not tackling data wrangling until the next chapter, so we are not going to fully explain the code just yet. Copy the code (if you hover over the code, there is a copy to clipboard icon in the top right) and paste it into a code chunk below where you read the two data files, then run the code again. 
 
 ```{r eval=FALSE}
 all_dat <- inner_join(dat, 
@@ -197,15 +224,15 @@ glimpse(summarydata)
 The `glimpse()` function comes from a package called `dplyr`, which is part of the tidyverse. This package contains many functions for wrangling data like joining data sets and selecting columns. We will explore loads of functions within `dplyr` in the next few chapters on data wrangling. 
 :::
 
-This function provides a condensed summary of your data. You can see there are 992 rows and 8 columns. You see all the columns names for each variable in the data set. You can also see that all the variables are automatically considered as `r glossary("numeric")` (in this case `r glossary("double")` represented by `<dbl>`). Treating categorical variables like "sex" and "income" as numbers will cause us problems later, but it is fine for the variables we will be working on now. 
+This function provides a condensed summary of your data. You can see there are 992 rows and 8 columns. You see all the column names for each variable in the data set. You can also see that all the variables are automatically considered as `r glossary("numeric")` (in this case `r glossary("double")` represented by `<dbl>`). Treating categorical variables like "sex" and "income" as numbers will cause us problems later, but it is fine for the variables we will be working on now. 
 
 ## `ggplot2` and the layer system
 
 There are multiple approaches to data visualisation in R but we will use `ggplot2` which uses a layered grammar of graphics where you build up plots in a series of layers. You can think of it as building a picture with multiple elements that sit over each other. 
 
-@fig-img-layers adapted from @nordmann_data_2022 demonstrates the idea of building up a plot by adding layers. One function creates the first layer, the basic plot area, and you add functions and arguments to add additional layers such as the data, the labels, the colors etc. If you are used to making plots in other software, this might seem a bit odd at first, but it means that you can customise each layer separately to make complex and beautiful figures with relative ease. 
+@fig-img-layers from @nordmann_data_2022 demonstrates the idea of building up a plot by adding layers. One function creates the first layer, the basic plot area, and you add functions and arguments to add additional layers such as the data, the labels, the colors etc. If you are used to making plots in other software, this might seem a bit odd at first, but it means that you can customise each layer separately to make complex and beautiful figures with relative ease. 
 
-You can get a sense of what plots are possible from ([the website data-to-viz](https://www.data-to-viz.com/){target="_blank"}, but we will build up your data visualisation skills over the courses. 
+You can get a sense of what plots are possible from [the website data-to-viz](https://www.data-to-viz.com/){target="_blank"}, but we will build up your data visualisation skills over the RM1 and RM2 courses. 
 
 ```{r img-layers, echo=FALSE}
 #| label: fig-img-layers
@@ -217,7 +244,7 @@ knitr::include_graphics("images/layers2.PNG")
 
 ## Histograms and density plots
 
-We are going to plot the distribution of participant age in a histogram, and add layers one-by-one to demonstrate how we build the plot step-by-step.
+We are going to start by plotting the distribution of participant age in a histogram, and add layers to demonstrate how we build the plot step-by-step.
 
 ### Step 1: Start with the `ggplot` function
 
@@ -291,7 +318,7 @@ By default, the axis names come from the variable names in your data. When you a
 
 There are different layers to control the axes depending on the type of variable you use. Both the x- and y-axis here are continuous numbers, so we can use the `scale_x_continuous` and `scale_y_continuous` layers to control them. 
 
-There are many options available in `ggplot2`, but you will learn through experience and searching what you need in different scenarios. 
+There are many options available in `ggplot2` for controlling the axes, but you will learn through experience and searching what you need in different scenarios. 
 
 ```{r histogram4}
 # Plot the variable age from summarydata
@@ -337,7 +364,7 @@ ggplot(summarydata, aes(x = age)) +  # Plot age on the x axis
 
 Before we move on to barplots, an important learning step is being able to apply or transfer what you learnt in one scenario to something new. 
 
-In the data set, there is a variable for The Authentic Happiness Inventory (AHI): `ahiTotal`. Plot the new variable and try to recreate the customisation layers before checking the solution below. It make take some trial-and-error to get some features right, so do not worry if it does not immediately look the same. 
+In the data set, there is a variable for The Authentic Happiness Inventory (AHI): `ahiTotal`. Plot the new variable and try to recreate the customisation layers before checking the solution below. It might take some trial-and-error to get some features right, so do not worry if it does not immediately look the same. 
 
 ```{r echo=FALSE}
 # Plot the variable ahi total from summarydata
@@ -380,8 +407,8 @@ Copy and run the following code in your R Markdown document, at least below wher
 
 ```{r factors}
 # Overwrite summary data 
-summarydata <- mutate(summarydata, # mutate to change columns in the data
-         sex = as.factor(sex), # save sex as a factor, using the original values of sex
+summarydata <- mutate(summarydata, # mutate to change columns 
+         sex = as.factor(sex), # save sex as a factor
          educ = as.factor(educ),
          income = as.factor(income))
 ```
@@ -391,7 +418,7 @@ You can interpret this code as "overwrite `summarydata` and transform three colu
 ::: {.callout-important}
 #### Error mode
 
-If you do not do convert numbers to factors when they should represent distinct categories, you can get some weird looking figures. Instead of treating the numbers as categories, it will try and plot the full range of numerical values. If you notice this, just go back convert your variables to factors (which we will break down in the next chapter).
+If you do not do convert numbers to factors when they should represent distinct categories, you can get some weird looking figures. Instead of treating the numbers as categories, it will try and plot the full range of numerical values. If you notice this, just go back and convert your variables to factors (which we will break down in the next chapter).
 :::
 
 ### Activity 7 - Create a bar plot {#introviz-a3}
@@ -401,8 +428,7 @@ Now you are familiar with the layering system, we will jump straight into creati
 ```{r barplot1}
 # Plot the variable sex from summarydata
 ggplot(summarydata, aes(x = sex)) + 
-  geom_bar() + 
-  theme_minimal()
+  geom_bar()
 ```
 
 Compared to the histogram plot, the only difference here is using the `geom_bar()` as the layer instead. Rather than plot the frequency of your variable in bins, we plot the frequency of each unique category. 
@@ -419,7 +445,6 @@ Type and run the following code:
 # Plot the variable sex from summarydata
 ggplot(summarydata, aes(x = sex)) + 
   geom_bar() + 
-  theme_minimal() + 
   scale_x_discrete(name = "Participant Sex", 
                    labels = c("Female", # 1 = Female
                               "Male")) + # 2 = Male
@@ -498,7 +523,6 @@ To demonstrate this, let us run the code again from Activity 8 to produce the fi
 # Plot the variable sex from summarydata
 ggplot(summarydata, aes(x = sex)) + 
   geom_bar() + 
-  theme_minimal() + 
   scale_x_discrete(name = "Participant Sex", 
                    labels = c("Female", # 1 = Female
                               "Male")) + # 2 = Male
@@ -520,7 +544,7 @@ Type and run the following code to overwrite the image file with new dimensions.
 One final tip, by default, the plot has a transparent background which you do not notice on a white document, but looks odd on anything else. So, you can set a specific background colour through the argument `bg`. 
 
 ```{r, eval = FALSE}
- ggsave("participant_sex_barplot", 
+ ggsave("figures/participant_sex_barplot", 
         width = 10, # 10 inches wide
         height = 8, # 8 inches high
         units = "in", 
@@ -542,7 +566,6 @@ We do not add on `ggsave()` as a plot layer. Instead it is a separate line of co
 ```{r ggsave object, eval = FALSE}
 sex_barplot <- ggplot(summarydata, aes(x = sex)) +
   geom_bar() +
-  theme_minimal() +
   scale_x_discrete(name = "Participant Sex",
                    labels = c("Female", # 1 = Female
                               "Male")) + # 2 = Male
@@ -557,62 +580,159 @@ Note that when you save a plot to an object, you will not see the plot displayed
 
 ## Test Yourself
 
-To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you find the solution to some common errors in the concepts we covered in this chapter. 
+To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter. 
 
 ### Knowledge check
 
-1. Which of these is the appropriate order of functions to create a boxplot? `r longmcq(sample(c(answer = "ggplot() + geom_boxplot()", "ggplot() %>% geom_boxplot()", "geom_boxplot() + ggplot()", "geom_plot() + geom_boxplot()")))`
+1. Which of these is the appropriate order of functions to create a barplot? 
 
-2. Would this line of code run, assuming all data and libraries had been loaded in and the data and column names were spelt correctly?
+`r longmcq(sample(c(answer = "ggplot() + geom_bar()", "ggplot() %>% geom_bar()", "geom_bar() + ggplot()", "geom_plot() + geom_boxplot()")))`
 
-```{r, eval = FALSE}
-ggplot(summarydata, aes(x = sex, fill = sex)) %>%
-  geom_bar()
-```
-
-`r longmcq(sample(c(answer = "No, because you have piped the geom_bar() instead of adding it", "Yes, as the code looks perfectly acceptable and no errors are visible")))`
-
-3. Why would this line of code not create a barplot, assuming all data and libraries had been loaded in and the data and column names were spelt correctly?
+2. Why would this line of code not create a barplot, assuming you already loaded all data and libraries and you spelt the data and column names correctly?
 
 ```{r, eval = FALSE}
-ggplot(summarydata, aes(x = sex, fill = sex)) +
+ggplot(summarydata, aes(x = sex)) +
   geom_barplot()
 ```
 
-`r longmcq(sample(c(answer = "because there is no geom_barplot() and it should be geom_bar()","because you have piped the barplot and not added it","because you have not included a y axis","because this would create a boxplot")))`
+`r longmcq(sample(c(answer = "because there is no geom_barplot() and it should be geom_bar()","because you have piped the barplot and not added it","because you have not included a y axis","because this would create a histogram")))`
 
-4. If I wanted a boxplot on top of a violin plot, what order of functions would I write? `r longmcq(sample(c(answer = "ggplot() + geom_violin() + geom_boxplot()","ggplot() %>% geom_violin() %>% geom_boxplot()", "ggplot() + geom_boxplot() + geom_violin()", "ggplot() %>% geom_boxplot() %>% geom_violin()")))`
+3. If I wanted precisely 5 bars in my histogram, what argument would I use? 
 
-`r hide("Explain these answers")`
-```{r, echo = FALSE, results='asis'}
-cat("
-`r unhide()`
+`r longmcq(sample(c(answer = "ggplot() + geom_histogram(bins = 5)","ggplot() + geom_histogram(bars = 5)", "ggplot() + geom_histogram(binwidth = 5)", "ggplot() + geom_histogram()")))`
 
-1. `ggplot() + geom_boxplot()` would be the correct answer as the rest either use pipes, have the wrong order, or have the wrong functions.
-2. The line of code would not run because it uses pipes instead of adding a layer
-3. The line of code would not run because there is no `geom_barplot()` function and it should be `geom_bar()`
-4. The correct order would be `ggplot() + geom_violin() + geom_boxplot()` as the others either use pipes, have the wrong order, or have the wrong functions.
-")
-```
-`r unhide()`
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
+- `ggplot() + geom_histogram(bins = 5)`. This is the **correct** answer as you are asking ggplot2 to give you the plot organised into 5 bins. 
+
+- `ggplot() + geom_histogram(bars = 5)`. This is incorrect as you bars is not the right argument name. You want 5 bars, but the argument is bins. 
+
+- `ggplot() + geom_histogram(binwidth = 5)`. This is incorrect as binwidth controls the x-axis range to include per bar, rather than the number of bars. 
+
+-  `ggplot() + geom_histogram()`. This is incorrect as you did not control the number of bins, so it will default to 30. 
+:::
 
 ### Error mode
 
-Q5. 
+The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on reading data and using ggplot2. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
 
-- Wrong working directory 
+Create and save a new R Markdown file for these activities by following the instructions in Chapter 2. You should have a blank R Markdown file below line 10. Below, we have several variations of a code chunk and inline code errors. Copy and paste them into your R Markdown file, click knit, and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
 
-- Not loading tidyverse 
+**Question 4**. Copy the following code chunk into your R Markdown file and press knit. You should receive an error like `Error in read_csv(): ! could not find function "read_csv"`. 
 
-- Typo in file name
+````{verbatim, lang = "markdown"}
+```{r}
+pinfo <- read_csv("data/participant-info.csv")
+```
 
-- Missing aes
+````
 
-- Missing + in layers
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
 
-- overriding x labels but not order 
+If you only added this code chunk in, you have not loaded tidyverse yet. Remember R Markdown knits from start to finish in a fresh session, so it will not work even if you have loaded already tidyverse outside the R Markdown document. So, you would need to add `library(tidyverse)` first. 
+:::
 
-- Wrong axis setting 
+**Question 5**. Copy the following code chunk into your R Markdown file and press knit. You should receive an error like `! participant-info.csv does not exist in current working directory`. 
+
+````{verbatim, lang = "markdown"}
+```{r}
+library(tidyverse)
+
+pinfo <- read_csv("participant-info.csv")
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+You had tidyverse loaded this time, but it is not pointing to the right folder. Your working directory should be the main chapter folder, where `participant-info.csv` does not exist. You will need to edit it to `data/participant-info.csv` to work. 
+:::
+
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. You should receive a long error where the problem is buried in the first five lines: 
+
+> `Error in geom_histogram()`
+
+> `! Problem while computing stat.`
+
+> `i Error occurred in the 1st layer.`
+
+> `Caused by error in setup_params():`
+
+> `! stat_bin() requires an x or y aesthetic.` 
+
+````{verbatim, lang = "markdown"}
+```{r}
+library(tidyverse)
+
+pinfo <- read_csv("data/participant-info.csv")
+
+# Plot the variable age from pinfo
+ggplot(pinfo, x = age) +   # Plot age on the x axis
+  geom_histogram()
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+This is potentially a sneaky one where we missed the `aes()` argument and it is only line 5 of the error which gives it away: `! stat_bin() requires an x or y aesthetic`. The first ggplot2 layer has two key components: the data object you want to use, and the aesthetics to set. You need to add "aes()" around where you specify the x-axis: `ggplot(pinfo, aes(x = age))`.
+:::
+
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. This...works, but does not look quite right? 
+
+````{verbatim, lang = "markdown"}
+```{r}
+library(tidyverse)
+
+pinfo <- read_csv("data/participant-info.csv")
+
+# Plot the variable age from pinfo
+ggplot(pinfo, aes(x = age)) # Plot age on the x axis
+  geom_histogram()
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+There is a missing `+` between the two ggplot2 layers. The code should be:
+
+```{r eval=FALSE}
+# Plot the variable age from pinfo
+ggplot(pinfo, aes(x = age)) +  # Plot age on the x axis
+  geom_histogram()
+```
+
+At the moment, it runs the first layer to create an empty plot, then prints the information contained within geom_histogram. 
+:::
+
+**Question 8**. Copy the following code chunk into your R Markdown file and press knit. You should receive a long error again with lines 5-7 key: 
+
+> `! stat_bin() requires a continuous x aesthetic.`
+
+> `x the x aesthetic is discrete.`
+
+> `i Perhaps you want stat="count"?`
+
+````{verbatim, lang = "markdown"}
+```{r}
+library(tidyverse)
+
+pinfo <- read_csv("data/participant-info.csv")
+
+# Plot the variable age from pinfo
+ggplot(pinfo, aes(x = age)) +   # Plot age on the x axis
+  geom_histogram() + 
+  scale_x_discrete(name = "Participant Age")
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+The error message here is a little more useful and points to how we tried to edit the x-axis name. In a histogram, the x-axis is continuous for the range of a numeric variable. We tried using the discrete version of the layer to control the axis (`scale_x_discrete(name = "Participant Age")`) which we had to use for the bar plot. To fix the error, you would need to correct the layer to `scale_x_continuous(name = "Participant Age")`. 
+:::
 
 ## Words from this Chapter
 
@@ -624,4 +744,5 @@ glossary_table()
 
 ## End of chapter
 
-That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!
+Well done! It takes a while to get used to the layering system in ggplot2, particularly if you are used to making graphs a different way. But once it clicks, you will be able to make informative and professional visualisations with ease. Remember, data visualisation is useful for yourself to quickly plot your data, and it's useful for your reader in communicating your key findings. 
+

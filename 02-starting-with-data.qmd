@@ -62,7 +62,7 @@ When you create and name folders to use with R / RStudio, whatever you do, do no
 
 ::: {.callout-note collapse="true"}
 #### File management when using the online server
-If we support you to use the online University of Glasgow **R Server**, working with files is a little different. If you downloaded R / RStudio to your own computer or you are using one of the computers, please ignore this section. 
+If we support you to use the online University of Glasgow **R Server**, working with files is a little different. If you downloaded R / RStudio to your own computer or you are using one of the library/lab computers, please ignore this section. 
 
 The main disadvantage to using the R server is that you will need create folders on the server and then upload and download any files you are working on to and from the server. Please be aware that **there is no link between your computer and the R server**. If you change files on the server, they will not appear on your computer until you download them from the server, and you need to be very careful when you submit your assessment files that you are submitting the right file. This is the main reason we recommend installing R / RStudio on your computer wherever possible.
 
@@ -426,7 +426,7 @@ If you have any questions or problems about anything contained in this chapter, 
 
 ## Test yourself
 
-To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you find the solution to some common errors in the concepts we covered in this chapter. 
+To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter. 
 
 ### Knowledge check 
 
