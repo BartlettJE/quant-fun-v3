@@ -542,7 +542,7 @@ Here, we have a sneaky kind of "error" where it knits, but it is not doing what 
 `r city`
 ```
 
-If you add the after the first backtick, it should knit and add the city object in. 
+If you add the `r` after the first backtick, it should knit and add the city object in. 
 :::
 
 ## Words from this Chapter

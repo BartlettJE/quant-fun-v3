@@ -193,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1: Join, select, and mutate</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -495,7 +495,7 @@ File management when using the online server
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>If we support you to use the online University of Glasgow <strong>R Server</strong>, working with files is a little different. If you downloaded R / RStudio to your own computer or you are using one of the computers, please ignore this section.</p>
+<p>If we support you to use the online University of Glasgow <strong>R Server</strong>, working with files is a little different. If you downloaded R / RStudio to your own computer or you are using one of the library/lab computers, please ignore this section.</p>
 <p>The main disadvantage to using the R server is that you will need create folders on the server and then upload and download any files you are working on to and from the server. Please be aware that <strong>there is no link between your computer and the R server</strong>. If you change files on the server, they will not appear on your computer until you download them from the server, and you need to be very careful when you submit your assessment files that you are submitting the right file. This is the main reason we recommend installing R / RStudio on your computer wherever possible.</p>
 <p>Going forward throughout this book, if you are using the server, you will need to follow an extra step where you also upload them to the sever. As an example:</p>
 <ol type="1">
@@ -879,7 +879,7 @@ How does inline code work?
 <span class="header-section-number">2.2.6</span> Activity 8: Knitting your file</h3>
 <p>As our final step in this part, we are going to knit our file again to see how it looks now. So, click the Knit button to regenerate your knitted .html version.</p>
 <p>If you look at the knitted .html document in the Viewer tab or in your browser, you should see the sentence we copied in from Activity 7. As if by magic, that slightly odd bit of text you copied and pasted now appears as a normal sentence with the values pulled in from the objects you created:</p>
-<p>My name is <strong>James</strong> and I am <strong>30</strong> years old. <br><br>It is <strong>207</strong> days until my birthday.</p>
+<p>My name is <strong>James</strong> and I am <strong>30</strong> years old. <br><br>It is <strong>202</strong> days until my birthday.</p>
 <p>R Markdown is an incredibly powerful and flexible format, we wrote this whole book using it! There are a few final things to note about knitting that will be useful going forward for your data skills learning and assessments:</p>
 <ul>
 <li><p>R Markdown will only knit if your code works. If you have an error, it will stop and tell you to fix the error before you can click knit and try again. This is a good way of checking whether you have written functioning code in your assessments.</p></li>
@@ -919,12 +919,12 @@ Figure&nbsp;2.14: You should see the reproducibility demonstration as the .Rmd (
 <p>If you have any questions or problems about anything contained in this chapter, please remember you are always welcome to post on the course Teams channel, attend a GTA support session, or attend the office hours of one of the team.</p>
 </section></section><section id="test-yourself" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="test-yourself">
 <span class="header-section-number">2.4</span> Test yourself</h2>
-<p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you find the solution to some common errors in the concepts we covered in this chapter.</p>
+<p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
 <section id="knowledge-check" class="level3" data-number="2.4.1"><h3 data-number="2.4.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">2.4.1</span> Knowledge check</h3>
 <strong>Question 1</strong>. One of the key first steps when we open RStudio is to:
-<div id="radio_SQSUGNNQVZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SQSUGNNQVZ" value="answer"><span>set your working directory/open a project</span></label><label><input type="radio" autocomplete="off" name="radio_SQSUGNNQVZ" value=""><span>put on some music as we will be here a while</span></label><label><input type="radio" autocomplete="off" name="radio_SQSUGNNQVZ" value=""><span>check out the news</span></label><label><input type="radio" autocomplete="off" name="radio_SQSUGNNQVZ" value=""><span>make a coffee</span></label>
+<div id="radio_ZSTHZWCXJK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZSTHZWCXJK" value="answer"><span>set your working directory/open a project</span></label><label><input type="radio" autocomplete="off" name="radio_ZSTHZWCXJK" value=""><span>put on some music as we will be here a while</span></label><label><input type="radio" autocomplete="off" name="radio_ZSTHZWCXJK" value=""><span>check out the news</span></label><label><input type="radio" autocomplete="off" name="radio_ZSTHZWCXJK" value=""><span>make a coffee</span></label>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
@@ -969,8 +969,8 @@ Explain this answer
 </div>
 </div>
 <strong>Question 4</strong>. Code chunks start and end with:
-<div id="radio_SGAGPLQBIN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SGAGPLQBIN" value=""><span>three single quotes</span></label><label><input type="radio" autocomplete="off" name="radio_SGAGPLQBIN" value="answer"><span>three backticks</span></label><label><input type="radio" autocomplete="off" name="radio_SGAGPLQBIN" value=""><span>three double quotes</span></label><label><input type="radio" autocomplete="off" name="radio_SGAGPLQBIN" value=""><span>three single clefs</span></label>
+<div id="radio_XFEMXFEHYW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XFEMXFEHYW" value=""><span>three single quotes</span></label><label><input type="radio" autocomplete="off" name="radio_XFEMXFEHYW" value="answer"><span>three backticks</span></label><label><input type="radio" autocomplete="off" name="radio_XFEMXFEHYW" value=""><span>three double quotes</span></label><label><input type="radio" autocomplete="off" name="radio_XFEMXFEHYW" value=""><span>three single clefs</span></label>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
@@ -989,8 +989,8 @@ Explain this answer
 </div>
 </div>
 <strong>Question 5</strong>. Inline code is:
-<div id="radio_AYWGZXJABD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AYWGZXJABD" value=""><span>where you nicely organise your code in a line.</span></label><label><input type="radio" autocomplete="off" name="radio_AYWGZXJABD" value=""><span>where you make sure all the code is nicely indented from the side.</span></label><label><input type="radio" autocomplete="off" name="radio_AYWGZXJABD" value=""><span>a fancy way of saying you have written good code.</span></label><label><input type="radio" autocomplete="off" name="radio_AYWGZXJABD" value="answer"><span>an approach of integrating code and text in a sentence outside of a code chunk.</span></label>
+<div id="radio_AUYGTZYWQE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AUYGTZYWQE" value=""><span>where you nicely organise your code in a line.</span></label><label><input type="radio" autocomplete="off" name="radio_AUYGTZYWQE" value=""><span>where you make sure all the code is nicely indented from the side.</span></label><label><input type="radio" autocomplete="off" name="radio_AUYGTZYWQE" value=""><span>a fancy way of saying you have written good code.</span></label><label><input type="radio" autocomplete="off" name="radio_AUYGTZYWQE" value="answer"><span>an approach of integrating code and text in a sentence outside of a code chunk.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
@@ -1104,7 +1104,7 @@ Explain the solution
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="st">`</span><span class="at">r city</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you add the after the first backtick, it should knit and add the city object in.</p>
+<p>If you add the <code>r</code> after the first backtick, it should knit and add the city object in.</p>
 </div>
 </div>
 </div>

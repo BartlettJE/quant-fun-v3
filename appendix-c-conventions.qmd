@@ -33,7 +33,7 @@ These boxes warn you about something important in R / R Studio, so you pay atten
 These boxes highlight where you need to be cautious when using or interpreting something, as it might be easy to make an error. 
 :::
 
-::: {.callout-tip}
+::: {.callout-tip collapse="true"}
 #### Try this
 These boxes will invite you to try something yourself, like complete independent activities or answer questions. 
 :::
