@@ -176,7 +176,47 @@ all_dat2 <- inner_join(x = dat,
 ```
 :::
 
-Once you have run this code you should now see the `all_dat` in the environment pane. View the new dataset using one of the methods from Activity 4. In fact, try to remember that you should always view any new object or data that you create. Code often can run but that doesn't necessarily mean it is correct. The programme only ever knows what the code says not what you thought you said. Get into the habit of always checking output!
+### Explore your data objects
+
+Once you have run this code, you should now see the new `all_dat` object in the environment pane. Remember to get into the habit of exploring your data and objects as you make changes, to check your wrangling is working as intended. 
+
+There are two main ways you can do this: 
+
+1. Click on the data object in the Environment pane. This will open it up as a tab in RStudio, and you will be able to scroll through the rows and columns (@fig-img-preview-alldat). 
+
+::: {.callout-important}
+#### Why do I not see all my columns? 
+
+One common source of confusion is not seeing all your columns when you open up a data object as a tab. This is because RStudio shows you a maximum of 50 columns at a time. If you have more than 50 columns, to see more, you must use the arrows at the top of the tab where it says "Cols:". For example in `all_dat`, it will say 1-50, if you click the right arrow, it will then say 5-54 so you can see the final 4 columns.
+:::
+
+```{r preview-alldat, echo=FALSE}
+#| label: fig-img-preview-alldat
+#| fig.cap: "Exploring a data object in RStudio by opening it as a tab. You can navigate around the columns and rows without opening it up in somehthing like Excel. If there are more than 50 columns, you can click the arrows next to Cols:."
+
+knitr::include_graphics("images/alldat_previewdata.png")
+
+```
+
+2. Use the `glimpse()` function to see an overview of the data objects. 
+
+We explored this in chapter 3, but `glimpse()` tells you how many rows and columns your data have, plus an overview of responses per column. Note: you will see a preview of all 54 columns, but we have shortened it to 10 columns to take up less space in the book. 
+
+```{r eval=FALSE}
+glimpse(all_dat)
+```
+
+```{r echo=FALSE}
+all_dat %>% 
+  select(1:10) %>% 
+  glimpse()
+```
+
+::: {.callout-tip}
+#### Try this
+
+Now you have explored `all_dat`, try and use one or both of these methods to explore the original `dat` and `pinfo` objects to see how they changed. Notice how the number of rows/observations and columns change from the original objects to when you join them. 
+:::
 
 ## Selecting variables of interest with `select()`
 

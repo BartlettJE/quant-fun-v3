@@ -26,8 +26,8 @@ This experiment does not use tennis players however. Instead they used the Pong 
 
 ### Activity 1: Set-up Data Wrangling 2 {#dw2-a1}
 
-* First, download <a href="data/chpt5/PongBlueRedBack 1-16 Codebook.csv" download>PongBlueRedBack 1-16 Codebook.csv</a> into your chapter folder.
-    * If you are having trouble downloading .csv files directly you may prefer to download the data as a zip file and unzip it from this link: <a href="data/chpt5/PsyTeachR_FQA_Chpt5-data.zip" download>PongBlueRedBack 1-16 Codebook.zip</a>. Again just unzip it into your chapter folder. 
+* First, download <a href="data/PongBlueRedBack 1-16 Codebook.csv" download>PongBlueRedBack 1-16 Codebook.csv</a> into your chapter folder.
+    * If you are having trouble downloading .csv files directly you may prefer to download the data as a zip file and unzip it from this link: <a href="data/PsyTeachR_FQA_Chpt5-data.zip" download>PongBlueRedBack 1-16 Codebook.zip</a>. Again just unzip it into your chapter folder. 
 * Next, set the `r glossary("working directory")` to your chapter folder. Ensure the `r glossary("environment")` is clear.
     * If you're using the Rserver, avoid a number of issues by restarting the session - click `Session` - `Restart R` 
 * Now, open a new R Markdown document and save it in your working directory and call the file something informative like "DataWrangling2". 
@@ -36,7 +36,7 @@ This experiment does not use tennis players however. Instead they used the Pong 
 
 ```{r libraries, eval = FALSE}
 library("tidyverse")
-pong_data <- read_csv("PongBlueRedBack 1-16 Codebook.csv")
+pong_data <- read_csv("data/PongBlueRedBack 1-16 Codebook.csv")
 summary(pong_data)
 ``` 
 
@@ -46,7 +46,7 @@ If you have done this task correctly you should see the following output:
 
 ```{r libraries-hid, echo=FALSE, eval = TRUE, message = FALSE, warning = FALSE}
 library("tidyverse")
-pong_data <- read_csv("PongBlueRedBack 1-16 Codebook.csv")
+pong_data <- read_csv("data/PongBlueRedBack 1-16 Codebook.csv")
 summary(pong_data)
 ``` 
 

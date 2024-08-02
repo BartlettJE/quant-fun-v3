@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
-<title>Fundamentals of Quantitative Analysis - 5&nbsp; Data wrangling 2</title>
+<title>Fundamentals of Quantitative Analysis - 5&nbsp; Data wrangling 2: Filter, summarise, and pipes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,8 +110,7 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -124,7 +123,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-wrangling-2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-wrangling-2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -136,7 +135,8 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/BartlettJE/quant-fun-v3/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -192,7 +192,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-starting-with-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -204,19 +204,19 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1: Join, select, and mutate</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -410,13 +410,11 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">5.6</span> Words from this Chapter</a></li>
-  </ul></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/05-wrangling-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/05-wrangling-2.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span>
-</h1>
+<h1 class="title"><span id="05-wrangling-2" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span></h1>
 </div>
 
 
@@ -430,8 +428,8 @@ div.csl-indent {
   
 
 </header><p>As we have said previously, one of the key aspects in a researcher’s toolbox is the knowledge and skill to work with data - regardless of how it comes to you. In fact, when you run an experiment you might get lots of different data types in various different files. For instance, it is not uncommon for an experimental software to create a new file for every participant you run and for each participant’s file to contain numerous columns and rows of different data types, only some of which are important. Being able to wrangle that data, manipulate it into different layouts, extract the parts you need, and summarise it, is one of the most important skills we will help you learn through this book.</p>
-<p>In the last chapter we introduced you to the <strong>Wickham six</strong> one-table <a class="glossary">functions<span class="def"></span></a> which we use to do that data wrangling. Over the course of this book we will reiterate these functions and skills, and <a class="glossary">packages<span class="def"></span></a> like the <code>tidyverse</code> and the packages it contains, across a number of different datasets to give you a wide range of exposure to what Psychology is about, and to reiterate that the same skills apply across different datasets. Always remember, <strong>the whilst the data changes, the skills stay the same!</strong></p>
-<p>We have also started to introduce different types of data and data structures. For example, data is often stored in two-dimensional tables, either called data frames, tables, or <a class="glossary">tibbles<span class="def"></span></a>. There are other ways of storing data that you will discover in time but mainly, in this book, we will be using tibbles, which we mentioned in the previous chapter (if you would like more info, type <code>vignette("tibble")</code> in the console). A tibble is really just a table of data with columns and rows of information - and some additional features we will learn about - and within the cells of the tibble, a cell being where a row and a column meets, you get different types of data, e.g.&nbsp;<a class="glossary">double<span class="def"></span></a>, <a class="glossary">integer<span class="def"></span></a>, <a class="glossary">character<span class="def"></span></a> and <a class="glossary">factor<span class="def"></span></a></p>
+<p>In the last chapter we introduced you to the <strong>Wickham six</strong> one-table <a href="https://psyteachr.github.io/glossary/f#function" target="_blank" class="glossary" title="A named section of code that can be reused.">functions</a> which we use to do that data wrangling. Over the course of this book we will reiterate these functions and skills, and <a href="https://psyteachr.github.io/glossary/p#package" target="_blank" class="glossary" title="A group of R functions.">packages</a> like the <code>tidyverse</code> and the packages it contains, across a number of different datasets to give you a wide range of exposure to what Psychology is about, and to reiterate that the same skills apply across different datasets. Always remember, <strong>the whilst the data changes, the skills stay the same!</strong></p>
+<p>We have also started to introduce different types of data and data structures. For example, data is often stored in two-dimensional tables, either called data frames, tables, or <a href="https://psyteachr.github.io/glossary/t#tibble" target="_blank" class="glossary" title="A container for tabular data with some different properties to a data frame">tibbles</a>. There are other ways of storing data that you will discover in time but mainly, in this book, we will be using tibbles, which we mentioned in the previous chapter (if you would like more info, type <code>vignette("tibble")</code> in the console). A tibble is really just a table of data with columns and rows of information - and some additional features we will learn about - and within the cells of the tibble, a cell being where a row and a column meets, you get different types of data, e.g.&nbsp;<a href="https://psyteachr.github.io/glossary/d#double" target="_blank" class="glossary" title="A data type representing a real decimal number">double</a>, <a href="https://psyteachr.github.io/glossary/i#integer" target="_blank" class="glossary" title="A data type representing whole numbers.">integer</a>, <a href="https://psyteachr.github.io/glossary/c#character" target="_blank" class="glossary" title="A data type representing strings of text.">character</a> and <a href="https://psyteachr.github.io/glossary/f#factor" target="_blank" class="glossary" title="A data type where a specific set of values are stored with labels; An explanatory variable manipulated by the experimenter">factor</a></p>
 <table class="table">
 <colgroup>
 <col style="width: 17%">
@@ -462,7 +460,7 @@ div.csl-indent {
 </table>
 <ul>
 <li>
-<strong>Note 1:</strong> Double and Integer can both be referred to as <a class="glossary">numeric<span class="def"></span></a> data, and you will see this word from time to time. For clarity, we will use Double as a term for any number that can take a decimal (e.g.&nbsp;3.14) and Integer as a term for any whole number (no decimal, e.g.&nbsp;3).</li>
+<strong>Note 1:</strong> Double and Integer can both be referred to as <a href="https://psyteachr.github.io/glossary/n#numeric" target="_blank" class="glossary" title="A data type representing a real decimal number or integer.">numeric</a> data, and you will see this word from time to time. For clarity, we will use Double as a term for any number that can take a decimal (e.g.&nbsp;3.14) and Integer as a term for any whole number (no decimal, e.g.&nbsp;3).</li>
 <li>
 <strong>Note 2:</strong> A wee bit confusingly Double data does not have to have decimal places in it. For instance, the value of 1 could be Double as well as Integer. However, the value of 1.1 could only be Double and never Integer. Integers cannot have decimal places. Again, the more you work with data the more this will make sense, but it highlights the importance of looking at your data and checking what type it is as the type determines what you can do with the data.</li>
 </ul>
@@ -474,24 +472,24 @@ div.csl-indent {
 <section id="dw2-a1" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="dw2-a1">
 <span class="header-section-number">5.1.1</span> Activity 1: Set-up Data Wrangling 2</h3>
 <ul>
-<li>First, download <a href="data/chpt5/PongBlueRedBack 1-16 Codebook.csv" download="">PongBlueRedBack 1-16 Codebook.csv</a> into your chapter folder.
+<li>First, download <a href="data/PongBlueRedBack 1-16 Codebook.csv" download="">PongBlueRedBack 1-16 Codebook.csv</a> into your chapter folder.
 <ul>
-<li>If you are having trouble downloading .csv files directly you may prefer to download the data as a zip file and unzip it from this link: <a href="data/chpt5/PsyTeachR_FQA_Chpt5-data.zip" download="">PongBlueRedBack 1-16 Codebook.zip</a>. Again just unzip it into your chapter folder.</li>
+<li>If you are having trouble downloading .csv files directly you may prefer to download the data as a zip file and unzip it from this link: <a href="data/PsyTeachR_FQA_Chpt5-data.zip" download="">PongBlueRedBack 1-16 Codebook.zip</a>. Again just unzip it into your chapter folder.</li>
 </ul>
 </li>
-<li>Next, set the <a class="glossary">working directory<span class="def"></span></a> to your chapter folder. Ensure the <a class="glossary">environment<span class="def"></span></a> is clear.
+<li>Next, set the <a href="https://psyteachr.github.io/glossary/w#working-directory" target="_blank" class="glossary" title="The filepath where R is currently reading and writing files.">working directory</a> to your chapter folder. Ensure the <a href="https://psyteachr.github.io/glossary/e#environment" target="_blank" class="glossary" title="A data structure that contains R objects such as variables and functions">environment</a> is clear.
 <ul>
 <li>If you’re using the Rserver, avoid a number of issues by restarting the session - click <code>Session</code> - <code>Restart R</code>
 </li>
 </ul>
 </li>
 <li>Now, open a new R Markdown document and save it in your working directory and call the file something informative like “DataWrangling2”.</li>
-<li>Next, delete the default R Markdown welcome text and insert a new code <a class="glossary">chunk<span class="def"></span></a>.</li>
+<li>Next, delete the default R Markdown welcome text and insert a new code <a href="https://psyteachr.github.io/glossary/c#chunk" target="_blank" class="glossary" title="A section of code in an R Markdown file">chunk</a>.</li>
 <li>Finally, copy and paste the below code into this code chunk and then run the code.</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"PongBlueRedBack 1-16 Codebook.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/PongBlueRedBack 1-16 Codebook.csv"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">summary</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Remember: </strong> We use the <code>read_csv()</code> function to load in data, and the data filename must be a) in quotation marks and b) spelt exactly as the filename states, including spaces and the file extension (in this case .csv)</p>
@@ -514,8 +512,8 @@ div.csl-indent {
                     Max.   :1.0000   Max.   :12.00  </code></pre>
 </div>
 </div>
-<p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, from the <strong><code>base</code></strong> package - the default packages automatically installed - provides a quick overview of the variables in your dataset and can be useful as a quick check that you have indeed imported the correct data. It will also provide some basic <a class="glossary">descriptive<span class="def"></span></a> statistics and some information on whether the data is character (text) data which can also be useful to check.</p>
-<p>An alternative approach for looking at data types would be to use the <code>glimpse()</code> function, from the <strong><code>dplyr</code></strong> package, loaded in with <strong><code>tidyverse</code></strong>. Try the following in your <a class="glossary">console<span class="def"></span></a> window:</p>
+<p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, from the <strong><code>base</code></strong> package - the default packages automatically installed - provides a quick overview of the variables in your dataset and can be useful as a quick check that you have indeed imported the correct data. It will also provide some basic <a href="https://psyteachr.github.io/glossary/d#descriptive" target="_blank" class="glossary" title="Statistics that describe an aspect of data (e.g., mean, median, mode, variance, range)">descriptive</a> statistics and some information on whether the data is character (text) data which can also be useful to check.</p>
+<p>An alternative approach for looking at data types would be to use the <code>glimpse()</code> function, from the <strong><code>dplyr</code></strong> package, loaded in with <strong><code>tidyverse</code></strong>. Try the following in your <a href="https://psyteachr.github.io/glossary/c#console" target="_blank" class="glossary" title="The pane in RStudio where you can type in commands and view output messages.">console</a> window:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">glimpse</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -785,15 +783,15 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 </ul>
 <ul>
 <li>What was the total number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_AEPJJBRMUN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AEPJJBRMUN" value=""><span>1059</span></label><label><input type="radio" autocomplete="off" name="radio_AEPJJBRMUN" value="answer"><span>527</span></label><label><input type="radio" autocomplete="off" name="radio_AEPJJBRMUN" value=""><span>1057</span></label><label><input type="radio" autocomplete="off" name="radio_AEPJJBRMUN" value=""><span>516</span></label>
+<div id="radio_BYIVGNEAIR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BYIVGNEAIR" value="answer"><span>527</span></label><label><input type="radio" autocomplete="off" name="radio_BYIVGNEAIR" value=""><span>1057</span></label><label><input type="radio" autocomplete="off" name="radio_BYIVGNEAIR" value=""><span>516</span></label><label><input type="radio" autocomplete="off" name="radio_BYIVGNEAIR" value=""><span>1059</span></label>
 </div>
 </li>
 </ul>
 <ul>
 <li>To three decimal places, what was the mean number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_ZRTPCSSNPA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZRTPCSSNPA" value="answer"><span>0.459</span></label><label><input type="radio" autocomplete="off" name="radio_ZRTPCSSNPA" value=""><span>0.922</span></label><label><input type="radio" autocomplete="off" name="radio_ZRTPCSSNPA" value=""><span>0.451</span></label><label><input type="radio" autocomplete="off" name="radio_ZRTPCSSNPA" value=""><span>0.92</span></label>
+<div id="radio_SKWOTPBBPX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SKWOTPBBPX" value=""><span>0.922</span></label><label><input type="radio" autocomplete="off" name="radio_SKWOTPBBPX" value="answer"><span>0.459</span></label><label><input type="radio" autocomplete="off" name="radio_SKWOTPBBPX" value=""><span>0.451</span></label><label><input type="radio" autocomplete="off" name="radio_SKWOTPBBPX" value=""><span>0.92</span></label>
 </div>
 </li>
 </ul>
@@ -885,7 +883,7 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 </div>
 </section><section id="dw2-pipes" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="dw2-pipes">
 <span class="header-section-number">5.2.3</span> Recapping Pipes (<strong><code>%&gt;%</code></strong>)</h3>
-<p>And finally today we just want to throw in a quick recap on <a class="glossary">pipes<span class="def"></span></a>. We have used pipes a little above but you might still not have got the hang of it so reading through this will help a little. Remember where pipes become most useful is when we <strong>string a series of functions together</strong>, rather than using them as separate steps and having to save the data each time under a new variable name and getting ourselves all confused. In non-piped code we have to create a new object each time, for example, <code>data</code>, <code>data_filtered</code>, <code>data_arranged</code>, <code>data_grouped</code>, <code>data_summarised</code> just to get to the final one we actually want. This creates a lot of variables and tibbles in our environment and can make everything unclear, difficult to follow, and eventually slow down our computer. Piped code however uses one variable name, saving space in the environment, and is clear and easy to read. With pipes we skip unnecessary steps and avoid cluttering our environment.</p>
+<p>And finally today we just want to throw in a quick recap on <a href="https://psyteachr.github.io/glossary/p#pipe" target="_blank" class="glossary" title="A way to order your code in a more readable format using the symbol %>%">pipes</a>. We have used pipes a little above but you might still not have got the hang of it so reading through this will help a little. Remember where pipes become most useful is when we <strong>string a series of functions together</strong>, rather than using them as separate steps and having to save the data each time under a new variable name and getting ourselves all confused. In non-piped code we have to create a new object each time, for example, <code>data</code>, <code>data_filtered</code>, <code>data_arranged</code>, <code>data_grouped</code>, <code>data_summarised</code> just to get to the final one we actually want. This creates a lot of variables and tibbles in our environment and can make everything unclear, difficult to follow, and eventually slow down our computer. Piped code however uses one variable name, saving space in the environment, and is clear and easy to read. With pipes we skip unnecessary steps and avoid cluttering our environment.</p>
 <p>Here is an example of code that doesn’t use pipes to find how many hits there were with the large paddle length and the red background:</p>
 <ul>
 <li>First we group the data accordingly, storing it in <code>pong_data_group</code>
@@ -966,23 +964,23 @@ Explain these answers
 <p><br></p>
 <ol start="2" type="1">
 <li>Which of the Wickham Six would you use to sort columns from smallest to largest:
-<div id="radio_RHQOSTZJED" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RHQOSTZJED" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_RHQOSTZJED" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_RHQOSTZJED" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_RHQOSTZJED" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_RHQOSTZJED" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_RHQOSTZJED" value=""><span>summarise</span></label>
+<div id="radio_VFNHPYJXHM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VFNHPYJXHM" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_VFNHPYJXHM" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_VFNHPYJXHM" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_VFNHPYJXHM" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_VFNHPYJXHM" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_VFNHPYJXHM" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to calculate the mean of a column:
-<div id="radio_LUIAEWGGKV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LUIAEWGGKV" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_LUIAEWGGKV" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_LUIAEWGGKV" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_LUIAEWGGKV" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_LUIAEWGGKV" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_LUIAEWGGKV" value="answer"><span>summarise</span></label>
+<div id="radio_HFZJZSFNWG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HFZJZSFNWG" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_HFZJZSFNWG" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_HFZJZSFNWG" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_HFZJZSFNWG" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_HFZJZSFNWG" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_HFZJZSFNWG" value="answer"><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to remove certain observations - e.g.&nbsp;remove all males:
-<div id="radio_YUKSAKPKKU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YUKSAKPKKU" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_YUKSAKPKKU" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_YUKSAKPKKU" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_YUKSAKPKKU" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_YUKSAKPKKU" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_YUKSAKPKKU" value=""><span>summarise</span></label>
+<div id="radio_WKYORNTZCX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WKYORNTZCX" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_WKYORNTZCX" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_WKYORNTZCX" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_WKYORNTZCX" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_WKYORNTZCX" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_WKYORNTZCX" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>What does this line of code say? <code>data %&gt;% filter() %&gt;% group_by() %&gt;% summarise()</code>:
-<div id="radio_URMREVLPCI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_URMREVLPCI" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_URMREVLPCI" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_URMREVLPCI" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_URMREVLPCI" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
+<div id="radio_VXOARVITLO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VXOARVITLO" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_VXOARVITLO" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_VXOARVITLO" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_VXOARVITLO" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
 </div>
 </li>
 </ol></section><section id="dw2-debug" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="dw2-debug">
@@ -1095,67 +1093,67 @@ Explain these answers
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">definition</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">definition</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">character</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#character" class="glossary" target="_blank">character</a></td>
+<td style="text-align: left;">A data type representing strings of text.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">chunk</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#chunk" class="glossary" target="_blank">chunk</a></td>
+<td style="text-align: left;">A section of code in an R Markdown file</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">console</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#console" class="glossary" target="_blank">console</a></td>
+<td style="text-align: left;">The pane in RStudio where you can type in commands and view output messages.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">descriptive</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#descriptive" class="glossary" target="_blank">descriptive</a></td>
+<td style="text-align: left;">Statistics that describe an aspect of data (e.g., mean, median, mode, variance, range)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">double</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#double" class="glossary" target="_blank">double</a></td>
+<td style="text-align: left;">A data type representing a real decimal number</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">environment</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/e#environment" class="glossary" target="_blank">environment</a></td>
+<td style="text-align: left;">A data structure that contains R objects such as variables and functions</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">factor</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/f#factor" class="glossary" target="_blank">factor</a></td>
+<td style="text-align: left;">A data type where a specific set of values are stored with labels; An explanatory variable manipulated by the experimenter</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">function</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/f#function" class="glossary" target="_blank">function</a></td>
+<td style="text-align: left;">A named section of code that can be reused.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">integer</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/i#integer" class="glossary" target="_blank">integer</a></td>
+<td style="text-align: left;">A data type representing whole numbers.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/n#numeric" class="glossary" target="_blank">numeric</a></td>
+<td style="text-align: left;">A data type representing a real decimal number or integer.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">package</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#package" class="glossary" target="_blank">package</a></td>
+<td style="text-align: left;">A group of R functions.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">pipe</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#pipe" class="glossary" target="_blank">pipe</a></td>
+<td style="text-align: left;">A way to order your code in a more readable format using the symbol %&gt;%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">tibble</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tibble" class="glossary" target="_blank">tibble</a></td>
+<td style="text-align: left;">A container for tabular data with some different properties to a data frame</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">working directory</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#working-directory" class="glossary" target="_blank">working-directory</a></td>
+<td style="text-align: left;">The filepath where R is currently reading and writing files.</td>
 </tr>
 </tbody>
 </table>
@@ -1750,12 +1748,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./04-wrangling-1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1: Join, select, and mutate</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./06-wrangling-3.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

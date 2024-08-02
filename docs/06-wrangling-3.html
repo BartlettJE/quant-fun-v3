@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
-<title>Fundamentals of Quantitative Analysis - 6&nbsp; Data Wrangling 3</title>
+<title>Fundamentals of Quantitative Analysis - 6&nbsp; Data Wrangling 3: Pivots</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,8 +91,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -105,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-wrangling-3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-wrangling-3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,7 +116,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/BartlettJE/quant-fun-v3/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -173,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-starting-with-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -185,19 +185,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1: Join, select, and mutate</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -404,13 +404,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">6.12</span> Words from this Chapter</a></li>
-  </ul></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/06-wrangling-3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/06-wrangling-3.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span>
-</h1>
+<h1 class="title"><span id="06-wrangling-03" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></span></h1>
 </div>
 
 
@@ -423,18 +421,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><p>In the last chapter, we looked at using one-table Wickham verbs to <code>filter</code>, <code>arrange</code>, <code>group_by</code>, <code>select</code>, <code>mutate</code> and <code>summarise</code> the pong data. We also learnt a little more about <a class="glossary">pipes<span class="def"></span></a> and we saw how to do some quick counting and some ungrouping. Be sure to try out those activities before moving on as we will start to add a few more functions to allow us a few more skills in <a class="glossary">data wrangling<span class="def"></span></a>.</p>
+</header><p>In the last chapter, we looked at using one-table Wickham verbs to <code>filter</code>, <code>arrange</code>, <code>group_by</code>, <code>select</code>, <code>mutate</code> and <code>summarise</code> the pong data. We also learnt a little more about <a href="https://psyteachr.github.io/glossary/p#pipe" target="_blank" class="glossary" title="A way to order your code in a more readable format using the symbol %>%">pipes</a> and we saw how to do some quick counting and some ungrouping. Be sure to try out those activities before moving on as we will start to add a few more functions to allow us a few more skills in <a href="https://psyteachr.github.io/glossary/d#data-wrangling" target="_blank" class="glossary" title="The process of preparing data for visualisation and statistical analysis.">data wrangling</a>.</p>
 <p>Today, as a progression from working with one table/tibble, we will focus on working with data across two or more tibbles To do this we are going to add two more functions, to the skills we already know. Those are:</p>
 <ul>
 <li>
-<code>pivot_longer()</code> which allows us to <strong>transform</strong> a <a class="glossary">tibble<span class="def"></span></a> from <a class="glossary">wide<span class="def"></span></a> format to <a class="glossary">long<span class="def"></span></a> format.</li>
+<code>pivot_longer()</code> which allows us to <strong>transform</strong> a <a href="https://psyteachr.github.io/glossary/t#tibble" target="_blank" class="glossary" title="A container for tabular data with some different properties to a data frame">tibble</a> from <a href="https://psyteachr.github.io/glossary/w#wide" target="_blank" class="glossary" title="A data format where all of the observations about one subject are in the same row">wide</a> format to <a href="https://psyteachr.github.io/glossary/l#long" target="_blank" class="glossary" title="A data format where each observation is on a separate row">long</a> format.</li>
 <li>
-<code>inner_join()</code> which allows us to <strong>combine</strong> two tibbles together based on common columns. We actually saw this <a class="glossary">function<span class="def"></span></a> in Chapter 3 so this might be more of a recap.</li>
+<code>inner_join()</code> which allows us to <strong>combine</strong> two tibbles together based on common columns. We actually saw this <a href="https://psyteachr.github.io/glossary/f#function" target="_blank" class="glossary" title="A named section of code that can be reused.">function</a> in Chapter 3 so this might be more of a recap.</li>
 </ul>
-<p>And just to recap, if you are still struggling with the idea of a function, remember that a function takes an input, performs some action, and gives an output. Think of your toaster again like we mentioned before: it takes bread as an input; it performs the action of heating it up; and it gives an output, the toast. A good thing about a lot of the functions we use is that they are nicely named as verbs to describe what they do - <code>mutate()</code> mutates (adds on a column); <code>arrange()</code> arranges columns, <code>summarise()</code> summarises, etc. But keep in mind that you don’t have to know or memorise all the different functions; through practice and repetition you will quickly learn to remember which ones are which and what <a class="glossary">package<span class="def"></span></a> they come from. Sort of like where to find your spoons in your kitchen - you don’t look in the fridge, and then the washing machine, and then the drawer. Nope, you learnt, by repetition, to look in the drawer first time. It’s the same with functions. Keep in mind that research methods is like a language in that the more you use it and work with it the more it makes sense. So with that, let’s do some practicing!</p>
+<p>And just to recap, if you are still struggling with the idea of a function, remember that a function takes an input, performs some action, and gives an output. Think of your toaster again like we mentioned before: it takes bread as an input; it performs the action of heating it up; and it gives an output, the toast. A good thing about a lot of the functions we use is that they are nicely named as verbs to describe what they do - <code>mutate()</code> mutates (adds on a column); <code>arrange()</code> arranges columns, <code>summarise()</code> summarises, etc. But keep in mind that you don’t have to know or memorise all the different functions; through practice and repetition you will quickly learn to remember which ones are which and what <a href="https://psyteachr.github.io/glossary/p#package" target="_blank" class="glossary" title="A group of R functions.">package</a> they come from. Sort of like where to find your spoons in your kitchen - you don’t look in the fridge, and then the washing machine, and then the drawer. Nope, you learnt, by repetition, to look in the drawer first time. It’s the same with functions. Keep in mind that research methods is like a language in that the more you use it and work with it the more it makes sense. So with that, let’s do some practicing!</p>
 <section id="tidy-data" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="tidy-data">
 <span class="header-section-number">6.1</span> Tidy data</h2>
-<p>But first a little more on data structure and organisation.For most of this book, we will use a type of data organisation known as <a class="glossary">tidy data<span class="def"></span></a>. Any data in this format is easily processed through the <code>tidyverse</code> package. However, the data you work with will not always start formatted in the most efficient way possible. If that happens then our first step is to put it into <code>Tidy Data</code> format. There are two fundamental principles defining <code>Tidy Data</code>:</p>
+<p>But first a little more on data structure and organisation.For most of this book, we will use a type of data organisation known as <a href="https://psyteachr.github.io/glossary/t#tidy-data" target="_blank" class="glossary" title="A format for data that maps the meaning onto the structure.">tidy data</a>. Any data in this format is easily processed through the <code>tidyverse</code> package. However, the data you work with will not always start formatted in the most efficient way possible. If that happens then our first step is to put it into <code>Tidy Data</code> format. There are two fundamental principles defining <code>Tidy Data</code>:</p>
 <ol type="1">
 <li>Each variable must have its own column.</li>
 <li>Each observation must have its own row.</li>
@@ -536,8 +534,8 @@ There is more information about <a href="https://r4ds.had.co.nz/tidy-data.html">
 <p>Have a look at the data in <code>responses</code> to see if you think it is Tidy or not and answer the following question:</p>
 <ul>
 <li>The data in <code>responses</code> is in what format?
-<div id="radio_CQDOGAUPTH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CQDOGAUPTH" value=""><span>Tidy</span></label><label><input type="radio" autocomplete="off" name="radio_CQDOGAUPTH" value=""><span>Long</span></label><label><input type="radio" autocomplete="off" name="radio_CQDOGAUPTH" value="answer"><span>Wide</span></label>
+<div id="radio_XTCKGHRCQW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XTCKGHRCQW" value=""><span>Tidy</span></label><label><input type="radio" autocomplete="off" name="radio_XTCKGHRCQW" value=""><span>Long</span></label><label><input type="radio" autocomplete="off" name="radio_XTCKGHRCQW" value="answer"><span>Wide</span></label>
 </div>
 </li>
 </ul>
@@ -633,7 +631,7 @@ The reasoning behind this shift is that sometimes agreeing or disagreeing might 
 <p>So far so good but there is more information we want to bring into the tibble. We now need to combine the information in our new tibble, <code>rlong2</code>, with the <code>scoring</code> tibble so you know how many points to attribute each question based on the answer the participant gave, and whether the question was forward or reverse coded. Again, you can use the <code>inner_join()</code> function, but this time the common columns found in <code>rlong2</code> and <code>scoring</code> are <code>QFormat</code> and <code>Response</code> - i.e.&nbsp;there are two common columns.</p>
 </section><section id="dw3-a6" class="level3" data-number="6.7.2"><h3 data-number="6.7.2" class="anchored" data-anchor-id="dw3-a6">
 <span class="header-section-number">6.7.2</span> Activity 6: Combining more data</h3>
-<p>Here, in the code below, we are going to show you how to combine data with two common columns. Really this is about combining tibbles were there is corresponding information in the two tibbles - participants appear in both tibbles but there is different info in each tibble and you want it all in the one tibble. This is called an <a class="glossary">inner-join<span class="def"></span></a> But first some information on this task.</p>
+<p>Here, in the code below, we are going to show you how to combine data with two common columns. Really this is about combining tibbles were there is corresponding information in the two tibbles - participants appear in both tibbles but there is different info in each tibble and you want it all in the one tibble. This is called an <a href="https://psyteachr.github.io/glossary/i#inner-join" target="_blank" class="glossary" title="A mutating join that returns all the rows that have a match in the other table.">inner-join</a> But first some information on this task.</p>
 <ul>
 <li>You can only ever join two tables with <code>inner_join()</code> at once. If you have multiple tibbles to join like we do, you need to do multiple calls to <code>inner_join()</code>.</li>
 <li>When there is more than one common column between two tibbles you are joining, it is best to combine by all the columns to avoid repeated columns names in the new tibble. For example, if you run a join and it produces columns named <code>variable.x</code> and <code>variable.y</code> it means that there was another column that was the same in both datasets that you didn’t add to <code>by =</code>.</li>
@@ -710,21 +708,21 @@ Additional Hints
 <ul>
 <li>
 <p>Complete the sentence, the higher the AQ score…</p>
-<div id="radio_CXKMTSLAAM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CXKMTSLAAM" value=""><span>the less autistic-like traits displayed</span></label><label><input type="radio" autocomplete="off" name="radio_CXKMTSLAAM" value=""><span>has no relation to autistic-like traits</span></label><label><input type="radio" autocomplete="off" name="radio_CXKMTSLAAM" value="answer"><span>the more autistic-like traits displayed</span></label>
+<div id="radio_UGJJYKACYW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UGJJYKACYW" value=""><span>the less autistic-like traits displayed</span></label><label><input type="radio" autocomplete="off" name="radio_UGJJYKACYW" value=""><span>has no relation to autistic-like traits</span></label><label><input type="radio" autocomplete="off" name="radio_UGJJYKACYW" value="answer"><span>the more autistic-like traits displayed</span></label>
 </div>
 </li>
 <li>
 <p>Assuming that your code all worked, what was the AQ score (just the number) of Participant ID No.&nbsp;87:</p>
-<div id="radio_THBVEUDEZI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_THBVEUDEZI" value=""><span>6</span></label>
+<div id="radio_RPROZXRNVN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value=""><span>6</span></label>
 </div>
 </li>
 <li><p>Type in the box how many participants had an AQ score of 3 (again just the number): <input class="webex-solveme nospaces" size="10" data-answer="[&quot;13&quot;]"></p></li>
 <li>
 <p>The cut-off for the AQ10 is usually said to be around 6 meaning that anyone with a score of more than 6 should be referred for diagnostic assessment. Based on this data, how many participants might be referred for further assessment?</p>
-<div id="radio_TMSHYAIGHQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value=""><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value="answer"><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_TMSHYAIGHQ" value=""><span>8</span></label>
+<div id="radio_DRKINCRLUH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value=""><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value="answer"><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value=""><span>8</span></label>
 </div>
 </li>
 </ul>
@@ -745,36 +743,36 @@ Explain these answers
 <p>Which function(s) would you use to approach each of the following problems?</p>
 <ul>
 <li><p>We have a dataset of 400 adults, but we want to remove anyone with an age of 50 years or more. To do this, we could use the <select class="webex-select"><option value="blank"></option>
-<option value="">arrange()</option>
 <option value="">group_by()</option>
-<option value="">select()</option>
 <option value="answer">filter()</option>
-<option value="">summarise()</option>
-<option value="">mutate()</option></select> function.</p></li>
-<li><p>We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the <select class="webex-select"><option value="blank"></option>
-<option value="">select()</option>
-<option value="">group_by()</option>
-<option value="answer">summarise()</option>
-<option value="">filter()</option>
 <option value="">mutate()</option>
+<option value="">summarise()</option>
+<option value="">select()</option>
 <option value="">arrange()</option></select> function.</p></li>
+<li><p>We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">mutate()</option>
+<option value="">group_by()</option>
+<option value="">filter()</option>
+<option value="">arrange()</option>
+<option value="">select()</option>
+<option value="answer">summarise()</option></select> function.</p></li>
 <li><p>Our dataset has a column with the number of cats a person has, and a column with the number of dogs. We want to calculate a new column which contains the total number of pets each participant has. To do this, we could use the <select class="webex-select"><option value="blank"></option>
 <option value="">group_by()</option>
+<option value="">filter()</option>
 <option value="">select()</option>
 <option value="">summarise()</option>
 <option value="answer">mutate()</option>
-<option value="">filter()</option>
 <option value="">arrange()</option></select> function.</p></li>
 <li><p>We want to calculate the average for each participant in our dataset. To do this we could use the <select class="webex-select"><option value="blank"></option>
-<option value="">filter() and select()</option>
 <option value="">group_by() and arrange()</option>
-<option value="">arrange() and mutate()</option>
-<option value="answer">group_by() and summarise()</option></select> functions.</p></li>
+<option value="">filter() and select()</option>
+<option value="answer">group_by() and summarise()</option>
+<option value="">arrange() and mutate()</option></select> functions.</p></li>
 <li><p>We want to order a dataframe of participants by the number of cats that they own, but want our new dataframe to only contain some of our columns. To do this we could use the <select class="webex-select"><option value="blank"></option>
-<option value="answer">filter() and select()</option>
-<option value="">select() and summarise()</option>
 <option value="answer">arrange() and select()</option>
-<option value="">group_by() and mutate()</option></select> functions.</p></li>
+<option value="answer">filter() and select()</option>
+<option value="">group_by() and mutate()</option>
+<option value="">select() and summarise()</option></select> functions.</p></li>
 </ul>
 <div class="webex-solution">
 <button>
@@ -862,47 +860,47 @@ Explain these Answers
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">definition</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">definition</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">data wrangling</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#data-wrangling" class="glossary" target="_blank">data-wrangling</a></td>
+<td style="text-align: left;">The process of preparing data for visualisation and statistical analysis.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">function</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/f#function" class="glossary" target="_blank">function</a></td>
+<td style="text-align: left;">A named section of code that can be reused.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">inner-join</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/i#inner-join" class="glossary" target="_blank">inner-join</a></td>
+<td style="text-align: left;">A mutating join that returns all the rows that have a match in the other table.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">long</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/l#long" class="glossary" target="_blank">long</a></td>
+<td style="text-align: left;">A data format where each observation is on a separate row</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">package</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#package" class="glossary" target="_blank">package</a></td>
+<td style="text-align: left;">A group of R functions.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">pipe</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#pipe" class="glossary" target="_blank">pipe</a></td>
+<td style="text-align: left;">A way to order your code in a more readable format using the symbol %&gt;%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">tibble</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tibble" class="glossary" target="_blank">tibble</a></td>
+<td style="text-align: left;">A container for tabular data with some different properties to a data frame</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">tidy data</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tidy-data" class="glossary" target="_blank">tidy-data</a></td>
+<td style="text-align: left;">A format for data that maps the meaning onto the structure.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">wide</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#wide" class="glossary" target="_blank">wide</a></td>
+<td style="text-align: left;">A data format where all of the observations about one subject are in the same row</td>
 </tr>
 </tbody>
 </table>
@@ -1492,7 +1490,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./05-wrangling-2.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
