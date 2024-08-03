@@ -192,7 +192,7 @@ One common source of confusion is not seeing all your columns when you open up a
 
 ```{r preview-alldat, echo=FALSE}
 #| label: fig-img-preview-alldat
-#| fig.cap: "Exploring a data object in RStudio by opening it as a tab. You can navigate around the columns and rows without opening it up in somehthing like Excel. If there are more than 50 columns, you can click the arrows next to Cols:."
+#| fig.cap: "Exploring a data object in RStudio by opening it as a tab. You can navigate around the columns and rows without opening it up in somehthing like Excel. If there are more than 50 columns, you can click the arrows next to Cols."
 
 knitr::include_graphics("images/alldat_previewdata.png")
 
@@ -220,132 +220,299 @@ Now you have explored `all_dat`, try and use one or both of these methods to exp
 
 ## Selecting variables of interest with `select()`
 
+Data sets often have a lot of variables we do not need and it can be easier to focus on just the columns we do need. In `all_dat`, we have 54 variables which takes ages to scroll through and it can be harder to find what you are looking for. 
+
+For the two scales on happiness and depression, we have all their items, as well as their total scores. We can create a data set that only includes the key variables and ignores all the individual items using the `select()` function. There are two ways you can use select: by selecting the variables you want to include, or by selecting the variables you want to ignore. 
+
+### Selecting variables you want to include
+
+If there are a smaller number of variables you want to include, then it will be more efficient to specify which variables you want to **include**. Returning to the data wrangling from chapter 3, we can select the columns from `all_dat` that we want to keep. 
+
+```{r select1}
+summarydata <- select(.data = all_dat, # First argument as the data object
+                      id, # Stating variables we want to include
+                      occasion, 
+                      elapsed.days,
+                      intervention,
+                      ahiTotal, 
+                      cesdTotal, 
+                      sex, 
+                      age, 
+                      educ, 
+                      income)
+```
+
+To break down this code: 
+
+- We are creating a new object called `summarydata`. 
+
+- From `all_dat`, we are selecting 10 columns we want to keep, which we list one by one. 
+
+::: {.callout-note}
+In this example, the variables are in the same order as they were `all_dat`, but they do not need to be. You can use `select()` to create a new variable order if that helps you see all the important variables first. 
+:::
+
+Keep in mind it is important you select variables and assign them to a new object, or overwrite the old object. Both work, but think about if you need the original object later in your analysis and you do not want to go back and rerun code to recreate it. If you just use the select function on it's own, it does not do anything to the object, R just shows you the variables you selected: 
+
+```{r eval=FALSE}
+select(.data = all_dat, # First argument as the data object
+                      id, # Stating variables we want to include
+                      occasion, 
+                      elapsed.days,
+                      intervention,
+                      ahiTotal, 
+                      cesdTotal, 
+                      sex, 
+                      age, 
+                      educ, 
+                      income)
+```
+
+If you have several variables in order that you want to select, you can use a shortcut to avoid typing out every single name. When you select variables, you can use the format `firstcolumn:lastcolumn` to select all the variables from the first column you specify until the last column. 
+
+For example, if we wanted to isolate the individual items, we could use the following code: 
+
+```{r}
+scaleitems <- select(all_dat, # First argument as the data object
+                     ahi01:cesd20) # Range of variables to select
+```
+
+You can also pair this with individual variable selection: 
+
+```{r}
+scaleitems <- select(all_dat, # First argument as the data object
+                     id, # Individual variable to include
+                     ahi01:cesd20) # Range of variables to select
+```
+
+::: {.callout-tip}
+#### Try this
+
+If you wanted to select all the variables from `id` to `intervention`, plus all the variables from `ahiTotal` to `income`, how could you use this shortcut format? Try and complete the following code to recreate `summarydata`. Check your answer below when you have tried on your own. 
+
+```{r eval=FALSE}
+summarydata2 <- ?
+```
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+
+Instead of typing all 10 variables, you can select them using two ranges to ignore the scale items in the middle: 
+
+```{r}
+summarydata2 <- select(all_dat, # First argument as the data object
+                      id:intervention, # variable range 1
+                      ahiTotal:income) # variable range 2
+```
+
+:::
+
+### Selecting variables you want to ignore
+
+Alternatively, you can also state which variables you do not want to keep. This is really handy if you want to keep many columns and only remove one or two. 
+
+For example, if we wanted to remove two variables, you add a dash (-) before the variable name:
+
+```{r}
+all_dat_reduced2 <- select(all_dat, 
+                           -occasion, # Remove occasion
+                           -elapsed.days) # Remove elapsed.days
+```
+
+This also works using the range method, but you must add the dash before the first and last column in the range you want to remove. For example, we can recreate `summarydata` one more time by removing the scale items in the middle:
+
+```{r}
+summarydata3 <- select(all_dat, # 
+                       -ahi01:-cesd20) # Remove range of variables
+```
+
+::: {.callout-tip}
+You can see there were at least three different ways of creating `summarydata` to keep the 10 variables we want to focus on. This is an important lesson as there is often not just one unique way of completing a task in R. 
+
+When you first start coding, you might begin with the long way that makes sense to you. As you practice more, you recognise ways to simplify your code. 
+:::
+
 ## Arranging variables of interest with `arrange()`
 
-## Creating or modifying variables with `mutate()`
+Another handy skill is being able to change the order of observations within columns in your data set. The function `arrange()` will sort the rows/observations by one or more columns. This can be useful for exploring your data set and answering basic questions, such as: who was the youngest or oldest participant? 
 
-## Six functions for wrangling the `babynames`
+### Arranging in ascending order
 
-Ok so now we have a fairly code understanding of the babynames, let's use it to learn a bit more about the six functions from `dplyr` that make up a lot of data wrangling!
+Using `summarydata`, we can order the participants' ages in ascending order: 
 
-### Activity 4: Selecting variables of interest  with `select()` {#dw1-a4}
+```{r sort1}
 
-Often data has a lot of variables we don't need and it can be easier to focus on just the data we do need. In `babynames` there are two numeric measurements of name popularity - `prop`, the proportion of all babies with each name, is probably more useful than `n`, the total number of babies with that name, because `prop` takes into account that different numbers of babies are born in different years. 
-
-Now as we saw previously, if we wanted to create a dataset that only includes certain variables, we can use the `select()` function from the `dplyr` package. 
-
-* In a new code chunk, type and run the below code to select only the columns `year`, `sex`, `name` and `prop` and store it as a `tibble` in the object named `babynames_reduced`.
-    * the first argument `.data` is the object we want to select variables from, in this case `babynames`
-    * the additional arguments are the names of the variables you want to **keep**!
-
-```{r bab-select1, eval=FALSE}
-babynames_reduced1 <- select(.data = babynames,
-                            year, 
-                            sex, 
-                            name, 
-                            prop)
-```
-
-Alternatively, you can also state which variables you don't want to keep! This is really handy if you want to keep a lot of columns and only get rid of maybe one or two. 
-
-* Type and run in the below code in a new code chunk.
-    * Here, rather than stating you want to keep `year`, `sex`, `name` and `prop`, we can say drop (i.e. get rid of) the column `n` using the minus sign `-` before the variable name.
-
-```{r bab-select2, eval=FALSE}
-babynames_reduced2 <- select(.data = babynames, 
-                             -n)
-```
-
-**Note** that `select()` does not change the original tibble, `babynames`, but makes a new object that stores a new tibble with the specified columns, i.e. `babynames_reduced1` and `babynames_reduced2`. You will see the new objects in your environment pane. If you don't save the new tibbles to an object, they won't be saved. For example, the below code does the same as the previous code but is not saved as the output of the function is not assigned (using the `r glossary("assignment operator")`, `<-`) to a new object. 
-
-```{r chpt4-nosave, eval=FALSE}
-
-select(.data = babynames, 
-       -n)
+age_ascend <- arrange(summarydata,
+                    age)
 
 ```
 
-### Activity 5: Arranging the data with `arrange()` {#dw1-a5}
+To break down the code, 
 
-Superb! We now know how to select variables. Another handy skill is being able to change the order of data in a tibble. The function `arrange()` will sort the rows in the table according to the columns you supply. 
+- We create a new object called `age_ascend`. 
 
-* Type and run the below code in a new code chunk.
-    * the first argument `.data` again says what object to work on
-    * the second argument says what column to sort the data by - in this instance we are sorting by `name`
-    * the default sorting order is ascending!
+- We apply the function `arrange()` to the `summarydata` object.
 
-```{r sort1, eval=FALSE}
+- We order the observations by `age`, which is by default in ascending order from smallest to largest. 
 
-sort_asc <- arrange(.data = babynames,
-                    name)
+If you look in `age_ascend`, we organised the data in ascending order based on age and can see the youngest participant was 18 years old. 
 
-```
+### Arranging in descending order
 
-If you look in `sort_asc` the data are now sorted in ascending alphabetical order by name. But what if you want the data in descending order? Here we can wrap the name of the variable in the `desc()` function. 
+By default, `arrange()` sorts observations in ascending order from the smallest to largest value, or alphabetical order from A to Z. If you want to arrange observations in descending order, you can wrap the name of the variable in the `desc()` function. 
 
-* Type and run the below code in a new code chunk. When you have run the code have a look at `sort_desc` and note that the data is now sorted by descending year!
+For example, we can order participants from oldest to youngest: 
 
-```{r sort2, eval=FALSE}
+```{r sort2}
 
-sort_desc <- arrange(babynames, 
-                     desc(year)) 
+age_descend <- arrange(summarydata, 
+                     desc(age)) # descending order of age
 
 ```
 
-Finally, you can also sort by more than one column and a combination of ascending and descending columns. Have a look at th below code and then answer the question below:
+This time, we can see the oldest participant was 83 years old. 
+
+### Sorting by multiple columns
+
+Finally, you can also sort by more than one column and a combination of ascending and descending columns. Unlike `select()`, you might not need to save your sorted observations as a new object, you could use `arrange()` more as a tool to explore your data. 
+
+For example, we could look for the oldest female participant. Note: your code will show all 992 observations you could scroll through, but we shorten the data to the first 10 to save space.  
 
 ```{r sort3, eval=FALSE}
 
-arrange(babynames, 
-        desc(year), 
-        desc(sex), 
-        desc(prop)) 
+arrange(summarydata, 
+        sex, # order by sex first
+        desc(age)) # then descending age
 
 ```
 
-The above code will produce: `r longmcq(c("the data sorted by descending year and sex but ascending prop","the data sorted by descending year and prop but ascending sex", answer = "the data sorted by descending year, sex and prop", "the data sorted by ascending year, sex and prop"))`
-
-`r hide("Explain this answer")`
-As all the columns stated are wrapped in the `desc()` function inside the `arrange()` function then all columns will be sorted in descending fashion, sorting the year first, then the sex, then the prop. Note however that the output is not being stored at all in a new object so you would not be able to work on the data later without saving it in an object first!
-`r unhide()`
-
-### Activity 7: Creating new variables with `mutate()` {#dw1-a7}
-
-Doing really well! Only a little more to go we promise! OK so we have really learnt a lot about changing the data we have but sometimes we need to create a new variable that doesn’t exist in our dataset. For instance, we might want to figure out what decade a particular year belongs to in out babynames data and add that to our data! To create new variables, we use the function `mutate()`. 
-
-* Type and run the below code in a new code chunk.
-    * Here, you are mutating a new column onto the data and storing it in the object `baby_decades`
-    * the first argument is the original data, `babynames`
-    * the second argument is the name of the new column `decade` followed by what you want in that column - the decade.
-    * we are creating the decades using the code `floor(year/10)*10. This seems complicated but it says take the year and divide by 10, then get rid of the decimal places, and then multiply by 10. So for example, 1945/10 = 194.5, and if you get rid of the decimal places that becomes 194, and multiply it by 10 gives you 1940s!.
-
-```{r decades, eval = FALSE}
-baby_decades <- mutate(.data = babynames,
-                  decade = floor(year/10) *10)
-baby_decades
+```{r echo=FALSE}
+summarydata %>% 
+  arrange(sex, # order by sex first
+          desc(age)) %>%  # then order by age
+  head(10)
 ```
 
-The start of the data will look something like this with the new column called `decade` mutated on:
+::: {.callout-tip}
+#### Try this
 
-```{r decades-hidden, echo = FALSE}
-baby_decades <- mutate(.data = babynames,
-                  decade = floor(year/10) *10)
-head(baby_decades)
+Using `summarydata` and `arrange()`, sort the data to answer the following questions: 
+
+1. How old is the participant with the highest total happiness score (`ahiTotal`)? `r fitb(25)`
+
+2. What is the highest total depression score (`cesdTotal`) in a female participant (remember 1 = female, 2 = male)? `r fitb(55)`
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+
+1. We only need to arrange by `ahiTotal` in descending order to find the highest value, then look at the age column. 
+
+```{r eval=FALSE}
+arrange(summarydata, 
+        desc(ahiTotal)) # descending ahiTotal
 ```
 
+2. We first order by `sex` in ascending order so 1s are first, then descending order of `cesdTotal` for the highest value. 
 
-But mutates can be much simpler like this example here. Have a look at the code and then answer the question below:
-
-```{r decades2, eval = FALSE}
-baby_where <- mutate(.data = babynames,
-                  country = "USA")
+```{r eval=FALSE}
+arrange(summarydata, 
+        sex, # order by sex first
+        desc(cesdTotal)) # Descending depression total
 ```
 
-What will be stored in the object `baby_where`? `r longmcq(c("a tibble with one column called country that contains the decade people were born", answer = "a tibble with all the original data and a new column called country stating USA", "a tibble with all the original data and a new column stating usa", "a tibble with all the original data arranged by the country USA"))`
+:::
 
-`r hide("Explain this Answer")`
-This code will create a new object storing a tibble that has all the original data and a new column called country that states USA for each row. The `mutate()` adds to what is already there unless you add a `select()` or `filter()` to remove columns or rows. Note that one of the answers is wrong because it states usa in lowercase but the code states it in uppercase, i.e. USA. Remember to be specific.
-`r unhide()`
+## Modifying or creating variables with `mutate()`
+
+In the final data wrangling function for this chapter, we can use the function `mutate()` to modify existing variables or create new variables. This is an extremely powerful and flexible function. We will not be able to cover everything you can do with it in this chapter but we will introduce you to some common tasks you might want to apply.  
+
+### Modifying existing variables 
+
+If you remember back to chapter 3, we had a problem where R interpreted variables like `sex`, `educ`, and `income` as numeric, but ideally we wanted to treat them as distinct categories or factors. We used `mutate()` to convert the three columns to factors:
+
+```{r}
+# Overwrite summary data 
+summarydata <- mutate(summarydata, # mutate to change columns 
+         sex = as.factor(sex), # save sex as a factor
+         educ = as.factor(educ),
+         income = as.factor(income))
+```
+
+To break down the code: 
+
+- We overwrite `summarydata` by assigning the function to an existing object name. 
+
+- We use the `mutate()` function on the old `summarydata` data by using as the first argument. 
+
+- We can add one or more arguments to modify or create variables. Here, we modify an existing variable `sex`, use an equals sign (=), then how we want to modify the variable. In this example, we convert sex to a factor by using the function `as.factor(sex)`. 
+
+You might not just want to turn a variable into a factor, you might want to completely recode what its values represent. For this, there is a function called `case_match()` which you can use within `mutate()`. For example, if we wanted to make `sex` easier to interpret, we could overwrite its values from 1 and 2: 
+
+```{r}
+sex_recode <- mutate(summarydata,
+                     sex = case_match(sex, # overwrite existing
+                                      "1" ~ "Female", # old to new
+                                      "2" ~ "Male")) # old to new
+```
+
+To break down this code, 
+
+- We create a new object `sex_recode` by mutating the `summarydata` object. 
+
+- We modify an existing variable `sex` by applying `case_match()` to `sex`. 
+
+- Within `case_match()`, the value on the left is the existing value in the data you want to recode. The value on the right is the new value you want to overwrite it to. So, we want to change all the 1s in the data to Female. We then add a new line for every old value we want to change. 
+
+::: {.callout-important}
+#### Error mode
+
+In the previous exercise, we already converted sex to a factor. So, we had to add quote marks around the old values (`"1"`) as they are no longer considered numeric. If you do not add the quote marks, you will get an error like `Can't convert "..1 (left)" <double> to <factor>`. 
+
+If you applied this step *before* converting `sex` to a factor, then `1 ~ "Female"` would work. This shows why it is important to keep data types in mind as R might not know what you mean if you state one data type when it is expecting another. 
+:::
+
+::: {.callout-tip}
+#### Try this
+
+Using what you just learnt about using `mutate` and `case_match()`, recode the variable `income` and complete the code below. These are what the numeric values mean as labels: 
+
+1 = Below average
+
+2 = Average
+
+3 = Above average
+
+```{r eval=FALSE}
+income_recode <- mutate(summarydata,
+                     income = ?
+                       )
+```
+
+Check your code against the solution when you have attempted yourself first. 
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+
+Following the same format as `sex`, we add a new label for each of the three levels of income. 
+
+```{r eval=FALSE}
+income_recode <- mutate(summarydata,
+                     income = case_match(income, # overwrite existing
+                                      "1" ~ "Below average", # old to new
+                                      "2" ~ "Average", # old to new
+                                      "3" ~ "Above average")) # old to new
+```
+
+:::
+
+### Creating new variables 
+
+
 
 ## Test yourself {#ld-test}
 
@@ -460,6 +627,8 @@ Such a dastardly error! Well done if you spotted it!!!
 
 `r unhide()`
 <br>
+
+- case_match spelling error or factor not in quotes
 
 ## Words from this Chapter
 

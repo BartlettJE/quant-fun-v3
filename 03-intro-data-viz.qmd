@@ -194,17 +194,19 @@ all_dat <- inner_join(dat,
                       by= c("id", "intervention"))
 
 summarydata <- select(.data = all_dat, 
+                      id,
+                      occasion, 
+                      elapsed.days,
+                      intervention,
                       ahiTotal, 
                       cesdTotal, 
                       sex, 
                       age, 
                       educ, 
-                      income, 
-                      occasion, 
-                      elapsed.days)
+                      income)
 ```
 
-For a brief overview, we are joining the two data files by common columns ("id" and "intervention") to create the object `all_dat`. We are then selecting 8 columns from the original 54 to make the data easier to work with in `summarydata`. 
+For a brief overview, we are joining the two data files by common columns ("id" and "intervention") to create the object `all_dat`. We are then selecting 10 columns from the original 54 to make the data easier to work with in `summarydata`. 
 
 This final object `summarydata` is the source of the data we will be working with for the rest of this chapter. 
 
@@ -224,7 +226,7 @@ glimpse(summarydata)
 The `glimpse()` function comes from a package called `dplyr`, which is part of the tidyverse. This package contains many functions for wrangling data like joining data sets and selecting columns. We will explore loads of functions within `dplyr` in the next few chapters on data wrangling. 
 :::
 
-This function provides a condensed summary of your data. You can see there are 992 rows and 8 columns. You see all the column names for each variable in the data set. You can also see that all the variables are automatically considered as `r glossary("numeric")` (in this case `r glossary("double")` represented by `<dbl>`). Treating categorical variables like "sex" and "income" as numbers will cause us problems later, but it is fine for the variables we will be working on now. 
+This function provides a condensed summary of your data. You can see there are 992 rows and 10 columns. You see all the column names for each variable in the data set. You can also see that all the variables are automatically considered as `r glossary("numeric")` (in this case `r glossary("double")` represented by `<dbl>`). Treating categorical variables like "sex" and "income" as numbers will cause us problems later, but it is fine for the variables we will be working on now. 
 
 ## `ggplot2` and the layer system
 
