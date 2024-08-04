@@ -512,7 +512,102 @@ income_recode <- mutate(summarydata,
 
 ### Creating new variables 
 
+You can also create new variables using `mutate()`. There are many possibilities here, so we will demonstrate a few key principles for inspiration and you will learn how to tackle unique problems as you come to them. 
 
+In it's simplest application, you can use `mutate()` to add a single value to all rows. For example, you might want to label a data set before joining with another data set so you can identify their origin. Instead of overwriting an existing variable, we specify a new variable name and the value we want to assign: 
+
+```{r}
+summarydata <- mutate(summarydata,
+                      study = "Woodworth et al. (2018)")
+```
+
+Using a similar kind of logic to `case_match()` we introduced you to earlier, there is an extremely flexible function called `case_when()` to help create new variables. Before we explain how it works, we will jump straight into an example to give you something concrete to work with. 
+
+@woodworth_data_2018 includes scores from the Center for Epidemiological Studies Depression (CES-D) scale. Scores range from 0 to 60, with scores of 16 or more considered a cut-off for being at risk of clinical depression. We have the scores, so we can use `case_when()` to label whether participants are at risk or not.
+
+```{r}
+summarydata <- mutate(summarydata,
+                      depression_risk = case_when(
+                        cesdTotal < 16 ~ "Not at risk",
+                        cesdTotal > 15 ~ "At risk"))
+```
+
+To break down the code: 
+
+- We overwrite `summarydata` by mutating the existing `summarydata` object. 
+
+- We create a new variable called `depression_risk` by applying the `case_when()` function to the variable `cesdTotal`. 
+
+- We apply two comparisons to label responses as either "Not at risk" or "At risk". If `cesdTotal` is less than 16 (i.e., 15 or smaller), then it receives the value "Not at risk". If `cesdTotal` is more than 15 (i.e., 16 or higher), then it receives the value "At risk". 
+
+The function `case_when()` applies these criteria **line by line** as it works through your rows. Depending on which criteria your observation meet, it receives the label "Not at risk" or "At risk". The comparisons use something called a `r glossary("Boolean expression", def = "A logical statement in programming to evaluate a condition and return a Boolean value, which can be TRUE or FALSE.")`. These are logical expressions which can return the values of TRUE or FALSE. 
+
+To demonstrate the idea, imagine we were applying the logic manually to scores in the data. The first value is 50, so we could apply our criteria to see which one it meets:
+
+```{r}
+50 < 16
+50 > 15
+```
+
+R evaluates the first comparison as FALSE as 50 is not smaller than 16, but it evaluates the second comparison as TRUE as 50 is larger than 15. So, `case_when()` would apply the label "At risk" as the second statement evaluates to TRUE. 
+
+::: {.callout-tip}
+#### Try this
+Try and pick a few more `cesdTotal` scores from the data and apply the criteria to see if they are evaluated as TRUE OR FALSE. It can be tricky moving from imagining what you want to do to being able to express it in code, so the more practice the better. 
+:::
+
+We have used a simple less than or greater than, but there are several options for expressing Boolean logic, the most common of which are:
+
+Operator	|Name	                 |is TRUE if and only if
+----------|----------------------|---------------------------------
+A < B 	  |less than 	           |A is less than B
+A <= B 	  |less than or equal    |A is less than or equal to B
+A > B 	  |greater than 	       |A is greater than B
+A >= B 	  |greater than or equal |A is greater than or equal to B
+A == B 	  |equivalence 	         |A exactly equals B
+A != B 	  |not equal 	           |A does not exactly equal B
+A %in% B 	|in 	                 |A is an element of vector B
+
+Boolean expressions will come up again in chapter 5 when it comes to `filter()`, so there will be plenty more practice as you apply your understanding to different data sets and use cases. 
+
+::: {.callout-tip}
+#### Try this
+
+Using what you just learnt about using `mutate` and `case_when()`, create a new variable called `happy` using the `ahiTotal` variable and complete the code below.
+
+The Authentic Happiness Inventory (AHI) does not have official cutoffs, but let us pretend scores of **65 or more** are "happy" and scores of **less than 65** are "unhappy". 
+
+```{r eval=FALSE}
+summarydata <- mutate(summarydata,
+                     happy = ?
+                       )
+```
+
+Check your code against the solution when you have attempted yourself first. 
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+
+Following the same format as `depression_risk` and `cesdTotal`, we add a new comparison for each criterion we want to use as a Boolean expression:  
+
+```{r eval=FALSE}
+summarydata <- mutate(summarydata,
+                      happy = case_when(
+                        ahiTotal < 65 ~ "Unhappy",
+                        ahiTotal > 64 ~ "Happy"))
+```
+
+If you looked at the table of Boolean operators, you could also express 65 or more as: 
+
+```{r eval=FALSE}
+summarydata <- mutate(summarydata,
+                      happy = case_when(
+                        ahiTotal < 65 ~ "Unhappy",
+                        ahiTotal >= 65 ~ "Happy"))
+```
+
+:::
 
 ## Test yourself {#ld-test}
 
