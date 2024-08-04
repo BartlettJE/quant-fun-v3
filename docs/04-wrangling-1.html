@@ -1318,126 +1318,169 @@ Solution
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
 <section id="knowledge-check" class="level3" data-number="4.7.1"><h3 data-number="4.7.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">4.7.1</span> Knowledge check</h3>
-<ol type="1">
-<li>Which of the following is not one of the Wickham Six functions?
-<div id="radio_MLJPKBCTBU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MLJPKBCTBU" value="answer"><span>melt()</span></label><label><input type="radio" autocomplete="off" name="radio_MLJPKBCTBU" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_MLJPKBCTBU" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_MLJPKBCTBU" value=""><span>filter()</span></label>
+<strong>Question 1</strong>. Which of the following functions would you use if you wanted to keep only certain columns?
+<div id="radio_QSNUZQYGVS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QSNUZQYGVS" value="answer"><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_QSNUZQYGVS" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_QSNUZQYGVS" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_QSNUZQYGVS" value=""><span>inner_join()</span></label>
 </div>
-</li>
-<li>Which of the following functions would I use if I wanted to keep only certain columns?
-<div id="radio_VOWUCIWEKQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VOWUCIWEKQ" value="answer"><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_VOWUCIWEKQ" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_VOWUCIWEKQ" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_VOWUCIWEKQ" value=""><span>filter()</span></label>
+<strong>Question 2</strong>. Which of the following functions would you use if you wanted to join two data sets by their shared identifier?
+<div id="radio_NDYWVEVMNE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NDYWVEVMNE" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_NDYWVEVMNE" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_NDYWVEVMNE" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_NDYWVEVMNE" value="answer"><span>inner_join()</span></label>
 </div>
-</li>
-<li>Which of the following functions would I use if I wanted to keep only certain rows?
-<div id="radio_WLZOMGBZWX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WLZOMGBZWX" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_WLZOMGBZWX" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_WLZOMGBZWX" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_WLZOMGBZWX" value="answer"><span>filter()</span></label>
+<strong>Question 3</strong>. Which of the following functions would you use if you wanted to add or modify a column?
+<div id="radio_VMGJNDUAFS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VMGJNDUAFS" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_VMGJNDUAFS" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_VMGJNDUAFS" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_VMGJNDUAFS" value=""><span>inner_join()</span></label>
 </div>
-</li>
-<li>Which of the following functions would I use if I wanted to add a new column of information?
-<div id="radio_ARVZZLJWLA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ARVZZLJWLA" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_ARVZZLJWLA" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_ARVZZLJWLA" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_ARVZZLJWLA" value=""><span>filter()</span></label>
+<strong>Question 4</strong>. When you use mutate(), which additional function could you use to recode an existing variable?
+<div id="radio_GHYFETULSS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GHYFETULSS" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_GHYFETULSS" value=""><span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_GHYFETULSS" value="answer"><span>case_match()</span></label><label><input type="radio" autocomplete="off" name="radio_GHYFETULSS" value=""><span>filter()</span></label>
 </div>
-</li>
-<li>Which boolean expression would I add to a <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function to keep only Male babies in the original <code>babynames</code> data?
-<div id="radio_VJUMKUOAUN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VJUMKUOAUN" value=""><span>sex == F</span></label><label><input type="radio" autocomplete="off" name="radio_VJUMKUOAUN" value="answer"><span>sex == M</span></label><label><input type="radio" autocomplete="off" name="radio_VJUMKUOAUN" value=""><span>sex &lt; F</span></label><label><input type="radio" autocomplete="off" name="radio_VJUMKUOAUN" value=""><span>Sex == M</span></label>
-</div>
-</li>
-</ol>
-<div class="webex-solution">
-<button>
-Explain these Answers
-</button>
-<ol type="1">
-<li>
-<code>melt()</code> is not a function in the Wickham six functions. It is actually a function but not one we tend to use.</li>
-<li>
-<code>select()</code> is the function for keeping and removing columns.</li>
-<li>
-<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> is the function for keeping and removing rows.</li>
-<li>
-<code>mutate()</code> is the function for adding new columns.</li>
-<li>Assuming the original data has not been changed, <code>"sex == M"</code> would work and not <code>"Sex == M"</code> as there is no column called Sex with an uppercase S. Remember to be exact.</li>
-</ol>
+<strong>Question 5</strong>. When you use mutate(), which additional function could you use to create a new variable depending on specific criteria you set?
+<div id="radio_SDHIPNOEXG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SDHIPNOEXG" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_SDHIPNOEXG" value="answer"><span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_SDHIPNOEXG" value=""><span>case_match()</span></label><label><input type="radio" autocomplete="off" name="radio_SDHIPNOEXG" value=""><span>filter()</span></label>
 </div>
 </section><section id="error-mode-1" class="level3" data-number="4.7.2"><h3 data-number="4.7.2" class="anchored" data-anchor-id="error-mode-1">
 <span class="header-section-number">4.7.2</span> Error mode</h3>
-<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on reading data and using ggplot2. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
-<p>Create and save a new R Markdown file for these activities by following the instructions in Chapter 2. You should have a blank R Markdown file below line 10. Below, we have several variations of a code chunk and inline code errors. Copy and paste them into your R Markdown file, click knit, and look at the error message you receive. See if you can fix the error and get it working before checking the answer.</p>
-<ol type="1">
-<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code in your console window:</li>
-</ol>
+<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions <code>inner_join()</code>, <code>select()</code>, and <code>mutate()</code>. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
+<p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <code>tidyverse</code> and the two data files:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>babynames</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Load the tidyverse package</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb31-3"><a href="#cb31-3"></a></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="co"># Load the two data files</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ahi-cesd.csv"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/participant-info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This will produce the error:</p>
-<pre><code>Error: object 'babynames' not found</code></pre>
-<p>Once you figure out how to fix this error, make a note of it.</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<p>This is an indication that you have not loaded the <code>babynames</code> package into the library using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function</p>
+<p>Below, we have several variations of a code chunk and inline code errors. Copy and paste them into your R Markdown file below the code chunk to load <code>tidyverse</code> and the data. Once you have copied the files, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.</p>
+<p><strong>Question 6</strong>. Copy the following code chunk into your R Markdown file and press knit. This…works, but we want 54 columns rather than 55 columns. Some of the columns do not look quite right?</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> dat, </span>
+<span id="cb32-3"><a href="#cb32-3"></a>                      <span class="at">y =</span> pinfo, </span>
+<span id="cb32-4"><a href="#cb32-4"></a>                      <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span>))</span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p><br></p>
-<ol start="2" type="1">
-<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code in your console window:</li>
-</ol>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This was a prompt to look out for duplicate columns when we do not specify all the common columns between the data sets you want to join. You join by “id” which works, but because you did not also add “intervention”, you get .x and .y appended to two “intervention” columns.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">library</span>(babynames)</span>
-<span id="cb33-2"><a href="#cb33-2"></a></span>
-<span id="cb33-3"><a href="#cb33-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames, <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> dat, </span>
+<span id="cb33-2"><a href="#cb33-2"></a>                      <span class="at">y =</span> pinfo, </span>
+<span id="cb33-3"><a href="#cb33-3"></a>                      <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This will produce the error:</p>
-<pre><code>Error in summarise(.data = babynames, mean_n = mean(n)) : 
-  could not find function "summarise"</code></pre>
-<p>Once you figure out how to fix this error, make a note of it.</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<p>What the error is saying is that there is no function called <code>summarise()</code>. You know that function exists though. What you have not done is call load the function into the libary using <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code></p>
 </div>
-<p><br></p>
-<ol start="3" type="1">
-<li>Restart the R session (<strong><code>Session &gt;&gt; Restart R</code></strong>). Make sure that the working directory is set to the right folder and then run the below code in your console window:</li>
-</ol>
+</div>
+</div>
+<p><strong>Question 7</strong>. Copy the following code chunk into your R Markdown file and press knit. You should receive an error like <code>! Can't subset columns that don't exist. x Column "interventnion" doesnt exist.</code></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>select_data <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> pinfo,</span>
+<span id="cb34-3"><a href="#cb34-3"></a>                      id,</span>
+<span id="cb34-4"><a href="#cb34-4"></a>                      intervetnion,</span>
+<span id="cb34-5"><a href="#cb34-5"></a>                      sex, </span>
+<span id="cb34-6"><a href="#cb34-6"></a>                      age, </span>
+<span id="cb34-7"><a href="#cb34-7"></a>                      educ, </span>
+<span id="cb34-8"><a href="#cb34-8"></a>                      income)</span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is an example of a sneaky typo causing an error. R is case and spelling sensitive, so it does not know what you mean when you asked it to select the column “intervetnion” rather than “intervention”. To fix the error, you just need to fix the typo:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">library</span>(babynames)</span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb35-3"><a href="#cb35-3"></a></span>
-<span id="cb35-4"><a href="#cb35-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>select_data <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> pinfo,</span>
+<span id="cb35-2"><a href="#cb35-2"></a>                      id,</span>
+<span id="cb35-3"><a href="#cb35-3"></a>                      intervention,</span>
+<span id="cb35-4"><a href="#cb35-4"></a>                      sex, </span>
+<span id="cb35-5"><a href="#cb35-5"></a>                      age, </span>
+<span id="cb35-6"><a href="#cb35-6"></a>                      educ, </span>
+<span id="cb35-7"><a href="#cb35-7"></a>                      income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This will produce the error:</p>
-<pre><code>Error: unexpected symbol in "dat &lt;- summarise(.data = babynames mean_n"
-</code></pre>
-<p>Once you figure out how to fix this error, make a note of it.</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<p>This is actually one of the most painful errors you can see as it doesn’t really help you solve your issue because it is not quite clear what it means. <strong>unexpected symbol</strong> means effectively that the code is wrong and it is seeing something it did not think it would see. Again not that clear right? What we do when we see this is ask ourselves have we forgotten a comma somewhere or maybe a bracket or a quotation mark! Look for those issues and see if that helps. The error does show you that the error comes between <code>babynames</code> and <code>mean_n</code> it just isn’t clear that that is what it means. The issue will be around the last word it mentions basically. The answer here is that there is a comma missing between the data and the arguement; between <code>babynames</code> and <code>mean_n</code>. The line should read:</p>
+</div>
+</div>
+</div>
+<p><strong>Question 8</strong>. Copy the following code chunk into your R Markdown file and press knit. You should receive an error like <code>! Cant convert "..1 (left)" &lt;character&gt; to &lt;double&gt;.</code></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>recode_variable <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pinfo,</span>
+<span id="cb36-3"><a href="#cb36-3"></a>                          <span class="at">sex =</span> <span class="fu">case_match</span>(sex,</span>
+<span id="cb36-4"><a href="#cb36-4"></a>                                           <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Female"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5"></a>                                           <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Male"</span>))</span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is the opposite problem to what we warned about in the <code>case_match</code> section. You need to honour data types and we have not converted sex to a factor or character in this example. So, R does not know how to match the character “1” against the number/double 1 in the data. To fix the error, you need to remove the double quotes to give R a number/double like it can see in the data:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">library</span>(babynames)</span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb37-3"><a href="#cb37-3"></a></span>
-<span id="cb37-4"><a href="#cb37-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames, <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>recode_variable <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pinfo,</span>
+<span id="cb37-2"><a href="#cb37-2"></a>                          <span class="at">sex =</span> <span class="fu">case_match</span>(sex,</span>
+<span id="cb37-3"><a href="#cb37-3"></a>                                           <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Female"</span>,</span>
+<span id="cb37-4"><a href="#cb37-4"></a>                                           <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Male"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Again an incredibly frustrating and time consuming error. Watch out for these. It is why partitioning the code on to new lines after a comma can be really help see errors as such:</p>
+</div>
+</div>
+</div>
+<p><strong>Question 9</strong>. Copy the following code chunk into your R Markdown file and press knit. We want to create two groups depending on if we consider a participant a teenager if they are younger than 20, or not a teenger if they are 20 years or older. The code below…works? This is a sneaky one, so think about the criteria we want vs the criteria we set.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="#cb38-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>age_groups <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pinfo,</span>
+<span id="cb38-3"><a href="#cb38-3"></a>                      <span class="at">age_groups =</span> <span class="fu">case_when</span>(</span>
+<span id="cb38-4"><a href="#cb38-4"></a>                        age <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Teenager"</span>,</span>
+<span id="cb38-5"><a href="#cb38-5"></a>                        age <span class="sc">&gt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Not a teenager"</span>))</span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is a really sneaky one as it does not actually affect a participant in the data, but there is a small mismatch between the criteria we want and the criteria we set.</p>
+<p>In our “teenager” group, this is accurate as we want to classify them if they are younger than 20. However, in the “not a teenager” group we currently set the criterion if they are older than 20, i.e., 21 or older. This would mean 20 year old participants are stuck in the middle with no group.</p>
+<p>We see this kind of mistake a lot, so think carefully about your Boolean expression and check examples in the console if you are unsure. To fix, you could use:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">library</span>(babynames)</span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb38-3"><a href="#cb38-3"></a></span>
-<span id="cb38-4"><a href="#cb38-4"></a>dat <span class="ot">&lt;-</span> <span class="fu">summarise</span>(<span class="at">.data =</span> babynames, </span>
-<span id="cb38-5"><a href="#cb38-5"></a>                 <span class="at">mean_n =</span> <span class="fu">mean</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>age_groups <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pinfo,</span>
+<span id="cb39-2"><a href="#cb39-2"></a>                      <span class="at">age_groups =</span> <span class="fu">case_when</span>(</span>
+<span id="cb39-3"><a href="#cb39-3"></a>                        age <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Teenager"</span>,</span>
+<span id="cb39-4"><a href="#cb39-4"></a>                        age <span class="sc">&gt;</span> <span class="dv">19</span> <span class="sc">~</span> <span class="st">"Not a teenager"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Such a dastardly error! Well done if you spotted it!!!</p>
+<p>or</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>age_groups <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pinfo,</span>
+<span id="cb40-2"><a href="#cb40-2"></a>                      <span class="at">age_groups =</span> <span class="fu">case_when</span>(</span>
+<span id="cb40-3"><a href="#cb40-3"></a>                        age <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Teenager"</span>,</span>
+<span id="cb40-4"><a href="#cb40-4"></a>                        age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Not a teenager"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><br></p>
-<ul>
-<li>case_match spelling error or factor not in quotes</li>
-</ul></section></section><section id="words-from-this-chapter" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="words-from-this-chapter">
+</div>
+</div>
+</div>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="words-from-this-chapter">
 <span class="header-section-number">4.8</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
@@ -1474,8 +1517,8 @@ Solution
 </div>
 </section><section id="end-of-chapter" class="level2" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">4.9</span> End of Chapter</h2>
-<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
-<p>Brilliant! That has been a lot of information but hopefully it has started to give you a sense of some of the approaches to data wrangling and the main functions we will use as we get deeper into the book!</p>
+<p>Excellent work so far! Data wrangling is a critical skill and being able to clean and prepare your data using code will save you time in the long run. Manually tidying data might seem quicker now when you are unfamilar with these functions, but it is open to errors which may not have a paper trail as you edit files. By reproducibly wrangling your data, you can still make mistakes, but they are reproducible mistakes you can fix.</p>
+<p>In the next chapter, we start by recapping the key functions from this chapter on a new data set, then introduce you to more data wrangling functions from <code>dplyr</code> to expand your toolkit.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
