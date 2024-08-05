@@ -5,7 +5,7 @@ This book will use the following conventions:
 * Generic code: `list(number = 1, letter = "A")`
 * Highlighted code: `r hl(dplyr::slice_max())`
 * File paths: `r path("data/sales.csv")`
-* R Packages: `r pkg("tidyverse")`
+* R Packages: <pkg>tidyverse</pkg> <pkg></pkg>
 * Functions: `r hl(paste())`
 * Strings: `r hl("psyTeachR")`
 * Numbers: `r hl(100)`, `r hl(3.14)`

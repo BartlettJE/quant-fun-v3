@@ -3,8 +3,6 @@
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-library(babynames)
-
 # Load the tidyverse package 
 library(tidyverse)
 
@@ -15,17 +13,21 @@ pinfo <- read_csv("data/participant-info.csv")
 
 In this chapter, we start our exploration of `r glossary("data wrangling")`. Some of you might have experience painstakingly copying and pasting values into new columns or trying to match up values from multiple spreadsheets. As well as taking a long time, there is so much room for error as you might repeat or miss values. 
 
-We have mentioned a few times now the benefits of working with R/RStudio to develop reproducible research practices over the first few chapters.But, if you take nothing else away from these materials, developing your data wrangling skills is one of the primary benefits that will benefit you in many assessments and careers.
+We have mentioned a few times now the benefits of working with R/RStudio to develop reproducible research practices over the first few chapters. But, if you take nothing else away from these materials, developing your data wrangling skills is one of the primary benefits that will benefit you in many assessments and careers. Researchers actually spend far more of their time cleaning and preparing their data than they spend analysing it. @dasu2003 estimated that up to 80% of time spent on data analysis involves data preparation tasks! Although every data set presents unique challenges, there are some systematic principles that you will constantly use to make your analyses less error-prone and more efficient. Our mantra is: the data changes but the skills stay the same. 
 
-Researchers actually spend far more of their time cleaning and preparing their data than they spend analysing it. @dasu2003 estimated that up to 80% of time spent on data analysis involves data preparation tasks! Although every data set presents unique challenges, there are some systematic principles that you will constantly use to make your analyses less error-prone and more efficient. Our mantra is: the data changes but the skills stay the same. 
-
-Over the next three chapters, we are going to introduce you to a range of functions within the `tidyverse` for wrangling data. In this chapter, we will cover joining two data sets by a common identifier, selecting columns to simplify your data, arranging values within a data set, and mutating data to create new variables.   
+Over the next three chapters, we are going to introduce you to a range of functions within the <pkg>tidyverse</pkg> for wrangling data. In this chapter, we will cover joining two data sets by a common identifier, selecting columns to simplify your data, arranging values within a data set, and mutating data to create new variables.   
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
 By the end of this chapter, you will be able to: 
 
-- ILO1
+- Join two data sets by matching one or more identifying columns in common. 
+
+- Select a range and reorder variables in your data set. 
+
+- Arrange values in numerical or alphabetical order. 
+
+- Modify or create variables, such as recoding values or creating new groups.
 
 ## Chapter preparation
 
@@ -66,9 +68,9 @@ If we support you to use the online University of Glasgow R Server, working with
 5. Click `Choose file` and go and find the data you want to upload.
 :::
 
-### Activity 1 - Load `tidyverse` and read the data files
+### Activity 1 - Load <pkg>tidyverse</pkg> and read the data files
 
-As the first activity, try and test yourself by loading `tidyverse` and reading the two data files. As a prompt, save the data files to these two object names to be consistent with the activities below, but you can check your answer below if you are stuck. 
+As the first activity, try and test yourself by loading <pkg>tidyverse</pkg> and reading the two data files. As a prompt, save the data files to these two object names to be consistent with the activities below, but you can check your answer below if you are stuck. 
 
 ```{r eval=FALSE}
 # Load the tidyverse package below
@@ -101,11 +103,11 @@ pinfo <- read_csv("data/participant-info.csv")
 
 ## Tidyverse and the dplyr package
 
-So far, we have loaded a `r glossary("package")` called `tidyverse` in every chapter and it is going to be at the core of all the data skills you develop. The `tidyverse` [https://www.tidyverse.org/](https://www.tidyverse.org/){target="_blank"} [@tidyverse] is an ecosystem containing six core packages: `dplyr`, `tidyr`, `readr`, `purrr`,  `ggplot2`, and `tibble`. Within these six core packages, you have access to `r glossary("function", display = "functions")` that will pretty much cover everything you need to wrangle and visualise your data. 
+So far, we have loaded a `r glossary("package")` called <pkg>tidyverse</pkg> in every chapter and it is going to be at the core of all the data skills you develop. The tidyverse ([https://www.tidyverse.org/](https://www.tidyverse.org/){target="_blank"},  @tidyverse is an ecosystem containing six core packages: <pkg>dplyr</pkg>, <pkg>tidyr</pkg>, <pkg>readr</pkg>, <pkg>purrr</pkg>,  <pkg>ggplot2</pkg>, and <pkg>tibble</pkg>. Within these six core packages, you have access to `r glossary("function", display = "functions")` that will pretty much cover everything you need to wrangle and visualise your data. 
 
-In chapter 3, we introduced you to the package `ggplot2` for data visualisation. In this chapter, we focus on functions from the [`dplyr`](https://dplyr.tidyverse.org/){target="_blank"} package, which the authors describe as a grammar of data manipulation (in the wrangling sense, not deviously making up data). 
+In chapter 3, we introduced you to the package <pkg>ggplot2</pkg> for data visualisation. In this chapter, we focus on functions from the [<pkg>dplyr</pkg>](https://dplyr.tidyverse.org/){target="_blank"} package, which the authors describe as a grammar of data manipulation (in the wrangling sense, not deviously making up data). 
 
-The `dplyr` package contains several key functions based on common English verbs to help you understand what the code is doing. For an overview, we will introduce you to the following functions:
+The <pkg>dplyr</pkg> package contains several key functions based on common English verbs to help you understand what the code is doing. For an overview, we will introduce you to the following functions:
 
 |Function|Description|
 |:------:|:----------|
@@ -129,10 +131,10 @@ To do this, we are going to use the function `inner_join()`. So far, we have des
 
 |Join function|Description|
 |:------:|:----------|
-|`inner_join()`| Keep observations in data set 1 that has a matching key in data set 2 |
-|`left_join()`| Keep all observations in data set 1 |
-|`right_join()`| Keep all observations in data set 2 |
-|`full_join()`| Keep all observations in both data set 1 and 2 |
+|`inner_join()`| Keep observations in data set x that has a matching key in data set y |
+|`left_join()`| Keep all observations in data set x |
+|`right_join()`| Keep all observations in data set y |
+|`full_join()`| Keep all observations in both data set x and y |
 
 ::: {.callout-important}
 As these functions join data sets in different ways, they will produce different sample sizes depending on the presence of missing data in one or both data sets. For example, `inner_join()` will be the strictest as you must have matching observations in each data set. On the other hand, `full_join()` will be the least strict, as you retain observations that may not exist in one data set or the other. 
@@ -142,7 +144,7 @@ As these functions join data sets in different ways, they will produce different
 
 We are going to join `dat` and `pinfo` by common identifiers. When we use `inner_join()`, this means we want to keep all the observations in `dat` that also has a corresponding identifier in `pinfo`. This is known as an **`r glossary("inner-join")`**, where you would exclude participants if they did not have a matching observation in one of the data sets.
 
-The code below will create a new object, called `all_dat`, that combines the data from both `dat` and `pinfo` using the information in the columns `id` and `intervention` to match the participants' data across the two sets of data. `id` is a code or number for each unique participant and will be the most common approach you see for creating an identifier. `intervention` is the group the participant was placed in for the study by @woodworth_data_2018. 
+The code below will create a new object, called `all_dat`, that combines the data from both `dat` and `pinfo` using the columns `id` and `intervention` to match the participants' data across the two sets of data. `id` is a code or number for each unique participant and will be the most common approach you see for creating an identifier. `intervention` is the group the participant was placed in for the study by @woodworth_data_2018. 
 
 Type and run the code in a new code chunk to inner join the two sets of data.
 
@@ -176,7 +178,7 @@ all_dat2 <- inner_join(x = dat,
 ```
 :::
 
-### Explore your data objects
+### Activity 3 - Explore your data objects
 
 Once you have run this code, you should now see the new `all_dat` object in the environment pane. Remember to get into the habit of exploring your data and objects as you make changes, to check your wrangling is working as intended. 
 
@@ -192,7 +194,7 @@ One common source of confusion is not seeing all your columns when you open up a
 
 ```{r preview-alldat, echo=FALSE}
 #| label: fig-img-preview-alldat
-#| fig.cap: "Exploring a data object in RStudio by opening it as a tab. You can navigate around the columns and rows without opening it up in somehthing like Excel. If there are more than 50 columns, you can click the arrows next to Cols."
+#| fig.cap: "Exploring a data object in RStudio by opening it as a tab. You can navigate around the columns and rows without opening it up in something like Excel. If there are more than 50 columns, you can click the arrows next to Cols."
 
 knitr::include_graphics("images/alldat_previewdata.png")
 
@@ -200,7 +202,7 @@ knitr::include_graphics("images/alldat_previewdata.png")
 
 2. Use the `glimpse()` function to see an overview of the data objects. 
 
-We explored this in chapter 3, but `glimpse()` tells you how many rows and columns your data have, plus an overview of responses per column. Note: you will see a preview of all 54 columns, but we have shortened it to 10 columns to take up less space in the book. 
+We explored this in chapter 3, but `glimpse()` tells you how many rows and columns your data have, plus an overview of responses per column. Note: you will see a preview of all 54 columns, but we have shortened the preview to 10 columns to take up less space in the book. 
 
 ```{r eval=FALSE}
 glimpse(all_dat)
@@ -222,9 +224,9 @@ Now you have explored `all_dat`, try and use one or both of these methods to exp
 
 Data sets often have a lot of variables we do not need and it can be easier to focus on just the columns we do need. In `all_dat`, we have 54 variables which takes ages to scroll through and it can be harder to find what you are looking for. 
 
-For the two scales on happiness and depression, we have all their items, as well as their total scores. We can create a data set that only includes the key variables and ignores all the individual items using the `select()` function. There are two ways you can use select: by selecting the variables you want to include, or by selecting the variables you want to ignore. 
+For the two scales on happiness and depression, we have all their items, as well as their total scores. We can create a data set that only includes the key variables and ignores all the individual items using the `r glossary("select()", def = "Select, reorder, or rename variables in your data set.")` function. There are two ways you can use select: by selecting the variables you want to include, or by selecting the variables you want to ignore. 
 
-### Selecting variables you want to include
+### Activity 4 - Selecting variables you want to include
 
 If there are a smaller number of variables you want to include, then it will be more efficient to specify which variables you want to **include**. Returning to the data wrangling from chapter 3, we can select the columns from `all_dat` that we want to keep. 
 
@@ -249,23 +251,23 @@ To break down this code:
 - From `all_dat`, we are selecting 10 columns we want to keep, which we list one by one. 
 
 ::: {.callout-note}
-In this example, the variables are in the same order as they were `all_dat`, but they do not need to be. You can use `select()` to create a new variable order if that helps you see all the important variables first. 
+In this example, the variables are in the same order as they were `all_dat`, but they do not need to be. You can use `select()` to create a new variable order if that helps you see all the important variables first. You can also rename variables as you select or reorder them, using the form `new_name = old_name`. 
 :::
 
 Keep in mind it is important you select variables and assign them to a new object, or overwrite the old object. Both work, but think about if you need the original object later in your analysis and you do not want to go back and rerun code to recreate it. If you just use the select function on it's own, it does not do anything to the object, R just shows you the variables you selected: 
 
 ```{r eval=FALSE}
 select(.data = all_dat, # First argument as the data object
-                      id, # Stating variables we want to include
-                      occasion, 
-                      elapsed.days,
-                      intervention,
-                      ahiTotal, 
-                      cesdTotal, 
-                      sex, 
-                      age, 
-                      educ, 
-                      income)
+       id, # Stating variables we want to include
+       occasion, 
+       elapsed.days,
+       intervention,
+       ahiTotal, 
+       cesdTotal, 
+       sex, 
+       age, 
+       educ, 
+       income)
 ```
 
 If you have several variables in order that you want to select, you can use a shortcut to avoid typing out every single name. When you select variables, you can use the format `firstcolumn:lastcolumn` to select all the variables from the first column you specify until the last column. 
@@ -309,7 +311,7 @@ summarydata2 <- select(all_dat, # First argument as the data object
 
 :::
 
-### Selecting variables you want to ignore
+### Activity 5 - Selecting variables you want to ignore
 
 Alternatively, you can also state which variables you do not want to keep. This is really handy if you want to keep many columns and only remove one or two. 
 
@@ -336,9 +338,9 @@ When you first start coding, you might begin with the long way that makes sense 
 
 ## Arranging variables of interest with `arrange()`
 
-Another handy skill is being able to change the order of observations within columns in your data set. The function `arrange()` will sort the rows/observations by one or more columns. This can be useful for exploring your data set and answering basic questions, such as: who was the youngest or oldest participant? 
+Another handy skill is being able to change the order of observations within columns in your data set. The function `r glossary("arrange()", def = "Order the rows of a data set by the values of one or more columns.")` will sort the rows/observations by one or more columns. This can be useful for exploring your data set and answering basic questions, such as: who was the youngest or oldest participant? 
 
-### Arranging in ascending order
+### Activity 6 - Arranging in ascending order
 
 Using `summarydata`, we can order the participants' ages in ascending order: 
 
@@ -359,7 +361,7 @@ To break down the code,
 
 If you look in `age_ascend`, we organised the data in ascending order based on age and can see the youngest participant was 18 years old. 
 
-### Arranging in descending order
+### Activity 7 - Arranging in descending order
 
 By default, `arrange()` sorts observations in ascending order from the smallest to largest value, or alphabetical order from A to Z. If you want to arrange observations in descending order, you can wrap the name of the variable in the `desc()` function. 
 
@@ -374,11 +376,11 @@ age_descend <- arrange(summarydata,
 
 This time, we can see the oldest participant was 83 years old. 
 
-### Sorting by multiple columns
+### Activity 8 - Sorting by multiple columns
 
 Finally, you can also sort by more than one column and a combination of ascending and descending columns. Unlike `select()`, you might not need to save your sorted observations as a new object, you could use `arrange()` more as a tool to explore your data. 
 
-For example, we could look for the oldest female participant. Note: your code will show all 992 observations you could scroll through, but we shorten the data to the first 10 to save space.  
+For example, we could look for the oldest female participant. Note: your code will show all 992 observations you could scroll through, but we show the first 10 to save space.  
 
 ```{r sort3, eval=FALSE}
 
@@ -428,9 +430,9 @@ arrange(summarydata,
 
 ## Modifying or creating variables with `mutate()`
 
-In the final data wrangling function for this chapter, we can use the function `mutate()` to modify existing variables or create new variables. This is an extremely powerful and flexible function. We will not be able to cover everything you can do with it in this chapter but we will introduce you to some common tasks you might want to apply.  
+In the final data wrangling function for this chapter, we can use the function `r glossary("mutate()", def = "You can create new columns that are functions of existing variables. You can also modify variables if the name is the same as an existing column.")` to modify existing variables or create new variables. This is an extremely powerful and flexible function. We will not be able to cover everything you can do with it in this chapter but we will introduce you to some common tasks you might want to apply.  
 
-### Modifying existing variables 
+### Activity 9 - Modifying existing variables 
 
 If you remember back to chapter 3, we had a problem where R interpreted variables like `sex`, `educ`, and `income` as numeric, but ideally we wanted to treat them as distinct categories or factors. We used `mutate()` to convert the three columns to factors:
 
@@ -446,11 +448,11 @@ To break down the code:
 
 - We overwrite `summarydata` by assigning the function to an existing object name. 
 
-- We use the `mutate()` function on the old `summarydata` data by using as the first argument. 
+- We use the `mutate()` function on the old `summarydata` data by using it as the first argument. 
 
 - We can add one or more arguments to modify or create variables. Here, we modify an existing variable `sex`, use an equals sign (=), then how we want to modify the variable. In this example, we convert sex to a factor by using the function `as.factor(sex)`. 
 
-You might not just want to turn a variable into a factor, you might want to completely recode what its values represent. For this, there is a function called `case_match()` which you can use within `mutate()`. For example, if we wanted to make `sex` easier to interpret, we could overwrite its values from 1 and 2: 
+You might not just want to turn a variable into a factor, you might want to completely recode what it's values represent. For this, there is a function called `r glossary("case_match()", def = "You can switch values from old to new. Statements are evaluated sequentially, meaning the old value is replaced with the first new value it matches.")` which you can use within `mutate()`. For example, if we wanted to make `sex` easier to interpret, we could overwrite it's values from 1 and 2: 
 
 ```{r}
 sex_recode <- mutate(summarydata,
@@ -510,7 +512,7 @@ income_recode <- mutate(summarydata,
 
 :::
 
-### Creating new variables 
+### Activity 10 - Creating new variables 
 
 You can also create new variables using `mutate()`. There are many possibilities here, so we will demonstrate a few key principles for inspiration and you will learn how to tackle unique problems as you come to them. 
 
@@ -521,7 +523,7 @@ summarydata <- mutate(summarydata,
                       study = "Woodworth et al. (2018)")
 ```
 
-Using a similar kind of logic to `case_match()` we introduced you to earlier, there is an extremely flexible function called `case_when()` to help create new variables. Before we explain how it works, we will jump straight into an example to give you something concrete to work with. 
+Using a similar kind of logic to `case_match()` we introduced you to earlier, there is an extremely flexible function called `r glossary("case_when()", def = "An if else statement to check old values against a set of criteria. Statements are evaluated sequentially, meaning each observation is checked against the criteria, and it receives the first match it passes.")` to help create new variables. Before we explain how it works, we will jump straight into an example to give you something concrete to work with. 
 
 @woodworth_data_2018 includes scores from the Center for Epidemiological Studies Depression (CES-D) scale. Scores range from 0 to 60, with scores of 16 or more considered a cut-off for being at risk of clinical depression. We have the scores, so we can use `case_when()` to label whether participants are at risk or not.
 
@@ -540,9 +542,9 @@ To break down the code:
 
 - We apply two comparisons to label responses as either "Not at risk" or "At risk". If `cesdTotal` is less than 16 (i.e., 15 or smaller), then it receives the value "Not at risk". If `cesdTotal` is more than 15 (i.e., 16 or higher), then it receives the value "At risk". 
 
-The function `case_when()` applies these criteria **line by line** as it works through your rows. Depending on which criteria your observation meet, it receives the label "Not at risk" or "At risk". The comparisons use something called a `r glossary("Boolean expression", def = "A logical statement in programming to evaluate a condition and return a Boolean value, which can be TRUE or FALSE.")`. These are logical expressions which can return the values of TRUE or FALSE. 
+The function `case_when()` applies these criteria **line by line** as it works through your rows. Depending on which criteria your observation meet, it receives the label "Not at risk" or "At risk". You can also set the argument `.default` to assign one value for anything that does not pass any criteria you give it. 
 
-To demonstrate the idea, imagine we were applying the logic manually to scores in the data. The first value is 50, so we could apply our criteria to see which one it meets:
+The comparisons use something called a `r glossary("Boolean expression", def = "A logical statement in programming to evaluate a condition and return a Boolean value, which can be TRUE or FALSE.")`. These are logical expressions which can return the values of TRUE or FALSE. To demonstrate the idea, imagine we were applying the logic manually to scores in the data. The first value is 50, so we could apply our criteria to see which one it meets:
 
 ```{r}
 50 < 16
@@ -556,7 +558,7 @@ R evaluates the first comparison as FALSE as 50 is not smaller than 16, but it e
 Try and pick a few more `cesdTotal` scores from the data and apply the criteria to see if they are evaluated as TRUE OR FALSE. It can be tricky moving from imagining what you want to do to being able to express it in code, so the more practice the better. 
 :::
 
-We have used a simple less than or greater than, but there are several options for expressing Boolean logic, the most common of which are:
+We have only used less than or greater than, but there are several options for expressing Boolean logic, the most common of which are:
 
 Operator	|Name	                 |is TRUE if and only if
 ----------|----------------------|---------------------------------
@@ -583,7 +585,7 @@ summarydata <- mutate(summarydata,
                        )
 ```
 
-Check your code against the solution when you have attempted yourself first. 
+Check your code against the solution when you have attempted it yourself first. 
 :::
 
 ::: {.callout-caution collapse="true"} 
@@ -767,4 +769,4 @@ glossary_table()
 
 Excellent work so far! Data wrangling is a critical skill and being able to clean and prepare your data using code will save you time in the long run. Manually tidying data might seem quicker now when you are unfamilar with these functions, but it is open to errors which may not have a paper trail as you edit files. By reproducibly wrangling your data, you can still make mistakes, but they are reproducible mistakes you can fix. 
 
-In the next chapter, we start by recapping the key functions from this chapter on a new data set, then introduce you to more data wrangling functions from `dplyr` to expand your toolkit. 
+In the next chapter, we start by recapping the key functions from this chapter on a new data set, then introduce you to more data wrangling functions from <pkg>dplyr</pkg> to expand your toolkit. 
