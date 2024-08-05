@@ -1,10 +1,100 @@
 # Data wrangling 2: Filter, summarise, and pipes {#05-wrangling-2}
 
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load the tidyverse package below
+library(tidyverse)
+
+# Load the data file
+# This should be the witt_2018.csv file 
+pong_data <- read_csv("data/witt_2018.csv")
+
+```
+
 As we have said previously, one of the key aspects in a researcher's toolbox is the knowledge and skill to work with data - regardless of how it comes to you. In fact, when you run an experiment you might get lots of different data types in various different files. For instance, it is not uncommon for an experimental software to create a new file for every participant you run and for each participant's file to contain numerous columns and rows of different data types, only some of which are important. Being able to wrangle that data, manipulate it into different layouts, extract the parts you need, and summarise it, is one of the most important skills we will help you learn through this book.
 
 In the last chapter we introduced you to the **Wickham six** one-table `r glossary("function", display = "functions")` which we use to do that data wrangling. Over the course of this book we will reiterate these functions and skills, and `r glossary("package", display = "packages")` like the `tidyverse` and the packages it contains, across a number of different datasets to give you a wide range of exposure to what Psychology is about, and to reiterate that the same skills apply across different datasets. Always remember, **the whilst the data changes, the skills stay the same!**
 
-We have also started to introduce different types of data and data structures. For example, data is often stored in two-dimensional tables, either called data frames, tables, or `r glossary("tibble", display = "tibbles")`. There are other ways of storing data that you will discover in time but mainly, in this book, we will be using tibbles, which we mentioned in the previous chapter (if you would like more info, type `vignette("tibble")` in the console). A tibble is really just a table of data with columns and rows of information - and some additional features we will learn about - and  within the cells of the tibble, a cell being where a row and a column meets, you get different types of data, e.g. `r glossary("double")`, `r glossary("integer")`, `r glossary("character")` and `r glossary("factor")`
+Today, we are going to continue developing our understanding of data, and build on the knowledge and skills we have seen to this point, to help you develop your ability to work with data. The only difference in this chapter is we are going to ask you to do more of the wrangling yourself, based on what we have shown you previously. To build our skills we will analyse a novel dataset and some activities based around manipulating that data. Remember to be pro-active in your learning and to refer back to what we have done before, using the example code as a guide. The solutions for all the tasks are at the bottom of the page as well for you to check yourself, but do be sure to try the tasks first. There is also the online [cheatsheets](https://www.rstudio.com/resources/cheatsheets/){target="_blank"} if you need more help - the key cheatsheet for this chapter is the Data Transformation with **`dplyr`**  -  and don't forget to ask questions on ours forums.
+
+**Chapter Intended Learning Outcomes (ILOs)**
+
+By the end of this chapter, you will be able to: 
+
+- ILO1
+
+## Chapter preparation
+
+### Introduction to the data set 
+
+For this chapter, we are using open data from @witt2018. The abstract of their article is:
+
+> Can one’s ability to perform an action, such as hitting a softball, influence one’s perception? According to the action-specific account, perception of spatial layout is influenced by the perceiver’s abilities to perform an intended action. Alternative accounts posit that purported effects are instead due to nonperceptual processes, such as response bias. Despite much confirmatory research on both sides of the debate, researchers who promote a response-bias account have never used the Pong task, which has yielded one of the most robust action-specific effects. Conversely, researchers who promote a perceptual account have rarely used the opposition’s preferred test for response bias, namely, the postexperiment survey. The current experiments rectified this. We found that even for people naive to the experiment’s hypothesis, the ability to block a moving ball affected the ball’s perceived speed. Moreover, when participants were explicitly told the hypothesis and instructed to resist the influence of their ability to block the ball, their ability still affected their perception of the ball’s speed. 
+
+To summarise, their research question was: **does your ability to perform an action influence your perception?** For instance, does your ability to hit a tennis ball influence how fast you perceive the ball to be moving? Or to phrase another way, do expert tennis players perceive the ball moving slower than novice tennis players?  
+
+This experiment does not use tennis players, instead they used the Pong task like the classic retro arcade game. Participants aimed to block moving balls with various sizes of paddles. Participants tend to estimate the balls as moving faster when they have to block it with a smaller paddle as opposed to when they have a bigger paddle. In this chapter, we will wrangle their data to reinforce skills from Chapter 4, and add more <pkg>dplyr</pkg> functions to your toolkit. 
+
+### Organising your files and project for the chapter
+
+Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.
+
+1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, you should have a folder from chapter 4 called `Chapter_04_06_datawrangling`.
+
+2. Create a new R Markdown document and give it a sensible title describing the chapter, such as `05 Data Wrangling 2`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_04_06_datawrangling` folder. 
+
+4. We are working with a new data set, so please save the following data file: ([witt_2018.csv](data/witt_2018.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that both files are saved as ".csv". Save or copy the file to your `data/` folder within `Chapter_04_06_datawrangling`.
+
+You are now ready to start working on the chapter! 
+
+## Select, arrange, and mutate recap
+
+Before we introduce you to new functions, we will recap data wrangling functions from chapter 3 to select, arrange, and mutate. Following along is one thing but being able to transfer your understanding to a new data set is a key sign of your skill development. Feel free to use chapter 3 to help you, but try and complete the recap activities independently before checking the solutions. This will help prepare you as we move from the chapters, to the data analysis journeys, to the assessments, and to your future career. 
+
+### Activity 1 - Load <pkg>tidyverse</pkg> and read the data files
+
+As the first activity, try and test yourself by loading <pkg>tidyverse</pkg> and reading the data file. As a prompt, save the data file to this object name to be consistent with the activities below, but you can check your answer below if you are stuck. 
+
+```{r eval=FALSE}
+# Load the tidyverse package below
+?
+  
+# Load the data file
+# This should be the witt_2018.csv file 
+pong_data <- ?
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# Load the tidyverse package below
+library(tidyverse)
+
+# Load the data file
+# This should be the witt_2018.csv file 
+pong_data <- read_csv("data/witt_2018.csv")
+```
+
+:::
+
+### Activity 2 - Explore `pong_data`
+
+Remember the first critical step when you come across any new data is exploring to see how many columns you are working with, how many rows/observations there are, and what the values look like. For example, you can click on `pong_data` in the environment and scroll around it as a tab. You can also get a preview of your data by using the `glimpse()` function. 
+
+```{r}
+glimpse(pong_data)
+```
+
+If you look at that table, you can see there are 8 columns and 4608 rows. Seven of the column names are `<dbl>`, short for double, and one is `<chr>` short for character. We will need to keep the data types in mind as we wrangle the data. 
+
+### Data types in R 
+
+We try and balance developing your data skills in a practical way while slowly introducing some of the underlying technical points. In the last chapter, we warned about honoring data types so R knew how to handle numbers/doubles vs factors. Now we have explored a few data sets, it is time to clarify some key differences between data types in R. 
+
+We often store data in two-dimensional tables, either called `r glossary("data frame", display = "data frames")`, tables, or `r glossary("tibble", display = "tibbles")`. There are other ways of storing data that you will discover in time but in this book, we will be using data frame or tibbles (a special type of data frame in the tidyverse). A data frame is really just a table of data with columns and rows of information. Within the cells of the data frame - a cell being where a row and a column meet - you get different types of data, including `r glossary("double")`, `r glossary("integer")`, `r glossary("character")` and `r glossary("factor")`. To summarise: 
 
 |Type of Data | Description                                                  |
 |:------------|:-------------------------------------------------------------| 
@@ -13,64 +103,11 @@ We have also started to introduce different types of data and data structures. F
 |Character    | Tends to contain letters or be words                         |
 |Factor       | Nominal (categorical). Can be words or numbers (e.g., animal or human, 1 or 2)|
 
-* **Note 1:** Double and Integer can both be referred to as `r glossary("numeric")` data, and you will see this word from time to time. For clarity, we will use Double as a term for any number that can take a decimal (e.g. 3.14) and Integer as a term for any whole number (no decimal, e.g. 3).
-* **Note 2:** A wee bit confusingly Double data does not have to have decimal places in it. For instance, the value of 1 could be Double as well as Integer. However, the value of 1.1 could only be Double and never Integer. Integers cannot have decimal places. Again, the more you work with data the more this will make sense, but it highlights the importance of looking at your data and checking what type it is as the type determines what you can do with the data.
+Double and Integer can both be referred to as `r glossary("numeric")` data, and you will see this word from time to time. For clarity, we will use Double as a term for any number that can take a decimal (e.g. 3.14) and Integer as a term for any whole number (no decimal, e.g. 3).
 
-Today, we are going to continue developing our understanding of data, and build on the knowledge and skills we have seen to this point, to help you develop your ability to work with data. The only difference in this chapter is we are going to ask you to do more of the wrangling yourself, based on what we have shown you previously. To build our skills we will analyse a novel dataset and some activities based around manipulating that data. Remember to be pro-active in your learning and to refer back to what we have done before, using the example code as a guide. The solutions for all the tasks are at the bottom of the page as well for you to check yourself, but do be sure to try the tasks first. There is also the online [cheatsheets](https://www.rstudio.com/resources/cheatsheets/){target="_blank"} if you need more help - the key cheatsheet for this chapter is the Data Transformation with **`dplyr`**  -  and don't forget to ask questions on ours forums.
+Somewhat confusingly, Double data might not have decimal places in it. For instance, the value of 1 could be Double as well as Integer. However, the value of 1.1 could only be Double and never Integer. Integers cannot have decimal places. The more you work with data the more this will make sense, but it highlights the importance of looking at your data and checking what type it is as the type determines what you can do with the data.
 
-## Learning to wrangle: Is there a chastity belt on perception
-
-Today we are going to be using data from the paper [Is there a Chastity Belt on Perception](http://journals.sagepub.com/doi/abs/10.1177/0956797617730892){target="_blank"}[@witt2018]. We recommend reading the paper's abstract for contetx, but to summarise the research question is: **does your ability to perform an action influence your perception?** For instance, does your ability to hit a tennis ball influence how fast you perceive the ball to be moving? Or to phrase another way, do expert tennis players perceive the ball moving slower than novice tennis players?  
-
-This experiment does not use tennis players however. Instead they used the Pong task: "a computerised game in which participants aim to block moving balls with various sizes of paddles". A bit like a very classic retro arcade game. Participants tend to estimate the balls as moving faster when they have to block it with a smaller paddle as opposed to when they have a bigger paddle. You can read the paper to get more details if you wish but hopefully that gives enough of an idea to help you understand the wrangling we will do on the data. We have cleaned up the data a little to start with. Let's begin!
-
-### Activity 1: Set-up Data Wrangling 2 {#dw2-a1}
-
-* First, download <a href="data/PongBlueRedBack 1-16 Codebook.csv" download>PongBlueRedBack 1-16 Codebook.csv</a> into your chapter folder.
-    * If you are having trouble downloading .csv files directly you may prefer to download the data as a zip file and unzip it from this link: <a href="data/PsyTeachR_FQA_Chpt5-data.zip" download>PongBlueRedBack 1-16 Codebook.zip</a>. Again just unzip it into your chapter folder. 
-* Next, set the `r glossary("working directory")` to your chapter folder. Ensure the `r glossary("environment")` is clear.
-    * If you're using the Rserver, avoid a number of issues by restarting the session - click `Session` - `Restart R` 
-* Now, open a new R Markdown document and save it in your working directory and call the file something informative like "DataWrangling2". 
-* Next, delete the default R Markdown welcome text and insert a new code `r glossary("chunk")`.
-* Finally, copy and paste the below code into this code chunk and then run the code.
-
-```{r libraries, eval = FALSE}
-library("tidyverse")
-pong_data <- read_csv("data/PongBlueRedBack 1-16 Codebook.csv")
-summary(pong_data)
-``` 
-
-**Remember: ** We use the `read_csv()` function to load in data, and the data filename must be a) in quotation marks and b) spelt exactly as the filename states, including spaces and the file extension (in this case .csv)
-
-If you have done this task correctly you should see the following output:
-
-```{r libraries-hid, echo=FALSE, eval = TRUE, message = FALSE, warning = FALSE}
-library("tidyverse")
-pong_data <- read_csv("data/PongBlueRedBack 1-16 Codebook.csv")
-summary(pong_data)
-``` 
-
-`summary()`, from the **`base`** package - the default packages automatically installed - provides a quick overview of the variables in your dataset and can be useful as a quick check that you have indeed imported the correct data. It will also provide some basic `r glossary("descriptive")` statistics and some information on whether the data is character (text) data which can also be useful to check.
-
-An alternative approach for looking at data types would be to use the `glimpse()` function, from the **`dplyr`** package, loaded in with **`tidyverse`**. Try the following in your `r glossary("console")` window:
-
-```{r glimp1, eval=FALSE}
-glimpse(pong_data)
-```
-
-And you will see:
-
-```{r glimp2, eval=TRUE, echo=FALSE}
-glimpse(pong_data)
-```
-
-And if you look at that table you can see the eight column names followed by `<dbl>`, short for double, or `<chr>` short for character. Again, this might not mean that much to you but as you progress you will become very adept at recognising the type of data you are working with, as the type of data changes what you can do to the data.
-
-### Activity 2: Look at your data {#dw2-a2}
-
-Great! Now that we have the data loaded in, let's have a look at the `pong_data` and see how it is organized. Again you can do this various ways, but today, click on `pong_data` in your environment pane.
-
-In the dataset you will see that each row (observation) represents one trial per participant and that there were 288 trials for each of the 16 participants. The columns (variables) we have in the dataset are as follows:
+In `pong_data`, each row (observation) represents one trial per participant and that there were 288 trials for each of the 16 participants. Most of the data is a double (i.e., numbers) and one column is a `character` (i.e., text). The columns (variables) we have in the data set are:
 
 | Variable       |       Type                       |           Description          |
 |:--------------:|:---------------------------------|:-------------------------------|
@@ -83,38 +120,117 @@ In the dataset you will see that each row (observation) represents one trial per
 | HitOrMiss      | `r typeof(pong_data$HitOrMiss)`  | hit ball = 1, missed ball = 0      |
 | BlockNumber    | `r typeof(pong_data$BlockNumber)`| block number (out of 12 blocks)|
 
-Just as we saw with `glimpse()`, some of the data is `double` - i.e. numbers - and some of the data is `character` - i.e. text. We will use this data to master our skills of the Wickham Six verbs, taking each verb in turn. You should refer to the explanations and example code in the previous chapter to help you complete these. Remember the six main functions were:
+### Activity 3 - `select()` a range of columns {#dw2-a3}
 
-|Function|Description|
-|:------:|:----------|
-|`select()`| Include or exclude certain variables (columns)|
-|`filter()`| Include or exclude certain observations (rows)|
-|`mutate()`| Create new variables (columns)|
-|`arrange()`| Change the order of observations (rows)|
-|`group_by()`| Organize the observations (rows) into groups|
-|`summarise()`| Create summary variables for groups of observations|
+Either by inclusion (stating all the variables you want to keep) or exclusion (stating all the variables you want to drop), create a new object named `select_dat` and select the following columns from `pong_data`:
 
-Now, let's do some wrangling!!! And don't forget, it can help to take a new code chunk on each activity and write yourself some notes between the code chunks!
+- `Participant`
 
-### Activity 3: **`select()`** {#dw2-a3}
+- `PaddleLength`
 
-We are going to start with some selections!
+- `TrialNumber`
 
-* Either by inclusion (stating all the variables you want to keep) or exclusion (stating all the variables you want to drop), select only the `Participant`, `PaddleLength`, `TrialNumber`, `BackgroundColor` and `HitOrMiss` columns from `pong_data` and store it in a new object named `select_dat`.  
+- `BackgroundColor`
 
-### Activity 4: Reorder the variables {#dw2-a4}
+- `HitOrMiss`
 
-Good work! Now, we previously mentioned that `select()` can also be used to reorder the columns in a tibble, as the new tibble will display the variables in the order that you entered them. 
+```{r eval=FALSE}
+# select 5 variables from pong_data
+select_dat <- ?
+```
 
-* Use `select()` to keep only the columns `Participant`, `JudgedSpeed`, `BallSpeed`, `TrialNumber`, and `HitOrMiss` from `pong_data` but have them display in alphabetical order, left to right. Save this tibble in a new object named `reorder_dat`.
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
 
-### Activity 5: **`arrange()`** {#dw2-a5}
+```{r eval=FALSE}
+# select 5 variables from pong_data
+select_dat <- select(pong_data,
+                     Participant,
+                     PaddleLength,
+                     TrialNumber,
+                     BackgroundColor,
+                     HitOrMiss)
+```
 
-We are now master of selections!!! Let's move on to a different skill and test our ability to change the order of the data in the rows.
+:::
 
-* Arrange the data by the following two variables: `HitOrMiss` (putting hits - 1 - first), and `JudgedSpeed` (putting fast judgement - 1 - first) and store this in an object named `arrange_dat`.
+### Activity 4 - Reorder the variables using `select()` {#dw2-a4}
 
-### Activity 6: **`filter()`** {#dw2-a6}
+We can also use `select()` to reorder your columns, as the new data object will display the variables in the order that you entered them. 
+
+Use `select()` to keep only the columns `Participant`, `JudgedSpeed`, `BallSpeed`, `TrialNumber`, and `HitOrMiss` from `pong_data` but this time, display them in ascending alphabetical order. Save this tibble in a new object named `reorder_dat`.
+
+```{r eval=FALSE}
+# reorder the 5 variables from pong_data
+reorder_dat <- ?
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# reorder the 5 variables from pong_data
+reorder_dat <- select(pong_data, # original data
+                     BallSpeed,
+                     HitOrMiss,
+                     JudgedSpeed,
+                     Participant,
+                     TrialNumber)
+```
+
+:::
+
+### Activity 5 - Reorder observations using `arrange()` {#dw2-a5}
+
+Arrange the data by the following two variables: `HitOrMiss` (putting hits - 1 - first), and `JudgedSpeed` (putting fast judgement - 1 - first) and store this in an object named `arrange_dat`.
+
+
+### Activity 6 - Modify or creating variables using `mutate()` {#dw2-a7}
+
+Brilliant work on getting this far! You really are starting to get the hang of wrangling! Now, let's test our skills on `mutate()` but first we want to introduce a new function to help understand what we can do with `mutate()`.
+
+Previously you learned how the `mutate()` function lets us create a new variable in our dataset. However, it also has another useful function in that it can be combined with `recode()` to create new columns with recoded values - where you change how different categories in a variable are represented. For example, the code below adds a new column to `pong_data` in which the judged speed  is converted into a text label where `1` will become `Fast`, and `0` will become "Slow". Run the code and look at the output! 
+
+```{r mutatedata, eval = FALSE}
+pong_data_mut1 <- mutate(pong_data, 
+                    JudgedSpeedLabel = recode(JudgedSpeed, 
+                                                    "1" = "Fast", 
+                                                    "0" = "Slow"))
+```
+
+The code here is a bit complicated but we will explain:
+
+* `JudgedSpeedLabel` is the name of your new column, 
+* `JudgedSpeed` is the name of the old column and the one to take information from
+    * Note that if you gave the recoded variable the same name as the original it would overwrite it.
+* Fast and Slow are the new codings of 1 and 0 respectively in the new column
+
+The `mutate()` function is also handy for making some calculations on or across columns in your data. For example, say you realise you made a mistake in your experiment where your participant numbers should be 1 higher for every participant, i.e. Participant 1 should actually be numbered as Participant 2, etc. You could do something like:
+
+``` {r mutatedata2, eval = FALSE}
+pong_data_mut2 <- mutate(pong_data, 
+                         Participant = Participant + 1)
+```
+
+Note here, in this second example, you are giving the new column the same name as the old column `Participant`. Again, happens here is that you are **overwriting the old data with the new data**! So watch out, mutate can create a new column or overwrite an existing column, depending on what you tell it to do!  
+
+## Removing or retaining observations using `filter()`
+
+Ok great! Now, imagine you realise that there is a mistake in your dataset and that all your trial numbers are wrong. The first trial (trial number 1) was a practice so should be excluded and your experiment actually started on trial 2. Your turn! You can either do this following activity in two separate steps and create a new object each time, or you can uses pipes `%>%` and do it it one line of code. The final tibble should be stored in an object called `pong_data_renumbered`.
+
+* Filter out all trials with the number 1 (`TrialNumber` column) from `pong_data`. 
+* Then use the `mutate()` function to renumber all the remaining trial numbers, starting them at one again instead of two, overwriting the values that were in the `TrialNumber` column.
+
+`r hide("Helpful Hint")`
+```{r, echo = FALSE, results='asis'}
+cat("
+* Step 1. filter(`TrialNumber` does not equal 1). Remember to store this output in a variable if you are not using pipes.
+
+* Step 2. mutate(`TrialNumber` = TrialNumber minus 1)")
+```
+`r unhide()`  
 
 Great! But what about keeping and removing some of the rows with `filter()`! You may need to refer back to the different boolean operations to complete this activity!
 
@@ -166,50 +282,9 @@ You used this last approach, using `%in%`, when producing your own graph of `bab
 ```
 
 
-### Activity 7: **`mutate()`** {#dw2-a7}
+## Counting observations using `count()`
 
-Brilliant work on getting this far! You really are starting to get the hang of wrangling! Now, let's test our skills on `mutate()` but first we want to introduce a new function to help understand what we can do with `mutate()`.
-
-Previously you learned how the `mutate()` function lets us create a new variable in our dataset. However, it also has another useful function in that it can be combined with `recode()` to create new columns with recoded values - where you change how different categories in a variable are represented. For example, the code below adds a new column to `pong_data` in which the judged speed  is converted into a text label where `1` will become `Fast`, and `0` will become "Slow". Run the code and look at the output! 
-
-```{r mutatedata, eval = FALSE}
-pong_data_mut1 <- mutate(pong_data, 
-                    JudgedSpeedLabel = recode(JudgedSpeed, 
-                                                    "1" = "Fast", 
-                                                    "0" = "Slow"))
-```
-
-The code here is a bit complicated but we will explain:
-
-* `JudgedSpeedLabel` is the name of your new column, 
-* `JudgedSpeed` is the name of the old column and the one to take information from
-    * Note that if you gave the recoded variable the same name as the original it would overwrite it.
-* Fast and Slow are the new codings of 1 and 0 respectively in the new column
-
-The `mutate()` function is also handy for making some calculations on or across columns in your data. For example, say you realise you made a mistake in your experiment where your participant numbers should be 1 higher for every participant, i.e. Participant 1 should actually be numbered as Participant 2, etc. You could do something like:
-
-``` {r mutatedata2, eval = FALSE}
-pong_data_mut2 <- mutate(pong_data, 
-                         Participant = Participant + 1)
-```
-
-Note here, in this second example, you are giving the new column the same name as the old column `Participant`. Again, happens here is that you are **overwriting the old data with the new data**! So watch out, mutate can create a new column or overwrite an existing column, depending on what you tell it to do!  
-
-Ok great! Now, imagine you realise that there is a mistake in your dataset and that all your trial numbers are wrong. The first trial (trial number 1) was a practice so should be excluded and your experiment actually started on trial 2. Your turn! You can either do this following activity in two separate steps and create a new object each time, or you can uses pipes `%>%` and do it it one line of code. The final tibble should be stored in an object called `pong_data_renumbered`.
-
-* Filter out all trials with the number 1 (`TrialNumber` column) from `pong_data`. 
-* Then use the `mutate()` function to renumber all the remaining trial numbers, starting them at one again instead of two, overwriting the values that were in the `TrialNumber` column.
-
-`r hide("Helpful Hint")`
-```{r, echo = FALSE, results='asis'}
-cat("
-* Step 1. filter(`TrialNumber` does not equal 1). Remember to store this output in a variable if you are not using pipes.
-
-* Step 2. mutate(`TrialNumber` = TrialNumber minus 1)")
-```
-`r unhide()`  
-
-### Activity 8: Summarising data {#dw2-a8}
+## Getting summary statistics using `summarise()` and `group_by()`
 
 Excellent! And now that we have done some wrangling we want to calculate some descriptive statistics for the data using `summarise()`. `summarise()` has a range of internal functions that make life really easy, e.g. `mean`, `sum`, `max`, `min`, etc. See the [dplyr cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) for more examples. And additional one that we will use from time-to-time is `na.rm = TRUE` which we can add when calculating descriptive statistics to say what to do if there are missing values. Missing values often appear as `NA` and the job of `na.rm` is to say whether to remove (rm) the NAs (`na.rm = TRUE`) or not (`na.rm = FALSE`). If you try to calculate values from data that have NAs, such as the mean, it would return `NA` as the result because it doesn't know how to average nothing. This dataset has no missing values but we will show you how to use it here and try to remember this argument exists, as you will use it often and it save you a lot of time!
 
@@ -297,6 +372,8 @@ act8_false3 <- pong_data_hits %>%
 
 * The name of the column within `pong_data_hits` is `total_hits`; this is what you called it in the above code. You could have called it anything you wanted but always try to use something sensible.
 * Make sure to call your variables something you (and anyone looking at your code) will understand and recognize later (i.e. not variable1, variable2, variable3. etc.), and avoid spaces (use_underscores_never_spaces). 
+
+## Combining functions using the pipe
 
 ## Ungrouping, counting, pipes - quick notes!
 
@@ -417,13 +494,11 @@ data_arrange <- pong_data %>%
                 arrange(BallSpeed) 
 ```
 
-## Finished! {#dw2-fin}
+## Test yourself
 
-Brilliant work again! We have now learned a number of functions and verbs that you will need as you progress through this book.  You will use them in the next chapter so be sure to go over these and try them out to make yourself more comfortable with them.  If you have any questions please post them on Teams. **Happy Wrangling!**
+To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter. 
 
-## Test yourself {#dw2-test}
-
-### Knowledge Questions
+### Knowledge check
 
 1. What type of data would these most likely be:
 
@@ -449,6 +524,12 @@ There is a lot of different types of data and as well as different types of leve
 3. Which of the Wickham Six would you use to calculate the mean of a column: `r longmcq(c("select","filter","mutate","arrange","group_by",answer ="summarise"))`
 4. Which of the Wickham Six would you use to remove certain observations - e.g. remove all males: `r longmcq(c("select",answer = "filter","mutate","arrange","group_by","summarise"))` 
 5. What does this line of code say? `data %>% filter() %>% group_by() %>% summarise()`: `r longmcq(c("take the data and then group it and then filter it and then summarise it", answer = "take the data and then filter it and then group it and then summarise it", "take the data and then summarise it and then filter it and then group it","take the data and then group it and then summarise it and then filter it"))`  
+
+### Error mode
+
+The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions `inner_join()`, `select()`, and `mutate()`. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
+
+Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the two data files: 
 
 ### Debugging tips {#dw2-debug}
 
@@ -572,8 +653,11 @@ Below you will find a list of words that were used in this chapter that might be
 glossary_table()
 ```
 
+## End of chapter
 
 That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!
+
+Brilliant work again! We have now learned a number of functions and verbs that you will need as you progress through this book.  You will use them in the next chapter so be sure to go over these and try them out to make yourself more comfortable with them.  If you have any questions please post them on Teams. **Happy Wrangling!**
 
 
 

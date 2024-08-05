@@ -74,13 +74,14 @@ As the first activity, try and test yourself by loading <pkg>tidyverse</pkg> and
 
 ```{r eval=FALSE}
 # Load the tidyverse package below
-
+?
+  
 # Load the two data files
 # This should be the ahi-cesd.csv file 
-dat <- NULL
+dat <- ?
 
 # This should be the participant-info.csv file
-pinfo <- NULL
+pinfo <- ?
 ```
 
 ::: {.callout-tip collapse="true"}
