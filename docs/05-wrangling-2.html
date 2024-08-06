@@ -407,20 +407,12 @@ div.csl-indent {
 <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">5.8.1</span> Knowledge check</a></li>
   <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">5.8.2</span> Error mode</a></li>
   <li><a href="#dw2-debug" id="toc-dw2-debug" class="nav-link" data-scroll-target="#dw2-debug"><span class="header-section-number">5.8.3</span> Debugging tips</a></li>
+  <li><a href="#dw2-a6sol" id="toc-dw2-a6sol" class="nav-link" data-scroll-target="#dw2-a6sol"><span class="header-section-number">5.8.4</span> Activity 6</a></li>
+  <li><a href="#dw2-a7sol" id="toc-dw2-a7sol" class="nav-link" data-scroll-target="#dw2-a7sol"><span class="header-section-number">5.8.5</span> Activity 7</a></li>
   </ul>
 </li>
-  <li>
-<a href="#dw2-sols" id="toc-dw2-sols" class="nav-link" data-scroll-target="#dw2-sols"><span class="header-section-number">5.9</span> Solutions to Activities</a>
-  <ul class="collapse">
-<li><a href="#dw2-a3sol" id="toc-dw2-a3sol" class="nav-link" data-scroll-target="#dw2-a3sol"><span class="header-section-number">5.9.1</span> Activity 3</a></li>
-  <li><a href="#dw2-a4sol" id="toc-dw2-a4sol" class="nav-link" data-scroll-target="#dw2-a4sol"><span class="header-section-number">5.9.2</span> Activity 4</a></li>
-  <li><a href="#dw2-a5sol" id="toc-dw2-a5sol" class="nav-link" data-scroll-target="#dw2-a5sol"><span class="header-section-number">5.9.3</span> Activity 5</a></li>
-  <li><a href="#dw2-a6sol" id="toc-dw2-a6sol" class="nav-link" data-scroll-target="#dw2-a6sol"><span class="header-section-number">5.9.4</span> Activity 6</a></li>
-  <li><a href="#dw2-a7sol" id="toc-dw2-a7sol" class="nav-link" data-scroll-target="#dw2-a7sol"><span class="header-section-number">5.9.5</span> Activity 7</a></li>
-  </ul>
-</li>
-  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">5.10</span> Words from this Chapter</a></li>
-  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">5.11</span> End of chapter</a></li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">5.9</span> Words from this Chapter</a></li>
+  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">5.10</span> End of chapter</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/05-wrangling-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/05-wrangling-2.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -687,39 +679,76 @@ Show me the solution
 </section><section id="dw2-a5" class="level3" data-number="5.2.6"><h3 data-number="5.2.6" class="anchored" data-anchor-id="dw2-a5">
 <span class="header-section-number">5.2.6</span> Activity 5 - Reorder observations using <code>arrange()</code>
 </h3>
-<p>Arrange the data by the following two variables: <code>HitOrMiss</code> (putting hits - 1 - first), and <code>JudgedSpeed</code> (putting fast judgement - 1 - first) and store this in an object named <code>arrange_dat</code>.</p>
+<p>Reorder observations in the data using the following two variables: <code>HitOrMiss</code> (putting hits (1) first) and <code>JudgedSpeed</code> (putting fast judgement () first). Store this in an object named <code>arrange_dat</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># arrange pong_data by HitOrMiss and JudgedSpeed</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>arrange_dat <span class="ot">&lt;-</span> ?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now try and answer the following questions about the data.</p>
+<ol type="1">
+<li><p>What is the trial number (<code>TrialNumber</code>) in the 1st row? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;5&quot;]"></p></li>
+<li><p>What is the background colour (<code>BackgroundColor</code>) in the 10th row? <input class="webex-solveme nospaces" size="4" data-answer="[&quot;blue&quot;]"></p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You needed to include <code>desc()</code> to change it from running smallest-to-largest to largest-to-smallest as the values are 0 and 1. You should have the following in a code chunk:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># arrange pong_data by HitOrMiss and JudgedSpeed</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>arrange_dat <span class="ot">&lt;-</span> <span class="fu">arrange</span>(pong_data, <span class="co"># original data</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>                     <span class="fu">desc</span>(HitOrMiss),</span>
+<span id="cb10-4"><a href="#cb10-4"></a>                     <span class="fu">desc</span>(JudgedSpeed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section><section id="dw2-a7" class="level3" data-number="5.2.7"><h3 data-number="5.2.7" class="anchored" data-anchor-id="dw2-a7">
 <span class="header-section-number">5.2.7</span> Activity 6 - Modify or creating variables using <code>mutate()</code>
 </h3>
-<p>Brilliant work on getting this far! You really are starting to get the hang of wrangling! Now, let’s test our skills on <code>mutate()</code> but first we want to introduce a new function to help understand what we can do with <code>mutate()</code>.</p>
-<p>Previously you learned how the <code>mutate()</code> function lets us create a new variable in our dataset. However, it also has another useful function in that it can be combined with <code>recode()</code> to create new columns with recoded values - where you change how different categories in a variable are represented. For example, the code below adds a new column to <code>pong_data</code> in which the judged speed is converted into a text label where <code>1</code> will become <code>Fast</code>, and <code>0</code> will become “Slow”. Run the code and look at the output!</p>
+<p>Some of these values could be a little easier to understand. They are represented in the data by 0s and 1s, but it might not be immediately obvious what they mean.</p>
+<p>Using what you learnt in Chapter 4 about modifying existing variables, create a new variable called <code>JudgedSpeedLabel</code> by mutating the original <code>pong_data</code> object. Change the values in <code>JudgedSpeed</code> using the following labels:</p>
+<p>0 = Slow</p>
+<p>1 = Fast</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>pong_data_mut1 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data, </span>
-<span id="cb9-2"><a href="#cb9-2"></a>                    <span class="at">JudgedSpeedLabel =</span> <span class="fu">recode</span>(JudgedSpeed, </span>
-<span id="cb9-3"><a href="#cb9-3"></a>                                                    <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Fast"</span>, </span>
-<span id="cb9-4"><a href="#cb9-4"></a>                                                    <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"Slow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># mutate pong_data and recode values into a new variable</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>pong_data <span class="ot">&lt;-</span> ?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The code here is a bit complicated but we will explain:</p>
-<ul>
-<li>
-<code>JudgedSpeedLabel</code> is the name of your new column,</li>
-<li>
-<code>JudgedSpeed</code> is the name of the old column and the one to take information from
-<ul>
-<li>Note that if you gave the recoded variable the same name as the original it would overwrite it.</li>
-</ul>
-</li>
-<li>Fast and Slow are the new codings of 1 and 0 respectively in the new column</li>
-</ul>
-<p>The <code>mutate()</code> function is also handy for making some calculations on or across columns in your data. For example, say you realise you made a mistake in your experiment where your participant numbers should be 1 higher for every participant, i.e.&nbsp;Participant 1 should actually be numbered as Participant 2, etc. You could do something like:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You should have the following in a code chunk:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>pong_data_mut2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data, </span>
-<span id="cb10-2"><a href="#cb10-2"></a>                         <span class="at">Participant =</span> Participant <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># mutate pong_data and recode values into a new variable</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>pong_data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>                    <span class="at">JudgedSpeedLabel =</span> <span class="fu">case_match</span>(JudgedSpeed, </span>
+<span id="cb12-4"><a href="#cb12-4"></a>                                                  <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Slow"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>                                                  <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Fast"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Note here, in this second example, you are giving the new column the same name as the old column <code>Participant</code>. Again, happens here is that you are <strong>overwriting the old data with the new data</strong>! So watch out, mutate can create a new column or overwrite an existing column, depending on what you tell it to do!</p>
+</div>
+</div>
+</div>
 </section></section><section id="removing-or-retaining-observations-using-filter" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="removing-or-retaining-observations-using-filter">
 <span class="header-section-number">5.3</span> Removing or retaining observations using <code>filter()</code>
 </h2>
+<p>Now we have revisited key data wrangling functions from Chapter 4 to select, arrange, and mutate, it is time to add some new functions from <pkg>dplyr</pkg> to your toolkit.</p>
 <p>Ok great! Now, imagine you realise that there is a mistake in your dataset and that all your trial numbers are wrong. The first trial (trial number 1) was a practice so should be excluded and your experiment actually started on trial 2. Your turn! You can either do this following activity in two separate steps and create a new object each time, or you can uses pipes <code>%&gt;%</code> and do it it one line of code. The final tibble should be stored in an object called <code>pong_data_renumbered</code>.</p>
 <ul>
 <li>Filter out all trials with the number 1 (<code>TrialNumber</code> column) from <code>pong_data</code>.</li>
@@ -809,13 +838,13 @@ You used this last approach, using <code>%in%</code>, when producing your own gr
 </ul>
 <p>We will do this activity using pipes to reduce the amount of code we write. Remember to try and read the code out loud and to pronounce <code>%&gt;%</code> as ‘and then’. Copy and paste the below code into a new code chunk and run the code.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>pong_data_hits <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb11-3"><a href="#cb11-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
-<span id="cb11-5"><a href="#cb11-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-6"><a href="#cb11-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
-<span id="cb11-7"><a href="#cb11-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>pong_data_hits <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb13-3"><a href="#cb13-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
+<span id="cb13-5"><a href="#cb13-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-6"><a href="#cb13-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
+<span id="cb13-7"><a href="#cb13-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'BackgroundColor'. You can override using
 the `.groups` argument.</code></pre>
@@ -833,15 +862,15 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 </ul>
 <ul>
 <li>What was the total number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_DLPKYDYYFE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DLPKYDYYFE" value="answer"><span>527</span></label><label><input type="radio" autocomplete="off" name="radio_DLPKYDYYFE" value=""><span>1059</span></label><label><input type="radio" autocomplete="off" name="radio_DLPKYDYYFE" value=""><span>516</span></label><label><input type="radio" autocomplete="off" name="radio_DLPKYDYYFE" value=""><span>1057</span></label>
+<div id="radio_XWALQKSUVP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value=""><span>1059</span></label><label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value=""><span>1057</span></label><label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value=""><span>516</span></label><label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value="answer"><span>527</span></label>
 </div>
 </li>
 </ul>
 <ul>
 <li>To three decimal places, what was the mean number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_YOBLTMJLPH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YOBLTMJLPH" value=""><span>0.451</span></label><label><input type="radio" autocomplete="off" name="radio_YOBLTMJLPH" value="answer"><span>0.459</span></label><label><input type="radio" autocomplete="off" name="radio_YOBLTMJLPH" value=""><span>0.92</span></label><label><input type="radio" autocomplete="off" name="radio_YOBLTMJLPH" value=""><span>0.922</span></label>
+<div id="radio_NPGPAZCOCM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value=""><span>0.451</span></label><label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value="answer"><span>0.459</span></label><label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value=""><span>0.92</span></label><label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value=""><span>0.922</span></label>
 </div>
 </li>
 </ul>
@@ -863,20 +892,20 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 <strong>Note:</strong> the function is <code>n()</code> and takes no arguments it is just left blank as shown, <code>n()</code>. However, as in other functions, the <code>n</code> prior to the <code>=</code> could be called anything you want the column to be called, e.g.&nbsp;<code>n = n()</code> or <code>number = n()</code> would do the same but just give different names to the column.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>pong_count <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb13-3"><a href="#cb13-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
-<span id="cb13-5"><a href="#cb13-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb13-6"><a href="#cb13-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
-<span id="cb13-7"><a href="#cb13-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb13-8"><a href="#cb13-8"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>pong_count <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb15-3"><a href="#cb15-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
+<span id="cb15-5"><a href="#cb15-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-6"><a href="#cb15-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
+<span id="cb15-7"><a href="#cb15-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-8"><a href="#cb15-8"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, if you’re just interested in counts rather than also calculating descriptives, this above method is a bit clunky. Instead, we can use the function <code>count()</code> which is specifically designed to count observations and doesn’t require the use of <code>summarise()</code> or <code>group_by()</code>.</p>
 <p>To count the total number of observations in the dataset for example we would do:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>pong_data <span class="sc">%&gt;%</span> <span class="co"># take pong_data</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">count</span>() <span class="co"># and then count the observations in it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>pong_data <span class="sc">%&gt;%</span> <span class="co"># take pong_data</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">count</span>() <span class="co"># and then count the observations in it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And it would give the answer of:</p>
 <div class="cell" data-layout-align="center">
@@ -895,8 +924,8 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 </div>
 <p>Alternatively, to count the number of observations in each level of a variable you could do:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">count</span>(BackgroundColor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">count</span>(BackgroundColor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And it would give the answer of:</p>
 <div class="cell" data-layout-align="center">
@@ -927,11 +956,11 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 <p>After grouping data together using the <code>group_by()</code> function and then performing a task on it, e.g.&nbsp;<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, it can be very good practice to ungroup the data before performing another function - by piping it into the <code>ungroup()</code> function - this is related to what the warnings about <code>summarise()</code> mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won’t always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.</p>
 <p>This is an example of how you might use the function:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>pong_data_ungroup <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb16-3"><a href="#cb16-3"></a>           PaddleLength) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a>  ungroup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>pong_data_ungroup <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb18-3"><a href="#cb18-3"></a>           PaddleLength) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  ungroup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="dw2-pipes" class="level3" data-number="5.7.3"><h3 data-number="5.7.3" class="anchored" data-anchor-id="dw2-pipes">
 <span class="header-section-number">5.7.3</span> Recapping Pipes (<strong><code>%&gt;%</code></strong>)</h3>
@@ -945,38 +974,38 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 <li>And finally we filter just the red, large paddle hits</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>pong_data_group <span class="ot">&lt;-</span> <span class="fu">group_by</span>(pong_data, </span>
-<span id="cb17-2"><a href="#cb17-2"></a>                            BackgroundColor, </span>
-<span id="cb17-3"><a href="#cb17-3"></a>                            PaddleLength)</span>
-<span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a>pong_data_hits <span class="ot">&lt;-</span> <span class="fu">summarise</span>(pong_data_group, </span>
-<span id="cb17-6"><a href="#cb17-6"></a>                            <span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss))</span>
-<span id="cb17-7"><a href="#cb17-7"></a></span>
-<span id="cb17-8"><a href="#cb17-8"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_hits, </span>
-<span id="cb17-9"><a href="#cb17-9"></a>                                   BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
-<span id="cb17-10"><a href="#cb17-10"></a>                                   PaddleLength <span class="sc">==</span> <span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>pong_data_group <span class="ot">&lt;-</span> <span class="fu">group_by</span>(pong_data, </span>
+<span id="cb19-2"><a href="#cb19-2"></a>                            BackgroundColor, </span>
+<span id="cb19-3"><a href="#cb19-3"></a>                            PaddleLength)</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a>pong_data_hits <span class="ot">&lt;-</span> <span class="fu">summarise</span>(pong_data_group, </span>
+<span id="cb19-6"><a href="#cb19-6"></a>                            <span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss))</span>
+<span id="cb19-7"><a href="#cb19-7"></a></span>
+<span id="cb19-8"><a href="#cb19-8"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_hits, </span>
+<span id="cb19-9"><a href="#cb19-9"></a>                                   BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
+<span id="cb19-10"><a href="#cb19-10"></a>                                   PaddleLength <span class="sc">==</span> <span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Alternatively we can make our code even more efficient, using less code, by stringing our sequence of functions together using pipes. This would look like:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb18-3"><a href="#cb18-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">filter</span>(BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
-<span id="cb18-6"><a href="#cb18-6"></a>         PaddleLength <span class="sc">==</span> <span class="dv">250</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb20-3"><a href="#cb20-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">filter</span>(BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
+<span id="cb20-6"><a href="#cb20-6"></a>         PaddleLength <span class="sc">==</span> <span class="dv">250</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So the code becomes easier to read as you remember the data goes into one function “and then” into another, “and then” into another, and so on.</p>
 <p>It is also worth remembering that whilst pipes and code can be written in a single line, but it is much easier to see what the pipe is doing if each function takes its own line. You just have to remember that every time you add a function to the pipeline, add a <code>%&gt;%</code> first and <strong>note that when using separate lines for each function, the <code>%&gt;%</code> must appear at the end of the line and not the start of the next line</strong>. Compare the two examples below. The first won’t work but the second will because the second puts the pipes at the end of the line where they need to be!</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Piped version that won't work </span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>data_arrange <span class="ot">&lt;-</span> pong_data </span>
-<span id="cb19-3"><a href="#cb19-3"></a>                <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>)</span>
-<span id="cb19-4"><a href="#cb19-4"></a>                <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(BallSpeed) </span>
-<span id="cb19-5"><a href="#cb19-5"></a></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="co"># Piped version that will work </span></span>
-<span id="cb19-7"><a href="#cb19-7"></a>data_arrange <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>                <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>                <span class="fu">arrange</span>(BallSpeed) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Piped version that won't work </span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>data_arrange <span class="ot">&lt;-</span> pong_data </span>
+<span id="cb21-3"><a href="#cb21-3"></a>                <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4"></a>                <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(BallSpeed) </span>
+<span id="cb21-5"><a href="#cb21-5"></a></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co"># Piped version that will work </span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>data_arrange <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>                <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>                <span class="fu">arrange</span>(BallSpeed) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="test-yourself" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="test-yourself">
 <span class="header-section-number">5.8</span> Test yourself</h2>
@@ -1014,23 +1043,23 @@ Explain these answers
 <p><br></p>
 <ol start="2" type="1">
 <li>Which of the Wickham Six would you use to sort columns from smallest to largest:
-<div id="radio_KEVVCTKLXE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KEVVCTKLXE" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_KEVVCTKLXE" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_KEVVCTKLXE" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_KEVVCTKLXE" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_KEVVCTKLXE" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_KEVVCTKLXE" value=""><span>summarise</span></label>
+<div id="radio_XWERQXUWRS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to calculate the mean of a column:
-<div id="radio_ZLUGLNCEZT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZLUGLNCEZT" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_ZLUGLNCEZT" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_ZLUGLNCEZT" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_ZLUGLNCEZT" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_ZLUGLNCEZT" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_ZLUGLNCEZT" value="answer"><span>summarise</span></label>
+<div id="radio_RCKAAWSOEX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value="answer"><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to remove certain observations - e.g.&nbsp;remove all males:
-<div id="radio_FIJDBMBMGK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FIJDBMBMGK" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_FIJDBMBMGK" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_FIJDBMBMGK" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_FIJDBMBMGK" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_FIJDBMBMGK" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_FIJDBMBMGK" value=""><span>summarise</span></label>
+<div id="radio_YJQBKGYKVG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>What does this line of code say? <code>data %&gt;% filter() %&gt;% group_by() %&gt;% summarise()</code>:
-<div id="radio_YPZGCMPDEA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YPZGCMPDEA" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_YPZGCMPDEA" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_YPZGCMPDEA" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_YPZGCMPDEA" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
+<div id="radio_ZSNCICDDYA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
 </div>
 </li>
 </ol></section><section id="error-mode" class="level3" data-number="5.8.2"><h3 data-number="5.8.2" class="anchored" data-anchor-id="error-mode">
@@ -1051,56 +1080,8 @@ Explain these answers
 <li>When using pipes, remember that you only need the data once, at the start.</li>
 <li>If separating pipes across different lines, remember the line ends with the pipe, it does not start with the pipe.</li>
 <li>And lastly, remember that only the data changes, the skills stay the same. Always look back to when you had the code working and go from there.</li>
-</ul></section></section><section id="dw2-sols" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="dw2-sols">
-<span class="header-section-number">5.9</span> Solutions to Activities</h2>
-<p>Below you will find the solutions to the above questions. Only look at them after giving the questions a good try and speaking to the tutor about any issues.</p>
-<section id="dw2-a3sol" class="level3" data-number="5.9.1"><h3 data-number="5.9.1" class="anchored" data-anchor-id="dw2-a3sol">
-<span class="header-section-number">5.9.1</span> Activity 3</h3>
-<ul>
-<li>To include variables we would name all the variables we want:</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>select_dat <span class="ot">&lt;-</span> <span class="fu">select</span>(pong_data, </span>
-<span id="cb20-2"><a href="#cb20-2"></a>                     Participant, </span>
-<span id="cb20-3"><a href="#cb20-3"></a>                     PaddleLength, </span>
-<span id="cb20-4"><a href="#cb20-4"></a>                     TrialNumber, </span>
-<span id="cb20-5"><a href="#cb20-5"></a>                     BackgroundColor, </span>
-<span id="cb20-6"><a href="#cb20-6"></a>                     HitOrMiss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>in contrast, to exclude variables we would name the ones we don’t want and put a <code>-</code> prior to the name:</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>select_dat <span class="ot">&lt;-</span><span class="fu">select</span>(pong_data, </span>
-<span id="cb21-2"><a href="#cb21-2"></a>                    <span class="sc">-</span>JudgedSpeed, </span>
-<span id="cb21-3"><a href="#cb21-3"></a>                    <span class="sc">-</span>BallSpeed, </span>
-<span id="cb21-4"><a href="#cb21-4"></a>                    <span class="sc">-</span>BlockNumber)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="dw2-a4sol" class="level3" data-number="5.9.2"><h3 data-number="5.9.2" class="anchored" data-anchor-id="dw2-a4sol">
-<span class="header-section-number">5.9.2</span> Activity 4</h3>
-<ul>
-<li>To reorder variables using the <code>select()</code> we state the order of the variables we want them in. Note that this only works on column order.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>reorder_dat <span class="ot">&lt;-</span> <span class="fu">select</span>(pong_data, </span>
-<span id="cb22-2"><a href="#cb22-2"></a>                      BallSpeed, </span>
-<span id="cb22-3"><a href="#cb22-3"></a>                      HitOrMiss, </span>
-<span id="cb22-4"><a href="#cb22-4"></a>                      JudgedSpeed, </span>
-<span id="cb22-5"><a href="#cb22-5"></a>                      Participant, </span>
-<span id="cb22-6"><a href="#cb22-6"></a>                      TrialNumber)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="dw2-a5sol" class="level3" data-number="5.9.3"><h3 data-number="5.9.3" class="anchored" data-anchor-id="dw2-a5sol">
-<span class="header-section-number">5.9.3</span> Activity 5</h3>
-<ul>
-<li>To arrange the rows by certain columns we use <code>arrange()</code> but you need to remember to include <code>desc()</code> to change it from running smallest-to-largest to largest-to-smallest.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>arrange_dat <span class="ot">&lt;-</span> <span class="fu">arrange</span>(pong_data, </span>
-<span id="cb23-2"><a href="#cb23-2"></a>                       <span class="fu">desc</span>(HitOrMiss), </span>
-<span id="cb23-3"><a href="#cb23-3"></a>                       <span class="fu">desc</span>(JudgedSpeed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="dw2-a6sol" class="level3" data-number="5.9.4"><h3 data-number="5.9.4" class="anchored" data-anchor-id="dw2-a6sol">
-<span class="header-section-number">5.9.4</span> Activity 6</h3>
+</ul></section><section id="dw2-a6sol" class="level3" data-number="5.8.4"><h3 data-number="5.8.4" class="anchored" data-anchor-id="dw2-a6sol">
+<span class="header-section-number">5.8.4</span> Activity 6</h3>
 <ul>
 <li><p>Remembering that filters can take more than one argument then the below code would filter for data where:</p></li>
 <li><p>JudgedSpeed is 1 AND</p></li>
@@ -1108,42 +1089,42 @@ Explain these answers
 <li><p>HitOrMiss is 0.</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>pong_fast_miss <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
-<span id="cb24-2"><a href="#cb24-2"></a>                         JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>, </span>
-<span id="cb24-3"><a href="#cb24-3"></a>                         BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>), </span>
-<span id="cb24-4"><a href="#cb24-4"></a>                         HitOrMiss <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>pong_fast_miss <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
+<span id="cb22-2"><a href="#cb22-2"></a>                         JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>, </span>
+<span id="cb22-3"><a href="#cb22-3"></a>                         BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>), </span>
+<span id="cb22-4"><a href="#cb22-4"></a>                         HitOrMiss <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="dw2-a7sol" class="level3" data-number="5.9.5"><h3 data-number="5.9.5" class="anchored" data-anchor-id="dw2-a7sol">
-<span class="header-section-number">5.9.5</span> Activity 7</h3>
+</section><section id="dw2-a7sol" class="level3" data-number="5.8.5"><h3 data-number="5.8.5" class="anchored" data-anchor-id="dw2-a7sol">
+<span class="header-section-number">5.8.5</span> Activity 7</h3>
 <p>If you didn’t use pipes then the following code would be appropriate:</p>
 <ul>
 <li>First you filter. And remember that you can call the first object <code>pong_data_filt</code> anything that makes sense to you and others.</li>
 <li>Then in a separate step you mutate.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>pong_data_filt <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
-<span id="cb25-2"><a href="#cb25-2"></a>                         TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) </span>
-<span id="cb25-3"><a href="#cb25-3"></a></span>
-<span id="cb25-4"><a href="#cb25-4"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data_filt, </span>
-<span id="cb25-5"><a href="#cb25-5"></a>                               <span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>pong_data_filt <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
+<span id="cb23-2"><a href="#cb23-2"></a>                         TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) </span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data_filt, </span>
+<span id="cb23-5"><a href="#cb23-5"></a>                               <span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And if you used pipes this would be the solution:</p>
 <ul>
 <li>Remember you include the data once, and the pipes end the line, they do not start the line.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
-<span id="cb26-2"><a href="#cb26-2"></a>                               TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
+<span id="cb24-2"><a href="#cb24-2"></a>                               TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>which could also be written as below - which some find better to remember the data goes in first and only once:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="words-from-this-chapter" class="level2" data-number="5.10"><h2 data-number="5.10" class="anchored" data-anchor-id="words-from-this-chapter">
-<span class="header-section-number">5.10</span> Words from this Chapter</h2>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">5.9</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1197,8 +1178,8 @@ Explain these answers
 </table>
 </div>
 </div>
-</section><section id="end-of-chapter" class="level2" data-number="5.11"><h2 data-number="5.11" class="anchored" data-anchor-id="end-of-chapter">
-<span class="header-section-number">5.11</span> End of chapter</h2>
+</section><section id="end-of-chapter" class="level2" data-number="5.10"><h2 data-number="5.10" class="anchored" data-anchor-id="end-of-chapter">
+<span class="header-section-number">5.10</span> End of chapter</h2>
 <p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
 <p>Brilliant work again! We have now learned a number of functions and verbs that you will need as you progress through this book. You will use them in the next chapter so be sure to go over these and try them out to make yourself more comfortable with them. If you have any questions please post them on Teams. <strong>Happy Wrangling!</strong></p>
 

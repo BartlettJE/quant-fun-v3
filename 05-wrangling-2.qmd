@@ -184,39 +184,64 @@ reorder_dat <- select(pong_data, # original data
 
 ### Activity 5 - Reorder observations using `arrange()` {#dw2-a5}
 
-Arrange the data by the following two variables: `HitOrMiss` (putting hits - 1 - first), and `JudgedSpeed` (putting fast judgement - 1 - first) and store this in an object named `arrange_dat`.
+Reorder observations in the data using the following two variables: `HitOrMiss` (putting hits (1) first) and `JudgedSpeed` (putting fast judgement () first). Store this in an object named `arrange_dat`. 
 
+```{r eval=FALSE}
+# arrange pong_data by HitOrMiss and JudgedSpeed
+arrange_dat <- ?
+```
+
+Now try and answer the following questions about the data.
+
+1. What is the trial number (`TrialNumber`) in the 1st row? `r fitb(5)`
+
+2. What is the background colour (`BackgroundColor`) in the 10th row? `r fitb("blue")`
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You needed to include `desc()` to change it from running smallest-to-largest to largest-to-smallest as the values are 0 and 1. You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# arrange pong_data by HitOrMiss and JudgedSpeed
+arrange_dat <- arrange(pong_data, # original data
+                     desc(HitOrMiss),
+                     desc(JudgedSpeed))
+```
+
+:::
 
 ### Activity 6 - Modify or creating variables using `mutate()` {#dw2-a7}
 
-Brilliant work on getting this far! You really are starting to get the hang of wrangling! Now, let's test our skills on `mutate()` but first we want to introduce a new function to help understand what we can do with `mutate()`.
+Some of these values could be a little easier to understand. They are represented in the data by 0s and 1s, but it might not be immediately obvious what they mean. 
 
-Previously you learned how the `mutate()` function lets us create a new variable in our dataset. However, it also has another useful function in that it can be combined with `recode()` to create new columns with recoded values - where you change how different categories in a variable are represented. For example, the code below adds a new column to `pong_data` in which the judged speed  is converted into a text label where `1` will become `Fast`, and `0` will become "Slow". Run the code and look at the output! 
+Using what you learnt in Chapter 4 about modifying existing variables, create a new variable called `JudgedSpeedLabel` by mutating the original `pong_data` object. Change the values in `JudgedSpeed` using the following labels: 
 
-```{r mutatedata, eval = FALSE}
-pong_data_mut1 <- mutate(pong_data, 
-                    JudgedSpeedLabel = recode(JudgedSpeed, 
-                                                    "1" = "Fast", 
-                                                    "0" = "Slow"))
+0 = Slow
+
+1 = Fast
+
+```{r eval=FALSE}
+# mutate pong_data and recode values into a new variable
+pong_data <- ?
 ```
 
-The code here is a bit complicated but we will explain:
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
 
-* `JudgedSpeedLabel` is the name of your new column, 
-* `JudgedSpeed` is the name of the old column and the one to take information from
-    * Note that if you gave the recoded variable the same name as the original it would overwrite it.
-* Fast and Slow are the new codings of 1 and 0 respectively in the new column
-
-The `mutate()` function is also handy for making some calculations on or across columns in your data. For example, say you realise you made a mistake in your experiment where your participant numbers should be 1 higher for every participant, i.e. Participant 1 should actually be numbered as Participant 2, etc. You could do something like:
-
-``` {r mutatedata2, eval = FALSE}
-pong_data_mut2 <- mutate(pong_data, 
-                         Participant = Participant + 1)
+```{r eval=FALSE}
+# mutate pong_data and recode values into a new variable
+pong_data <- mutate(pong_data, 
+                    JudgedSpeedLabel = case_match(JudgedSpeed, 
+                                                  0 ~ "Slow",
+                                                  1 ~ "Fast"))
 ```
 
-Note here, in this second example, you are giving the new column the same name as the old column `Participant`. Again, happens here is that you are **overwriting the old data with the new data**! So watch out, mutate can create a new column or overwrite an existing column, depending on what you tell it to do!  
+:::
 
 ## Removing or retaining observations using `filter()`
+
+Now we have revisited key data wrangling functions from Chapter 4 to select, arrange, and mutate, it is time to add some new functions from <pkg>dplyr</pkg> to your toolkit. 
 
 Ok great! Now, imagine you realise that there is a mistake in your dataset and that all your trial numbers are wrong. The first trial (trial number 1) was a practice so should be excluded and your experiment actually started on trial 2. Your turn! You can either do this following activity in two separate steps and create a new object each time, or you can uses pipes `%>%` and do it it one line of code. The final tibble should be stored in an object called `pong_data_renumbered`.
 
@@ -545,57 +570,6 @@ There are no debugging challenges today as we have done a lot of work but here a
 * When using pipes, remember that you only need the data once, at the start.
 * If separating pipes across different lines, remember the line ends with the pipe, it does not start with the pipe.
 * And lastly, remember that only the data changes, the skills stay the same. Always look back to when you had the code working and go from there.
-
-## Solutions to Activities {#dw2-sols}
-
-Below you will find the solutions to the above questions. Only look at them after giving the questions a good try and speaking to the tutor about any issues.
-
-### Activity 3 {#dw2-a3sol}
-
-* To include variables we would name all the variables we want:
-
-```{r include-dat, eval = TRUE}
-select_dat <- select(pong_data, 
-                     Participant, 
-                     PaddleLength, 
-                     TrialNumber, 
-                     BackgroundColor, 
-                     HitOrMiss)
-```
-
-* in contrast, to exclude variables we would name the ones we don't want and put a `-` prior to the name:
-
-```{r exclude-dat, eval=TRUE}
-select_dat <-select(pong_data, 
-                    -JudgedSpeed, 
-                    -BallSpeed, 
-                    -BlockNumber)
-```
-
-### Activity 4 {#dw2-a4sol}
-
-* To reorder variables using the `select()` we state the order of the variables we want them in. Note that this only works on column order.
-
-```{r select-ord, eval = TRUE}
-reorder_dat <- select(pong_data, 
-                      BallSpeed, 
-                      HitOrMiss, 
-                      JudgedSpeed, 
-                      Participant, 
-                      TrialNumber)
-```
-
-
-### Activity 5 {#dw2-a5sol}
-
-* To arrange the rows by certain columns we use `arrange()` but you need to remember to include `desc()` to change it from running smallest-to-largest to largest-to-smallest.
-
-```{r arrange-sol, eval = TRUE}
-arrange_dat <- arrange(pong_data, 
-                       desc(HitOrMiss), 
-                       desc(JudgedSpeed))
-```
-
 
 ### Activity 6 {#dw2-a6sol}
 
