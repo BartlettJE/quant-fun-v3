@@ -1,4 +1,4 @@
-# Data wrangling 2: Filter, summarise, and pipes {#05-wrangling-2}
+# Data wrangling 2: Filter and summarise {#05-wrangling-2}
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -229,7 +229,7 @@ pong_data <- ?
 #### Show me the solution
 You should have the following in a code chunk: 
 
-```{r eval=FALSE}
+```{r}
 # mutate pong_data and recode values into a new variable
 pong_data <- mutate(pong_data, 
                     JudgedSpeedLabel = case_match(JudgedSpeed, 
@@ -243,71 +243,206 @@ pong_data <- mutate(pong_data,
 
 Now we have revisited key data wrangling functions from Chapter 4 to select, arrange, and mutate, it is time to add some new functions from <pkg>dplyr</pkg> to your toolkit. 
 
-Ok great! Now, imagine you realise that there is a mistake in your dataset and that all your trial numbers are wrong. The first trial (trial number 1) was a practice so should be excluded and your experiment actually started on trial 2. Your turn! You can either do this following activity in two separate steps and create a new object each time, or you can uses pipes `%>%` and do it it one line of code. The final tibble should be stored in an object called `pong_data_renumbered`.
+Using select, we could remove columns, but there are many situations where you want to include or exclude certain observations/rows. The function `r glossary("filter()", def = "The ability to subset a data frame to keep all observations/rows that satisfy one or more conditions.")` will possibly be one of your most used for data wrangling. For example, imagine you want to only analyse participants who provided informed consent and exclude participants who did not. Similarly, you might want to focus your analyses only on participants who are under the age of 21. 
 
-* Filter out all trials with the number 1 (`TrialNumber` column) from `pong_data`. 
-* Then use the `mutate()` function to renumber all the remaining trial numbers, starting them at one again instead of two, overwriting the values that were in the `TrialNumber` column.
+### Activity 7 - Filter using one criterion 
 
-`r hide("Helpful Hint")`
-```{r, echo = FALSE, results='asis'}
-cat("
-* Step 1. filter(`TrialNumber` does not equal 1). Remember to store this output in a variable if you are not using pipes.
+We will jump straight into an example. Imagine that you realised you made a mistake creating your experiment and all your trial numbers are wrong. The first trial (trial number 1) was a practice, so you should exclude it and your experiment actually started on trial 2.
 
-* Step 2. mutate(`TrialNumber` = TrialNumber minus 1)")
-```
-`r unhide()`  
-
-Great! But what about keeping and removing some of the rows with `filter()`! You may need to refer back to the different boolean operations to complete this activity!
-
-Use `filter()` to extract all Participants in the original `pong_data` that had:
-
-* a fast speed judgement;
-* for speeds 2, 4, 5, and 7;
-* but missed the ball.   
-
-Store this remaining data in a new object called `pong_fast_miss`
-
-`r hide("Helpful Hint")`
-```{r, echo = FALSE, results='asis'}
-
-cat("There are three parts to this filter so it is best to think about them individually and then combine them.
-
-1. Filter all fast speed judgements (`JudgedSpeed`)
-
-2. Filter for the speeds 2, 4, 5 and 7 (`BallSpeed`)
-
-3. Filter for all Misses (`HitOrMiss`)
-
-You could do this in three filters where each one uses the output of the preceding one, or remember that filter functions can take more than one argument. You may also need to use `==` instead of just `=`.")
-```
-`r unhide()`
-
-<br>
-
-```{block, type="warning"}
-
-The filter function is very useful but if used wrongly can give you very misleading findings. This is why it is very important to always check your data after you perform an action. Let's say you are working in comparative psychology and have run a study looking at how cats, dogs and horses perceive emotion. Let's say the data is all stored in the tibble `animal_data` and there is a column called `animals` that tells you what type of animal your participant was. Imagine you wanted all the data from just cats:
-
-`filter(animal_data, animals == "cat")`
-
-Exactly! But what if you wanted cats and dogs?
-
-`filter(animal_data, animals == "cat", animals == "dog")` 
-
-Right? Wrong! This actually says "give me everything that is a cat and a dog". But nothing is a cat and a dog, that would be weird - like a dat or a cog. In fact you want everything that is either a cat **or** a dog, so you could do:
-
-`filter(animal_data, animals == "cat"| animals == "dog")`
-
-Or you could do:
-
-`filter(animal_data, animals %in% c("cat", "dog"))`
-
-You used this last approach, using `%in%`, when producing your own graph of `babynames`. It is a very helpful function so don't forget it exists!
-
+```{r}
+pong_data_filter <- filter(pong_data,
+                           TrialNumber > 1)
 ```
 
+To break down the code:
+
+- We create a new object called `pong_data_filter` by applying the filter function to `pong_data`.
+
+- We add the Boolean expression `TrialNumber > 1` to keep all responses higher than 1 (i.e., 2 or higher). 
+
+The `filter()` function uses our old friends the Boolean expressions we introduced you to in Chapter 4. You can add one or more logical expressions to filter observations. The function retains observations when they are evaluated to TRUE and ignores observations when they are evaluated to FALSE. Remember, when you are working out how to express your ideas in code, test them out. For example, we can see what the expression would do to different trial numbers: 
+
+```{r}
+1 > 1
+
+2 > 1
+```
+
+1 is not larger than 1, so it's evaluated to FALSE and would be ignored. 2 is larger than 2, so it's evaluated to TRUE and would be retained. Explore the two data sets `pong_data` and `pong_data_filter` and the number of rows they have to see the effects of applying the function. 
+
+As a reminder from Chapter 4, the most common Boolean expressions are: 
+
+Operator	|Name	                 |is TRUE if and only if
+----------|----------------------|---------------------------------
+A < B 	  |less than 	           |A is less than B
+A <= B 	  |less than or equal    |A is less than or equal to B
+A > B 	  |greater than 	       |A is greater than B
+A >= B 	  |greater than or equal |A is greater than or equal to B
+A == B 	  |equivalence 	         |A exactly equals B
+A != B 	  |not equal 	           |A does not exactly equal B
+A %in% B 	|in 	                 |A is an element of vector B
+
+::: {.callout-tip}
+#### Try this
+Using the `filter()` example and the table above, imagine we wanted to only keep trials where participants' judged the speed to be "Fast". Use the `pong_data_filter` after removing trial number 1 and assign it to a new object `pong_data_fast`. You could use the `JudgedSpeed` or `JudgedSpeedLabel` variables to do this. 
+
+For a hint, you want to keep responses when they are equivalent to "Fast" or 1 depending on the variable you use. 
+
+```{r eval=FALSE}
+# Retain fast judged speed trials
+pong_data_fast <- filter(pong_data_filter,
+                         ?)
+```
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+You were looking for the equivalence Boolean operator (==) to retain responses which were equal to "Fast" or 1. If you used `JudgedSpeedLabel`, you should have:
+
+```{r eval=FALSE}
+# Retain fast judged speed trials
+pong_data_fast <- filter(pong_data_filter,
+                         JudgedSpeedLabel == "Fast")
+```
+
+If you used `JudgedSpeed`, you should have:
+
+```{r eval=FALSE}
+# Retain fast judged speed trials
+pong_data_fast <- filter(pong_data_filter,
+                         JudgedSpeedLabel == 1)
+```
+
+Note we use a double equals == and not a single equals = for the Boolean operator. We also must honour the data type for the expression we set. 
+:::
+
+### Activity 8 - Filter using two or more criteria 
+
+You explored using one criterion to filter out or retain observations/rows, but you can make the expressions arbitrarily more complicated by adding two or more criteria to evaluate against. Just note the more criteria you add, the more selective you are being. You are probably going to be excluding more and more observations, so think about what you want to achieve. 
+
+Focusing on one variable, you can specify multiple values to compare against. For example, you might want to only keep responses which had a ball speed of 2 or 4:
+
+```{r}
+pong_data_BallSpeed <- filter(pong_data_filter,
+                              BallSpeed == 2 | BallSpeed == 4)
+```
+
+To break down the code:
+
+- We create a new object called `pong_data_BallSpeed` by applying the filter function to `pong_data_filter`.
+
+- We add the Boolean expression `BallSpeed == 2`, the vertical line symbol (`|`), then a second expression `BallSpeed == 4`. The vertical line symbol (`|`) means "or", so our expression is retain `BallSpeed` responses which equal 2 OR 4, and ignore all the others. 
+
+For two values, this is pretty straightforward, but it could get out of hand when you have four or five values to evaluate against. There is a super handy shortcut from the Boolean expressions table for "in" which we can apply if we wanted to keep ball speeds of 2, 4, 5, and 7:
+
+```{r}
+pong_data_BallSpeed <- filter(pong_data_filter,
+                              BallSpeed %in% c(2, 4, 5, 7))
+```
+
+You can read the expression here as: for each observation/row, check whether the value of `BallSpeed` is in the vector of numbers 2, 4, 5, 7. Remember `filter()` works by whether the expression is evaluted to TRUE or FALSE, so you can see how it works by testing some numbers: 
+
+```{r}
+1 %in% c(2, 4, 5, 7)
+2 %in% c(2, 4, 5, 7)
+```
+
+1 is not present in `c(2, 4, 5, 7)`, so it is evaluated to FALSE and would be ignored. 2 is presented in `c(2, 4, 5, 7)`, so it is evaluated to TRUE and would be retained. 
+
+You can also add two or more expressions including multiple variables by adding them to the function separated by commas. For example, imagine we wanted to retain observations/rows which had a "Fast" speed judgement with ball speeds of 2, 4, 5, and 7:
+
+```{r}
+pong_fast_BallSpeed <- filter(pong_data_filter, 
+                         JudgedSpeedLabel == "Fast", 
+                         BallSpeed %in% c("2", "4", "5", "7"))
+```
+
+In the first expression, we only want to keep observations/rows which have a `JudgedSpeedLabel` of "Fast". In the second expression, we only want to keep observations/rows which have a BallSpeed of 2, 4, 5, or 7. In other words, retain "Fast" observations AND those with a ball speed of 2, 4, 5, or 7. Adding more expressions makes your criteria more selective as rows must pass both conditions to be retained in the data. 
+
+::: {.callout-tip}
+#### Try this
+Using the examples above, imagine we wanted to only keep trials where:
+
+1. The `PaddleLength` is 50. 
+
+2. The `BackgroundColor` is red.
+
+3. The `HitOrMiss` is 1. 
+
+Use the `pong_data_filter` object and assign it to a new object `pong_data_three_criteria`.
+
+```{r eval=FALSE}
+# apply three criteria to filter pong_data_filter
+pong_data_three_criteria <- filter(pong_data_filter,
+                                   ?)
+```
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# apply three criteria to filter pong_data_filter
+pong_data_three_criteria <- filter(pong_data_filter,
+                                   PaddleLength == 50,
+                                   BackgroundColor == "red",
+                                   HitOrMiss == 1)
+```
+
+:::
 
 ## Counting observations using `count()`
+
+First we want to look at different ways of counting your observations. Often it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you've done something with the code and your mean or median is only being calculated using a subset of the values you intended.
+
+There are two ways of counting the number of observations. The first uses `summarise()` and the function `n()` within the `summarise()`. For example, the below code is the same as the previous activity, but with an extra line that will add a column called `n` to the table that contains the number of observations in each group. This is useful for when you want to add a column of counts to a table of other descriptive statistics. 
+
+* **Note:** the function is `n()` and takes no arguments it is just left blank as shown, `n()`.  However, as in other functions, the `n` prior to the `=` could be called anything you want the column to be called, e.g. `n = n()` or `number = n()` would do the same but just give different names to the column.
+
+```{r showing-n, message = FALSE}
+pong_count <- pong_data_filter %>% 
+  group_by(BackgroundColor, 
+           PaddleLength) %>% 
+  summarise(total_hits = sum(HitOrMiss, 
+                             na.rm = TRUE),
+            meanhits = mean(HitOrMiss, 
+                            na.rm = TRUE),
+            n = n())
+```
+
+However, if you're just interested in counts rather than also calculating descriptives, this above method is a bit clunky. Instead, we can use the function `count()` which is specifically designed to count observations and doesn't require the use of `summarise()` or `group_by()`.
+
+To count the total number of observations in the dataset for example we would do:
+
+```{r count1, eval = FALSE}
+pong_data %>% # take pong_data
+  count() # and then count the observations in it
+```
+
+And it would give the answer of:
+
+```{r count2, echo = FALSE}
+pong_data %>% count()
+```
+
+Alternatively, to count the number of observations in each level of a variable you could do:
+
+```{r count3, eval = FALSE}
+pong_data %>%
+  count(BackgroundColor)
+```
+
+And it would give the answer of:
+
+```{r count4, echo = FALSE}
+pong_data %>%
+  count(BackgroundColor)
+```
+
+Which method you use will depend on whether you want to add the counts to a table of other descriptives, but both functions are useful to know.
 
 ## Getting summary statistics using `summarise()` and `group_by()`
 
@@ -398,61 +533,7 @@ act8_false3 <- pong_data_hits %>%
 * The name of the column within `pong_data_hits` is `total_hits`; this is what you called it in the above code. You could have called it anything you wanted but always try to use something sensible.
 * Make sure to call your variables something you (and anyone looking at your code) will understand and recognize later (i.e. not variable1, variable2, variable3. etc.), and avoid spaces (use_underscores_never_spaces). 
 
-## Combining functions using the pipe
-
-## Ungrouping, counting, pipes - quick notes!
-
-You have done some superb work today! Congratulations. You should be really proud of yourself. Before ending we just want to show a couple more new functions and approaches that will help in future activities.
-
 ### Counting data {#dw2-a9}
-
-First we want to look at different ways of counting your observations. Often it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you've done something with the code and your mean or median is only being calculated using a subset of the values you intended.
-
-There are two ways of counting the number of observations. The first uses `summarise()` and the function `n()` within the `summarise()`. For example, the below code is the same as the previous activity, but with an extra line that will add a column called `n` to the table that contains the number of observations in each group. This is useful for when you want to add a column of counts to a table of other descriptive statistics. 
-
-* **Note:** the function is `n()` and takes no arguments it is just left blank as shown, `n()`.  However, as in other functions, the `n` prior to the `=` could be called anything you want the column to be called, e.g. `n = n()` or `number = n()` would do the same but just give different names to the column.
-
-```{r showing-n, message = FALSE}
-pong_count <- pong_data_renumbered %>% 
-  group_by(BackgroundColor, 
-           PaddleLength) %>% 
-  summarise(total_hits = sum(HitOrMiss, 
-                             na.rm = TRUE),
-            meanhits = mean(HitOrMiss, 
-                            na.rm = TRUE),
-            n = n())
-```
-
-However, if you're just interested in counts rather than also calculating descriptives, this above method is a bit clunky. Instead, we can use the function `count()` which is specifically designed to count observations and doesn't require the use of `summarise()` or `group_by()`.
-
-To count the total number of observations in the dataset for example we would do:
-
-```{r count1, eval = FALSE}
-pong_data %>% # take pong_data
-  count() # and then count the observations in it
-```
-
-And it would give the answer of:
-
-```{r count2, echo = FALSE}
-pong_data %>% count()
-```
-
-Alternatively, to count the number of observations in each level of a variable you could do:
-
-```{r count3, eval = FALSE}
-pong_data %>%
-  count(BackgroundColor)
-```
-
-And it would give the answer of:
-
-```{r count4, echo = FALSE}
-pong_data %>%
-  count(BackgroundColor)
-```
-
-Which method you use will depend on whether you want to add the counts to a table of other descriptives, but both functions are useful to know.
 
 ### Ungrouping data {#dw2-ungroup}
 
@@ -466,57 +547,6 @@ pong_data_ungroup <- pong_data %>%
            PaddleLength) %>%
   summarise(total_hits = sum(HitOrMiss)) %>%
   ungroup
-```
-
-### Recapping Pipes (**`%>%`**) {#dw2-pipes}  
-
-And finally today we just want to throw in a quick recap on `r glossary("pipe", display = "pipes")`. We have used pipes a little above but you might still not have got the hang of it so reading through this will help a little. Remember where pipes become most useful is when we **string a series of functions together**, rather than using them as separate steps and having to save the data each time under a new variable name and getting ourselves all confused. In non-piped code we have to create a new object each time, for example, `data`, `data_filtered`, `data_arranged`, `data_grouped`, `data_summarised` just to get to the final one we actually want.  This creates a lot of variables and tibbles in our environment and can make everything unclear, difficult to follow, and eventually slow down our computer. Piped code however uses one variable name, saving space in the environment, and is clear and easy to read. With pipes we skip unnecessary steps and avoid cluttering our environment.  
-
-Here is an example of code that doesn't use pipes to find how many hits there were with the large paddle length and the red background:
-
-* First we group the data accordingly, storing it in `pong_data_group`
-* And then we summarise it, storing the answer in `total_hits`
-* And finally we filter just the red, large paddle hits
-
-```{r datasummary-nopipe, eval = FALSE}
-
-pong_data_group <- group_by(pong_data, 
-                            BackgroundColor, 
-                            PaddleLength)
-
-pong_data_hits <- summarise(pong_data_group, 
-                            total_hits = sum(HitOrMiss))
-
-pong_data_hits_red_large <- filter(pong_data_hits, 
-                                   BackgroundColor == "red", 
-                                   PaddleLength == 250)
-```
-
-Alternatively we can make our code even more efficient, using less code, by stringing our sequence of functions together using pipes. This would look like:
-
-```{r datasummary-pipes, eval = FALSE}
-pong_data_hits_red_large <- pong_data %>% 
-  group_by(BackgroundColor, 
-           PaddleLength) %>% 
-  summarise(total_hits = sum(HitOrMiss)) %>% 
-  filter(BackgroundColor == "red", 
-         PaddleLength == 250) 
-```
-
-So the code becomes easier to read as you remember the data goes into one function "and then" into another, "and then" into another, and so on. 
-
-It is also worth remembering that whilst pipes and code can be written in a single line, but it is much easier to see what the pipe is doing if each function takes its own line. You just have to remember that every time you add a function to the pipeline, add a `%>%` first and **note that when using separate lines for each function, the `%>%` must appear at the end of the line and not the start of the next line**. Compare the two examples below. The first won't work but the second will because the second puts the pipes at the end of the line where they need to be!
-
-``` {r pipes3, eval = FALSE}
-# Piped version that won't work 
-data_arrange <- pong_data 
-                %>% filter(PaddleLength == "50")
-                %>% arrange(BallSpeed) 
-
-# Piped version that will work 
-data_arrange <- pong_data %>%
-                filter(PaddleLength == "50") %>%
-                arrange(BallSpeed) 
 ```
 
 ## Test yourself
@@ -556,6 +586,8 @@ The following questions are designed to introduce you to making and fixing error
 
 Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the two data files: 
 
+- filter using equals not double equals
+
 ### Debugging tips {#dw2-debug}
 
 There are no debugging challenges today as we have done a lot of work but here are some tips to keep in mind.
@@ -570,54 +602,6 @@ There are no debugging challenges today as we have done a lot of work but here a
 * When using pipes, remember that you only need the data once, at the start.
 * If separating pipes across different lines, remember the line ends with the pipe, it does not start with the pipe.
 * And lastly, remember that only the data changes, the skills stay the same. Always look back to when you had the code working and go from there.
-
-### Activity 6 {#dw2-a6sol}
-
-* Remembering that filters can take more than one argument then the below code would filter for data where:
-
-* JudgedSpeed is 1 AND
-* BallSpeed is either 2, 4, 5, or 7, AND
-* HitOrMiss is 0.
-
-```{r filt1, eval = TRUE}
-pong_fast_miss <- filter(pong_data, 
-                         JudgedSpeed == 1, 
-                         BallSpeed %in% c("2", "4", "5", "7"), 
-                         HitOrMiss == 0)
-```
- 
-### Activity 7 {#dw2-a7sol}
-
-If you didn't use pipes then the following code would be appropriate:
-
-* First you filter. And remember that you can call the first object `pong_data_filt` anything that makes sense to you and others.
-* Then in a separate step you mutate.
-
-```{r act7-1, eval = TRUE}
-pong_data_filt <- filter(pong_data, 
-                         TrialNumber >= 2) 
-
-pong_data_renumbered <- mutate(pong_data_filt, 
-                               TrialNumber = TrialNumber - 1)
-```
-
-And if you used pipes this would be the solution:
-
-* Remember you include the data once, and the pipes end the line, they do not start the line.
-
-```{r act7-2, eval = TRUE}
-pong_data_renumbered <- filter(pong_data, 
-                               TrialNumber >= 2) %>%
-  mutate(TrialNumber = TrialNumber - 1)
-```
-
-which could also be written as below - which some find better to remember the data goes in first and only once:
-
-```{r act7-3, eval = TRUE}
-pong_data_renumbered <- pong_data %>%
-  filter(TrialNumber >= 2) %>%
-  mutate(TrialNumber = TrialNumber - 1)
-```
 
 ## Words from this Chapter
 

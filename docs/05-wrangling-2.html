@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
-<title>Fundamentals of Quantitative Analysis - 5&nbsp; Data wrangling 2: Filter, summarise, and pipes</title>
+<title>Fundamentals of Quantitative Analysis - 5&nbsp; Data wrangling 2: Filter and summarise</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-wrangling-2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-wrangling-2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -210,7 +210,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -389,35 +389,36 @@ div.csl-indent {
   <li><a href="#dw2-a7" id="toc-dw2-a7" class="nav-link" data-scroll-target="#dw2-a7"><span class="header-section-number">5.2.7</span> Activity 6 - Modify or creating variables using <code>mutate()</code></a></li>
   </ul>
 </li>
-  <li><a href="#removing-or-retaining-observations-using-filter" id="toc-removing-or-retaining-observations-using-filter" class="nav-link" data-scroll-target="#removing-or-retaining-observations-using-filter"><span class="header-section-number">5.3</span> Removing or retaining observations using <code>filter()</code></a></li>
+  <li>
+<a href="#removing-or-retaining-observations-using-filter" id="toc-removing-or-retaining-observations-using-filter" class="nav-link" data-scroll-target="#removing-or-retaining-observations-using-filter"><span class="header-section-number">5.3</span> Removing or retaining observations using <code>filter()</code></a>
+  <ul class="collapse">
+<li><a href="#activity-7---filter-using-one-criterion" id="toc-activity-7---filter-using-one-criterion" class="nav-link" data-scroll-target="#activity-7---filter-using-one-criterion"><span class="header-section-number">5.3.1</span> Activity 7 - Filter using one criterion</a></li>
+  <li><a href="#activity-8---filter-using-two-or-more-criteria" id="toc-activity-8---filter-using-two-or-more-criteria" class="nav-link" data-scroll-target="#activity-8---filter-using-two-or-more-criteria"><span class="header-section-number">5.3.2</span> Activity 8 - Filter using two or more criteria</a></li>
+  </ul>
+</li>
   <li><a href="#counting-observations-using-count" id="toc-counting-observations-using-count" class="nav-link" data-scroll-target="#counting-observations-using-count"><span class="header-section-number">5.4</span> Counting observations using <code>count()</code></a></li>
-  <li><a href="#getting-summary-statistics-using-summarise-and-group_by" id="toc-getting-summary-statistics-using-summarise-and-group_by" class="nav-link" data-scroll-target="#getting-summary-statistics-using-summarise-and-group_by"><span class="header-section-number">5.5</span> Getting summary statistics using <code>summarise()</code> and <code>group_by()</code></a></li>
-  <li><a href="#combining-functions-using-the-pipe" id="toc-combining-functions-using-the-pipe" class="nav-link" data-scroll-target="#combining-functions-using-the-pipe"><span class="header-section-number">5.6</span> Combining functions using the pipe</a></li>
   <li>
-<a href="#ungrouping-counting-pipes---quick-notes" id="toc-ungrouping-counting-pipes---quick-notes" class="nav-link" data-scroll-target="#ungrouping-counting-pipes---quick-notes"><span class="header-section-number">5.7</span> Ungrouping, counting, pipes - quick notes!</a>
+<a href="#getting-summary-statistics-using-summarise-and-group_by" id="toc-getting-summary-statistics-using-summarise-and-group_by" class="nav-link" data-scroll-target="#getting-summary-statistics-using-summarise-and-group_by"><span class="header-section-number">5.5</span> Getting summary statistics using <code>summarise()</code> and <code>group_by()</code></a>
   <ul class="collapse">
-<li><a href="#dw2-a9" id="toc-dw2-a9" class="nav-link" data-scroll-target="#dw2-a9"><span class="header-section-number">5.7.1</span> Counting data</a></li>
-  <li><a href="#dw2-ungroup" id="toc-dw2-ungroup" class="nav-link" data-scroll-target="#dw2-ungroup"><span class="header-section-number">5.7.2</span> Ungrouping data</a></li>
-  <li><a href="#dw2-pipes" id="toc-dw2-pipes" class="nav-link" data-scroll-target="#dw2-pipes"><span class="header-section-number">5.7.3</span> Recapping Pipes (<strong><code>%&gt;%</code></strong>)</a></li>
+<li><a href="#dw2-a9" id="toc-dw2-a9" class="nav-link" data-scroll-target="#dw2-a9"><span class="header-section-number">5.5.1</span> Counting data</a></li>
+  <li><a href="#dw2-ungroup" id="toc-dw2-ungroup" class="nav-link" data-scroll-target="#dw2-ungroup"><span class="header-section-number">5.5.2</span> Ungrouping data</a></li>
   </ul>
 </li>
   <li>
-<a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">5.8</span> Test yourself</a>
+<a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">5.6</span> Test yourself</a>
   <ul class="collapse">
-<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">5.8.1</span> Knowledge check</a></li>
-  <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">5.8.2</span> Error mode</a></li>
-  <li><a href="#dw2-debug" id="toc-dw2-debug" class="nav-link" data-scroll-target="#dw2-debug"><span class="header-section-number">5.8.3</span> Debugging tips</a></li>
-  <li><a href="#dw2-a6sol" id="toc-dw2-a6sol" class="nav-link" data-scroll-target="#dw2-a6sol"><span class="header-section-number">5.8.4</span> Activity 6</a></li>
-  <li><a href="#dw2-a7sol" id="toc-dw2-a7sol" class="nav-link" data-scroll-target="#dw2-a7sol"><span class="header-section-number">5.8.5</span> Activity 7</a></li>
+<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">5.6.1</span> Knowledge check</a></li>
+  <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">5.6.2</span> Error mode</a></li>
+  <li><a href="#dw2-debug" id="toc-dw2-debug" class="nav-link" data-scroll-target="#dw2-debug"><span class="header-section-number">5.6.3</span> Debugging tips</a></li>
   </ul>
 </li>
-  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">5.9</span> Words from this Chapter</a></li>
-  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">5.10</span> End of chapter</a></li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">5.7</span> Words from this Chapter</a></li>
+  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">5.8</span> End of chapter</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/05-wrangling-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/05-wrangling-2.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="05-wrangling-2" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span></h1>
+<h1 class="title"><span id="05-wrangling-2" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></span></h1>
 </div>
 
 
@@ -749,142 +750,207 @@ Show me the solution
 <span class="header-section-number">5.3</span> Removing or retaining observations using <code>filter()</code>
 </h2>
 <p>Now we have revisited key data wrangling functions from Chapter 4 to select, arrange, and mutate, it is time to add some new functions from <pkg>dplyr</pkg> to your toolkit.</p>
-<p>Ok great! Now, imagine you realise that there is a mistake in your dataset and that all your trial numbers are wrong. The first trial (trial number 1) was a practice so should be excluded and your experiment actually started on trial 2. Your turn! You can either do this following activity in two separate steps and create a new object each time, or you can uses pipes <code>%&gt;%</code> and do it it one line of code. The final tibble should be stored in an object called <code>pong_data_renumbered</code>.</p>
-<ul>
-<li>Filter out all trials with the number 1 (<code>TrialNumber</code> column) from <code>pong_data</code>.</li>
-<li>Then use the <code>mutate()</code> function to renumber all the remaining trial numbers, starting them at one again instead of two, overwriting the values that were in the <code>TrialNumber</code> column.</li>
-</ul>
-<div class="webex-solution">
-<button>
-Helpful Hint
-</button>
+<p>Using select, we could remove columns, but there are many situations where you want to include or exclude certain observations/rows. The function <a class="glossary" title="The ability to subset a data frame to keep all observations/rows that satisfy one or more conditions.">filter()</a> will possibly be one of your most used for data wrangling. For example, imagine you want to only analyse participants who provided informed consent and exclude participants who did not. Similarly, you might want to focus your analyses only on participants who are under the age of 21.</p>
+<section id="activity-7---filter-using-one-criterion" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="activity-7---filter-using-one-criterion">
+<span class="header-section-number">5.3.1</span> Activity 7 - Filter using one criterion</h3>
+<p>We will jump straight into an example. Imagine that you realised you made a mistake creating your experiment and all your trial numbers are wrong. The first trial (trial number 1) was a practice, so you should exclude it and your experiment actually started on trial 2.</p>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>pong_data_filter <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data,</span>
+<span id="cb13-2"><a href="#cb13-2"></a>                           TrialNumber <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To break down the code:</p>
 <ul>
-<li><p>Step 1. filter(<code>TrialNumber</code> does not equal 1). Remember to store this output in a variable if you are not using pipes.</p></li>
-<li><p>Step 2. mutate(<code>TrialNumber</code> = TrialNumber minus 1)</p></li>
+<li><p>We create a new object called <code>pong_data_filter</code> by applying the filter function to <code>pong_data</code>.</p></li>
+<li><p>We add the Boolean expression <code>TrialNumber &gt; 1</code> to keep all responses higher than 1 (i.e., 2 or higher).</p></li>
 </ul>
+<p>The <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function uses our old friends the Boolean expressions we introduced you to in Chapter 4. You can add one or more logical expressions to filter observations. The function retains observations when they are evaluated to TRUE and ignores observations when they are evaluated to FALSE. Remember, when you are working out how to express your ideas in code, test them out. For example, we can see what the expression would do to different trial numbers:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="dv">1</span> <span class="sc">&gt;</span> <span class="dv">1</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="dv">2</span> <span class="sc">&gt;</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE
+[1] TRUE</code></pre>
 </div>
 </div>
-<p>Great! But what about keeping and removing some of the rows with <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>! You may need to refer back to the different boolean operations to complete this activity!</p>
-<p>Use <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> to extract all Participants in the original <code>pong_data</code> that had:</p>
-<ul>
-<li>a fast speed judgement;</li>
-<li>for speeds 2, 4, 5, and 7;</li>
-<li>but missed the ball.</li>
-</ul>
-<p>Store this remaining data in a new object called <code>pong_fast_miss</code></p>
-<div class="webex-solution">
-<button>
-Helpful Hint
-</button>
+<p>1 is not larger than 1, so it’s evaluated to FALSE and would be ignored. 2 is larger than 2, so it’s evaluated to TRUE and would be retained. Explore the two data sets <code>pong_data</code> and <code>pong_data_filter</code> and the number of rows they have to see the effects of applying the function.</p>
+<p>As a reminder from Chapter 4, the most common Boolean expressions are:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Operator</th>
+<th>Name</th>
+<th>is TRUE if and only if</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>A &lt; B</td>
+<td>less than</td>
+<td>A is less than B</td>
+</tr>
+<tr class="even">
+<td>A &lt;= B</td>
+<td>less than or equal</td>
+<td>A is less than or equal to B</td>
+</tr>
+<tr class="odd">
+<td>A &gt; B</td>
+<td>greater than</td>
+<td>A is greater than B</td>
+</tr>
+<tr class="even">
+<td>A &gt;= B</td>
+<td>greater than or equal</td>
+<td>A is greater than or equal to B</td>
+</tr>
+<tr class="odd">
+<td>A == B</td>
+<td>equivalence</td>
+<td>A exactly equals B</td>
+</tr>
+<tr class="even">
+<td>A != B</td>
+<td>not equal</td>
+<td>A does not exactly equal B</td>
+</tr>
+<tr class="odd">
+<td>A %in% B</td>
+<td>in</td>
+<td>A is an element of vector B</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> example and the table above, imagine we wanted to only keep trials where participants’ judged the speed to be “Fast”. Use the <code>pong_data_filter</code> after removing trial number 1 and assign it to a new object <code>pong_data_fast</code>. You could use the <code>JudgedSpeed</code> or <code>JudgedSpeedLabel</code> variables to do this.</p>
+<p>For a hint, you want to keep responses when they are equivalent to “Fast” or 1 depending on the variable you use.</p>
 <div class="cell" data-layout-align="center">
-<p>There are three parts to this filter so it is best to think about them individually and then combine them.</p>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Retain fast judged speed trials</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>pong_data_fast <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>                         ?)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You were looking for the equivalence Boolean operator (==) to retain responses which were equal to “Fast” or 1. If you used <code>JudgedSpeedLabel</code>, you should have:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Retain fast judged speed trials</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>pong_data_fast <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>                         JudgedSpeedLabel <span class="sc">==</span> <span class="st">"Fast"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you used <code>JudgedSpeed</code>, you should have:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Retain fast judged speed trials</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>pong_data_fast <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter,</span>
+<span id="cb18-3"><a href="#cb18-3"></a>                         JudgedSpeedLabel <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note we use a double equals == and not a single equals = for the Boolean operator. We also must honour the data type for the expression we set.</p>
+</div>
+</div>
+</div>
+</section><section id="activity-8---filter-using-two-or-more-criteria" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="activity-8---filter-using-two-or-more-criteria">
+<span class="header-section-number">5.3.2</span> Activity 8 - Filter using two or more criteria</h3>
+<p>You explored using one criterion to filter out or retain observations/rows, but you can make the expressions arbitrarily more complicated by adding two or more criteria to evaluate against. Just note the more criteria you add, the more selective you are being. You are probably going to be excluding more and more observations, so think about what you want to achieve.</p>
+<p>Focusing on one variable, you can specify multiple values to compare against. For example, you might want to only keep responses which had a ball speed of 2 or 4:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>pong_data_BallSpeed <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter,</span>
+<span id="cb19-2"><a href="#cb19-2"></a>                              BallSpeed <span class="sc">==</span> <span class="dv">2</span> <span class="sc">|</span> BallSpeed <span class="sc">==</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To break down the code:</p>
+<ul>
+<li><p>We create a new object called <code>pong_data_BallSpeed</code> by applying the filter function to <code>pong_data_filter</code>.</p></li>
+<li><p>We add the Boolean expression <code>BallSpeed == 2</code>, the vertical line symbol (<code>|</code>), then a second expression <code>BallSpeed == 4</code>. The vertical line symbol (<code>|</code>) means “or”, so our expression is retain <code>BallSpeed</code> responses which equal 2 OR 4, and ignore all the others.</p></li>
+</ul>
+<p>For two values, this is pretty straightforward, but it could get out of hand when you have four or five values to evaluate against. There is a super handy shortcut from the Boolean expressions table for “in” which we can apply if we wanted to keep ball speeds of 2, 4, 5, and 7:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>pong_data_BallSpeed <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter,</span>
+<span id="cb20-2"><a href="#cb20-2"></a>                              BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can read the expression here as: for each observation/row, check whether the value of <code>BallSpeed</code> is in the vector of numbers 2, 4, 5, 7. Remember <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> works by whether the expression is evaluted to TRUE or FALSE, so you can see how it works by testing some numbers:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="dv">1</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="dv">2</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE
+[1] TRUE</code></pre>
+</div>
+</div>
+<p>1 is not present in <code>c(2, 4, 5, 7)</code>, so it is evaluated to FALSE and would be ignored. 2 is presented in <code>c(2, 4, 5, 7)</code>, so it is evaluated to TRUE and would be retained.</p>
+<p>You can also add two or more expressions including multiple variables by adding them to the function separated by commas. For example, imagine we wanted to retain observations/rows which had a “Fast” speed judgement with ball speeds of 2, 4, 5, and 7:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>pong_fast_BallSpeed <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter, </span>
+<span id="cb23-2"><a href="#cb23-2"></a>                         JudgedSpeedLabel <span class="sc">==</span> <span class="st">"Fast"</span>, </span>
+<span id="cb23-3"><a href="#cb23-3"></a>                         BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the first expression, we only want to keep observations/rows which have a <code>JudgedSpeedLabel</code> of “Fast”. In the second expression, we only want to keep observations/rows which have a BallSpeed of 2, 4, 5, or 7. In other words, retain “Fast” observations AND those with a ball speed of 2, 4, 5, or 7. Adding more expressions makes your criteria more selective as rows must pass both conditions to be retained in the data.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the examples above, imagine we wanted to only keep trials where:</p>
 <ol type="1">
-<li><p>Filter all fast speed judgements (<code>JudgedSpeed</code>)</p></li>
-<li><p>Filter for the speeds 2, 4, 5 and 7 (<code>BallSpeed</code>)</p></li>
-<li><p>Filter for all Misses (<code>HitOrMiss</code>)</p></li>
+<li><p>The <code>PaddleLength</code> is 50.</p></li>
+<li><p>The <code>BackgroundColor</code> is red.</p></li>
+<li><p>The <code>HitOrMiss</code> is 1.</p></li>
 </ol>
-<p>You could do this in three filters where each one uses the output of the preceding one, or remember that filter functions can take more than one argument. You may also need to use <code>==</code> instead of just <code>=</code>.</p>
+<p>Use the <code>pong_data_filter</code> object and assign it to a new object <code>pong_data_three_criteria</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># apply three criteria to filter pong_data_filter</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>pong_data_three_criteria <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter,</span>
+<span id="cb24-3"><a href="#cb24-3"></a>                                   ?)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p><br></p>
-<div class="cell" data-layout-align="center" type="warning">
-<div class="warning">
-<p>
-The filter function is very useful but if used wrongly can give you very misleading findings. This is why it is very important to always check your data after you perform an action. Let’s say you are working in comparative psychology and have run a study looking at how cats, dogs and horses perceive emotion. Let’s say the data is all stored in the tibble <code>animal_data</code> and there is a column called <code>animals</code> that tells you what type of animal your participant was. Imagine you wanted all the data from just cats:
-</p>
-<p>
-<code>filter(animal_data, animals == “cat”)</code>
-</p>
-<p>
-Exactly! But what if you wanted cats and dogs?
-</p>
-<p>
-<code>filter(animal_data, animals == “cat”, animals == “dog”)</code>
-</p>
-<p>
-Right? Wrong! This actually says “give me everything that is a cat and a dog”. But nothing is a cat and a dog, that would be weird - like a dat or a cog. In fact you want everything that is either a cat <strong>or</strong> a dog, so you could do:
-</p>
-<p>
-<code>filter(animal_data, animals == “cat”| animals == “dog”)</code>
-</p>
-<p>
-Or you could do:
-</p>
-<p>
-<code>filter(animal_data, animals %in% c(“cat”, “dog”))</code>
-</p>
-<p>
-You used this last approach, using <code>%in%</code>, when producing your own graph of <code>babynames</code>. It is a very helpful function so don’t forget it exists!
-</p>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You should have the following in a code chunk:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># apply three criteria to filter pong_data_filter</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>pong_data_three_criteria <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_filter,</span>
+<span id="cb25-3"><a href="#cb25-3"></a>                                   PaddleLength <span class="sc">==</span> <span class="dv">50</span>,</span>
+<span id="cb25-4"><a href="#cb25-4"></a>                                   BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5"></a>                                   HitOrMiss <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</section><section id="counting-observations-using-count" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="counting-observations-using-count">
+</div>
+</div>
+</section></section><section id="counting-observations-using-count" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="counting-observations-using-count">
 <span class="header-section-number">5.4</span> Counting observations using <code>count()</code>
 </h2>
-</section><section id="getting-summary-statistics-using-summarise-and-group_by" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="getting-summary-statistics-using-summarise-and-group_by">
-<span class="header-section-number">5.5</span> Getting summary statistics using <code>summarise()</code> and <code>group_by()</code>
-</h2>
-<p>Excellent! And now that we have done some wrangling we want to calculate some descriptive statistics for the data using <code>summarise()</code>. <code>summarise()</code> has a range of internal functions that make life really easy, e.g.&nbsp;<code>mean</code>, <code>sum</code>, <code>max</code>, <code>min</code>, etc. See the <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">dplyr cheatsheet</a> for more examples. And additional one that we will use from time-to-time is <code>na.rm = TRUE</code> which we can add when calculating descriptive statistics to say what to do if there are missing values. Missing values often appear as <code>NA</code> and the job of <code>na.rm</code> is to say whether to remove (rm) the NAs (<code>na.rm = TRUE</code>) or not (<code>na.rm = FALSE</code>). If you try to calculate values from data that have NAs, such as the mean, it would return <code>NA</code> as the result because it doesn’t know how to average nothing. This dataset has no missing values but we will show you how to use it here and try to remember this argument exists, as you will use it often and it save you a lot of time!</p>
-<p>Back to the activity. Here, using the data in <code>pong_data_renumbered</code> we will calculate:</p>
-<ul>
-<li>The total (sum) number of hits for each combination of background colour and paddle length.</li>
-<li>The mean number of hits for each combination of background colour and paddle length</li>
-</ul>
-<p>Remember though, because we want to produce descriptive statistics by groups (background colour and paddle length), there are two steps:</p>
-<ul>
-<li>First we group the data by <code>BackgroundColor</code> and <code>PaddleLength</code> using <code>group_by()</code>.</li>
-<li>Then, we use <code>summarise()</code> to calculate the total and mean number of hits (<code>HitOrMiss</code>) using the grouped data</li>
-</ul>
-<p>We will do this activity using pipes to reduce the amount of code we write. Remember to try and read the code out loud and to pronounce <code>%&gt;%</code> as ‘and then’. Copy and paste the below code into a new code chunk and run the code.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>pong_data_hits <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb13-3"><a href="#cb13-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
-<span id="cb13-5"><a href="#cb13-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb13-6"><a href="#cb13-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
-<span id="cb13-7"><a href="#cb13-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'BackgroundColor'. You can override using
-the `.groups` argument.</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center" type="info">
-<div class="info">
-<p>
-Remember, if you get what looks like an error that says “<code>summarise()</code> has grouped output by ‘BackgroundColor’. You can override using the <code>.groups</code> argument.”, don’t worry, this isn’t an error it’s just the code telling you how the final object is grouped.
-</p>
-</div>
-</div>
-<ul>
-<li>View <code>pong_data_hits</code> and answer the following questions to see if you have completed the task correctly.</li>
-</ul>
-<ul>
-<li>What was the total number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_XWALQKSUVP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value=""><span>1059</span></label><label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value=""><span>1057</span></label><label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value=""><span>516</span></label><label><input type="radio" autocomplete="off" name="radio_XWALQKSUVP" value="answer"><span>527</span></label>
-</div>
-</li>
-</ul>
-<ul>
-<li>To three decimal places, what was the mean number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_NPGPAZCOCM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value=""><span>0.451</span></label><label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value="answer"><span>0.459</span></label><label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value=""><span>0.92</span></label><label><input type="radio" autocomplete="off" name="radio_NPGPAZCOCM" value=""><span>0.922</span></label>
-</div>
-</li>
-</ul>
-<p><strong>Note:</strong></p>
-<ul>
-<li>The name of the column within <code>pong_data_hits</code> is <code>total_hits</code>; this is what you called it in the above code. You could have called it anything you wanted but always try to use something sensible.</li>
-<li>Make sure to call your variables something you (and anyone looking at your code) will understand and recognize later (i.e.&nbsp;not variable1, variable2, variable3. etc.), and avoid spaces (use_underscores_never_spaces).</li>
-</ul></section><section id="combining-functions-using-the-pipe" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="combining-functions-using-the-pipe">
-<span class="header-section-number">5.6</span> Combining functions using the pipe</h2>
-</section><section id="ungrouping-counting-pipes---quick-notes" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="ungrouping-counting-pipes---quick-notes">
-<span class="header-section-number">5.7</span> Ungrouping, counting, pipes - quick notes!</h2>
-<p>You have done some superb work today! Congratulations. You should be really proud of yourself. Before ending we just want to show a couple more new functions and approaches that will help in future activities.</p>
-<section id="dw2-a9" class="level3" data-number="5.7.1"><h3 data-number="5.7.1" class="anchored" data-anchor-id="dw2-a9">
-<span class="header-section-number">5.7.1</span> Counting data</h3>
 <p>First we want to look at different ways of counting your observations. Often it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you’ve done something with the code and your mean or median is only being calculated using a subset of the values you intended.</p>
 <p>There are two ways of counting the number of observations. The first uses <code>summarise()</code> and the function <code>n()</code> within the <code>summarise()</code>. For example, the below code is the same as the previous activity, but with an extra line that will add a column called <code>n</code> to the table that contains the number of observations in each group. This is useful for when you want to add a column of counts to a table of other descriptive statistics.</p>
 <ul>
@@ -892,20 +958,20 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 <strong>Note:</strong> the function is <code>n()</code> and takes no arguments it is just left blank as shown, <code>n()</code>. However, as in other functions, the <code>n</code> prior to the <code>=</code> could be called anything you want the column to be called, e.g.&nbsp;<code>n = n()</code> or <code>number = n()</code> would do the same but just give different names to the column.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>pong_count <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb15-3"><a href="#cb15-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
-<span id="cb15-5"><a href="#cb15-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb15-6"><a href="#cb15-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
-<span id="cb15-7"><a href="#cb15-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb15-8"><a href="#cb15-8"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>pong_count <span class="ot">&lt;-</span> pong_data_filter <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb26-3"><a href="#cb26-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
+<span id="cb26-5"><a href="#cb26-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb26-6"><a href="#cb26-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
+<span id="cb26-7"><a href="#cb26-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb26-8"><a href="#cb26-8"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, if you’re just interested in counts rather than also calculating descriptives, this above method is a bit clunky. Instead, we can use the function <code>count()</code> which is specifically designed to count observations and doesn’t require the use of <code>summarise()</code> or <code>group_by()</code>.</p>
 <p>To count the total number of observations in the dataset for example we would do:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>pong_data <span class="sc">%&gt;%</span> <span class="co"># take pong_data</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">count</span>() <span class="co"># and then count the observations in it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>pong_data <span class="sc">%&gt;%</span> <span class="co"># take pong_data</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">count</span>() <span class="co"># and then count the observations in it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And it would give the answer of:</p>
 <div class="cell" data-layout-align="center">
@@ -924,8 +990,8 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 </div>
 <p>Alternatively, to count the number of observations in each level of a variable you could do:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">count</span>(BackgroundColor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">count</span>(BackgroundColor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And it would give the answer of:</p>
 <div class="cell" data-layout-align="center">
@@ -951,67 +1017,81 @@ Remember, if you get what looks like an error that says “<code>summarise()</co
 </div>
 </div>
 <p>Which method you use will depend on whether you want to add the counts to a table of other descriptives, but both functions are useful to know.</p>
-</section><section id="dw2-ungroup" class="level3" data-number="5.7.2"><h3 data-number="5.7.2" class="anchored" data-anchor-id="dw2-ungroup">
-<span class="header-section-number">5.7.2</span> Ungrouping data</h3>
+</section><section id="getting-summary-statistics-using-summarise-and-group_by" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="getting-summary-statistics-using-summarise-and-group_by">
+<span class="header-section-number">5.5</span> Getting summary statistics using <code>summarise()</code> and <code>group_by()</code>
+</h2>
+<p>Excellent! And now that we have done some wrangling we want to calculate some descriptive statistics for the data using <code>summarise()</code>. <code>summarise()</code> has a range of internal functions that make life really easy, e.g.&nbsp;<code>mean</code>, <code>sum</code>, <code>max</code>, <code>min</code>, etc. See the <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">dplyr cheatsheet</a> for more examples. And additional one that we will use from time-to-time is <code>na.rm = TRUE</code> which we can add when calculating descriptive statistics to say what to do if there are missing values. Missing values often appear as <code>NA</code> and the job of <code>na.rm</code> is to say whether to remove (rm) the NAs (<code>na.rm = TRUE</code>) or not (<code>na.rm = FALSE</code>). If you try to calculate values from data that have NAs, such as the mean, it would return <code>NA</code> as the result because it doesn’t know how to average nothing. This dataset has no missing values but we will show you how to use it here and try to remember this argument exists, as you will use it often and it save you a lot of time!</p>
+<p>Back to the activity. Here, using the data in <code>pong_data_renumbered</code> we will calculate:</p>
+<ul>
+<li>The total (sum) number of hits for each combination of background colour and paddle length.</li>
+<li>The mean number of hits for each combination of background colour and paddle length</li>
+</ul>
+<p>Remember though, because we want to produce descriptive statistics by groups (background colour and paddle length), there are two steps:</p>
+<ul>
+<li>First we group the data by <code>BackgroundColor</code> and <code>PaddleLength</code> using <code>group_by()</code>.</li>
+<li>Then, we use <code>summarise()</code> to calculate the total and mean number of hits (<code>HitOrMiss</code>) using the grouped data</li>
+</ul>
+<p>We will do this activity using pipes to reduce the amount of code we write. Remember to try and read the code out loud and to pronounce <code>%&gt;%</code> as ‘and then’. Copy and paste the below code into a new code chunk and run the code.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>pong_data_hits <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb29-3"><a href="#cb29-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
+<span id="cb29-5"><a href="#cb29-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-6"><a href="#cb29-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
+<span id="cb29-7"><a href="#cb29-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'BackgroundColor'. You can override using
+the `.groups` argument.</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center" type="info">
+<div class="info">
+<p>
+Remember, if you get what looks like an error that says “<code>summarise()</code> has grouped output by ‘BackgroundColor’. You can override using the <code>.groups</code> argument.”, don’t worry, this isn’t an error it’s just the code telling you how the final object is grouped.
+</p>
+</div>
+</div>
+<ul>
+<li>View <code>pong_data_hits</code> and answer the following questions to see if you have completed the task correctly.</li>
+</ul>
+<ul>
+<li>What was the total number of hits made with the small paddle (50) and the blue colour background?
+<div id="radio_XKMWNPITBA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XKMWNPITBA" value=""><span>1059</span></label><label><input type="radio" autocomplete="off" name="radio_XKMWNPITBA" value="answer"><span>527</span></label><label><input type="radio" autocomplete="off" name="radio_XKMWNPITBA" value=""><span>516</span></label><label><input type="radio" autocomplete="off" name="radio_XKMWNPITBA" value=""><span>1057</span></label>
+</div>
+</li>
+</ul>
+<ul>
+<li>To three decimal places, what was the mean number of hits made with the small paddle (50) and the blue colour background?
+<div id="radio_OOJPRQSQAK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OOJPRQSQAK" value=""><span>0.451</span></label><label><input type="radio" autocomplete="off" name="radio_OOJPRQSQAK" value=""><span>0.92</span></label><label><input type="radio" autocomplete="off" name="radio_OOJPRQSQAK" value=""><span>0.922</span></label><label><input type="radio" autocomplete="off" name="radio_OOJPRQSQAK" value="answer"><span>0.459</span></label>
+</div>
+</li>
+</ul>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The name of the column within <code>pong_data_hits</code> is <code>total_hits</code>; this is what you called it in the above code. You could have called it anything you wanted but always try to use something sensible.</li>
+<li>Make sure to call your variables something you (and anyone looking at your code) will understand and recognize later (i.e.&nbsp;not variable1, variable2, variable3. etc.), and avoid spaces (use_underscores_never_spaces).</li>
+</ul>
+<section id="dw2-a9" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="dw2-a9">
+<span class="header-section-number">5.5.1</span> Counting data</h3>
+</section><section id="dw2-ungroup" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="dw2-ungroup">
+<span class="header-section-number">5.5.2</span> Ungrouping data</h3>
 <p>After grouping data together using the <code>group_by()</code> function and then performing a task on it, e.g.&nbsp;<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, it can be very good practice to ungroup the data before performing another function - by piping it into the <code>ungroup()</code> function - this is related to what the warnings about <code>summarise()</code> mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won’t always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.</p>
 <p>This is an example of how you might use the function:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>pong_data_ungroup <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb18-3"><a href="#cb18-3"></a>           PaddleLength) <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>  ungroup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>pong_data_ungroup <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
+<span id="cb31-3"><a href="#cb31-3"></a>           PaddleLength) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>  ungroup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="dw2-pipes" class="level3" data-number="5.7.3"><h3 data-number="5.7.3" class="anchored" data-anchor-id="dw2-pipes">
-<span class="header-section-number">5.7.3</span> Recapping Pipes (<strong><code>%&gt;%</code></strong>)</h3>
-<p>And finally today we just want to throw in a quick recap on <a href="https://psyteachr.github.io/glossary/p#pipe" target="_blank" class="glossary" title="A way to order your code in a more readable format using the symbol %>%">pipes</a>. We have used pipes a little above but you might still not have got the hang of it so reading through this will help a little. Remember where pipes become most useful is when we <strong>string a series of functions together</strong>, rather than using them as separate steps and having to save the data each time under a new variable name and getting ourselves all confused. In non-piped code we have to create a new object each time, for example, <code>data</code>, <code>data_filtered</code>, <code>data_arranged</code>, <code>data_grouped</code>, <code>data_summarised</code> just to get to the final one we actually want. This creates a lot of variables and tibbles in our environment and can make everything unclear, difficult to follow, and eventually slow down our computer. Piped code however uses one variable name, saving space in the environment, and is clear and easy to read. With pipes we skip unnecessary steps and avoid cluttering our environment.</p>
-<p>Here is an example of code that doesn’t use pipes to find how many hits there were with the large paddle length and the red background:</p>
-<ul>
-<li>First we group the data accordingly, storing it in <code>pong_data_group</code>
-</li>
-<li>And then we summarise it, storing the answer in <code>total_hits</code>
-</li>
-<li>And finally we filter just the red, large paddle hits</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>pong_data_group <span class="ot">&lt;-</span> <span class="fu">group_by</span>(pong_data, </span>
-<span id="cb19-2"><a href="#cb19-2"></a>                            BackgroundColor, </span>
-<span id="cb19-3"><a href="#cb19-3"></a>                            PaddleLength)</span>
-<span id="cb19-4"><a href="#cb19-4"></a></span>
-<span id="cb19-5"><a href="#cb19-5"></a>pong_data_hits <span class="ot">&lt;-</span> <span class="fu">summarise</span>(pong_data_group, </span>
-<span id="cb19-6"><a href="#cb19-6"></a>                            <span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss))</span>
-<span id="cb19-7"><a href="#cb19-7"></a></span>
-<span id="cb19-8"><a href="#cb19-8"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data_hits, </span>
-<span id="cb19-9"><a href="#cb19-9"></a>                                   BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
-<span id="cb19-10"><a href="#cb19-10"></a>                                   PaddleLength <span class="sc">==</span> <span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Alternatively we can make our code even more efficient, using less code, by stringing our sequence of functions together using pipes. This would look like:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>pong_data_hits_red_large <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb20-3"><a href="#cb20-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">filter</span>(BackgroundColor <span class="sc">==</span> <span class="st">"red"</span>, </span>
-<span id="cb20-6"><a href="#cb20-6"></a>         PaddleLength <span class="sc">==</span> <span class="dv">250</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>So the code becomes easier to read as you remember the data goes into one function “and then” into another, “and then” into another, and so on.</p>
-<p>It is also worth remembering that whilst pipes and code can be written in a single line, but it is much easier to see what the pipe is doing if each function takes its own line. You just have to remember that every time you add a function to the pipeline, add a <code>%&gt;%</code> first and <strong>note that when using separate lines for each function, the <code>%&gt;%</code> must appear at the end of the line and not the start of the next line</strong>. Compare the two examples below. The first won’t work but the second will because the second puts the pipes at the end of the line where they need to be!</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Piped version that won't work </span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>data_arrange <span class="ot">&lt;-</span> pong_data </span>
-<span id="cb21-3"><a href="#cb21-3"></a>                <span class="sc">%&gt;%</span> <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>)</span>
-<span id="cb21-4"><a href="#cb21-4"></a>                <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(BallSpeed) </span>
-<span id="cb21-5"><a href="#cb21-5"></a></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co"># Piped version that will work </span></span>
-<span id="cb21-7"><a href="#cb21-7"></a>data_arrange <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>                <span class="fu">filter</span>(PaddleLength <span class="sc">==</span> <span class="st">"50"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a>                <span class="fu">arrange</span>(BallSpeed) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="test-yourself" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="test-yourself">
-<span class="header-section-number">5.8</span> Test yourself</h2>
+</section></section><section id="test-yourself" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="test-yourself">
+<span class="header-section-number">5.6</span> Test yourself</h2>
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
-<section id="knowledge-check" class="level3" data-number="5.8.1"><h3 data-number="5.8.1" class="anchored" data-anchor-id="knowledge-check">
-<span class="header-section-number">5.8.1</span> Knowledge check</h3>
+<section id="knowledge-check" class="level3" data-number="5.6.1"><h3 data-number="5.6.1" class="anchored" data-anchor-id="knowledge-check">
+<span class="header-section-number">5.6.1</span> Knowledge check</h3>
 <ol type="1">
 <li>What type of data would these most likely be:</li>
 </ol>
@@ -1043,31 +1123,33 @@ Explain these answers
 <p><br></p>
 <ol start="2" type="1">
 <li>Which of the Wickham Six would you use to sort columns from smallest to largest:
-<div id="radio_XWERQXUWRS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_XWERQXUWRS" value=""><span>summarise</span></label>
+<div id="radio_AYJMRUEYHA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AYJMRUEYHA" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_AYJMRUEYHA" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_AYJMRUEYHA" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_AYJMRUEYHA" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_AYJMRUEYHA" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_AYJMRUEYHA" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to calculate the mean of a column:
-<div id="radio_RCKAAWSOEX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_RCKAAWSOEX" value="answer"><span>summarise</span></label>
+<div id="radio_ONKHWDKMZO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ONKHWDKMZO" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_ONKHWDKMZO" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_ONKHWDKMZO" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_ONKHWDKMZO" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_ONKHWDKMZO" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_ONKHWDKMZO" value="answer"><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to remove certain observations - e.g.&nbsp;remove all males:
-<div id="radio_YJQBKGYKVG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_YJQBKGYKVG" value=""><span>summarise</span></label>
+<div id="radio_BHQLITEIWT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BHQLITEIWT" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_BHQLITEIWT" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_BHQLITEIWT" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_BHQLITEIWT" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_BHQLITEIWT" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_BHQLITEIWT" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>What does this line of code say? <code>data %&gt;% filter() %&gt;% group_by() %&gt;% summarise()</code>:
-<div id="radio_ZSNCICDDYA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_ZSNCICDDYA" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
+<div id="radio_YCFECKRJGM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YCFECKRJGM" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_YCFECKRJGM" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_YCFECKRJGM" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_YCFECKRJGM" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
 </div>
 </li>
-</ol></section><section id="error-mode" class="level3" data-number="5.8.2"><h3 data-number="5.8.2" class="anchored" data-anchor-id="error-mode">
-<span class="header-section-number">5.8.2</span> Error mode</h3>
+</ol></section><section id="error-mode" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="error-mode">
+<span class="header-section-number">5.6.2</span> Error mode</h3>
 <p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions <code>inner_join()</code>, <code>select()</code>, and <code>mutate()</code>. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
 <p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <code>tidyverse</code> and the two data files:</p>
-</section><section id="dw2-debug" class="level3" data-number="5.8.3"><h3 data-number="5.8.3" class="anchored" data-anchor-id="dw2-debug">
-<span class="header-section-number">5.8.3</span> Debugging tips</h3>
+<ul>
+<li>filter using equals not double equals</li>
+</ul></section><section id="dw2-debug" class="level3" data-number="5.6.3"><h3 data-number="5.6.3" class="anchored" data-anchor-id="dw2-debug">
+<span class="header-section-number">5.6.3</span> Debugging tips</h3>
 <p>There are no debugging challenges today as we have done a lot of work but here are some tips to keep in mind.</p>
 <ul>
 <li>Remember to run the library and not just write the code</li>
@@ -1080,51 +1162,8 @@ Explain these answers
 <li>When using pipes, remember that you only need the data once, at the start.</li>
 <li>If separating pipes across different lines, remember the line ends with the pipe, it does not start with the pipe.</li>
 <li>And lastly, remember that only the data changes, the skills stay the same. Always look back to when you had the code working and go from there.</li>
-</ul></section><section id="dw2-a6sol" class="level3" data-number="5.8.4"><h3 data-number="5.8.4" class="anchored" data-anchor-id="dw2-a6sol">
-<span class="header-section-number">5.8.4</span> Activity 6</h3>
-<ul>
-<li><p>Remembering that filters can take more than one argument then the below code would filter for data where:</p></li>
-<li><p>JudgedSpeed is 1 AND</p></li>
-<li><p>BallSpeed is either 2, 4, 5, or 7, AND</p></li>
-<li><p>HitOrMiss is 0.</p></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>pong_fast_miss <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
-<span id="cb22-2"><a href="#cb22-2"></a>                         JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>, </span>
-<span id="cb22-3"><a href="#cb22-3"></a>                         BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>), </span>
-<span id="cb22-4"><a href="#cb22-4"></a>                         HitOrMiss <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="dw2-a7sol" class="level3" data-number="5.8.5"><h3 data-number="5.8.5" class="anchored" data-anchor-id="dw2-a7sol">
-<span class="header-section-number">5.8.5</span> Activity 7</h3>
-<p>If you didn’t use pipes then the following code would be appropriate:</p>
-<ul>
-<li>First you filter. And remember that you can call the first object <code>pong_data_filt</code> anything that makes sense to you and others.</li>
-<li>Then in a separate step you mutate.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>pong_data_filt <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
-<span id="cb23-2"><a href="#cb23-2"></a>                         TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) </span>
-<span id="cb23-3"><a href="#cb23-3"></a></span>
-<span id="cb23-4"><a href="#cb23-4"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(pong_data_filt, </span>
-<span id="cb23-5"><a href="#cb23-5"></a>                               <span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And if you used pipes this would be the solution:</p>
-<ul>
-<li>Remember you include the data once, and the pipes end the line, they do not start the line.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> <span class="fu">filter</span>(pong_data, </span>
-<span id="cb24-2"><a href="#cb24-2"></a>                               TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>which could also be written as below - which some find better to remember the data goes in first and only once:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>pong_data_renumbered <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="words-from-this-chapter" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="words-from-this-chapter">
-<span class="header-section-number">5.9</span> Words from this Chapter</h2>
+</ul></section></section><section id="words-from-this-chapter" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">5.7</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1151,24 +1190,24 @@ Explain these answers
 <td style="text-align: left;">A data type where a specific set of values are stored with labels; An explanatory variable manipulated by the experimenter</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/f#filter()" class="glossary" target="_blank">filter()</a></td>
+<td style="text-align: left;">The ability to subset a data frame to keep all observations/rows that satisfy one or more conditions.</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/f#function" class="glossary" target="_blank">function</a></td>
 <td style="text-align: left;">A named section of code that can be reused.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/i#integer" class="glossary" target="_blank">integer</a></td>
 <td style="text-align: left;">A data type representing whole numbers.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/n#numeric" class="glossary" target="_blank">numeric</a></td>
 <td style="text-align: left;">A data type representing a real decimal number or integer.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#package" class="glossary" target="_blank">package</a></td>
 <td style="text-align: left;">A group of R functions.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#pipe" class="glossary" target="_blank">pipe</a></td>
-<td style="text-align: left;">A way to order your code in a more readable format using the symbol %&gt;%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tibble" class="glossary" target="_blank">tibble</a></td>
@@ -1178,8 +1217,8 @@ Explain these answers
 </table>
 </div>
 </div>
-</section><section id="end-of-chapter" class="level2" data-number="5.10"><h2 data-number="5.10" class="anchored" data-anchor-id="end-of-chapter">
-<span class="header-section-number">5.10</span> End of chapter</h2>
+</section><section id="end-of-chapter" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="end-of-chapter">
+<span class="header-section-number">5.8</span> End of chapter</h2>
 <p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
 <p>Brilliant work again! We have now learned a number of functions and verbs that you will need as you progress through this book. You will use them in the next chapter so be sure to go over these and try them out to make yourself more comfortable with them. If you have any questions please post them on Teams. <strong>Happy Wrangling!</strong></p>
 
