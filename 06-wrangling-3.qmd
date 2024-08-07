@@ -1,4 +1,4 @@
-# Data Wrangling 3: Pivots {#06-wrangling-03}
+# Data Wrangling 3: Pipes and Pivots {#06-wrangling-03}
 
 In the last chapter, we looked at using one-table Wickham verbs to `filter`, `arrange`, `group_by`, `select`, `mutate` and `summarise` the pong data. We also learnt a little more about `r glossary("pipe", display = "pipes")` and we saw how to do some quick counting and some ungrouping. Be sure to try out those activities before moving on as we will start to add a few more functions to allow us a few more skills in `r glossary("data wrangling")`. 
 

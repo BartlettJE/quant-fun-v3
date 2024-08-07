@@ -396,43 +396,23 @@ pong_data_three_criteria <- filter(pong_data_filter,
 
 ## Counting observations using `count()`
 
-First we want to look at different ways of counting your observations. Often it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you've done something with the code and your mean or median is only being calculated using a subset of the values you intended.
+As we work from wrangling data towards analysing your data to produce numerical summaries, we can start introducing different ways of summarising your data set. 
 
-There are two ways of counting the number of observations. The first uses `summarise()` and the function `n()` within the `summarise()`. For example, the below code is the same as the previous activity, but with an extra line that will add a column called `n` to the table that contains the number of observations in each group. This is useful for when you want to add a column of counts to a table of other descriptive statistics. 
+In it's simplest sense, we can look at different ways of counting your observations. Often, it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you have done something with the code and your mean or median is only being calculated using a subset of the values you intended. Alternatively, it can be useful for reporting descriptive statistics, such as how many participants were in your study or how many people were in each group.  
 
-* **Note:** the function is `n()` and takes no arguments it is just left blank as shown, `n()`.  However, as in other functions, the `n` prior to the `=` could be called anything you want the column to be called, e.g. `n = n()` or `number = n()` would do the same but just give different names to the column.
+To count observations, you have the function `r glossary("count()", def = "Count the observations in your data set, or the number of observations in one or more variables.")`. Without any additional argument, you can use the function to report how many observations are in your data set:
 
-```{r showing-n, message = FALSE}
-pong_count <- pong_data_filter %>% 
-  group_by(BackgroundColor, 
-           PaddleLength) %>% 
-  summarise(total_hits = sum(HitOrMiss, 
-                             na.rm = TRUE),
-            meanhits = mean(HitOrMiss, 
-                            na.rm = TRUE),
-            n = n())
+```{r}
+count(pong_data_filter)
 ```
 
-However, if you're just interested in counts rather than also calculating descriptives, this above method is a bit clunky. Instead, we can use the function `count()` which is specifically designed to count observations and doesn't require the use of `summarise()` or `group_by()`.
+This corresponds nicely with the number of observations you can see in the data environment window and from when we have used `glimpse()` for a summary of the object. 
 
-To count the total number of observations in the dataset for example we would do:
-
-```{r count1, eval = FALSE}
-pong_data %>% # take pong_data
-  count() # and then count the observations in it
-```
-
-And it would give the answer of:
-
-```{r count2, echo = FALSE}
-pong_data %>% count()
-```
-
-Alternatively, to count the number of observations in each level of a variable you could do:
+You can then add one or more variables to the function to count the number of observations within each variable and across the combination of variables when you supply two or more. For example, we could count the number of observations within `BackgroundColor`: 
 
 ```{r count3, eval = FALSE}
-pong_data %>%
-  count(BackgroundColor)
+count(pong_data_filter,
+      BackgroundColor) # count observations within variable 1
 ```
 
 And it would give the answer of:
@@ -442,7 +422,50 @@ pong_data %>%
   count(BackgroundColor)
 ```
 
-Which method you use will depend on whether you want to add the counts to a table of other descriptives, but both functions are useful to know.
+We can see there are an equal number of blue and red backgrounds across all the observations.
+
+::: {.callout-tip}
+#### Try this
+One way of sense checking your data and making sure there is not a sneaky error is checking how many observations there are per unique participant and ensuring that matches up with what you understand about the study. 
+
+Use the `count()` function on the `pong_data_filter` object to answer the following questions about the data:
+
+1. How many observations do we have for each unique `Participant` in the data? `r fitb(287)`
+
+2. `HitOrMiss` codes for whether the `Participant` hit or missed the ball in the trial. If you count the number of `HitOrMiss` per `Participant`, participant number 3 made `r fitb(205)` hits and `r fitb(82)` misses. 
+
+```{r eval=FALSE}
+# count observations per Participant
+count(pong_data_filter,
+      ?)
+
+# count observations of HitOrMiss per Participant
+# Hint: you can add multiple variables with a comma. 
+count(pong_data_filter,
+      ?)
+```
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+To answer question 1, we only need to add `Participant` as an argument after the data `pong_data_filter`. 
+
+```{r eval=FALSE}
+# count observations per Participant
+count(pong_data_filter,
+      Participant)
+```
+
+To answer question 2, we need both `Participant` and `HitOrMiss` as arguments after the data `pong_data_filter`, as we want the number of hits and misses per participant. 
+
+```{r eval=FALSE}
+# count observations of HitOrMiss per Participant
+count(pong_data_filter,
+      Participant,
+      HitOrMiss)
+```
+:::
 
 ## Getting summary statistics using `summarise()` and `group_by()`
 
