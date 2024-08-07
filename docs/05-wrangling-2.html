@@ -396,12 +396,18 @@ div.csl-indent {
   <li><a href="#activity-8---filter-using-two-or-more-criteria" id="toc-activity-8---filter-using-two-or-more-criteria" class="nav-link" data-scroll-target="#activity-8---filter-using-two-or-more-criteria"><span class="header-section-number">5.3.2</span> Activity 8 - Filter using two or more criteria</a></li>
   </ul>
 </li>
-  <li><a href="#counting-observations-using-count" id="toc-counting-observations-using-count" class="nav-link" data-scroll-target="#counting-observations-using-count"><span class="header-section-number">5.4</span> Counting observations using <code>count()</code></a></li>
   <li>
-<a href="#getting-summary-statistics-using-summarise-and-group_by" id="toc-getting-summary-statistics-using-summarise-and-group_by" class="nav-link" data-scroll-target="#getting-summary-statistics-using-summarise-and-group_by"><span class="header-section-number">5.5</span> Getting summary statistics using <code>summarise()</code> and <code>group_by()</code></a>
+<a href="#counting-observations-using-count" id="toc-counting-observations-using-count" class="nav-link" data-scroll-target="#counting-observations-using-count"><span class="header-section-number">5.4</span> Counting observations using <code>count()</code></a>
   <ul class="collapse">
-<li><a href="#dw2-a9" id="toc-dw2-a9" class="nav-link" data-scroll-target="#dw2-a9"><span class="header-section-number">5.5.1</span> Counting data</a></li>
-  <li><a href="#dw2-ungroup" id="toc-dw2-ungroup" class="nav-link" data-scroll-target="#dw2-ungroup"><span class="header-section-number">5.5.2</span> Ungrouping data</a></li>
+<li><a href="#activity-9---counting-observations" id="toc-activity-9---counting-observations" class="nav-link" data-scroll-target="#activity-9---counting-observations"><span class="header-section-number">5.4.1</span> Activity 9 - Counting observations</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#summarising-data-using-summarise-and-group_by" id="toc-summarising-data-using-summarise-and-group_by" class="nav-link" data-scroll-target="#summarising-data-using-summarise-and-group_by"><span class="header-section-number">5.5</span> Summarising data using <code>summarise()</code> and <code>group_by()</code></a>
+  <ul class="collapse">
+<li><a href="#activity-10---summarising-all-the-observations" id="toc-activity-10---summarising-all-the-observations" class="nav-link" data-scroll-target="#activity-10---summarising-all-the-observations"><span class="header-section-number">5.5.1</span> Activity 10 - Summarising all the observations</a></li>
+  <li><a href="#activity-11---grouping-your-summary-statistics" id="toc-activity-11---grouping-your-summary-statistics" class="nav-link" data-scroll-target="#activity-11---grouping-your-summary-statistics"><span class="header-section-number">5.5.2</span> Activity 11 - Grouping your summary statistics</a></li>
+  <li><a href="#dw2-ungroup" id="toc-dw2-ungroup" class="nav-link" data-scroll-target="#dw2-ungroup"><span class="header-section-number">5.5.3</span> Ungrouping data</a></li>
   </ul>
 </li>
   <li>
@@ -953,6 +959,8 @@ Solution
 </h2>
 <p>As we work from wrangling data towards analysing your data to produce numerical summaries, we can start introducing different ways of summarising your data set.</p>
 <p>In it’s simplest sense, we can look at different ways of counting your observations. Often, it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you have done something with the code and your mean or median is only being calculated using a subset of the values you intended. Alternatively, it can be useful for reporting descriptive statistics, such as how many participants were in your study or how many people were in each group.</p>
+<section id="activity-9---counting-observations" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="activity-9---counting-observations">
+<span class="header-section-number">5.4.1</span> Activity 9 - Counting observations</h3>
 <p>To count observations, you have the function <a class="glossary" title="Count the observations in your data set, or the number of observations in one or more variables.">count()</a>. Without any additional argument, you can use the function to report how many observations are in your data set:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">count</span>(pong_data_filter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1055,76 +1063,120 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="getting-summary-statistics-using-summarise-and-group_by" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="getting-summary-statistics-using-summarise-and-group_by">
-<span class="header-section-number">5.5</span> Getting summary statistics using <code>summarise()</code> and <code>group_by()</code>
+</section></section><section id="summarising-data-using-summarise-and-group_by" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="summarising-data-using-summarise-and-group_by">
+<span class="header-section-number">5.5</span> Summarising data using <code>summarise()</code> and <code>group_by()</code>
 </h2>
-<p>Excellent! And now that we have done some wrangling we want to calculate some descriptive statistics for the data using <code>summarise()</code>. <code>summarise()</code> has a range of internal functions that make life really easy, e.g.&nbsp;<code>mean</code>, <code>sum</code>, <code>max</code>, <code>min</code>, etc. See the <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">dplyr cheatsheet</a> for more examples. And additional one that we will use from time-to-time is <code>na.rm = TRUE</code> which we can add when calculating descriptive statistics to say what to do if there are missing values. Missing values often appear as <code>NA</code> and the job of <code>na.rm</code> is to say whether to remove (rm) the NAs (<code>na.rm = TRUE</code>) or not (<code>na.rm = FALSE</code>). If you try to calculate values from data that have NAs, such as the mean, it would return <code>NA</code> as the result because it doesn’t know how to average nothing. This dataset has no missing values but we will show you how to use it here and try to remember this argument exists, as you will use it often and it save you a lot of time!</p>
-<p>Back to the activity. Here, using the data in <code>pong_data_renumbered</code> we will calculate:</p>
-<ul>
-<li>The total (sum) number of hits for each combination of background colour and paddle length.</li>
-<li>The mean number of hits for each combination of background colour and paddle length</li>
-</ul>
-<p>Remember though, because we want to produce descriptive statistics by groups (background colour and paddle length), there are two steps:</p>
-<ul>
-<li>First we group the data by <code>BackgroundColor</code> and <code>PaddleLength</code> using <code>group_by()</code>.</li>
-<li>Then, we use <code>summarise()</code> to calculate the total and mean number of hits (<code>HitOrMiss</code>) using the grouped data</li>
-</ul>
-<p>We will do this activity using pipes to reduce the amount of code we write. Remember to try and read the code out loud and to pronounce <code>%&gt;%</code> as ‘and then’. Copy and paste the below code into a new code chunk and run the code.</p>
+<p>Counting data is useful, but it might not be the only way of summarising data that you want. A more flexible function is <a class="glossary" title="Creates a new data frame to summarise all the observations you provide. You can also group by an additional variable to create separate summary statistics.">summarise()</a> which you can use to calculate summary statistics across your whole data frame, or grouped by additional variables.</p>
+<section id="activity-10---summarising-all-the-observations" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="activity-10---summarising-all-the-observations">
+<span class="header-section-number">5.5.1</span> Activity 10 - Summarising all the observations</h3>
+<p>To start with something familiar, we can use <code>summarise()</code> to count observations. The function works in a similar format to <code>mutate()</code> where you enter a variable name and tell R what function you want applying to the data frame or variable. For example, we can use the <code>n()</code> function to calculate the number of observations in <code>pong_data_filter</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>pong_data_hits <span class="ot">&lt;-</span> pong_data_renumbered <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb31-3"><a href="#cb31-3"></a>           PaddleLength) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, </span>
-<span id="cb31-5"><a href="#cb31-5"></a>                             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb31-6"><a href="#cb31-6"></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, </span>
-<span id="cb31-7"><a href="#cb31-7"></a>                            <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'BackgroundColor'. You can override using
-the `.groups` argument.</code></pre>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>N_observations <span class="ot">&lt;-</span> <span class="fu">summarise</span>(pong_data_filter,</span>
+<span id="cb31-2"><a href="#cb31-2"></a>                            <span class="at">N_observations =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell" data-layout-align="center" type="info">
-<div class="info">
-<p>
-Remember, if you get what looks like an error that says “<code>summarise()</code> has grouped output by ‘BackgroundColor’. You can override using the <code>.groups</code> argument.”, don’t worry, this isn’t an error it’s just the code telling you how the final object is grouped.
-</p>
-</div>
-</div>
+<p>To break down the code:</p>
 <ul>
-<li>View <code>pong_data_hits</code> and answer the following questions to see if you have completed the task correctly.</li>
+<li><p>We create a new object <code>N_observations</code> by applying the <code>summarise()</code> function to <code>pong_data_filter</code>.</p></li>
+<li><p>We create a new variable name called <code>N_observations</code>, add an equals for what that new variable represents, and add our desired function: <code>n()</code>. You do not need to add any further arguments, it calculates the number of observations in the object you give it.</p></li>
 </ul>
-<ul>
-<li>What was the total number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_IKNBSEKHKN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IKNBSEKHKN" value=""><span>1059</span></label><label><input type="radio" autocomplete="off" name="radio_IKNBSEKHKN" value=""><span>516</span></label><label><input type="radio" autocomplete="off" name="radio_IKNBSEKHKN" value=""><span>1057</span></label><label><input type="radio" autocomplete="off" name="radio_IKNBSEKHKN" value="answer"><span>527</span></label>
+<p>This creates a new object as a data frame with 1 observation and 1 column to produce a single number:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">N_observations</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">4592</td>
+</tr></tbody>
+</table>
 </div>
-</li>
-</ul>
-<ul>
-<li>To three decimal places, what was the mean number of hits made with the small paddle (50) and the blue colour background?
-<div id="radio_HQOYBVEZAR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HQOYBVEZAR" value=""><span>0.451</span></label><label><input type="radio" autocomplete="off" name="radio_HQOYBVEZAR" value=""><span>0.92</span></label><label><input type="radio" autocomplete="off" name="radio_HQOYBVEZAR" value="answer"><span>0.459</span></label><label><input type="radio" autocomplete="off" name="radio_HQOYBVEZAR" value=""><span>0.922</span></label>
 </div>
-</li>
-</ul>
-<p><strong>Note:</strong></p>
-<ul>
-<li>The name of the column within <code>pong_data_hits</code> is <code>total_hits</code>; this is what you called it in the above code. You could have called it anything you wanted but always try to use something sensible.</li>
-<li>Make sure to call your variables something you (and anyone looking at your code) will understand and recognize later (i.e.&nbsp;not variable1, variable2, variable3. etc.), and avoid spaces (use_underscores_never_spaces).</li>
-</ul>
-<section id="dw2-a9" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="dw2-a9">
-<span class="header-section-number">5.5.1</span> Counting data</h3>
-</section><section id="dw2-ungroup" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="dw2-ungroup">
-<span class="header-section-number">5.5.2</span> Ungrouping data</h3>
+</div>
+<p>Reassuringly, this is exactly the same as we received for <code>count()</code>. If you only want the number of observations, then <code>count()</code> will be more efficient. However, if you want to produce the number of observations in addition to other summary statistics, then <code>summarise()</code> is going to be more useful.</p>
+<p>To demonstrate the flexibility of <code>summarise()</code>, we can add another summary statistic for the mean hit rate. When binary outcomes like a hit or a miss are coded as 0 and 1, taking the mean provides the proportion of hits (or whatever is coded as 1).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">summarise</span>(pong_data_filter,</span>
+<span id="cb32-2"><a href="#cb32-2"></a>          <span class="at">N_observations =</span> <span class="fu">n</span>(),</span>
+<span id="cb32-3"><a href="#cb32-3"></a>          <span class="at">hit_proportion =</span> <span class="fu">mean</span>(HitOrMiss, </span>
+<span id="cb32-4"><a href="#cb32-4"></a>                                <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">N_observations</th>
+<th style="text-align: right;">hit_proportion</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">4592</td>
+<td style="text-align: right;">0.6879355</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+<p>In this example, we have not saved the <code>summarise()</code> output to a new object, just printed it’s result. We can see we get the number of observations as before, but we also get the mean value for the hit rate. The proportion of hits across all observations was 0.688 or 68.8%. Hopefully, you can see how</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why is my mean NA?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you use the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function, you might find the result is <code>NA</code>. This is likely due to the presence of an NA or missing value in your variable. NAs are contagious as if you try and calculate the mean of a set of numbers containing one or more NA values, the overall mean will also be an NA.</p>
+<p>So, the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function has an additional argument <code>na.rm = TRUE</code> which tells R what to do if there are missing values. The job of <code>na.rm</code> is to say whether to remove (rm) the NAs (<code>na.rm = TRUE</code>) or not (<code>na.rm = FALSE</code>).</p>
+<p>This data set has no missing values but we showed you how to use it here so you can try to remember it exists in future. You do not need to use it all the time and you should think carefully about whether you should ignore NAs, but the option is there if you need it.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using what you learnt above, apply the <code>summarise()</code> function to calculate the mean value of <code>JudgedSpeed</code> using the <code>pong_data_filter</code> object and fill in the blanks below. Remember, calculating the mean of a binary outcome of 0s and 1s tells you the proportion, so the mean here would be the proportion of responses judged to be fast.</p>
+<p>Rounded to 2 decimal places, the mean proportion of fast responses is <input class="webex-solveme nospaces" size="5" data-answer="[&quot;0.547&quot;,&quot;.547&quot;]"> or <input class="webex-solveme nospaces" size="4" data-answer="[&quot;54.7&quot;]">%.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># mean value of JudgedSpeed for the proportion</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">summarise</span>(pong_data_filter,</span>
+<span id="cb33-3"><a href="#cb33-3"></a>          ?)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You only needed to add one argument to calculate the mean of the <code>JudgedSpeed</code> variable. We called the new variable <code>fast_proportion</code>, but this was not important for the answer. Just make sure you call your variables something sensible, so you could understand what it means later.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># mean value of JudgedSpeed for the proportion</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">summarise</span>(pong_data_filter,</span>
+<span id="cb34-3"><a href="#cb34-3"></a>          <span class="at">fast_proportion =</span> <span class="fu">mean</span>(JudgedSpeed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="activity-11---grouping-your-summary-statistics" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="activity-11---grouping-your-summary-statistics">
+<span class="header-section-number">5.5.2</span> Activity 11 - Grouping your summary statistics</h3>
+</section><section id="dw2-ungroup" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="dw2-ungroup">
+<span class="header-section-number">5.5.3</span> Ungrouping data</h3>
 <p>After grouping data together using the <code>group_by()</code> function and then performing a task on it, e.g.&nbsp;<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, it can be very good practice to ungroup the data before performing another function - by piping it into the <code>ungroup()</code> function - this is related to what the warnings about <code>summarise()</code> mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won’t always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.</p>
-<p>This is an example of how you might use the function:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>pong_data_ungroup <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">group_by</span>(BackgroundColor, </span>
-<span id="cb33-3"><a href="#cb33-3"></a>           PaddleLength) <span class="sc">%&gt;%</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">summarise</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a>  ungroup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section></section><section id="test-yourself" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="test-yourself">
 <span class="header-section-number">5.6</span> Test yourself</h2>
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
@@ -1161,23 +1213,23 @@ Explain these answers
 <p><br></p>
 <ol start="2" type="1">
 <li>Which of the Wickham Six would you use to sort columns from smallest to largest:
-<div id="radio_DQGZSDYHHY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DQGZSDYHHY" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_DQGZSDYHHY" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_DQGZSDYHHY" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_DQGZSDYHHY" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_DQGZSDYHHY" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_DQGZSDYHHY" value=""><span>summarise</span></label>
+<div id="radio_NVVBLUWVIW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NVVBLUWVIW" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_NVVBLUWVIW" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_NVVBLUWVIW" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_NVVBLUWVIW" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_NVVBLUWVIW" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_NVVBLUWVIW" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to calculate the mean of a column:
-<div id="radio_AIIMJMBYQO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AIIMJMBYQO" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_AIIMJMBYQO" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_AIIMJMBYQO" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_AIIMJMBYQO" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_AIIMJMBYQO" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_AIIMJMBYQO" value="answer"><span>summarise</span></label>
+<div id="radio_XTDBUKPSAK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XTDBUKPSAK" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_XTDBUKPSAK" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_XTDBUKPSAK" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_XTDBUKPSAK" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_XTDBUKPSAK" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_XTDBUKPSAK" value="answer"><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to remove certain observations - e.g.&nbsp;remove all males:
-<div id="radio_NIJEQSYCZA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NIJEQSYCZA" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_NIJEQSYCZA" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_NIJEQSYCZA" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_NIJEQSYCZA" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_NIJEQSYCZA" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_NIJEQSYCZA" value=""><span>summarise</span></label>
+<div id="radio_JKNAKFLXIF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JKNAKFLXIF" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_JKNAKFLXIF" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_JKNAKFLXIF" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_JKNAKFLXIF" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_JKNAKFLXIF" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_JKNAKFLXIF" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>What does this line of code say? <code>data %&gt;% filter() %&gt;% group_by() %&gt;% summarise()</code>:
-<div id="radio_HKZCVKHBTO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HKZCVKHBTO" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_HKZCVKHBTO" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_HKZCVKHBTO" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_HKZCVKHBTO" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
+<div id="radio_EFLLSCMLDT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EFLLSCMLDT" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_EFLLSCMLDT" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_EFLLSCMLDT" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_EFLLSCMLDT" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
 </div>
 </li>
 </ol></section><section id="error-mode" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="error-mode">
@@ -1252,6 +1304,10 @@ Explain these answers
 <td style="text-align: left;">A group of R functions.</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#summarise()" class="glossary" target="_blank">summarise()</a></td>
+<td style="text-align: left;">Creates a new data frame to summarise all the observations you provide. You can also group by an additional variable to create separate summary statistics.</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tibble" class="glossary" target="_blank">tibble</a></td>
 <td style="text-align: left;">A container for tabular data with some different properties to a data frame</td>
 </tr>

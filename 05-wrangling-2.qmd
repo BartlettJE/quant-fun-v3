@@ -400,6 +400,8 @@ As we work from wrangling data towards analysing your data to produce numerical 
 
 In it's simplest sense, we can look at different ways of counting your observations. Often, it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you have done something with the code and your mean or median is only being calculated using a subset of the values you intended. Alternatively, it can be useful for reporting descriptive statistics, such as how many participants were in your study or how many people were in each group.  
 
+### Activity 9 - Counting observations
+
 To count observations, you have the function `r glossary("count()", def = "Count the observations in your data set, or the number of observations in one or more variables.")`. Without any additional argument, you can use the function to report how many observations are in your data set:
 
 ```{r}
@@ -467,110 +469,84 @@ count(pong_data_filter,
 ```
 :::
 
-## Getting summary statistics using `summarise()` and `group_by()`
+## Summarising data using `summarise()` and `group_by()`
 
-Excellent! And now that we have done some wrangling we want to calculate some descriptive statistics for the data using `summarise()`. `summarise()` has a range of internal functions that make life really easy, e.g. `mean`, `sum`, `max`, `min`, etc. See the [dplyr cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) for more examples. And additional one that we will use from time-to-time is `na.rm = TRUE` which we can add when calculating descriptive statistics to say what to do if there are missing values. Missing values often appear as `NA` and the job of `na.rm` is to say whether to remove (rm) the NAs (`na.rm = TRUE`) or not (`na.rm = FALSE`). If you try to calculate values from data that have NAs, such as the mean, it would return `NA` as the result because it doesn't know how to average nothing. This dataset has no missing values but we will show you how to use it here and try to remember this argument exists, as you will use it often and it save you a lot of time!
+Counting data is useful, but it might not be the only way of summarising data that you want. A more flexible function is `r glossary("summarise()", def = "Creates a new data frame to summarise all the observations you provide. You can also group by an additional variable to create separate summary statistics.")` which you can use to calculate summary statistics across your whole data frame, or grouped by additional variables. 
 
-Back to the activity. Here, using the data in `pong_data_renumbered` we will calculate:
+### Activity 10 - Summarising all the observations
 
-* The total (sum) number of hits for each combination of background colour and paddle length.
-* The mean number of hits for each combination of background colour and paddle length
+To start with something familiar, we can use `summarise()` to count observations. The function works in a similar format to `mutate()` where you enter a variable name and tell R what function you want applying to the data frame or variable. For example, we can use the `n()` function to calculate the number of observations in `pong_data_filter`:
 
-Remember though, because we want to produce descriptive statistics by groups (background colour and paddle length), there are two steps:
-
-* First we group the data by `BackgroundColor` and `PaddleLength` using `group_by()`.
-* Then, we use `summarise()` to calculate the total and mean number of hits (`HitOrMiss`) using the grouped data
-
-We will do this activity using pipes to reduce the amount of code we write. Remember to try and read the code out loud and to pronounce `%>%` as 'and then'. Copy and paste the below code into a new code chunk and run the code.
-
-```{r act8-hide, echo=FALSE}
-pong_data_renumbered <- filter(pong_data, 
-                               TrialNumber >= 2) %>%
-  mutate(TrialNumber = TrialNumber - 1)
+```{r}
+N_observations <- summarise(pong_data_filter,
+                            N_observations = n())
 ```
 
-```{r datasummary, eval = TRUE}
-pong_data_hits <- pong_data_renumbered %>% 
-  group_by(BackgroundColor, 
-           PaddleLength) %>% 
-  summarise(total_hits = sum(HitOrMiss, 
-                             na.rm = TRUE),
-            meanhits = mean(HitOrMiss, 
-                            na.rm = TRUE))
+To break down the code: 
+
+- We create a new object `N_observations` by applying the `summarise()` function to `pong_data_filter`.
+
+- We create a new variable name called `N_observations`, add an equals for what that new variable represents, and add our desired function: `n()`. You do not need to add any further arguments, it calculates the number of observations in the object you give it. 
+
+This creates a new object as a data frame with 1 observation and 1 column to produce a single number: 
+
+```{r, echo=FALSE}
+N_observations
 ```
 
-```{block, type = "info"}
-Remember, if you get what looks like an error that says "`summarise()` has grouped output by 'BackgroundColor'. You can override using the `.groups` argument.", don't worry, this isn't an error it's just the code telling you how the final object is grouped.
+Reassuringly, this is exactly the same as we received for `count()`. If you only want the number of observations, then `count()` will be more efficient. However, if you want to produce the number of observations in addition to other summary statistics, then `summarise()` is going to be more useful. 
+
+To demonstrate the flexibility of `summarise()`, we can add another summary statistic for the mean hit rate. When binary outcomes like a hit or a miss are coded as 0 and 1, taking the mean provides the proportion of hits (or whatever is coded as 1). 
+
+```{r}
+summarise(pong_data_filter,
+          N_observations = n(),
+          hit_proportion = mean(HitOrMiss, 
+                                na.rm = TRUE))
 ```
 
-* View `pong_data_hits` and answer the following questions to see if you have completed the task correctly.
+In this example, we have not saved the `summarise()` output to a new object, just printed it's result. We can see we get the number of observations as before, but we also get the mean value for the hit rate. The proportion of hits across all observations was 0.688 or 68.8%. Hopefully, you can see how 
 
-```{r mcq-ans1, echo = FALSE}
-act8_correct <- pong_data_hits %>% 
-  filter(BackgroundColor == "blue", 
-         PaddleLength == 50) %>% 
-  pull(total_hits)
-act8_false1 <- pong_data_hits %>% 
-  filter(BackgroundColor == "red", 
-         PaddleLength == 50) %>% 
-  pull(total_hits)
-act8_false2 <- pong_data_hits %>% 
-  filter(BackgroundColor == "blue", 
-         PaddleLength == 250) %>% 
-  pull(total_hits)
-act8_false3 <- pong_data_hits %>% 
-  filter(BackgroundColor == "red", 
-         PaddleLength == 250) %>%
-  pull(total_hits)
+::: {.callout-important}
+#### Why is my mean NA? 
+
+When you use the `mean()` function, you might find the result is `NA`. This is likely due to the presence of an NA or missing value in your variable. NAs are contagious as if you try and calculate the mean of a set of numbers containing one or more NA values, the overall mean will also be an NA. 
+
+So, the `mean()` function has an additional argument `na.rm = TRUE` which tells R what to do if there are missing values. The job of `na.rm` is to say whether to remove (rm) the NAs (`na.rm = TRUE`) or not (`na.rm = FALSE`). 
+
+This data set has no missing values but we showed you how to use it here so you can try to remember it exists in future. You do not need to use it all the time and you should think carefully about whether you should ignore NAs, but the option is there if you need it. 
+:::
+
+::: {.callout-tip}
+#### Try this
+Using what you learnt above, apply the `summarise()` function to calculate the mean value of `JudgedSpeed` using the `pong_data_filter` object and fill in the blanks below. Remember, calculating the mean of a binary outcome of 0s and 1s tells you the proportion, so the mean here would be the proportion of responses judged to be fast. 
+
+Rounded to 2 decimal places, the mean proportion of fast responses is `r fitb(0.547)` or `r fitb(54.7)`%.  
+
+```{r eval=FALSE}
+# mean value of JudgedSpeed for the proportion
+summarise(pong_data_filter,
+          ?)
 ```
 
-* What was the total number of hits made with the small paddle (50) and the blue colour background? `r longmcq(sample(c(answer = act8_correct,act8_false3,act8_false2,act8_false1)))`
+:::
 
-```{r mcq-ans2, echo = FALSE}
-act8_correct <- pong_data_hits %>% 
-  filter(BackgroundColor == "blue", 
-         PaddleLength == 50) %>% 
-  pull(meanhits) %>%
-  round(3)
-act8_false1 <- pong_data_hits %>% 
-  filter(BackgroundColor == "red", 
-         PaddleLength == 50) %>% 
-  pull(meanhits) %>%
-  round(3)
-act8_false2 <- pong_data_hits %>% 
-  filter(BackgroundColor == "blue", 
-         PaddleLength == 250) %>% 
-  pull(meanhits) %>%
-  round(3)
-act8_false3 <- pong_data_hits %>% 
-  filter(BackgroundColor == "red", 
-         PaddleLength == 250) %>%
-  pull(meanhits) %>%
-  round(3)
+::: {.callout-caution collapse="true"} 
+#### Solution
+You only needed to add one argument to calculate the mean of the `JudgedSpeed` variable. We called the new variable `fast_proportion`, but this was not important for the answer. Just make sure you call your variables something sensible, so you could understand what it means later. 
+
+```{r eval=FALSE}
+# mean value of JudgedSpeed for the proportion
+summarise(pong_data_filter,
+          fast_proportion = mean(JudgedSpeed))
 ```
+:::
 
-* To three decimal places, what was the mean number of hits made with the small paddle (50) and the blue colour background? `r longmcq(sample(c(answer = act8_correct,act8_false3,act8_false2,act8_false1)))`
-
-**Note:**
-
-* The name of the column within `pong_data_hits` is `total_hits`; this is what you called it in the above code. You could have called it anything you wanted but always try to use something sensible.
-* Make sure to call your variables something you (and anyone looking at your code) will understand and recognize later (i.e. not variable1, variable2, variable3. etc.), and avoid spaces (use_underscores_never_spaces). 
-
-### Counting data {#dw2-a9}
+### Activity 11 - Grouping your summary statistics 
 
 ### Ungrouping data {#dw2-ungroup}
 
 After grouping data together using the `group_by()` function and then performing a task on it, e.g. `filter()`, it can be very good practice to ungroup the data before performing another function - by piping it into the `ungroup()` function - this is related to what the warnings about `summarise()` mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won't always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.
-
-This is an example of how you might use the function:
-
-```{r ungroup1, eval = FALSE}
-pong_data_ungroup <- pong_data %>%
-  group_by(BackgroundColor, 
-           PaddleLength) %>%
-  summarise(total_hits = sum(HitOrMiss)) %>%
-  ungroup
-```
 
 ## Test yourself
 
