@@ -628,12 +628,30 @@ hits_by_background <- summarise(pong_data_background,
 
 After we introduced you to R Markdown to create reproducible documents in Chapter 2, we are going to add a tip in every chapter to demonstrate extra functionality.
 
-https://gt.rstudio.com/
+R Markdown is great for embedding plots and statistics in reproducible documents, but tables can be a little tricky. If you only call objects like `hits_by_background`, the output does not look super professional and it is not consistent with APA formatting guidelines.
+
+There are a few options available to you. One of the packages that helps create R Markdown - <pkg>knitr</pkg> -  can create tables from objects you create. There is a function called `kable()` which can create tables with no further arguments, but you will need to edit the object to make sure it has headers and labels consistent with APA. The following code creates a simple table if you have <pkg>knitr</pkg> installed: 
+
+```{r eval=FALSE}
+knitr::kable(hits_by_background)
+```
+
+You will need to knit your document to see what it looks like and our book renders tables differently, so we cannot demonstrate it here directly. See [The R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html){target="_blank"} for a guide on creating tables using `kable()`.
+
+Alternatively, there is a package called <pkg>gt</pkg> which can also create tables with plenty of formatting options. See their documentation [https://gt.rstudio.com/](https://gt.rstudio.com/){target="_blank"} online for further information. 
 :::
 
 ### Ungrouping data
 
-After grouping data together using the `group_by()` function and then performing a task on it, e.g. `filter()`, it can be very good practice to ungroup the data before performing another function - by piping it into the `ungroup()` function - this is related to what the warnings about `summarise()` mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won't always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.
+For a final word of warning, there is an additional function which removes a group from a data frame. For example, if you wanted to use objects like `pong_data_grouped` for additional wrangling, visualisation, or analysis, it can create problems if you leave the group property. If you only use these objects to create summary tables like `hits_by_judgedspeed`, then there is no issue. 
+
+It is good practice to ungroup the data before performing another function using the `r glossary("ungroup()", def = "Remove a grouping property from a grouped data frame or tibble.")` function:
+
+```{r eval=FALSE}
+pong_data_grouped <- ungroup(pong_data_grouped)
+```
+
+If you run `str(pong_data_grouped)` again, you will see we removed the grouping property. Remember, you only need to apply this if you are using the object in further steps. We will demonstrate in the next chapter how you can add this in a more streamlined way. 
 
 ## Test yourself
 
@@ -678,21 +696,6 @@ Create and save a new R Markdown file for these activities. Delete the example c
 
 - sum not n() for number
 
-### Debugging tips {#dw2-debug}
-
-There are no debugging challenges today as we have done a lot of work but here are some tips to keep in mind.
-
-* Remember to run the library and not just write the code
-* Make sure you have spelt the data file name **exactly** as it is shown. Spaces and everything. Do not change the name of the csv file, fix your code instead. If you have a different name for your file than someone else then your code is not reproducible.
-* Remember when uploading data we use `read_csv()` which has an underscore, whereas the data file itself will have a dot in its name, `filename.csv`. 
-* Check that the datafile is actually in the folder you have set as your working directory. 
-* Remember to start a new session each time you start a new analysis - the more functions and packages you use the great a chance of conflicting functions. 
-* Watch the spelling of functions and remember to put the data first. Often people forget to include the data as they are focussing on what they want to do.
-* Always look at the output of your functions as you build the code. Often code runs but it doesn't do what you think it is doing because you wrote the code wrong. Code only does what you tell it to do!
-* When using pipes, remember that you only need the data once, at the start.
-* If separating pipes across different lines, remember the line ends with the pipe, it does not start with the pipe.
-* And lastly, remember that only the data changes, the skills stay the same. Always look back to when you had the code working and go from there.
-
 ## Words from this Chapter
 
 Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the [PsyTeachR Glossary](https://psyteachr.github.io/glossary/){target="_blank"}. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.
@@ -703,9 +706,6 @@ glossary_table()
 
 ## End of chapter
 
-That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!
+Brilliant work again! You have another handful of functions added to your data wrangling toolkit and we are almost ready to tackle more advanced plotting techniques and inferential statistics. 
 
-Brilliant work again! We have now learned a number of functions and verbs that you will need as you progress through this book.  You will use them in the next chapter so be sure to go over these and try them out to make yourself more comfortable with them.  If you have any questions please post them on Teams. **Happy Wrangling!**
-
-
-
+In the next chapter, we finish the key data wrangling functions. For example, showing you how you can pipe together multiple functions to streamline your code. We will also demonstrate how to pivot your data wider from long form where there are multiple observations per participant to wide form where there is one row per participant, and vice versa. 

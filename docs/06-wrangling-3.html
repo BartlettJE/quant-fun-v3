@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
-<title>Fundamentals of Quantitative Analysis - 6&nbsp; Data Wrangling 3: Pivots</title>
+<title>Fundamentals of Quantitative Analysis - 6&nbsp; Data Wrangling 3: Pipes and Pivots</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-wrangling-3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-wrangling-3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pipes and Pivots</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -191,13 +191,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pipes and Pivots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -408,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="06-wrangling-03" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots</span></span></h1>
+<h1 class="title"><span id="06-wrangling-03" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pipes and Pivots</span></span></h1>
 </div>
 
 
@@ -534,8 +534,8 @@ There is more information about <a href="https://r4ds.had.co.nz/tidy-data.html">
 <p>Have a look at the data in <code>responses</code> to see if you think it is Tidy or not and answer the following question:</p>
 <ul>
 <li>The data in <code>responses</code> is in what format?
-<div id="radio_XTCKGHRCQW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XTCKGHRCQW" value=""><span>Tidy</span></label><label><input type="radio" autocomplete="off" name="radio_XTCKGHRCQW" value=""><span>Long</span></label><label><input type="radio" autocomplete="off" name="radio_XTCKGHRCQW" value="answer"><span>Wide</span></label>
+<div id="radio_OELXGYWHHC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OELXGYWHHC" value=""><span>Tidy</span></label><label><input type="radio" autocomplete="off" name="radio_OELXGYWHHC" value=""><span>Long</span></label><label><input type="radio" autocomplete="off" name="radio_OELXGYWHHC" value="answer"><span>Wide</span></label>
 </div>
 </li>
 </ul>
@@ -708,21 +708,21 @@ Additional Hints
 <ul>
 <li>
 <p>Complete the sentence, the higher the AQ score…</p>
-<div id="radio_UGJJYKACYW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UGJJYKACYW" value=""><span>the less autistic-like traits displayed</span></label><label><input type="radio" autocomplete="off" name="radio_UGJJYKACYW" value=""><span>has no relation to autistic-like traits</span></label><label><input type="radio" autocomplete="off" name="radio_UGJJYKACYW" value="answer"><span>the more autistic-like traits displayed</span></label>
+<div id="radio_KLRKSBVXUL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KLRKSBVXUL" value=""><span>the less autistic-like traits displayed</span></label><label><input type="radio" autocomplete="off" name="radio_KLRKSBVXUL" value=""><span>has no relation to autistic-like traits</span></label><label><input type="radio" autocomplete="off" name="radio_KLRKSBVXUL" value="answer"><span>the more autistic-like traits displayed</span></label>
 </div>
 </li>
 <li>
 <p>Assuming that your code all worked, what was the AQ score (just the number) of Participant ID No.&nbsp;87:</p>
-<div id="radio_RPROZXRNVN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_RPROZXRNVN" value=""><span>6</span></label>
+<div id="radio_UYPAQIQYWY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UYPAQIQYWY" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_UYPAQIQYWY" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_UYPAQIQYWY" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_UYPAQIQYWY" value=""><span>6</span></label>
 </div>
 </li>
 <li><p>Type in the box how many participants had an AQ score of 3 (again just the number): <input class="webex-solveme nospaces" size="10" data-answer="[&quot;13&quot;]"></p></li>
 <li>
 <p>The cut-off for the AQ10 is usually said to be around 6 meaning that anyone with a score of more than 6 should be referred for diagnostic assessment. Based on this data, how many participants might be referred for further assessment?</p>
-<div id="radio_DRKINCRLUH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value=""><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value="answer"><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_DRKINCRLUH" value=""><span>8</span></label>
+<div id="radio_UWSZUCPQFC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UWSZUCPQFC" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_UWSZUCPQFC" value=""><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_UWSZUCPQFC" value="answer"><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_UWSZUCPQFC" value=""><span>8</span></label>
 </div>
 </li>
 </ul>
@@ -743,36 +743,36 @@ Explain these answers
 <p>Which function(s) would you use to approach each of the following problems?</p>
 <ul>
 <li><p>We have a dataset of 400 adults, but we want to remove anyone with an age of 50 years or more. To do this, we could use the <select class="webex-select"><option value="blank"></option>
-<option value="">group_by()</option>
-<option value="answer">filter()</option>
-<option value="">mutate()</option>
 <option value="">summarise()</option>
-<option value="">select()</option>
-<option value="">arrange()</option></select> function.</p></li>
-<li><p>We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the <select class="webex-select"><option value="blank"></option>
 <option value="">mutate()</option>
 <option value="">group_by()</option>
-<option value="">filter()</option>
 <option value="">arrange()</option>
-<option value="">select()</option>
-<option value="answer">summarise()</option></select> function.</p></li>
-<li><p>Our dataset has a column with the number of cats a person has, and a column with the number of dogs. We want to calculate a new column which contains the total number of pets each participant has. To do this, we could use the <select class="webex-select"><option value="blank"></option>
+<option value="answer">filter()</option>
+<option value="">select()</option></select> function.</p></li>
+<li><p>We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the <select class="webex-select"><option value="blank"></option>
 <option value="">group_by()</option>
-<option value="">filter()</option>
+<option value="">mutate()</option>
+<option value="">arrange()</option>
+<option value="answer">summarise()</option>
 <option value="">select()</option>
+<option value="">filter()</option></select> function.</p></li>
+<li><p>Our dataset has a column with the number of cats a person has, and a column with the number of dogs. We want to calculate a new column which contains the total number of pets each participant has. To do this, we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">select()</option>
+<option value="">arrange()</option>
+<option value="">filter()</option>
 <option value="">summarise()</option>
 <option value="answer">mutate()</option>
-<option value="">arrange()</option></select> function.</p></li>
+<option value="">group_by()</option></select> function.</p></li>
 <li><p>We want to calculate the average for each participant in our dataset. To do this we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">arrange() and mutate()</option>
 <option value="">group_by() and arrange()</option>
-<option value="">filter() and select()</option>
 <option value="answer">group_by() and summarise()</option>
-<option value="">arrange() and mutate()</option></select> functions.</p></li>
+<option value="">filter() and select()</option></select> functions.</p></li>
 <li><p>We want to order a dataframe of participants by the number of cats that they own, but want our new dataframe to only contain some of our columns. To do this we could use the <select class="webex-select"><option value="blank"></option>
-<option value="answer">arrange() and select()</option>
-<option value="answer">filter() and select()</option>
 <option value="">group_by() and mutate()</option>
-<option value="">select() and summarise()</option></select> functions.</p></li>
+<option value="answer">filter() and select()</option>
+<option value="">select() and summarise()</option>
+<option value="answer">arrange() and select()</option></select> functions.</p></li>
 </ul>
 <div class="webex-solution">
 <button>
@@ -1490,7 +1490,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./05-wrangling-2.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter, summarise, and pipes</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

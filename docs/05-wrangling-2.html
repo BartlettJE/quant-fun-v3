@@ -415,7 +415,6 @@ div.csl-indent {
   <ul class="collapse">
 <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">5.6.1</span> Knowledge check</a></li>
   <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">5.6.2</span> Error mode</a></li>
-  <li><a href="#dw2-debug" id="toc-dw2-debug" class="nav-link" data-scroll-target="#dw2-debug"><span class="header-section-number">5.6.3</span> Debugging tips</a></li>
   </ul>
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">5.7</span> Words from this Chapter</a></li>
@@ -1259,7 +1258,7 @@ Try this
 <div class="callout-body-container callout-body">
 <p>Using what you learnt above, apply the <code>group_by()</code> and <code>summarise()</code> functions to calculate the sum and mean value of <code>HitOrMiss</code> depending on whether <code>BackgroundColor</code> was blue or red. In your <code>group_by()</code> object, make sure you use the <code>pong_data_filter</code> object. After writing the code and checking the new object, answer the following questions:</p>
 <ol type="1">
-<li><p>Rounded to 3 decimal places, the mean proportion of hits to the <strong>blue</strong> background was <input class="webex-solveme nospaces" size="4" data-answer="[&quot;0.69&quot;,&quot;.69&quot;]"> or rounded to 1 decimal place <input class="webex-solveme nospaces" size="2" data-answer="[&quot;69&quot;]">%.</p></li>
+<li><p>Rounded to 2 decimal places, the mean proportion of hits to the <strong>blue</strong> background was <input class="webex-solveme nospaces" size="4" data-answer="[&quot;0.69&quot;,&quot;.69&quot;]"> or rounded to 0 decimal places <input class="webex-solveme nospaces" size="2" data-answer="[&quot;69&quot;]">%.</p></li>
 <li><p>Rounded to 3 decimal places, the mean proportion of hits to the <strong>red</strong> background was <input class="webex-solveme nospaces" size="5" data-answer="[&quot;0.686&quot;,&quot;.686&quot;]"> or rounded to 1 decimal place <input class="webex-solveme nospaces" size="4" data-answer="[&quot;68.6&quot;]">%.</p></li>
 </ol>
 <div class="cell" data-layout-align="center">
@@ -1310,12 +1309,23 @@ R Markdown tip of the chapter: Create pretty tables
 </div>
 <div class="callout-body-container callout-body">
 <p>After we introduced you to R Markdown to create reproducible documents in Chapter 2, we are going to add a tip in every chapter to demonstrate extra functionality.</p>
-<p>https://gt.rstudio.com/</p>
+<p>R Markdown is great for embedding plots and statistics in reproducible documents, but tables can be a little tricky. If you only call objects like <code>hits_by_background</code>, the output does not look super professional and it is not consistent with APA formatting guidelines.</p>
+<p>There are a few options available to you. One of the packages that helps create R Markdown - <pkg>knitr</pkg> - can create tables from objects you create. There is a function called <code>kable()</code> which can create tables with no further arguments, but you will need to edit the object to make sure it has headers and labels consistent with APA. The following code creates a simple table if you have <pkg>knitr</pkg> installed:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(hits_by_background)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You will need to knit your document to see what it looks like and our book renders tables differently, so we cannot demonstrate it here directly. See <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html" target="_blank">The R Markdown Cookbook</a> for a guide on creating tables using <code>kable()</code>.</p>
+<p>Alternatively, there is a package called <pkg>gt</pkg> which can also create tables with plenty of formatting options. See their documentation <a href="https://gt.rstudio.com/" target="_blank">https://gt.rstudio.com/</a> online for further information.</p>
 </div>
 </div>
 </section><section id="ungrouping-data" class="level3" data-number="5.5.3"><h3 data-number="5.5.3" class="anchored" data-anchor-id="ungrouping-data">
 <span class="header-section-number">5.5.3</span> Ungrouping data</h3>
-<p>After grouping data together using the <code>group_by()</code> function and then performing a task on it, e.g.&nbsp;<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, it can be very good practice to ungroup the data before performing another function - by piping it into the <code>ungroup()</code> function - this is related to what the warnings about <code>summarise()</code> mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won’t always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.</p>
+<p>For a final word of warning, there is an additional function which removes a group from a data frame. For example, if you wanted to use objects like <code>pong_data_grouped</code> for additional wrangling, visualisation, or analysis, it can create problems if you leave the group property. If you only use these objects to create summary tables like <code>hits_by_judgedspeed</code>, then there is no issue.</p>
+<p>It is good practice to ungroup the data before performing another function using the <a class="glossary" title="Remove a grouping property from a grouped data frame or tibble.">ungroup()</a> function:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>pong_data_grouped <span class="ot">&lt;-</span> <span class="fu">ungroup</span>(pong_data_grouped)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you run <code>str(pong_data_grouped)</code> again, you will see we removed the grouping property. Remember, you only need to apply this if you are using the object in further steps. We will demonstrate in the next chapter how you can add this in a more streamlined way.</p>
 </section></section><section id="test-yourself" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="test-yourself">
 <span class="header-section-number">5.6</span> Test yourself</h2>
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
@@ -1352,23 +1362,23 @@ Explain these answers
 <p><br></p>
 <ol start="2" type="1">
 <li>Which of the Wickham Six would you use to sort columns from smallest to largest:
-<div id="radio_FTLXYHJIGK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FTLXYHJIGK" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_FTLXYHJIGK" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_FTLXYHJIGK" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_FTLXYHJIGK" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_FTLXYHJIGK" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_FTLXYHJIGK" value=""><span>summarise</span></label>
+<div id="radio_JXAWFPAIYC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JXAWFPAIYC" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_JXAWFPAIYC" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_JXAWFPAIYC" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_JXAWFPAIYC" value="answer"><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_JXAWFPAIYC" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_JXAWFPAIYC" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to calculate the mean of a column:
-<div id="radio_APDVJANRAN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_APDVJANRAN" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_APDVJANRAN" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_APDVJANRAN" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_APDVJANRAN" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_APDVJANRAN" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_APDVJANRAN" value="answer"><span>summarise</span></label>
+<div id="radio_YSQBTAIQVK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YSQBTAIQVK" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_YSQBTAIQVK" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_YSQBTAIQVK" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_YSQBTAIQVK" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_YSQBTAIQVK" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_YSQBTAIQVK" value="answer"><span>summarise</span></label>
 </div>
 </li>
 <li>Which of the Wickham Six would you use to remove certain observations - e.g.&nbsp;remove all males:
-<div id="radio_PLXLXYZNEZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PLXLXYZNEZ" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_PLXLXYZNEZ" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_PLXLXYZNEZ" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_PLXLXYZNEZ" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_PLXLXYZNEZ" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_PLXLXYZNEZ" value=""><span>summarise</span></label>
+<div id="radio_IHNNAGYDBD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IHNNAGYDBD" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_IHNNAGYDBD" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_IHNNAGYDBD" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_IHNNAGYDBD" value=""><span>arrange</span></label><label><input type="radio" autocomplete="off" name="radio_IHNNAGYDBD" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_IHNNAGYDBD" value=""><span>summarise</span></label>
 </div>
 </li>
 <li>What does this line of code say? <code>data %&gt;% filter() %&gt;% group_by() %&gt;% summarise()</code>:
-<div id="radio_PQTKDEKFYN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PQTKDEKFYN" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_PQTKDEKFYN" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_PQTKDEKFYN" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_PQTKDEKFYN" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
+<div id="radio_WZPZAPONAC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WZPZAPONAC" value=""><span>take the data and then group it and then filter it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_WZPZAPONAC" value="answer"><span>take the data and then filter it and then group it and then summarise it</span></label><label><input type="radio" autocomplete="off" name="radio_WZPZAPONAC" value=""><span>take the data and then summarise it and then filter it and then group it</span></label><label><input type="radio" autocomplete="off" name="radio_WZPZAPONAC" value=""><span>take the data and then group it and then summarise it and then filter it</span></label>
 </div>
 </li>
 </ol></section><section id="error-mode" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="error-mode">
@@ -1379,20 +1389,6 @@ Explain these answers
 <li><p>filter using equals not double equals</p></li>
 <li><p>summarise not using group_by</p></li>
 <li><p>sum not n() for number</p></li>
-</ul></section><section id="dw2-debug" class="level3" data-number="5.6.3"><h3 data-number="5.6.3" class="anchored" data-anchor-id="dw2-debug">
-<span class="header-section-number">5.6.3</span> Debugging tips</h3>
-<p>There are no debugging challenges today as we have done a lot of work but here are some tips to keep in mind.</p>
-<ul>
-<li>Remember to run the library and not just write the code</li>
-<li>Make sure you have spelt the data file name <strong>exactly</strong> as it is shown. Spaces and everything. Do not change the name of the csv file, fix your code instead. If you have a different name for your file than someone else then your code is not reproducible.</li>
-<li>Remember when uploading data we use <code>read_csv()</code> which has an underscore, whereas the data file itself will have a dot in its name, <code>filename.csv</code>.</li>
-<li>Check that the datafile is actually in the folder you have set as your working directory.</li>
-<li>Remember to start a new session each time you start a new analysis - the more functions and packages you use the great a chance of conflicting functions.</li>
-<li>Watch the spelling of functions and remember to put the data first. Often people forget to include the data as they are focussing on what they want to do.</li>
-<li>Always look at the output of your functions as you build the code. Often code runs but it doesn’t do what you think it is doing because you wrote the code wrong. Code only does what you tell it to do!</li>
-<li>When using pipes, remember that you only need the data once, at the start.</li>
-<li>If separating pipes across different lines, remember the line ends with the pipe, it does not start with the pipe.</li>
-<li>And lastly, remember that only the data changes, the skills stay the same. Always look back to when you had the code working and go from there.</li>
 </ul></section></section><section id="words-from-this-chapter" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="words-from-this-chapter">
 <span class="header-section-number">5.7</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
@@ -1456,14 +1452,18 @@ Explain these answers
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tibble" class="glossary" target="_blank">tibble</a></td>
 <td style="text-align: left;">A container for tabular data with some different properties to a data frame</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/u#ungroup()" class="glossary" target="_blank">ungroup()</a></td>
+<td style="text-align: left;">Remove a grouping property from a grouped data frame or tibble.</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
 </section><section id="end-of-chapter" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">5.8</span> End of chapter</h2>
-<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
-<p>Brilliant work again! We have now learned a number of functions and verbs that you will need as you progress through this book. You will use them in the next chapter so be sure to go over these and try them out to make yourself more comfortable with them. If you have any questions please post them on Teams. <strong>Happy Wrangling!</strong></p>
+<p>Brilliant work again! You have another handful of functions added to your data wrangling toolkit and we are almost ready to tackle more advanced plotting techniques and inferential statistics.</p>
+<p>In the next chapter, we finish the key data wrangling functions. For example, showing you how you can pipe together multiple functions to streamline your code. We will also demonstrate how to pivot your data wider from long form where there are multiple observations per participant to wide form where there is one row per participant, and vice versa.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
