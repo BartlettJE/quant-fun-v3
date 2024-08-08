@@ -521,7 +521,7 @@ This data set has no missing values but we showed you how to use it here so you 
 #### Try this
 Using what you learnt above, apply the `summarise()` function to calculate the mean value of `JudgedSpeed` using the `pong_data_filter` object and fill in the blanks below. Remember, calculating the mean of a binary outcome of 0s and 1s tells you the proportion, so the mean here would be the proportion of responses judged to be fast. 
 
-Rounded to 2 decimal places, the mean proportion of fast responses is `r fitb(0.547)` or `r fitb(54.7)`%.  
+Rounded to 3 decimal places, the mean proportion of fast responses is `r fitb(0.547)` or rounded to 1 decimal place `r fitb(54.7)`%.  
 
 ```{r eval=FALSE}
 # mean value of JudgedSpeed for the proportion
@@ -544,7 +544,94 @@ summarise(pong_data_filter,
 
 ### Activity 11 - Grouping your summary statistics 
 
-### Ungrouping data {#dw2-ungroup}
+Summarising your whole data set is great, but there will often be times you want separate summary statistics for different groups in your data. The `r glossary("group_by()", def = "Take an existing data frame or tibble and convert it to a grouped data frame.")` function takes an existing data frame or tibble and creates a grouped data frame. As a data frame, this does not look much different, but it adds a kind of hidden property which functions like `summarise()` detects and uses. 
+
+As an example, let us see how the summary statistics compare between each level of judged speed. For the initial step, we need to apply the `group_by()` function: 
+
+```{r}
+# Group pong_data_filter by JudgedSpeedLabel
+pong_data_grouped <- group_by(pong_data_filter,
+                              JudgedSpeedLabel)
+```
+
+To break down the code: 
+
+- We create a new object `pong_data_grouped` by applying the `group_by()` function to `pong_data_filter`.
+
+- We add one or more variables we want to group any summary statistics by. In this case, we group by `JudgedSpeedLabel` so we will get separate values for fast and slow. 
+
+If you open `pong_data_grouped` as a tab, it does not look any different. Remember, `group_by()` adds a kind of hidden property. To check this, we can run the `str()` function on the data object which will show us the structure of an object:
+
+```{r}
+# Show the structure of the data object pong_data_grouped
+str(pong_data_grouped)
+```
+
+The two key elements here are in the first line (`gropd_df [4,592 × 9] (S3: grouped_df/tbl_df/tbl/data.frame)`) and below the variables (`- attr(*, "groups")... ..$ JudgedSpeedLabel: chr [1:2] "Fast" "Slow"`). The first line confirms we now have a grouped data frame and the two lines below the variables show the values we group by. 
+
+The next step is applying the `summarise()` function as before. Here, we will calculate the total and mean number of hits by whether the participants judged the speed to be fast or slow: 
+
+```{r}
+# Sum hits for the number of hits 
+# Mean hits for the proportion of hits
+hits_by_judgedspeed <- summarise(pong_data_grouped,
+                                 sum_hits = sum(HitOrMiss),
+                                 prop_hits = mean(HitOrMiss))
+```
+
+Calling the object shows we now get two rows per summary statistic: 
+
+```{r}
+hits_by_judgedspeed
+```
+
+Although there were more hits in the fast judged speed, the proportion of hits to misses was lower. Participants hit .657 (65.7%) of trials they judged to be fast, but .725 (72.5%) of trials they judged to be slow. 
+
+::: {.callout-tip}
+#### Try this
+Using what you learnt above, apply the `group_by()` and `summarise()` functions to calculate the sum and mean value of `HitOrMiss` depending on whether `BackgroundColor` was blue or red. In your `group_by()` object, make sure you use the `pong_data_filter` object. After writing the code and checking the new object, answer the following questions: 
+
+1. Rounded to 2 decimal places, the mean proportion of hits to the **blue** background was `r fitb(0.69)` or rounded to 0 decimal places `r fitb(69)`%.
+
+2. Rounded to 3 decimal places, the mean proportion of hits to the **red** background was `r fitb(0.686)` or rounded to 1 decimal place `r fitb(68.6)`%.
+
+```{r eval=FALSE}
+# Group pong_data_filter by BackgroundColor
+pong_data_background <- ?
+
+# Sum hits for the number of hits 
+# Mean hits for the proportion of hits
+hits_by_background <- ?
+```
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+There are two steps here to follow the previous example. The main difference is using `BackgroundColor` in `group_by()`, and then the `summarise()` element is largely the same.  
+
+```{r eval=FALSE}
+# Group pong_data_filter by BackgroundColor
+pong_data_background <- group_by(pong_data_filter,
+                                 BackgroundColor)
+
+# Sum hits for the number of hits 
+# Mean hits for the proportion of hits
+hits_by_background <- summarise(pong_data_background,
+                                 sum_hits = sum(HitOrMiss),
+                                 prop_hits = mean(HitOrMiss))
+```
+:::
+
+::: {.callout-tip}
+#### R Markdown tip of the chapter: Create pretty tables
+
+After we introduced you to R Markdown to create reproducible documents in Chapter 2, we are going to add a tip in every chapter to demonstrate extra functionality.
+
+https://gt.rstudio.com/
+:::
+
+### Ungrouping data
 
 After grouping data together using the `group_by()` function and then performing a task on it, e.g. `filter()`, it can be very good practice to ungroup the data before performing another function - by piping it into the `ungroup()` function - this is related to what the warnings about `summarise()` mean as they are changing the groupings so removing all groupings can be good to do. Forgetting to ungroup the dataset won't always affect further processing, but can really mess up other things. Again just a good reminder to always check the data you are getting out of a function a) makes sense and b) is what you expect.
 
@@ -586,6 +673,10 @@ The following questions are designed to introduce you to making and fixing error
 Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the two data files: 
 
 - filter using equals not double equals
+
+- summarise not using group_by
+
+- sum not n() for number
 
 ### Debugging tips {#dw2-debug}
 
