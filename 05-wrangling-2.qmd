@@ -12,17 +12,21 @@ pong_data <- read_csv("data/witt_2018.csv")
 
 ```
 
-As we have said previously, one of the key aspects in a researcher's toolbox is the knowledge and skill to work with data - regardless of how it comes to you. In fact, when you run an experiment you might get lots of different data types in various different files. For instance, it is not uncommon for an experimental software to create a new file for every participant you run and for each participant's file to contain numerous columns and rows of different data types, only some of which are important. Being able to wrangle that data, manipulate it into different layouts, extract the parts you need, and summarise it, is one of the most important skills we will help you learn through this book.
+One of the key aspects in a researcher's toolbox is the knowledge and skill to work with data regardless of how it comes to you. When you run a study, you might get lots of different data types in various different files. For instance, some experimental software creates a new file for every participant, and each participant's file might contain columns and rows of different data types, only some of which are important. Being able to wrangle that data, manipulate it into different layouts, extract the parts you need, and summarise it, is one of the most important skills we will help you learn throughout this book.
 
-In the last chapter we introduced you to the **Wickham six** one-table `r glossary("function", display = "functions")` which we use to do that data wrangling. Over the course of this book we will reiterate these functions and skills, and `r glossary("package", display = "packages")` like the `tidyverse` and the packages it contains, across a number of different datasets to give you a wide range of exposure to what Psychology is about, and to reiterate that the same skills apply across different datasets. Always remember, **the whilst the data changes, the skills stay the same!**
+In the last chapter, we introduced you to several one-table `r glossary("function", display = "functions")` from <pkg>dplyr</pkg> which we use to wrangle data. Over the course of this book, we will reinforce these functions and skills across different data sets to give you a wide range of exposure to what psychology is about, and to reiterate that the same skills apply across different data sets. Always remember: **while the data changes, the skills stay the same!**
 
-Today, we are going to continue developing our understanding of data, and build on the knowledge and skills we have seen to this point, to help you develop your ability to work with data. The only difference in this chapter is we are going to ask you to do more of the wrangling yourself, based on what we have shown you previously. To build our skills we will analyse a novel dataset and some activities based around manipulating that data. Remember to be pro-active in your learning and to refer back to what we have done before, using the example code as a guide. The solutions for all the tasks are at the bottom of the page as well for you to check yourself, but do be sure to try the tasks first. There is also the online [cheatsheets](https://www.rstudio.com/resources/cheatsheets/){target="_blank"} if you need more help - the key cheatsheet for this chapter is the Data Transformation with **`dplyr`**  -  and don't forget to ask questions on ours forums.
+In this chapter, we are going to continue developing our understanding of data, and build on the knowledge and skills you have developed so far. We start with a recap of data wrangling functions from Chapter 4 and ask you to apply them to a new data set. Feel free through to refer back to Chapter 4 for help - this is not a test - but try and complete the activities independently to judge how well you can transfer your skills to a new scenario. We then introduce you to new data wrangling functions to filter and summarise. 
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
 By the end of this chapter, you will be able to: 
 
-- ILO1
+- Apply your data wrangling skills to a new unseen data set. 
+
+- Filter observations to retain a subset of your data, such as keeping only postgraduate students. 
+
+- Summarise your data to calculate summary statistics, either across all of your observations, or by subsetting across one or more additional variables. 
 
 ## Chapter preparation
 
@@ -44,13 +48,13 @@ Before we can get started, you need to organise your files and project for the c
 
 2. Create a new R Markdown document and give it a sensible title describing the chapter, such as `05 Data Wrangling 2`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_04_06_datawrangling` folder. 
 
-4. We are working with a new data set, so please save the following data file: ([witt_2018.csv](data/witt_2018.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that both files are saved as ".csv". Save or copy the file to your `data/` folder within `Chapter_04_06_datawrangling`.
+4. We are working with a new data set, so please save the following data file: [witt_2018.csv](data/witt_2018.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_04_06_datawrangling`.
 
 You are now ready to start working on the chapter! 
 
 ## Select, arrange, and mutate recap
 
-Before we introduce you to new functions, we will recap data wrangling functions from chapter 3 to select, arrange, and mutate. Following along is one thing but being able to transfer your understanding to a new data set is a key sign of your skill development. Feel free to use chapter 3 to help you, but try and complete the recap activities independently before checking the solutions. This will help prepare you as we move from the chapters, to the data analysis journeys, to the assessments, and to your future career. 
+Before we introduce you to new functions, we will recap data wrangling functions from Chapter 4 to select, arrange, and mutate. Following along is one thing but being able to transfer your understanding to a new data set is a key sign of your skill development. Feel free to use Chapter 4 to help you, but try and complete the recap activities independently before checking the solutions. This will help prepare you as we move from the chapters, to the data analysis journeys, to the assessments, and to your future career. 
 
 ### Activity 1 - Load <pkg>tidyverse</pkg> and read the data files
 
@@ -88,7 +92,7 @@ Remember the first critical step when you come across any new data is exploring 
 glimpse(pong_data)
 ```
 
-If you look at that table, you can see there are 8 columns and 4608 rows. Seven of the column names are `<dbl>`, short for double, and one is `<chr>` short for character. We will need to keep the data types in mind as we wrangle the data. 
+If you look at that table, you can see there are 8 columns and 4608 rows. Seven of the column names are `<dbl>`, short for double, and one is `<chr>`, short for character. We will need to keep the data types in mind as we wrangle the data. 
 
 ### Data types in R 
 
@@ -103,11 +107,11 @@ We often store data in two-dimensional tables, either called `r glossary("data f
 |Character    | Tends to contain letters or be words                         |
 |Factor       | Nominal (categorical). Can be words or numbers (e.g., animal or human, 1 or 2)|
 
-Double and Integer can both be referred to as `r glossary("numeric")` data, and you will see this word from time to time. For clarity, we will use Double as a term for any number that can take a decimal (e.g. 3.14) and Integer as a term for any whole number (no decimal, e.g. 3).
+Double and integer can both be referred to as `r glossary("numeric")` data, and you will see this word from time to time. For clarity, we will use double as a term for any number that can take a decimal (e.g. 3.14) and integer as a term for any whole number (no decimal, e.g. 3).
 
-Somewhat confusingly, Double data might not have decimal places in it. For instance, the value of 1 could be Double as well as Integer. However, the value of 1.1 could only be Double and never Integer. Integers cannot have decimal places. The more you work with data the more this will make sense, but it highlights the importance of looking at your data and checking what type it is as the type determines what you can do with the data.
+Somewhat confusingly, double data might not have decimal places in it. For instance, the value of 1 could be double as well as integer. However, the value of 1.1 could only be double and never integer. Integers cannot have decimal places. The more you work with data the more this will make sense, but it highlights the importance of looking at your data and checking what type it is as the type determines what you can do with the data.
 
-In `pong_data`, each row (observation) represents one trial per participant and that there were 288 trials for each of the 16 participants. Most of the data is a double (i.e., numbers) and one column is a `character` (i.e., text). The columns (variables) we have in the data set are:
+In `pong_data`, each row (observation) represents one trial per participant and there are 288 trials for each of the 16 participants. Most of the data is a double (i.e., numbers) and one column is a character (i.e., text). The columns (variables) we have in the data set are:
 
 | Variable       |       Type                       |           Description          |
 |:--------------:|:---------------------------------|:-------------------------------|

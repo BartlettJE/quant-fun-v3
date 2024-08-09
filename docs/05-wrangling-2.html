@@ -436,13 +436,15 @@ div.csl-indent {
   </div>
   
 
-</header><p>As we have said previously, one of the key aspects in a researcher’s toolbox is the knowledge and skill to work with data - regardless of how it comes to you. In fact, when you run an experiment you might get lots of different data types in various different files. For instance, it is not uncommon for an experimental software to create a new file for every participant you run and for each participant’s file to contain numerous columns and rows of different data types, only some of which are important. Being able to wrangle that data, manipulate it into different layouts, extract the parts you need, and summarise it, is one of the most important skills we will help you learn through this book.</p>
-<p>In the last chapter we introduced you to the <strong>Wickham six</strong> one-table <a href="https://psyteachr.github.io/glossary/f#function" target="_blank" class="glossary" title="A named section of code that can be reused.">functions</a> which we use to do that data wrangling. Over the course of this book we will reiterate these functions and skills, and <a href="https://psyteachr.github.io/glossary/p#package" target="_blank" class="glossary" title="A group of R functions.">packages</a> like the <code>tidyverse</code> and the packages it contains, across a number of different datasets to give you a wide range of exposure to what Psychology is about, and to reiterate that the same skills apply across different datasets. Always remember, <strong>the whilst the data changes, the skills stay the same!</strong></p>
-<p>Today, we are going to continue developing our understanding of data, and build on the knowledge and skills we have seen to this point, to help you develop your ability to work with data. The only difference in this chapter is we are going to ask you to do more of the wrangling yourself, based on what we have shown you previously. To build our skills we will analyse a novel dataset and some activities based around manipulating that data. Remember to be pro-active in your learning and to refer back to what we have done before, using the example code as a guide. The solutions for all the tasks are at the bottom of the page as well for you to check yourself, but do be sure to try the tasks first. There is also the online <a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">cheatsheets</a> if you need more help - the key cheatsheet for this chapter is the Data Transformation with <strong><code>dplyr</code></strong> - and don’t forget to ask questions on ours forums.</p>
+</header><p>One of the key aspects in a researcher’s toolbox is the knowledge and skill to work with data regardless of how it comes to you. When you run a study, you might get lots of different data types in various different files. For instance, some experimental software creates a new file for every participant, and each participant’s file might contain columns and rows of different data types, only some of which are important. Being able to wrangle that data, manipulate it into different layouts, extract the parts you need, and summarise it, is one of the most important skills we will help you learn throughout this book.</p>
+<p>In the last chapter, we introduced you to several one-table <a href="https://psyteachr.github.io/glossary/f#function" target="_blank" class="glossary" title="A named section of code that can be reused.">functions</a> from <pkg>dplyr</pkg> which we use to wrangle data. Over the course of this book, we will reinforce these functions and skills across different data sets to give you a wide range of exposure to what psychology is about, and to reiterate that the same skills apply across different data sets. Always remember: <strong>while the data changes, the skills stay the same!</strong></p>
+<p>In this chapter, we are going to continue developing our understanding of data, and build on the knowledge and skills you have developed so far. We start with a recap of data wrangling functions from Chapter 4 and ask you to apply them to a new data set. Feel free through to refer back to Chapter 4 for help - this is not a test - but try and complete the activities independently to judge how well you can transfer your skills to a new scenario. We then introduce you to new data wrangling functions to filter and summarise.</p>
 <p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
 <p>By the end of this chapter, you will be able to:</p>
 <ul>
-<li>ILO1</li>
+<li><p>Apply your data wrangling skills to a new unseen data set.</p></li>
+<li><p>Filter observations to retain a subset of your data, such as keeping only postgraduate students.</p></li>
+<li><p>Summarise your data to calculate summary statistics, either across all of your observations, or by subsetting across one or more additional variables.</p></li>
 </ul>
 <section id="chapter-preparation" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="chapter-preparation">
 <span class="header-section-number">5.1</span> Chapter preparation</h2>
@@ -460,12 +462,12 @@ div.csl-indent {
 <ol type="1">
 <li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, you should have a folder from chapter 4 called <code>Chapter_04_06_datawrangling</code>.</p></li>
 <li><p>Create a new R Markdown document and give it a sensible title describing the chapter, such as <code>05 Data Wrangling 2</code>. Delete everything below line 10 so you have a blank file to work with and save the file in your <code>Chapter_04_06_datawrangling</code> folder.</p></li>
-<li><p>We are working with a new data set, so please save the following data file: (<a href="data/witt_2018.csv">witt_2018.csv</a>. Right click the link and select “save link as”, or clicking the link will save the files to your Downloads. Make sure that both files are saved as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Chapter_04_06_datawrangling</code>.</p></li>
+<li><p>We are working with a new data set, so please save the following data file: <a href="data/witt_2018.csv">witt_2018.csv</a>. Right click the link and select “save link as”, or clicking the link will save the files to your Downloads. Make sure that you save the file as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Chapter_04_06_datawrangling</code>.</p></li>
 </ol>
 <p>You are now ready to start working on the chapter!</p>
 </section></section><section id="select-arrange-and-mutate-recap" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="select-arrange-and-mutate-recap">
 <span class="header-section-number">5.2</span> Select, arrange, and mutate recap</h2>
-<p>Before we introduce you to new functions, we will recap data wrangling functions from chapter 3 to select, arrange, and mutate. Following along is one thing but being able to transfer your understanding to a new data set is a key sign of your skill development. Feel free to use chapter 3 to help you, but try and complete the recap activities independently before checking the solutions. This will help prepare you as we move from the chapters, to the data analysis journeys, to the assessments, and to your future career.</p>
+<p>Before we introduce you to new functions, we will recap data wrangling functions from Chapter 4 to select, arrange, and mutate. Following along is one thing but being able to transfer your understanding to a new data set is a key sign of your skill development. Feel free to use Chapter 4 to help you, but try and complete the recap activities independently before checking the solutions. This will help prepare you as we move from the chapters, to the data analysis journeys, to the assessments, and to your future career.</p>
 <section id="activity-1---load-tidyverse-and-read-the-data-files" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="activity-1---load-tidyverse-and-read-the-data-files">
 <span class="header-section-number">5.2.1</span> Activity 1 - Load <pkg>tidyverse</pkg> and read the data files</h3>
 <p>As the first activity, try and test yourself by loading <pkg>tidyverse</pkg> and reading the data file. As a prompt, save the data file to this object name to be consistent with the activities below, but you can check your answer below if you are stuck.</p>
@@ -1334,8 +1336,8 @@ R Markdown tip of the chapter: Create pretty tables
 <p><strong>Question 1</strong>. What type of data would these most likely be:</p>
 <ul>
 <li><p>Male = <select class="webex-select"><option value="blank"></option>
-<option value="answer">Character</option>
 <option value="">Integer</option>
+<option value="answer">Character</option>
 <option value="">Double</option></select></p></li>
 <li><p>7.15 = <select class="webex-select"><option value="blank"></option>
 <option value="">Character</option>
@@ -1364,20 +1366,20 @@ Explain this answer
 </div>
 </div>
 <strong>Question 2</strong>. Which of the <pkg>dplyr</pkg> functions would you use to count the number of observations in your data set or variables?
-<div id="radio_ZXGWUGQSRR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZXGWUGQSRR" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_ZXGWUGQSRR" value="answer"><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_ZXGWUGQSRR" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_ZXGWUGQSRR" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_ZXGWUGQSRR" value=""><span>mutate</span></label>
+<div id="radio_OWZYYUAAZJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OWZYYUAAZJ" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_OWZYYUAAZJ" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_OWZYYUAAZJ" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_OWZYYUAAZJ" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_OWZYYUAAZJ" value="answer"><span>count</span></label>
 </div>
 <strong>Question 3</strong>. Which of the <pkg>dplyr</pkg> functions would you use to calculate the mean of a column?
-<div id="radio_HGSWXTNQCY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HGSWXTNQCY" value="answer"><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_HGSWXTNQCY" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_HGSWXTNQCY" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_HGSWXTNQCY" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_HGSWXTNQCY" value=""><span>mutate</span></label>
+<div id="radio_EMBCSAFLIQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EMBCSAFLIQ" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_EMBCSAFLIQ" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_EMBCSAFLIQ" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_EMBCSAFLIQ" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_EMBCSAFLIQ" value="answer"><span>summarise</span></label>
 </div>
 <strong>Question 4</strong>. Which of the <pkg>dplyr</pkg> functions would you use to remove certain observations (e.g., remove all males)?
-<div id="radio_KFQJIWDZVV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KFQJIWDZVV" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_KFQJIWDZVV" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_KFQJIWDZVV" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_KFQJIWDZVV" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_KFQJIWDZVV" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_KFQJIWDZVV" value="answer"><span>filter</span></label>
+<div id="radio_KHHZLFRQQV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KHHZLFRQQV" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_KHHZLFRQQV" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_KHHZLFRQQV" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_KHHZLFRQQV" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_KHHZLFRQQV" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_KHHZLFRQQV" value=""><span>summarise</span></label>
 </div>
 <strong>Question 5</strong>. Which of the <pkg>dplyr</pkg> functions would you use to subset summary statistics by?
-<div id="radio_MOTCASCDRI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MOTCASCDRI" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_MOTCASCDRI" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_MOTCASCDRI" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_MOTCASCDRI" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_MOTCASCDRI" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_MOTCASCDRI" value="answer"><span>group_by</span></label>
+<div id="radio_CNPWQGSSOH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CNPWQGSSOH" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_CNPWQGSSOH" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_CNPWQGSSOH" value="answer"><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_CNPWQGSSOH" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_CNPWQGSSOH" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_CNPWQGSSOH" value=""><span>count</span></label>
 </div>
 </section><section id="error-mode" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="error-mode">
 <span class="header-section-number">5.6.2</span> Error mode</h3>
@@ -1538,18 +1540,14 @@ Explain the solution
 <td style="text-align: left;">A data type representing a real decimal number or integer.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#package" class="glossary" target="_blank">package</a></td>
-<td style="text-align: left;">A group of R functions.</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#summarise()" class="glossary" target="_blank">summarise()</a></td>
 <td style="text-align: left;">Creates a new data frame to summarise all the observations you provide. You can also group by an additional variable to create separate summary statistics.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tibble" class="glossary" target="_blank">tibble</a></td>
 <td style="text-align: left;">A container for tabular data with some different properties to a data frame</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/u#ungroup()" class="glossary" target="_blank">ungroup()</a></td>
 <td style="text-align: left;">Remove a grouping property from a grouped data frame or tibble.</td>
 </tr>
