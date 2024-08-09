@@ -680,6 +680,8 @@ Note: in the last answer, 137 could also be double as it is not clear if it coul
 
 **Question 4**. Which of the <pkg>dplyr</pkg> functions would you use to remove certain observations (e.g., remove all males)? `r longmcq(sample(c("select", answer = "filter", "mutate", "count", "group_by", "summarise")))` 
 
+**Question 5**. Which of the <pkg>dplyr</pkg> functions would you use to subset summary statistics by? `r longmcq(sample(c("select", "filter", "mutate", "count", answer = "group_by", "summarise")))` 
+
 ### Error mode
 
 The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions `filter()`, `count()`, and `group_by()` and `summarise()`. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
@@ -696,7 +698,7 @@ pong_data <- read_csv("data/witt_2018.csv")
 
 Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
 
-**Question 5**. Copy the following code chunk into your R Markdown file and press knit. We want to filter data to only include a paddle length of 50. You should receive the error starting with `Error in "filter()" ! We detected a named input`. 
+**Question 6**. Copy the following code chunk into your R Markdown file and press knit. We want to filter data to only include a paddle length of 50. You should receive the error starting with `Error in "filter()" ! We detected a named input`. 
 
 ````{verbatim, lang = "markdown"}
 
@@ -720,39 +722,62 @@ pong_data_filter <- filter(pong_data,
 ```
 :::
 
-**Question 6**. Copy the following code chunk into your R Markdown file and press knit.  sum not n() for number
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. We want to count the number of trials per block (`BlockNumber`). This...works, but if you look at the output, have we counted the number of trials? 
 
 ````{verbatim, lang = "markdown"}
 ```{r}
-
+# Count block numbers from pong_data
+count_blocknumbers <- summarise(pong_data,
+                                N_blocks = sum(BlockNumber))
 ```
 ````
 
 ::: {.callout-caution collapse="true"} 
 #### Explain the solution
 
+The mistake is using `sum()` to count the number of trials per block. `sum()` would only work when you have 0s and 1s. Here, it just adds up all the numbers, totalling 29952. There are two options here. In every other scenario, you need to either `count()`:
 
+```{r}
+# Count block numbers from pong_data
+count_blocknumbers <- count(pong_data,
+                            BlockNumber)
+```
+
+or `group_by()` and `n():
 
 ```{r eval = FALSE}
-
+# Group by block number
+group_blocks <- group_by(pong_data,
+                         BlockNumber)
+# Then calculate the number of trials per block
+count_blocknumbers <- summarise(group_blocks,
+                                N_blocks = n())
 ```
 :::
 
-**Question 7**. Copy the following code chunk into your R Markdown file and press knit. summarise not using group_by. 
+**Question 8**. Copy the following code chunk into your R Markdown file and press knit. Here, we want the proportion of fast judgements per paddle length by taking the mean of `JudgedSpeed`. This code... works, but do we have a proportion of fast judgements per paddle length? 
 
 ````{verbatim, lang = "markdown"}
 ```{r}
-
+# Mean judged speed for the proportion of fast judgements
+hits_by_background <- summarise(pong_data,
+                                prop_fast = mean(JudgedSpeed))
 ```
 ````
 
 ::: {.callout-caution collapse="true"} 
 #### Explain the solution
 
-
+We wanted the mean proportion of fast judgements, but we forgot to add a group by! We only got one value, so we need to add an initial step to group the responses by `PaddleLength` first, before we then calculate the mean proportion. 
 
 ```{r eval = FALSE}
+# Group pong_data by paddle length
+pong_data_paddle <- group_by(pong_data,
+                                 PaddleLength)
 
+# Mean judged speed for the proportion of fast judgements
+hits_by_background <- summarise(pong_data_paddle,
+                                 prop_fast = mean(JudgedSpeed))
 ```
 :::
 
