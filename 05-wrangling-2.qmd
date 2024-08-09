@@ -659,42 +659,102 @@ To end the chapter, we have some knowledge check questions to test your understa
 
 ### Knowledge check
 
-1. What type of data would these most likely be:
+**Question 1**. What type of data would these most likely be:
 
-* Male = `r mcq(c(answer = "Character","Numeric","Integer"))`
+* Male = `r mcq(sample(c(answer = "Character", "Double", "Integer")))`
 
-* 7.15 = `r mcq(c("Character",answer = "Double","Integer"))`
+* 7.15 = `r mcq(sample(c("Character", answer = "Double", "Integer")))`
 
-* 137 = `r mcq(c("Character","Double",answer = "Integer"))`
+* 137 = `r mcq(sample(c("Character", "Double", answer = "Integer")))`
 
-`r hide("Explain these answers")`
-```{r, echo = FALSE, results='asis'}
-cat("
-There is a lot of different types of data and as well as different types of levels of measurements and it can get very confusing. It's important to try to remember which is which because you can only do certain types of analyses on certain types of data and certain types of measurements. For instance, you can't take the average of Characters just like you can't take the average of Categorical data. Likewise, you can do any maths on Double data, just like you can on Interval and Ratio data. Integer data is funny in that sometimes it is Ordinal and sometimes it is Interval, sometimes you should take the median, sometimes you should take the mean. The main point is to always know what type of data you are using and to think about what you can and cannot do with them.
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
+There are several different types of data as well as different levels of measurement and it takes a while to recognise the nuanced differences. It is important to try to remember which is which because you can only do certain types of analyses on certain types of data and certain types of measurements. For instance, you cannot take the average of characters or categorical data. Likewise, you can do any maths on double data, just like you can on interval and ratio data. Integer data is funny in that sometimes it is ordinal and sometimes it is interval, sometimes you should take the median, sometimes you should take the mean. The main point is to always know what type of data you are using and to think about what you can and cannot do with them.
 
-* Note that the last answer, 137, could also be double as it isn't clear if it could take a decimal or not. 
-")
-```
-`r unhide()`
+Note: in the last answer, 137 could also be double as it is not clear if it could take a decimal or not. 
+:::
 
-<br>
+**Question 2**. Which of the <pkg>dplyr</pkg> functions would you use to count the number of observations in your data set or variables? `r longmcq(sample(c("select", "filter", "mutate", answer ="count", "group_by")))`
 
-2. Which of the Wickham Six would you use to sort columns from smallest to largest: `r longmcq(c("select","filter","mutate",answer ="arrange","group_by","summarise"))`
-3. Which of the Wickham Six would you use to calculate the mean of a column: `r longmcq(c("select","filter","mutate","arrange","group_by",answer ="summarise"))`
-4. Which of the Wickham Six would you use to remove certain observations - e.g. remove all males: `r longmcq(c("select",answer = "filter","mutate","arrange","group_by","summarise"))` 
-5. What does this line of code say? `data %>% filter() %>% group_by() %>% summarise()`: `r longmcq(c("take the data and then group it and then filter it and then summarise it", answer = "take the data and then filter it and then group it and then summarise it", "take the data and then summarise it and then filter it and then group it","take the data and then group it and then summarise it and then filter it"))`  
+**Question 3**. Which of the <pkg>dplyr</pkg> functions would you use to calculate the mean of a column? `r longmcq(sample(c("select", "filter", "mutate", "group_by", answer ="summarise")))`
+
+**Question 4**. Which of the <pkg>dplyr</pkg> functions would you use to remove certain observations (e.g., remove all males)? `r longmcq(sample(c("select", answer = "filter", "mutate", "count", "group_by", "summarise")))` 
 
 ### Error mode
 
-The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions `inner_join()`, `select()`, and `mutate()`. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
+The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions `filter()`, `count()`, and `group_by()` and `summarise()`. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
 
-Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the two data files: 
+Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the data file: 
 
-- filter using equals not double equals
+```{r eval=FALSE}
+# Load the tidyverse package below
+library(tidyverse)
 
-- summarise not using group_by
+# Load the data file
+pong_data <- read_csv("data/witt_2018.csv")
+```
 
-- sum not n() for number
+Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
+
+**Question 5**. Copy the following code chunk into your R Markdown file and press knit. We want to filter data to only include a paddle length of 50. You should receive the error starting with `Error in "filter()" ! We detected a named input`. 
+
+````{verbatim, lang = "markdown"}
+
+```{r}
+# filter pong_data to retain PaddleLength of 50
+pong_data_filter <- filter(pong_data,
+                           PaddleLength = 50)
+```
+
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+In the code, we use a single equals sign (`=`) rather than the Boolean operator a double equals sign (`==`). With a single equals, R is interpreting this as "PaddleLength is equal to 50" like you were saving an object or setting an argument. The error message below line two tries to help and suggests you might need to include `==` instead.  
+
+```{r eval = FALSE}
+# filter pong_data to retain PaddleLength of 50
+pong_data_filter <- filter(pong_data,
+                           PaddleLength == 50)
+```
+:::
+
+**Question 6**. Copy the following code chunk into your R Markdown file and press knit.  sum not n() for number
+
+````{verbatim, lang = "markdown"}
+```{r}
+
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+
+
+```{r eval = FALSE}
+
+```
+:::
+
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. summarise not using group_by. 
+
+````{verbatim, lang = "markdown"}
+```{r}
+
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+
+
+```{r eval = FALSE}
+
+```
+:::
 
 ## Words from this Chapter
 

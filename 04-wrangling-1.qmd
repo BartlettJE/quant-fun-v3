@@ -643,7 +643,7 @@ dat <- read_csv("data/ahi-cesd.csv")
 pinfo <- read_csv("data/participant-info.csv")
 ```
 
-Below, we have several variations of a code chunk and inline code errors. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data. Once you have copied the files, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
+Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
 
 **Question 6**. Copy the following code chunk into your R Markdown file and press knit. This...works, but we want 54 columns rather than 55 columns. Some of the columns do not look quite right?  
 
