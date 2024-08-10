@@ -56,7 +56,7 @@ You are now ready to start working on the chapter!
 
 Before we introduce you to new functions, we will recap data wrangling functions from Chapter 4 to select, arrange, and mutate. Following along is one thing but being able to transfer your understanding to a new data set is a key sign of your skill development. Feel free to use Chapter 4 to help you, but try and complete the recap activities independently before checking the solutions. This will help prepare you as we move from the chapters, to the data analysis journeys, to the assessments, and to your future career. 
 
-### Activity 1 - Load <pkg>tidyverse</pkg> and read the data files
+### Activity 1 - Load <pkg>tidyverse</pkg> and read the data file
 
 As the first activity, try and test yourself by loading <pkg>tidyverse</pkg> and reading the data file. As a prompt, save the data file to this object name to be consistent with the activities below, but you can check your answer below if you are stuck. 
 
