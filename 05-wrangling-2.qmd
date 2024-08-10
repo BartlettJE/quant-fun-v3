@@ -157,6 +157,15 @@ select_dat <- select(pong_data,
                      HitOrMiss)
 ```
 
+or
+
+```{r eval=FALSE}
+# remove 3 variables from pong_data
+select_dat <- select(pong_data,
+                     -JudgedSpeed,
+                     -BallSpeed,
+                     -BlockNumber)
+```
 :::
 
 ### Activity 4 - Reorder the variables using `select()` {#dw2-a4}
@@ -188,7 +197,7 @@ reorder_dat <- select(pong_data, # original data
 
 ### Activity 5 - Reorder observations using `arrange()` {#dw2-a5}
 
-Reorder observations in the data using the following two variables: `HitOrMiss` (putting hits (1) first) and `JudgedSpeed` (putting fast judgement () first). Store this in an object named `arrange_dat`. 
+Reorder observations in the data using the following two variables: `HitOrMiss` (putting hits (1) first) and `JudgedSpeed` (putting fast judgement (1) first). Store this in an object named `arrange_dat`. 
 
 ```{r eval=FALSE}
 # arrange pong_data by HitOrMiss and JudgedSpeed
@@ -214,11 +223,11 @@ arrange_dat <- arrange(pong_data, # original data
 
 :::
 
-### Activity 6 - Modify or creating variables using `mutate()` {#dw2-a7}
+### Activity 6 - Modifying or creating variables using `mutate()` {#dw2-a7}
 
 Some of these values could be a little easier to understand. They are represented in the data by 0s and 1s, but it might not be immediately obvious what they mean. 
 
-Using what you learnt in Chapter 4 about modifying existing variables, create a new variable called `JudgedSpeedLabel` by mutating the original `pong_data` object. Change the values in `JudgedSpeed` using the following labels: 
+Create a new variable called `JudgedSpeedLabel` by mutating the original `pong_data` object. Change the values in `JudgedSpeed` using the following labels: 
 
 0 = Slow
 
@@ -268,7 +277,6 @@ The `filter()` function uses our old friends the Boolean expressions we introduc
 
 ```{r}
 1 > 1
-
 2 > 1
 ```
 
@@ -288,7 +296,7 @@ A %in% B 	|in 	                 |A is an element of vector B
 
 ::: {.callout-tip}
 #### Try this
-Using the `filter()` example and the table above, imagine we wanted to only keep trials where participants' judged the speed to be "Fast". Use the `pong_data_filter` after removing trial number 1 and assign it to a new object `pong_data_fast`. You could use the `JudgedSpeed` or `JudgedSpeedLabel` variables to do this. 
+Using the `filter()` example and the table above, imagine we wanted to only keep trials where participants judged the speed to be "Fast". Use the `pong_data_filter` after removing trial number 1 and assign it to a new object `pong_data_fast`. You could use the `JudgedSpeed` or `JudgedSpeedLabel` variable to do this. 
 
 For a hint, you want to keep responses when they are equivalent to "Fast" or 1 depending on the variable you use. 
 
@@ -402,11 +410,11 @@ pong_data_three_criteria <- filter(pong_data_filter,
 
 As we work from wrangling data towards analysing your data to produce numerical summaries, we can start introducing different ways of summarising your data set. 
 
-In it's simplest sense, we can look at different ways of counting your observations. Often, it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, for example, if you have done something with the code and your mean or median is only being calculated using a subset of the values you intended. Alternatively, it can be useful for reporting descriptive statistics, such as how many participants were in your study or how many people were in each group.  
+In it's simplest sense, we can look at different ways of counting your observations. Often, it is helpful to know how many observations you have, either in total, or broken down by groups. This can help you spot if something has gone wrong in a calculation, e.g., if you have done something with the code and your mean or median is only being calculated using a subset of the values you intended. Alternatively, it can be useful for reporting descriptive statistics, such as how many participants were in your study or how many people were in each group.  
 
 ### Activity 9 - Counting observations
 
-To count observations, you have the function `r glossary("count()", def = "Count the observations in your data set, or the number of observations in one or more variables.")`. Without any additional argument, you can use the function to report how many observations are in your data set:
+To count observations, you have the function `r glossary("count()", def = "Count the observations in your data set, or the number of observations in one or more variables.")`. Without any additional arguments, you can use the function to report how many observations are in your data set:
 
 ```{r}
 count(pong_data_filter)
@@ -490,7 +498,7 @@ To break down the code:
 
 - We create a new object `N_observations` by applying the `summarise()` function to `pong_data_filter`.
 
-- We create a new variable name called `N_observations`, add an equals for what that new variable represents, and add our desired function: `n()`. You do not need to add any further arguments, it calculates the number of observations in the object you give it. 
+- We create a new variable name called `N_observations`, add an equals for what that new variable represents, and add our desired function `n()`. You do not need to add any further arguments, it calculates the number of observations in the object you give it. 
 
 This creates a new object as a data frame with 1 observation and 1 column to produce a single number: 
 
@@ -509,7 +517,7 @@ summarise(pong_data_filter,
                                 na.rm = TRUE))
 ```
 
-In this example, we have not saved the `summarise()` output to a new object, just printed it's result. We can see we get the number of observations as before, but we also get the mean value for the hit rate. The proportion of hits across all observations was 0.688 or 68.8%. Hopefully, you can see how 
+In this example, we have not saved the `summarise()` output to a new object, just printed it's result. We can see we get the number of observations as before, but we also get the mean value for the hit rate. The proportion of hits across all observations was 0.688 or 68.8%.  
 
 ::: {.callout-important}
 #### Why is my mean NA? 
@@ -589,7 +597,7 @@ Calling the object shows we now get two rows per summary statistic:
 hits_by_judgedspeed
 ```
 
-Although there were more hits in the fast judged speed, the proportion of hits to misses was lower. Participants hit .657 (65.7%) of trials they judged to be fast, but .725 (72.5%) of trials they judged to be slow. 
+Although there were more hits in the fast judged speed, the proportion of hits to misses was lower. Participants hit .657 (65.7%) of trials they judged to be fast but .725 (72.5%) of trials they judged to be slow. 
 
 ::: {.callout-tip}
 #### Try this
@@ -637,10 +645,20 @@ R Markdown is great for embedding plots and statistics in reproducible documents
 There are a few options available to you. One of the packages that helps create R Markdown - <pkg>knitr</pkg> -  can create tables from objects you create. There is a function called `kable()` which can create tables with no further arguments, but you will need to edit the object to make sure it has headers and labels consistent with APA. The following code creates a simple table if you have <pkg>knitr</pkg> installed: 
 
 ```{r eval=FALSE}
-knitr::kable(hits_by_background)
+knitr::kable(hits_by_judgedspeed)
 ```
 
-You will need to knit your document to see what it looks like and our book renders tables differently, so we cannot demonstrate it here directly. See [The R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html){target="_blank"} for a guide on creating tables using `kable()`.
+You will need to knit your document to see what it looks like, but it should look similar to @fig-img-kable-demo. The row labels are fine, but you would need to tidy up the headers and round `prop_hits` to three decimals (see the function `round()`). 
+
+```{r img-kable-demo, echo=FALSE}
+#| label: fig-img-kable-demo
+#| fig.cap: "Example of using kable() to create tables in R Markdown."
+
+knitr::include_graphics("images/kable_demo.png")
+
+```
+
+See [The R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html){target="_blank"} for a guide on creating tables using `kable()`.
 
 Alternatively, there is a package called <pkg>gt</pkg> which can also create tables with plenty of formatting options. See their documentation [https://gt.rstudio.com/](https://gt.rstudio.com/){target="_blank"} online for further information. 
 :::
