@@ -1,4 +1,4 @@
-# Data Wrangling 3: Pipes and Pivots {#06-wrangling-03}
+# Data Wrangling 3: Pivots and Pipes {#06-wrangling-03}
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -57,32 +57,91 @@ You are now ready to start working on the chapter!
 
 ## Recapping all the previous <pkg>dplyr</pkg> functions
 
+In this first section, we will prepare the data for some analysis later by practicing the data wrangling skills you learnt in Chapters 4 and 5 on this new data set. 
+
 ### Activity 1 - Load <pkg>tidyverse</pkg> and read the data files
+
+As the first activity, load <pkg>tidyverse</pkg> and read the two data files. As a prompt, save the data files to these object names to be consistent with the activities below, but you can check your answer below if you are stuck. 
+
+```{r eval=FALSE}
+# Load the tidyverse package below
+?
+
+# Load the data files
+# This should be the Alter_2024_demographics.csv file 
+demog <- ?
+
+# This should be the Alter_2024_scales.csv file 
+scales <- ?
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# Load the tidyverse package below
+library(tidyverse)
+
+# Load the data files
+# This should be the Alter_2024_demographics.csv file 
+demog <- read_csv("data/Alter_2024_demographics.csv")
+
+# This should be the Alter_2024_scales.csv file 
+scales <- read_csv("data/Alter_2024_scales.csv")
+```
+
+:::
 
 ### Activity 2 - Explore `demog` and `scales`
 
-In `pong_data`, each row (observation) represents one trial per participant and there are 288 trials for each of the 16 participants. Most of the data is a double (i.e., numbers) and one column is a character (i.e., text). The columns (variables) we have in the data set are:
+The data from @alter_vssl_2024 is split into two data files. In `demog`, we have the participant ID (`StudentIDE`) and several demographic variables. The columns (variables) we have in the data set are:
 
 | Variable       |       Type                       |           Description          |
 |:--------------:|:---------------------------------|:-------------------------------|
-| Participant    | `r typeof(pong_data$Participant)`| participant number             |
-| JudgedSpeed    | `r typeof(pong_data$JudgedSpeed)`| speed judgement (1 = fast, 0 = slow)|
-| PaddleLength   | `r typeof(pong_data$PaddleLength)`| paddle length (pixels)        |
-| BallSpeed      | `r typeof(pong_data$BallSpeed)`  | ball speed (2 pixels/4ms)      |
-| TrialNumber    | `r typeof(pong_data$TrialNumber)`| trial number                   |
-| BackgroundColor| `r typeof(pong_data$BackgroundColor)`| background display colour  |
-| HitOrMiss      | `r typeof(pong_data$HitOrMiss)`  | hit ball = 1, missed ball = 0      |
-| BlockNumber    | `r typeof(pong_data$BlockNumber)`| block number (out of 12 blocks)|
+| StudentIDE    | `r typeof(demog$StudentIDE)`| Participant number             |
+| GenderE    | `r typeof(demog$GenderE)`| Gender: 1 = Female, 2 = Male, 3 = Non-Binary |
+| RaceEthE    | `r typeof(demog$RaceEthE)`| Ethnicity: 1 = Black/African American, 2 = Hispanic/Other Latinx, 3 = White, 4 = Multiracial, 5 = Asian/Pacific Islander, 6 = Native American/Alaska Native, 7 = South/Central American |
+| GradeE    | `r typeof(demog$GradeE)`| Expected grade: 1 = A,	2 = B,	3 = C, 4 = D,	5 = F |
+| StuStaE    | `r typeof(demog$StuStaE)`| Student status: 1 = Freshman, 2 = Sophomore,	3 = Junior,	4 = Senior or Higher |
+| GPAE    | `r typeof(demog$GPAE)`| Expected Grade Point Average (GPA) |
+| MajorE    | `r typeof(demog$MajorE)`| Degree major |
+| AgeE    | `r typeof(demog$AgeE)`| Age in years |
 
-### Activity 3 - Selecting a range of columns using `select()`
+In `scales`, we then have the participant ID (`StudentIDE`) and all the individual scale items. The columns (variables) we have in the data set are:
 
-### Activity 4 - Reorder observations using `arrange()` 
+| Variable       |       Type                       |           Description          |
+|:--------------:|:---------------------------------|:-------------------------------|
+| StudentIDE    | `r typeof(demog$StudentIDE)`| Participant number             |
+| MA1E to MA8E    | `r typeof(scales$MA1E)`| **Enjoyment of Mathematics and statistics**, not analysed in this study. |
+| QANX1E to QANX4E    | `r typeof(scales$QANX1E)`| **Quantitative anxiety**: four items scored on a 5-point Likert scale ranging from 1 (Not at all Anxious) to 5 (Extremely Anxious) |
+| QINFL1E to QINFL7E    | `r typeof(scales$QINFL1E)`| **Quantitative attitudes**: seven items scored on a 5-point Likert scale ranging from 1 (Strongly Disagree) to 5 (Strongly Agree) |
+| QSF1E to QSF4E    | `r typeof(scales$QSF1E)`| **Study motivation**, not analysed in this study. |
+| QHIND1E to QHIND5E    | `r typeof(scales$QHIND1E)`| **Quantitative hindrances**: five items scored on a 5-point Likert scale ranging from 1 (Strongly Disagree) to 5 (Strongly Agree) |
+| QSC1E to QSC4E    | `r typeof(scales$QSC1E)`| **Mathematical self-efficacy**, not analysed in this study. |
+| QSE1E to QSE6E    | `r typeof(scales$QSE1E)`| **Mathematical ability**, not analysed in this study. |
+| SPSS1E to SPSS10E    | `r typeof(scales$SPSS1E)`| **VSSL scale on SPSS**: 10 items scored on a 5-point Likert scale ranging from 1 (Never True) to 5 (Always True) |
 
-### Activity 5 - Modifying or creating variables using `mutate()`
+::: {.callout-tip}
+#### Try this
+Now we have introduced the two data sets, explore them using different methods we introduced. For example, opening the data objects as a tab to scroll around, explore with `glimpse()`, or even try plotting some of the variables to see what they look like using visualisation skills from Chapter 3. 
+:::
 
-### Activity 6 - Removing or retaining observations using `filter()`
+### Activity 3 - Joining the two data sets using `inner_join()`
 
-### Activity 7 - Summarising data using `count()` and `summarise()`
+### Activity 4 - Selecting a range of columns using `select()`
+
+After factor analysis, only keep 1, 4, 5, 6, 7, 8, and 9 for SPSS / VSSL scale. 
+
+### Activity 5 - Reorder observations using `arrange()` 
+
+### Activity 6 - Modifying or creating variables using `mutate()`
+
+Reverse code items 2, 3, and 10 - SPSS / VSSL
+
+### Activity 7 - Removing or retaining observations using `filter()`
+
+### Activity 8 - Summarising data using `count()` and `summarise()`
 
 Transition to pivot longer by highlighting issue of not being able to use mean on all the scales. 
 

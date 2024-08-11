@@ -216,7 +216,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pipes and Pivots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -380,7 +380,7 @@ div.csl-indent {
   <li>
 <a href="#select-arrange-and-mutate-recap" id="toc-select-arrange-and-mutate-recap" class="nav-link" data-scroll-target="#select-arrange-and-mutate-recap"><span class="header-section-number">5.2</span> Select, arrange, and mutate recap</a>
   <ul class="collapse">
-<li><a href="#activity-1---load-tidyverse-and-read-the-data-files" id="toc-activity-1---load-tidyverse-and-read-the-data-files" class="nav-link" data-scroll-target="#activity-1---load-tidyverse-and-read-the-data-files"><span class="header-section-number">5.2.1</span> Activity 1 - Load <pkg>tidyverse</pkg> and read the data files</a></li>
+<li><a href="#activity-1---load-tidyverse-and-read-the-data-file" id="toc-activity-1---load-tidyverse-and-read-the-data-file" class="nav-link" data-scroll-target="#activity-1---load-tidyverse-and-read-the-data-file"><span class="header-section-number">5.2.1</span> Activity 1 - Load <pkg>tidyverse</pkg> and read the data file</a></li>
   <li><a href="#activity-2---explore-pong_data" id="toc-activity-2---explore-pong_data" class="nav-link" data-scroll-target="#activity-2---explore-pong_data"><span class="header-section-number">5.2.2</span> Activity 2 - Explore <code>pong_data</code></a></li>
   <li><a href="#data-types-in-r" id="toc-data-types-in-r" class="nav-link" data-scroll-target="#data-types-in-r"><span class="header-section-number">5.2.3</span> Data types in R</a></li>
   <li><a href="#dw2-a3" id="toc-dw2-a3" class="nav-link" data-scroll-target="#dw2-a3"><span class="header-section-number">5.2.4</span> Activity 3 - <code>select()</code> a range of columns</a></li>
@@ -468,8 +468,8 @@ div.csl-indent {
 </section></section><section id="select-arrange-and-mutate-recap" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="select-arrange-and-mutate-recap">
 <span class="header-section-number">5.2</span> Select, arrange, and mutate recap</h2>
 <p>Before we introduce you to new functions, we will recap data wrangling functions from Chapter 4 to select, arrange, and mutate. Following along is one thing but being able to transfer your understanding to a new data set is a key sign of your skill development. Feel free to use Chapter 4 to help you, but try and complete the recap activities independently before checking the solutions. This will help prepare you as we move from the chapters, to the data analysis journeys, to the assessments, and to your future career.</p>
-<section id="activity-1---load-tidyverse-and-read-the-data-files" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="activity-1---load-tidyverse-and-read-the-data-files">
-<span class="header-section-number">5.2.1</span> Activity 1 - Load <pkg>tidyverse</pkg> and read the data files</h3>
+<section id="activity-1---load-tidyverse-and-read-the-data-file" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="activity-1---load-tidyverse-and-read-the-data-file">
+<span class="header-section-number">5.2.1</span> Activity 1 - Load <pkg>tidyverse</pkg> and read the data file</h3>
 <p>As the first activity, try and test yourself by loading <pkg>tidyverse</pkg> and reading the data file. As a prompt, save the data file to this object name to be consistent with the activities below, but you can check your answer below if you are stuck.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load the tidyverse package below</span></span>
@@ -1353,16 +1353,16 @@ R Markdown tip of the chapter: Create pretty tables
 <ul>
 <li><p>Male = <select class="webex-select"><option value="blank"></option>
 <option value="">Double</option>
-<option value="answer">Character</option>
-<option value="">Integer</option></select></p></li>
+<option value="">Integer</option>
+<option value="answer">Character</option></select></p></li>
 <li><p>7.15 = <select class="webex-select"><option value="blank"></option>
-<option value="">Character</option>
+<option value="">Integer</option>
 <option value="answer">Double</option>
-<option value="">Integer</option></select></p></li>
+<option value="">Character</option></select></p></li>
 <li><p>137 = <select class="webex-select"><option value="blank"></option>
 <option value="">Character</option>
-<option value="answer">Integer</option>
-<option value="">Double</option></select></p></li>
+<option value="">Double</option>
+<option value="answer">Integer</option></select></p></li>
 </ul>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
@@ -1382,20 +1382,20 @@ Explain this answer
 </div>
 </div>
 <strong>Question 2</strong>. Which of the <pkg>dplyr</pkg> functions would you use to count the number of observations in your data set or variables?
-<div id="radio_BJTFENFFTT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BJTFENFFTT" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_BJTFENFFTT" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_BJTFENFFTT" value="answer"><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_BJTFENFFTT" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_BJTFENFFTT" value=""><span>group_by</span></label>
+<div id="radio_JYIGJWZRVU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value="answer"><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>mutate</span></label>
 </div>
 <strong>Question 3</strong>. Which of the <pkg>dplyr</pkg> functions would you use to calculate the mean of a column?
-<div id="radio_QBTLNWKNKT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QBTLNWKNKT" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_QBTLNWKNKT" value="answer"><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_QBTLNWKNKT" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_QBTLNWKNKT" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_QBTLNWKNKT" value=""><span>mutate</span></label>
+<div id="radio_CGCROIHUWH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value="answer"><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>mutate</span></label>
 </div>
 <strong>Question 4</strong>. Which of the <pkg>dplyr</pkg> functions would you use to remove certain observations (e.g., remove all males)?
-<div id="radio_XSWQBSPAVX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XSWQBSPAVX" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_XSWQBSPAVX" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_XSWQBSPAVX" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_XSWQBSPAVX" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_XSWQBSPAVX" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_XSWQBSPAVX" value=""><span>count</span></label>
+<div id="radio_AIBZKEIGFU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>mutate</span></label>
 </div>
 <strong>Question 5</strong>. Which of the <pkg>dplyr</pkg> functions would you use to subset summary statistics by?
-<div id="radio_TICWLZWNZP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TICWLZWNZP" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_TICWLZWNZP" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_TICWLZWNZP" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_TICWLZWNZP" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_TICWLZWNZP" value="answer"><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_TICWLZWNZP" value=""><span>summarise</span></label>
+<div id="radio_OWFXGNEJLU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value="answer"><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>mutate</span></label>
 </div>
 </section><section id="error-mode" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="error-mode">
 <span class="header-section-number">5.6.2</span> Error mode</h3>
@@ -2168,7 +2168,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./06-wrangling-3.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pipes and Pivots</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
