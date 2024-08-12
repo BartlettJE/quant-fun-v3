@@ -124,7 +124,7 @@ Just looking at the names gives you some idea of what the functions do. For exam
 
 In this chapter, we focus on the `*_join()` series of functions, `select()`, `arrange()`, and `mutate()`.
 
-## Joining two data frames with `*_join()` functions
+## Joining two data frames with `*_join()` functions {#04-joins}
 
 The first thing we will do is combine data files. We have two files, `dat` and `pinfo`, but what we really want is a single file that has both the happiness and depression scores and the demographic information about the participants as it makes it easier to work with the combined data. 
 

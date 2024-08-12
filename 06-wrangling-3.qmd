@@ -129,15 +129,176 @@ Now we have introduced the two data sets, explore them using different methods w
 
 ### Activity 3 - Joining the two data sets using `inner_join()`
 
+At the moment, we have two separate data sets, but it will make things easier to join them together so we have both demographic information and the participants' responses to the scales. 
+
+We did not recap joining data sets in the last chapter, so you might need to revisit Chapter 4 - [Joining two data frames](#04-joins)  - for a recap. 
+
+Create a new data object called `full_data` and see if you can spot a common variable between both data sets that you can use an identifier. 
+
+```{r eval=FALSE}
+# join demog and scales by a common identifier 
+full_data <- ?
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r}
+# join demog and scales by a common identifier 
+full_data <- inner_join(x = demog,
+                        y = scales,
+                        by = "StudentIDE")
+```
+:::
+
 ### Activity 4 - Selecting a range of columns using `select()`
 
-After factor analysis, only keep 1, 4, 5, 6, 7, 8, and 9 for SPSS / VSSL scale. 
+There are some scales in the data that @alter_vssl_2024 did not analyse, so we can get rid of them to declutter. Furthermore, the purpose of their study was to validate the new VSSL scale and they found some items did not make the cut. Create a new object called `full_data_select` and **retain** the following variables from your new `full_data` object:
+
+- `StudentIDE`
+
+- `GenderE`
+
+- `RaceEthE`
+
+- `AgeE` 
+
+- `QANX1E` to `QINFL7E`
+
+- `QHIND1E` to `QHIND5E`
+
+- `SPSS1E`, `SPSS4E`, `SPSS5E`, `SPSS6E`, `SPSS7E`, `SPSS8E`, `SPSS9E`. 
+
+Remember: you can select variables either by **retaining** the variables you want to keep, or **removing** the variables you want to remove. You should have **27** columns remaining. 
+
+```{r eval=FALSE}
+# select the key variables listed above
+full_data_select <- ?
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk if you chose to retain: 
+
+```{r}
+# select the key variables listed above
+full_data_select <- select(full_data,
+                           StudentIDE, 
+                           GenderE,
+                           RaceEthE, 
+                           AgeE, 
+                           QANX1E:QINFL7E, 
+                           QHIND1E:QHIND5E, 
+                           SPSS1E, SPSS4E, SPSS5E, SPSS6E, SPSS7E, SPSS8E, SPSS9E)
+```
+
+or the following if you chose to remove: 
+
+```{r eval=FALSE}
+# select the key variables listed above
+full_data_select <- select(full_data,
+                           -GradeE, 
+                           -StuStaE, 
+                           -GPAE, 
+                           -MajorE, 
+                           -MA1E:-MA8E,
+                           -QSF1E:-QSF4E,
+                           -QSC1E:-QSE6E,
+                           -SPSS2E, -SPSS3E, -SPSS10E)
+```
+:::
 
 ### Activity 5 - Reorder observations using `arrange()` 
 
+For a quick check of the data, order the values of `AgeE` using the object `full_data_select` and answer the following questions:
+
+1. The youngest participant is `r fitb(18)` years old. 
+
+2. The old participant is `r fitb(39)` years old. 
+
+```{r eval=FALSE}
+# youngest participants
+arrange(?)
+
+# oldest participants
+arrange(?)
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# youngest participants
+arrange(full_data_select, 
+        AgeE)
+
+# oldest participants
+arrange(full_data_select, 
+        desc(AgeE))
+```
+:::
+
 ### Activity 6 - Modifying or creating variables using `mutate()`
 
-Reverse code items 2, 3, and 10 - SPSS / VSSL
+Convert gender to labels 
+
+Convert ethnicity to labels
+
+#### Bonus activity - reverse coding scales {#06-reverse-coding}
+
+For a bonus activity, we want to demonstrate a super common task when working with scale data. Often, scales will **`r glossary("reverse code", def = "Having two similar questions, one expressed in a positive way, and another expressed in a negative way.")`** some items to express the same idea in opposite ways: one positive and one negative. If the scale is measuring a consistent construct, the responses should be more positive in one and more negative in the other. If you analysed this immediately, you would get two opposing answers, so a key data analysis step is reverse coding some items so all the numbers mean a similar thing. 
+
+In @alter_vssl_2024, all the VSSL items we removed were reverse coded, but it is a good excuse to practice. Using the `scales` object, what function could you use to recode existing responses? Hint: we want to recode 1 to 5, 2 to 4, etc. 
+
+```{r eval=FALSE}
+# recode items 2, 3, and 10
+scales_reverse <- mutate(scales,
+                         SPSS2_R = ?,
+                         SPSS3_R = ?,
+                         SPSS10_R = ?)
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+Based on what we covered before, we expect you will have completed a perfectly accurate but long process of recoding each item one by one: 
+
+```{r eval=FALSE}
+# recode items 2, 3, and 10
+scales_reverse <- mutate(scales,
+                         SPSS2_R = case_match(SPSS2E,
+                                              1 ~ 5,
+                                              2 ~ 4,
+                                              3 ~ 3,
+                                              4 ~ 2,
+                                              5 ~ 1),
+                         SPSS3_R = case_match(SPSS3E,
+                                              1 ~ 5,
+                                              2 ~ 4,
+                                              3 ~ 3,
+                                              4 ~ 2,
+                                              5 ~ 1),
+                         SPSS10_R = case_match(SPSS10E,
+                                              1 ~ 5,
+                                              2 ~ 4,
+                                              3 ~ 3,
+                                              4 ~ 2,
+                                              5 ~ 1))
+```
+
+However, there is a neat shortcut where you can subtract the response from the biggest scale unit plus 1. For example, if you have a 5-point scale, you would subtract the response from 6, if you have a 7-point scale, from 8 etc. 
+
+```{r eval=FALSE}
+# Reverse code by subtracting responses from 6
+scales_reverse <- mutate(scales,
+                         SPSS2_R = 6 = SPSS2E,
+                         SPSS3_R = 6 - SPSS3E,
+                         SPSS10_R = 6 - SPSS10E)
+```
+
+Explore your new data object to see what the new reverse coded variables look like. 
+:::
 
 ### Activity 7 - Removing or retaining observations using `filter()`
 
@@ -145,7 +306,7 @@ Reverse code items 2, 3, and 10 - SPSS / VSSL
 
 Transition to pivot longer by highlighting issue of not being able to use mean on all the scales. 
 
-## Manipulating data between longer and wider using `pivot_longer()` and `pivot_wider()`
+## Restructuring data using `pivot_longer()` and `pivot_wider()`
 
 ### Tidy data 
 

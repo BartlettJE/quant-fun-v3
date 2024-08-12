@@ -216,7 +216,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pipes and Pivots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -380,7 +380,7 @@ div.csl-indent {
 </li>
   <li><a href="#tidyverse-and-the-dplyr-package" id="toc-tidyverse-and-the-dplyr-package" class="nav-link" data-scroll-target="#tidyverse-and-the-dplyr-package"><span class="header-section-number">4.2</span> Tidyverse and the dplyr package</a></li>
   <li>
-<a href="#joining-two-data-frames-with-_join-functions" id="toc-joining-two-data-frames-with-_join-functions" class="nav-link" data-scroll-target="#joining-two-data-frames-with-_join-functions"><span class="header-section-number">4.3</span> Joining two data frames with <code>*_join()</code> functions</a>
+<a href="#04-joins" id="toc-04-joins" class="nav-link" data-scroll-target="#04-joins"><span class="header-section-number">4.3</span> Joining two data frames with <code>*_join()</code> functions</a>
   <ul class="collapse">
 <li><a href="#activity-2---join-the-files-together" id="toc-activity-2---join-the-files-together" class="nav-link" data-scroll-target="#activity-2---join-the-files-together"><span class="header-section-number">4.3.1</span> Activity 2 - Join the files together</a></li>
   <li><a href="#activity-3---explore-your-data-objects" id="toc-activity-3---explore-your-data-objects" class="nav-link" data-scroll-target="#activity-3---explore-your-data-objects"><span class="header-section-number">4.3.2</span> Activity 3 - Explore your data objects</a></li>
@@ -571,7 +571,7 @@ Show me the solution
 </table>
 <p>Just looking at the names gives you some idea of what the functions do. For example, <code>select()</code> selects columns and <code>arrange()</code> orders observations. You will be surprised by how far you can get with data wrangling using just these functions. There will always be unique problems to solve, but these functions cover the most common that apply to almost every data set.</p>
 <p>In this chapter, we focus on the <code>*_join()</code> series of functions, <code>select()</code>, <code>arrange()</code>, and <code>mutate()</code>.</p>
-</section><section id="joining-two-data-frames-with-_join-functions" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="joining-two-data-frames-with-_join-functions">
+</section><section id="04-joins" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="04-joins">
 <span class="header-section-number">4.3</span> Joining two data frames with <code>*_join()</code> functions</h2>
 <p>The first thing we will do is combine data files. We have two files, <code>dat</code> and <code>pinfo</code>, but what we really want is a single file that has both the happiness and depression scores and the demographic information about the participants as it makes it easier to work with the combined data.</p>
 <p>To do this, we are going to use the function <code>inner_join()</code>. So far, we have described these types of functions as <code>*_join()</code>. This is because there are a series of functions that join two data sets in slightly different ways. You do not need to memorise these, but it might be useful to refer back to later.</p>
@@ -1322,24 +1322,24 @@ Solution
 <section id="knowledge-check" class="level3" data-number="4.7.1"><h3 data-number="4.7.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">4.7.1</span> Knowledge check</h3>
 <strong>Question 1</strong>. Which of the following functions would you use if you wanted to keep only certain columns?
-<div id="radio_CUZNNFDUAK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CUZNNFDUAK" value="answer"><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_CUZNNFDUAK" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_CUZNNFDUAK" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_CUZNNFDUAK" value=""><span>inner_join()</span></label>
+<div id="radio_NZTPWILRBJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NZTPWILRBJ" value="answer"><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_NZTPWILRBJ" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_NZTPWILRBJ" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_NZTPWILRBJ" value=""><span>inner_join()</span></label>
 </div>
 <strong>Question 2</strong>. Which of the following functions would you use if you wanted to join two data sets by their shared identifier?
-<div id="radio_EEHPQXWRGI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EEHPQXWRGI" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_EEHPQXWRGI" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_EEHPQXWRGI" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_EEHPQXWRGI" value="answer"><span>inner_join()</span></label>
+<div id="radio_WCBNBZMWYC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WCBNBZMWYC" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_WCBNBZMWYC" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_WCBNBZMWYC" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_WCBNBZMWYC" value="answer"><span>inner_join()</span></label>
 </div>
 <strong>Question 3</strong>. Which of the following functions would you use if you wanted to add or modify a column?
-<div id="radio_WKSUBSNQUQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WKSUBSNQUQ" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_WKSUBSNQUQ" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_WKSUBSNQUQ" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_WKSUBSNQUQ" value=""><span>inner_join()</span></label>
+<div id="radio_VHWKFRPMTQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VHWKFRPMTQ" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_VHWKFRPMTQ" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_VHWKFRPMTQ" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_VHWKFRPMTQ" value=""><span>inner_join()</span></label>
 </div>
 <strong>Question 4</strong>. When you use mutate(), which additional function could you use to recode an existing variable?
-<div id="radio_GBHGOBGIAN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GBHGOBGIAN" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_GBHGOBGIAN" value=""><span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_GBHGOBGIAN" value="answer"><span>case_match()</span></label><label><input type="radio" autocomplete="off" name="radio_GBHGOBGIAN" value=""><span>filter()</span></label>
+<div id="radio_DCZMXMXOMO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DCZMXMXOMO" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_DCZMXMXOMO" value=""><span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_DCZMXMXOMO" value="answer"><span>case_match()</span></label><label><input type="radio" autocomplete="off" name="radio_DCZMXMXOMO" value=""><span>filter()</span></label>
 </div>
 <strong>Question 5</strong>. When you use mutate(), which additional function could you use to create a new variable depending on specific criteria you set?
-<div id="radio_JWCYLAPHUD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JWCYLAPHUD" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_JWCYLAPHUD" value="answer"><span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_JWCYLAPHUD" value=""><span>case_match()</span></label><label><input type="radio" autocomplete="off" name="radio_JWCYLAPHUD" value=""><span>filter()</span></label>
+<div id="radio_HURAMNSJSA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HURAMNSJSA" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_HURAMNSJSA" value="answer"><span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_HURAMNSJSA" value=""><span>case_match()</span></label><label><input type="radio" autocomplete="off" name="radio_HURAMNSJSA" value=""><span>filter()</span></label>
 </div>
 </section><section id="error-mode-1" class="level3" data-number="4.7.2"><h3 data-number="4.7.2" class="anchored" data-anchor-id="error-mode-1">
 <span class="header-section-number">4.7.2</span> Error mode</h3>
