@@ -483,7 +483,7 @@ We can fix this problem by restructuring the data.
 
 ## Restructuring data using `pivot_longer()` and `pivot_wider()`
 
-Apart from joining two data sets, we have pretty much just worked with the data files as they come to us where each row represents one observation/participant and each column represents one variable. That is great but there are scenarios where you get data sets in messier formats that do not follow this pattern. Furthermore, you might need to restructure your data to perform certain functions, like taking the mean/sum of many columns per participant, or visualising multiple elements. Before we work on the data wrangling side, we need a brief explanation of tidy data. 
+Apart from joining two data sets, we have pretty much just worked with the data files as they come to us where each row represents one observation/participant and each column represents one variable. That is great but there are scenarios where you get data sets in messier formats that do not follow this pattern. Furthermore, you might need to restructure your data to perform certain functions, like taking the mean/sum of many columns per participant or visualising multiple elements. Before we work on the data wrangling side, we need a brief explanation of data formats. 
 
 ### Tidy data 
 
@@ -511,30 +511,117 @@ Tidy data is a mix of both of these approaches and most functions in the `tidyve
 
 ### Activity 9: Gathering with `pivot_longer()`
 
-The first step is to use the function `pivot_longer()` to transform the data. The pivot functions can be easier to show than tell - you may find it a useful exercise to run the below code and compare the tibble in the newly created object `rlong` with the tibble in the original object, `respones`, before reading on.
+In it's current format, we have wide data where each row is a separate participant and each column is a separate variable. We can use the function `r glossary("pivot_longer()", def = "Gather data by increasing the number of rows and decreasing the number of columns.")` from the <pkg>tidyr</pkg> package within `tidyverse`. 
 
-```{r long1, eval = FALSE}
-rlong <- pivot_longer(data = responses,
-                      cols = Q1:Q10,
+The pivot functions can be easier to show than explain first, so type and run the following code using the `full_data_mutate` object:
+
+```{r}
+full_data_long <- pivot_longer(data = full_data_mutate,
+                      cols = SPSS1E:SPSS9E,
                       names_to = "Question", 
                       values_to = "Response")
 ```
 
-To break this code down a little to help you understand it more:
+To break down the code:
 
-* As with the other tidyverse functions, the first argument specifies the dataset to use as the base, in this case `responses`. 
-    * And remember the more experienced and confident you get you do not have to write the argument names, e.g. `data = `.
-* The second argument, `cols` specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. In this case, we only have a single column `Id` that will remain constant and we will transform all the the other columns that contain participant's responses to each question. 
-    * The colon notation `first_column:last_column` is used to select all variables from the first column specified to the second column specified. So in our code, `cols` specifies that the columns we want to transform are `Q1` to `Q10`.
-    * Note that "Gathering" of columns is based on position in the tibble. If the order of columns in the tibble was Q1 then Q10, the above code would only gather those two columns. As it is, in our tibble, the order, is Q1, Q2, Q3, ... Q10, and therefore the code gathers all the columns between Q1 and Q10.
-* The third and fourth arguments are the names of the new columns we are creating.
-    * `names_to` specifies the names of the new columns that will be created. 
-    * Finally, `values_to` names the new column that will contain the measurements, in this case we'll call it `Response`. 
-    * These new column names are put in quotes because they do not already exist in the tibble. This is not always the case but is the case for this function.
-    * Note also that these names could have been anything but by using these names the code makes more sense.
-    * Lastly, you do need to write names_to = ... and values_to = ... otherwise the columns won't be created correctly.    
-    
-And now that we have run the code and explained it a bit, you may find it helpful to go back and compare `rlong` and `responses` again to see how each argument matches up with the output of the table.
+- We create a new data object called `full_data_long` by applying the `pivot_longer()` function to `full_data_mutate`. 
+
+- In the `cols` argument, we specify the columns we want to gather. We use the colon method here like `select()` to choose the 7 columns for the VSSL items. If the columns are not in order, you could use the `c()` method instead (e.g., `cols = c(SPSS1E, SPSS9E)`). 
+
+- The `names_to` argument is what your first new column will be called. All the column names you selected in `cols` will be pivoted into this new column, so call it something sensible you will remember later. Here, we call the new column "Question". 
+
+- The `values_to` argument is what your second new column will be called. For all the columns you gather, the response of each participant will be in one column stacked on top of each other next to its label in "Question". You also need to call this something memorable, like "Response" here. 
+
+Now, explore the new `full_data_long` object you just created and compare it to `full_data_mutate`. Instead of 181 rows, we now have 1267 rows. Instead of 27 variables, we now have 22 variables. We have 181 participants who responded to 7 VSSL items, so we pivot the data into long format to get 181 * 7 = 1267 rows. 
+
+Visually, you can see the difference with a preview of just the participant ID and VSSL items here: 
+
+::: {.panel-tabset}
+#### Original wide format
+
+```{r echo=FALSE}
+full_data_mutate %>% 
+  select(StudentIDE, SPSS1E:SPSS9E) %>% 
+  head(n = 10)
+```
+
+#### New long format
+
+```{r echo=FALSE}
+full_data_long %>% 
+  select(StudentIDE, Question, Response) %>% 
+  head(n = 10)
+```
+:::
+
+Now we have our data in long form, we can calculate summary statistics for participants using `group_by()` and `summarise()`. First, we group the data by the participant ID, as we want one value per participant:
+
+```{r}
+# group full_data_long by StudentIDE
+longdata_grouped <- group_by(full_data_long, 
+                             StudentIDE)
+```
+
+Second, we create a new variable using `summarise()` to take the sum of all the items. This will create the VSSL scale score consistent with @alter_vssl_2024: 
+
+```{r}
+# Calculate the sum of VSSL items by taking the sum of Response
+VSSL_sum <- summarise(longdata_grouped,
+                      VSSL_sum = sum(Response))
+```
+
+Our new object goes from 1267 rows back to 181 as we grouped by the participant ID and took the sum of `Response`. This means we apply the function we provide `summarise()` to all the rows we want to group by, in this case across all 7 VSSL items. Your new object has just two columns: `StudentIDE` and `VSSL_sum`. 
+
+At this point, you could join the object to `full_data_mutate` to add the scale score to all the other variables, but we will come back to that when we cover pipes. 
+
+::: {.callout-tip}
+#### Try this
+
+We calculated the VSSL scale score by pivoting longer, grouping the data, and taking the sum of the 7 items. To test your understanding, complete the same steps to calculate the scale score of **Quantitative anxiety** using the four columns `QANX1E` to `QANX4E`. The scale score here also involves taking the sum of the columns. Use the `full_data_mutate` object as your starting point for the data. 
+
+Check your attempt with the solution below when you have tried on your own. 
+
+```{r eval=FALSE}
+# gather the four quant anxiety items to long form
+quant_anxiety_long <- ?
+
+# group the long data by participant ID
+quant_anxiety_group <- ?
+
+# calculate the sum quant anxiety per participant
+sum_quant_anxiety <- ?
+```
+
+To check your answers: 
+
+1. Participant 1 has a sum quantitative anxiety score of  `r fitb(6)`
+
+2. Participant 5 has a sum quantitative anxiety score of  `r fitb(16)`
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Solution
+
+We complete the task in three steps. First, we pivot longer using the four columns QANX1E to QANX4E to create the new `quant_anxiety_long` object. Second, we group that new long data object by the participant ID. Third, we calculate the sum quantitative anxiety score by taking the sum of the responses per participant ID. 
+
+```{r}
+# gather the four quant anxiety items to long form
+quant_anxiety_long <- pivot_longer(data = full_data_mutate,
+                                   cols = QANX1E:QANX4E,
+                                   names_to = "Question",
+                                   values_to = "Response")
+
+# group the long data by participant ID
+quant_anxiety_group <- group_by(quant_anxiety_long, 
+                                StudentIDE)
+
+# calculate the sum quant anxiety per participant
+sum_quant_anxiety <- summarise(quant_anxiety_group,
+                               sum_quant_anxiety = sum(Response))
+```
+
+:::
 
 ### Spreading with `pivot_wider()`
 

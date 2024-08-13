@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
 <title>Fundamentals of Quantitative Analysis - 6&nbsp; Data Wrangling 3: Pivots and Pipes</title>
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -56,7 +56,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,13 +98,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,10 +107,8 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
@@ -129,19 +120,19 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-wrangling-3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-wrangling-3.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -373,7 +364,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -403,7 +394,8 @@ div.csl-indent {
 <a href="#restructuring-data-using-pivot_longer-and-pivot_wider" id="toc-restructuring-data-using-pivot_longer-and-pivot_wider" class="nav-link" data-scroll-target="#restructuring-data-using-pivot_longer-and-pivot_wider"><span class="header-section-number">6.3</span> Restructuring data using <code>pivot_longer()</code> and <code>pivot_wider()</code></a>
   <ul class="collapse">
 <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="header-section-number">6.3.1</span> Tidy data</a></li>
-  <li><a href="#activity-9-gathering-with-pivot_longer" id="toc-activity-9-gathering-with-pivot_longer" class="nav-link" data-scroll-target="#activity-9-gathering-with-pivot_longer"><span class="header-section-number">6.3.2</span> Activity 9: Gathering with pivot_longer()</a></li>
+  <li><a href="#activity-9-gathering-with-pivot_longer" id="toc-activity-9-gathering-with-pivot_longer" class="nav-link" data-scroll-target="#activity-9-gathering-with-pivot_longer"><span class="header-section-number">6.3.2</span> Activity 9: Gathering with <code>pivot_longer()</code></a></li>
+  <li><a href="#spreading-with-pivot_wider" id="toc-spreading-with-pivot_wider" class="nav-link" data-scroll-target="#spreading-with-pivot_wider"><span class="header-section-number">6.3.3</span> Spreading with <code>pivot_wider()</code></a></li>
   </ul>
 </li>
   <li><a href="#combining-several-functions-with-pipes" id="toc-combining-several-functions-with-pipes" class="nav-link" data-scroll-target="#combining-several-functions-with-pipes"><span class="header-section-number">6.4</span> Combining several functions with pipes</a></li>
@@ -416,7 +408,7 @@ div.csl-indent {
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">6.6</span> Words from this Chapter</a></li>
   <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">6.7</span> End of chapter</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/06-wrangling-3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/06-wrangling-3.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/06-wrangling-3.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/06-wrangling-3.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -432,7 +424,6 @@ div.csl-indent {
     
   </div>
   
-
 
 </header><p>In the last chapter, we looked at using one-table Wickham verbs to <code>filter</code>, <code>arrange</code>, <code>group_by</code>, <code>select</code>, <code>mutate</code> and <code>summarise</code> the pong data. We also learnt a little more about <a href="https://psyteachr.github.io/glossary/p#pipe" target="_blank" class="glossary" title="A way to order your code in a more readable format using the symbol %>%">pipes</a> and we saw how to do some quick counting and some ungrouping. Be sure to try out those activities before moving on as we will start to add a few more functions to allow us a few more skills in <a href="https://psyteachr.github.io/glossary/d#data-wrangling" target="_blank" class="glossary" title="The process of preparing data for visualisation and statistical analysis.">data wrangling</a>.</p>
 <p>Today, as a progression from working with one table/tibble, we will focus on working with data across two or more tibbles To do this we are going to add two more functions, to the skills we already know. Those are:</p>
@@ -513,7 +504,7 @@ Show me the solution
 <span class="header-section-number">6.2.2</span> Activity 2 - Explore <code>demog</code> and <code>scales</code>
 </h3>
 <p>The data from <span class="citation" data-cites="alter_vssl_2024">Alter et al. (<a href="references.html#ref-alter_vssl_2024" role="doc-biblioref">2024</a>)</span> is split into two data files. In <code>demog</code>, we have the participant ID (<code>StudentIDE</code>) and several demographic variables. The columns (variables) we have in the data set are:</p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 41%">
@@ -568,7 +559,7 @@ Show me the solution
 </tbody>
 </table>
 <p>In <code>scales</code>, we then have the participant ID (<code>StudentIDE</code>) and all the individual scale items. The columns (variables) we have in the data set are:</p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 41%">
@@ -652,7 +643,7 @@ Try this
 <span class="header-section-number">6.2.3</span> Activity 3 - Joining the two data sets using <code>inner_join()</code>
 </h3>
 <p>At the moment, we have two separate data sets, but it will make things easier to join them together so we have both demographic information and the participants’ responses to the scales.</p>
-<p>We did not recap joining data sets in the last chapter, so you might need to revisit Chapter 4 - <a href="#04-joins">Joining two data frames</a> - for a recap.</p>
+<p>We did not recap joining data sets in the last chapter, so you might need to revisit Chapter 4 - <a href="04-wrangling-1.html#04-joins">Joining two data frames</a> - for a recap.</p>
 <p>Create a new data object called <code>full_data</code> and see if you can spot a common variable between both data sets that you can use an identifier.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># join demog and scales by a common identifier </span></span>
@@ -1061,7 +1052,7 @@ Error mode
 </section></section></section><section id="restructuring-data-using-pivot_longer-and-pivot_wider" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="restructuring-data-using-pivot_longer-and-pivot_wider">
 <span class="header-section-number">6.3</span> Restructuring data using <code>pivot_longer()</code> and <code>pivot_wider()</code>
 </h2>
-<p>Apart from joining two data sets, we have pretty much just worked with the data files as they come to us where each row represents one observation/participant and each column represents one variable. That is great but there are scenarios where you get data sets in messier formats that do not follow this pattern. Furthermore, you might need to restructure your data to perform certain functions, like taking the mean/sum of many columns per participant, or visualising multiple elements. Before we work on the data wrangling side, we need a brief explanation of tidy data.</p>
+<p>Apart from joining two data sets, we have pretty much just worked with the data files as they come to us where each row represents one observation/participant and each column represents one variable. That is great but there are scenarios where you get data sets in messier formats that do not follow this pattern. Furthermore, you might need to restructure your data to perform certain functions, like taking the mean/sum of many columns per participant or visualising multiple elements. Before we work on the data wrangling side, we need a brief explanation of data formats.</p>
 <section id="tidy-data" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="tidy-data">
 <span class="header-section-number">6.3.1</span> Tidy data</h3>
 <p>For most of this book, we will use a type of data organisation known as <a href="https://psyteachr.github.io/glossary/t#tidy-data" target="_blank" class="glossary" title="A format for data that maps the meaning onto the structure.">tidy data</a>. Any data in this format is easily processed through the <code>tidyverse</code> family of packages. However, the data you work with will not always start formatted in the most efficient way possible. If that happens then our first step is to put it into a tidy data format. There are two fundamental principles defining tidy data:</p>
@@ -1091,39 +1082,299 @@ Note
 </div>
 </div>
 </section><section id="activity-9-gathering-with-pivot_longer" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="activity-9-gathering-with-pivot_longer">
-<span class="header-section-number">6.3.2</span> Activity 9: Gathering with pivot_longer()</h3>
-<p>The first step is to use the function <code>pivot_longer()</code> to transform the data. The pivot functions can be easier to show than tell - you may find it a useful exercise to run the below code and compare the tibble in the newly created object <code>rlong</code> with the tibble in the original object, <code>respones</code>, before reading on.</p>
+<span class="header-section-number">6.3.2</span> Activity 9: Gathering with <code>pivot_longer()</code>
+</h3>
+<p>In it’s current format, we have wide data where each row is a separate participant and each column is a separate variable. We can use the function <a class="glossary" title="Gather data by increasing the number of rows and decreasing the number of columns.">pivot_longer()</a> from the <pkg>tidyr</pkg> package within <code>tidyverse</code>.</p>
+<p>The pivot functions can be easier to show than explain first, so type and run the following code using the <code>full_data_mutate</code> object:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>rlong <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> responses,</span>
-<span id="cb24-2"><a href="#cb24-2"></a>                      <span class="at">cols =</span> Q1<span class="sc">:</span>Q10,</span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>full_data_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> full_data_mutate,</span>
+<span id="cb24-2"><a href="#cb24-2"></a>                      <span class="at">cols =</span> SPSS1E<span class="sc">:</span>SPSS9E,</span>
 <span id="cb24-3"><a href="#cb24-3"></a>                      <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
 <span id="cb24-4"><a href="#cb24-4"></a>                      <span class="at">values_to =</span> <span class="st">"Response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To break this code down a little to help you understand it more:</p>
+<p>To break down the code:</p>
 <ul>
-<li>As with the other tidyverse functions, the first argument specifies the dataset to use as the base, in this case <code>responses</code>.
-<ul>
-<li>And remember the more experienced and confident you get you do not have to write the argument names, e.g.&nbsp;<code>data =</code>.</li>
+<li><p>We create a new data object called <code>full_data_long</code> by applying the <code>pivot_longer()</code> function to <code>full_data_mutate</code>.</p></li>
+<li><p>In the <code>cols</code> argument, we specify the columns we want to gather. We use the colon method here like <code>select()</code> to choose the 7 columns for the VSSL items. If the columns are not in order, you could use the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> method instead (e.g., <code>cols = c(SPSS1E, SPSS9E)</code>).</p></li>
+<li><p>The <code>names_to</code> argument is what your first new column will be called. All the column names you selected in <code>cols</code> will be pivoted into this new column, so call it something sensible you will remember later. Here, we call the new column “Question”.</p></li>
+<li><p>The <code>values_to</code> argument is what your second new column will be called. For all the columns you gather, the response of each participant will be in one column stacked on top of each other next to its label in “Question”. You also need to call this something memorable, like “Response” here.</p></li>
 </ul>
-</li>
-<li>The second argument, <code>cols</code> specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. In this case, we only have a single column <code>Id</code> that will remain constant and we will transform all the the other columns that contain participant’s responses to each question.
-<ul>
-<li>The colon notation <code>first_column:last_column</code> is used to select all variables from the first column specified to the second column specified. So in our code, <code>cols</code> specifies that the columns we want to transform are <code>Q1</code> to <code>Q10</code>.</li>
-<li>Note that “Gathering” of columns is based on position in the tibble. If the order of columns in the tibble was Q1 then Q10, the above code would only gather those two columns. As it is, in our tibble, the order, is Q1, Q2, Q3, … Q10, and therefore the code gathers all the columns between Q1 and Q10.</li>
+<p>Now, explore the new <code>full_data_long</code> object you just created and compare it to <code>full_data_mutate</code>. Instead of 181 rows, we now have 1267 rows. Instead of 27 variables, we now have 22 variables. We have 181 participants who responded to 7 VSSL items, so we pivot the data into long format to get 181 * 7 = 1267 rows.</p>
+<p>Visually, you can see the difference with a preview of just the participant ID and VSSL items here:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Original wide format</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">New long format</a></li>
 </ul>
-</li>
-<li>The third and fourth arguments are the names of the new columns we are creating.
-<ul>
-<li>
-<code>names_to</code> specifies the names of the new columns that will be created.</li>
-<li>Finally, <code>values_to</code> names the new column that will contain the measurements, in this case we’ll call it <code>Response</code>.</li>
-<li>These new column names are put in quotes because they do not already exist in the tibble. This is not always the case but is the case for this function.</li>
-<li>Note also that these names could have been anything but by using these names the code makes more sense.</li>
-<li>Lastly, you do need to write names_to = … and values_to = … otherwise the columns won’t be created correctly.</li>
-</ul>
-</li>
-</ul>
-<p>And now that we have run the code and explained it a bit, you may find it helpful to go back and compare <code>rlong</code> and <code>responses</code> again to see how each argument matches up with the output of the table.</p>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">StudentIDE</th>
+<th style="text-align: right;">SPSS1E</th>
+<th style="text-align: right;">SPSS4E</th>
+<th style="text-align: right;">SPSS5E</th>
+<th style="text-align: right;">SPSS6E</th>
+<th style="text-align: right;">SPSS7E</th>
+<th style="text-align: right;">SPSS8E</th>
+<th style="text-align: right;">SPSS9E</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">StudentIDE</th>
+<th style="text-align: left;">Question</th>
+<th style="text-align: right;">Response</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SPSS1E</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SPSS4E</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SPSS5E</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SPSS6E</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SPSS7E</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SPSS8E</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">SPSS9E</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">SPSS1E</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">SPSS4E</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">SPSS5E</td>
+<td style="text-align: right;">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Now we have our data in long form, we can calculate summary statistics for participants using <code>group_by()</code> and <code>summarise()</code>. First, we group the data by the participant ID, as we want one value per participant:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># group full_data_long by StudentIDE</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>longdata_grouped <span class="ot">&lt;-</span> <span class="fu">group_by</span>(full_data_long, </span>
+<span id="cb25-3"><a href="#cb25-3"></a>                             StudentIDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Second, we create a new variable using <code>summarise()</code> to take the sum of all the items. This will create the VSSL scale score consistent with <span class="citation" data-cites="alter_vssl_2024">Alter et al. (<a href="references.html#ref-alter_vssl_2024" role="doc-biblioref">2024</a>)</span>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Calculate the sum of VSSL items by taking the sum of Response</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>VSSL_sum <span class="ot">&lt;-</span> <span class="fu">summarise</span>(longdata_grouped,</span>
+<span id="cb26-3"><a href="#cb26-3"></a>                      <span class="at">VSSL_sum =</span> <span class="fu">sum</span>(Response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Our new object goes from 1267 rows back to 181 as we grouped by the participant ID and took the sum of <code>Response</code>. This means we apply the function we provide <code>summarise()</code> to all the rows we want to group by, in this case across all 7 VSSL items. Your new object has just two columns: <code>StudentIDE</code> and <code>VSSL_sum</code>.</p>
+<p>At this point, you could join the object to <code>full_data_mutate</code> to add the scale score to all the other variables, but we will come back to that when we cover pipes.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We calculated the VSSL scale score by pivoting longer, grouping the data, and taking the sum of the 7 items. To test your understanding, complete the same steps to calculate the scale score of <strong>Quantitative anxiety</strong> using the four columns <code>QANX1E</code> to <code>QANX4E</code>. The scale score here also involves taking the sum of the four columns. Use the <code>full_data_mutate</code> object as your starting point for the data.</p>
+<p>Check your answer below when you have tried on your own.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># gather the four quant anxiety items to long form</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>quant_anxiety_long <span class="ot">&lt;-</span> ?</span>
+<span id="cb27-3"><a href="#cb27-3"></a></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co"># group the long data by participant ID</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>quant_anxiety_group <span class="ot">&lt;-</span> ?</span>
+<span id="cb27-6"><a href="#cb27-6"></a></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="co"># calculate the sum quant anxiety per participant</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>sum_quant_anxiety <span class="ot">&lt;-</span> ?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To check your answers:</p>
+<ol type="1">
+<li><p>Participant 1 has a sum quantitative anxiety score of <input class="webex-solveme nospaces" size="1" data-answer="[&quot;6&quot;]"></p></li>
+<li><p>Participant 5 has a sum quantitative anxiety score of <input class="webex-solveme nospaces" size="2" data-answer="[&quot;16&quot;]"></p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We complete the task in three steps. First, we pivot longer using the four columns QANX1E to QANX4E to create the new <code>quant_anxiety_long</code> object. Second, we group that new long data object by the participant ID. Third, we calculate the sum quantitative anxiety score by taking the sum of the responses per participant ID.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># gather the four quant anxiety items to long form</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>quant_anxiety_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> full_data_mutate,</span>
+<span id="cb28-3"><a href="#cb28-3"></a>                                   <span class="at">cols =</span> QANX1E<span class="sc">:</span>QANX4E,</span>
+<span id="cb28-4"><a href="#cb28-4"></a>                                   <span class="at">names_to =</span> <span class="st">"Question"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5"></a>                                   <span class="at">values_to =</span> <span class="st">"Response"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="co"># group the long data by participant ID</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>quant_anxiety_group <span class="ot">&lt;-</span> <span class="fu">group_by</span>(quant_anxiety_long, </span>
+<span id="cb28-9"><a href="#cb28-9"></a>                                StudentIDE)</span>
+<span id="cb28-10"><a href="#cb28-10"></a></span>
+<span id="cb28-11"><a href="#cb28-11"></a><span class="co"># calculate the sum quant anxiety per participant</span></span>
+<span id="cb28-12"><a href="#cb28-12"></a>sum_quant_anxiety <span class="ot">&lt;-</span> <span class="fu">summarise</span>(quant_anxiety_group,</span>
+<span id="cb28-13"><a href="#cb28-13"></a>                               <span class="at">sum_quant_anxiety =</span> <span class="fu">sum</span>(Response))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="spreading-with-pivot_wider" class="level3" data-number="6.3.3"><h3 data-number="6.3.3" class="anchored" data-anchor-id="spreading-with-pivot_wider">
+<span class="header-section-number">6.3.3</span> Spreading with <code>pivot_wider()</code>
+</h3>
 </section></section><section id="combining-several-functions-with-pipes" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="combining-several-functions-with-pipes">
 <span class="header-section-number">6.4</span> Combining several functions with pipes</h2>
 </section><section id="test-yourself" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="test-yourself">
@@ -1134,21 +1385,21 @@ Note
 <ul>
 <li>
 <p>Complete the sentence, the higher the AQ score…</p>
-<div id="radio_BKTHQMFSHR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BKTHQMFSHR" value=""><span>the less autistic-like traits displayed</span></label><label><input type="radio" autocomplete="off" name="radio_BKTHQMFSHR" value=""><span>has no relation to autistic-like traits</span></label><label><input type="radio" autocomplete="off" name="radio_BKTHQMFSHR" value="answer"><span>the more autistic-like traits displayed</span></label>
+<div id="radio_EBZEEIKZMP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EBZEEIKZMP" value=""><span>the less autistic-like traits displayed</span></label><label><input type="radio" autocomplete="off" name="radio_EBZEEIKZMP" value=""><span>has no relation to autistic-like traits</span></label><label><input type="radio" autocomplete="off" name="radio_EBZEEIKZMP" value="answer"><span>the more autistic-like traits displayed</span></label>
 </div>
 </li>
 <li>
 <p>Assuming that your code all worked, what was the AQ score (just the number) of Participant ID No.&nbsp;87:</p>
-<div id="radio_ZENNCROQVF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZENNCROQVF" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_ZENNCROQVF" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_ZENNCROQVF" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_ZENNCROQVF" value=""><span>6</span></label>
+<div id="radio_NNYRGUAUOM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NNYRGUAUOM" value="answer"><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_NNYRGUAUOM" value=""><span>3</span></label><label><input type="radio" autocomplete="off" name="radio_NNYRGUAUOM" value=""><span>5</span></label><label><input type="radio" autocomplete="off" name="radio_NNYRGUAUOM" value=""><span>6</span></label>
 </div>
 </li>
 <li><p>Type in the box how many participants had an AQ score of 3 (again just the number): <input class="webex-solveme nospaces" size="10" data-answer="[&quot;13&quot;]"></p></li>
 <li>
 <p>The cut-off for the AQ10 is usually said to be around 6 meaning that anyone with a score of more than 6 should be referred for diagnostic assessment. Based on this data, how many participants might be referred for further assessment?</p>
-<div id="radio_MARZBSEEQO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MARZBSEEQO" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_MARZBSEEQO" value=""><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_MARZBSEEQO" value="answer"><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_MARZBSEEQO" value=""><span>8</span></label>
+<div id="radio_IZNNNHXGAN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IZNNNHXGAN" value=""><span>2</span></label><label><input type="radio" autocomplete="off" name="radio_IZNNNHXGAN" value=""><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_IZNNNHXGAN" value="answer"><span>6</span></label><label><input type="radio" autocomplete="off" name="radio_IZNNNHXGAN" value=""><span>8</span></label>
 </div>
 </li>
 </ul>
@@ -1169,26 +1420,26 @@ Explain these answers
 <p>Which function(s) would you use to approach each of the following problems?</p>
 <ul>
 <li><p>We have a dataset of 400 adults, but we want to remove anyone with an age of 50 years or more. To do this, we could use the <select class="webex-select"><option value="blank"></option>
-<option value="">mutate()</option>
-<option value="">summarise()</option>
-<option value="answer">filter()</option>
 <option value="">select()</option>
-<option value="">arrange()</option>
-<option value="">group_by()</option></select> function.</p></li>
-<li><p>We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the <select class="webex-select"><option value="blank"></option>
-<option value="">mutate()</option>
-<option value="">select()</option>
-<option value="">filter()</option>
 <option value="">group_by()</option>
 <option value="">arrange()</option>
-<option value="answer">summarise()</option></select> function.</p></li>
+<option value="">summarise()</option>
+<option value="">mutate()</option>
+<option value="answer">filter()</option></select> function.</p></li>
+<li><p>We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the <select class="webex-select"><option value="blank"></option>
+<option value="">select()</option>
+<option value="answer">summarise()</option>
+<option value="">filter()</option>
+<option value="">group_by()</option>
+<option value="">mutate()</option>
+<option value="">arrange()</option></select> function.</p></li>
 <li><p>Our dataset has a column with the number of cats a person has, and a column with the number of dogs. We want to calculate a new column which contains the total number of pets each participant has. To do this, we could use the <select class="webex-select"><option value="blank"></option>
 <option value="">filter()</option>
+<option value="">group_by()</option>
 <option value="answer">mutate()</option>
-<option value="">summarise()</option>
-<option value="">arrange()</option>
 <option value="">select()</option>
-<option value="">group_by()</option></select> function.</p></li>
+<option value="">arrange()</option>
+<option value="">summarise()</option></select> function.</p></li>
 <li><p>We want to calculate the average for each participant in our dataset. To do this we could use the <select class="webex-select"><option value="blank"></option>
 <option value="">arrange() and mutate()</option>
 <option value="">filter() and select()</option>
@@ -1222,11 +1473,11 @@ Explain these Answers
 <p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, <code>count()</code>, and <code>group_by()</code> and <code>summarise()</code>. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
 <p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <code>tidyverse</code> and the data file:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Load the tidyverse package below</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-3"><a href="#cb25-3"></a></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="co"># Load the data file</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/witt_2018.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Load the tidyverse package below</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co"># Load the data file</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/witt_2018.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load <code>tidyverse</code> and the data. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.</p>
 <ul>
@@ -1237,7 +1488,8 @@ Explain these Answers
 <span class="header-section-number">6.6</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
-<table class="caption-top table table-sm table-striped small">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">term</th>
 <th style="text-align: left;">definition</th>
@@ -1264,23 +1516,28 @@ Explain these Answers
 <td style="text-align: left;">A way to order your code in a more readable format using the symbol %&gt;%</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#pivot_longer()" class="glossary" target="_blank">pivot_longer()</a></td>
+<td style="text-align: left;">Gather data by increasing the number of rows and decreasing the number of columns.</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#reverse-code" class="glossary" target="_blank">reverse-code</a></td>
 <td style="text-align: left;">Having two similar questions, one expressed in a positive way, and another expressed in a negative way.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tibble" class="glossary" target="_blank">tibble</a></td>
 <td style="text-align: left;">A container for tabular data with some different properties to a data frame</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#tidy-data" class="glossary" target="_blank">tidy-data</a></td>
 <td style="text-align: left;">A format for data that maps the meaning onto the structure.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#wide" class="glossary" target="_blank">wide</a></td>
 <td style="text-align: left;">A data format where all of the observations about one subject are in the same row</td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </section><section id="end-of-chapter" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">6.7</span> End of chapter</h2>
@@ -1288,7 +1545,7 @@ Explain these Answers
 <p>Brilliant work again today! You have now recapped one-table verbs and started to expand your knowledge of two-table verbs. These are great to know as for example, as seen above, it actually only took a handful of reproducible steps to get from messy data to tidy data; could you imagine doing this by hand in Excel through cutting and pasting? Not to mention the mistakes you could make! Excellent work! You are a DataWrangling expert! Before finishing, remember to go over anything you are unsure of, and if you have any questions, please post them on Teams. There are some additional questions below to help you check your understanding.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-alter_vssl_2024" class="csl-entry" role="listitem">
 Alter, U., Dang, C., Kunicki, Z. J., &amp; Counsell, A. (2024). The <span>VSSL</span> scale: <span>A</span> brief instructor tool for assessing students’ perceived value of software to learning statistics. <em>Teaching Statistics</em>, <em>46</em>(3). <a href="https://doi.org/10.1111/test.12374">https://doi.org/10.1111/test.12374</a>
 </div>
@@ -1571,33 +1828,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1664,15 +1894,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1751,27 +1979,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1781,17 +1992,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1803,130 +2005,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -1970,7 +2049,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1996,32 +2074,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2081,12 +2133,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./05-wrangling-2.html" class="pagination-link" aria-label="Data wrangling 2: Filter and summarise">
+      <a href="./05-wrangling-2.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-more-visualisation.html" class="pagination-link" aria-label="Building your data visualisation skills">
+      <a href="./07-more-visualisation.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -2096,9 +2148,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">
-<p>CC-BY (2024) James Bartlett &amp; Wil Toivo</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/06-wrangling-3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/06-wrangling-3.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
