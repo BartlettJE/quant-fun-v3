@@ -242,9 +242,62 @@ arrange(full_data_select,
 
 ### Activity 6 - Modifying or creating variables using `mutate()`
 
-Convert gender to labels 
+At the moment, we have categorical variables such gender (`GenderE`) and race (`RaceEthE`) which have numerical codes. When it comes to summarising or plotting later, this would not be the easiest to understand. 
 
-Convert ethnicity to labels
+Using the `full_data_select` object, use `mutate()` to recode these two existing variables and replace the numbers with labels and create a new object `full_data_mutate`. As a reminder of what each number refers to: 
+
+`GenderE`
+
+- 1 = Female
+
+- 2 = Male
+
+- 3 = Non-Binary
+
+`RaceEthE`
+
+- 1 = Black/African American
+
+- 2 = Hispanic/Other Latinx
+
+- 3 = White
+
+- 4 = Multiracial
+
+- 5 = Asian/Pacific Islander
+
+- 6 = Native American/Alaska Native
+
+- 7 = South/Central American
+
+```{r eval=FALSE}
+# recode gender and race to labels
+full_data_mutate <- mutate(full_data_select,
+                           GenderE = ?,
+                           RaceEthE = ?)
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk (some lines wrap due to being quite long, but it will look right if you copy and paste it to your RStudio): 
+
+```{r}
+# recode gender and race to labels
+full_data_mutate <- mutate(full_data_select,
+                           GenderE = case_match(GenderE,
+                                                1 ~ "Female",
+                                                2 ~ "Male",
+                                                3 ~ "Non-binary"),
+                           RaceEthE = case_match(RaceEthE,
+                                                 1 ~ "Black/African American",
+                                                 2 ~ "Hispanic/Other Latinx",
+                                                 3 ~ "White",
+                                                 4 ~ "Multiracial",
+                                                 5 ~ "Asian/Pacific Islander",
+                                                 6 ~ "Native American/Alaska Native",
+                                                 7 ~ "South/Central American"))
+```
+:::
 
 #### Bonus activity - reverse coding scales {#06-reverse-coding}
 
@@ -292,7 +345,7 @@ However, there is a neat shortcut where you can subtract the response from the b
 ```{r eval=FALSE}
 # Reverse code by subtracting responses from 6
 scales_reverse <- mutate(scales,
-                         SPSS2_R = 6 = SPSS2E,
+                         SPSS2_R = 6 - SPSS2E,
                          SPSS3_R = 6 - SPSS3E,
                          SPSS10_R = 6 - SPSS10E)
 ```
@@ -302,45 +355,161 @@ Explore your new data object to see what the new reverse coded variables look li
 
 ### Activity 7 - Removing or retaining observations using `filter()`
 
+To practice filtering data to retain specific participants, imagine we wanted to focus on two specific groups of people. 
+
+First, we just want to explore the data of non-binary participants. Second, we want to explore the data of female, Asian/Pacific Islander participants. Use `filter()` on the `full_data_mutate` object to create two objects: `NB_participants` and `F_asian_participants`. 
+
+```{r eval=FALSE}
+# non-binary participants
+NB_participants <- ?
+
+# female, Asian/Pacific Islander participants
+F_asian_participants <- ?
+```
+
+After creating the objects, answer the following questions: 
+
+1. We have `r fitb(1)` non-binary participant(s) in the data set.  
+
+2. We have `r fitb(9)` female, Asian/Pacific Islander participant(s) in the data set.
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r}
+# non-binary participants
+NB_participants <- filter(full_data_mutate,
+                          GenderE == "Non-binary")
+
+# female, Asian/Pacific Islander participants
+F_asian_participants <- filter(full_data_mutate,
+                          GenderE == "Female",
+                          RaceEthE == "Asian/Pacific Islander")
+```
+:::
+
+#### Bonus activity - Removing NAs with `drop_na()` {#06-drop-NAs}
+
+One concept we will spend more time on in Chapter 11 - Screening Data - is removing participants who do not provide an answer. We delve more into the decision making in the course materials, but there is a handy function in <pkg>tidyr</pkg> called `drop_na()`. You could do this using filter, but the standalone function streamlines things. If you run the function on your whole data set, it will remove observations with one or more NAs in all their variables: 
+
+```{r}
+# remove observations with any NAs
+no_NAs <- drop_na(full_data_mutate)
+```
+
+However, often you do not want to remove all variables with an NA as there might be valuable information elsewhere. You can add one or more variables to ask `drop_na()` to only remove NAs present in those specific variables: 
+
+```{r}
+# remove observations with any NAs
+age_NAs <- drop_na(full_data_mutate,
+                   AgeE)
+```
+
+This impacts the number of participants we remove as we had 171 when we removed all NAs, but 179 when we only removed NAs in age. 
+
 ### Activity 8 - Summarising data using `count()` and `summarise()`
 
-Transition to pivot longer by highlighting issue of not being able to use mean on all the scales. 
+#### Counting observations
+
+As the final recap activity, it is time to calculate some summary statistics to understand our data set. First, use `count()` on the `full_data_mutate` object to answer the following questions: 
+
+1. How many observations do we have of each gender? `r fitb(29)` males, `r fitb(149)` females, and `r fitb(1)` non-binary. 
+
+2. How many observations do we have of each race? `r fitb(131)` white, `r fitb(13)` Black/African American, and `r fitb(1)` NA with missing data. 
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# count each group in GenderE
+count(full_data_mutate,
+      GenderE)
+
+# count each group in RaceE
+count(full_data_mutate,
+      RaceEthE)
+```
+:::
+
+#### Summarising observations
+
+One useful demographic summary is the mean and standard deviation (*SD*) of participant ages. We have covered the function for the mean (`mean()`) several times, but a key part of coding is knowing what you want, but not the function to do it. So, in the process of the next answer, try and find the function for the standard deviation on your own. If you are really stuck though, you can see the hint below. 
+
+::: {.callout-note collapse="true"}
+#### Give me a hint for the SD function
+
+```{r eval=FALSE}
+# Function for the standard deviation
+sd()
+```
+:::
+
+```{r eval=FALSE}
+# Mean and SD age
+mean_age <- summarise(full_data_mutate,
+                      mean_age = ?,
+                      SD_age = ?)
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+```{r eval=FALSE}
+# Mean and SD age
+mean_age <- summarise(full_data_mutate,
+                      mean_age = mean(AgeE, na.rm = TRUE),
+                      SD_age = sd(AgeE, na.rm = TRUE))
+```
+
+Remember, if there are NAs present in the data like this, you need to add `na.rm = TRUE` or handle NAs prior to applying the function. 
+:::
+
+::: {.callout-important}
+#### Error mode
+
+As a transition point to restructuring data, imagine we wanted to calculate the sum score of the items to calculate a number for the whole scale. Based on how we have used `mutate()` or `summarise()` before, you might try:
+
+```{r}
+sum_VSSL <- mutate(full_data_mutate,
+                      VSSL = sum(c(SPSS1E, SPSS4E, SPSS5E, SPSS6E, SPSS7E, SPSS8E, SPSS9E), na.rm = TRUE))
+```
+
+However, if you look at the object, the VSSL column is the same for every participant (4413) which does not look right? This is due to how functions work within `mutate()`. It is essentially applying the `sum()` function to all the columns first and adding them together, rather than summing the values of each column within each participant. 
+
+We can fix this problem by restructuring the data. 
+:::
 
 ## Restructuring data using `pivot_longer()` and `pivot_wider()`
 
+Apart from joining two data sets, we have pretty much just worked with the data files as they come to us where each row represents one observation/participant and each column represents one variable. That is great but there are scenarios where you get data sets in messier formats that do not follow this pattern. Furthermore, you might need to restructure your data to perform certain functions, like taking the mean/sum of many columns per participant, or visualising multiple elements. Before we work on the data wrangling side, we need a brief explanation of tidy data. 
+
 ### Tidy data 
 
-But first a little more on data structure and organisation.For most of this book, we will use a type of data organisation known as `r glossary("tidy data")`. Any data in this format is easily processed through the `tidyverse` package. However, the data you work with will not always start formatted in the most efficient way possible. If that happens then our first step is to put it into `Tidy Data` format. There are two fundamental principles defining `Tidy Data`:
+For most of this book, we will use a type of data organisation known as `r glossary("tidy data")`. Any data in this format is easily processed through the `tidyverse` family of packages. However, the data you work with will not always start formatted in the most efficient way possible. If that happens then our first step is to put it into a tidy data format. There are two fundamental principles defining tidy data:
 
 1. Each variable must have its own column.
+
 2. Each observation must have its own row.
 
-<a href = "https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf" target = "_blank">Tidy Data (Wickham, 2014)</a> adds the following principle:
+@wickham_tidy_2014 adds the following principle:
 
-* Each type of observation unit forms a table. 
+3. Each type of observation unit forms a table. 
 
-And <a href = "https://r4ds.had.co.nz/tidy-data.html" target = "_blank">Grolemund and Wickham (2017)</a> restate this third principle as:
+[Grolemund and Wickham (2023)](https://r4ds.hadley.nz/data-tidy.html){target="_blank"} restate this third principle as: "Each value must have its own cell (i.e. no grouping two variables together, e.g. time/date in one cell)" where a cell is where any specific row and column meet. A single data point in a data frame / tibble is a cell for example. The Grolemund and Wickham (2023) book is a very useful source for further reading and it is free, but browsing the chapter on tidy data will help you visualise how you want to arrange data.
 
-* Each value must have its own cell (i.e. no grouping two variables together, e.g. time/date in one cell).
-
-Where a cell is where any specific row and column meet; a single data point in a tibble is a cell for example. The <a href = "https://r4ds.had.co.nz/tidy-data.html" target = "_blank">Grolemund and Wickham (2017)</a> book is a very useful read and it is free, but browsing the chapter on Tidy Data will help you visualise how you want to arrange data. Try to keep the principles in mind whilst doing so.  
-
-
-```{block, type="info"}
-If you've worked with any kind of data before, particularly if you've used Excel, it's very likely that you will have used **wide format** or **long format** data. In wide format, each participant's data is all in one row with multiple columns for different data points. This means that the data set tends to be very wide and you will have as many rows as you have participants. 
+::: {.callout-note}
+If you have worked with any kind of data before, particularly if you have used Excel, it is likely that you will have used **wide format** or **long format** data. In wide format, each participant's data is all in one row with multiple columns for different data points. This means that the data set tends to be very wide and you will have as many rows as you have participants. 
 
 Long format is where each **row** is a single observation, typically a single trial in an experiment or a response to a single item on a questionnaire. When you have multiple trials per participant, you will have multiple rows for the same participant. To identify participants, you would need a variable with some kind of participant id, which can be as simple as a distinct integer value for each participant. In addition to the participant identifier, you would have any measurements taken during each observation (e.g., response time) and what experimental condition the observation was taken under.
 
 In wide format data, each **row** corresponds to a single participant, with multiple observations for that participant spread across columns. So for instance, with survey data, you would have a separate column for each survey question.
 
-`Tidy` is a mix of both of these approachs and most functions in the tidyverse assume the tidy format, so typically the first thing you need to do when you get data, particularly wide-format data, is to reshape it through wrangling. Which is why we teach these really important skills.
+Tidy data is a mix of both of these approaches and most functions in the `tidyverse` assume the tidy format, so typically the first thing you need to do when you get data is think about what format you need your data to perform the functions and analyses you want.
+:::
 
-There is more information about [tidy data available here](https://r4ds.had.co.nz/tidy-data.html).
-```
-
-We now have all the data we need loaded in, but in order to make it easier for us to get the AQ score for each participant, we need to change the layout of the `responses` tibble to Tidy Data. 
-
-### Activity 4: Gathering with pivot_longer()
+### Activity 9: Gathering with `pivot_longer()`
 
 The first step is to use the function `pivot_longer()` to transform the data. The pivot functions can be easier to show than tell - you may find it a useful exercise to run the below code and compare the tibble in the newly created object `rlong` with the tibble in the original object, `respones`, before reading on.
 
@@ -366,6 +535,8 @@ To break this code down a little to help you understand it more:
     * Lastly, you do need to write names_to = ... and values_to = ... otherwise the columns won't be created correctly.    
     
 And now that we have run the code and explained it a bit, you may find it helpful to go back and compare `rlong` and `responses` again to see how each argument matches up with the output of the table.
+
+### Spreading with `pivot_wider()`
 
 ## Combining several functions with pipes 
 
@@ -443,6 +614,12 @@ pong_data <- read_csv("data/witt_2018.csv")
 ```
 
 Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
+
+- SD not sd function 
+
+- mean on scale scores
+
+- adding object in each pipe step 
 
 ## Words from this Chapter
 
