@@ -1,4 +1,4 @@
-# Analysis Journey 1: Data Wrangling
+# Analysis Journey 1: Data Wrangling {#journey-01-wrangling}
 
 Activity on data wrangling. 
 

@@ -15,21 +15,23 @@ scales <- read_csv("data/Alter_2024_scales.csv")
 
 ```
 
-In the last chapter, we looked at using one-table Wickham verbs to `filter`, `arrange`, `group_by`, `select`, `mutate` and `summarise` the pong data. We also learnt a little more about `r glossary("pipe", display = "pipes")` and we saw how to do some quick counting and some ungrouping. Be sure to try out those activities before moving on as we will start to add a few more functions to allow us a few more skills in `r glossary("data wrangling")`. 
+In the last chapter, we added two more functions to your data wrangling toolkit. You learnt how to filter data to retain or remove certain observations and summarise data to calculate different summary statistics. 
 
-Today, as a progression from working with one table/tibble, we will focus on working with data across two or more tibbles To do this we are going to add two more functions, to the skills we already know. Those are:
+In this chapter, we start with another recap of all your data wrangling skills so far on a new data set. There is no substitute for practice when it comes to data skills. By applying your skills to new data, you can transfer your knowledge to novel scenarios and develop independence. We then add two more sets of data wrangling functions. First, we demonstrate pivots to restructure your data from wide format into long format, and vice versa. Second, we show how you can string together multiple functions from the `tidyverse` using pipes. These help streamline your code to avoid creating lots of intermediary objects. 
 
-* `pivot_longer()` which allows us to **transform** a `r glossary("tibble")` from `r glossary("wide")` format to `r glossary("long")` format.
-
-* `inner_join()` which allows us to **combine** two tibbles together based on common columns. We actually saw this `r glossary("function")` in Chapter 3 so this might be more of a recap.
-
-And just to recap, if you are still struggling with the idea of a function, remember that a function takes an input, performs some action, and gives an output. Think of your toaster again like we mentioned before: it takes bread as an input; it performs the action of heating it up; and it gives an output, the toast. A good thing about a lot of the functions we use is that they are nicely named as verbs to describe what they do - `mutate()` mutates (adds on a column); `arrange()` arranges columns, `summarise()` summarises, etc. But keep in mind that you don't have to know or memorise all the different functions; through practice and repetition you will quickly learn to remember which ones are which and what `r glossary("package")` they come from. Sort of like where to find your spoons in your kitchen - you don't look in the fridge, and then the washing machine, and then the drawer. Nope, you learnt, by repetition, to look in the drawer first time. It's the same with functions. Keep in mind that research methods is like a language in that the more you use it and work with it the more it makes sense. So with that, let's do some practicing! 
+After this chapter, you will be ready for the first data analysis journey chapter: [Analysis Journey 1: Data Wrangling](#journey-01-wrangling). This is where you can test the skills you have developed so far on a more independent task as a bridge between the core chapters and your assessments. 
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
 By the end of this chapter, you will be able to: 
 
-- ILO1
+- Apply all your data wrangling skills to a new data set. 
+
+- Restructure data into different formats, such as long and wide form. 
+
+- Understand the tidy data structure for how most of the `tidyverse` functions expect your data to look. 
+
+- String together multiple functions using pipes. 
 
 ## Chapter preparation
 
@@ -871,80 +873,136 @@ To end the chapter, we have some knowledge check questions to test your understa
 
 ### Knowledge check
 
-* Complete the sentence, the higher the AQ score...`r longmcq(c("the less autistic-like traits displayed","has no relation to autistic-like traits",answer = "the more autistic-like traits displayed"))`  
-
-* Assuming that your code all worked, what was the AQ score (just the number) of Participant ID No. 87: `r longmcq(c(answer = 2,3,5,6))`  
-
-* Type in the box how many participants had an AQ score of 3 (again just the number): `r fitb(13, width = 10, ignore_ws = TRUE)`  
-
-* The cut-off for the AQ10 is usually said to be around 6 meaning that anyone with a score of more than 6 should be referred for diagnostic assessment. Based on this data, how many participants might be referred for further assessment? `r longmcq(c(2, 4, answer = 6, 8))`
-
-
-`r hide("Explain these answers")`
-```{r, echo = FALSE, results='asis'}
-cat("
-1. As mentioned, the higher the score on the AQ10 the more autistic-like traits a participant is said to show.
-
-2. You could do this by code with `filter(aq_scores, Id == 87)`, which would give you a tibble of 1x2 showing the ID number and score. If you just wanted the score you could use `pull()` but we haven't shown you that yet: `filter(aq_scores, Id == 87) %>% pull(AQ)`. The answer is an AQ score of 2.
-
-3. Same as above but changing the argument of the filter. `filter(aq_scores, AQ == 3) %>% count()`. The answer is 13. Remember you can do this by counting but the code makes it reproducible and accurate every time. You might make mistakes.
-
-4. `filter(aq_scores, AQ > 6) %>% count()` or `filter(aq_scores, AQ >= 7) %>% count()`. The answer is 6.
-        ")
-```
-`r unhide()`  
-
-**Recap on Wickham Verbs!**
-
 Which function(s) would you use to approach each of the following problems?
 
-* We have a dataset of 400 adults, but we want to remove anyone with an age of 50 years or more. To do this, we could use the `r mcq(sample(c("select()", answer="filter()", "mutate()", "arrange()", "group_by()", "summarise()")))` function.
+**Question 1**. We have a data set of 400 adults but we want to remove anyone with an age of 50 years or more. To do this, we could use:
 
-* We are interested in overall summary statistics for our data, such as the overall average and total number of observations. To do this, we could use the `r mcq(sample(c("select()", "filter()", "mutate()", "arrange()", "group_by()", answer="summarise()")))` function.
+`r longmcq(sample(c("select()", answer="filter()", "mutate()", "arrange()", "group_by()", "summarise()")))`
 
-* Our dataset has a column with the number of cats a person has, and a column with the number of dogs. We want to calculate a new column which contains the total number of pets each participant has. To do this, we could use the `r mcq(sample(c("select()", "filter()", answer="mutate()", "arrange()", "group_by()", "summarise()")))` function.
+**Question 2**. We are interested in overall summary statistics for our data, such as the mean and total number of observations for a variable. To do this, we could use:
 
-* We want to calculate the average for each participant in our dataset. To do this we could use the `r mcq(sample(c(answer="group_by() and summarise()", "filter() and select()", "group_by() and arrange()", "arrange() and mutate()")))` functions.
+`r longmcq(sample(c("select()", "filter()", "mutate()", "arrange()", "group_by()", answer="summarise()")))`
 
-* We want to order a dataframe of participants by the number of cats that they own, but want our new dataframe to only contain some of our columns. To do this we could use the `r mcq(sample(c(answer = "arrange() and select()", "group_by() and mutate()", answer="filter() and select()", "select() and summarise()")))` functions.
+**Question 3**. Our data set has a column with the number of cats a person has and a column with the number of dogs. We want to calculate a new column which contains the total number of pets each participant has. To do this, we could use:
 
+`r longmcq(sample(c("select()", "filter()", answer="mutate()", "arrange()", "group_by()", "summarise()")))`
 
-`r hide("Explain these Answers")`
-```{r, echo = FALSE, results='asis'}
-cat("
+**Question 4**. We want to calculate the mean value of a column for several groups in our data set. To do this, we could use:
 
-* `filter()` helps us keep and remove rows!
-* `summarise()` is the main function for creating means, medians, modes, etc.
-* `mutate()` can be used to add columns to help add more information.
-* When you want summary statistics for individual groups or participants you have to first `group_by()` and then `summarise()`.
-* You would need to `filter()` first to reduce the people based on their number of cats and then just `select()` the columns you want to keep.
+`r longmcq(sample(c(answer="group_by() and summarise()", "filter() and select()", "group_by() and arrange()", "arrange() and mutate()")))` 
 
+**Question 5**. If we wanted to apply the following wrangling steps with pipes, which series of functions would work? With the object `wide_data`, select several columns **and then**, pivot three columns longer **and then**, group by a participant ID **and then**, calculate the sum of responses. 
 
-")
-```
-`r unhide()`
+`r longmcq(sample(c(answer = "wide_data %>% select() %>% pivot_longer() %>% group_by() %>% summarise()", "long_data %>% select() %>% pivot__longer_wider() %>% group_by() %>% summarise()", "wide_data %>% pivot_longer() %>% select() %>% summarise() %>% group_by()", "select() %>% pivot_longer() %>% group_by() %>% summarise() %>% wide_data")))`
 
 ### Error mode
 
-The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using the functions `filter()`, `count()`, and `group_by()` and `summarise()`. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
+The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using past functions, `pivot_longer()`, `pivot_wider()`, and pipes (`%>%`). Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
 
-Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the data file: 
+Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the data files: 
 
 ```{r eval=FALSE}
 # Load the tidyverse package below
 library(tidyverse)
 
-# Load the data file
-pong_data <- read_csv("data/witt_2018.csv")
+# Load the data files
+# This should be the Alter_2024_demographics.csv file 
+demog <- read_csv("data/Alter_2024_demographics.csv")
+
+# This should be the Alter_2024_scales.csv file 
+scales <- read_csv("data/Alter_2024_scales.csv")
 ```
 
-Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
+Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data files. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
 
-- SD not sd function 
+**Question 6**. Copy the following code chunk into your R Markdown file and press knit. In this code chunk, we want to calculate the mean and SD age of all participants using `demog`. There are two errors/omissions here to try and fix: 
 
-- mean on scale scores
+1. One causes the document not to knit. You should receive an error like `Caused by error in "SD()": ! could not find function "SD"`.  
+
+2. The other looks like we just get NA values?
+
+````{verbatim, lang = "markdown"}
+```{r}
+# calculate the mean and SD age
+demog %>% 
+  summarise(mean_age = mean(AgeE),
+            SD_age = SD(AgeE))
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+The first error is using the wrong function name for SD. Because we always abbreviate standard deviation to SD, it is tempting to try and use that as the function name. However, the function is lowercase: `sd()`. 
+
+The second error is not including the `na.rm = TRUE` argument. There are NAs in the data, so you either need to address them before running the function, or ignoring the NAs with `na.rm = TRUE`. 
+
+```{r eval = FALSE}
+# calculate the mean and SD age
+demog %>% 
+  summarise(mean_age = mean(AgeE, na.rm = TRUE),
+            SD_age = sd(AgeE, na.rm = TRUE))
+```
+:::
+
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. We want to calculate the sum of the five quantitative hindrances items per participant. This code... works, but does it look like it fits in the possible 5-25 range? 
+
+````{verbatim, lang = "markdown"}
+```{r}
+# sum quant hindrances items per participant
+sum_quant_hindrance <- scales %>% 
+  mutate(sum_quant_hindrance = sum(c(QHIND1E, QHIND2E, QHIND3E, QHIND4E, QHIND5E), na.rm = TRUE))
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+This is the main of warning we flagged in the opening section to `pivot_longer()`. Intuitively, it is the right idea to try and calculate the sum in a new column. However, in `mutate()`, it sums all the columns, not the observations for each participant. 
+
+Instead, we can pivot longer focusing on the quantitative hindrance items, group by participant ID, and summarise.
+
+```{r eval = FALSE}
+# sum quant hindrances items per participant
+sum_quant_hindrance <- scales %>% 
+  # pivot longer on 5 quant hindrances items
+  pivot_longer(cols = QHIND1E:QHIND5E,
+               names_to = "Question",
+               values_to = "Response") %>% 
+  # group by student ID
+  group_by(StudentIDE) %>% 
+  # summarise for sum of new long column 
+  summarise(sum_quant_hindrance = sum(Response, na.rm = TRUE))
+```
+:::
 
 - adding object in each pipe step 
+
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. We want to filter `demog` to focus on female participant and calculate the mean age of the female participants. You should receive an error containing `Caused by error:! "..1$StudentIDE" must be a logical vector, not a double vector` which is not the most helpful error for diagnosing the problem. 
+
+````{verbatim, lang = "markdown"}
+```{r}
+# filter for females then calculate mean age
+demog %>% 
+  filter(.data = demog, 
+         GenderE == 2) %>% 
+  summarise(.data = demog,
+            mean_age = mean(AgeE, na.rm = TRUE))
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+We are using pipes but we tried adding in the `.data` argument in each line. Remember %>% "pipes" the previous line into the next line, so you do not need to specify an object for it to work with. If you try and specify the .data argument with pipes, it thinks you are trying to set the next argument in the list. 
+
+```{r eval = FALSE}
+# filter for females then calculate mean age
+demog %>% 
+  filter(GenderE == 2) %>% 
+  summarise(mean_age = mean(AgeE, na.rm = TRUE))
+```
+:::
 
 ## Words from this Chapter
 
@@ -956,6 +1014,11 @@ glossary_table()
 
 ## End of chapter
 
-That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!
+Brilliant work again! You recapped data wrangling functions from the past two chapters to a new data set, and added two more concepts to your arsenal: pivots and pipes. There really is no substitute for practicing on new data to transfer your knowledge and understanding. As you work with more and more data, you will see how far these data wrangling functions take you. They will be the foundation of your skills for any new data set and give you the confidence to search for new functions when there is a new problem to solve. 
 
-Brilliant work again today! You have now recapped one-table verbs and started to expand your knowledge of two-table verbs. These are great to know as for example, as seen above, it actually only took a handful of reproducible steps to get from messy data to tidy data; could you imagine doing this by hand in Excel through cutting and pasting? Not to mention the mistakes you could make! Excellent work! You are a DataWrangling expert! Before finishing, remember to go over anything you are unsure of, and if you have any questions, please post them on Teams. There are some additional questions below to help you check your understanding.
+This is a key milestone, so remember to go over anything you are unsure of. If you have any questions about data wrangling, please post them on Teams, visit the GTAs, or pop into office hours. 
+
+At this point, we direct you to the first data analysis journey chapter: [Analysis Journey 1: Data Wrangling](#journey-01-wrangling). This is a bridge between the structured learning in these chapters and your assessments. We present you with a new data set, show you what the end product should look like, and see if you can apply your data wrangling skills to get there. If you get stuck, we have a range of hints and steps you can unhide, then the solution to check your attempts against. 
+
+In the next core chapter though, we turn to more advanced data visualisation to demonstrate how to create scatterplots, boxplots, and violin-boxplots. 
+
