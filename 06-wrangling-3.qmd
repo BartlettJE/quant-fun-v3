@@ -15,9 +15,9 @@ scales <- read_csv("data/Alter_2024_scales.csv")
 
 ```
 
-In the last chapter, we added two more functions to your data wrangling toolkit. You learnt how to filter data to retain or remove certain observations and summarise data to calculate different summary statistics. 
+In the last chapter, we added two more functions to your data wrangling toolkit. You learnt how to filter data to retain or remove observations and summarise data to calculate different summary statistics. 
 
-In this chapter, we start with another recap of all your data wrangling skills so far on a new data set. There is no substitute for practice when it comes to data skills. By applying your skills to new data, you can transfer your knowledge to novel scenarios and develop independence. We then add two more sets of data wrangling functions. First, we demonstrate pivots to restructure your data from wide format into long format, and vice versa. Second, we show how you can string together multiple functions from the `tidyverse` using pipes. These help streamline your code to avoid creating lots of intermediary objects. 
+In this chapter, we start with another recap of all your data wrangling skills so far on a new data set. There is no substitute for practice when it comes to data skills. By applying your skills to new data, you can transfer your knowledge to novel scenarios and develop independence. We then add two more sets of data wrangling functions. First, we demonstrate pivots to restructure your data from wide format into long format, and vice versa. Second, we show how you can string together multiple functions from the <pkg>tidyverse</pkg> using pipes. These help streamline your code to avoid creating lots of intermediary objects. 
 
 After this chapter, you will be ready for the first data analysis journey chapter: [Analysis Journey 1: Data Wrangling](#journey-01-wrangling). This is where you can test the skills you have developed so far on a more independent task as a bridge between the core chapters and your assessments. 
 
@@ -29,7 +29,7 @@ By the end of this chapter, you will be able to:
 
 - Restructure data into different formats, such as long and wide form. 
 
-- Understand the tidy data structure for how most of the `tidyverse` functions expect your data to look. 
+- Understand the tidy data structure for how most of the <pkg>tidyverse</pkg> functions expect your data to look. 
 
 - String together multiple functions using pipes. 
 
@@ -103,7 +103,7 @@ The data from @alter_vssl_2024 is split into two data files. In `demog`, we have
 |:--------------:|:---------------------------------|:-------------------------------|
 | StudentIDE    | `r typeof(demog$StudentIDE)`| Participant number             |
 | GenderE    | `r typeof(demog$GenderE)`| Gender: 1 = Female, 2 = Male, 3 = Non-Binary |
-| RaceEthE    | `r typeof(demog$RaceEthE)`| Ethnicity: 1 = Black/African American, 2 = Hispanic/Other Latinx, 3 = White, 4 = Multiracial, 5 = Asian/Pacific Islander, 6 = Native American/Alaska Native, 7 = South/Central American |
+| RaceEthE    | `r typeof(demog$RaceEthE)`| Race: 1 = Black/African American, 2 = Hispanic/Other Latinx, 3 = White, 4 = Multiracial, 5 = Asian/Pacific Islander, 6 = Native American/Alaska Native, 7 = South/Central American |
 | GradeE    | `r typeof(demog$GradeE)`| Expected grade: 1 = A,	2 = B,	3 = C, 4 = D,	5 = F |
 | StuStaE    | `r typeof(demog$StuStaE)`| Student status: 1 = Freshman, 2 = Sophomore,	3 = Junior,	4 = Senior or Higher |
 | GPAE    | `r typeof(demog$GPAE)`| Expected Grade Point Average (GPA) |
@@ -156,7 +156,7 @@ full_data <- inner_join(x = demog,
 
 ### Activity 4 - Selecting a range of columns using `select()`
 
-There are some scales in the data that @alter_vssl_2024 did not analyse, so we can get rid of them to declutter. Furthermore, the purpose of their study was to validate the new VSSL scale and they found some items did not make the cut. Create a new object called `full_data_select` and **retain** the following variables from your new `full_data` object:
+There are some scales in the data that @alter_vssl_2024 did not analyse, so we can get rid of them to declutter. Furthermore, the purpose of their study was to validate the new VSSL scale and they found some items did not make the cut. Create a new object called `full_data_select` and retain the following variables from your new `full_data` object:
 
 - `StudentIDE`
 
@@ -209,6 +209,8 @@ full_data_select <- select(full_data,
                            -QSC1E:-QSE6E,
                            -SPSS2E, -SPSS3E, -SPSS10E)
 ```
+
+There are a similar number to retain or remove, so there is no real time saving one way or the other. 
 :::
 
 ### Activity 5 - Reorder observations using `arrange()` 
@@ -221,10 +223,10 @@ For a quick check of the data, order the values of `AgeE` using the object `full
 
 ```{r eval=FALSE}
 # youngest participants
-arrange(?)
+?
 
 # oldest participants
-arrange(?)
+?
 ```
 
 ::: {.callout-tip collapse="true"}
@@ -254,7 +256,7 @@ Using the `full_data_select` object, use `mutate()` to recode these two existing
 
 - 2 = Male
 
-- 3 = Non-Binary
+- 3 = Non-binary
 
 `RaceEthE`
 
@@ -274,9 +276,7 @@ Using the `full_data_select` object, use `mutate()` to recode these two existing
 
 ```{r eval=FALSE}
 # recode gender and race to labels
-full_data_mutate <- mutate(full_data_select,
-                           GenderE = ?,
-                           RaceEthE = ?)
+full_data_mutate <- ?
 ```
 
 ::: {.callout-tip collapse="true"}
@@ -303,9 +303,9 @@ full_data_mutate <- mutate(full_data_select,
 
 #### Bonus activity - reverse coding scales {#06-reverse-coding}
 
-For a bonus activity, we want to demonstrate a super common task when working with scale data. Often, scales will **`r glossary("reverse code", def = "Having two similar questions, one expressed in a positive way, and another expressed in a negative way.")`** some items to express the same idea in opposite ways: one positive and one negative. If the scale is measuring a consistent construct, the responses should be more positive in one and more negative in the other. If you analysed this immediately, you would get two opposing answers, so a key data analysis step is reverse coding some items so all the numbers mean a similar thing. 
+For a bonus activity, we want to demonstrate a super common task when working with scale data. Often, scales will **`r glossary("reverse code", def = "Having two similar questions, one expressed in a positive way, and another expressed in a negative way.")`** some items to express the same idea in opposite ways: one positive and one negative. If the scale is measuring a consistent construct, the responses should be more positive in one and more negative in the other. If you analysed this immediately, you would get two opposing answers, so a key data wrangling step is reverse coding some items so all the numbers mean a similar thing. 
 
-In @alter_vssl_2024, all the VSSL items we removed were reverse coded, but it is a good excuse to practice. Using the `scales` object, what function could you use to recode existing responses? Hint: we want to recode 1 to 5, 2 to 4, etc. 
+In @alter_vssl_2024, the three VSSL items we removed were the ones which needed to be reverse coded, but it is a good excuse to practice. Using the `scales` object, what function could you use to recode existing responses? Hint: we want to recode 1 to 5, 2 to 4, etc. 
 
 ```{r eval=FALSE}
 # recode items 2, 3, and 10
@@ -359,7 +359,7 @@ Explore your new data object to see what the new reverse coded variables look li
 
 To practice filtering data to retain specific participants, imagine we wanted to focus on two specific groups of people. 
 
-First, we just want to explore the data of non-binary participants. Second, we want to explore the data of female, Asian/Pacific Islander participants. Use `filter()` on the `full_data_mutate` object to create two objects: `NB_participants` and `F_asian_participants`. 
+First, we just want to explore the data of "Non-binary" participants. Second, we want to explore the data of "Female", "Asian/Pacific Islander" participants. Use `filter()` on the `full_data_mutate` object to create two objects: `NB_participants` and `F_asian_participants`. 
 
 ```{r eval=FALSE}
 # non-binary participants
@@ -393,7 +393,7 @@ F_asian_participants <- filter(full_data_mutate,
 
 #### Bonus activity - Removing NAs with `drop_na()` {#06-drop-NAs}
 
-One concept we will spend more time on in Chapter 11 - Screening Data - is removing participants who do not provide an answer. We delve more into the decision making in the course materials, but there is a handy function in <pkg>tidyr</pkg> called `drop_na()`. You could do this using filter, but the standalone function streamlines things. If you run the function on your whole data set, it will remove observations with one or more NAs in all their variables: 
+One concept we will spend more time on in [Chapter 11 - Screening Data]() - is removing participants who do not provide an answer. We delve more into the decision making in the course materials, but there is a handy function in <pkg>tidyr</pkg> called `drop_na()`. You could do this using filter, but the standalone function streamlines things. If you run the function on your whole data set, it will remove observations with one or more NAs in all their variables: 
 
 ```{r}
 # remove observations with any NAs
@@ -408,7 +408,7 @@ age_NAs <- drop_na(full_data_mutate,
                    AgeE)
 ```
 
-This impacts the number of participants we remove as we had 171 when we removed all NAs, but 179 when we only removed NAs in age. 
+This impacts the number of participants we remove as we had **171** when we removed all NAs, but **179** when we only removed NAs in age. 
 
 ### Activity 8 - Summarising data using `count()` and `summarise()`
 
@@ -419,6 +419,14 @@ As the final recap activity, it is time to calculate some summary statistics to 
 1. How many observations do we have of each gender? `r fitb(29)` males, `r fitb(149)` females, and `r fitb(1)` non-binary. 
 
 2. How many observations do we have of each race? `r fitb(131)` white, `r fitb(13)` Black/African American, and `r fitb(1)` NA with missing data. 
+
+```{r eval=FALSE}
+# count each group in GenderE
+?
+
+# count each group in RaceE
+?
+```
 
 ::: {.callout-tip collapse="true"}
 #### Show me the solution
@@ -471,7 +479,7 @@ Remember, if there are NAs present in the data like this, you need to add `na.rm
 ::: {.callout-important}
 #### Error mode
 
-As a transition point to restructuring data, imagine we wanted to calculate the sum score of the items to calculate a number for the whole scale. Based on how we have used `mutate()` or `summarise()` before, you might try:
+As a transition point to restructuring data, imagine we wanted to calculate the sum score of the items to calculate a number for the whole scale per participant. Based on how we have used `mutate()` or `summarise()` before, you might try:
 
 ```{r}
 sum_VSSL <- mutate(full_data_mutate,
@@ -489,7 +497,7 @@ Apart from joining two data sets, we have pretty much just worked with the data 
 
 ### Tidy data 
 
-For most of this book, we will use a type of data organisation known as `r glossary("tidy data")`. Any data in this format is easily processed through the `tidyverse` family of packages. However, the data you work with will not always start formatted in the most efficient way possible. If that happens then our first step is to put it into a tidy data format. There are two fundamental principles defining tidy data:
+For most of this book, we use a type of data organisation known as `r glossary("tidy data")`. Any data in this format is easily processed through the <pkg>tidyverse</pkg> family of packages. However, the data you work with will not always be formatted in the most efficient way possible. If that happens, then our first step is to put it into a tidy data format. There are two fundamental principles defining tidy data:
 
 1. Each variable must have its own column.
 
@@ -508,12 +516,12 @@ Long format is where each **row** is a single observation, typically a single tr
 
 In wide format data, each **row** corresponds to a single participant, with multiple observations for that participant spread across columns. So for instance, with survey data, you would have a separate column for each survey question.
 
-Tidy data is a mix of both of these approaches and most functions in the `tidyverse` assume the tidy format, so typically the first thing you need to do when you get data is think about what format you need your data to perform the functions and analyses you want.
+Tidy data is a mix of both of these approaches and most functions in the <pkg>tidyverse</pkg> assume the tidy format, so typically the first thing you need to do when you get data is think about what format you need your data to perform the functions and analyses you want. For some functions, you need your data in wide format, and in others you need your data in long format. This means being able to quickly restructure your data is a key skill. 
 :::
 
 ### Activity 9: Gathering with `pivot_longer()`
 
-In it's current format, we have wide data where each row is a separate participant and each column is a separate variable. We can use the function `r glossary("pivot_longer()", def = "Gather data by increasing the number of rows and decreasing the number of columns.")` from the <pkg>tidyr</pkg> package within `tidyverse`. 
+In it's current format, we have wide data where each row is a separate participant and each column is a separate variable. We can use the function `r glossary("pivot_longer()", def = "Gather data by increasing the number of rows and decreasing the number of columns.")` from the <pkg>tidyr</pkg> package within <pkg>tidyverse</pkg>. 
 
 The pivot functions can be easier to show than explain first, so type and run the following code using the `full_data_mutate` object:
 
@@ -534,7 +542,7 @@ To break down the code:
 
 - The `values_to` argument is what your second new column will be called. For all the columns you gather, the response of each participant will be in one column stacked on top of each other next to its label in "Question". You also need to call this something memorable, like "Response" here. 
 
-Now, explore the new `full_data_long` object you just created and compare it to `full_data_mutate`. Instead of 181 rows, we now have 1267 rows. Instead of 27 variables, we now have 22 variables. We have 181 participants who responded to 7 VSSL items, so we pivot the data into long format to get 181 * 7 = 1267 rows. 
+Now, explore the new `full_data_long` object you just created and compare it to `full_data_mutate`. Instead of **181** rows, we now have **1267** rows. Instead of 27 variables, we now have 22 variables. We have 181 participants who responded to 7 VSSL items, so we pivot the data into long format to get 181 * 7 = **1267** rows. 
 
 Visually, you can see the difference with a preview of just the participant ID and VSSL items here: 
 
@@ -572,9 +580,13 @@ VSSL_sum <- summarise(longdata_grouped,
                       VSSL_sum = sum(Response))
 ```
 
-Our new object goes from 1267 rows back to 181 as we grouped by the participant ID and took the sum of `Response`. This means we apply the function we provide `summarise()` to all the rows we want to group by, in this case across all 7 VSSL items. Your new object has just two columns: `StudentIDE` and `VSSL_sum`. 
+Our new object goes from 1267 rows back to 181 as we grouped by the participant ID and took the sum of `Response`. This means we apply the function we provide `summarise()` to all the rows we want to group by, in this case across all 7 VSSL items. Your new object has just two columns: `StudentIDE` and `VSSL_sum` and should look like the following extract: 
 
-At this point, you could join the object to `full_data_mutate` to add the scale score to all the other variables, but we will come back to that when we cover pipes. 
+```{r echo=FALSE}
+head(VSSL_sum)
+```
+
+At this point, you could join the object to `full_data_mutate` to add the scale score to all the other variables. 
 
 ::: {.callout-tip}
 #### Try this
@@ -627,7 +639,7 @@ sum_quant_anxiety <- summarise(quant_anxiety_group,
 
 ### Spreading with `pivot_wider()`
 
-You might also find yourself in situations where you must restructure data in the opposite direction: from long to wide. There is a complementary function called `pivot_wider()` where you can spread values from one column to multiple columns. You need two columns in your long form data set, one for the variable names which will be your column names, then one for the responses which will be the values in each cell. 
+You might also find yourself in situations where you must restructure data in the opposite direction: from long to wide. There is a complementary function called `r glossary("pivot_wider()", def = "Spread data by decreasing the number of rows and increasing the number of columns.")` where you can spread values from one column to multiple columns. You need two columns in your long form data set, one for the variable names which will be your new column names, then one for the responses which will be the values in each cell. 
 
 To demonstrate this function, we will transform `full_data_long` back to wide format so we have 7 columns of VSSL items: 
 
@@ -641,16 +653,16 @@ To break down the code:
 
 - We create a new object `full_data_wide` by applying the function `pivot_wider()` to `full_data_long`.
 
-- In the `names_from` argument, we add the column name which contains the names of the variables you want as your new column names. 
+- In the `names_from` argument, we add the column name "Question" which contains the names of the variables you want as your new column names. 
 
-- In the `values_from` argument, we add the column name which contains the values of the variables which will be the cells of your data frame. 
+- In the `values_from` argument, we add the column name "Response" which contains the values of the variables which will be the cells of your data frame. 
 
 The new object `full_data_wide` should now look exactly the same as the `full_data_mutate` object we started with. 
 
 ::: {.callout-note}
 #### Do I need to add quotes to the column names?
 
-You might have noticed we added quotes around the column names to specify the `names_from` and `values_from` arguments. When we specify columns in `tidyverse` functions, we do not need to add the quotes, we can just type the name and it will work (`names_from = "Question"` and `names_from = Question` would both work here). However, in other functions outside the `tidyverse`, you normally need to add the quotes around column names. When to add quotes or not can take a while to get used to, so this is just a note to highlight you might try one method and it does not work, but you can try the other method instead. 
+You might have noticed we added quotes around the column names to specify the `names_from` and `values_from` arguments. When we specify columns in <pkg>tidyverse</pkg> functions, we do not need to add the quotes, we can just type the name and it will work (`names_from = "Question"` and `names_from = Question` would both work here). However, in other functions outside the <pkg>tidyverse</pkg>, you normally need to add the quotes around column names. When to add quotes or not can take a while to get used to, so this is just a note to highlight you might try one method and it does not work, but you can try the other method if you get an error. 
 :::
 
 ::: {.callout-tip}
@@ -684,11 +696,11 @@ quant_anxiety_wide <- pivot_wider(quant_anxiety_long,
 
 ## Combining several functions with pipes 
 
-In this final section on data wrangling, we are not covering new functions, but a new way of working. So far, we have created lots of new objects by applying individual `tidyverse` functions, but there is a way to string together several functions and streamline your code. We wanted to introduce you to the individual functions first to develop your fundamentals skills and understanding of what the functions do, but now we can be a little more efficient.  
+In this final section on data wrangling, we are not covering new functions, but a new way of working. So far, we have created lots of new objects by applying individual <pkg>tidyverse</pkg> functions, but there is a way to string together several functions and streamline your code. We wanted to introduce you to the individual functions first to develop your fundamentals skills and understanding of what the functions do, but now we can be a little more efficient.  
 
-Instead of creating several objects, you can use `r glossary("pipe", display = "pipes")`. We write pipes as `%>%` and you can be read them as "and then". Pipes allow you to string together 'sentences' of code into 'paragraphs' so that you do not need to create intermediary objects. 
+Instead of creating several objects, you can use `r glossary("pipe", display = "pipes")`. We write pipes as `%>%` and you can read them as "and then". Pipes allow you to string together 'sentences' of code into 'paragraphs' so that you do not need to create intermediary objects. 
 
-This is one of those concepts that is initially easier to show than tell: 
+This is another one of those concepts that is initially easier to show than tell: 
 
 ```{r}
 # Create an object starting with demog 
@@ -804,7 +816,7 @@ It can be tricky at first to understand what pipes are doing from a conceptual p
 ::: {.callout-important}
 #### Error mode
 
-One key difference that can trip people up is we no longer specify the data object as the first argument in each function. The reason that this function, the `%>%`, is called a pipe is because it 'pipes' the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes, it will automatically take the data from the previous line of code so you do not need to specify it again. 
+One key difference that can trip people up is we no longer specify the data object as the first argument in each function. The reason that this function - the `%>%` - is called a pipe is because it 'pipes' the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes, it will automatically take the data from the previous line of code so you do not need to specify it again. 
 
 For example, if we tried to specify `demog` again in `select()`, we would just receive an error.  
 
@@ -897,9 +909,9 @@ Which function(s) would you use to approach each of the following problems?
 
 ### Error mode
 
-The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using past functions, `pivot_longer()`, `pivot_wider()`, and pipes (`%>%`). Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
+The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on data wrangling using past functions, `pivot_longer()`, and pipes (`%>%`). Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
 
-Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load `tidyverse` and the data files: 
+Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and the data files: 
 
 ```{r eval=FALSE}
 # Load the tidyverse package below
@@ -913,7 +925,7 @@ demog <- read_csv("data/Alter_2024_demographics.csv")
 scales <- read_csv("data/Alter_2024_scales.csv")
 ```
 
-Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load `tidyverse` and the data files. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
+Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load <pkg>tidyverse</pkg> and the data files. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
 
 **Question 6**. Copy the following code chunk into your R Markdown file and press knit. In this code chunk, we want to calculate the mean and SD age of all participants using `demog`. There are two errors/omissions here to try and fix: 
 
@@ -976,9 +988,7 @@ sum_quant_hindrance <- scales %>%
 ```
 :::
 
-- adding object in each pipe step 
-
-**Question 7**. Copy the following code chunk into your R Markdown file and press knit. We want to filter `demog` to focus on female participant and calculate the mean age of the female participants. You should receive an error containing `Caused by error:! "..1$StudentIDE" must be a logical vector, not a double vector` which is not the most helpful error for diagnosing the problem. 
+**Question 8**. Copy the following code chunk into your R Markdown file and press knit. We want to filter `demog` to focus on female participant and calculate the mean age of the female participants. You should receive an error containing `Caused by error:! "..1$StudentIDE" must be a logical vector, not a double vector` which is not the most helpful error for diagnosing the problem. 
 
 ````{verbatim, lang = "markdown"}
 ```{r}
@@ -994,7 +1004,7 @@ demog %>%
 ::: {.callout-caution collapse="true"} 
 #### Explain the solution
 
-We are using pipes but we tried adding in the `.data` argument in each line. Remember %>% "pipes" the previous line into the next line, so you do not need to specify an object for it to work with. If you try and specify the .data argument with pipes, it thinks you are trying to set the next argument in the list. 
+We are using pipes but we tried adding in the `.data` argument in each line. Remember `%>%` "pipes" the previous line into the next line, so you do not need to specify an object for it to work with. If you try and specify the .data argument with pipes, it thinks you are trying to set the next argument in the list. 
 
 ```{r eval = FALSE}
 # filter for females then calculate mean age
@@ -1014,9 +1024,9 @@ glossary_table()
 
 ## End of chapter
 
-Brilliant work again! You recapped data wrangling functions from the past two chapters to a new data set, and added two more concepts to your arsenal: pivots and pipes. There really is no substitute for practicing on new data to transfer your knowledge and understanding. As you work with more and more data, you will see how far these data wrangling functions take you. They will be the foundation of your skills for any new data set and give you the confidence to search for new functions when there is a new problem to solve. 
+Brilliant work again! You recapped data wrangling functions from the past two chapters to a new data set, and added two more concepts to your arsenal: pivots and pipes. There really is no substitute for practicing on new data to transfer your knowledge and understanding. As you work with more and more data, you will see how far these data wrangling functions take you. They will your foundational skills for any new data set and give you the confidence to search for new functions when there is a new problem to solve. 
 
-This is a key milestone, so remember to go over anything you are unsure of. If you have any questions about data wrangling, please post them on Teams, visit the GTAs, or pop into office hours. 
+This is a key milestone, so remember to go over anything you are unsure of. If you have any questions about data wrangling, please post them on Teams, visit the GTA support sessions, or pop into office hours. 
 
 At this point, we direct you to the first data analysis journey chapter: [Analysis Journey 1: Data Wrangling](#journey-01-wrangling). This is a bridge between the structured learning in these chapters and your assessments. We present you with a new data set, show you what the end product should look like, and see if you can apply your data wrangling skills to get there. If you get stuck, we have a range of hints and steps you can unhide, then the solution to check your attempts against. 
 
