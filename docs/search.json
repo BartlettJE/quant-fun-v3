@@ -1821,7 +1821,10 @@
     "href": "17-analysis-journey-1.html",
     "title": "16  Analysis Journey 1: Data Wrangling",
     "section": "",
-    "text": "Activity on data wrangling."
+    "text": "16.1 Task preparation",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Analysis Journey 1: Data Wrangling</span>"
+    ]
   },
   {
     "objectID": "18-analysis-journey-2.html",
@@ -2357,6 +2360,66 @@
     "text": "6.1 Chapter preparation",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Data Wrangling 3: Pivots and Pipes</span>"
+    ]
+  },
+  {
+    "objectID": "17-analysis-journey-1.html#task-preparation",
+    "href": "17-analysis-journey-1.html#task-preparation",
+    "title": "16  Analysis Journey 1: Data Wrangling",
+    "section": "",
+    "text": "16.1.1 Introduction to the data set\nFor this task, we are using open data from Bartlett et al. (2022). The abstract of their article is:\n\nBoth daily and non-daily smokers find it difficult to quit smoking long-term. One factor associated with addictive behaviour is attentional bias, but previous research in daily and non-daily smokers found inconsistent results and did not report the reliability of their cognitive tasks. Using an online sample, we compared daily (n = 106) and non-daily (n = 60) smokers in their attentional bias towards smoking pictures. Participants completed a visual probe task with two picture presentation times: 200ms and 500ms. In confirmatory analyses, there were no significant effects of interest, and in exploratory analyses, equivalence testing showed the effects were statistically equivalent to zero. The reliability of the visual probe task was poor, meaning it should not be used for repeated testing or investigating individual differences. The results can be interpreted in line with contemporary theories of attentional bias where there are unlikely to be stable trait-like differences between smoking groups. Future research in attentional bias should focus on state-level differences using more reliable measures than the visual probe task.\n\nTo summarise, they compared two groups of participants (daily and non-daily smokers) on something called attentional bias. This is the idea that when people use drugs often, things associated with those drugs grab people’s attention.\nTo measure attentional bias, participants completed an dot probe task. This is a computer task where participants see two pictures side-by-side: one related to smoking like someone holding a cigarette and one unrelated to smoking like someone holding a fork. Both the images disappear and a small dot appears in the location of one of the images. Participants must press left or right on the keyboard to identify where the dot appeared. This process is repeated many times for different images, different locations of the dot, and different durations of showing the images. The idea is if smoking images grab people’s attention, they will be able to identify the dot location faster on average when it appears in the location of the smoking images compared to when it appears in the location of the the non-smoking images.\nResponse time tasks like this are incredibly common in psychology and cognitive neuroscience, and being able to wrangle hundreds of trials is a great demonstration of your new data skills. After setting up your files and project for the chapter, we will outline the kind of problems you are trying to solve.\n\n\n16.1.2 Organising your files and project for the task\nBefore we can get started, you need to organise your files and project for the task, so your working directory is in order.\n\nIn your folder for research methods and the book ResearchMethods1_2/Quant_Fundamentals, create a new folder for the data analysis journey called Journey_01_wrangling. Within Journey_01_wrangling, create two new folders called data and figures.\nCreate a new R Markdown document and give it a sensible title describing the chapter, such as Analysis Journey 1 - Data Wrangling. Delete everything below line 10 so you have a blank file to work with and save the file in your Journey_01_wrangling folder.\nWe are working with a data set separated into two files. The links are data file one (Bartlett_demographics.csv) and data file two (Bartlett_trials.csv). Right click the links and select “save link as”, or clicking the links will save the files to your Downloads. Make sure that both files are saved as “.csv”. Save or copy the file to your data/ folder within Journey_01_wrangling.\n\nYou are now ready to start working on the task!",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Analysis Journey 1: Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "17-analysis-journey-1.html#overview",
+    "href": "17-analysis-journey-1.html#overview",
+    "title": "16  Analysis Journey 1: Data Wrangling",
+    "section": "16.2 Overview",
+    "text": "16.2 Overview",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Analysis Journey 1: Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "17-analysis-journey-1.html#wrangling-demographics",
+    "href": "17-analysis-journey-1.html#wrangling-demographics",
+    "title": "16  Analysis Journey 1: Data Wrangling",
+    "section": "16.3 Wrangling demographics",
+    "text": "16.3 Wrangling demographics",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Analysis Journey 1: Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "17-analysis-journey-1.html#wrangling-trials",
+    "href": "17-analysis-journey-1.html#wrangling-trials",
+    "title": "16  Analysis Journey 1: Data Wrangling",
+    "section": "16.4 Wrangling trials",
+    "text": "16.4 Wrangling trials",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Analysis Journey 1: Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "17-analysis-journey-1.html#summarising",
+    "href": "17-analysis-journey-1.html#summarising",
+    "title": "16  Analysis Journey 1: Data Wrangling",
+    "section": "16.5 Summarising",
+    "text": "16.5 Summarising",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Analysis Journey 1: Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "17-analysis-journey-1.html#conclusion",
+    "href": "17-analysis-journey-1.html#conclusion",
+    "title": "16  Analysis Journey 1: Data Wrangling",
+    "section": "16.6 Conclusion",
+    "text": "16.6 Conclusion\nWell done! Hopefully you recognised how far your skills have come to be able to do this independently, regardless of how many hints you needed.\nThese are real skills people use in research. If you are curious, Bartlett et al. (2022) shared their code as a reproducible manuscrupt, so you can see all the wrangling steps they completed by looking at this file on the Open Science Framework. We did not include all of them here as there are concepts like outliers we had not covered by Chapter 6.\n\n\n\n\nBartlett, J. E., Jenks, R., & Wilson, N. (2022). No Meaningful Difference in Attentional Bias Between Daily and Non-Daily Smokers. Journal of Trial & Error. https://doi.org/10.36850/e11",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Analysis Journey 1: Data Wrangling</span>"
     ]
   }
 ]
