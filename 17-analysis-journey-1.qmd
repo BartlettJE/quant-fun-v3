@@ -47,7 +47,7 @@ You are now ready to start working on the task!
 
 ## Overview
 
-### Activity 1 - Load <pkg>tidyverse</pkg> and read the data files
+### Load <pkg>tidyverse</pkg> and read the data files
 
 Before we explore what wrangling we need to do, load <pkg>tidyverse</pkg> and read the two data files. As a prompt, save the data files to these object names to be consistent with the activities below, but you can check your answer below if you are stuck. 
 
@@ -80,7 +80,7 @@ trials <- read_csv("data/Bartlett_trials.csv")
 ```
 :::
 
-### Activity 2 - Explore `demog` and `trials`
+### Explore `demog` and `trials`
 
 The data from @bartlett_no_2022 is split into two data files. In `demog`, we have the participant ID (`participant_private_id`) and several demographic variables. 
 
@@ -487,6 +487,166 @@ full_data <- demog_tidy %>%
 :::
 
 ## Summarising/visualising your data
+
+```{r echo=FALSE}
+write_csv(full_data, "data/Bartlett_full_data.csv")
+```
+
+That is all the wrangling complete! Hopefully, this reinforces the role of reproducibility and data skills. If you did this in other software like Excel, you might not have a paper trail of all the steps. Like this, you the full code to apply all the wrangling steps from raw data which you can run every time you need to, and edit it if you found a mistake or wanted to add something new. 
+
+To finish the journey, we have some practice tasks for summarising and visualising the data. The whole purpose of @bartlett_no_2022 was to compare daily and non-daily smokers, so we will explore some of the key variables. 
+
+All of the questions are based on the final `full_data` object. If your answers differ, check the wrangling steps above. If you are really struggling to identify the difference, or you just wanted to complete these tasks, you can download a spreadsheet version of `full_data` here: [Bartlett_full_data.csv](data/Bartlett_full_data.csv).
+
+### Demographics
+
+1. How many daily and non-daily smokers were there? There were `r fitb(115)` daily smokers and `r fitb(63)`
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r}
+full_data %>% 
+  count(daily_smoker)
+```
+:::
+
+2. To 2 decimal places, the mean age of all the participants was `r fitb(31.07)` (*SD* = `r fitb(9.22)`).
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r}
+full_data %>% 
+  summarise(mean_age = round(mean(age), 2),
+            sd_age = round(sd(age), 2))
+```
+:::
+
+3. A histogram of all the participants' ages looks like: 
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+full_data %>% 
+  ggplot(aes(x = age)) + 
+  geom_histogram() + 
+  scale_x_continuous(name = "Age") + 
+  scale_y_continuous(name = "Frequency") + 
+  theme_classic()
+```
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r warning=FALSE, message=FALSE, eval=FALSE}
+full_data %>% 
+  ggplot(aes(x = age)) + 
+  geom_histogram() + 
+  scale_x_continuous(name = "Age") + 
+  scale_y_continuous(name = "Frequency") + 
+  theme_classic()
+```
+:::
+
+4. A bar plot of the gender breakdown of the sample would look like: 
+
+```{r echo=FALSE}
+full_data %>% 
+  ggplot(aes(x = gender)) + 
+  geom_bar() +
+  scale_x_discrete(name = "Gender") + 
+  scale_y_continuous(name = "Frequency") + 
+  theme_classic()
+```
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r eval=FALSE}
+full_data %>% 
+  ggplot(aes(x = gender)) + 
+  geom_bar() +
+  scale_x_discrete(name = "Gender") + 
+  scale_y_continuous(name = "Frequency") + 
+  theme_classic()
+```
+:::
+
+### Measures of smoking dependence 
+
+5. To 2 decimal places, for daily smokers the mean number of cigarettes per day was `r fitb(8.85)` (*SD* = `r fitb(6.51)`) and for non-daily smokers the mean number of cigarettes per day was `r fitb(2.32)` (*SD* = `r fitb(2.69)`).
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r}
+full_data %>% 
+  group_by(daily_smoker) %>% 
+  summarise(mean_cpd = round(mean(cpd, na.rm = TRUE), 2),
+            sd_cpd = round(sd(cpd, na.rm = TRUE), 2))
+```
+:::
+
+6. To 2 decimal places, for daily smokers the mean FTND sum score was `r fitb(2.61)` (*SD* = `r fitb(2.20)`) and for non-daily smokers the mean number of cigarettes per day was `r fitb(0.49)` (*SD* = `r fitb(1.28)`).
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r}
+full_data %>% 
+  group_by(daily_smoker) %>% 
+  summarise(mean_FTND = round(mean(FTND_sum, na.rm = TRUE), 2),
+            sd_FTND = round(sd(FTND_sum, na.rm = TRUE), 2))
+```
+:::
+
+### Attentional bias
+
+7. Before answering the following questions, complete one extra data wrangling step to create difference scores where positive values mean attentional bias towards smoking images (faster responses to smoking compared to non-smoking stimuli):
+
+    - Create a new variable called `difference_200` by substracting the `smoking200` variable from the `nonsmoking200` variable. 
+    
+    - Create a new variable called `difference_500` by substracting the `smoking500` variable from the `nonsmoking500` variable. 
+    
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r}
+full_data <- full_data %>% 
+  mutate(difference_200 = nonsmoking200 - smoking200,
+         difference_500 = nonsmoking500 - smoking500)
+```
+:::
+
+8. To 2 decimal places, the mean difference in attentional bias in the 200ms condition was `r fitb(1.25)` (*SD* = `r fitb(23.91)`) for daily smokers and `r fitb(-2.74)` (*SD* = `r fitb(21.27)`) for non-daily smokers.
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r}
+full_data %>% 
+  group_by(daily_smoker) %>% 
+  summarise(mean_bias_200 = round(mean(difference_200, na.rm = TRUE), 2),
+            sd_bias_200 = round(sd(difference_200, na.rm = TRUE), 2))
+```
+:::
+
+9. To 2 decimal places, the mean difference in attentional bias in the 500ms condition was `r fitb(0.76)` (*SD* = `r fitb(21.66)`) for daily smokers and `r fitb(-1.19)` (*SD* = `r fitb(14.51)`) for non-daily smokers.
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+```{r}
+full_data %>% 
+  group_by(daily_smoker) %>% 
+  summarise(mean_bias_500 = round(mean(difference_500, na.rm = TRUE), 2),
+            sd_bias_500 = round(sd(difference_500, na.rm = TRUE), 2))
+```
+:::
+
+If you are currently completing this after Chapter 6, we have not covered visualising continuous data or inferential statistics yet. Try coming back to this tasks to compare these measures when you have finished Chapter 7 for visualisation Chapter 13 for factorial ANOVA. 
+
+A difference score of 0 means no bias towards smoking or non-smoking images. So, you can see the paper did not find either group showed much attentional bias towards smoking images, hence why it was published in the *Journal of Trial and Error*. 
 
 ## Conclusion
 
