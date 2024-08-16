@@ -1,4 +1,4 @@
-participant_private_id,consent_given,age,cigarettes_per_week,smoke_everyday,past_four_weeks,age_started_smoking,country_of_origin,cpd,ethnicity,gender,last_cigarette,level_education,technical_issues,FTND_1,FTND_2,FTND_3,FTND_4,FTND_5,FTCD_6
+participant_private_id,consent_given,age,cigarettes_per_week,smoke_everyday,past_four_weeks,age_started_smoking,country_of_origin,cpd,ethnicity,gender,last_cigarette,level_education,technical_issues,FTND_1,FTND_2,FTND_3,FTND_4,FTND_5,FTND_6
 631737,1,46,Yes,Yes,Yes,12,United Kingdom,6,White / Caucasian,Female,60,Graduated University / College,No,2,0,1,0,0,0
 631738,1,54,Yes,Yes,Yes,17,Germany,5,White / Caucasian,Female,780,Graduated University / College,No,0,0,0,0,0,0
 631741,1,23,Yes,Yes,Yes,17,Poland,10,Mixed / multiple ethnic groups,Male,90,Graduated Secondary school / High school / equivalent,No,0,0,1,1,0,0
