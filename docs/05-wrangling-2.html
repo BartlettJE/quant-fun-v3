@@ -460,7 +460,7 @@ div.csl-indent {
 <span class="header-section-number">5.1.2</span> Organising your files and project for the chapter</h3>
 <p>Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.</p>
 <ol type="1">
-<li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, you should have a folder from chapter 4 called <code>Chapter_04_06_datawrangling</code>.</p></li>
+<li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, you should have a folder from chapter 4 called <code>Chapter_04_06_datawrangling</code> where you created an R Project.</p></li>
 <li><p>Create a new R Markdown document and give it a sensible title describing the chapter, such as <code>05 Data Wrangling 2</code>. Delete everything below line 10 so you have a blank file to work with and save the file in your <code>Chapter_04_06_datawrangling</code> folder.</p></li>
 <li><p>We are working with a new data set, so please save the following data file: <a href="data/witt_2018.csv">witt_2018.csv</a>. Right click the link and select “save link as”, or clicking the link will save the files to your Downloads. Make sure that you save the file as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Chapter_04_06_datawrangling</code>.</p></li>
 </ol>
@@ -1352,16 +1352,16 @@ R Markdown tip of the chapter: Create pretty tables
 <p><strong>Question 1</strong>. What type of data would these most likely be:</p>
 <ul>
 <li><p>Male = <select class="webex-select"><option value="blank"></option>
-<option value="">Double</option>
+<option value="answer">Character</option>
 <option value="">Integer</option>
-<option value="answer">Character</option></select></p></li>
+<option value="">Double</option></select></p></li>
 <li><p>7.15 = <select class="webex-select"><option value="blank"></option>
-<option value="">Integer</option>
 <option value="answer">Double</option>
+<option value="">Integer</option>
 <option value="">Character</option></select></p></li>
 <li><p>137 = <select class="webex-select"><option value="blank"></option>
-<option value="">Character</option>
 <option value="">Double</option>
+<option value="">Character</option>
 <option value="answer">Integer</option></select></p></li>
 </ul>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -1382,20 +1382,20 @@ Explain this answer
 </div>
 </div>
 <strong>Question 2</strong>. Which of the <pkg>dplyr</pkg> functions would you use to count the number of observations in your data set or variables?
-<div id="radio_JYIGJWZRVU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value="answer"><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_JYIGJWZRVU" value=""><span>mutate</span></label>
+<div id="radio_KZXXEWMJBH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KZXXEWMJBH" value="answer"><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_KZXXEWMJBH" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_KZXXEWMJBH" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_KZXXEWMJBH" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_KZXXEWMJBH" value=""><span>filter</span></label>
 </div>
 <strong>Question 3</strong>. Which of the <pkg>dplyr</pkg> functions would you use to calculate the mean of a column?
-<div id="radio_CGCROIHUWH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value="answer"><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_CGCROIHUWH" value=""><span>mutate</span></label>
+<div id="radio_OAYBSEPINL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OAYBSEPINL" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_OAYBSEPINL" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_OAYBSEPINL" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_OAYBSEPINL" value="answer"><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_OAYBSEPINL" value=""><span>select</span></label>
 </div>
 <strong>Question 4</strong>. Which of the <pkg>dplyr</pkg> functions would you use to remove certain observations (e.g., remove all males)?
-<div id="radio_AIBZKEIGFU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_AIBZKEIGFU" value=""><span>mutate</span></label>
+<div id="radio_MXMJRAQIFQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MXMJRAQIFQ" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_MXMJRAQIFQ" value="answer"><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_MXMJRAQIFQ" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_MXMJRAQIFQ" value=""><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_MXMJRAQIFQ" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_MXMJRAQIFQ" value=""><span>count</span></label>
 </div>
 <strong>Question 5</strong>. Which of the <pkg>dplyr</pkg> functions would you use to subset summary statistics by?
-<div id="radio_OWFXGNEJLU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value="answer"><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>count</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_OWFXGNEJLU" value=""><span>mutate</span></label>
+<div id="radio_IAXWBGKZFV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IAXWBGKZFV" value=""><span>filter</span></label><label><input type="radio" autocomplete="off" name="radio_IAXWBGKZFV" value="answer"><span>group_by</span></label><label><input type="radio" autocomplete="off" name="radio_IAXWBGKZFV" value=""><span>select</span></label><label><input type="radio" autocomplete="off" name="radio_IAXWBGKZFV" value=""><span>summarise</span></label><label><input type="radio" autocomplete="off" name="radio_IAXWBGKZFV" value=""><span>mutate</span></label><label><input type="radio" autocomplete="off" name="radio_IAXWBGKZFV" value=""><span>count</span></label>
 </div>
 </section><section id="error-mode" class="level3" data-number="5.6.2"><h3 data-number="5.6.2" class="anchored" data-anchor-id="error-mode">
 <span class="header-section-number">5.6.2</span> Error mode</h3>

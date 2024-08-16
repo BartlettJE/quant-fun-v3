@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
 <title>Fundamentals of Quantitative Analysis - 16&nbsp; Analysis Journey 1: Data Wrangling</title>
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -56,7 +56,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,13 +98,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,10 +107,8 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
@@ -129,19 +120,19 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./17-analysis-journey-1.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./17-analysis-journey-1.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -373,7 +364,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -422,7 +413,7 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">16.7</span> Conclusion</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/17-analysis-journey-1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/17-analysis-journey-1.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/17-analysis-journey-1.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/17-analysis-journey-1.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -439,10 +430,9 @@ div.csl-indent {
   </div>
   
 
-
 </header><p>Welcome to the first data analysis journey. We have designed these chapters as a bridge between the structured learning in the core chapters and your assessments. We present you with a new data set, show you what the end product should look like, and see if you can apply your data wrangling, visualisation, and/or analysis skills to get there.</p>
-<p>As you gain independence, this is the crucial skill. Data analysis is all about seeing the data you have available to you and identifying what the end product needs to be to apply your visualisation and analysis techniques. You can then mentally (or physically) create a checklist of tasks to work backgrounds to get there. There might be a lot of trial and error as you try one thing, it does not quite work, so you have to go back and try something else. If you get stuck though, we have a range of hints and steps you can unhide, then the solution to check your attempts against.</p>
-<p>In this first data analysis journey, we focus on data wrangling to apply all the skills you have developed from Chapter 1 to Chapter 6.</p>
+<p>As you gain independence, this is the crucial skill. Data analysis is all about seeing the data you have available to you and identifying what the end product needs to be to apply your visualisation and analysis techniques. You can then mentally (or physically) create a checklist of tasks to work backgrounds to get there. There might be a lot of trial and error as you try one thing, it does not quite work, so you go back and try something else. If you get stuck though, we have a range of hints and task lists you can unhide, then the solution to check your attempts against.</p>
+<p>In this first data analysis journey, we focus on data wrangling to apply all the skills you developed from Chapter 1 to Chapter 6.</p>
 <section id="task-preparation" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="task-preparation">
 <span class="header-section-number">16.1</span> Task preparation</h2>
 <section id="introduction-to-the-data-set" class="level3" data-number="16.1.1"><h3 data-number="16.1.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
@@ -451,23 +441,24 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>Both daily and non-daily smokers find it difficult to quit smoking long-term. One factor associated with addictive behaviour is attentional bias, but previous research in daily and non-daily smokers found inconsistent results and did not report the reliability of their cognitive tasks. Using an online sample, we compared daily (n = 106) and non-daily (n = 60) smokers in their attentional bias towards smoking pictures. Participants completed a visual probe task with two picture presentation times: 200ms and 500ms. In confirmatory analyses, there were no significant effects of interest, and in exploratory analyses, equivalence testing showed the effects were statistically equivalent to zero. The reliability of the visual probe task was poor, meaning it should not be used for repeated testing or investigating individual differences. The results can be interpreted in line with contemporary theories of attentional bias where there are unlikely to be stable trait-like differences between smoking groups. Future research in attentional bias should focus on state-level differences using more reliable measures than the visual probe task.</p>
 </blockquote>
-<p>To summarise, they compared two groups of participants (daily and non-daily smokers) on something called attentional bias. This is the idea that when people use drugs often, things associated with those drugs grab people’s attention.</p>
-<p>To measure attentional bias, participants completed an dot probe task. This is a computer task where participants see two pictures side-by-side: one related to smoking like someone holding a cigarette and one unrelated to smoking like someone holding a fork. Both the images disappear and a small dot appears in the location of one of the images. Participants must press left or right on the keyboard to identify where the dot appeared. This process is repeated many times for different images, different locations of the dot, and different durations of showing the images. The idea is if smoking images grab people’s attention, they will be able to identify the dot location faster on average when it appears in the location of the smoking images compared to when it appears in the location of the the non-smoking images.</p>
+<p>To summarise, they compared two daily and non-daily smokers on something called attentional bias. This is the idea that when people use drugs often, things associated with those drugs grab people’s attention.</p>
+<p>To measure attentional bias, participants completed a dot probe task. This is a computer task where participants see two pictures side-by-side: one related to smoking like someone holding a cigarette and one unrelated to smoking like someone holding a fork. Both the images disappear and a small dot appears in the location of one of the images. Participants must press left or right on the keyboard to identify where the dot appeared. This process is repeated many times for different images, different locations of the dot, and different durations of showing the images. The idea is if smoking images grab people’s attention, they will be able to identify the dot location faster on average when it appears in the location of the smoking images compared to when it appears in the location of the the non-smoking images.</p>
 <p>Response time tasks like this are incredibly common in psychology and cognitive neuroscience, and being able to wrangle hundreds of trials is a great demonstration of your new data skills. After setting up your files and project for the chapter, we will outline the kind of problems you are trying to solve.</p>
 </section><section id="organising-your-files-and-project-for-the-task" class="level3" data-number="16.1.2"><h3 data-number="16.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-task">
 <span class="header-section-number">16.1.2</span> Organising your files and project for the task</h3>
 <p>Before we can get started, you need to organise your files and project for the task, so your working directory is in order.</p>
 <ol type="1">
 <li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, create a new folder for the data analysis journey called <code>Journey_01_wrangling</code>. Within <code>Journey_01_wrangling</code>, create two new folders called <code>data</code> and <code>figures</code>.</p></li>
+<li><p>Create an R Project for <code>Journey_01_wrangling</code> as an existing directory for your chapter folder. This should now be your working directory.</p></li>
 <li><p>Create a new R Markdown document and give it a sensible title describing the chapter, such as <code>Analysis Journey 1 - Data Wrangling</code>. Delete everything below line 10 so you have a blank file to work with and save the file in your <code>Journey_01_wrangling</code> folder.</p></li>
-<li><p>We are working with a data set separated into two files. The links are data file one (<a href="data/Bartlett_demographics.csv">Bartlett_demographics.csv</a>) and data file two (<a href="data/Bartlett_trials.csv">Bartlett_trials.csv</a>). Right click the links and select “save link as”, or clicking the links will save the files to your Downloads. Make sure that both files are saved as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Journey_01_wrangling</code>.</p></li>
+<li><p>We are working with data separated into two files. The links are data file one (<a href="data/Bartlett_demographics.csv">Bartlett_demographics.csv</a>) and data file two (<a href="data/Bartlett_trials.csv">Bartlett_trials.csv</a>). Right click the links and select “save link as”, or clicking the links will save the files to your Downloads. Make sure that both files are saved as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Journey_01_wrangling</code>.</p></li>
 </ol>
 <p>You are now ready to start working on the task!</p>
 </section></section><section id="overview" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="overview">
 <span class="header-section-number">16.2</span> Overview</h2>
 <section id="load-tidyverse-and-read-the-data-files" class="level3" data-number="16.2.1"><h3 data-number="16.2.1" class="anchored" data-anchor-id="load-tidyverse-and-read-the-data-files">
 <span class="header-section-number">16.2.1</span> Load <pkg>tidyverse</pkg> and read the data files</h3>
-<p>Before we explore what wrangling we need to do, load <pkg>tidyverse</pkg> and read the two data files. As a prompt, save the data files to these object names to be consistent with the activities below, but you can check your answer below if you are stuck.</p>
+<p>Before we explore what wrangling we need to do, load <pkg>tidyverse</pkg> and read the two data files. As a prompt, save the data files to these object names to be consistent with the activities below, but you can check the solution if you are stuck.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load the tidyverse package below</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
@@ -537,7 +528,7 @@ $ FTND_6                 &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0
 </div>
 </div>
 <p>The columns (variables) we have in the data set are:</p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 41%">
@@ -649,7 +640,7 @@ $ block                  &lt;dbl&gt; NA, NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 </div>
 </div>
 <p>The columns (variables) we have in the data set are:</p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 41%">
@@ -754,11 +745,11 @@ Try this
 </div>
 </section></section><section id="wrangling-demographics" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="wrangling-demographics">
 <span class="header-section-number">16.3</span> Wrangling demographics</h2>
-<p>For this kind of data, we recommend wrangling each file first, before joining them together. Starting with the demographics file, there are a few wrangling steps before the data are ready to summarise. We are going to show you a preview of the starting data set, and the end product we are aiming for.</p>
+<p>For this kind of data, we recommend wrangling each file first, before joining them together. Starting with the demographics file, there are a few wrangling steps before the data are ready to summarise. We are going to show you a preview of the starting data set and the end product we are aiming for.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Original raw data</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Wrangled data you are aiming for</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Raw data</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Wrangled data</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
@@ -831,7 +822,7 @@ Try this
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before we give you a task list, try and switch between the original raw data and the wrangled data. Make a list of all the differences you can see between the two data objects.</p>
+<p>Before we give you a task list, try and switch between the raw data and the wrangled data. Make a list of all the differences you can see between the two data objects.</p>
 <ol type="1">
 <li><p>What type is each variable? Has it changed from the raw data?</p></li>
 <li><p>Do we have any new variables? How could you create these from the variables available to you?</p></li>
@@ -858,13 +849,13 @@ Show me the task list
 <p>These are all the steps we applied to create the wrangled data object:</p>
 <ol type="1">
 <li><p>Convert <code>age_started_smoking</code> to an integer (as age is a round number).</p></li>
-<li><p>Convert <code>cpd</code> to an integer (as cigarettes per day is a round number).</p></li>
+<li><p>Convert <code>cpd</code> to an integer (as cigarettes per day is a round number). You will notice a warning about introducing an NA as some nonsense responses cannot be converted to a number.</p></li>
 <li><p>Convert <code>country_of_origin</code> to a factor (as we have distinct categories).</p></li>
 <li><p>Convert <code>ethnicity</code> to a factor (as we have distinct categories).</p></li>
 <li><p>Convert <code>gender</code> to a factor (as we have distinct categories).</p></li>
-<li><p>Convert <code>last_cigarette</code> to a double (as time since last cigarette could - in theory - have decimals).</p></li>
+<li><p>Convert <code>last_cigarette</code> to an integer (as time since last cigarette in minutes is a round number). You will notice a warning about introducing an NA as some nonsense responses cannot be converted to a number.</p></li>
 <li><p>Convert <code>level_education</code> to a factor (as we have distinct categories).</p></li>
-<li><p>Create a new variable <code>daily_smoker</code> by recoding an existing variable. The new variable should have two levels: “Daily Smoker” and “Non-daily Smoker”.</p></li>
+<li><p>Create a new variable <code>daily_smoker</code> by recoding an existing variable. The new variable should have two levels: “Daily Smoker” and “Non-daily Smoker”. In the process, convert <code>daily_smoker</code> to a factor (as we have distinct categories).</p></li>
 <li><p>Create a new variable <code>FTND_sum</code> by taking the sum of the six items <code>FTND_1</code> to <code>FTND_6</code> per participant.</p></li>
 </ol>
 <p>For some advice, think of everything we covered in Chapters 4 to 6. How could you complete these steps as efficiently as possible? Could you string together functions using pipes, or do you need some intermediary objects? If it’s easier for you to complete steps with longer but accurate code, there is nothing wrong with that. You recognise ways to make your code more efficient over time.</p>
@@ -920,7 +911,7 @@ Show me the solution
 </div>
 </section></section><section id="wrangling-trials" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="wrangling-trials">
 <span class="header-section-number">16.4</span> Wrangling trials</h2>
-<p>Turning to the trials file, there are a few wrangling steps and you will probably need the task list more for this part than you did for demographics. Some of the steps might not be as obvious but it is still important to compare both objects and see if you can identify the changes. We are going to show you a preview of the starting data set, and the end product we are aiming for in step 3.</p>
+<p>Turning to the trials file, there are a few wrangling steps and you will probably need the task list more for this part than you did for demographics. Some of the steps might not be as obvious but it is still important to compare the objects and see if you can identify the changes. We are going to show you a preview of the starting data set, and the end product we are aiming for in step 3.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Original raw data</a></li>
@@ -1013,7 +1004,8 @@ Try this
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before we give you a task list, try and switch between the raw data and the three steps we took for wrangling the data. Make a list of all the differences you can see across the steps. This part of the data wrangling is quite difficult if you are unfamiliar with dealing with response time tasks as you need to know what the end product should look like to work with later. This will hopefully show the power of working in R when you have large data like this where you need to apply a few processing steps.</p>
+<p>Before we give you a task list, try and switch between the raw data and the three steps we took for wrangling the data. Make a list of all the differences you can see across the steps.</p>
+<p>This part of the data wrangling is quite difficult if you are unfamiliar with dealing with response time tasks as you need to know what the end product should look like to work with later. Essentially, we want the median response time per participant per condition (across trial type and soa). There are rows we do not need, variables to create, and data to restructure. So, it takes all your wrangling skills you have learnt so far.</p>
 <ol type="1">
 <li><p>In step 1, how many observations do we have compared to the raw data? Knowing the design is important here, so look at the columns <code>correct</code>, <code>screen_name</code>, and <code>trial_type</code>. What function might reduce the number of observations like this?</p></li>
 <li><p>In step 2, how many observations do we have compared to step 1? How many observations do we have per participant ID? What new variables do we have and how could you make them? Hint: for <code>condition</code>, we have not covered this, so look up a function called <code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code>.</p></li>
@@ -1026,7 +1018,6 @@ Try this
 <section id="task-list-1" class="level3" data-number="16.4.1"><h3 data-number="16.4.1" class="anchored" data-anchor-id="task-list-1">
 <span class="header-section-number">16.4.1</span> Task list</h3>
 <p>For this part, we will separate the task list into the three steps in case you want to test yourself at each stage.</p>
-<p>For some advice, think of everything we covered in Chapters 4 to 6. How could you complete these steps as efficiently as possible? Could you string together functions using pipes, or do you need some intermediary objects?</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1071,7 +1062,7 @@ Show me the step 2 task list
 <li><p>Create an object <code>average_trials</code> using the <code>trials_tidy</code> object from step 1.</p></li>
 <li><p>Group observations by three variables: <code>participant_private_id</code>, <code>soa</code>, and <code>trial_type</code>.</p></li>
 <li><p>Summarise the data to create a new variable <code>median_RT</code> by calculating the median <code>reaction_time</code>.</p></li>
-<li><p>Create a new variable called <code>condition</code> by combining the names of the <code>trial_type</code> and <code>soa</code> columns. Hint: this is a new concept, so try this <code>paste0(trial_type, soa)</code>.</p></li>
+<li><p>Create a new variable called <code>condition</code> by combining the names of the <code>trial_type</code> and <code>soa</code> columns. Hint: this is a new concept, so try this <code>paste0(trial_type, soa)</code>. There are a few ways of dealing with this problem, but we are trying to avoid turning <code>soa</code> into variable names, as R does not like having variable names start with or be completely numbers.</p></li>
 <li><p>Ungroup to avoid the groups carrying over into future objects.</p></li>
 </ol>
 </div>
@@ -1092,7 +1083,7 @@ Show me the step 3 task list
 <p>These are all the steps we applied to create the wrangled data object:</p>
 <ol type="1">
 <li><p>Create an object <code>RT_wide</code> using the <code>average_trials</code> object from step 2.</p></li>
-<li><p>Remove the variables <code>soa</code> and <code>trial_type</code> to avoid problems with restructuring.</p></li>
+<li><p>Remove the variables <code>soa</code> and <code>trial_type</code> to avoid problems with restructuring. You could use the argument,</p></li>
 <li><p>Restructure the data so your <code>condition</code> variable is spread across columns.</p></li>
 </ol>
 </div>
@@ -1112,7 +1103,7 @@ Show me the solution
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>This is the code we used to create the new object <code>RT_wide</code> by following three steps. You could do it in two to combine the first two steps, but we wanted to make the change between filtering and grouping/summarising more obvious.</p>
+<p>This is the code we used to create the new object <code>RT_wide</code> by following three steps. You could do it in two to combine the first two steps, but we wanted to make the change between filtering and grouping/summarising more obvious before showing you the task list.</p>
 <p>Remember: As long as you get the same end result, the exact code is not important. In coding, there are multiple ways of getting to the same end result.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># filter trials to focus on correct responses and key trials</span></span>
@@ -1141,7 +1132,7 @@ Show me the solution
 </div>
 </section></section><section id="combining-objects-and-exclusion-criteria" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="combining-objects-and-exclusion-criteria">
 <span class="header-section-number">16.5</span> Combining objects and exclusion criteria</h2>
-<p>Great work so far! You should have two wrangled objects: <code>demog_tidy</code> and <code>RT_wide</code>. The next step is combining them and applying exclusion criteria from the study.</p>
+<p>Great work so far! You should now have two wrangled objects: <code>demog_tidy</code> and <code>RT_wide</code>. The next step is combining them and applying exclusion criteria from the study.</p>
 <p>We are going to give you the task list immediately for this as you need to understand the methods to know what criteria to use. We still challenge you to complete the tasks though, before checking your answers against the code we used.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1183,7 +1174,7 @@ Show me the solution
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This is the code we used to create the new object <code>full_data</code> by joining <code>demog_tidy</code> and <code>RT_wide</code>, and filtering observations based on our four criteria.</p>
-<p>As long as you get the same end result, the exact code is not important. In coding, there are multiple ways of getting to the same end result. Maybe you found a more efficient way to complete some of the steps compared to us. Maybe your code was a little longer. As long as it worked, that is the most important thing.</p>
+<p>As long as you get the same end result, the exact code is not important. In coding, there are multiple ways of getting to the same end result.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># create full_data by joining the two objects</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co"># filter data by four criteria</span></span>
@@ -1200,14 +1191,13 @@ Show me the solution
 </div>
 </section></section><section id="summarisingvisualising-your-data" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="summarisingvisualising-your-data">
 <span class="header-section-number">16.6</span> Summarising/visualising your data</h2>
-<p>That is all the wrangling complete! Hopefully, this reinforces the role of reproducibility and data skills. If you did this in other software like Excel, you might not have a paper trail of all the steps. Like this, you the full code to apply all the wrangling steps from raw data which you can run every time you need to, and edit it if you found a mistake or wanted to add something new.</p>
+<p>That is all the wrangling complete! Hopefully, this reinforces the role of reproducibility and data skills. If you did this in other software like Excel, you might not have a paper trail of all the steps. Like this, you have the full code to apply all the wrangling steps from raw data which you can run every time you need to, and edit it if you found a mistake or wanted to add something new. You can also come back to the file later to add more code (such as after Chapter 7 to plot more of the data, or Chapter 13 for some inferential statistics).</p>
 <p>To finish the journey, we have some practice tasks for summarising and visualising the data. The whole purpose of <span class="citation" data-cites="bartlett_no_2022">Bartlett et al. (<a href="references.html#ref-bartlett_no_2022" role="doc-biblioref">2022</a>)</span> was to compare daily and non-daily smokers, so we will explore some of the key variables.</p>
 <p>All of the questions are based on the final <code>full_data</code> object. If your answers differ, check the wrangling steps above. If you are really struggling to identify the difference, or you just wanted to complete these tasks, you can download a spreadsheet version of <code>full_data</code> here: <a href="data/Bartlett_full_data.csv">Bartlett_full_data.csv</a>.</p>
 <section id="demographics" class="level3" data-number="16.6.1"><h3 data-number="16.6.1" class="anchored" data-anchor-id="demographics">
 <span class="header-section-number">16.6.1</span> Demographics</h3>
 <ol type="1">
-<li>How many daily and non-daily smokers were there? There were <input class="webex-solveme nospaces" size="3" data-answer="[&quot;115&quot;]"> daily smokers and <input class="webex-solveme nospaces" size="2" data-answer="[&quot;63&quot;]">
-</li>
+<li>How many daily and non-daily smokers were there? There were <input class="webex-solveme nospaces" size="3" data-answer="[&quot;115&quot;]"> daily smokers and <input class="webex-solveme nospaces" size="2" data-answer="[&quot;63&quot;]"> non-daily smokers.</li>
 </ol>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
@@ -1226,7 +1216,7 @@ Show me the solution
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">count</span>(daily_smoker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">daily_smoker</th>
 <th style="text-align: right;">n</th>
@@ -1249,7 +1239,7 @@ Show me the solution
 </div>
 </div>
 <ol start="2" type="1">
-<li>To 2 decimal places, the mean age of all the participants was <input class="webex-solveme nospaces" size="5" data-answer="[&quot;31.07&quot;]"> (<em>SD</em> = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;9.22&quot;]">).</li>
+<li>To 2 decimal places, the mean age of <strong>all</strong> the participants was <input class="webex-solveme nospaces" size="5" data-answer="[&quot;31.07&quot;]"> (<em>SD</em> = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;9.22&quot;]">).</li>
 </ol>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
@@ -1269,7 +1259,7 @@ Show me the solution
 <span id="cb15-3"><a href="#cb15-3"></a>            <span class="at">sd_age =</span> <span class="fu">round</span>(<span class="fu">sd</span>(age), <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
@@ -1291,7 +1281,7 @@ Show me the solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="17-analysis-journey-1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="17-analysis-journey-1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1325,7 +1315,7 @@ Show me the solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="17-analysis-journey-1_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="17-analysis-journey-1_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1377,7 +1367,7 @@ Show me the solution
 <span id="cb18-4"><a href="#cb18-4"></a>            <span class="at">sd_cpd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(cpd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">daily_smoker</th>
 <th style="text-align: right;">mean_cpd</th>
@@ -1424,7 +1414,7 @@ Show me the solution
 <span id="cb19-4"><a href="#cb19-4"></a>            <span class="at">sd_FTND =</span> <span class="fu">round</span>(<span class="fu">sd</span>(FTND_sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">daily_smoker</th>
 <th style="text-align: right;">mean_FTND</th>
@@ -1455,8 +1445,8 @@ Show me the solution
 <li>
 <p>Before answering the following questions, complete one extra data wrangling step to create difference scores where positive values mean attentional bias towards smoking images (faster responses to smoking compared to non-smoking stimuli):</p>
 <ul>
-<li><p>Create a new variable called <code>difference_200</code> by substracting the <code>smoking200</code> variable from the <code>nonsmoking200</code> variable.</p></li>
-<li><p>Create a new variable called <code>difference_500</code> by substracting the <code>smoking500</code> variable from the <code>nonsmoking500</code> variable.</p></li>
+<li><p>Create a new variable called <code>difference_200</code> by calculating <code>nonsmoking200</code> - <code>smoking200</code>.</p></li>
+<li><p>Create a new variable called <code>difference_500</code> by by calculating <code>nonsmoking500</code> - <code>smoking500</code>.</p></li>
 </ul>
 </li>
 </ol>
@@ -1502,7 +1492,7 @@ Show me the solution
 <span id="cb21-4"><a href="#cb21-4"></a>            <span class="at">sd_bias_200 =</span> <span class="fu">round</span>(<span class="fu">sd</span>(difference_200, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">daily_smoker</th>
 <th style="text-align: right;">mean_bias_200</th>
@@ -1549,7 +1539,7 @@ Show me the solution
 <span id="cb22-4"><a href="#cb22-4"></a>            <span class="at">sd_bias_500 =</span> <span class="fu">round</span>(<span class="fu">sd</span>(difference_500, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">daily_smoker</th>
 <th style="text-align: right;">mean_bias_500</th>
@@ -1574,15 +1564,15 @@ Show me the solution
 </div>
 </div>
 </div>
-<p>If you are currently completing this after Chapter 6, we have not covered visualising continuous data or inferential statistics yet. Try coming back to this tasks to compare these measures when you have finished Chapter 7 for visualisation Chapter 13 for factorial ANOVA.</p>
-<p>A difference score of 0 means no bias towards smoking or non-smoking images. So, you can see the paper did not find either group showed much attentional bias towards smoking images, hence why it was published in the <em>Journal of Trial and Error</em>.</p>
+<p>If you are currently completing this after Chapter 6, we have not covered visualising continuous data or inferential statistics yet. Try coming back to these tasks to compare these measures when you have finished Chapter 7 for more advanced visualisation and Chapter 13 for factorial ANOVA.</p>
+<p>A difference score of 0 means no bias towards smoking or non-smoking images. So, you can see the paper did not find either group showed much attentional bias towards smoking images nor much difference between the groups, hence why it was published in the <em>Journal of Trial and Error</em>.</p>
 </section></section><section id="conclusion" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="conclusion">
 <span class="header-section-number">16.7</span> Conclusion</h2>
 <p>Well done! Hopefully you recognised how far your skills have come to be able to do this independently, regardless of how many hints you needed.</p>
 <p>These are real skills people use in research. If you are curious, <span class="citation" data-cites="bartlett_no_2022">Bartlett et al. (<a href="references.html#ref-bartlett_no_2022" role="doc-biblioref">2022</a>)</span> shared their code as a reproducible manuscrupt, so you can see all the wrangling steps they completed by looking at <a href="https://osf.io/xpgt3" target="_blank">this file on the Open Science Framework</a>. We did not include all of them here as there are concepts like outliers we had not covered by Chapter 6.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-bartlett_no_2022" class="csl-entry" role="listitem">
 Bartlett, J. E., Jenks, R., &amp; Wilson, N. (2022). No <span>Meaningful</span> <span>Difference</span> in <span>Attentional</span> <span>Bias</span> <span>Between</span> <span>Daily</span> and <span>Non</span>-<span>Daily</span> <span>Smokers</span>. <em>Journal of Trial &amp; Error</em>. <a href="https://doi.org/10.36850/e11">https://doi.org/10.36850/e11</a>
 </div>
@@ -1862,33 +1852,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1955,15 +1918,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2042,27 +2003,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2072,17 +2016,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2094,130 +2029,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -2261,7 +2073,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2287,32 +2098,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2372,12 +2157,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./16-analysis-journeys.html" class="pagination-link" aria-label="Data Analysis Journeys">
+      <a href="./16-analysis-journeys.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data Analysis Journeys</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./18-analysis-journey-2.html" class="pagination-link" aria-label="Analysis Journey 2: Simple Linear Regression">
+      <a href="./18-analysis-journey-2.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -2387,9 +2172,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">
-<p>CC-BY (2024) James Bartlett &amp; Wil Toivo</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/17-analysis-journey-1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/17-analysis-journey-1.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

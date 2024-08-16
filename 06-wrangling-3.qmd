@@ -49,7 +49,7 @@ In this chapter, we will wrangle their data to reinforce skills from Chapter 4 a
 
 Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.
 
-1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, you should have a folder from chapter 4 called `Chapter_04_06_datawrangling`.
+1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, you should have a folder from chapter 4 called `Chapter_04_06_datawrangling` where you created an R Project. 
 
 2. Create a new R Markdown document and give it a sensible title describing the chapter, such as `06 Data Wrangling 3`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_04_06_datawrangling` folder. 
 
