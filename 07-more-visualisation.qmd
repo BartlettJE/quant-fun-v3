@@ -1,113 +1,112 @@
-# Building your data visualisation skills {#07-more-viz}
+# Scatterplots, boxplots, and violin-boxplots {#07-more-viz}
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      echo = TRUE)
+
+# Load the tidyverse package below
+library(tidyverse)
+
+# Load the data file
+# This should be the Zhang_2014.csv file 
+zhang_data <- read_csv("data/Zhang_2014.csv")
+
+zhang_data <- zhang_data %>%
+  select(Gender, Age,Condition, T1_Predicted_Interest_Composite, T2_Actual_Interest_Composite) %>%
+  mutate(subject = row_number()) %>%
+  pivot_longer(names_to = "time",values_to = "interest",
+               cols = T1_Predicted_Interest_Composite:T2_Actual_Interest_Composite) %>%
+  mutate(Condition = recode(Condition, 
+                            "1" = "Ordinary", 
+                            "2" = "Extraordinary")) %>%
+  mutate(time = recode(time, 
+                       "T1_Predicted_Interest_Composite" = "time1_interest", 
+                       "T2_Actual_Interest_Composite" = "time2_interest"),
+         Gender = recode(Gender, 
+                         "1" = "male", 
+                         "2" = "female")) %>%
+  filter(Gender %in% c("male", "female"))
 ```
 
 In this chapter we are going to focus on visualising data using `ggplot2`. You've already created a number of different plots including bar charts, scatterplots, histograms, qq-plots, and violin-boxplots, but now we will show you how to customise your plots further to give you a better idea of the range and flexibility of visualising data in R. 
 
-In this chapter, you won't be asked to write any code yourself, we will give you all the example code. Instead, play with the arguments, change TRUE to FALSE and vice-versa, change the values and colours. This will help you learn what each bit does. 
+**Chapter Intended Learning Outcomes (ILOs)**
 
-For all of the activities in this chapter, we are going to use data from Experiment 3 of [A "present" for the future: The unexpected value of rediscovery](https://journals.sagepub.com/doi/abs/10.1177/0956797614542274){target="_blank"} [@zhang_present_2014].
+By the end of this chapter, you will be able to: 
 
-To help you understand the data we're visualising, here is the abstract:
+- ILO1.
+
+## Chapter preparation
+
+### Introduction to the data set 
+
+For this chapter, we are using open data from @zhang_present_2014. The abstract of their article is:
 
 > Although documenting everyday activities may seem trivial, four studies reveal that creating records of the present generates unexpected benefits by allowing future rediscoveries. In Study 1, we used a time-capsule paradigm to show that individuals underestimate the extent to which rediscovering experiences from the past will be curiosity provoking and interesting in the future. In Studies 2 and 3, we found that people are particularly likely to underestimate the pleasure of rediscovering ordinary, mundane experiences, as opposed to extraordinary experiences. Finally, Study 4 demonstrates that underestimating the pleasure of rediscovery leads to time-inconsistent choices: Individuals forgo opportunities to document the present but then prefer rediscovering those moments in the future to engaging in an alternative fun activity. Underestimating the value of rediscovery is linked to people’s erroneous faith in their memory of everyday events. By documenting the present, people provide themselves with the opportunity to rediscover mundane moments that may otherwise have been forgotten.
 
-## Activity 1: Set-up Visualisation {#viz-a1}
+In summary...
 
-* Open R Studio and set the working directory to your chapter folder. Ensure the environment is clear.   
-* Open a new R Markdown document and save it in your working directory. Call the file "Visualisation".    
-* Download <a href="Zhang et al. 2014 Study 3.csv" download>Zhang et al. 2014 Study 3.csv</a> and save it in your chapter folder. Make sure that you do not change the file name at all.
-* If you're on the server, avoid a number of issues by restarting the session - click `Session` - `Restart R` 
-* Delete the default R Markdown welcome text and insert a new code chunk that loads the package `tidyverse` using the `library()` function. 
-* Run the below code to load and wrangle the data into tidy data.
+### Organising your files and project for the chapter
 
-```{r load_data, message = FALSE, warning = FALSE}
+Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.
+
+1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, create a new folder called `Chapter_07_dataviz`. Within `Chapter_07_dataviz`, create two new folders called `data` and `figures`.
+
+2. Create an R Project for `Chapter_07_dataviz` as an existing directory for your chapter folder. This should now be your working directory.
+
+3. Create a new R Markdown document and give it a sensible title describing the chapter, such as `07 Scatterplots Boxplots Violins`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_07_dataviz` folder. 
+
+4. We are working with a new data set, so please save the following data file: [Zhang_2014.csv](data/Zhang_2014.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_07_dataviz`.
+
+You are now ready to start working on the chapter! 
+
+### Activity 1 - Read and wrangle the data
+
+As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. If you just want to focus on data visualisation, then you can just type the code in the solution. 
+
+```{r eval=FALSE}
+# Load the tidyverse package below
+?
+  
+# Load the two data files
+# This should be the ahi-cesd.csv file 
+dat <- ?
+
+# This should be the participant-info.csv file
+pinfo <- ?
+```
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r eval=FALSE}
+# Load the tidyverse package below
 library(tidyverse)
-zhang_data <- read_csv("data/Zhang et al. 2014 Study 3.csv")%>%
-  select(Gender, Age,Condition, T1_Predicted_Interest_Composite, T2_Actual_Interest_Composite)%>%
-  mutate(subject = row_number())%>%
+
+# Load the data file
+# This should be the Zhang_2014.csv file 
+zhang_data <- read_csv("data/Zhang_2014.csv")
+
+zhang_data <- zhang_data %>%
+  select(Gender, Age,Condition, T1_Predicted_Interest_Composite, T2_Actual_Interest_Composite) %>%
+  mutate(subject = row_number()) %>%
   pivot_longer(names_to = "time",values_to = "interest",
-               cols = T1_Predicted_Interest_Composite:T2_Actual_Interest_Composite)%>%
-  mutate(Condition = recode(Condition, "1" = "Ordinary", "2" = "Extraordinary"))%>%
-  mutate(time = recode(time, "T1_Predicted_Interest_Composite" = "time1_interest", "T2_Actual_Interest_Composite" = "time2_interest"),
-         Gender = recode(Gender, "1" = "male", "2" = "female")) %>%
+               cols = T1_Predicted_Interest_Composite:T2_Actual_Interest_Composite) %>%
+  mutate(Condition = recode(Condition, 
+                            "1" = "Ordinary", 
+                            "2" = "Extraordinary")) %>%
+  mutate(time = recode(time, 
+                       "T1_Predicted_Interest_Composite" = "time1_interest", 
+                       "T2_Actual_Interest_Composite" = "time2_interest"),
+         Gender = recode(Gender, 
+                         "1" = "male", 
+                         "2" = "female")) %>%
   filter(Gender %in% c("male", "female"))
 ```
 
-## Activity 2: Histograms {#viz-a2}
-
-First, let's create histograms for `interest` to check the distribution. 
-The first line of code creates the `ggplot()` object and specifies which dataset is being used, and what should be represented on the x and y-axis. Because this is a histogram, you only need to specify the variable on the x-axis because y is always frequency
-
-### Basic histogram
-
-The code below will create a simple histogram with default appearance and no customisation. You wouldn't use this graph in a paper, but if you just want to quickly check your distributions, for e.g., normality, this code might be enough. 
-
-```{r hist1, fig.cap = "Basic histogram",warning=FALSE, message = FALSE}
-ggplot(zhang_data, aes(interest))+ 
-  geom_histogram()
-```
-
-### Colour and fill
-
-The next section of code will change the appearance. Plots in ggplot2 are highly customisable - [R for Data Science](https://r4ds.had.co.nz/data-visualisation.html) has an excellent chapter on `ggplot` if you would like additional information. 
-
-Adding `binwidth` to `geom_histogram()` changes the bins of the histogram, i.e., how wide the bars are. The default is 30. Sometimes this may be appropriate but often you will want to change the binwidth. What value you give will depend upon your data.
-
-`colour()` changes the colour of the line around the bars. `fill()` changes the fill of the bars. 
-
-```{r hist2, fig.cap = "Histogram with colour changes"}
-ggplot(zhang_data, aes(x = interest))+ 
-  geom_histogram(binwidth = .3, 
-                 colour = "black",  
-                 fill = "grey") 
-```
-
-### Axis labels
-
-The next section of code changes the labels on the graphs. Note that the labels are an additional layer (i.e., it comes after an `+`, rather than being an argument to `geom_histogram()`).
-
-The function you use will depend on your data, the most common are `scale_x/y_continuous` and `scale_x/y_discrete` depending on whether you are displaying continuous or categorical data. Again, each axis is a separate layer. 
-
-These scale functions control all the information about the axis, from the label to the breaks, to the minimum and maximum values. For more information use the help documentation. 
-
-For our labelling purposes, there are two main arguments:
-
-1. `name()` controls the main name of the axis
-2. `labels()` controls the name of the breaks  
-
-For our histogram we will just change the main axis labels. 
-
-```{r hist3, fig.cap = "Histogram with label changes"}
-ggplot(zhang_data, aes(x = interest))+ 
-  geom_histogram(binwidth = .3, 
-                 colour = "black",  
-                 fill = "grey") + 
-  scale_x_continuous(name = "Mean interest score (1-7)") +
-  scale_y_continuous(name = "Count") 
-```
-
-### Density curve
-
-The following section adds a normal density curve to the histogram, which can be useful for checking the assumption of normality.
-
-To add the line you must change the `geom_histogram()` to use density on the y-axis (the default is count) and add a `stat_function()` layer that draws the line.
-
-```{r hist4, fig.cap = "Histogram with normal density curve"}
-ggplot(zhang_data, aes(interest))+ 
-  geom_histogram(binwidth = .3, 
-                 colour = "black", 
-                 fill = "grey",
-                 aes(y = ..density..))+ # change y-axis to density
-  scale_x_continuous(name = "Mean interest score (1-7)") +
-  scale_y_continuous(name = "Count") +
-  stat_function(fun = dnorm, # this adds a normal density function curve
-                colour = "red", # this makes it red
-                args = list(mean = mean(zhang_data$interest, na.rm = TRUE),
-                           sd = sd(zhang_data$interest, na.rm = TRUE)))
-```
+:::
 
 ## Activity 3: Scatterplots {#viz-a3}
 
@@ -263,29 +262,6 @@ ggplot(zhang_data, aes(x = Condition, y = interest, fill = time))+
   scale_fill_viridis_d(option = "E")
 ```
 
-## Activity 6: Bar Charts {#viz-a6}
-
-### Basic bar chart
-
-Bar charts should only be used for counts because they can distort your understanding of the data if you use them to represent means (see [here for a great example](https://www.autodeskresearch.com/publications/samestats). 
-
-First, we'll do a bar chart for the count of male and females in our sample.
-
-```{r bc1, fig.cap = "Basic bar chart"}
-ggplot(zhang_data, aes(x=Gender))+
-  geom_bar()
-```
-
-### Bar charts with two factors
-
-We can also use `fill()` to separate gender by Condition
-
-```{r bc2, fig.cap = "Bar chart with two factors"}
-ggplot(zhang_data, aes(x=Gender, fill = Condition))+
-  geom_bar(position = "dodge", alpha = .6) + # the position argument places the bars next to each other, rather than on top of each other, try removing this
-  scale_fill_viridis_d(option = "E")
-```
-
 ## Activity 7: Violin plots {#viz-a7}
 
 ### Basic violin plot
@@ -372,206 +348,108 @@ ggplot(zhang_data, aes(x = Condition, y = interest, fill = time))+
   facet_wrap(~Gender, labeller = labeller(Gender = (c(female = "Female", male = "Male"))))
 ```
 
-## Activity 10: Split-violins and raincloud plots {#viz-a10}
+## Test yourself
 
-Finally, we're going to do something a bit snazzy. As well as the functions that are included in packages, anyone can also write custom functions and share the code. One such custom function allows us to create **raincloud plots** which are highly informative and very pretty. See [here](https://wellcomeopenresearch.org/articles/4-63) for more information about their creation and function (and to cite them if you use them in a publication or report).
+To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter. 
 
-In order to use this custom function code you will need to install the `plyr` package, although crucially, don't load it like you normally would using `library()`. The custom function code will just use one very specific function, if you load the entire package you risk creating a function conflict.
+### Knowledge check
+
+**Question 1**. We have...
+
+`r longmcq(sample(c("select()", answer="filter()", "mutate()", "arrange()", "group_by()", "summarise()")))`
+
+**Question 2**. We are...
+
+`r longmcq(sample(c("select()", "filter()", "mutate()", "arrange()", "group_by()", answer="summarise()")))`
+
+**Question 3**. Our data..
+
+`r longmcq(sample(c("select()", "filter()", answer="mutate()", "arrange()", "group_by()", "summarise()")))`
+
+**Question 4**. We want...
+
+`r longmcq(sample(c(answer="group_by() and summarise()", "filter() and select()", "group_by() and arrange()", "arrange() and mutate()")))` 
+
+**Question 5**. If we...
+
+`r longmcq(sample(c(answer = "wide_data %>% select() %>% pivot_longer() %>% group_by() %>% summarise()", "long_data %>% select() %>% pivot__longer_wider() %>% group_by() %>% summarise()", "wide_data %>% pivot_longer() %>% select() %>% summarise() %>% group_by()", "select() %>% pivot_longer() %>% group_by() %>% summarise() %>% wide_data")))`
+
+### Error mode
+
+The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on the new types of data visualisation. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
+
+Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and the data files: 
+
+```{r eval=FALSE}
+# Load the tidyverse package below
+library(tidyverse)
+
+# Load the data file
+# This should be the Zhang_2014.csv file 
+zhang_data <- read_csv("data/Zhang_2014.csv")
+```
+
+Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load <pkg>tidyverse</pkg> and the data files. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
+
+**Question 6**. Copy the following code chunk into your R Markdown file and press knit. 
+
+````{verbatim, lang = "markdown"}
+```{r}
+
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
 
 ```{r eval = FALSE}
-install.packages("plyr")
-```
-
-
-### Split-violin plots
-
-Because the functions we need don't exist in a package we can load, we need to create them. Copy and paste all  the below code without changing anything. You do not need to understand this code. I certainly don't. When you run this, you should see `geom_split_violin` appear in the Environment pane under Functions. 
-
-```{r function1}
-GeomSplitViolin <- ggproto(
-  "GeomSplitViolin", 
-  GeomViolin, 
-  draw_group = function(self, data, ..., draw_quantiles = NULL) {
-    data <- transform(data, 
-                      xminv = x - violinwidth * (x - xmin), 
-                      xmaxv = x + violinwidth * (xmax - x))
-    grp <- data[1,'group']
-    newdata <- plyr::arrange(
-      transform(data, x = if(grp%%2==1) xminv else xmaxv), 
-      if(grp%%2==1) y else -y
-    )
-    newdata <- rbind(newdata[1, ], newdata, newdata[nrow(newdata), ], newdata[1, ])
-    newdata[c(1,nrow(newdata)-1,nrow(newdata)), 'x'] <- round(newdata[1, 'x']) 
-    if (length(draw_quantiles) > 0 & !scales::zero_range(range(data$y))) {
-      stopifnot(all(draw_quantiles >= 0), all(draw_quantiles <= 1))
-      quantiles <- ggplot2:::create_quantile_segment_frame(data, draw_quantiles)
-      aesthetics <- data[rep(1, nrow(quantiles)), setdiff(names(data), c("x", "y")), drop = FALSE]
-      aesthetics$alpha <- rep(1, nrow(quantiles))
-      both <- cbind(quantiles, aesthetics)
-      quantile_grob <- GeomPath$draw_panel(both, ...)
-      ggplot2:::ggname("geom_split_violin", 
-                       grid::grobTree(GeomPolygon$draw_panel(newdata, ...), quantile_grob))
-    } else {
-      ggplot2:::ggname("geom_split_violin", GeomPolygon$draw_panel(newdata, ...))
-    }
-  }
-)
-
-geom_split_violin <- function (mapping = NULL, 
-                               data = NULL, 
-                               stat = "ydensity", 
-                               position = "identity", ..., 
-                               draw_quantiles = NULL, 
-                               trim = TRUE, 
-                               scale = "area", 
-                               na.rm = FALSE, 
-                               show.legend = NA, 
-                               inherit.aes = TRUE) {
-  layer(data = data, 
-        mapping = mapping, 
-        stat = stat, 
-        geom = GeomSplitViolin, 
-        position = position, 
-        show.legend = show.legend, 
-        inherit.aes = inherit.aes, 
-        params = list(trim = trim, 
-                      scale = scale, 
-                      draw_quantiles = draw_quantiles, 
-                      na.rm = na.rm, ...)
-  )
-}
-```
-
-The split-violin is a version of the violin-boxplot that is good for visualising interactions. If you look at the faceted graph we made, there's actually quite a lot of unnecessary space used up because we only need half of the violin to see the distribution - the other half is just repeating the same information. 
-
-```{r sv1, fig.cap = "Split-violin plot", message = FALSE}
-ggplot(zhang_data, aes(x = Condition, y = interest, fill = Gender))+
-  geom_split_violin(trim = FALSE, alpha = .4)+
-  geom_boxplot(width = .2, alpha = .6,
-               position = position_dodge(.25))+
-  scale_fill_viridis_d(option = "E") +
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(width = 0.25)) +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
-               position = position_dodge(width = 0.25))
 
 ```
+:::
 
-### Raincloud plots
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. 
 
-The second custom function is `geom_flat_violin`. Copy and paste all of this code and again you should see it appear in your Environment pane. 
-
-```{r function2}
-"%||%" <- function(a, b) {
-  if (!is.null(a)) a else b
-}
-
-geom_flat_violin <- function(mapping = NULL, data = NULL, stat = "ydensity",
-                             position = "dodge", trim = TRUE, scale = "area",
-                             show.legend = NA, inherit.aes = TRUE, ...) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomFlatViolin,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      trim = trim,
-      scale = scale,
-      ...
-    )
-  )
-}
-
-GeomFlatViolin <-
-  ggproto("Violinist", Geom,
-          setup_data = function(data, params) {
-            data$width <- data$width %||%
-              params$width %||% (resolution(data$x, FALSE) * 0.9)
-            
-            # ymin, ymax, xmin, and xmax define the bounding rectangle for each group
-            data %>%
-              group_by(group) %>%
-              mutate(ymin = min(y),
-                     ymax = max(y),
-                     xmin = x,
-                     xmax = x + width / 2)
-            
-          },
-          
-          draw_group = function(data, panel_scales, coord) {
-            # Find the points for the line to go all the way around
-            data <- transform(data, xminv = x,
-                              xmaxv = x + violinwidth * (xmax - x))
-            
-            # Make sure it's sorted properly to draw the outline
-            newdata <- rbind(plyr::arrange(transform(data, x = xminv), y),
-                             plyr::arrange(transform(data, x = xmaxv), -y))
-            
-            # Close the polygon: set first and last point the same
-            # Needed for coord_polar and such
-            newdata <- rbind(newdata, newdata[1,])
-            
-            ggplot2:::ggname("geom_flat_violin", GeomPolygon$draw_panel(newdata, panel_scales, coord))
-          },
-          
-          draw_key = draw_key_polygon,
-          
-          default_aes = aes(weight = 1, colour = "grey20", fill = "white", size = 0.5,
-                            alpha = NA, linetype = "solid"),
-          
-          required_aes = c("x", "y")
-  )
-```
-
-This plot is similar to the split-violin, but it adds in the raw data points and looks a bit like a raincloud as a result. 
-  
-First, we will run the plot for just one variable, Condition. Again, try changing the arguments (adjust any numbers and change FALSE to TRUE) to see how you can control different aspects of the plot, in particular, try removing `coord_flip()` to see what happens.
-
-```{r rc1, fig.cap = "Raincloud plot for one factor"}
-ggplot(zhang_data, aes(x = Condition, y = interest))+
-  geom_flat_violin(position = position_nudge(x = .25, y = 0), 
-                   trim=FALSE, alpha = 0.75) +
-  geom_jitter(aes(color = Condition), 
-             width = .2, size = .5, alpha = .75, show.legend = FALSE)+
-  geom_boxplot(width = .1, alpha = 0.5, fatten = NULL)+
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(width = 0.25)) +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
-               position = position_dodge(width = 0.3)) +
-  coord_flip()
+````{verbatim, lang = "markdown"}
+```{r}
 
 ```
+````
 
-### Raincloud plots with multiple factors
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
 
-Now we can run the code for a 2 x 2 plot, adding in Gender to `fill` argument. This is quite a complicated plot, do not worry if you are struggling to understand the code but remember, you just need to understand which bits to change. 
-  
-```{r rc2,fig.cap = "Raincloud plot for two factors"}
-ggplot(zhang_data, 
-       aes(x = Condition, y = interest, fill = Gender))+
-  geom_flat_violin(position = position_nudge(x = .25, y = 0), 
-                   trim=FALSE, 
-                   alpha = 0.6) +
-  geom_point(position = position_jitter(width = .05, height = 0.05), 
-             size = .5, 
-             alpha = .7, 
-             show.legend = FALSE, 
-             aes(colour = Gender))+
-  geom_boxplot(width = .3, 
-               alpha = 0.5, 
-               position = "dodge")+
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(width = 0.3)) +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
-               position = position_dodge(width = 0.3)) +
-  scale_fill_viridis_d(option = "E") +
-  scale_colour_viridis_d(option = "E")
+
+```{r eval = FALSE}
+
+```
+:::
+
+**Question 8**. Copy the following code chunk into your R Markdown file and press knit.
+
+````{verbatim, lang = "markdown"}
+```{r}
+
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+```{r eval = FALSE}
+
+```
+:::
+
+## Words from this Chapter
+
+Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the [PsyTeachR Glossary](https://psyteachr.github.io/glossary/){target="_blank"}. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.
+
+```{r gloss, echo=FALSE, results='asis'}
+glossary_table()
 ```
 
-### Finished! {#viz-fin}
+## End of chapter
 
-And you're done! As we've said throughout this chapter, you do not need to remember all of this code, you just need to remember what's possible and where to find the examples that you can modify. 
+Blah. 
 

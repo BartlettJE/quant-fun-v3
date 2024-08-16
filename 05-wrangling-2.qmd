@@ -48,7 +48,7 @@ Before we can get started, you need to organise your files and project for the c
 
 2. Create a new R Markdown document and give it a sensible title describing the chapter, such as `05 Data Wrangling 2`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_04_06_datawrangling` folder. 
 
-4. We are working with a new data set, so please save the following data file: [witt_2018.csv](data/witt_2018.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_04_06_datawrangling`.
+3. We are working with a new data set, so please save the following data file: [witt_2018.csv](data/witt_2018.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_04_06_datawrangling`.
 
 You are now ready to start working on the chapter! 
 
