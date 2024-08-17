@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
-<title>Fundamentals of Quantitative Analysis - 7&nbsp; Building your data visualisation skills</title>
+<title>Fundamentals of Quantitative Analysis - 7&nbsp; Scatterplots, boxplots, and violin-boxplots</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-more-visualisation.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-more-visualisation.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Scatterplots, boxplots, and violin-boxplots</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -204,25 +204,25 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1: Join, select, and mutate</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-more-visualisation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Scatterplots, boxplots, and violin-boxplots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -370,71 +370,63 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#viz-a1" id="toc-viz-a1" class="nav-link active" data-scroll-target="#viz-a1"><span class="header-section-number">7.1</span> Activity 1: Set-up Visualisation</a></li>
-  <li>
-<a href="#viz-a2" id="toc-viz-a2" class="nav-link" data-scroll-target="#viz-a2"><span class="header-section-number">7.2</span> Activity 2: Histograms</a>
+<li>
+<a href="#chapter-preparation" id="toc-chapter-preparation" class="nav-link active" data-scroll-target="#chapter-preparation"><span class="header-section-number">7.1</span> Chapter preparation</a>
   <ul class="collapse">
-<li><a href="#basic-histogram" id="toc-basic-histogram" class="nav-link" data-scroll-target="#basic-histogram"><span class="header-section-number">7.2.1</span> Basic histogram</a></li>
-  <li><a href="#colour-and-fill" id="toc-colour-and-fill" class="nav-link" data-scroll-target="#colour-and-fill"><span class="header-section-number">7.2.2</span> Colour and fill</a></li>
-  <li><a href="#axis-labels" id="toc-axis-labels" class="nav-link" data-scroll-target="#axis-labels"><span class="header-section-number">7.2.3</span> Axis labels</a></li>
-  <li><a href="#density-curve" id="toc-density-curve" class="nav-link" data-scroll-target="#density-curve"><span class="header-section-number">7.2.4</span> Density curve</a></li>
+<li><a href="#introduction-to-the-data-set" id="toc-introduction-to-the-data-set" class="nav-link" data-scroll-target="#introduction-to-the-data-set"><span class="header-section-number">7.1.1</span> Introduction to the data set</a></li>
+  <li><a href="#organising-your-files-and-project-for-the-chapter" id="toc-organising-your-files-and-project-for-the-chapter" class="nav-link" data-scroll-target="#organising-your-files-and-project-for-the-chapter"><span class="header-section-number">7.1.2</span> Organising your files and project for the chapter</a></li>
+  <li><a href="#activity-1---read-and-wrangle-the-data" id="toc-activity-1---read-and-wrangle-the-data" class="nav-link" data-scroll-target="#activity-1---read-and-wrangle-the-data"><span class="header-section-number">7.1.3</span> Activity 1 - Read and wrangle the data</a></li>
+  <li><a href="#activity-2---explore-the-data" id="toc-activity-2---explore-the-data" class="nav-link" data-scroll-target="#activity-2---explore-the-data"><span class="header-section-number">7.1.4</span> Activity 2 - Explore the data</a></li>
   </ul>
 </li>
   <li>
-<a href="#viz-a3" id="toc-viz-a3" class="nav-link" data-scroll-target="#viz-a3"><span class="header-section-number">7.3</span> Activity 3: Scatterplots</a>
+<a href="#viz-a3" id="toc-viz-a3" class="nav-link" data-scroll-target="#viz-a3"><span class="header-section-number">7.2</span> Activity 3: Scatterplots</a>
   <ul class="collapse">
-<li><a href="#basic-scatterplot" id="toc-basic-scatterplot" class="nav-link" data-scroll-target="#basic-scatterplot"><span class="header-section-number">7.3.1</span> Basic scatterplot</a></li>
-  <li><a href="#axis-labels-1" id="toc-axis-labels-1" class="nav-link" data-scroll-target="#axis-labels-1"><span class="header-section-number">7.3.2</span> Axis labels</a></li>
-  <li><a href="#adding-a-regression-line" id="toc-adding-a-regression-line" class="nav-link" data-scroll-target="#adding-a-regression-line"><span class="header-section-number">7.3.3</span> Adding a regression line</a></li>
-  <li><a href="#grouped-scatterplots" id="toc-grouped-scatterplots" class="nav-link" data-scroll-target="#grouped-scatterplots"><span class="header-section-number">7.3.4</span> Grouped scatterplots</a></li>
+<li><a href="#basic-scatterplot" id="toc-basic-scatterplot" class="nav-link" data-scroll-target="#basic-scatterplot"><span class="header-section-number">7.2.1</span> Basic scatterplot</a></li>
+  <li><a href="#axis-labels" id="toc-axis-labels" class="nav-link" data-scroll-target="#axis-labels"><span class="header-section-number">7.2.2</span> Axis labels</a></li>
+  <li><a href="#adding-a-regression-line" id="toc-adding-a-regression-line" class="nav-link" data-scroll-target="#adding-a-regression-line"><span class="header-section-number">7.2.3</span> Adding a regression line</a></li>
+  <li><a href="#grouped-scatterplots" id="toc-grouped-scatterplots" class="nav-link" data-scroll-target="#grouped-scatterplots"><span class="header-section-number">7.2.4</span> Grouped scatterplots</a></li>
   </ul>
 </li>
   <li>
-<a href="#viz-a4" id="toc-viz-a4" class="nav-link" data-scroll-target="#viz-a4"><span class="header-section-number">7.4</span> Activity 4: Boxplots</a>
+<a href="#viz-a4" id="toc-viz-a4" class="nav-link" data-scroll-target="#viz-a4"><span class="header-section-number">7.3</span> Activity 4: Boxplots</a>
   <ul class="collapse">
-<li><a href="#basic-boxplot" id="toc-basic-boxplot" class="nav-link" data-scroll-target="#basic-boxplot"><span class="header-section-number">7.4.1</span> Basic boxplot</a></li>
-  <li><a href="#adding-data-points" id="toc-adding-data-points" class="nav-link" data-scroll-target="#adding-data-points"><span class="header-section-number">7.4.2</span> Adding data points</a></li>
-  <li><a href="#adding-colour" id="toc-adding-colour" class="nav-link" data-scroll-target="#adding-colour"><span class="header-section-number">7.4.3</span> Adding colour</a></li>
-  <li><a href="#boxplots-for-multiple-factors" id="toc-boxplots-for-multiple-factors" class="nav-link" data-scroll-target="#boxplots-for-multiple-factors"><span class="header-section-number">7.4.4</span> Boxplots for multiple factors</a></li>
-  <li><a href="#colour-blind-friendly-options" id="toc-colour-blind-friendly-options" class="nav-link" data-scroll-target="#colour-blind-friendly-options"><span class="header-section-number">7.4.5</span> Colour-blind friendly options</a></li>
+<li><a href="#basic-boxplot" id="toc-basic-boxplot" class="nav-link" data-scroll-target="#basic-boxplot"><span class="header-section-number">7.3.1</span> Basic boxplot</a></li>
+  <li><a href="#adding-data-points" id="toc-adding-data-points" class="nav-link" data-scroll-target="#adding-data-points"><span class="header-section-number">7.3.2</span> Adding data points</a></li>
+  <li><a href="#adding-colour" id="toc-adding-colour" class="nav-link" data-scroll-target="#adding-colour"><span class="header-section-number">7.3.3</span> Adding colour</a></li>
+  <li><a href="#boxplots-for-multiple-factors" id="toc-boxplots-for-multiple-factors" class="nav-link" data-scroll-target="#boxplots-for-multiple-factors"><span class="header-section-number">7.3.4</span> Boxplots for multiple factors</a></li>
+  <li><a href="#colour-blind-friendly-options" id="toc-colour-blind-friendly-options" class="nav-link" data-scroll-target="#colour-blind-friendly-options"><span class="header-section-number">7.3.5</span> Colour-blind friendly options</a></li>
   </ul>
 </li>
-  <li><a href="#viz-a5" id="toc-viz-a5" class="nav-link" data-scroll-target="#viz-a5"><span class="header-section-number">7.5</span> Activity 5: Reordering factors</a></li>
+  <li><a href="#viz-a5" id="toc-viz-a5" class="nav-link" data-scroll-target="#viz-a5"><span class="header-section-number">7.4</span> Activity 5: Reordering factors</a></li>
   <li>
-<a href="#viz-a6" id="toc-viz-a6" class="nav-link" data-scroll-target="#viz-a6"><span class="header-section-number">7.6</span> Activity 6: Bar Charts</a>
+<a href="#viz-a7" id="toc-viz-a7" class="nav-link" data-scroll-target="#viz-a7"><span class="header-section-number">7.5</span> Activity 7: Violin plots</a>
   <ul class="collapse">
-<li><a href="#basic-bar-chart" id="toc-basic-bar-chart" class="nav-link" data-scroll-target="#basic-bar-chart"><span class="header-section-number">7.6.1</span> Basic bar chart</a></li>
-  <li><a href="#bar-charts-with-two-factors" id="toc-bar-charts-with-two-factors" class="nav-link" data-scroll-target="#bar-charts-with-two-factors"><span class="header-section-number">7.6.2</span> Bar charts with two factors</a></li>
+<li><a href="#basic-violin-plot" id="toc-basic-violin-plot" class="nav-link" data-scroll-target="#basic-violin-plot"><span class="header-section-number">7.5.1</span> Basic violin plot</a></li>
+  <li><a href="#violin-plots-with-raw-data-points" id="toc-violin-plots-with-raw-data-points" class="nav-link" data-scroll-target="#violin-plots-with-raw-data-points"><span class="header-section-number">7.5.2</span> Violin plots with raw data points</a></li>
   </ul>
 </li>
+  <li><a href="#viz-a8" id="toc-viz-a8" class="nav-link" data-scroll-target="#viz-a8"><span class="header-section-number">7.6</span> Activity 8: Violin-boxplots</a></li>
   <li>
-<a href="#viz-a7" id="toc-viz-a7" class="nav-link" data-scroll-target="#viz-a7"><span class="header-section-number">7.7</span> Activity 7: Violin plots</a>
+<a href="#viz-a9" id="toc-viz-a9" class="nav-link" data-scroll-target="#viz-a9"><span class="header-section-number">7.7</span> Activity 9: Faceting</a>
   <ul class="collapse">
-<li><a href="#basic-violin-plot" id="toc-basic-violin-plot" class="nav-link" data-scroll-target="#basic-violin-plot"><span class="header-section-number">7.7.1</span> Basic violin plot</a></li>
-  <li><a href="#violin-plots-with-raw-data-points" id="toc-violin-plots-with-raw-data-points" class="nav-link" data-scroll-target="#violin-plots-with-raw-data-points"><span class="header-section-number">7.7.2</span> Violin plots with raw data points</a></li>
-  </ul>
-</li>
-  <li><a href="#viz-a8" id="toc-viz-a8" class="nav-link" data-scroll-target="#viz-a8"><span class="header-section-number">7.8</span> Activity 8: Violin-boxplots</a></li>
-  <li>
-<a href="#viz-a9" id="toc-viz-a9" class="nav-link" data-scroll-target="#viz-a9"><span class="header-section-number">7.9</span> Activity 9: Faceting</a>
-  <ul class="collapse">
-<li><a href="#facet-labelling" id="toc-facet-labelling" class="nav-link" data-scroll-target="#facet-labelling"><span class="header-section-number">7.9.1</span> Facet labelling</a></li>
+<li><a href="#facet-labelling" id="toc-facet-labelling" class="nav-link" data-scroll-target="#facet-labelling"><span class="header-section-number">7.7.1</span> Facet labelling</a></li>
   </ul>
 </li>
   <li>
-<a href="#viz-a10" id="toc-viz-a10" class="nav-link" data-scroll-target="#viz-a10"><span class="header-section-number">7.10</span> Activity 10: Split-violins and raincloud plots</a>
+<a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">7.8</span> Test yourself</a>
   <ul class="collapse">
-<li><a href="#split-violin-plots" id="toc-split-violin-plots" class="nav-link" data-scroll-target="#split-violin-plots"><span class="header-section-number">7.10.1</span> Split-violin plots</a></li>
-  <li><a href="#raincloud-plots" id="toc-raincloud-plots" class="nav-link" data-scroll-target="#raincloud-plots"><span class="header-section-number">7.10.2</span> Raincloud plots</a></li>
-  <li><a href="#raincloud-plots-with-multiple-factors" id="toc-raincloud-plots-with-multiple-factors" class="nav-link" data-scroll-target="#raincloud-plots-with-multiple-factors"><span class="header-section-number">7.10.3</span> Raincloud plots with multiple factors</a></li>
-  <li><a href="#viz-fin" id="toc-viz-fin" class="nav-link" data-scroll-target="#viz-fin"><span class="header-section-number">7.10.4</span> Finished!</a></li>
+<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">7.8.1</span> Knowledge check</a></li>
+  <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">7.8.2</span> Error mode</a></li>
   </ul>
 </li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">7.9</span> Words from this Chapter</a></li>
+  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">7.10</span> End of chapter</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/07-more-visualisation.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/07-more-visualisation.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="07-more-viz" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span></span></h1>
+<h1 class="title"><span id="07-more-viz" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Scatterplots, boxplots, and violin-boxplots</span></span></h1>
 </div>
 
 
@@ -448,128 +440,177 @@ div.csl-indent {
   
 
 </header><p>In this chapter we are going to focus on visualising data using <code>ggplot2</code>. You’ve already created a number of different plots including bar charts, scatterplots, histograms, qq-plots, and violin-boxplots, but now we will show you how to customise your plots further to give you a better idea of the range and flexibility of visualising data in R.</p>
-<p>In this chapter, you won’t be asked to write any code yourself, we will give you all the example code. Instead, play with the arguments, change TRUE to FALSE and vice-versa, change the values and colours. This will help you learn what each bit does.</p>
-<p>For all of the activities in this chapter, we are going to use data from Experiment 3 of <a href="https://journals.sagepub.com/doi/abs/10.1177/0956797614542274" target="_blank">A “present” for the future: The unexpected value of rediscovery</a> <span class="citation" data-cites="zhang_present_2014">(<a href="references.html#ref-zhang_present_2014" role="doc-biblioref">Zhang et al., 2014</a>)</span>.</p>
-<p>To help you understand the data we’re visualising, here is the abstract:</p>
+<p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
+<p>By the end of this chapter, you will be able to:</p>
+<ul>
+<li>ILO1.</li>
+</ul>
+<section id="chapter-preparation" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="chapter-preparation">
+<span class="header-section-number">7.1</span> Chapter preparation</h2>
+<section id="introduction-to-the-data-set" class="level3" data-number="7.1.1"><h3 data-number="7.1.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
+<span class="header-section-number">7.1.1</span> Introduction to the data set</h3>
+<p>For this chapter, we are using open data from <span class="citation" data-cites="zhang_present_2014">Zhang et al. (<a href="references.html#ref-zhang_present_2014" role="doc-biblioref">2014</a>)</span>. The abstract of their article is:</p>
 <blockquote class="blockquote">
 <p>Although documenting everyday activities may seem trivial, four studies reveal that creating records of the present generates unexpected benefits by allowing future rediscoveries. In Study 1, we used a time-capsule paradigm to show that individuals underestimate the extent to which rediscovering experiences from the past will be curiosity provoking and interesting in the future. In Studies 2 and 3, we found that people are particularly likely to underestimate the pleasure of rediscovering ordinary, mundane experiences, as opposed to extraordinary experiences. Finally, Study 4 demonstrates that underestimating the pleasure of rediscovery leads to time-inconsistent choices: Individuals forgo opportunities to document the present but then prefer rediscovering those moments in the future to engaging in an alternative fun activity. Underestimating the value of rediscovery is linked to people’s erroneous faith in their memory of everyday events. By documenting the present, people provide themselves with the opportunity to rediscover mundane moments that may otherwise have been forgotten.</p>
 </blockquote>
-<section id="viz-a1" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="viz-a1">
-<span class="header-section-number">7.1</span> Activity 1: Set-up Visualisation</h2>
-<ul>
-<li>Open R Studio and set the working directory to your chapter folder. Ensure the environment is clear.<br>
-</li>
-<li>Open a new R Markdown document and save it in your working directory. Call the file “Visualisation”.<br>
-</li>
-<li>Download <a href="Zhang et al. 2014 Study 3.csv" download="">Zhang et al.&nbsp;2014 Study 3.csv</a> and save it in your chapter folder. Make sure that you do not change the file name at all.</li>
-<li>If you’re on the server, avoid a number of issues by restarting the session - click <code>Session</code> - <code>Restart R</code>
-</li>
-<li>Delete the default R Markdown welcome text and insert a new code chunk that loads the package <code>tidyverse</code> using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</li>
-<li>Run the below code to load and wrangle the data into tidy data.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>zhang_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Zhang et al. 2014 Study 3.csv"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">select</span>(Gender, Age,Condition, T1_Predicted_Interest_Composite, T2_Actual_Interest_Composite)<span class="sc">%&gt;%</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="fu">row_number</span>())<span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"time"</span>,<span class="at">values_to =</span> <span class="st">"interest"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6"></a>               <span class="at">cols =</span> T1_Predicted_Interest_Composite<span class="sc">:</span>T2_Actual_Interest_Composite)<span class="sc">%&gt;%</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">mutate</span>(<span class="at">Condition =</span> <span class="fu">recode</span>(Condition, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"Ordinary"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"Extraordinary"</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">recode</span>(time, <span class="st">"T1_Predicted_Interest_Composite"</span> <span class="ot">=</span> <span class="st">"time1_interest"</span>, <span class="st">"T2_Actual_Interest_Composite"</span> <span class="ot">=</span> <span class="st">"time2_interest"</span>),</span>
-<span id="cb1-9"><a href="#cb1-9"></a>         <span class="at">Gender =</span> <span class="fu">recode</span>(Gender, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"male"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"female"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">filter</span>(Gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="viz-a2" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="viz-a2">
-<span class="header-section-number">7.2</span> Activity 2: Histograms</h2>
-<p>First, let’s create histograms for <code>interest</code> to check the distribution. The first line of code creates the <code>ggplot()</code> object and specifies which dataset is being used, and what should be represented on the x and y-axis. Because this is a histogram, you only need to specify the variable on the x-axis because y is always frequency</p>
-<section id="basic-histogram" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="basic-histogram">
-<span class="header-section-number">7.2.1</span> Basic histogram</h3>
-<p>The code below will create a simple histogram with default appearance and no customisation. You wouldn’t use this graph in a paper, but if you just want to quickly check your distributions, for e.g., normality, this code might be enough.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(interest))<span class="sc">+</span> </span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/hist1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Basic histogram</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="colour-and-fill" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="colour-and-fill">
-<span class="header-section-number">7.2.2</span> Colour and fill</h3>
-<p>The next section of code will change the appearance. Plots in ggplot2 are highly customisable - <a href="https://r4ds.had.co.nz/data-visualisation.html">R for Data Science</a> has an excellent chapter on <code>ggplot</code> if you would like additional information.</p>
-<p>Adding <code>binwidth</code> to <code>geom_histogram()</code> changes the bins of the histogram, i.e., how wide the bars are. The default is 30. Sometimes this may be appropriate but often you will want to change the binwidth. What value you give will depend upon your data.</p>
-<p><code>colour()</code> changes the colour of the line around the bars. <code>fill()</code> changes the fill of the bars.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> interest))<span class="sc">+</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">3</span>, </span>
-<span id="cb3-3"><a href="#cb3-3"></a>                 <span class="at">colour =</span> <span class="st">"black"</span>,  </span>
-<span id="cb3-4"><a href="#cb3-4"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/hist2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Histogram with colour changes</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="axis-labels" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="axis-labels">
-<span class="header-section-number">7.2.3</span> Axis labels</h3>
-<p>The next section of code changes the labels on the graphs. Note that the labels are an additional layer (i.e., it comes after an <code>+</code>, rather than being an argument to <code>geom_histogram()</code>).</p>
-<p>The function you use will depend on your data, the most common are <code>scale_x/y_continuous</code> and <code>scale_x/y_discrete</code> depending on whether you are displaying continuous or categorical data. Again, each axis is a separate layer.</p>
-<p>These scale functions control all the information about the axis, from the label to the breaks, to the minimum and maximum values. For more information use the help documentation.</p>
-<p>For our labelling purposes, there are two main arguments:</p>
+<p>In summary…</p>
+</section><section id="organising-your-files-and-project-for-the-chapter" class="level3" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-chapter">
+<span class="header-section-number">7.1.2</span> Organising your files and project for the chapter</h3>
+<p>Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.</p>
 <ol type="1">
-<li>
-<code>name()</code> controls the main name of the axis</li>
-<li>
-<code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> controls the name of the breaks</li>
+<li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, create a new folder called <code>Chapter_07_dataviz</code>. Within <code>Chapter_07_dataviz</code>, create two new folders called <code>data</code> and <code>figures</code>.</p></li>
+<li><p>Create an R Project for <code>Chapter_07_dataviz</code> as an existing directory for your chapter folder. This should now be your working directory.</p></li>
+<li><p>Create a new R Markdown document and give it a sensible title describing the chapter, such as <code>07 Scatterplots Boxplots Violins</code>. Delete everything below line 10 so you have a blank file to work with and save the file in your <code>Chapter_07_dataviz</code> folder.</p></li>
+<li><p>We are working with a new data set, so please save the following data file: <a href="data/Zhang_2014.csv">Zhang_2014.csv</a>. Right click the link and select “save link as”, or clicking the link will save the files to your Downloads. Make sure that you save the file as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Chapter_07_dataviz</code>.</p></li>
 </ol>
-<p>For our histogram we will just change the main axis labels.</p>
+<p>You are now ready to start working on the chapter!</p>
+</section><section id="activity-1---read-and-wrangle-the-data" class="level3" data-number="7.1.3"><h3 data-number="7.1.3" class="anchored" data-anchor-id="activity-1---read-and-wrangle-the-data">
+<span class="header-section-number">7.1.3</span> Activity 1 - Read and wrangle the data</h3>
+<p>As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. Create an object called <code>zhang_data</code> to be consistent with the tasks below. If you just want to focus on data visualisation, then you can just type the code in the solution.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To wrangle the data, complete the following tasks:</p>
+<ol type="1">
+<li><p>Load the <pkg>tidyverse</pkg> package.</p></li>
+<li><p>Read the data file <code>data/Zhang_2014.csv</code>.</p></li>
+<li>
+<p>Select the following columns:</p>
+<ul>
+<li><p><code>Gender</code></p></li>
+<li><p><code>Age</code></p></li>
+<li><p><code>Condition</code></p></li>
+<li><p><code>T1_Predicted_Interest_Composite</code> renamed to <code>time1_interest</code></p></li>
+<li><p><code>T2_Actual_Interest_Composite</code> renamed to <code>time2_interest</code>.</p></li>
+</ul>
+</li>
+<li><p>There is currently no identifier, so create a new variable called <code>participant_ID</code>. Hint: try <code>participant_ID = row_number()</code>.</p></li>
+<li>
+<p>Recode two variables to be easier to understand and visualise:</p>
+<ul>
+<li><p>Gender: 1 = “Male”, 2 = “Female”.</p></li>
+<li><p>Condition: 1 = “Ordinary”, 2 = “Extraordinary”.</p></li>
+</ul>
+</li>
+</ol>
+<p>Your data should now be in wide format and ready to create a scatterplot.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You should have the following in a code chunk:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> interest))<span class="sc">+</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">3</span>, </span>
-<span id="cb4-3"><a href="#cb4-3"></a>                 <span class="at">colour =</span> <span class="st">"black"</span>,  </span>
-<span id="cb4-4"><a href="#cb4-4"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>) <span class="sc">+</span> </span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/hist3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Histogram with label changes</figcaption></figure>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load the tidyverse package below</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Load the data file</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># This should be the Zhang_2014.csv file </span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>zhang_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Zhang_2014.csv"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Wrangle the data for plotting. </span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># select and rename key variables</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># mutate to add participant ID and recode</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>zhang_data <span class="ot">&lt;-</span> zhang_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">select</span>(Gender, </span>
+<span id="cb1-13"><a href="#cb1-13"></a>         Age, </span>
+<span id="cb1-14"><a href="#cb1-14"></a>         Condition, </span>
+<span id="cb1-15"><a href="#cb1-15"></a>         <span class="at">time1_interest =</span> T1_Predicted_Interest_Composite, </span>
+<span id="cb1-16"><a href="#cb1-16"></a>         <span class="at">time2_interest =</span> T2_Actual_Interest_Composite) <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="fu">mutate</span>(<span class="at">participant_ID =</span> <span class="fu">row_number</span>(),</span>
+<span id="cb1-18"><a href="#cb1-18"></a>         <span class="at">Condition =</span> <span class="fu">case_match</span>(Condition, </span>
+<span id="cb1-19"><a href="#cb1-19"></a>                            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Ordinary"</span>, </span>
+<span id="cb1-20"><a href="#cb1-20"></a>                            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Extraordinary"</span>),</span>
+<span id="cb1-21"><a href="#cb1-21"></a>         <span class="at">Gender =</span> <span class="fu">case_match</span>(Gender,</span>
+<span id="cb1-22"><a href="#cb1-22"></a>                             <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Male"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23"></a>                             <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Female"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-</section><section id="density-curve" class="level3" data-number="7.2.4"><h3 data-number="7.2.4" class="anchored" data-anchor-id="density-curve">
-<span class="header-section-number">7.2.4</span> Density curve</h3>
-<p>The following section adds a normal density curve to the histogram, which can be useful for checking the assumption of normality.</p>
-<p>To add the line you must change the <code>geom_histogram()</code> to use density on the y-axis (the default is count) and add a <code>stat_function()</code> layer that draws the line.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(interest))<span class="sc">+</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">3</span>, </span>
-<span id="cb5-3"><a href="#cb5-3"></a>                 <span class="at">colour =</span> <span class="st">"black"</span>, </span>
-<span id="cb5-4"><a href="#cb5-4"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5"></a>                 <span class="fu">aes</span>(<span class="at">y =</span> ..density..))<span class="sc">+</span> <span class="co"># change y-axis to density</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="co"># this adds a normal density function curve</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>                <span class="at">colour =</span> <span class="st">"red"</span>, <span class="co"># this makes it red</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(zhang_data<span class="sc">$</span>interest, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-11"><a href="#cb5-11"></a>                           <span class="at">sd =</span> <span class="fu">sd</span>(zhang_data<span class="sc">$</span>interest, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/hist4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Histogram with normal density curve</figcaption></figure>
+</div>
+</section><section id="activity-2---explore-the-data" class="level3" data-number="7.1.4"><h3 data-number="7.1.4" class="anchored" data-anchor-id="activity-2---explore-the-data">
+<span class="header-section-number">7.1.4</span> Activity 2 - Explore the data</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>After the wrangling steps, try and explore <code>zhang_data</code> to see what variables you are working with. For example, opening the data object as a tab to scroll around, explore with <code>glimpse()</code>, or try plotting some of the individual variables to see what they look like using visualisation skills from Chapter 3.</p>
 </div>
-</section></section><section id="viz-a3" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="viz-a3">
-<span class="header-section-number">7.3</span> Activity 3: Scatterplots</h2>
-<section id="basic-scatterplot" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="basic-scatterplot">
-<span class="header-section-number">7.3.1</span> Basic scatterplot</h3>
+</div>
+<p>In <code>zhang_data</code>, we have the following variables:</p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 41%">
+<col style="width: 39%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">Variable</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Gender</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Age</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Condition</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">time1_interest</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">time2_interest</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">participant_ID</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table></section></section><section id="viz-a3" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="viz-a3">
+<span class="header-section-number">7.2</span> Activity 3: Scatterplots</h2>
+<section id="basic-scatterplot" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="basic-scatterplot">
+<span class="header-section-number">7.2.1</span> Basic scatterplot</h3>
 <p>Now let’s make a scatterplot plotting <code>Age</code> and <code>interest</code> to see if there is any relationship between the two. We need to specify both the x and y-axis variables. The following code will produce a very simple scatterplot. Again, you wouldn’t use this graph in a paper, but for eye-balling your data it would suffice.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> interest,<span class="at">y =</span> Age))<span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>       <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> time1_interest,<span class="at">y =</span> Age))<span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>       <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/scat1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -577,14 +618,14 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section><section id="axis-labels-1" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="axis-labels-1">
-<span class="header-section-number">7.3.2</span> Axis labels</h3>
+</section><section id="axis-labels" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="axis-labels">
+<span class="header-section-number">7.2.2</span> Axis labels</h3>
 <p>From this plot it doesn’t look like there is much of a relationship between age and interest ratings. We can now change the labels using the same scale functions as before.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> interest,<span class="at">y =</span> Age))<span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>       <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> time1_interest,<span class="at">y =</span> Age))<span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>       <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/scat2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -592,15 +633,15 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section><section id="adding-a-regression-line" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="adding-a-regression-line">
-<span class="header-section-number">7.3.3</span> Adding a regression line</h3>
+</section><section id="adding-a-regression-line" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="adding-a-regression-line">
+<span class="header-section-number">7.2.3</span> Adding a regression line</h3>
 <p>It’s often useful to add a regression line or line of best fit to a scatterplot. The regression line is added with <code>geom_smooth()</code> and by default will also provide a 95% confidence interval. You can specify what type of line you want to draw, most often you will need <code>method = lm</code>, i.e., a linear model or a straight line. Look up the help documentation for <code>geom_smooth()</code> and see what other methods you can use.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> interest,<span class="at">y =</span> Age))<span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)<span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm) <span class="co"># if you don't want the shaded CI, add se = FALSE to this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> time1_interest,<span class="at">y =</span> Age))<span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)<span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm) <span class="co"># if you don't want the shaded CI, add se = FALSE to this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/scat3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -608,17 +649,16 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section><section id="grouped-scatterplots" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="grouped-scatterplots">
-<span class="header-section-number">7.3.4</span> Grouped scatterplots</h3>
+</section><section id="grouped-scatterplots" class="level3" data-number="7.2.4"><h3 data-number="7.2.4" class="anchored" data-anchor-id="grouped-scatterplots">
+<span class="header-section-number">7.2.4</span> Grouped scatterplots</h3>
 <p>We can use ggplot to show how the relationship might differ for different populations within our data. We do this by adding <code>colour()</code> to <code>aes()</code> and setting it as whatever variable we would like to distinguish between. In this case, we will see how the relationship between age and interest differs for the male and female participants. There are a few participants with missing gender so we will first filter them out.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>zhang_data <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">filter</span>(Gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>           <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> interest,<span class="at">y =</span> Age, <span class="at">colour =</span> Gender))<span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)<span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>zhang_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>           <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time1_interest, <span class="at">y =</span> Age, <span class="at">colour =</span> Gender))<span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)<span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/scat4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -635,13 +675,13 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> interest,<span class="at">y =</span> Age, <span class="at">colour =</span> Gender))<span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)<span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm)<span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Gender"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> time1_interest,<span class="at">y =</span> Age, <span class="at">colour =</span> Gender))<span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest score (1-7)"</span>) <span class="sc">+</span> </span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span>)<span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm)<span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/scat5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -649,14 +689,17 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </div>
-</section></section><section id="viz-a4" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="viz-a4">
-<span class="header-section-number">7.4</span> Activity 4: Boxplots</h2>
-<section id="basic-boxplot" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="basic-boxplot">
-<span class="header-section-number">7.4.1</span> Basic boxplot</h3>
+</section></section><section id="viz-a4" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="viz-a4">
+<span class="header-section-number">7.3</span> Activity 4: Boxplots</h2>
+<section id="basic-boxplot" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="basic-boxplot">
+<span class="header-section-number">7.3.1</span> Basic boxplot</h3>
+<ul>
+<li>Remember to add pivot_longer step.</li>
+</ul>
 <p>The following code will produce a simple boxplot for eye-balling your data.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest))<span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> time1_interest))<span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bp1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -664,13 +707,13 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </div>
-</section><section id="adding-data-points" class="level3" data-number="7.4.2"><h3 data-number="7.4.2" class="anchored" data-anchor-id="adding-data-points">
-<span class="header-section-number">7.4.2</span> Adding data points</h3>
+</section><section id="adding-data-points" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="adding-data-points">
+<span class="header-section-number">7.3.2</span> Adding data points</h3>
 <p>If we add another layer <code>geom_point()</code> we can add our raw data points to our boxplots to make them more informative.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest))<span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> time1_interest))<span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bp2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -681,9 +724,9 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 <p>However, this plot suffers from <strong>over-plotting</strong>, that is, there are multiple data points on top of each other. We can change this by using <code>geom_jitter()</code>, which adds a layer of points that are jittered so that each one is visible.</p>
 <p><code>height</code> and <code>width</code> affect how much each point is jittered. Play around with the values to see how it affects the data points.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest))<span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> time1_interest))<span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bp3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -691,16 +734,16 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </div>
-</section><section id="adding-colour" class="level3" data-number="7.4.3"><h3 data-number="7.4.3" class="anchored" data-anchor-id="adding-colour">
-<span class="header-section-number">7.4.3</span> Adding colour</h3>
+</section><section id="adding-colour" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="adding-colour">
+<span class="header-section-number">7.3.3</span> Adding colour</h3>
 <p>We may want to add colour to our graph (and for consistency, we’ll sort out the labels). We do this by adding the ‘fill’ argument to the ggplot aesthetic by specifying which variable the colour of the fill should be organised by.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> Condition))<span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> .<span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Condition"</span>) <span class="sc">+</span> <span class="co"># note the x-axis is discrete</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest rating (1-7)"</span>)<span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="co"># this suppresses the legend because we don't need it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> time1_interest, <span class="at">fill =</span> Condition))<span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> .<span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Condition"</span>) <span class="sc">+</span> <span class="co"># note the x-axis is discrete</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest rating (1-7)"</span>)<span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="co"># this suppresses the legend because we don't need it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bp4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -708,15 +751,24 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </div>
-</section><section id="boxplots-for-multiple-factors" class="level3" data-number="7.4.4"><h3 data-number="7.4.4" class="anchored" data-anchor-id="boxplots-for-multiple-factors">
-<span class="header-section-number">7.4.4</span> Boxplots for multiple factors</h3>
+</section><section id="boxplots-for-multiple-factors" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="boxplots-for-multiple-factors">
+<span class="header-section-number">7.3.4</span> Boxplots for multiple factors</h3>
 <p>When you only have one IV, using the fill command to change the colour is a little redundant, as the colours don’t add any additional information. It makes more sense to use colour to represent an additional IV.</p>
 <p>For this example, we’ll use <code>Condition</code> and <code>time</code> as IVs. <code>fill()</code> now specifies a second IV, rather than repeating the IV on the x-axis as in the previous plot.</p>
 <p>With multiple IVs the command to overlay the raw data points changes as the data points also need dodged (try running the code with the previous geom_jitter function to see what happens)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> time))<span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> .<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>zhang_data_long <span class="ot">&lt;-</span> zhang_data <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> time1_interest<span class="sc">:</span>time2_interest,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>               <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4"></a>               <span class="at">values_to =</span> <span class="st">"Interest"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(zhang_data_long, </span>
+<span id="cb12-2"><a href="#cb12-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Condition, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>           <span class="at">y =</span> Interest, </span>
+<span id="cb12-4"><a href="#cb12-4"></a>           <span class="at">fill =</span> Time))<span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> .<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bp5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -724,35 +776,35 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </div>
-</section><section id="colour-blind-friendly-options" class="level3" data-number="7.4.5"><h3 data-number="7.4.5" class="anchored" data-anchor-id="colour-blind-friendly-options">
-<span class="header-section-number">7.4.5</span> Colour-blind friendly options</h3>
+</section><section id="colour-blind-friendly-options" class="level3" data-number="7.3.5"><h3 data-number="7.3.5" class="anchored" data-anchor-id="colour-blind-friendly-options">
+<span class="header-section-number">7.3.5</span> Colour-blind friendly options</h3>
 <p>There is one more fill option that we can use. Rather than specifying <code>scale_fill_discrete()</code>, we can use <code>scale_fill_viridis_d()</code>. This function does exactly the same thing but it uses a colour-blind friendly palette (which also prints in black and white). There are 5 different options for colours and you can see them by changing <code>option</code> to A, B, C, D or E. Personally I like option E with <code>alpha = .6</code> (to control transparency) but that’s not an official School position.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> time))<span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> .<span class="dv">6</span>)<span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> .<span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(zhang_data_long, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> Interest, <span class="at">fill =</span> Time))<span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> .<span class="dv">6</span>)<span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> .<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption class="figure-caption">Boxplots with friendly colours</figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="viz-a5" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="viz-a5">
-<span class="header-section-number">7.5</span> Activity 5: Reordering factors</h2>
+</section></section><section id="viz-a5" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="viz-a5">
+<span class="header-section-number">7.4</span> Activity 5: Reordering factors</h2>
 <p>R orders categorical variables alphabetically. For gender it didn’t really matter whether male or female was represented first and for time 1 and 2 it makes sense for them to be in this order but we may want to change the order of Condition (in my mind it makes more sense for Ordinary to come first, but that may just be me).</p>
 <p>To do this we can use <code>mutate()</code> and <code>fct_level()</code> to change the factor levels to the order we want.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>zhang_data <span class="ot">&lt;-</span> zhang_data <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">mutate</span>(<span class="at">Condition =</span> <span class="fu">fct_relevel</span>(Condition, <span class="fu">c</span>(<span class="st">"Ordinary"</span>, <span class="st">"Extraordinary"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>zhang_data_long <span class="ot">&lt;-</span> zhang_data_long <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">mutate</span>(<span class="at">Condition =</span> <span class="fu">fct_relevel</span>(Condition, <span class="fu">c</span>(<span class="st">"Ordinary"</span>, <span class="st">"Extraordinary"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can re-run the boxplot. That’s better.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> time))<span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> .<span class="dv">6</span>)<span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> .<span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(zhang_data_long, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> Interest, <span class="at">fill =</span> Time))<span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> .<span class="dv">6</span>)<span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> .<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bp6-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -760,44 +812,14 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </div>
-</section><section id="viz-a6" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="viz-a6">
-<span class="header-section-number">7.6</span> Activity 6: Bar Charts</h2>
-<section id="basic-bar-chart" class="level3" data-number="7.6.1"><h3 data-number="7.6.1" class="anchored" data-anchor-id="basic-bar-chart">
-<span class="header-section-number">7.6.1</span> Basic bar chart</h3>
-<p>Bar charts should only be used for counts because they can distort your understanding of the data if you use them to represent means (see <a href="https://www.autodeskresearch.com/publications/samestats">here for a great example</a>.</p>
-<p>First, we’ll do a bar chart for the count of male and females in our sample.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x=</span>Gender))<span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bc1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Basic bar chart</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="bar-charts-with-two-factors" class="level3" data-number="7.6.2"><h3 data-number="7.6.2" class="anchored" data-anchor-id="bar-charts-with-two-factors">
-<span class="header-section-number">7.6.2</span> Bar charts with two factors</h3>
-<p>We can also use <code>fill()</code> to separate gender by Condition</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x=</span>Gender, <span class="at">fill =</span> Condition))<span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span> <span class="co"># the position argument places the bars next to each other, rather than on top of each other, try removing this</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/bc2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Bar chart with two factors</figcaption></figure>
-</div>
-</div>
-</div>
-</section></section><section id="viz-a7" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="viz-a7">
-<span class="header-section-number">7.7</span> Activity 7: Violin plots</h2>
-<section id="basic-violin-plot" class="level3" data-number="7.7.1"><h3 data-number="7.7.1" class="anchored" data-anchor-id="basic-violin-plot">
-<span class="header-section-number">7.7.1</span> Basic violin plot</h3>
+</section><section id="viz-a7" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="viz-a7">
+<span class="header-section-number">7.5</span> Activity 7: Violin plots</h2>
+<section id="basic-violin-plot" class="level3" data-number="7.5.1"><h3 data-number="7.5.1" class="anchored" data-anchor-id="basic-violin-plot">
+<span class="header-section-number">7.5.1</span> Basic violin plot</h3>
 <p>Violin plots are so-called because with a normal distribution the shape would look something like a violin. They show density, i.e., the fatter the violin the more data points there are for that value.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest))<span class="sc">+</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">geom_violin</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(zhang_data_long, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> Interest))<span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_violin</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/vp1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -805,13 +827,13 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </div>
-</section><section id="violin-plots-with-raw-data-points" class="level3" data-number="7.7.2"><h3 data-number="7.7.2" class="anchored" data-anchor-id="violin-plots-with-raw-data-points">
-<span class="header-section-number">7.7.2</span> Violin plots with raw data points</h3>
+</section><section id="violin-plots-with-raw-data-points" class="level3" data-number="7.5.2"><h3 data-number="7.5.2" class="anchored" data-anchor-id="violin-plots-with-raw-data-points">
+<span class="header-section-number">7.5.2</span> Violin plots with raw data points</h3>
 <p>Like the boxplot, we can also add the raw data points to our violin plot, making sure to use jitter to avoid over-plotting.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest))<span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(zhang_data_long, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> Interest))<span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/vp2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -826,8 +848,8 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 </p>
 </div>
 </div>
-</section></section><section id="viz-a8" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="viz-a8">
-<span class="header-section-number">7.8</span> Activity 8: Violin-boxplots</h2>
+</section></section><section id="viz-a8" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="viz-a8">
+<span class="header-section-number">7.6</span> Activity 8: Violin-boxplots</h2>
 <p>One increasingly common graph is a violin + boxplot + summary plot that shows a huge amount of information about your data in a single plot.</p>
 <ul>
 <li>This code uses two calls to <code>stat_summary()</code> that was introduced during the t-test chapter. The first draws a <code>point</code> to represent the mean, and the second draws an <code>errorbar</code> that represents standard error (<code>mean_se</code>).<br>
@@ -840,14 +862,14 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 <li>You may get warning messages telling you that R has removed rows containing missing values, you do not need to worry about this.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> Condition))<span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">7</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>)<span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>, <span class="at">label =</span> <span class="fu">c</span>(<span class="st">"Ordinary"</span>, <span class="st">"Extraordinary"</span>))<span class="sc">+</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest rating (1-7)"</span>) <span class="sc">+</span></span>
-<span id="cb23-8"><a href="#cb23-8"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(zhang_data_long, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> Interest, <span class="at">fill =</span> Condition))<span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">7</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>)<span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>, <span class="at">label =</span> <span class="fu">c</span>(<span class="st">"Ordinary"</span>, <span class="st">"Extraordinary"</span>))<span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Mean interest rating (1-7)"</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/vbp1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -855,25 +877,25 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 </div>
 </div>
 </div>
-</section><section id="viz-a9" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="viz-a9">
-<span class="header-section-number">7.9</span> Activity 9: Faceting</h2>
+</section><section id="viz-a9" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="viz-a9">
+<span class="header-section-number">7.7</span> Activity 9: Faceting</h2>
 <p><code>ggplot2</code> contains a facet function that produces different plots for each level of a grouping variable which can be very useful when you have more than two factors, for example, for a three-way ANOVA. The following code displays produces violin-boxplots for Condition ~ interest, but separately for male and female participants.</p>
 <ul>
 <li>This code adds an extra argument <code>position = position_dodge(.9)</code> to align the layers with the violin plots. Try removing this argument from each layer to see what happens, and also try adjusting the value from <code>.9</code> to another number.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> time))<span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
-<span id="cb24-4"><a href="#cb24-4"></a>               <span class="at">alpha =</span> .<span class="dv">6</span>, </span>
-<span id="cb24-5"><a href="#cb24-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>,</span>
-<span id="cb24-6"><a href="#cb24-6"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb24-8"><a href="#cb24-8"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
-<span id="cb24-9"><a href="#cb24-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb24-10"><a href="#cb24-10"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
-<span id="cb24-11"><a href="#cb24-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span></span>
-<span id="cb24-12"><a href="#cb24-12"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(zhang_data_long, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> Interest, <span class="at">fill =</span> Time))<span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
+<span id="cb19-4"><a href="#cb19-4"></a>               <span class="at">alpha =</span> .<span class="dv">6</span>, </span>
+<span id="cb19-5"><a href="#cb19-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>,</span>
+<span id="cb19-6"><a href="#cb19-6"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
+<span id="cb19-10"><a href="#cb19-10"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/facet1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -881,22 +903,22 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 </div>
 </div>
 </div>
-<section id="facet-labelling" class="level3" data-number="7.9.1"><h3 data-number="7.9.1" class="anchored" data-anchor-id="facet-labelling">
-<span class="header-section-number">7.9.1</span> Facet labelling</h3>
+<section id="facet-labelling" class="level3" data-number="7.7.1"><h3 data-number="7.7.1" class="anchored" data-anchor-id="facet-labelling">
+<span class="header-section-number">7.7.1</span> Facet labelling</h3>
 <p>Finally, changing the labels within the facets is a little more complicated - there’s no additional scale layer, instead, you adjust this inside <code>facet_wrap()</code> using <code>labeller</code>. This has always felt unintuitive to me and I have to look it up every single time so don’t worry if it is confusing - just remember where to look for the example.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> time))<span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
-<span id="cb25-4"><a href="#cb25-4"></a>               <span class="at">alpha =</span> .<span class="dv">6</span>, </span>
-<span id="cb25-5"><a href="#cb25-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>,</span>
-<span id="cb25-6"><a href="#cb25-6"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb25-8"><a href="#cb25-8"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
-<span id="cb25-9"><a href="#cb25-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb25-10"><a href="#cb25-10"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender, <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">Gender =</span> (<span class="fu">c</span>(<span class="at">female =</span> <span class="st">"Female"</span>, <span class="at">male =</span> <span class="st">"Male"</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(zhang_data_long, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> Interest, <span class="at">fill =</span> Time))<span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
+<span id="cb20-4"><a href="#cb20-4"></a>               <span class="at">alpha =</span> .<span class="dv">6</span>, </span>
+<span id="cb20-5"><a href="#cb20-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
+<span id="cb20-10"><a href="#cb20-10"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))<span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender, <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">Gender =</span> (<span class="fu">c</span>(<span class="at">female =</span> <span class="st">"Female"</span>, <span class="at">male =</span> <span class="st">"Male"</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="07-more-visualisation_files/figure-html/facet2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -904,209 +926,117 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 </div>
 </div>
 </div>
-</section></section><section id="viz-a10" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="viz-a10">
-<span class="header-section-number">7.10</span> Activity 10: Split-violins and raincloud plots</h2>
-<p>Finally, we’re going to do something a bit snazzy. As well as the functions that are included in packages, anyone can also write custom functions and share the code. One such custom function allows us to create <strong>raincloud plots</strong> which are highly informative and very pretty. See <a href="https://wellcomeopenresearch.org/articles/4-63">here</a> for more information about their creation and function (and to cite them if you use them in a publication or report).</p>
-<p>In order to use this custom function code you will need to install the <code>plyr</code> package, although crucially, don’t load it like you normally would using <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. The custom function code will just use one very specific function, if you load the entire package you risk creating a function conflict.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">install.packages</span>(<span class="st">"plyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section><section id="test-yourself" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="test-yourself">
+<span class="header-section-number">7.8</span> Test yourself</h2>
+<p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
+<section id="knowledge-check" class="level3" data-number="7.8.1"><h3 data-number="7.8.1" class="anchored" data-anchor-id="knowledge-check">
+<span class="header-section-number">7.8.1</span> Knowledge check</h3>
+<p><strong>Question 1</strong>. We have…</p>
+<div id="radio_MWDACZQKZF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value="answer"><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>mutate()</span></label>
 </div>
-<section id="split-violin-plots" class="level3" data-number="7.10.1"><h3 data-number="7.10.1" class="anchored" data-anchor-id="split-violin-plots">
-<span class="header-section-number">7.10.1</span> Split-violin plots</h3>
-<p>Because the functions we need don’t exist in a package we can load, we need to create them. Copy and paste all the below code without changing anything. You do not need to understand this code. I certainly don’t. When you run this, you should see <code>geom_split_violin</code> appear in the Environment pane under Functions.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>GeomSplitViolin <span class="ot">&lt;-</span> <span class="fu">ggproto</span>(</span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="st">"GeomSplitViolin"</span>, </span>
-<span id="cb27-3"><a href="#cb27-3"></a>  GeomViolin, </span>
-<span id="cb27-4"><a href="#cb27-4"></a>  <span class="at">draw_group =</span> <span class="cf">function</span>(self, data, ..., <span class="at">draw_quantiles =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb27-5"><a href="#cb27-5"></a>    data <span class="ot">&lt;-</span> <span class="fu">transform</span>(data, </span>
-<span id="cb27-6"><a href="#cb27-6"></a>                      <span class="at">xminv =</span> x <span class="sc">-</span> violinwidth <span class="sc">*</span> (x <span class="sc">-</span> xmin), </span>
-<span id="cb27-7"><a href="#cb27-7"></a>                      <span class="at">xmaxv =</span> x <span class="sc">+</span> violinwidth <span class="sc">*</span> (xmax <span class="sc">-</span> x))</span>
-<span id="cb27-8"><a href="#cb27-8"></a>    grp <span class="ot">&lt;-</span> data[<span class="dv">1</span>,<span class="st">'group'</span>]</span>
-<span id="cb27-9"><a href="#cb27-9"></a>    newdata <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">arrange</span>(</span>
-<span id="cb27-10"><a href="#cb27-10"></a>      <span class="fu">transform</span>(data, <span class="at">x =</span> <span class="cf">if</span>(grp<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>) xminv <span class="cf">else</span> xmaxv), </span>
-<span id="cb27-11"><a href="#cb27-11"></a>      <span class="cf">if</span>(grp<span class="sc">%%</span><span class="dv">2</span><span class="sc">==</span><span class="dv">1</span>) y <span class="cf">else</span> <span class="sc">-</span>y</span>
-<span id="cb27-12"><a href="#cb27-12"></a>    )</span>
-<span id="cb27-13"><a href="#cb27-13"></a>    newdata <span class="ot">&lt;-</span> <span class="fu">rbind</span>(newdata[<span class="dv">1</span>, ], newdata, newdata[<span class="fu">nrow</span>(newdata), ], newdata[<span class="dv">1</span>, ])</span>
-<span id="cb27-14"><a href="#cb27-14"></a>    newdata[<span class="fu">c</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(newdata)<span class="sc">-</span><span class="dv">1</span>,<span class="fu">nrow</span>(newdata)), <span class="st">'x'</span>] <span class="ot">&lt;-</span> <span class="fu">round</span>(newdata[<span class="dv">1</span>, <span class="st">'x'</span>]) </span>
-<span id="cb27-15"><a href="#cb27-15"></a>    <span class="cf">if</span> (<span class="fu">length</span>(draw_quantiles) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span>scales<span class="sc">::</span><span class="fu">zero_range</span>(<span class="fu">range</span>(data<span class="sc">$</span>y))) {</span>
-<span id="cb27-16"><a href="#cb27-16"></a>      <span class="fu">stopifnot</span>(<span class="fu">all</span>(draw_quantiles <span class="sc">&gt;=</span> <span class="dv">0</span>), <span class="fu">all</span>(draw_quantiles <span class="sc">&lt;=</span> <span class="dv">1</span>))</span>
-<span id="cb27-17"><a href="#cb27-17"></a>      quantiles <span class="ot">&lt;-</span> ggplot2<span class="sc">:::</span><span class="fu">create_quantile_segment_frame</span>(data, draw_quantiles)</span>
-<span id="cb27-18"><a href="#cb27-18"></a>      aesthetics <span class="ot">&lt;-</span> data[<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(quantiles)), <span class="fu">setdiff</span>(<span class="fu">names</span>(data), <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb27-19"><a href="#cb27-19"></a>      aesthetics<span class="sc">$</span>alpha <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(quantiles))</span>
-<span id="cb27-20"><a href="#cb27-20"></a>      both <span class="ot">&lt;-</span> <span class="fu">cbind</span>(quantiles, aesthetics)</span>
-<span id="cb27-21"><a href="#cb27-21"></a>      quantile_grob <span class="ot">&lt;-</span> GeomPath<span class="sc">$</span><span class="fu">draw_panel</span>(both, ...)</span>
-<span id="cb27-22"><a href="#cb27-22"></a>      ggplot2<span class="sc">:::</span><span class="fu">ggname</span>(<span class="st">"geom_split_violin"</span>, </span>
-<span id="cb27-23"><a href="#cb27-23"></a>                       grid<span class="sc">::</span><span class="fu">grobTree</span>(GeomPolygon<span class="sc">$</span><span class="fu">draw_panel</span>(newdata, ...), quantile_grob))</span>
-<span id="cb27-24"><a href="#cb27-24"></a>    } <span class="cf">else</span> {</span>
-<span id="cb27-25"><a href="#cb27-25"></a>      ggplot2<span class="sc">:::</span><span class="fu">ggname</span>(<span class="st">"geom_split_violin"</span>, GeomPolygon<span class="sc">$</span><span class="fu">draw_panel</span>(newdata, ...))</span>
-<span id="cb27-26"><a href="#cb27-26"></a>    }</span>
-<span id="cb27-27"><a href="#cb27-27"></a>  }</span>
-<span id="cb27-28"><a href="#cb27-28"></a>)</span>
-<span id="cb27-29"><a href="#cb27-29"></a></span>
-<span id="cb27-30"><a href="#cb27-30"></a>geom_split_violin <span class="ot">&lt;-</span> <span class="cf">function</span> (<span class="at">mapping =</span> <span class="cn">NULL</span>, </span>
-<span id="cb27-31"><a href="#cb27-31"></a>                               <span class="at">data =</span> <span class="cn">NULL</span>, </span>
-<span id="cb27-32"><a href="#cb27-32"></a>                               <span class="at">stat =</span> <span class="st">"ydensity"</span>, </span>
-<span id="cb27-33"><a href="#cb27-33"></a>                               <span class="at">position =</span> <span class="st">"identity"</span>, ..., </span>
-<span id="cb27-34"><a href="#cb27-34"></a>                               <span class="at">draw_quantiles =</span> <span class="cn">NULL</span>, </span>
-<span id="cb27-35"><a href="#cb27-35"></a>                               <span class="at">trim =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb27-36"><a href="#cb27-36"></a>                               <span class="at">scale =</span> <span class="st">"area"</span>, </span>
-<span id="cb27-37"><a href="#cb27-37"></a>                               <span class="at">na.rm =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb27-38"><a href="#cb27-38"></a>                               <span class="at">show.legend =</span> <span class="cn">NA</span>, </span>
-<span id="cb27-39"><a href="#cb27-39"></a>                               <span class="at">inherit.aes =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb27-40"><a href="#cb27-40"></a>  <span class="fu">layer</span>(<span class="at">data =</span> data, </span>
-<span id="cb27-41"><a href="#cb27-41"></a>        <span class="at">mapping =</span> mapping, </span>
-<span id="cb27-42"><a href="#cb27-42"></a>        <span class="at">stat =</span> stat, </span>
-<span id="cb27-43"><a href="#cb27-43"></a>        <span class="at">geom =</span> GeomSplitViolin, </span>
-<span id="cb27-44"><a href="#cb27-44"></a>        <span class="at">position =</span> position, </span>
-<span id="cb27-45"><a href="#cb27-45"></a>        <span class="at">show.legend =</span> show.legend, </span>
-<span id="cb27-46"><a href="#cb27-46"></a>        <span class="at">inherit.aes =</span> inherit.aes, </span>
-<span id="cb27-47"><a href="#cb27-47"></a>        <span class="at">params =</span> <span class="fu">list</span>(<span class="at">trim =</span> trim, </span>
-<span id="cb27-48"><a href="#cb27-48"></a>                      <span class="at">scale =</span> scale, </span>
-<span id="cb27-49"><a href="#cb27-49"></a>                      <span class="at">draw_quantiles =</span> draw_quantiles, </span>
-<span id="cb27-50"><a href="#cb27-50"></a>                      <span class="at">na.rm =</span> na.rm, ...)</span>
-<span id="cb27-51"><a href="#cb27-51"></a>  )</span>
-<span id="cb27-52"><a href="#cb27-52"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Question 2</strong>. We are…</p>
+<div id="radio_YHSKBPIUIM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value="answer"><span>summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>group_by()</span></label>
 </div>
-<p>The split-violin is a version of the violin-boxplot that is good for visualising interactions. If you look at the faceted graph we made, there’s actually quite a lot of unnecessary space used up because we only need half of the violin to see the distribution - the other half is just repeating the same information.</p>
+<p><strong>Question 3</strong>. Our data..</p>
+<div id="radio_REWBYDXIBB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>summarise()</span></label>
+</div>
+<p><strong>Question 4</strong>. We want…</p>
+<div id="radio_KXBPDEYGSX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value="answer"><span>group_by() and summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value=""><span>arrange() and mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value=""><span>group_by() and arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value=""><span>filter() and select()</span></label>
+</div>
+<p><strong>Question 5</strong>. If we…</p>
+<div id="radio_EZBJIXAGUY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value="answer"><span>wide_data %&gt;% select() %&gt;% pivot_longer() %&gt;% group_by() %&gt;% summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value=""><span>select() %&gt;% pivot_longer() %&gt;% group_by() %&gt;% summarise() %&gt;% wide_data</span></label><label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value=""><span>long_data %&gt;% select() %&gt;% pivot__longer_wider() %&gt;% group_by() %&gt;% summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value=""><span>wide_data %&gt;% pivot_longer() %&gt;% select() %&gt;% summarise() %&gt;% group_by()</span></label>
+</div>
+</section><section id="error-mode" class="level3" data-number="7.8.2"><h3 data-number="7.8.2" class="anchored" data-anchor-id="error-mode">
+<span class="header-section-number">7.8.2</span> Error mode</h3>
+<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on the new types of data visualisation. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
+<p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and the data files:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> Gender))<span class="sc">+</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_split_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> .<span class="dv">4</span>)<span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">6</span>,</span>
-<span id="cb28-4"><a href="#cb28-4"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">25</span>))<span class="sc">+</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb28-7"><a href="#cb28-7"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.25</span>)) <span class="sc">+</span></span>
-<span id="cb28-8"><a href="#cb28-8"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb28-9"><a href="#cb28-9"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Load the tidyverse package below</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co"># Load the data file</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co"># This should be the Zhang_2014.csv file </span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>zhang_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Zhang_2014.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load <pkg>tidyverse</pkg> and the data files. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.</p>
+<p><strong>Question 6</strong>. Copy the following code chunk into your R Markdown file and press knit.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<p><strong>Question 7</strong>. Copy the following code chunk into your R Markdown file and press knit.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<p><strong>Question 8</strong>. Copy the following code chunk into your R Markdown file and press knit.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="7.9"><h2 data-number="7.9" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">7.9</span> Words from this Chapter</h2>
+<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/sv1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Split-violin plot</figcaption></figure>
+<div class="kable-table">
+
 </div>
 </div>
 </div>
-</section><section id="raincloud-plots" class="level3" data-number="7.10.2"><h3 data-number="7.10.2" class="anchored" data-anchor-id="raincloud-plots">
-<span class="header-section-number">7.10.2</span> Raincloud plots</h3>
-<p>The second custom function is <code>geom_flat_violin</code>. Copy and paste all of this code and again you should see it appear in your Environment pane.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="st">"%||%"</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(a)) a <span class="cf">else</span> b</span>
-<span id="cb29-3"><a href="#cb29-3"></a>}</span>
-<span id="cb29-4"><a href="#cb29-4"></a></span>
-<span id="cb29-5"><a href="#cb29-5"></a>geom_flat_violin <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">mapping =</span> <span class="cn">NULL</span>, <span class="at">data =</span> <span class="cn">NULL</span>, <span class="at">stat =</span> <span class="st">"ydensity"</span>,</span>
-<span id="cb29-6"><a href="#cb29-6"></a>                             <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="st">"area"</span>,</span>
-<span id="cb29-7"><a href="#cb29-7"></a>                             <span class="at">show.legend =</span> <span class="cn">NA</span>, <span class="at">inherit.aes =</span> <span class="cn">TRUE</span>, ...) {</span>
-<span id="cb29-8"><a href="#cb29-8"></a>  <span class="fu">layer</span>(</span>
-<span id="cb29-9"><a href="#cb29-9"></a>    <span class="at">data =</span> data,</span>
-<span id="cb29-10"><a href="#cb29-10"></a>    <span class="at">mapping =</span> mapping,</span>
-<span id="cb29-11"><a href="#cb29-11"></a>    <span class="at">stat =</span> stat,</span>
-<span id="cb29-12"><a href="#cb29-12"></a>    <span class="at">geom =</span> GeomFlatViolin,</span>
-<span id="cb29-13"><a href="#cb29-13"></a>    <span class="at">position =</span> position,</span>
-<span id="cb29-14"><a href="#cb29-14"></a>    <span class="at">show.legend =</span> show.legend,</span>
-<span id="cb29-15"><a href="#cb29-15"></a>    <span class="at">inherit.aes =</span> inherit.aes,</span>
-<span id="cb29-16"><a href="#cb29-16"></a>    <span class="at">params =</span> <span class="fu">list</span>(</span>
-<span id="cb29-17"><a href="#cb29-17"></a>      <span class="at">trim =</span> trim,</span>
-<span id="cb29-18"><a href="#cb29-18"></a>      <span class="at">scale =</span> scale,</span>
-<span id="cb29-19"><a href="#cb29-19"></a>      ...</span>
-<span id="cb29-20"><a href="#cb29-20"></a>    )</span>
-<span id="cb29-21"><a href="#cb29-21"></a>  )</span>
-<span id="cb29-22"><a href="#cb29-22"></a>}</span>
-<span id="cb29-23"><a href="#cb29-23"></a></span>
-<span id="cb29-24"><a href="#cb29-24"></a>GeomFlatViolin <span class="ot">&lt;-</span></span>
-<span id="cb29-25"><a href="#cb29-25"></a>  <span class="fu">ggproto</span>(<span class="st">"Violinist"</span>, Geom,</span>
-<span id="cb29-26"><a href="#cb29-26"></a>          <span class="at">setup_data =</span> <span class="cf">function</span>(data, params) {</span>
-<span id="cb29-27"><a href="#cb29-27"></a>            data<span class="sc">$</span>width <span class="ot">&lt;-</span> data<span class="sc">$</span>width <span class="sc">%||%</span></span>
-<span id="cb29-28"><a href="#cb29-28"></a>              params<span class="sc">$</span>width <span class="sc">%||%</span> (<span class="fu">resolution</span>(data<span class="sc">$</span>x, <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="fl">0.9</span>)</span>
-<span id="cb29-29"><a href="#cb29-29"></a>            </span>
-<span id="cb29-30"><a href="#cb29-30"></a>            <span class="co"># ymin, ymax, xmin, and xmax define the bounding rectangle for each group</span></span>
-<span id="cb29-31"><a href="#cb29-31"></a>            data <span class="sc">%&gt;%</span></span>
-<span id="cb29-32"><a href="#cb29-32"></a>              <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
-<span id="cb29-33"><a href="#cb29-33"></a>              <span class="fu">mutate</span>(<span class="at">ymin =</span> <span class="fu">min</span>(y),</span>
-<span id="cb29-34"><a href="#cb29-34"></a>                     <span class="at">ymax =</span> <span class="fu">max</span>(y),</span>
-<span id="cb29-35"><a href="#cb29-35"></a>                     <span class="at">xmin =</span> x,</span>
-<span id="cb29-36"><a href="#cb29-36"></a>                     <span class="at">xmax =</span> x <span class="sc">+</span> width <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb29-37"><a href="#cb29-37"></a>            </span>
-<span id="cb29-38"><a href="#cb29-38"></a>          },</span>
-<span id="cb29-39"><a href="#cb29-39"></a>          </span>
-<span id="cb29-40"><a href="#cb29-40"></a>          <span class="at">draw_group =</span> <span class="cf">function</span>(data, panel_scales, coord) {</span>
-<span id="cb29-41"><a href="#cb29-41"></a>            <span class="co"># Find the points for the line to go all the way around</span></span>
-<span id="cb29-42"><a href="#cb29-42"></a>            data <span class="ot">&lt;-</span> <span class="fu">transform</span>(data, <span class="at">xminv =</span> x,</span>
-<span id="cb29-43"><a href="#cb29-43"></a>                              <span class="at">xmaxv =</span> x <span class="sc">+</span> violinwidth <span class="sc">*</span> (xmax <span class="sc">-</span> x))</span>
-<span id="cb29-44"><a href="#cb29-44"></a>            </span>
-<span id="cb29-45"><a href="#cb29-45"></a>            <span class="co"># Make sure it's sorted properly to draw the outline</span></span>
-<span id="cb29-46"><a href="#cb29-46"></a>            newdata <span class="ot">&lt;-</span> <span class="fu">rbind</span>(plyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">transform</span>(data, <span class="at">x =</span> xminv), y),</span>
-<span id="cb29-47"><a href="#cb29-47"></a>                             plyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">transform</span>(data, <span class="at">x =</span> xmaxv), <span class="sc">-</span>y))</span>
-<span id="cb29-48"><a href="#cb29-48"></a>            </span>
-<span id="cb29-49"><a href="#cb29-49"></a>            <span class="co"># Close the polygon: set first and last point the same</span></span>
-<span id="cb29-50"><a href="#cb29-50"></a>            <span class="co"># Needed for coord_polar and such</span></span>
-<span id="cb29-51"><a href="#cb29-51"></a>            newdata <span class="ot">&lt;-</span> <span class="fu">rbind</span>(newdata, newdata[<span class="dv">1</span>,])</span>
-<span id="cb29-52"><a href="#cb29-52"></a>            </span>
-<span id="cb29-53"><a href="#cb29-53"></a>            ggplot2<span class="sc">:::</span><span class="fu">ggname</span>(<span class="st">"geom_flat_violin"</span>, GeomPolygon<span class="sc">$</span><span class="fu">draw_panel</span>(newdata, panel_scales, coord))</span>
-<span id="cb29-54"><a href="#cb29-54"></a>          },</span>
-<span id="cb29-55"><a href="#cb29-55"></a>          </span>
-<span id="cb29-56"><a href="#cb29-56"></a>          <span class="at">draw_key =</span> draw_key_polygon,</span>
-<span id="cb29-57"><a href="#cb29-57"></a>          </span>
-<span id="cb29-58"><a href="#cb29-58"></a>          <span class="at">default_aes =</span> <span class="fu">aes</span>(<span class="at">weight =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"grey20"</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
-<span id="cb29-59"><a href="#cb29-59"></a>                            <span class="at">alpha =</span> <span class="cn">NA</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>),</span>
-<span id="cb29-60"><a href="#cb29-60"></a>          </span>
-<span id="cb29-61"><a href="#cb29-61"></a>          <span class="at">required_aes =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)</span>
-<span id="cb29-62"><a href="#cb29-62"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This plot is similar to the split-violin, but it adds in the raw data points and looks a bit like a raincloud as a result.</p>
-<p>First, we will run the plot for just one variable, Condition. Again, try changing the arguments (adjust any numbers and change FALSE to TRUE) to see how you can control different aspects of the plot, in particular, try removing <code>coord_flip()</code> to see what happens.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(zhang_data, <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest))<span class="sc">+</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_flat_violin</span>(<span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> .<span class="dv">25</span>, <span class="at">y =</span> <span class="dv">0</span>), </span>
-<span id="cb30-3"><a href="#cb30-3"></a>                   <span class="at">trim=</span><span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">color =</span> Condition), </span>
-<span id="cb30-5"><a href="#cb30-5"></a>             <span class="at">width =</span> .<span class="dv">2</span>, <span class="at">size =</span> .<span class="dv">5</span>, <span class="at">alpha =</span> .<span class="dv">75</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>)<span class="sc">+</span></span>
-<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb30-8"><a href="#cb30-8"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.25</span>)) <span class="sc">+</span></span>
-<span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb30-10"><a href="#cb30-10"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.3</span>)) <span class="sc">+</span></span>
-<span id="cb30-11"><a href="#cb30-11"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/rc1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Raincloud plot for one factor</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="raincloud-plots-with-multiple-factors" class="level3" data-number="7.10.3"><h3 data-number="7.10.3" class="anchored" data-anchor-id="raincloud-plots-with-multiple-factors">
-<span class="header-section-number">7.10.3</span> Raincloud plots with multiple factors</h3>
-<p>Now we can run the code for a 2 x 2 plot, adding in Gender to <code>fill</code> argument. This is quite a complicated plot, do not worry if you are struggling to understand the code but remember, you just need to understand which bits to change.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(zhang_data, </span>
-<span id="cb31-2"><a href="#cb31-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Condition, <span class="at">y =</span> interest, <span class="at">fill =</span> Gender))<span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_flat_violin</span>(<span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> .<span class="dv">25</span>, <span class="at">y =</span> <span class="dv">0</span>), </span>
-<span id="cb31-4"><a href="#cb31-4"></a>                   <span class="at">trim=</span><span class="cn">FALSE</span>, </span>
-<span id="cb31-5"><a href="#cb31-5"></a>                   <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">05</span>, <span class="at">height =</span> <span class="fl">0.05</span>), </span>
-<span id="cb31-7"><a href="#cb31-7"></a>             <span class="at">size =</span> .<span class="dv">5</span>, </span>
-<span id="cb31-8"><a href="#cb31-8"></a>             <span class="at">alpha =</span> .<span class="dv">7</span>, </span>
-<span id="cb31-9"><a href="#cb31-9"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb31-10"><a href="#cb31-10"></a>             <span class="fu">aes</span>(<span class="at">colour =</span> Gender))<span class="sc">+</span></span>
-<span id="cb31-11"><a href="#cb31-11"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">3</span>, </span>
-<span id="cb31-12"><a href="#cb31-12"></a>               <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
-<span id="cb31-13"><a href="#cb31-13"></a>               <span class="at">position =</span> <span class="st">"dodge"</span>)<span class="sc">+</span></span>
-<span id="cb31-14"><a href="#cb31-14"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb31-15"><a href="#cb31-15"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.3</span>)) <span class="sc">+</span></span>
-<span id="cb31-16"><a href="#cb31-16"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb31-17"><a href="#cb31-17"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.3</span>)) <span class="sc">+</span></span>
-<span id="cb31-18"><a href="#cb31-18"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span></span>
-<span id="cb31-19"><a href="#cb31-19"></a>  <span class="fu">scale_colour_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="07-more-visualisation_files/figure-html/rc2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Raincloud plot for two factors</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="viz-fin" class="level3" data-number="7.10.4"><h3 data-number="7.10.4" class="anchored" data-anchor-id="viz-fin">
-<span class="header-section-number">7.10.4</span> Finished!</h3>
-<p>And you’re done! As we’ve said throughout this chapter, you do not need to remember all of this code, you just need to remember what’s possible and where to find the examples that you can modify.</p>
+</section><section id="end-of-chapter" class="level2" data-number="7.10"><h2 data-number="7.10" class="anchored" data-anchor-id="end-of-chapter">
+<span class="header-section-number">7.10</span> End of chapter</h2>
+<p>Blah.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
@@ -1114,7 +1044,7 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 Zhang, T., Kim, T., Brooks, A. W., Gino, F., &amp; Norton, M. I. (2014). A <span>“<span>Present</span>”</span> for the <span>Future</span>: <span>The</span> <span>Unexpected</span> <span>Value</span> of <span>Rediscovery</span>. <em>Psychological Science</em>, <em>25</em>(10), 1851–1860. <a href="https://doi.org/10.1177/0956797614542274">https://doi.org/10.1177/0956797614542274</a>
 </div>
 </div>
-</section></section></main><!-- /main --><script>
+</section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -1695,7 +1625,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./06-wrangling-3.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
