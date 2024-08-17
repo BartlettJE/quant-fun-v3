@@ -380,7 +380,7 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#viz-a3" id="toc-viz-a3" class="nav-link" data-scroll-target="#viz-a3"><span class="header-section-number">7.2</span> Activity 3: Scatterplots</a>
+<a href="#viz-a3" id="toc-viz-a3" class="nav-link" data-scroll-target="#viz-a3"><span class="header-section-number">7.2</span> Scatterplots</a>
   <ul class="collapse">
 <li><a href="#basic-scatterplot" id="toc-basic-scatterplot" class="nav-link" data-scroll-target="#basic-scatterplot"><span class="header-section-number">7.2.1</span> Basic scatterplot</a></li>
   <li><a href="#axis-labels" id="toc-axis-labels" class="nav-link" data-scroll-target="#axis-labels"><span class="header-section-number">7.2.2</span> Axis labels</a></li>
@@ -389,7 +389,7 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#viz-a4" id="toc-viz-a4" class="nav-link" data-scroll-target="#viz-a4"><span class="header-section-number">7.3</span> Activity 4: Boxplots</a>
+<a href="#viz-a4" id="toc-viz-a4" class="nav-link" data-scroll-target="#viz-a4"><span class="header-section-number">7.3</span> Boxplots</a>
   <ul class="collapse">
 <li><a href="#basic-boxplot" id="toc-basic-boxplot" class="nav-link" data-scroll-target="#basic-boxplot"><span class="header-section-number">7.3.1</span> Basic boxplot</a></li>
   <li><a href="#adding-data-points" id="toc-adding-data-points" class="nav-link" data-scroll-target="#adding-data-points"><span class="header-section-number">7.3.2</span> Adding data points</a></li>
@@ -400,7 +400,7 @@ div.csl-indent {
 </li>
   <li><a href="#viz-a5" id="toc-viz-a5" class="nav-link" data-scroll-target="#viz-a5"><span class="header-section-number">7.4</span> Activity 5: Reordering factors</a></li>
   <li>
-<a href="#viz-a7" id="toc-viz-a7" class="nav-link" data-scroll-target="#viz-a7"><span class="header-section-number">7.5</span> Activity 7: Violin plots</a>
+<a href="#viz-a7" id="toc-viz-a7" class="nav-link" data-scroll-target="#viz-a7"><span class="header-section-number">7.5</span> Violin-boxplots</a>
   <ul class="collapse">
 <li><a href="#basic-violin-plot" id="toc-basic-violin-plot" class="nav-link" data-scroll-target="#basic-violin-plot"><span class="header-section-number">7.5.1</span> Basic violin plot</a></li>
   <li><a href="#violin-plots-with-raw-data-points" id="toc-violin-plots-with-raw-data-points" class="nav-link" data-scroll-target="#violin-plots-with-raw-data-points"><span class="header-section-number">7.5.2</span> Violin plots with raw data points</a></li>
@@ -453,7 +453,9 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>Although documenting everyday activities may seem trivial, four studies reveal that creating records of the present generates unexpected benefits by allowing future rediscoveries. In Study 1, we used a time-capsule paradigm to show that individuals underestimate the extent to which rediscovering experiences from the past will be curiosity provoking and interesting in the future. In Studies 2 and 3, we found that people are particularly likely to underestimate the pleasure of rediscovering ordinary, mundane experiences, as opposed to extraordinary experiences. Finally, Study 4 demonstrates that underestimating the pleasure of rediscovery leads to time-inconsistent choices: Individuals forgo opportunities to document the present but then prefer rediscovering those moments in the future to engaging in an alternative fun activity. Underestimating the value of rediscovery is linked to people’s erroneous faith in their memory of everyday events. By documenting the present, people provide themselves with the opportunity to rediscover mundane moments that may otherwise have been forgotten.</p>
 </blockquote>
-<p>In summary…</p>
+<p>In summary, they were interested in whether people could predict how interested they would be in rediscovering past experiences. They call it a “time capsule” effect, where people store photos or messages to remind themselves of past events in the future.</p>
+<p>At the start of the study (time 1), participants in a romantic relationship wrote about two kinds of experiences. An “extraordinary” experience with their partner on Valentine’s day and an “ordinary” experience one week before. They were then asked how enjoyable, interesting, and meaningful they predict they will find these recollection in three months time (time 2). Three months later, Zhang et al.&nbsp;randomised participants into one of two groups. In the “extraordinary” group, they reread the extraordinary recollection. In the “ordinary” group, they reread the ordinary recollection. All the participants completed measures on how enjoyable, interesting, and meaningful they found the experience, but this time what they felt, rather than what they predict they will feel.</p>
+<p>They predicted participants in the ordinary group would underestimate their future feelings (i.e., there would be a bigger difference between time 1 and time 2 measures) compared to participants in the extraordinary group. In this chapter, we focus on a composite measure which took the mean of items on interest, meaningfulness, and enjoyment.</p>
 </section><section id="organising-your-files-and-project-for-the-chapter" class="level3" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-chapter">
 <span class="header-section-number">7.1.2</span> Organising your files and project for the chapter</h3>
 <p>Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.</p>
@@ -575,36 +577,38 @@ Try this
 <tr class="odd">
 <td style="text-align: center;">Gender</td>
 <td style="text-align: left;">character</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Participant gender: Male (1) or Female (2)</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Age</td>
 <td style="text-align: left;">double</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Participant age in years.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Condition</td>
 <td style="text-align: left;">character</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Condition participant was randomly allocated into: Ordinary (1) or Extraordinary (2).</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">time1_interest</td>
 <td style="text-align: left;">double</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">How interested they predict they will find the recollection on a 1 (not at all) to 7 (extremely) scale. This measure is the mean of enjoyment, interest, and meaningfulness.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">time2_interest</td>
 <td style="text-align: left;">double</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">How interested they actually found the recollection on a 1 (not at all) to 7 (extremely) scale. This measure is the mean of enjoyment, interest, and meaningfulness.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">participant_ID</td>
 <td style="text-align: left;">integer</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Our new participant ID as an integer from 1 to 130.</td>
 </tr>
 </tbody>
-</table></section></section><section id="viz-a3" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="viz-a3">
-<span class="header-section-number">7.2</span> Activity 3: Scatterplots</h2>
+</table>
+<p>We will use this data set to demonstrate different ways of visualising continuous variables, either combining multiple continuous variables in a scatterplot or splitting continuous variables into categories in a boxplot or violin-boxplot.</p>
+</section></section><section id="viz-a3" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="viz-a3">
+<span class="header-section-number">7.2</span> Scatterplots</h2>
 <section id="basic-scatterplot" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="basic-scatterplot">
 <span class="header-section-number">7.2.1</span> Basic scatterplot</h3>
 <p>Now let’s make a scatterplot plotting <code>Age</code> and <code>interest</code> to see if there is any relationship between the two. We need to specify both the x and y-axis variables. The following code will produce a very simple scatterplot. Again, you wouldn’t use this graph in a paper, but for eye-balling your data it would suffice.</p>
@@ -690,7 +694,7 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </section></section><section id="viz-a4" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="viz-a4">
-<span class="header-section-number">7.3</span> Activity 4: Boxplots</h2>
+<span class="header-section-number">7.3</span> Boxplots</h2>
 <section id="basic-boxplot" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="basic-boxplot">
 <span class="header-section-number">7.3.1</span> Basic boxplot</h3>
 <ul>
@@ -813,7 +817,7 @@ When you change the <code>labels</code>, R will simply overwrite the names in th
 </div>
 </div>
 </section><section id="viz-a7" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="viz-a7">
-<span class="header-section-number">7.5</span> Activity 7: Violin plots</h2>
+<span class="header-section-number">7.5</span> Violin-boxplots</h2>
 <section id="basic-violin-plot" class="level3" data-number="7.5.1"><h3 data-number="7.5.1" class="anchored" data-anchor-id="basic-violin-plot">
 <span class="header-section-number">7.5.1</span> Basic violin plot</h3>
 <p>Violin plots are so-called because with a normal distribution the shape would look something like a violin. They show density, i.e., the fatter the violin the more data points there are for that value.</p>
@@ -932,24 +936,24 @@ It’s important to remember that R is very literal. <code>ggplot2</code> works 
 <section id="knowledge-check" class="level3" data-number="7.8.1"><h3 data-number="7.8.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">7.8.1</span> Knowledge check</h3>
 <p><strong>Question 1</strong>. We have…</p>
-<div id="radio_MWDACZQKZF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value="answer"><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_MWDACZQKZF" value=""><span>mutate()</span></label>
+<div id="radio_AFQNKJEJBB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AFQNKJEJBB" value=""><span>summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_AFQNKJEJBB" value=""><span>group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_AFQNKJEJBB" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_AFQNKJEJBB" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_AFQNKJEJBB" value="answer"><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_AFQNKJEJBB" value=""><span>arrange()</span></label>
 </div>
 <p><strong>Question 2</strong>. We are…</p>
-<div id="radio_YHSKBPIUIM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value="answer"><span>summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_YHSKBPIUIM" value=""><span>group_by()</span></label>
+<div id="radio_DHBXAMMCBK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DHBXAMMCBK" value=""><span>group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_DHBXAMMCBK" value=""><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_DHBXAMMCBK" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_DHBXAMMCBK" value="answer"><span>summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_DHBXAMMCBK" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_DHBXAMMCBK" value=""><span>mutate()</span></label>
 </div>
 <p><strong>Question 3</strong>. Our data..</p>
-<div id="radio_REWBYDXIBB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_REWBYDXIBB" value=""><span>summarise()</span></label>
+<div id="radio_FSLMTZPEXW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FSLMTZPEXW" value="answer"><span>mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_FSLMTZPEXW" value=""><span>group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_FSLMTZPEXW" value=""><span>summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_FSLMTZPEXW" value=""><span>select()</span></label><label><input type="radio" autocomplete="off" name="radio_FSLMTZPEXW" value=""><span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_FSLMTZPEXW" value=""><span>filter()</span></label>
 </div>
 <p><strong>Question 4</strong>. We want…</p>
-<div id="radio_KXBPDEYGSX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value="answer"><span>group_by() and summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value=""><span>arrange() and mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value=""><span>group_by() and arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_KXBPDEYGSX" value=""><span>filter() and select()</span></label>
+<div id="radio_SSMCEUNHQT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SSMCEUNHQT" value=""><span>filter() and select()</span></label><label><input type="radio" autocomplete="off" name="radio_SSMCEUNHQT" value=""><span>arrange() and mutate()</span></label><label><input type="radio" autocomplete="off" name="radio_SSMCEUNHQT" value=""><span>group_by() and arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_SSMCEUNHQT" value="answer"><span>group_by() and summarise()</span></label>
 </div>
 <p><strong>Question 5</strong>. If we…</p>
-<div id="radio_EZBJIXAGUY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value="answer"><span>wide_data %&gt;% select() %&gt;% pivot_longer() %&gt;% group_by() %&gt;% summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value=""><span>select() %&gt;% pivot_longer() %&gt;% group_by() %&gt;% summarise() %&gt;% wide_data</span></label><label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value=""><span>long_data %&gt;% select() %&gt;% pivot__longer_wider() %&gt;% group_by() %&gt;% summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_EZBJIXAGUY" value=""><span>wide_data %&gt;% pivot_longer() %&gt;% select() %&gt;% summarise() %&gt;% group_by()</span></label>
+<div id="radio_GEYZEOKTXT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GEYZEOKTXT" value=""><span>wide_data %&gt;% pivot_longer() %&gt;% select() %&gt;% summarise() %&gt;% group_by()</span></label><label><input type="radio" autocomplete="off" name="radio_GEYZEOKTXT" value=""><span>select() %&gt;% pivot_longer() %&gt;% group_by() %&gt;% summarise() %&gt;% wide_data</span></label><label><input type="radio" autocomplete="off" name="radio_GEYZEOKTXT" value=""><span>long_data %&gt;% select() %&gt;% pivot__longer_wider() %&gt;% group_by() %&gt;% summarise()</span></label><label><input type="radio" autocomplete="off" name="radio_GEYZEOKTXT" value="answer"><span>wide_data %&gt;% select() %&gt;% pivot_longer() %&gt;% group_by() %&gt;% summarise()</span></label>
 </div>
 </section><section id="error-mode" class="level3" data-number="7.8.2"><h3 data-number="7.8.2" class="anchored" data-anchor-id="error-mode">
 <span class="header-section-number">7.8.2</span> Error mode</h3>
