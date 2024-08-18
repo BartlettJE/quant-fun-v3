@@ -133,67 +133,158 @@ We will use this data set to demonstrate different ways of visualising continuou
 
 ## Scatterplots {#viz-a3}
 
-### Basic scatterplot
+The first visualisation is a `r glossary("scatterplot", def = "Plotting two variables on the x- and y-axis to show the correlation/relationship between the variables.")` to show the relationship between two continuous variables. One variable goes on the x-axis and the other variables goes on the y-axis. Each dot then represents the intersection of those two variables. You will use these plots when reporting a correlation or regression. 
 
-Now let's make a scatterplot plotting `Age` and `interest` to see if there is any relationship between the two. We need to specify both the x and y-axis variables. The following code will produce a very simple scatterplot. Again, you wouldn't use this graph in a paper, but for eye-balling your data it would suffice. 
+### Activity 3 - Creating a basic scatterplot
 
-```{r scat1, fig.cap = "Basic scatterplot"}
-ggplot(zhang_data, aes(x = time1_interest,y = Age))+
+Now let us make a scatterplot plotting `Age` and `time1_interest` to see if there is any relationship between the two. We need to specify both the x- and y-axis variables, but the only difference to what we created in Chapter 3 is using a new layer `geom_point`. 
+
+```{r scat1}
+zhang_data %>% 
+  ggplot(aes(x = time1_interest, y = Age)) +
        geom_point()
 ```
 
-### Axis labels
+### Activity 4 - Editing axis labels
 
-From this plot it doesn't look like there is much of a relationship between age and interest ratings. We can now change the labels using the same scale functions as before. 
+This plot is great for some exploratory data analysis, but it looks a little untidy to put into a report. We can use the `scale_x_continuous` and `scale_y_continuous` layers to control the tick marks, as well as the axis name. 
 
-```{r scat2, fig.cap = "Scatterplot with label changes"}
-ggplot(zhang_data, aes(x = time1_interest,y = Age))+
-       geom_point()+
-  scale_x_continuous(name = "Mean interest score (1-7)") + 
-  scale_y_continuous(name = "Age")
+```{r scat2}
+zhang_data %>%  
+  ggplot(aes(x = time1_interest,y = Age)) +
+  geom_point() +
+  theme_classic() + 
+  scale_x_continuous(name = "Time 1 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  scale_y_continuous(name = "Age",
+                     limits = c(15, 45), # change limits to 15 to 45
+                     breaks = seq(from = 15, # sequence from 15
+                                  to = 45, # to 45 
+                                  by = 5)) # in steps of 5
 ```
 
-### Adding a regression line
+To break down these new function layers: 
 
-It's often useful to add a regression line or line of best fit to a scatterplot. The regression line is added with `geom_smooth()` and by default will also provide a 95% confidence interval. You can specify what type of line you want to draw, most often you will need `method = lm`, i.e., a linear model or a straight line. Look up the help documentation for `geom_smooth()` and see what other methods you can use. 
+- `breaks` set the tick marks on the plot. We demonstrate two ways of setting this. On the x-axis, we just manually set values for 1 to 7. On the y-axis, we use a second function to set the breaks. 
 
-```{r scat3, fig.cap = "Scatterplot with regression line"}
-ggplot(zhang_data, aes(x = time1_interest,y = Age))+
-  geom_point()+
-  scale_x_continuous(name = "Mean interest score (1-7)") + 
-  scale_y_continuous(name = "Age")+
-  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this
+- `seq()` creates a sequence of numbers and can save a lot of time when you need to add lots of values. We set three arguments, `from` for the starting point, `to` for the end point, and `by` for the steps the sequence goes up in. 
+
+- `limits` controls the start and end point of the graph scale. In the original graph, we can see there are points below 20 and above 40, so we might want to increase the `limits` of the graph to include a wider range. 
+
+::: {.callout-important}
+#### Error mode
+
+When controlling the limits of the graph, sometimes you want to decrease the `limits` range to zoom in on an element of the data. If you decrease the range which cuts off some data points, you must be very careful as it actually cuts off data which you would receive a warning about:
+
+```{r warning=TRUE}
+zhang_data %>%  
+  ggplot(aes(x = time1_interest,y = Age)) +
+  geom_point() +
+  theme_classic() + 
+  scale_y_continuous(name = "Age",
+                     limits = c(30, 40)) # in steps of 5
 ```
 
-### Grouped scatterplots
+You must be very careful when truncating axes, but if you *do* need to do it, there is a different function layer to use: 
 
-We can use ggplot to show how the relationship might differ for different populations within our data. We do this by adding `colour()` to `aes()` and setting it as whatever variable we would like to distinguish between. In this case, we will see how the relationship between age and interest differs for the male and female participants. There are a few participants with missing gender so we will first filter them out.
+```{r}
+zhang_data %>%  
+  ggplot(aes(x = time1_interest,y = Age)) +
+  geom_point() +
+  theme_classic() + 
+  coord_cartesian(ylim = c(30, 40))
+```
+
+:::
+
+### Activity 5 - Adding a regression line
+
+It is often useful to add a regression line or line of best fit to a scatterplot. You can add a regression line with the `geom_smooth()` layer and by default will also provide a 95% confidence interval. You can specify what type of line you want to draw, most often you will need `method = lm` for a linear model or a straight line. 
+
+```{r scat3}
+zhang_data %>%  
+  ggplot(aes(x = time1_interest,y = Age)) +
+  geom_point() +
+  theme_classic() + 
+  scale_x_continuous(name = "Time 1 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  scale_y_continuous(name = "Age",
+                     limits = c(15, 45), # change limits to 15 to 45
+                     breaks = seq(from = 15, # sequence from 15
+                                  to = 45, # to 45 
+                                  by = 5)) +  # in steps of 5
+  geom_smooth(method = "lm")
+```
+
+With the regression line, we can see there is very little relationship between age and interest score at time 1. 
+
+::: {.callout-tip}
+#### Try this
+
+So far, we made a scatterplot of age against interest at time 1. Now, create a scatterplot on your own using the two interest rating variables: `time1_interest` and `time2_interest`. 
+
+After you made the scatterplot, it looks like there is a `r mcq(c(answer = "positive", "negative"))` relationship between interest ratings at time 1 and time 2. 
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r}
+zhang_data %>%  
+  ggplot(aes(x = time1_interest, y = time2_interest)) +
+  geom_point() +
+  theme_classic() + 
+  scale_x_continuous(name = "Time 1 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  scale_y_continuous(name = "Time 2 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  geom_smooth(method = "lm")
+```
+
+:::
+
+### Activity 6 - Creating a grouped scatterplot
+
+Before we move on, we can add a third variable to show how the relationship might differ for different groups within our data. We can do this by adding the `colour` argument to `aes()` and setting it as whatever variable we would like to distinguish between. In this case, we will see how the relationship between age and interest at time 1 differs for the male and female participants. There are a few participants with missing gender, so we will first filter them out.
 
 
 ```{r, scat4, fig.cap = "Grouped scatterplot", warning=FALSE}
 zhang_data %>%
-           ggplot(aes(x = time1_interest, y = Age, colour = Gender))+
-  geom_point()+
-  scale_x_continuous(name = "Mean interest score (1-7)") + 
-  scale_y_continuous(name = "Age")+
-  geom_smooth(method=lm)
+  drop_na(Gender) %>% 
+  ggplot(aes(x = time1_interest, y = Age, colour = Gender)) +
+  geom_point() +
+  theme_classic() + 
+  scale_x_continuous(name = "Mean interest score (1-7)",
+                     breaks = c(1:7)) + 
+  scale_y_continuous(name = "Age") +
+  geom_smooth(method = "lm")
 ```
 
-And here's that plot with the labels tidied up. Notice the use of `scale_color_discrete()` to adjust the labels for Gender. 
+::: {.callout-tip}
+#### Try this
 
-```{block, type="warning"}
-When you change the `labels`, R will simply overwrite the names in the dataset. If you wanted to actually change the order of the categories (e.g., have male as the red line) you need to change the order of the factor. We will do this later, for now, just be sure that you're changing the name of the right category (i.e., female comes first))
+For your independent scatterplot of the two interest rating variables: `time1_interest` and `time2_interest`, add a `colour` argument using the `Condition` variable. This will show the relationship between time 1 and time 2 interest separately for participants in the ordinary and extraordinary groups. 
+
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r}
+zhang_data %>%  
+  ggplot(aes(x = time1_interest, y = time2_interest, colour = Condition)) +
+  geom_point() +
+  theme_classic() + 
+  scale_x_continuous(name = "Time 1 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  scale_y_continuous(name = "Time 2 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  geom_smooth(method = "lm")
 ```
 
-```{r scat5, fig.cap = "Grouped scatterplot with adjusted labels"}
-ggplot(zhang_data, aes(x = time1_interest,y = Age, colour = Gender))+
-  geom_point()+
-  scale_x_continuous(name = "Mean interest score (1-7)") + 
-  scale_y_continuous(name = "Age")+
-  geom_smooth(method=lm)+
-  scale_color_discrete(name = "Gender",
-                       labels = c("Female", "Male"))
-```
+:::
 
 ## Boxplots {#viz-a4}
 
@@ -428,6 +519,8 @@ Below, we have several variations of a code chunk error or misspecification. Cop
 
 **Question 6**. Copy the following code chunk into your R Markdown file and press knit. 
 
+tick marks, limits
+
 ````{verbatim, lang = "markdown"}
 ```{r}
 
@@ -444,6 +537,8 @@ Below, we have several variations of a code chunk error or misspecification. Cop
 :::
 
 **Question 7**. Copy the following code chunk into your R Markdown file and press knit. 
+
+combination of pipes and + in ggplot2
 
 ````{verbatim, lang = "markdown"}
 ```{r}
