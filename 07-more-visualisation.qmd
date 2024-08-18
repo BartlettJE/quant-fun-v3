@@ -288,105 +288,200 @@ zhang_data %>%
 
 ## Boxplots {#viz-a4}
 
-### Basic boxplot
+The next visualisation is the `r glossary("boxplot", def = "Visualising a continuous variable by five summary statistics: the median centre line, the first and third quartile, and 1.5 times the first and third quartiles.")` which presents a range of summary statistics for your outcome, which you can split between different groups on the x-axis, or add further variables to divide by. For the boxplot element, you get five summary statistics: the median centre line, the first and third quartile as the box (essentially, the interquartile range), and 1.5 times the first and third quartiles as the whiskers extending from the box.  
 
-- Remember to add pivot_longer step. 
+### Activity 7 - Creating a basic boxplot
 
-The following code will produce a simple boxplot for eye-balling your data.
+Before we create the boxplot, we need a final data wrangling step. At the moment, we have `time1_interest` and `time2_interest` in wide format, but to plot together, we need to express it as a single variable. For that, we must restructure the data. 
 
-```{r bp1, fig.cap = "Basic boxplot"}
-ggplot(zhang_data, aes(x = Condition, y = time1_interest))+
-  geom_boxplot()
-```
+::: {.callout-tip}
+#### Try this
 
-### Adding data points
+To wrangle the data, gather the variables `time1_interest` and `time2_interest`. Create a new object called `zhang_data_long` and use the names `Time` and `Interest` for your column names to be consistent with the demonstrations below.
 
-If we add another layer `geom_point()` we can add our raw data points to our boxplots to make them more informative.
+:::
 
-```{r bp2, fig.cap = "Boxplot with overplotting"}
-ggplot(zhang_data, aes(x = Condition, y = time1_interest))+
-  geom_boxplot()+
-  geom_point()
-```
-
-However, this plot suffers from **over-plotting**, that is, there are multiple data points on top of each other. We can change this by using `geom_jitter()`, which adds a layer of points that are jittered so that each one is visible.
-
-`height` and `width` affect how much each point is jittered. Play around with the values to see how it affects the data points. 
-
-```{r bp3, fig.cap = "Boxplot with jittered data"}
-ggplot(zhang_data, aes(x = Condition, y = time1_interest))+
-  geom_boxplot()+
-  geom_jitter(height = 0, width = .1)
-```
-
-### Adding colour
-
-We may want to add colour to our graph (and for consistency, we'll sort out the labels). We do this by adding the 'fill' argument to the ggplot aesthetic by specifying which variable the colour of the fill should be organised by. 
-
-```{r bp4, fig.cap = "Boxplot with colour"}
-ggplot(zhang_data, aes(x = Condition, y = time1_interest, fill = Condition))+
-  geom_boxplot()+
-  geom_jitter(height = 0, width = .1)+
-  scale_x_discrete(name = "Condition") + # note the x-axis is discrete
-  scale_y_continuous(name = "Mean interest rating (1-7)")+
-  scale_fill_discrete(guide = FALSE) # this suppresses the legend because we don't need it
-```
-
-### Boxplots for multiple factors
-
-When you only have one IV, using the fill command to change the colour is a little redundant, as the colours don't add any additional information. It makes more sense to use colour to represent an additional IV. 
-
-For this example, we'll use `Condition` and `time` as IVs. `fill()` now specifies a second IV, rather than repeating the IV on the x-axis as in the previous plot. 
-
-With multiple IVs the command to overlay the raw data points changes as the data points also need dodged (try running the code with the previous geom_jitter function to see what happens)
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
 
 ```{r}
+# gather the data to convert to long format
 zhang_data_long <- zhang_data %>% 
   pivot_longer(cols = time1_interest:time2_interest,
                names_to = "Time",
                values_to = "Interest")
 ```
+:::
 
 
-```{r bp5, fig.cap = "Boxplot for two factors"}
-ggplot(zhang_data_long, 
-       aes(x = Condition, 
-           y = Interest, 
-           fill = Time))+
-  geom_boxplot()+
-  geom_point(position=position_jitterdodge(jitter.width = .1))
+If you only want to visualise one continuous variable, we need one variable on the y-axis and a new function layer `geom_boxplot()`. 
+
+```{r bp1}
+zhang_data_long %>% 
+  ggplot(aes(y = Interest)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
 ```
 
-### Colour-blind friendly options
+Typically, you want to compare the outcome between one or more categories, so we can add a categorical variable like gender to the x-axis, removing the missing value first. 
 
-There is one more fill option that we can use. Rather than specifying `scale_fill_discrete()`, we can use `scale_fill_viridis_d()`. This function does exactly the same thing but it uses a colour-blind friendly palette (which also prints in black and white). There are 5 different options for colours and you can see them by changing `option` to A, B, C, D or E. Personally I like option E with `alpha = .6` (to control transparency) but that's not an official School position.
+```{r}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
+```
+
+### Activity 8 - Adding colour to variables
+
+It is not as important when you only have one variable on the x-axis, but one useful feature is adding colour to distinguish between categories. You can control this by adding a variable to the `fill` argument within `aes()`. 
+
+By default, we get a legend which is redundant when we only have different colours on the x-axis, so we can turn it off by adding `guides(fill = FALSE)` as a layer. 
+
+```{r bp4, fig.cap = "Boxplot with colour"}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  guides(fill = FALSE) # remove the legend
+```
+
+::: {.callout-important}
+#### Error mode
+
+You might have noticed we have now used two different arguments to control the colour. In scatterplots, we used `colour`. In boxplots, we used `fill`. It is one of those concepts that takes time to recognise which you need, depending on the type of geoms you are using. Roughly, `colour` is when you want to control the outline or symbol, like the points. Whereas `fill` is when you want the inside of a geom coloured. You can see the difference here by controlling `fill` first:  
+
+```{r}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
+```
+
+Then `colour`: 
+
+```{r}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender, colour = Gender)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
+```
+
+:::
+
+### Activity 9 - Controlling colours
+
+<pkg>ggplot2</pkg> has a default colour scheme which is fine for quick plots, but it is useful to control the colour scheme. You can do this manually by editing `scale_fill_discrete()` and choosing colours through the `type` argument (you can do this through character names or choosing a HEX code: [https://r-charts.com/colors/](https://r-charts.com/colors/){target="_blank"}). 
+
+```{r}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_discrete(type = c("blue", "pink"))
+```
+
+Alternatively, can use `scale_fill_viridis_d()`. This function does exactly the same thing but it uses a colour-blind friendly palette (which also prints in black and white). There are 5 different options for colours and you can see them by changing `option` to A, B, C, D or E. We like option E with `alpha = .6` (to control transparency and soften the tone) but play around with the options to see what you prefer.
 
 ```{r, fig.cap= "Boxplots with friendly colours"}
-ggplot(zhang_data_long, aes(x = Condition, y = Interest, fill = Time))+
-  geom_boxplot(alpha = .6)+
-  geom_point(position=position_jitterdodge(jitter.width = .1)) +
-  scale_fill_viridis_d(option = "E")
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_viridis_d(option = "E", 
+                       alpha = 0.6) + 
+  guides(fill = FALSE)
 ```
 
-## Activity 5: Reordering factors {#viz-a5}
+::: {.callout-tip}
+#### Try this
 
-R orders categorical variables alphabetically. For gender it didn't really matter whether male or female was represented first and for time 1 and 2 it makes sense for them to be in this order but we may want to change the order of Condition (in my mind it makes more sense for Ordinary to come first, but that may just be me).
+For your independent boxplot, use `zhang_data_long` to visualise `Interest` as your continuous variable and `Condition` for different categories. This will show the difference in interest rating between those in the ordinary and extraordinary groups. 
+:::
 
-To do this we can use `mutate()` and `fct_level()` to change the factor levels to the order we want.
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
 
-```{r reorder}
-zhang_data_long <- zhang_data_long %>%
-  mutate(Condition = fct_relevel(Condition, c("Ordinary", "Extraordinary")))
+```{r}
+zhang_data_long %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Condition)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_viridis_d(option = "E", 
+                       alpha = 0.6) + 
+  guides(fill = FALSE)
 ```
 
-Now we can re-run the boxplot. That's better. 
+:::
 
-```{r, bp6, fig.cap = "Boxplot with reordered factors"}
-ggplot(zhang_data_long, aes(x = Condition, y = Interest, fill = Time))+
-  geom_boxplot(alpha = .6)+
-  geom_point(position=position_jitterdodge(jitter.width = .1)) +
-  scale_fill_viridis_d(option = "E")
+### Activity 10 - Ordering categories
+
+When we plot variables like `Gender` on the x-axis, R has an internal order it sets unless you create a factor. The default is alphabetical or numerical. In previous plots, it displayed Female then Male, as F comes before M. 
+
+Controlling the order of categories is an important design choice to communicate your message, and the most direct way is controlling the factor order before plotting. Here, we add `mutate()` in a pipe and manually set the factor levels, just be careful as it is case sensitive to the values in your data. 
+
+```{r}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  mutate(Gender = factor(Gender, 
+                         levels = c("Male", "Female"))) %>% 
+  ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_viridis_d(option = "E", 
+                       alpha = 0.6) + 
+  guides(fill = FALSE)
 ```
+
+
+### Activity 11- Boxplots for multiple factors
+
+When you only have one independent variable, using the `fill` argument to change the colour can be a little redundant as the colours do not add any additional information. It makes more sense to use colour to represent a second variable. 
+
+For this example, we will use `Condition` and `Time` as variables. `fill()` now specifies a second independent variable, rather than repeating the variable on the x-axis as in the previous plot, so we do not want to deactivate the legend. 
+
+```{r bp5, fig.cap = "Boxplot for two factors"}
+zhang_data_long %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Time)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_viridis_d(option = "E", 
+                       alpha = 0.6)
+```
+
+As a final point here, the `fill` values on the legend are not the most professional looking. Like reordering factors, the easiest way of addressing this is editing the underlying data before piping to <pkg>ggplot2</pkg>. 
+
+```{r}
+zhang_data_long %>% 
+  mutate(Time = case_match(Time,
+                           "time1_interest" ~ "Time 1",
+                           "time2_interest" ~ "Time 2")) %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Time)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_viridis_d(option = "E", 
+                       alpha = 0.6)
+```
+
 
 ## Violin-boxplots {#viz-a7}
 
