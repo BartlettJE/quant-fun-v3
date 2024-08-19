@@ -7,13 +7,21 @@ knitr::opts_chunk$set(warning = FALSE,
 
 ```
 
-In this chapter we are going to focus on visualising data using `ggplot2`. You've already created a number of different plots including bar charts, scatterplots, histograms, qq-plots, and violin-boxplots, but now we will show you how to customise your plots further to give you a better idea of the range and flexibility of visualising data in R. 
+Back in Chapter 3, we introduced you to data visualisation in R/RStudio using the package <pkg>ggplot2</pkg>. You developed foundational skills in using the layering system and customising your plots, but we only covered visualising one variable at a time in a histogram or barplot. This gets you a long way, but you typically want to visualise the relationship or difference between variables. 
+
+In this chapter, we develop your data visualisation skills to cover scatterplots, boxplots, and violin-boxplots. This will give you the skills to visualise your data in the next few chapters on inferential statistics. This is the final data visualisation specific chapter in the book, but by learning these core concepts, you will be able to find out how to create additional types of data visualisation independently. 
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
 By the end of this chapter, you will be able to: 
 
-- ILO1.
+- Create and edit a scatterplot to visualise the relationship between two continuous variables. 
+
+- Create and edit a boxplot to visualise summary statistics for a continuous outcome. 
+
+- Create and edit a violin-boxplot to visualise the density of data points in a continuous outcome. 
+
+- Customise your plots to include colourblind-friendly colour palettes and facet your data to visualise multiple independent variable. 
 
 ## Chapter preparation
 
@@ -217,6 +225,10 @@ zhang_data %>%
 ```
 
 With the regression line, we can see there is very little relationship between age and interest score at time 1. 
+
+::: {.callout-important}
+Remember, you can save your plots using the function `ggsave()`. You can use the function after creating the last plot, or saving your plot as an object and using the `plot` argument. You have a `Figures/` directory for the chapter, so try and save the plots you make to remind yourself later. 
+:::
 
 ::: {.callout-tip}
 #### Try this
@@ -457,7 +469,7 @@ When you only have one independent variable, using the `fill` argument to change
 
 For this example, we will use `Condition` and `Time` as variables. `fill()` now specifies a second independent variable, rather than repeating the variable on the x-axis as in the previous plot, so we do not want to deactivate the legend. 
 
-```{r bp5, fig.cap = "Boxplot for two factors"}
+```{r bp5}
 zhang_data_long %>% 
   ggplot(aes(y = Interest, x = Condition, fill = Time)) +
   geom_boxplot() + 
@@ -485,89 +497,208 @@ zhang_data_long %>%
 
 ## Violin-boxplots {#viz-a7}
 
-### Basic violin plot
+Boxplots are great for your own exploratory data analysis but you do not often see them reported in isolation. They visualise summary statistics, but you do not get much sense of the underlying distribution of values. When you want to communicate continuous outcomes, researchers in psychology are using `r glossary("violin-boxplots", def = "A combination of a violin plot to show the density of data points and a boxplot to show summary statistics of distribution.")` more often. This combines both elements: a violin plot to show the distribution of the data, and a boxplot to add summary statistics. This is where <pkg>ggplot2</pkg> comes into it's own as we can add and customise several layers.
 
-Violin plots are so-called because with a normal distribution the shape would look something like a violin. They show density, i.e., the fatter the violin the more data points there are for that value.
+### Activity 12 - Creating a basic violin plot
 
-```{r vp1, fig.cap = "Basic violin plot"}
-ggplot(zhang_data_long, aes(x = Condition, y = Interest))+
-  geom_violin()
+Violin plots get their name as they look something like a violin when the data are roughly normally distributed. They show density, so the fatter the violin element, the more data points there are for that value. Compared to the boxplot, the only difference is changing the layer to `geom_violin()`. 
+
+```{r vp1}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender)) +
+  geom_violin() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
 ```
 
-### Violin plots with raw data points
+The distribution of values is great, but sometimes it might be useful to also add the underlying data points. These are all important design choices as it can be useful when you have smaller amounts of data, but overwhelming when you have thousands of data points. So, keep in mind what you want to communicate. Here, we use the layer `geom_jitter()` to jitter the points slightly, so they are not all in a vertical line and we get a better sense of the density. 
 
-Like the boxplot, we can also add the raw data points to our violin plot, making sure to use jitter  to avoid over-plotting.
-
-```{r vp2, fig.cap = "Violin plot with data points"}
-ggplot(zhang_data_long, aes(x = Condition, y = Interest))+
-  geom_violin()+
-  geom_jitter(height = 0, width = .1)
+```{r vp2}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender)) +
+  geom_violin() + 
+  geom_jitter(height = 0, # do not jitter height
+              width = .1) + # jitter width of points
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
 ```
 
-```{block, type="warning"}
-It's important to remember that R is very literal. `ggplot2` works on a system of layers. It will add new geoms on top of existing ones and it won't stop to think whether this is a good idea. Try running the above code but put `geom_jitter()` first and then add `geom_violin()`. The order of your layers matters.
+::: {.callout-important}
+It is important to remember that R is very literal. <pkg>ggplot2</pkg> works on a system of layers. It will add new geoms on top of existing ones and it will not stop to think whether this is a good idea. Try running the code above but put `geom_jitter()` first and then add `geom_violin()`. The order of your layers matters.
+:::
+
+### Activity 13 - Creating a violin-boxplot
+
+Instead of adding the data points in a layer, we can add a boxplot to create the violin-boxplot. This way, we get distribution information from the violin layer and summary statistics from the boxplot layer. 
+
+```{r}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender)) +
+  geom_violin() + 
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
 ```
 
-## Activity 8: Violin-boxplots {#viz-a8}
+On it's own, this does not look great. We can edit the settings to reduce the width of the boxplots, add a colour scheme, and add transparency to the violin layer to make it easier to see the boxplot. 
 
-One increasingly common graph is a violin + boxplot + summary plot that shows a huge amount of information about your data in a single plot. 
+```{r}
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2) + 
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  guides(fill = FALSE)
+```
 
-* This code uses two calls to `stat_summary()` that was introduced during the t-test chapter. The first draws a `point` to represent the mean, and the second draws an `errorbar` that represents standard error (`mean_se`).  
-* `guides` is a new function and can be used to adjust whether legends are displayed. This has the same effect as specifying `show.legend = FALSE` in both `geom_violin()` and `geom_boxplot()` but it uses less code to do so.  
-* `fatten = NULL` removes the median line from the boxplots. This can be useful if you're running a test where you're comparing means as it makes it easier to see the point range. 
-* You may get warning messages telling you that R has removed rows containing missing values, you do not need to worry about this.
+The boxplot uses the median for the centre line, but in your report you might be presenting means per category which will be slightly different. One further variation is removing the centre line, and replacing it with the mean and 95% confidence interval (more on that in the lectures and Chapter 8). This way, you get three layers: the violin plot for the density, the boxplot for distribution summary statistics, and the mean and 95% confidence interval. 
+
+This code uses two calls to `stat_summary()` which is a layer to add summary statistics. The first layer draws a `point` to represent the mean, and the second draws an `errorbar` that represents the 95% confidence interval around the mean.  
 
 ```{r vbp1, fig.cap = "Violin-boxplot with summary data"}
-ggplot(zhang_data_long, aes(x = Condition, y = Interest, fill = Condition))+
-  geom_violin(alpha = .6, trim = FALSE)+
-  geom_boxplot(width = .2, alpha = .7, fatten = NULL)+
+
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL) + 
   stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
-  scale_fill_viridis_d(option = "E", label = c("Ordinary", "Extraordinary"))+
-  scale_y_continuous(name = "Mean interest rating (1-7)") +
+  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  theme_classic() + 
   guides(fill = FALSE)
 
 ```
 
-## Activity 9: Faceting {#viz-a9}
+::: {.callout-warning}
+When you run the line `stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1)` for the first time, you might be prompted to install the R package <pkg>Hmisc</pkg>. If you are on your own computer, follow the instructions in the Console to install the package. If you are on a university computer, this should already be installed. 
+:::
 
-`ggplot2` contains a facet function that produces different plots for each level of a grouping variable which can be very useful when you have more than two factors, for example, for a three-way ANOVA. The following code displays produces violin-boxplots for Condition ~ interest, but separately for male and female participants. 
+::: {.callout-tip}
+#### Try this
 
-* This code adds an extra argument `position = position_dodge(.9)` to align the layers with the violin plots. Try removing this argument from each layer to see what happens, and also try adjusting the value from `.9` to another number.
+For your independent violin-boxplot, use `zhang_data_long` to visualise `Interest` as your continuous variable and `Condition` for different categories on the x-axis. This will show the difference in interest rating between those in the ordinary and extraordinary groups. Your plot should look like this, so you might need to play around with different themes: 
+
+```{r echo=FALSE}
+zhang_data_long %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Condition)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL) + 
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  theme_minimal() + 
+  guides(fill = FALSE)
+```
+
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r, eval=FALSE}
+zhang_data_long %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Condition)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL) + 
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  theme_minimal() + 
+  guides(fill = FALSE)
+```
+
+:::
+
+### Activity 14 - Adding additional variables
+
+Like boxplots, we can add a second grouping variable to `fill` instead of just using it for colour. 
+
+```{r}
+zhang_data_long %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Time)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL) + 
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  theme_minimal()
+```
+
+However, unless you are trying to recreate a Kandinsky painting in <pkg>ggplot2</pkg>, that does not look quite right. This is because we have multiple layers that each plot separate groups in different ways. To make it all fall into line, we need to add a constant value to offset the elements. We start off my defining a position dodge value as an object. This way, we can use the object name later, and we only need to edit it in one place if we wanted to change the value. 
+
+```{r}
+# specify as an object, so we only change it in one place
+dodge_value <- 0.9
+
+zhang_data_long %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Time)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL,
+               position = position_dodge(dodge_value)) + 
+  stat_summary(fun = "mean", 
+               geom = "point",
+               position = position_dodge(dodge_value)) +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1,
+               position = position_dodge(dodge_value)) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  theme_classic()
+```
+
+This looks much better! Remember, if you want to change the legend labels, the easiest way is recoding the data before piping to <pkg>ggplot2</pkg>. 
+
+Finally, we might want to add a third variable to group the data by. There is a facet function that produces different plots for each level of a grouping variable which can be very useful when you have more than two factors. The following code shows interest ratings for all three variables we have worked with: Condition, Time, and Gender. 
 
 ```{r facet1, fig.cap = "Violin-boxplot facetted by gender", message = FALSE}
-ggplot(zhang_data_long, aes(x = Condition, y = Interest, fill = Time))+
-  geom_violin(alpha = .6, trim = FALSE)+
-  geom_boxplot(width = .2, 
-               alpha = .6, 
+# specify as an object, so we only change it in one place
+dodge_value <- 0.9
+
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Time)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
                fatten = NULL,
-               position = position_dodge(.9))+
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(.9)) +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
-               position = position_dodge(.9))+
-  scale_fill_viridis_d(option = "E") +
-  facet_wrap(~Gender)
+               position = position_dodge(dodge_value)) + 
+  stat_summary(fun = "mean", 
+               geom = "point",
+               position = position_dodge(dodge_value)) +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1,
+               position = position_dodge(dodge_value)) +
+  facet_wrap(~ Gender) + # facet by Gender
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  theme_classic()
 ```
 
-### Facet labelling
-
-Finally, changing the labels within the facets is a little more complicated - there's no additional scale layer, instead, you adjust this inside `facet_wrap()` using `labeller`. This has always felt unintuitive to me and I have to look it up every single time so don't worry if it is confusing - just remember where to look for the example. 
-
-```{r facet2, fig.cap = "Facetted plot with updated labels"}
-ggplot(zhang_data_long, aes(x = Condition, y = Interest, fill = Time))+
-  geom_violin(alpha = .6, trim = FALSE)+
-  geom_boxplot(width = .2, 
-               alpha = .6, 
-               fatten = NULL,
-               position = position_dodge(.9))+
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(.9)) +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
-               position = position_dodge(.9))+
-  scale_fill_viridis_d(option = "E") +
-  facet_wrap(~Gender, labeller = labeller(Gender = (c(female = "Female", male = "Male"))))
-```
+Facets work in the same way as adding a variable to `fill`. It is not easy to change the labels within <pkg>ggplot2</pkg>, you are better off editing the values in your data first. 
 
 ## Test yourself
 
@@ -575,31 +706,48 @@ To end the chapter, we have some knowledge check questions to test your understa
 
 ### Knowledge check
 
-**Question 1**. We have...
+**Question 1**. You want to plot several summary statistics including the median for your outcome, which <pkg>ggplot2</pkg> layer could you use? 
 
-`r longmcq(sample(c("select()", answer="filter()", "mutate()", "arrange()", "group_by()", "summarise()")))`
+`r longmcq(sample(c(answer = "geom_boxplot()", "geom_point()", "geom_violin()")))`
 
-**Question 2**. We are...
+**Question 2**. You want to create a scatterplot to show the correlation between two continuous variables, which <pkg>ggplot2</pkg> layer could you use? 
 
-`r longmcq(sample(c("select()", "filter()", "mutate()", "arrange()", "group_by()", answer="summarise()")))`
+`r longmcq(sample(c(answer = "geom_point()", "geom_violin()", "geom_boxplot()")))`
 
-**Question 3**. Our data..
+**Question 3**. You want to show the density of values in your outcome, which <pkg>ggplot2</pkg> layer could you use? 
 
-`r longmcq(sample(c("select()", "filter()", answer="mutate()", "arrange()", "group_by()", "summarise()")))`
+`r longmcq(sample(c(answer = "geom_violin()", "geom_point()", "geom_boxplot()")))`
 
-**Question 4**. We want...
+**Question 4**. To separate a scatterplot into different groups, you could specify a grouping variable using the `fill` argument to change the colour of the points? `r torf(FALSE)`
 
-`r longmcq(sample(c(answer="group_by() and summarise()", "filter() and select()", "group_by() and arrange()", "arrange() and mutate()")))` 
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
 
-**Question 5**. If we...
+This was a sneaky one, but relates to the error mode warning within the chapter. There are two ways to add a grouping variable for separate colours: `colour` and `fill`. In this scenario, `colour` would change the colour of the points, whereas `fill` would only change the colour of the regression line and its 95% confidence interval ribbon. Sometimes you need to play around with the settings to produce the effects you want. 
+:::
 
-`r longmcq(sample(c(answer = "wide_data %>% select() %>% pivot_longer() %>% group_by() %>% summarise()", "long_data %>% select() %>% pivot__longer_wider() %>% group_by() %>% summarise()", "wide_data %>% pivot_longer() %>% select() %>% summarise() %>% group_by()", "select() %>% pivot_longer() %>% group_by() %>% summarise() %>% wide_data")))`
+**Question 5**. The order of layers is important in <pkg>ggplot2</pkg>. Which order of layers would show individual data points on top of a boxplot? 
+
+`r longmcq(sample(c(answer = "data %>% ggplot() + geom_boxplot() + geom_jitter()", "data + ggplot() + geom_boxplot() + geom_jitter()", "data + ggplot() + geom_jitter() + geom_boxplot()", "data %>% ggplot() + geom_jitter() + geom_boxplot()")))`
+
+::: {.callout-caution collapse="true"} 
+#### Explain this answer
+
+In addition to the layer order, we also added an error mode feature to recognise when you need to use the pipe `%>%` vs the `+`. 
+
+- `data %>% ggplot() + geom_boxplot() + geom_jitter()` was the correct answer as we add data point after the boxplot. 
+
+- `data + ggplot() + geom_boxplot() + geom_jitter()` had the right order, but we used `+` instead of the pipe between the data and the initial `ggplot()` function. 
+
+- `data + ggplot() + geom_jitter() + geom_boxplot()` and `data %>% ggplot() + geom_jitter() + geom_boxplot()` both had the wrong layer order as the boxplot would overlay the points. 
+
+:::
 
 ### Error mode
 
 The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on the new types of data visualisation. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
 
-Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and the data files: 
+Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files: 
 
 ```{r eval=FALSE}
 # Load the tidyverse package below
@@ -608,61 +756,127 @@ library(tidyverse)
 # Load the data file
 # This should be the Zhang_2014.csv file 
 zhang_data <- read_csv("data/Zhang_2014.csv")
+
+# Wrangle the data for plotting. 
+# select and rename key variables
+# mutate to add participant ID and recode
+zhang_data <- zhang_data %>%
+  select(Gender, 
+         Age, 
+         Condition, 
+         time1_interest = T1_Predicted_Interest_Composite, 
+         time2_interest = T2_Actual_Interest_Composite) %>%
+  mutate(participant_ID = row_number(),
+         Condition = case_match(Condition, 
+                            1 ~ "Ordinary", 
+                            2 ~ "Extraordinary"),
+         Gender = case_match(Gender,
+                             1 ~ "Male",
+                             2 ~ "Female")) 
+
+# gather the data to convert to long format
+zhang_data_long <- zhang_data %>% 
+  pivot_longer(cols = time1_interest:time2_interest,
+               names_to = "Time",
+               values_to = "Interest")
 ```
 
 Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load <pkg>tidyverse</pkg> and the data files. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
 
-**Question 6**. Copy the following code chunk into your R Markdown file and press knit. 
-
-tick marks, limits
+**Question 6**. Copy the following code chunk into your R Markdown file and press knit. This code... works, but it does not look quite right? Why are the tick marks not displaying properly? 
 
 ````{verbatim, lang = "markdown"}
 ```{r}
-
+zhang_data %>%  
+  ggplot(aes(x = time1_interest, y = time2_interest)) +
+  geom_point() +
+  theme_classic() + 
+  scale_x_discrete(name = "Time 1 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  scale_y_discrete(name = "Time 2 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  geom_smooth(method = "lm")
 ```
 ````
 
 ::: {.callout-caution collapse="true"} 
 #### Explain the solution
 
+In this example, we used the wrong function for continuous variables. We used  `scale_x_discrete` and `scale_y_discrete`, instead of `scale_x_continuous` and `scale_y_continuous`. We must honour the variable type when we customise the plot, so think about what type of variable is on each axis and which function lets you edit it. 
 
 ```{r eval = FALSE}
-
+zhang_data %>%  
+  ggplot(aes(x = time1_interest, y = time2_interest)) +
+  geom_point() +
+  theme_classic() + 
+  scale_x_continuous(name = "Time 1 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  scale_y_continuous(name = "Time 2 interest score (1-7)", 
+                     breaks = c(1:7)) + # tick marks from 1 to 7
+  geom_smooth(method = "lm")
 ```
 :::
 
-**Question 7**. Copy the following code chunk into your R Markdown file and press knit. 
-
-combination of pipes and + in ggplot2
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. You should receive an error like `Error in "fortify()":! "data" must be a <data.frame>, or an object coercible by "fortify()"` which is a little cryptic. 
 
 ````{verbatim, lang = "markdown"}
 ```{r}
-
+zhang_data_long + 
+  ggplot(aes(y = Interest, x = Condition, fill = Condition)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_viridis_d(option = "E", 
+                       alpha = 0.6) + 
+  guides(fill = FALSE)
 ```
 ````
 
 ::: {.callout-caution collapse="true"} 
 #### Explain the solution
 
+Once we start using a mixture of <pkg>tidyverse</pkg> functions, it is important to remember which uses a pipe `%>%` between layers, and which uses `+`. Here, we tried using the `+` between the data object and the initial `ggplot()` layer. We need a pipe here or it thinks you are trying to set the data argument using `aes()`. 
 
 ```{r eval = FALSE}
-
+zhang_data_long %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Condition)) +
+  geom_boxplot() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_fill_viridis_d(option = "E", 
+                       alpha = 0.6) + 
+  guides(fill = FALSE)
 ```
 :::
 
-**Question 8**. Copy the following code chunk into your R Markdown file and press knit.
+**Question 8**. Copy the following code chunk into your R Markdown file and press knit. We want to change the order of the categories to present males then female. This code...works, but is it doing what we think it is doing? 
 
 ````{verbatim, lang = "markdown"}
 ```{r}
-
+zhang_data_long %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender)) +
+  geom_violin() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  scale_x_discrete(labels = c("Male", "Female"))
 ```
 ````
 
 ::: {.callout-caution collapse="true"} 
 #### Explain the solution
 
-```{r eval = FALSE}
+We have introduced this error several times, but we see it so often it is worth reinforcing. When we change the labels, this is really just to tidy things up. The underlying data does not change, we are just trying to communicate it clearer. If we want to change the order of categories, we must change the underlying order of the data as a factor or R will default to alphabetical/numerical. So, we mutate Gender as a factorm, then pipe to <pkg>ggplot2</pkg>. 
 
+```{r eval = FALSE}
+zhang_data_long %>% 
+  mutate(Gender = factor(Gender,
+                         levels = (c("Male", "Female")))) %>% 
+  drop_na(Gender) %>% 
+  ggplot(aes(y = Interest, x = Gender)) +
+  geom_violin() + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7))
 ```
 :::
 
@@ -676,5 +890,6 @@ glossary_table()
 
 ## End of chapter
 
-Blah. 
+Well done, you have completed the second chapter dedicated to data visualisation! This is a key area for psychology research and helping to communicate your findings to your audience. Data visualisation also comes with a lot of responsibility. There are lots of design choices to make and help communicate your findings as effectively and transparently as possible. We could dedicate a whole book to data visualisation possibilities in R and <pkg>ggplot2</pkg>, so we have added a range of further reading sources in the [Additional Resources](#additional-resources) appendix. 
 
+In the next chapter, we start on inferential statistics introducing you to the concept of regression by focusing on one continuous predictor variable. 
