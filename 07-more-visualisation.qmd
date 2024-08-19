@@ -21,7 +21,7 @@ By the end of this chapter, you will be able to:
 
 - Create and edit a violin-boxplot to visualise the density of data points in a continuous outcome. 
 
-- Customise your plots to include colourblind-friendly colour palettes and facet your data to visualise multiple independent variable. 
+- Customise your plots to include colourblind-friendly colour palettes and facet your data to visualise multiple independent variables. 
 
 ## Chapter preparation
 
@@ -33,7 +33,7 @@ For this chapter, we are using open data from @zhang_present_2014. The abstract 
 
 In summary, they were interested in whether people could predict how interested they would be in rediscovering past experiences. They call it a "time capsule" effect, where people store photos or messages to remind themselves of past events in the future. 
 
-At the start of the study (time 1), participants in a romantic relationship wrote about two kinds of experiences. An "extraordinary" experience with their partner on Valentine's day and an "ordinary" experience one week before. They were then asked how enjoyable, interesting, and meaningful they predict they will find these recollection in three months time (time 2). Three months later, Zhang et al. randomised participants into one of two groups. In the "extraordinary" group, they reread the extraordinary recollection. In the "ordinary" group, they reread the ordinary recollection. All the participants completed measures on how enjoyable, interesting, and meaningful they found the experience, but this time what they felt, rather than what they predict they will feel. 
+At the start of the study (time 1), participants in a romantic relationship wrote about two kinds of experiences. An "extraordinary" experience with their partner on Valentine's day and an "ordinary" experience one week before. They were then asked how enjoyable, interesting, and meaningful they predict they will find these recollections in three months time (time 2). Three months later, Zhang et al. randomised participants into one of two groups. In the "extraordinary" group, they reread the extraordinary recollection. In the "ordinary" group, they reread the ordinary recollection. All the participants completed measures on how enjoyable, interesting, and meaningful they found the experience, but this time what they actually felt, rather than what they predict they will feel. 
 
 They predicted participants in the ordinary group would underestimate their future feelings (i.e., there would be a bigger difference between time 1 and time 2 measures) compared to participants in the extraordinary group. In this chapter, we focus on a composite measure which took the mean of items on interest, meaningfulness, and enjoyment. 
 
@@ -53,7 +53,7 @@ You are now ready to start working on the chapter!
 
 ### Activity 1 - Read and wrangle the data
 
-As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. Create an object called `zhang_data` to be consistent with the tasks below. If you just want to focus on data visualisation, then you can just type the code in the solution. 
+As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. Create an object called `zhang_data` to be consistent with the tasks below. If you want to focus on data visualisation, then you can just type the code in the solution. 
 
 ::: {.callout-tip}
 #### Try this
@@ -141,11 +141,11 @@ We will use this data set to demonstrate different ways of visualising continuou
 
 ## Scatterplots {#viz-a3}
 
-The first visualisation is a `r glossary("scatterplot", def = "Plotting two variables on the x- and y-axis to show the correlation/relationship between the variables.")` to show the relationship between two continuous variables. One variable goes on the x-axis and the other variables goes on the y-axis. Each dot then represents the intersection of those two variables. You will use these plots when reporting a correlation or regression. 
+The first visualisation is a `r glossary("scatterplot", def = "Plotting two variables on the x- and y-axis to show the correlation/relationship between the variables.")` to show the relationship between two continuous variables. One variable goes on the x-axis and the other variables goes on the y-axis. Each dot then represents the intersection of those two variables per observation/participant. You will use these plots often when reporting a correlation or regression. 
 
 ### Activity 3 - Creating a basic scatterplot
 
-Now let us make a scatterplot plotting `Age` and `time1_interest` to see if there is any relationship between the two. We need to specify both the x- and y-axis variables, but the only difference to what we created in Chapter 3 is using a new layer `geom_point`. 
+Let us start by making a scatterplot of `Age` and `time1_interest` to see if there is any relationship between the two. We need to specify both the x- and y-axis variables, but the only difference to what we created in Chapter 3 is using a new layer `geom_point`. 
 
 ```{r scat1}
 zhang_data %>% 
@@ -171,7 +171,7 @@ zhang_data %>%
                                   by = 5)) # in steps of 5
 ```
 
-To break down these new function layers: 
+To break down these new arguments/functions in the layers: 
 
 - `breaks` set the tick marks on the plot. We demonstrate two ways of setting this. On the x-axis, we just manually set values for 1 to 7. On the y-axis, we use a second function to set the breaks. 
 
@@ -207,7 +207,7 @@ zhang_data %>%
 
 ### Activity 5 - Adding a regression line
 
-It is often useful to add a regression line or line of best fit to a scatterplot. You can add a regression line with the `geom_smooth()` layer and by default will also provide a 95% confidence interval. You can specify what type of line you want to draw, most often you will need `method = lm` for a linear model or a straight line. 
+It is often useful to add a regression line or line of best fit to a scatterplot. You can add a regression line with the `geom_smooth()` layer and by default will also provide a 95% confidence interval ribbon. You can specify what type of line you want to draw, most often you will need `method = "lm"` for a linear model or a straight line. 
 
 ```{r scat3}
 zhang_data %>%  
