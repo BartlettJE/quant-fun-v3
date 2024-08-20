@@ -1,4 +1,4 @@
-# Scatterplots, boxplots, and violin-boxplots {#07-more-viz}
+# Scatterplots, boxplots, and violin-boxplots {#sec-07-more-viz}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, 
