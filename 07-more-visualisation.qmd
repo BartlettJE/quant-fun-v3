@@ -161,7 +161,6 @@ This plot is great for some exploratory data analysis, but it looks a little unt
 zhang_data %>%  
   ggplot(aes(x = time1_interest,y = Age)) +
   geom_point() +
-  theme_classic() + 
   scale_x_continuous(name = "Time 1 interest score (1-7)", 
                      breaks = c(1:7)) + # tick marks from 1 to 7
   scale_y_continuous(name = "Age",
@@ -188,7 +187,6 @@ When controlling the limits of the graph, sometimes you want to decrease the `li
 zhang_data %>%  
   ggplot(aes(x = time1_interest,y = Age)) +
   geom_point() +
-  theme_classic() + 
   scale_y_continuous(name = "Age",
                      limits = c(30, 40)) # in steps of 5
 ```
@@ -199,7 +197,6 @@ You must be very careful when truncating axes, but if you *do* need to do it, th
 zhang_data %>%  
   ggplot(aes(x = time1_interest,y = Age)) +
   geom_point() +
-  theme_classic() + 
   coord_cartesian(ylim = c(30, 40))
 ```
 
@@ -213,7 +210,6 @@ It is often useful to add a regression line or line of best fit to a scatterplot
 zhang_data %>%  
   ggplot(aes(x = time1_interest,y = Age)) +
   geom_point() +
-  theme_classic() + 
   scale_x_continuous(name = "Time 1 interest score (1-7)", 
                      breaks = c(1:7)) + # tick marks from 1 to 7
   scale_y_continuous(name = "Age",
@@ -246,7 +242,6 @@ You should have the following in a code chunk:
 zhang_data %>%  
   ggplot(aes(x = time1_interest, y = time2_interest)) +
   geom_point() +
-  theme_classic() + 
   scale_x_continuous(name = "Time 1 interest score (1-7)", 
                      breaks = c(1:7)) + # tick marks from 1 to 7
   scale_y_continuous(name = "Time 2 interest score (1-7)", 
@@ -266,7 +261,6 @@ zhang_data %>%
   drop_na(Gender) %>% 
   ggplot(aes(x = time1_interest, y = Age, colour = Gender)) +
   geom_point() +
-  theme_classic() + 
   scale_x_continuous(name = "Mean interest score (1-7)",
                      breaks = c(1:7)) + 
   scale_y_continuous(name = "Age") +
@@ -288,7 +282,6 @@ You should have the following in a code chunk:
 zhang_data %>%  
   ggplot(aes(x = time1_interest, y = time2_interest, colour = Condition)) +
   geom_point() +
-  theme_classic() + 
   scale_x_continuous(name = "Time 1 interest score (1-7)", 
                      breaks = c(1:7)) + # tick marks from 1 to 7
   scale_y_continuous(name = "Time 2 interest score (1-7)", 
@@ -300,11 +293,11 @@ zhang_data %>%
 
 ## Boxplots {#viz-a4}
 
-The next visualisation is the `r glossary("boxplot", def = "Visualising a continuous variable by five summary statistics: the median centre line, the first and third quartile, and 1.5 times the first and third quartiles.")` which presents a range of summary statistics for your outcome, which you can split between different groups on the x-axis, or add further variables to divide by. For the boxplot element, you get five summary statistics: the median centre line, the first and third quartile as the box (essentially, the interquartile range), and 1.5 times the first and third quartiles as the whiskers extending from the box.  
+The next visualisation is the `r glossary("boxplot", def = "Visualising a continuous variable by five summary statistics: the median centre line, the first and third quartile, and 1.5 times the first and third quartiles.")` which presents a range of summary statistics for your outcome, which you can split between different groups on the x-axis, or add further variables to divide by. For the boxplot element, you get five summary statistics: the median centre line, the first and third quartile as the box (essentially, the interquartile range), and 1.5 times the first and third quartiles as the whiskers extending from the box. If there are any values beyond the whiskers, you see the individual data points and this is one definition of an outlier (more on that in Chapter 11)
 
 ### Activity 7 - Creating a basic boxplot
 
-Before we create the boxplot, we need a final data wrangling step. At the moment, we have `time1_interest` and `time2_interest` in wide format, but to plot together, we need to express it as a single variable. For that, we must restructure the data. 
+Before we create the boxplot, we need a final data wrangling step. At the moment, we have `time1_interest` and `time2_interest` in wide format, but to plot together, we need to express it as a single variable. For that, we must restructure the data. This is why we spent so much time on data wrangling, as you might need to quickly restructure your data to plot certain elements. 
 
 ::: {.callout-tip}
 #### Try this
@@ -337,7 +330,7 @@ zhang_data_long %>%
                      breaks = c(1:7))
 ```
 
-Typically, you want to compare the outcome between one or more categories, so we can add a categorical variable like gender to the x-axis, removing the missing value first. 
+Typically, you want to compare the outcome between one or more categories, so we can add a categorical variable like gender to the x-axis, removing the missing values first. 
 
 ```{r}
 zhang_data_long %>% 
@@ -354,7 +347,7 @@ It is not as important when you only have one variable on the x-axis, but one us
 
 By default, we get a legend which is redundant when we only have different colours on the x-axis, so we can turn it off by adding `guides(fill = FALSE)` as a layer. 
 
-```{r bp4, fig.cap = "Boxplot with colour"}
+```{r bp4}
 zhang_data_long %>% 
   drop_na(Gender) %>% 
   ggplot(aes(y = Interest, x = Gender, fill = Gender)) +
@@ -367,7 +360,7 @@ zhang_data_long %>%
 ::: {.callout-important}
 #### Error mode
 
-You might have noticed we have now used two different arguments to control the colour. In scatterplots, we used `colour`. In boxplots, we used `fill`. It is one of those concepts that takes time to recognise which you need, depending on the type of geoms you are using. Roughly, `colour` is when you want to control the outline or symbol, like the points. Whereas `fill` is when you want the inside of a geom coloured. You can see the difference here by controlling `fill` first:  
+You might have noticed we have now used two different arguments to control the colour. In scatterplots, we used `colour`. In boxplots, we used `fill`. It is one of those concepts that takes time to recognise which you need, depending on the type of geom you are using. Roughly, `colour` is when you want to control the outline or symbol, like the points. Whereas `fill` is when you want the inside of a geom coloured. You can see the difference here by controlling `fill` first:  
 
 ```{r}
 zhang_data_long %>% 
@@ -405,7 +398,7 @@ zhang_data_long %>%
   scale_fill_discrete(type = c("blue", "pink"))
 ```
 
-Alternatively, can use `scale_fill_viridis_d()`. This function does exactly the same thing but it uses a colour-blind friendly palette (which also prints in black and white). There are 5 different options for colours and you can see them by changing `option` to A, B, C, D or E. We like option E with `alpha = .6` (to control transparency and soften the tone) but play around with the options to see what you prefer.
+Alternatively (and what we recommend), you can use `scale_fill_viridis_d()`. This function does exactly the same thing but it uses a colour-blind friendly palette (which also prints in black and white). There are 5 different options for colours and you can see them by changing `option` to A, B, C, D or E. We like option E with `alpha = 0.6` (to control transparency and soften the tone) but play around with the options to see what you prefer.
 
 ```{r, fig.cap= "Boxplots with friendly colours"}
 zhang_data_long %>% 
@@ -423,6 +416,8 @@ zhang_data_long %>%
 #### Try this
 
 For your independent boxplot, use `zhang_data_long` to visualise `Interest` as your continuous variable and `Condition` for different categories. This will show the difference in interest rating between those in the ordinary and extraordinary groups. 
+
+Comparing the ordinary and extraordinary groups, it looks like `r mcq(c("ordinary score higher on average", answer = "very little difference on average", "extraordinary score higher on average"))`.
 :::
 
 ::: {.callout-caution collapse="true"}
@@ -557,11 +552,11 @@ zhang_data_long %>%
   guides(fill = FALSE)
 ```
 
-The boxplot uses the median for the centre line, but in your report you might be presenting means per category which will be slightly different. One further variation is removing the centre line, and replacing it with the mean and 95% confidence interval (more on that in the lectures and Chapter 8). This way, you get three layers: the violin plot for the density, the boxplot for distribution summary statistics, and the mean and 95% confidence interval. 
+The boxplot uses the median for the centre line, but in your report you might be presenting means per category which will be slightly different. One further variation is removing the centre median line, and replacing it with the mean and 95% confidence interval (more on that in the lectures and Chapter 8). This way, you get three layers: the violin plot for the density, the boxplot for distribution summary statistics, and the mean and 95% confidence interval. 
 
 This code uses two calls to `stat_summary()` which is a layer to add summary statistics. The first layer draws a `point` to represent the mean, and the second draws an `errorbar` that represents the 95% confidence interval around the mean.  
 
-```{r vbp1, fig.cap = "Violin-boxplot with summary data"}
+```{r vbp1}
 
 zhang_data_long %>% 
   drop_na(Gender) %>% 
@@ -569,12 +564,14 @@ zhang_data_long %>%
   geom_violin(alpha = 0.5) + 
   geom_boxplot(width = 0.2, 
                fatten = NULL) + 
-  stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  stat_summary(fun = "mean", 
+               geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", # confidence interval
+               geom = "errorbar", 
+               width = 0.1) +
   scale_fill_viridis_d(option = "E") + 
   scale_y_continuous(name = "Interest score (1-7)", 
                      breaks = c(1:7)) + 
-  theme_classic() + 
   guides(fill = FALSE)
 
 ```
@@ -586,7 +583,7 @@ When you run the line `stat_summary(fun.data = "mean_cl_boot", geom = "errorbar"
 ::: {.callout-tip}
 #### Try this
 
-For your independent violin-boxplot, use `zhang_data_long` to visualise `Interest` as your continuous variable and `Condition` for different categories on the x-axis. This will show the difference in interest rating between those in the ordinary and extraordinary groups. Your plot should look like this, so you might need to play around with different themes: 
+For your independent violin-boxplot, use `zhang_data_long` to visualise `Interest` as your continuous variable and `Condition` for different categories on the x-axis. Try and create the plot to look like this, so you might need to play around with different themes: 
 
 ```{r echo=FALSE}
 zhang_data_long %>% 
@@ -594,8 +591,11 @@ zhang_data_long %>%
   geom_violin(alpha = 0.5) + 
   geom_boxplot(width = 0.2, 
                fatten = NULL) + 
-  stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  stat_summary(fun = "mean", 
+               geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1) +
   scale_fill_viridis_d(option = "E") + 
   scale_y_continuous(name = "Interest score (1-7)", 
                      breaks = c(1:7)) + 
@@ -615,8 +615,11 @@ zhang_data_long %>%
   geom_violin(alpha = 0.5) + 
   geom_boxplot(width = 0.2, 
                fatten = NULL) + 
-  stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  stat_summary(fun = "mean", 
+               geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1) +
   scale_fill_viridis_d(option = "E") + 
   scale_y_continuous(name = "Interest score (1-7)", 
                      breaks = c(1:7)) + 
@@ -636,15 +639,18 @@ zhang_data_long %>%
   geom_violin(alpha = 0.5) + 
   geom_boxplot(width = 0.2, 
                fatten = NULL) + 
-  stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun.data = "mean_cl_boot", geom = "errorbar", width = .1) +
+  stat_summary(fun = "mean", 
+               geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1) +
   scale_fill_viridis_d(option = "E") + 
   scale_y_continuous(name = "Interest score (1-7)", 
                      breaks = c(1:7)) + 
   theme_minimal()
 ```
 
-However, unless you are trying to recreate a Kandinsky painting in <pkg>ggplot2</pkg>, that does not look quite right. This is because we have multiple layers that each plot separate groups in different ways. To make it all fall into line, we need to add a constant value to offset the elements. We start off my defining a position dodge value as an object. This way, we can use the object name later, and we only need to edit it in one place if we wanted to change the value. 
+However, unless you are trying to recreate a Kandinsky painting in <pkg>ggplot2</pkg>, that does not look quite right. This is because we have multiple layers that each plot separate groups in different ways. To make it all fall into line, we need to add a constant value to offset the elements. We start off by defining a position dodge value as an object. This way, we can use the object name later, and we only need to edit it in one place if we wanted to change the value. 
 
 ```{r}
 # specify as an object, so we only change it in one place
@@ -665,15 +671,14 @@ zhang_data_long %>%
                position = position_dodge(dodge_value)) +
   scale_fill_viridis_d(option = "E") + 
   scale_y_continuous(name = "Interest score (1-7)", 
-                     breaks = c(1:7)) + 
-  theme_classic()
+                     breaks = c(1:7))
 ```
 
 This looks much better! Remember, if you want to change the legend labels, the easiest way is recoding the data before piping to <pkg>ggplot2</pkg>. 
 
 Finally, we might want to add a third variable to group the data by. There is a facet function that produces different plots for each level of a grouping variable which can be very useful when you have more than two factors. The following code shows interest ratings for all three variables we have worked with: Condition, Time, and Gender. 
 
-```{r facet1, fig.cap = "Violin-boxplot facetted by gender", message = FALSE}
+```{r facet1, message = FALSE}
 # specify as an object, so we only change it in one place
 dodge_value <- 0.9
 
@@ -694,8 +699,7 @@ zhang_data_long %>%
   facet_wrap(~ Gender) + # facet by Gender
   scale_fill_viridis_d(option = "E") + 
   scale_y_continuous(name = "Interest score (1-7)", 
-                     breaks = c(1:7)) + 
-  theme_classic()
+                     breaks = c(1:7))
 ```
 
 Facets work in the same way as adding a variable to `fill`. It is not easy to change the labels within <pkg>ggplot2</pkg>, you are better off editing the values in your data first. 
