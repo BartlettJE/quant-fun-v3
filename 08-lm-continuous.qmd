@@ -11,7 +11,7 @@ knitr::opts_chunk$set(warning = FALSE,
 library(patchwork)
 library(effectsize)
 library(correlation)
-#library(report)
+library(performance)
 #library(psych)
 library(tidyverse)
 ```
@@ -587,9 +587,109 @@ standardize_parameters(lm_redistribution)
 ```
 :::
 
-### Visualising model estimates
-
 ## Checking assumptions
+
+For the inferential statistics to work as intended, the model makes certain assumptions about the data you are putting into it and the accuracy of the inferences depends on how sensible these assumption are. Remember these functions will always work even if the numbers you enter are nonsense, so it's important for you as the researcher to recognise when it's appropriate to use these techniques and when it is not.
+
+### Activity 9 - Diagnostic plots for linear regression
+
+As a reminder, the assumptions for simple linear regression are:
+
+1. The outcome is interval/ratio level data.
+
+2. The predictor variable is interval/ratio or categorical (with two levels at a time).
+
+3. All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).
+
+4. The predictors have non-zero variance.
+
+5. The relationship between the outcome and predictor is linear.
+
+6. The residuals should be normally distributed.
+
+7. There should be homoscedasticity.
+
+Assumptions 1-4 are pretty straight forward as they relate to your understanding of the design or a simple check on the data for non-zero variance (the responses are not all the exact same value).
+
+Assumptions 5-7 require diagnostic checks on the `r glossary("residuals", def = "")` from the model. The residuals are the difference between your observed values in the data and the values your model expects given it's assumptions. If you remember back, we highlighted the model output mentioned `Residuals:` and they are saved within the model object.
+
+```{r}
+# head shows the first 6 values 
+head(lm_redistribution$residuals)
+```
+
+::: {.callout-note}
+#### What does the $ symbol mean? 
+We have not used this symbol in the book yet, but it is a base R operator for extracting information. You use it to access specific components within a data frame or object.
+
+Try the following in the console to see what it does:
+
+- `dawtry_clean$age`
+
+- `lm_redistribution$coefficients`
+
+If you type an object name into the console and add the `$`, you will see all the components appear to auto complete. 
+:::
+
+In your reading, you might see individual statistical tests to check these assumptions, but they have more limitations than benefits. The best way to check the assumptions is through diagnostic plots which express the model residuals in different ways. We want to walk through this longer way of checking assumptions to develop a solid understanding before showing you a shortcut to see them all below. 
+
+In the code below, we use a format you will be less familiar with as all these functions come from base R. If you just run the code for the diagnostic plots `plot(lm_redistribution)`, each one gets individually printed to your Plots window. Here, we create a 2x2 panel to show them all together, then turn it back off. 
+
+```{r}
+# Change the panel layout to 2 x 2
+par(mfrow=c(2,2))
+
+# plot the diagnostic plots 
+plot(lm_redistribution)
+```
+
+For more information on each of these plots, see this great resource by [Kim (2015)](https://library.virginia.edu/data/articles/diagnostic-plots){target="_blank"} via the University of Virginia, but we will break the key ones down below. 
+
+### Checking linearity 
+
+To isolate each plot, we can use the `which` argument. Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
+
+```{r}
+plot(lm_redistribution, 
+     which = 1)
+```
+
+Here, you are looking out for a roughly flat horizontal red line. Common patterns to look out if there is a problem are when the lines has an obvious curve to look like a hump or several bends to look like an S. 
+
+The only downside to using diagnostic plots is it takes experience to recognise when there is nothing wrong with a regression model compared to when it violates the assumptions. It is easy to see a little deviation and think there is some drastically wrong. Our advice is if you squint and it looks fine, it is probably fine. You are looking for clear and obvious deviations from what you expect and all the models we use in Chapters 8 and 9 are intentionally fine to develop foundational skills. In Chapter 11, we then introduce you to more problematic cases and what your options are. 
+
+::: {.callout-important}
+#### Error mode
+
+If you want to save these plots to add into a report, you might try using `ggsave()` like we have covered in the data visualisation chapters. However, it will not work as these plots have not been created by <pkg>ggplot2</pkg>. 
+
+To save these plots, you can either right click and choose save as to save on your computer. Alternatively, if they open in the Plots window, you can click on Export and save them as an image or PDF to insert into your documents. 
+:::
+
+### Checking normality 
+
+Plot 2 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
+
+```{r}
+plot(lm_redistribution, 
+     which = 2)
+```
+
+### Checking homoscedasticity 
+
+Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
+
+```{r}
+plot(lm_redistribution, 
+     which = 3)
+```
+
+### Checking all the assumptions
+
+```{r}
+check_model(lm_redistribution)
+```
+
 
 ## Reporting your results
 

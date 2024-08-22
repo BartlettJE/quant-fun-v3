@@ -393,16 +393,24 @@ div.csl-indent {
   <li><a href="#activity-6---using-the-lm-function" id="toc-activity-6---using-the-lm-function" class="nav-link" data-scroll-target="#activity-6---using-the-lm-function"><span class="header-section-number">8.3.2</span> Activity 6 - Using the <code>lm()</code> function</a></li>
   <li><a href="#activity-7---calculating-confidence-intervals" id="toc-activity-7---calculating-confidence-intervals" class="nav-link" data-scroll-target="#activity-7---calculating-confidence-intervals"><span class="header-section-number">8.3.3</span> Activity 7 - Calculating confidence intervals</a></li>
   <li><a href="#activity-8---centering-and-standardising-predictors" id="toc-activity-8---centering-and-standardising-predictors" class="nav-link" data-scroll-target="#activity-8---centering-and-standardising-predictors"><span class="header-section-number">8.3.4</span> Activity 8 - Centering and standardising predictors</a></li>
-  <li><a href="#visualising-model-estimates" id="toc-visualising-model-estimates" class="nav-link" data-scroll-target="#visualising-model-estimates"><span class="header-section-number">8.3.5</span> Visualising model estimates</a></li>
   </ul>
 </li>
-  <li><a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions"><span class="header-section-number">8.4</span> Checking assumptions</a></li>
+  <li>
+<a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions"><span class="header-section-number">8.4</span> Checking assumptions</a>
+  <ul class="collapse">
+<li><a href="#activity-9---diagnostic-plots-for-linear-regression" id="toc-activity-9---diagnostic-plots-for-linear-regression" class="nav-link" data-scroll-target="#activity-9---diagnostic-plots-for-linear-regression"><span class="header-section-number">8.4.1</span> Activity 9 - Diagnostic plots for linear regression</a></li>
+  <li><a href="#checking-linearity" id="toc-checking-linearity" class="nav-link" data-scroll-target="#checking-linearity"><span class="header-section-number">8.4.2</span> Checking linearity</a></li>
+  <li><a href="#checking-normality" id="toc-checking-normality" class="nav-link" data-scroll-target="#checking-normality"><span class="header-section-number">8.4.3</span> Checking normality</a></li>
+  <li><a href="#checking-homoscedasticity" id="toc-checking-homoscedasticity" class="nav-link" data-scroll-target="#checking-homoscedasticity"><span class="header-section-number">8.4.4</span> Checking homoscedasticity</a></li>
+  <li><a href="#checking-all-the-assumptions" id="toc-checking-all-the-assumptions" class="nav-link" data-scroll-target="#checking-all-the-assumptions"><span class="header-section-number">8.4.5</span> Checking all the assumptions</a></li>
+  </ul>
+</li>
   <li><a href="#reporting-your-results" id="toc-reporting-your-results" class="nav-link" data-scroll-target="#reporting-your-results"><span class="header-section-number">8.5</span> Reporting your results</a></li>
   <li>
 <a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">8.6</span> Test Yourself</a>
   <ul class="collapse">
 <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">8.6.1</span> Knowledge check</a></li>
-  <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">8.6.2</span> Error mode</a></li>
+  <li><a href="#error-mode-1" id="toc-error-mode-1" class="nav-link" data-scroll-target="#error-mode-1"><span class="header-section-number">8.6.2</span> Error mode</a></li>
   </ul>
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">8.7</span> Words from this Chapter</a></li>
@@ -1353,11 +1361,133 @@ Tip
 </div>
 </div>
 </div>
-</section></section><section id="visualising-model-estimates" class="level3" data-number="8.3.5"><h3 data-number="8.3.5" class="anchored" data-anchor-id="visualising-model-estimates">
-<span class="header-section-number">8.3.5</span> Visualising model estimates</h3>
-</section></section><section id="checking-assumptions" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="checking-assumptions">
+</section></section></section><section id="checking-assumptions" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="checking-assumptions">
 <span class="header-section-number">8.4</span> Checking assumptions</h2>
-</section><section id="reporting-your-results" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="reporting-your-results">
+<p>For the inferential statistics to work as intended, the model makes certain assumptions about the data you are putting into it and the accuracy of the inferences depends on how sensible these assumption are. Remember these functions will always work even if the numbers you enter are nonsense, so it’s important for you as the researcher to recognise when it’s appropriate to use these techniques and when it is not.</p>
+<section id="activity-9---diagnostic-plots-for-linear-regression" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="activity-9---diagnostic-plots-for-linear-regression">
+<span class="header-section-number">8.4.1</span> Activity 9 - Diagnostic plots for linear regression</h3>
+<p>As a reminder, the assumptions for simple linear regression are:</p>
+<ol type="1">
+<li><p>The outcome is interval/ratio level data.</p></li>
+<li><p>The predictor variable is interval/ratio or categorical (with two levels at a time).</p></li>
+<li><p>All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).</p></li>
+<li><p>The predictors have non-zero variance.</p></li>
+<li><p>The relationship between the outcome and predictor is linear.</p></li>
+<li><p>The residuals should be normally distributed.</p></li>
+<li><p>There should be homoscedasticity.</p></li>
+</ol>
+<p>Assumptions 1-4 are pretty straight forward as they relate to your understanding of the design or a simple check on the data for non-zero variance (the responses are not all the exact same value).</p>
+<p>Assumptions 5-7 require diagnostic checks on the <a class="glossary" title="">residuals</a> from the model. The residuals are the difference between your observed values in the data and the values your model expects given it’s assumptions. If you remember back, we highlighted the model output mentioned <code>Residuals:</code> and they are saved within the model object.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># head shows the first 6 values </span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">head</span>(lm_redistribution<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+ 0.5806764 -0.6754769  0.4208311  0.2159084 -0.5279383 -0.5730156 </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What does the $ symbol mean?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We have not used this symbol in the book yet, but it is a base R operator for extracting information. You use it to access specific components within a data frame or object.</p>
+<p>Try the following in the console to see what it does:</p>
+<ul>
+<li><p><code>dawtry_clean$age</code></p></li>
+<li><p><code>lm_redistribution$coefficients</code></p></li>
+</ul>
+<p>If you type an object name into the console and add the <code>$</code>, you will see all the components appear to auto complete.</p>
+</div>
+</div>
+<p>In your reading, you might see individual statistical tests to check these assumptions, but they have more limitations than benefits. The best way to check the assumptions is through diagnostic plots which express the model residuals in different ways. We want to walk through this longer way of checking assumptions to develop a solid understanding before showing you a shortcut to see them all below.</p>
+<p>In the code below, we use a format you will be less familiar with as all these functions come from base R. If you just run the code for the diagnostic plots <code>plot(lm_redistribution)</code>, each one gets individually printed to your Plots window. Here, we create a 2x2 panel to show them all together, then turn it back off.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Change the panel layout to 2 x 2</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co"># plot the diagnostic plots </span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="fu">plot</span>(lm_redistribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For more information on each of these plots, see this great resource by <a href="https://library.virginia.edu/data/articles/diagnostic-plots" target="_blank">Kim (2015)</a> via the University of Virginia, but we will break the key ones down below.</p>
+</section><section id="checking-linearity" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="checking-linearity">
+<span class="header-section-number">8.4.2</span> Checking linearity</h3>
+<p>To isolate each plot, we can use the <code>which</code> argument. Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
+<span id="cb30-2"><a href="#cb30-2"></a>     <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here, you are looking out for a roughly flat horizontal red line. Common patterns to look out if there is a problem are when the lines has an obvious curve to look like a hump or several bends to look like an S.</p>
+<p>The only downside to using diagnostic plots is it takes experience to recognise when there is nothing wrong with a regression model compared to when it violates the assumptions. It is easy to see a little deviation and think there is some drastically wrong. Our advice is if you squint and it looks fine, it is probably fine. You are looking for clear and obvious deviations from what you expect and all the models we use in Chapters 8 and 9 are intentionally fine to develop foundational skills. In Chapter 11, we then introduce you to more problematic cases and what your options are.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Error mode
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you want to save these plots to add into a report, you might try using <code>ggsave()</code> like we have covered in the data visualisation chapters. However, it will not work as these plots have not been created by <pkg>ggplot2</pkg>.</p>
+<p>To save these plots, you can either right click and choose save as to save on your computer. Alternatively, if they open in the Plots window, you can click on Export and save them as an image or PDF to insert into your documents.</p>
+</div>
+</div>
+</section><section id="checking-normality" class="level3" data-number="8.4.3"><h3 data-number="8.4.3" class="anchored" data-anchor-id="checking-normality">
+<span class="header-section-number">8.4.3</span> Checking normality</h3>
+<p>Plot 2 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
+<span id="cb31-2"><a href="#cb31-2"></a>     <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="checking-homoscedasticity" class="level3" data-number="8.4.4"><h3 data-number="8.4.4" class="anchored" data-anchor-id="checking-homoscedasticity">
+<span class="header-section-number">8.4.4</span> Checking homoscedasticity</h3>
+<p>Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
+<span id="cb32-2"><a href="#cb32-2"></a>     <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="checking-all-the-assumptions" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="checking-all-the-assumptions">
+<span class="header-section-number">8.4.5</span> Checking all the assumptions</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">check_model</span>(lm_redistribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="reporting-your-results" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="reporting-your-results">
 <span class="header-section-number">8.5</span> Reporting your results</h2>
 <p>Instead of <span class="math inline">\(b_1\)</span> for the unstandardised coefficient, we use Beta instead <span class="math inline">\(\beta_1\)</span> for the standardised coefficient).</p>
 </section><section id="test-yourself" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="test-yourself">
@@ -1367,21 +1497,21 @@ Tip
 <span class="header-section-number">8.6.1</span> Knowledge check</h3>
 <p>Look at this code and answer the following questions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>results <span class="ot">&lt;-</span> <span class="fu">correlation</span>(<span class="at">data =</span> mh, </span>
-<span id="cb27-2"><a href="#cb27-2"></a>                       <span class="at">select =</span> <span class="st">"IQ"</span>, </span>
-<span id="cb27-3"><a href="#cb27-3"></a>                       <span class="at">select2 =</span> <span class="st">"Home"</span>,  </span>
-<span id="cb27-4"><a href="#cb27-4"></a>                       <span class="at">method =</span> <span class="st">"pearson"</span>, </span>
-<span id="cb27-5"><a href="#cb27-5"></a>                       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>results <span class="ot">&lt;-</span> <span class="fu">correlation</span>(<span class="at">data =</span> mh, </span>
+<span id="cb34-2"><a href="#cb34-2"></a>                       <span class="at">select =</span> <span class="st">"IQ"</span>, </span>
+<span id="cb34-3"><a href="#cb34-3"></a>                       <span class="at">select2 =</span> <span class="st">"Home"</span>,  </span>
+<span id="cb34-4"><a href="#cb34-4"></a>                       <span class="at">method =</span> <span class="st">"pearson"</span>, </span>
+<span id="cb34-5"><a href="#cb34-5"></a>                       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>What would this analysis show?
-<div id="radio_VFIVUXULQU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VFIVUXULQU" value=""><span>the effect of IQ on time spent reading at Home</span></label><label><input type="radio" autocomplete="off" name="radio_VFIVUXULQU" value=""><span>the relationship between IQ and Reading Ability</span></label><label><input type="radio" autocomplete="off" name="radio_VFIVUXULQU" value="answer"><span>the relationship between IQ and the time spent reading at home</span></label><label><input type="radio" autocomplete="off" name="radio_VFIVUXULQU" value=""><span>the relationship between IQ and the time spent watching TV at home</span></label>
+<div id="radio_MWOTWABZTJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value=""><span>the relationship between IQ and Reading Ability</span></label><label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value=""><span>the effect of IQ on time spent reading at Home</span></label><label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value=""><span>the relationship between IQ and the time spent watching TV at home</span></label><label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value="answer"><span>the relationship between IQ and the time spent reading at home</span></label>
 </div>
 </li>
 <li>What type of correlation analysis is it?
-<div id="radio_ANOXZUVRTF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ANOXZUVRTF" value=""><span>one-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_ANOXZUVRTF" value=""><span>two-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_ANOXZUVRTF" value=""><span>one-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_ANOXZUVRTF" value="answer"><span>two-tailed pearson analysis</span></label>
+<div id="radio_UMWDWZSXGW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value=""><span>one-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value=""><span>two-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value="answer"><span>two-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value=""><span>one-tailed pearson analysis</span></label>
 </div>
 </li>
 </ol>
@@ -1399,7 +1529,7 @@ Explain these answers
 <p>This analysis is a two-tailed pearson correlation looking at the relationship between IQ and the amount of time spent reading at home. You can tell this from the two variables in the code being IQ and Home, and the code stating pearson, and two-sided (another name for two-tailed). If you run the analysis you will find that the result would be r(23) = .202, p = .334.</p>
 </div>
 </div>
-</section><section id="error-mode" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="error-mode">
+</section><section id="error-mode-1" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="error-mode-1">
 <span class="header-section-number">8.6.2</span> Error mode</h3>
 <p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on the new types of data visualisation. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
 <p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files:</p>
@@ -1435,10 +1565,14 @@ Explain these answers
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#residuals" class="glossary" target="_blank">residuals</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#spearman" class="glossary" target="_blank">spearman</a></td>
 <td style="text-align: left;">A standardised measure of the relationship between two variables that assumes a monotonic - but not necessarily a linear - relationship and makes less stringent assumptions about the population.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#standardised-predictors" class="glossary" target="_blank">standardised-predictors</a></td>
 <td style="text-align: left;"></td>
 </tr>
