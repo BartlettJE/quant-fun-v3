@@ -8,8 +8,8 @@ knitr::opts_chunk$set(warning = FALSE,
 ```
 
 ```{r echo=FALSE}
-#library(patchwork)
-#library(car)
+library(patchwork)
+library(effectsize)
 library(correlation)
 #library(report)
 #library(psych)
@@ -211,7 +211,7 @@ dawtry_clean %>%
   geom_smooth(method = "lm") + 
   scale_x_continuous(name = "Perceived Fairness and Satisfaction", 
                      breaks = c(1:9)) + 
-  scale_y_continuous(name = "Attitudes on Wealth Distribution", 
+  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
                      breaks = c(1:6))
   
 ```
@@ -453,39 +453,147 @@ You can see the connection between the two by comparing the value of Pearson's *
 So, when you have a single continuous predictor, it is the exact same process as correlation, just expressed slightly different. 
 :::
 
+### Activity 7 - Calculating confidence intervals
+
+In the standard `lm()` and `summary()` output, we get most of the key values we need for our inferential statistics, but the one thing missing is confidence intervals around our estimates. Fortunately, R has a built-in function called `confint()` for calculating confidence intervals using your linear model object. 
+```{r}
+confint(lm_redistribution)
+```
+
+Normally, you focus on the confidence interval around your slope estimate as the intercept is not usually super useful for interpreting your findings when you have a continuous predictor. Now, we can summarise the three key concepts of inferential statistics as:  
+
+- **Hypothesis testing**: *p* < .001, suggesting we can reject the null hypothesis assuming $\alpha$ = .05. Fairness and satisfaction is a significant predictor of support for wealth redistribution. 
+
+- **Effect size**: $b_1$ = -0.40, suggesting fairness and satisfaction is a negative predictor.  
+
+- **Confidence interval**: [-0.44, -0.35], showing the precision around the slope estimate.  
+
 ::: {.callout-tip}
 #### Try this
 
 Great work following along so far, but now it is time to test your understanding on a new set of variables. This time, use `redistribution` as your outcome, `age` as your predictor, and use `dawtry_clean` as your data. We can ask the same question as before: "What is the relationship between age and attitudes on wealth redistribution?". 
 
-1. Apply simple linear regression to get your inferential statistics and answer the following questions: 
+Apply simple linear regression to get your inferential statistics and answer the following questions: 
 
-    - **Hypothesis testing**: Assuming $\alpha$ = .05, the relationship between age and wealth redistribution is `r mcq(c("statistically significant", answer = "not statistically significant"))`.
+- **Hypothesis testing**: Assuming $\alpha$ = .05, age is a `r mcq(c("statistically significant", answer = "non-significant"))` predictor of support for wealth redistribution.
     
-    - **Effect size**: Rounded to 2 decimals, the value for Pearson's correlation coefficient is `r mcq(c("-0.14", answer = "-0.03", "0.08", "-0.49"))`.
+- **Effect size**: Rounded to 2 decimals, the age coefficient is `r mcq(c("4.01", answer = "-0.003", "0.005", "0.22"))`.
     
-    - **Confidence interval**: Rounded to 2 decimals, the lower bound is `r mcq(c(answer = "-0.14", "-0.03", "0.08", "-0.49"))` and the upper bound is `r mcq(c("-0.14", "-0.03", answer = "0.08", "-0.49"))`.
+- **Confidence interval**: Rounded to 2 decimals, the lower bound of the age coefficient is `r mcq(c("3.59", answer = "-0.01", "4.44", "0.01"))` and the upper bound is `r mcq(c("3.59", "-0.01", "4.44", answer = "0.01"))`. 
 :::
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
-Blah
+The conclusions are the same as when we calculated the correlation where age is not a statistically significant predictor of support for wealth redistribution. As a regression model, we get the same conclusions expressed in a slightly different way. Age is negative, but the size of the slope is very small (-0.003) and non-significant (*p* = .625). We explain pretty much no variance in support for wealth redistribution ($R^2$ = 0.0008), so age is not very informative as a predictor.  
 
 ```{r}
+# Create lm object for age as a predictor
+lm_age <- lm(redistribution ~ age,
+             data = dawtry_clean)
 
+# summary of the model object
+summary(lm_age)
+
+# confidence intervals around estimates
+confint(lm_age)
 ```
 
 :::
 
-### Hypothesis testing, effect sizes, and confidence intervals
+### Activity 8 - Centering and standardising predictors
 
-### Centering predictors
+So far, we have covered specifying your outcome and predictor variables as their raw values in the data. However, there are two variations that are useful to understand: centering and standardising predictors. These do not change the model fitting or *p*-values, but change how you interpret the intercept and/or slope. 
+
+#### Centering predictors
+
+`r glossary("Centered predictors", display = "Centering", def = "")` predictors is where you change the values of your predictor, but not their scale. Typically, this means substracting the mean of your predictor from each observation. This changes how you interpret the intercept of your regression model. 
+
+Remember the interpretation of the intercept is the predicted value of your outcome when your predictor is set to 0. If 0 is not present in your data or a value of 0 would be uninformative, the intercept can be difficult to interpret. When you center your predictor, 0 becomes the mean value of your predictor. So, the intercept is now the predicted value of your outcome for the mean value of your predictor, but the slope itself does not change. You can see the impact of this by plotting the data side by side in @fig-centering-predictors. 
+
+```{r}
+dawtry_clean <- dawtry_clean %>% 
+  # subtract fairness values from mean of fairness
+  mutate(fairness_center = fairness_satisfaction - mean(fairness_satisfaction))
+```
+
+```{r centering-predictors, echo=FALSE}
+#| label: fig-centering-predictors
+#| fig.cap: "Top: The relationship between wealth redistribution and perceived fairness and satisfaction using raw values. Bottom: The relationship after centering perceived fairness and satisfaction values."
+
+normal <- dawtry_clean %>% 
+  ggplot(aes(x = fairness_satisfaction, y = redistribution)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  scale_x_continuous(name = "", 
+                     breaks = c(1:9)) + 
+  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+                     breaks = c(1:6)) + 
+  labs(title = "Raw predictor values")
+
+centered <- dawtry_clean %>% 
+  ggplot(aes(x = fairness_center, y = redistribution)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  scale_x_continuous(name = "Perceived Fairness and Satisfaction") + 
+  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+                     breaks = c(1:6)) + 
+  labs(title = "Centered predictor values")
+
+normal + centered + plot_layout(ncol = 1, nrow = 2)
+```
+
+The relationship between the two variables is exactly the same, but the values of fairness and satisfaction shifted so the mean is 0. If you create a new linear model object, you can see the difference this makes to the output. 
+
+```{r}
+lm_center <- lm(redistribution ~ fairness_center, 
+                data = dawtry_clean)
+
+summary(lm_center)
+```
+
+Every single one of the values remains the same apart from the intercept. Now, we can interpret it as the predicted value of redistribution when fairness and satisfaction is set to 0, i.e., the mean value. So, for the mean value of fairness and satisfaction, we would predict a value of 3.91 for redistribution. 
+
+#### Standardising predictors
+
+`r glossary("Standardised predictors", display = "Standardising", def = "")` predictors is where you first convert your values to z-scores. This means you interpret the values as standard deviations rather than your original units. This is more useful in multiple regression (Chapter 14) to compare the magnitude of predictors, but it is useful to get used to now when you only have one predictor to focus on. 
+
+The first step is to standardise **all** your variables, not just the predictor this time. This involves subtracting the mean of your variable from each value, and dividing by the standard deviation of the variable. They now have a mean of 0 and a standard deviation of 1. 
+
+```{r}
+dawtry_clean <- dawtry_clean %>% 
+  mutate(redistribution_std = (redistribution - mean(redistribution)) / sd(redistribution),
+         fairness_std = (fairness_satisfaction - mean(fairness_satisfaction)) / sd(fairness_satisfaction))
+```
+
+Once we enter them into the model, we no longer have values in the original units of measurement, we now have them expressed as standard deviations. 
+
+```{r}
+lm_standardised <- lm(redistribution_std ~ fairness_std, 
+                      data = dawtry_clean)
+
+summary(lm_standardised)
+```
+
+Like centering, the model fit and *p*-values do not change again, apart from the intercept. The relationship between the variables is exactly the same, but we changed their units. The intercept is tiny and close enough to zero that the *p*-value is 1. 
+
+More importantly, the slope is now expressed in standard deviations. Annoyingly, R prints the values in scientific notation, so this can be awkward to read (remember the `format()` function). Now, for every 1 standard deviation increase in our predictor, we predict the outcome to decrease by 0.70 standard deviations (does this remind you of the correlation value now we have standardised the relationship?). 
+
+::: {.callout-tip}
+
+It is important to demonstrate the underlying concepts first but if you want a shortcut without needing to standardise all your variables, the <pkg>effectsize</pkg> package has a handy function called `standardize_parameters()` which you can apply to your initial `lm()` object.
+
+```{r}
+standardize_parameters(lm_redistribution)
+```
+:::
 
 ### Visualising model estimates
 
 ## Checking assumptions
 
 ## Reporting your results
+
+Instead of $b_1$ for the unstandardised coefficient, we use Beta instead $\beta_1$ for the standardised coefficient).
 
 ## Test Yourself
 
