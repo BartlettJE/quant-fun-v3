@@ -1423,7 +1423,7 @@ What does the $ symbol mean?
 <p>For more information on each of these plots, see this great resource by <a href="https://library.virginia.edu/data/articles/diagnostic-plots" target="_blank">Kim (2015)</a> via the University of Virginia, but we will break the key ones down below.</p>
 </section><section id="checking-linearity" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="checking-linearity">
 <span class="header-section-number">8.4.2</span> Checking linearity</h3>
-<p>To isolate each plot, we can use the <code>which</code> argument. Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
+<p>To isolate each plot, we can use the <code>which</code> argument. Plot 1 is a residuals vs fitted plot and helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
 <span id="cb30-2"><a href="#cb30-2"></a>     <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1452,7 +1452,7 @@ Error mode
 </div>
 </section><section id="checking-normality" class="level3" data-number="8.4.3"><h3 data-number="8.4.3" class="anchored" data-anchor-id="checking-normality">
 <span class="header-section-number">8.4.3</span> Checking normality</h3>
-<p>Plot 2 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
+<p>Plot 2 is a qq-plot (quantile-quantile plot) and helps us check the normality of the model residuals by showing the standardised residuals on the y-axis and the theoretical quantiles on the x-axis. A common misconception is your variables should all be normally distributed, but it is actually the model residuals which should be normal.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
 <span id="cb31-2"><a href="#cb31-2"></a>     <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1463,9 +1463,12 @@ Error mode
 </div>
 </div>
 </div>
+<p>In this plot, you are looking for the data points to roughly follow the dashed line. The idea is there should be a linear relationship between the residuals and the values we would expect under a normal distribution.</p>
+<p>Like the other diagnostic plots, it is tempting to think there are problems where there are none. The vast majority of the points here follow the line nicely, but tail off a little at the extremes. It flags the points with the largest deviations but there do not appear to be any obvious problems.</p>
+<p>When there are problems with normality, you are looking for obvious deviations, like a the points curving around in a banana shape, or snaking around like an S.</p>
 </section><section id="checking-homoscedasticity" class="level3" data-number="8.4.4"><h3 data-number="8.4.4" class="anchored" data-anchor-id="checking-homoscedasticity">
 <span class="header-section-number">8.4.4</span> Checking homoscedasticity</h3>
-<p>Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
+<p>Plot 3 is a scale-location plot and helps us check homoscedasticity by showing the square root of the standardised residuals on the y-axis and the fitted values on the x-axis. Homoscedasticity is where the variance of the residuals is approximately equal across the range of your predictor(s).</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
 <span id="cb32-2"><a href="#cb32-2"></a>     <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1476,8 +1479,12 @@ Error mode
 </div>
 </div>
 </div>
+<p>In this plot, you are looking out for a roughly random spread of points as you move from one end of the x-axis to the other. The red line should be roughly flat and horizontal.</p>
+<p>When there is heteroscedasticity, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range, or a bow tie where there is a wide spread of points at each end and dense in the middle.</p>
 </section><section id="checking-all-the-assumptions" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="checking-all-the-assumptions">
 <span class="header-section-number">8.4.5</span> Checking all the assumptions</h3>
+<p>There is a fourth plot which you could examine using <code>plot(lm_redistribution, which = 4)</code>, but we are going to leave that until Chapter 11. It shows influential values or outliers which have the biggest individual effect on the model residuals. It is not technically an assumption of linear regression, but has knock on effects for the other assumptions.</p>
+<p>Now we have covered the individual diagnostic plots, there is a handy function called <code>check_model()</code> from the <pkg>performance</pkg> package. This function reports all the diagnostic checks from <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>, but tidies up the presentation and has some useful reminders of what you are looking for.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">check_model</span>(lm_redistribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1487,9 +1494,135 @@ Error mode
 </div>
 </div>
 </div>
+<p>The key difference is you get a posterior predictive check (essentially comparing values you observe compared to what your model would predict) and the qq-plot for normality of residuals looks a little different. Instead of a kind of angled line, the residuals are expressed as deviations instead, so the points should be close to a flat horizontal line. This version can make smaller deviations look worse, so keep in mind again you are looking for clear deviations in the overall pattern.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <pkg>performance</pkg> version of the diagnostic plots are actually created using <pkg>ggplot2</pkg>, so the function <code>ggsave()</code> would work here if you need to save the plot to add into your report.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In activity 7, you should have calculated the relationship between age and support for redistribution for your independent task. Using the model object <code>lm_age</code>, work through assumptions for simple linear regression and make a note of whether you think it meets the assumptions, or there might be any problems. Some of the assumptions you consider what you know about the design, while others you need the diagnostic plots.</p>
+<ol type="1">
+<li><p>The outcome is interval/ratio level data.</p></li>
+<li><p>The predictor variable is interval/ratio or categorical (with two levels at a time).</p></li>
+<li><p>All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).</p></li>
+<li><p>The predictors have non-zero variance.</p></li>
+<li><p>The relationship between the outcome and predictor is linear.</p></li>
+<li><p>The residuals should be normally distributed.</p></li>
+<li><p>There should be homoscedasticity.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>The outcome is interval/ratio level data.</li>
+</ol>
+<p><strong>There is a debate here we cover in the course materials, but there is an argument you can treat the average of multiple Likert items as interval, but you need to be careful.</strong></p>
+<ol start="2" type="1">
+<li>The predictor variable is interval/ratio or categorical (with two levels at a time).</li>
+</ol>
+<p><strong>Our predictor age is nicely ratio.</strong></p>
+<ol start="3" type="1">
+<li>All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).</li>
+</ol>
+<p><strong>You need to know this from the design / data collection, but it appears to be the case in this study.</strong></p>
+<ol start="4" type="1">
+<li>The predictors have non-zero variance.</li>
+</ol>
+<p><strong>There are a range of ages in the data.</strong></p>
+<ol start="5" type="1">
+<li>The relationship between the outcome and predictor is linear.</li>
+</ol>
+<p><strong>Looking at the first plot, the red line is pretty flat and horizontal, so we are happy with this.</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>The residuals should be normally distributed.</li>
+</ol>
+<p><strong>The qq-plot is fine for the vast majority of the range. We just have a few deviations in the extreme ends of the x-axis, but this is a byproduct of using a scale score as our outcome as responses cannot go beyond 1-6.</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="7" type="1">
+<li>There should be homoscedasticity.</li>
+</ol>
+<p><strong>The red line is pretty flat and it looks like there is a fairly even range of values across the x-axis range.</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>All in all, there do not appear to be any issues with the assumptions here.</p>
+</div>
+</div>
+</div>
 </section></section><section id="reporting-your-results" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="reporting-your-results">
 <span class="header-section-number">8.5</span> Reporting your results</h2>
-<p>Instead of <span class="math inline">\(b_1\)</span> for the unstandardised coefficient, we use Beta instead <span class="math inline">\(\beta_1\)</span> for the standardised coefficient).</p>
+<p>Now we have some results to go with, there are a few recommendations on how to communicate that information. In psychology (and other disciplines), we tend to follow the American Psychological Association (APA) formatting guidelines as they provide a comprehensive standardised style to make sure information is being reported as easily digestible and consistent as possible. You can see <a href="https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf" target="_blank">this PDF online</a> for a little cheat sheet for numbers and statistics, but we will outline some key principles to ensure you provide your reader with enough information.</p>
+<ol type="1">
+<li><p>Explain to the reader what your linear regression model was. For example, what was your outcome and predictor variable?</p></li>
+<li><p>Report descriptive statistics to help contextualise your findings. For example, the mean/standard deviation for your outcome and continuous predictor.</p></li>
+<li><p>Provide an appropriate data visualisation to help communciate key patterns to the reader. For example, a scatterplot for the relationship between your outcome and predictor.</p></li>
+<li><p>Report all three key inferential statistics concepts for the coefficient: the slope, the confidence interval around your slope, and the <em>p</em>-value for hypothesis testing. When you have one predictor in simple linear regression, you typically focus on the slope as your key effect size that helps address your research question and hypothesis. APA style rounds numbers to 2 decimal places when numbers can be bigger than 1, and 3 decimals with no leading zero when it cannot be bigger than 1. When you report the unstandardised slope, you use the symbol <span class="math inline">\(b_1\)</span> but for the standardised slope, you use Beta instead <span class="math inline">\(\beta_1\)</span>.</p></li>
+<li><p>Provide an overview of the model fit statistics for whether your model explained a significant amount of variance in your outcome. Remember: the <em>p</em>-value for your model will be the same as for the slope in simple linear regression.</p></li>
+</ol>
+<p>For our main example, we could summarise the findings as:</p>
+<p>“Our research question was: is there a relationship between support for wealth redistribution and fairness and satisfaction with the current system. To test this, we applied simple linear regression using fairness and satisfaction as a predictor and support for wealth redistribution as our outcome. Figure 1 shows a scatterplot of the relationship.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Our model explained a statistically significant amount of variance in our outcome (adjusted <span class="math inline">\(R^2\)</span> = .49, F(1, 303) = 291.70, <em>p</em> &lt; .001). Fairness and satisfaction was a negative predictor, where for every 1-unit increase we expect support for redistribution to decrease by 0.40 (<span class="math inline">\(b_1 = -0.40\)</span>, 95% CI = [-0.44, -0.35], <em>p</em> &lt; .001).”</p>
+<p>Note: we have not included an APA formatted Figure title here as it is not easy to format in our book, so refer to the course materials for guidance.</p>
 </section><section id="test-yourself" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="test-yourself">
 <span class="header-section-number">8.6</span> Test Yourself</h2>
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
@@ -1497,21 +1630,21 @@ Error mode
 <span class="header-section-number">8.6.1</span> Knowledge check</h3>
 <p>Look at this code and answer the following questions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>results <span class="ot">&lt;-</span> <span class="fu">correlation</span>(<span class="at">data =</span> mh, </span>
-<span id="cb34-2"><a href="#cb34-2"></a>                       <span class="at">select =</span> <span class="st">"IQ"</span>, </span>
-<span id="cb34-3"><a href="#cb34-3"></a>                       <span class="at">select2 =</span> <span class="st">"Home"</span>,  </span>
-<span id="cb34-4"><a href="#cb34-4"></a>                       <span class="at">method =</span> <span class="st">"pearson"</span>, </span>
-<span id="cb34-5"><a href="#cb34-5"></a>                       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>results <span class="ot">&lt;-</span> <span class="fu">correlation</span>(<span class="at">data =</span> mh, </span>
+<span id="cb37-2"><a href="#cb37-2"></a>                       <span class="at">select =</span> <span class="st">"IQ"</span>, </span>
+<span id="cb37-3"><a href="#cb37-3"></a>                       <span class="at">select2 =</span> <span class="st">"Home"</span>,  </span>
+<span id="cb37-4"><a href="#cb37-4"></a>                       <span class="at">method =</span> <span class="st">"pearson"</span>, </span>
+<span id="cb37-5"><a href="#cb37-5"></a>                       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>What would this analysis show?
-<div id="radio_MWOTWABZTJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value=""><span>the relationship between IQ and Reading Ability</span></label><label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value=""><span>the effect of IQ on time spent reading at Home</span></label><label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value=""><span>the relationship between IQ and the time spent watching TV at home</span></label><label><input type="radio" autocomplete="off" name="radio_MWOTWABZTJ" value="answer"><span>the relationship between IQ and the time spent reading at home</span></label>
+<div id="radio_QHMESFHRKT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value="answer"><span>the relationship between IQ and the time spent reading at home</span></label><label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value=""><span>the relationship between IQ and the time spent watching TV at home</span></label><label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value=""><span>the relationship between IQ and Reading Ability</span></label><label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value=""><span>the effect of IQ on time spent reading at Home</span></label>
 </div>
 </li>
 <li>What type of correlation analysis is it?
-<div id="radio_UMWDWZSXGW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value=""><span>one-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value=""><span>two-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value="answer"><span>two-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_UMWDWZSXGW" value=""><span>one-tailed pearson analysis</span></label>
+<div id="radio_JYPQYYJLSC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value=""><span>one-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value="answer"><span>two-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value=""><span>one-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value=""><span>two-tailed spearman analysis</span></label>
 </div>
 </li>
 </ol>

@@ -647,7 +647,7 @@ For more information on each of these plots, see this great resource by [Kim (20
 
 ### Checking linearity 
 
-To isolate each plot, we can use the `which` argument. Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
+To isolate each plot, we can use the `which` argument. Plot 1 is a residuals vs fitted plot and helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
 
 ```{r}
 plot(lm_redistribution, 
@@ -668,32 +668,148 @@ To save these plots, you can either right click and choose save as to save on yo
 
 ### Checking normality 
 
-Plot 2 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
+Plot 2 is a qq-plot (quantile-quantile plot) and helps us check the normality of the model residuals by showing the standardised residuals on the y-axis and the theoretical quantiles on the x-axis. A common misconception is your variables should all be normally distributed, but it is actually the model residuals which should be normal. 
 
 ```{r}
 plot(lm_redistribution, 
      which = 2)
 ```
 
+In this plot, you are looking for the data points to roughly follow the dashed line. The idea is there should be a linear relationship between the residuals and the values we would expect under a normal distribution. 
+
+Like the other diagnostic plots, it is tempting to think there are problems where there are none. The vast majority of the points here follow the line nicely, but tail off a little at the extremes. It flags the points with the largest deviations but there do not appear to be any obvious problems. 
+
+When there are problems with normality, you are looking for obvious deviations, like a the points curving around in a banana shape, or snaking around like an S.
+
 ### Checking homoscedasticity 
 
-Plot 1 helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
+Plot 3 is a scale-location plot and helps us check homoscedasticity by showing the square root of the standardised residuals on the y-axis and the fitted values on the x-axis. Homoscedasticity is where the variance of the residuals is approximately equal across the range of your predictor(s).
 
 ```{r}
 plot(lm_redistribution, 
      which = 3)
 ```
 
+In this plot, you are looking out for a roughly random spread of points as you move from one end of the x-axis to the other. The red line should be roughly flat and horizontal. 
+
+When there is heteroscedasticity, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range, or a bow tie where there is a wide spread of points at each end and dense in the middle. 
+
 ### Checking all the assumptions
+
+There is a fourth plot which you could examine using `plot(lm_redistribution, which = 4)`, but we are going to leave that until Chapter 11. It shows influential values or outliers which have the biggest individual effect on the model residuals. It is not technically an assumption of linear regression, but has knock on effects for the other assumptions. 
+
+Now we have covered the individual diagnostic plots, there is a handy function called `check_model()` from the <pkg>performance</pkg> package. This function reports all the diagnostic checks from `plot()`, but tidies up the presentation and has some useful reminders of what you are looking for. 
 
 ```{r}
 check_model(lm_redistribution)
 ```
 
+The key difference is you get a posterior predictive check (essentially comparing values you observe compared to what your model would predict) and the qq-plot for normality of residuals looks a little different. Instead of a kind of angled line, the residuals are expressed as deviations instead, so the points should be close to a flat horizontal line. This version can make smaller deviations look worse, so keep in mind again you are looking for clear deviations in the overall pattern. 
+
+::: {.callout-note}
+The <pkg>performance</pkg> version of the diagnostic plots are actually created using <pkg>ggplot2</pkg>, so the function `ggsave()` would work here if you need to save the plot to add into your report. 
+:::
+
+::: {.callout-tip}
+#### Try this
+
+In activity 7, you should have calculated the relationship between age and support for redistribution for your independent task. Using the model object `lm_age`, work through assumptions for simple linear regression and make a note of whether you think it meets the assumptions, or there might be any problems. Some of the assumptions you consider what you know about the design, while others you need the diagnostic plots. 
+
+1. The outcome is interval/ratio level data.
+
+2. The predictor variable is interval/ratio or categorical (with two levels at a time).
+
+3. All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).
+
+4. The predictors have non-zero variance.
+
+5. The relationship between the outcome and predictor is linear.
+
+6. The residuals should be normally distributed.
+
+7. There should be homoscedasticity.
+
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+
+1. The outcome is interval/ratio level data.
+
+**There is a debate here we cover in the course materials, but there is an argument you can treat the average of multiple Likert items as interval, but you need to be careful.**
+
+2. The predictor variable is interval/ratio or categorical (with two levels at a time).
+
+**Our predictor age is nicely ratio.**
+
+3. All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).
+
+**You need to know this from the design / data collection, but it appears to be the case in this study.**
+
+4. The predictors have non-zero variance.
+
+**There are a range of ages in the data.**
+
+5. The relationship between the outcome and predictor is linear.
+
+**Looking at the first plot, the red line is pretty flat and horizontal, so we are happy with this.**
+
+```{r}
+plot(lm_age, which = 1)
+```
+
+6. The residuals should be normally distributed.
+
+**The qq-plot is fine for the vast majority of the range. We just have a few deviations in the extreme ends of the x-axis, but this is a byproduct of using a scale score as our outcome as responses cannot go beyond 1-6.**
+
+```{r}
+plot(lm_age, which = 2)
+```
+
+7. There should be homoscedasticity. 
+
+**The red line is pretty flat and it looks like there is a fairly even range of values across the x-axis range.**
+
+```{r}
+plot(lm_age, which = 3)
+```
+
+All in all, there do not appear to be any issues with the assumptions here.
+:::
 
 ## Reporting your results
 
-Instead of $b_1$ for the unstandardised coefficient, we use Beta instead $\beta_1$ for the standardised coefficient).
+Now we have some results to go with, there are a few recommendations on how to communicate that information. In psychology (and other disciplines), we tend to follow the American Psychological Association (APA) formatting guidelines as they provide a comprehensive standardised style to make sure information is being reported as easily digestible and consistent as possible. You can see [this PDF online](https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf){target="_blank"} for a little cheat sheet for numbers and statistics, but we will outline some key principles to ensure you provide your reader with enough information.
+
+1. Explain to the reader what your linear regression model was. For example, what was your outcome and predictor variable?
+
+2. Report descriptive statistics to help contextualise your findings. For example, the mean/standard deviation for your outcome and continuous predictor.
+
+3. Provide an appropriate data visualisation to help communciate key patterns to the reader. For example, a scatterplot for the relationship between your outcome and predictor.
+
+4. Report all three key inferential statistics concepts for the coefficient: the slope, the confidence interval around your slope, and the *p*-value for hypothesis testing. When you have one predictor in simple linear regression, you typically focus on the slope as your key effect size that helps address your research question and hypothesis. APA style rounds numbers to 2 decimal places when numbers can be bigger than 1, and 3 decimals with no leading zero when it cannot be bigger than 1. When you report the unstandardised slope, you use the symbol $b_1$ but for the standardised slope, you use Beta instead $\beta_1$.
+
+5. Provide an overview of the model fit statistics for whether your model explained a significant amount of variance in your outcome. Remember: the *p*-value for your model will be the same as for the slope in simple linear regression. 
+
+For our main example, we could summarise the findings as: 
+
+"Our research question was: is there a relationship between support for wealth redistribution and fairness and satisfaction with the current system. To test this, we applied simple linear regression using fairness and satisfaction as a predictor and support for wealth redistribution as our outcome. Figure 1 shows a scatterplot of the relationship.
+
+```{r echo=FALSE}
+dawtry_clean %>% 
+  ggplot(aes(x = fairness_satisfaction, y = redistribution)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  scale_x_continuous(name = "", 
+                     breaks = c(1:9)) + 
+  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+                     breaks = c(1:6)) + 
+  theme_classic()
+```
+
+Our model explained a statistically significant amount of variance in our outcome (adjusted $R^2$ = .49, F(1, 303) = 291.70, *p* < .001). Fairness and satisfaction was a negative predictor, where for every 1-unit increase we expect support for redistribution to decrease by 0.40 ($b_1 = -0.40$, 95% CI = [-0.44, -0.35], *p* < .001)."
+
+Note: we have not included an APA formatted Figure title here as it is not easy to format in our book, so refer to the course materials for guidance. 
 
 ## Test Yourself
 
