@@ -12,19 +12,24 @@ library(patchwork)
 library(effectsize)
 library(correlation)
 library(performance)
-#library(psych)
 library(tidyverse)
 ```
 
-So far in this book we have been building your skills and knowledge on data wrangling and you now have the basis for a lot of the work you will do in research. You may think that the tasks we ask you to do will get harder as this course progresses but that isn't true. The hardest part of working with data is at the very beginning, trying to learn the new terminology, figuring out how to load in data and wrangle it into the format you need. And whilst it may feel like you have not yet covered a lot, it is really worth reflecting on just how far you've come in a short time..
+So far in this book, we have been building your data wrangling and visualisation skills and you now have the basis for a lot of the work you will do in research. Most of the work in data analysis is invested in getting your data into an appropriate form for analysis. Once you get there, the functions for inferential statistics is pretty short, but the challenge now comes to expressing your design as a statistical model and interpreting the output. 
 
-We will talk a little bit about these two correlations in the work we do today. And we shall begin now!
+In this chapter, we focus on simple linear regression for testing research questions and hypotheses for the relationship between two continuous predictors. We will also explore the concepts of correlation and checking the statistical assumptions of your regression model. 
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
 By the end of this chapter, you will be able to: 
 
-- ILO1.
+- Visualise the relationship between two continuous variables using a scatterplot. 
+
+- Apply and interpret a Pearson's and Spearman's correlation. 
+
+- Apply and interpret linear regression with one continuous predictor variable. 
+
+- Check the assumptions of linear regression through diagnostic plots. 
 
 ## Chapter preparation
 
@@ -100,7 +105,15 @@ As the first activity, try and test yourself by completing the following task li
 
 To wrangle the data, complete the following tasks: 
 
-1. Load the <pkg>tidyverse</pkg> package. 
+1. Load the following packages (three of these are new, so revisit [Chapter 1](#install-tidy) if you need a refresher of installing R packages, but remember not to do this on the university computers / online server):
+
+    - <pkg>tidyverse</pkg>
+    
+    - <pkg>effectsize</pkg>
+    
+    - <pkg>correlation</pkg>
+    
+    - <pkg>performance</pkg>
 
 2. Read the data file `data/Dawtry_2015.csv` to the object name `dawtry_data`.
 
@@ -127,8 +140,11 @@ glimpse(dawtry_clean)
 You should have the following in a code chunk: 
 
 ```{r eval=FALSE}
-# Load the tidyverse package below
+# Load the packages below
 library(tidyverse)
+library(effectsize)
+library(correlation)
+library(performance)
 
 # Load the data file
 # This should be the Dawtry_2015.csv file 
@@ -166,7 +182,7 @@ dawtry_clean <- dawtry_data %>%
 
 :::
 
-### Activity 2 - Explore the data
+### Activity 2 - Explore the data {#08-explore}
 
 ::: {.callout-tip}
 #### Try this
@@ -182,9 +198,9 @@ In `dawtry_clean`, we have the following variables:
 | Political_Preference | `r typeof(dawtry_clean$Political_Preference)`| Political attitudes: 1 = very liberal/very left-wing/strong Democrat to 7 = very conservative/very right-wing/strong Republican. |
 | age | `r typeof(dawtry_clean$age)`| Age in years. |
 | gender | `r typeof(dawtry_clean$gender)`| 1 = "Male", 2 = "Female. |
-| Population_Inequality_Gini_Index | `r typeof(dawtry_clean$Population_Inequality_Gini_Index)`| Measure of income inequality from 0 (perfect equality) to 1 (perfect inequality), here where participants estimated population in equality. |
+| Population_Inequality_Gini_Index | `r typeof(dawtry_clean$Population_Inequality_Gini_Index)`| Measure of income inequality from 0 (perfect equality) to 100 (perfect inequality), here where participants estimated population in equality. |
 | Population_Mean_Income | `r typeof(dawtry_clean$Population_Mean_Income)`| Participant estimate of the mean household income in the population (\$). |
-| Social_Circle_Inequality_Gini_Index | `r typeof(dawtry_clean$Social_Circle_Inequality_Gini_Index)`| Measure of income inequality from 0 (perfect equality) to 1 (perfect inequality), here where participants estimated inequality in their social circle. |
+| Social_Circle_Inequality_Gini_Index | `r typeof(dawtry_clean$Social_Circle_Inequality_Gini_Index)`| Measure of income inequality from 0 (perfect equality) to 100 (perfect inequality), here where participants estimated inequality in their social circle. |
 | Social_Circle_Mean_Income | `r typeof(dawtry_clean$Social_Circle_Mean_Income)`| Participant estimate of the mean household income in their social circle (\$). |
 | fairness_satisfaction | `r typeof(dawtry_clean$fairness_satisfaction)`| Perceived fairness and satisfaction about the current system of wealth redistribution: Mean of two items (1 extremely fair – 9 extremely unfair) |
 | redistribution | `r typeof(dawtry_clean$redistribution)`| Attitudes on wealth distribution: Mean of four items (1 strongly disagree – 6 strongly agree). |
@@ -817,43 +833,144 @@ To end the chapter, we have some knowledge check questions to test your understa
 
 ### Knowledge check
 
-Look at this code and answer the following questions:
+For this chapter's knowledge check section, we have something a little different. Instead of purely conceptual questions about functions, we have another example of linear regression from @dawtry_why_2015. Feel free to create this model yourself, but we will show you some output and ask you questions based on it. 
 
-```{r test1, eval = FALSE}
-results <- correlation(data = mh, 
-                       select = "IQ", 
-                       select2 = "Home",  
-                       method = "pearson", 
-                       alternative = "two.sided")
+For this model, we focus on the two variables estimated population inequality index (`Population_Inequality_Gini_Index`) and support for wealth redistribution (`redistribution`). Check back to the code book in [Activity 2](#08-explore) if you need a reminder of what the variables mean.
+
+**Question 1**. In the scatterplot of the relationship below, this shows a negative relationship between the inequality index and support for redistribution: `r torf(FALSE)`. 
+
+```{r echo=FALSE}
+dawtry_clean %>% 
+  ggplot(aes(x = Population_Inequality_Gini_Index, y = redistribution)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  scale_x_continuous(name = "Population Inequality Index", 
+                      breaks = seq(10, 60, 10),
+                      limits = c(10, 60)) + 
+  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+                      breaks = c(1:6)) + 
+  theme_classic()
 ```
 
-1. What would this analysis show? `r longmcq(sample(c(answer = "the relationship between IQ and the time spent reading at home","the relationship between IQ and the time spent watching TV at home","the relationship between IQ and Reading Ability","the effect of IQ on time spent reading at Home")))`
-2. What type of correlation analysis is it? `r longmcq(sample(c(answer = "two-tailed pearson analysis", "one-tailed pearson analysis", "one-tailed spearman analysis", "two-tailed spearman analysis")))`
+**Question 2** For the next few questions, we have the output from a linear regression model and we would like you to interpret it. 
 
-Now try running the code and then answering the following questions.
+```{r echo=FALSE}
+lm_test <- lm(redistribution ~ Population_Inequality_Gini_Index, data = dawtry_clean)
 
-3. To three decimal places, what is the r-value of the correlation between IQ and the time spent reading at Home? ` longmcq(sample(c(answer = rv, tv, civ, pv)))`
-
-4. To three decimal places, what is the p-value of the correlation between IQ and the time spent reading at Home? ` longmcq(sample(c(answer = pv, tv, civ, rv)))`
-
-5. What is the degrees of freedom of the correlation between IQ and the time spent reading at Home? ` longmcq(sample(c(answer = dfv, tv, civ, nv)))`
-
-`r hide("Explain these answers")`
-```{r, echo = FALSE, results='asis'}
-
-cat("
-
-This analysis is a two-tailed pearson correlation looking at the relationship between IQ and the amount of time spent reading at home. You can tell this from the two variables in the code being IQ and Home, and the code stating pearson, and two-sided (another name for two-tailed). If you run the analysis you will find that the result would be r(23) = .202, p = .334.
-
-")
+summary(lm_test)
 ```
-`r unhide()`
+
+The outcome variable in this model is `r mcq(c(answer = "Attitudes on Wealth Redistribution", "Population Inequality Index"))` and the predictor variable is `r mcq(c("Attitudes on Wealth Redistribution", answer = "Population Inequality Index"))`.
+
+**Question 3** Rounded to 2 decimals, when the predictor is 0, we predict a value of `r fitb(3.10, tol = 0.1)` for our outcome variable. 
+
+**Question 4** The predictor is `r mcq(c(answer = "significant", "non-significant"))` with a *p*-value of `r fitb(.009)`.
+
+**Question 5** The predictor is `r mcq(c(answer = "positive", "negative"))`, where we expect for every 1-unit increase in the predictor a `r fitb(0.02)` -unit `r mcq(c(answer = "increase", "decrease"))` in the outcome.
 
 ### Error mode
 
-The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on the new types of data visualisation. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently. 
+The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on simple linear regression between two continuous variables. There are not many outright errors that people make here, more misspecifications that are not doing what you think they are doing. 
 
 Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files: 
+
+```{r eval=FALSE}
+# Load the packages below
+library(tidyverse)
+library(effectsize)
+library(correlation)
+library(performance)
+
+# Load the data file
+# This should be the Dawtry_2015.csv file 
+dawtry_data <- read_csv("data/Dawtry_2015.csv")
+
+# Reverse code redist2 and redist4
+dawtry_data <- dawtry_data %>%
+  mutate(redist2_R = 7 - redist2,
+         redist4_R = 7 - redist4)
+
+# calculate mean fairness and satisfaction score  
+fairness_satisfaction <- dawtry_data %>% 
+  pivot_longer(cols = fairness:satisfaction, 
+               names_to = "Items", 
+               values_to = "Response") %>% 
+  group_by(PS) %>% 
+  summarise(fairness_satisfaction = mean(Response)) %>% 
+  ungroup()
+
+# calculate mean wealth redistribution score  
+redistribution <- dawtry_data %>% 
+  pivot_longer(cols = c(redist1, redist2_R, redist3, redist4_R), 
+               names_to = "Items", 
+               values_to = "Response") %>% 
+  group_by(PS) %>% 
+  summarise(redistribution = mean(Response)) %>% 
+  ungroup()
+
+# join data and select columns for focus
+dawtry_clean <- dawtry_data %>% 
+  inner_join(fairness_satisfaction, by = "PS") %>% 
+  inner_join(redistribution, by = "PS") %>% 
+  select(PS, Household_Income:redistribution, -redist2_R, -redist4_R)
+```
+
+Below, we have several variations of a misspecification. Copy and paste them into your R Markdown file below the code chunk to wrangle the data. Once you have copied the activities, click knit and look at the output you receive. See if you can identify the mistake and fix it before checking the answer.
+
+**Question 6**. Copy the following code chunk into your R Markdown file and press knit. We want to create a simple linear regression model to specify `fairness_satisfaction` as our outcome variable and `Political_Preference` as our predictor. Have we expressed that accurately? 
+
+````{verbatim, lang = "markdown"}
+```{r}
+lm_fairness <- lm(Political_Preference ~ fairness_satisfaction,
+                        data = dawtry_clean)
+
+summary(lm_fairness)
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+In this example, we mixed up the variables. The formula in `lm()` has the form `outcome ~ predictor`, so we mixed up the order. In simple linear regression, it makes no difference to the slope, but it is important to be able to express your model accurately and it would make a difference once you scale up to multiple linear regression. 
+
+```{r eval = FALSE}
+lm_fairness <- lm(fairness_satisfaction ~ Political_Preference,
+                        data = dawtry_clean)
+                        
+summary(lm_fairness)
+```
+:::
+
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. We want to standardise the outcome and predictors, so that we get the intercept and slope estimates in standard deviations. Have we expressed that accurately? 
+
+````{verbatim, lang = "markdown"}
+```{r}
+dawtry_clean <- dawtry_clean %>% 
+  mutate(fairness_std = (fairness_satisfaction - mean(fairness_satisfaction)) / sd(fairness_satisfaction))
+
+lm_fairness <- lm(fairness_std ~ Political_Preference,
+                        data = dawtry_clean)
+                        
+summary(lm_fairness)
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+In this example, we only standardised the outcome. When we standardise predictors, we must standardise both the outcome and predictor so they are expressed in standard deviations. It is just when we center, we only center the predictor. 
+
+```{r eval = FALSE}
+dawtry_clean <- dawtry_clean %>% 
+  mutate(fairness_std = (fairness_satisfaction - mean(fairness_satisfaction)) / sd(fairness_satisfaction),
+         Political_std = (Political_Preference - mean(Political_Preference, na.rm = TRUE)) / sd(Political_Preference, na.rm = TRUE))
+
+lm_fairness <- lm(fairness_std ~ Political_std,
+                        data = dawtry_clean)
+                        
+summary(lm_fairness)
+```
+:::
 
 ## Words from this Chapter
 
@@ -865,6 +982,8 @@ glossary_table()
 
 ## End of chapter
 
-That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!
+Great work, that was your first chapter working on inferential statistics! 
 
-Excellent work today! You can now add running, interpreting and writing up correlations to the list of knowledge and skills in your research methods toolbox. Remember that actually a lot of the work is in the preparation of the data and really running the correlation is just one more function. It might be worthwhile repeating the first few activities with two other variables to test your understanding. If you have any questions, please post them on Teams.
+We have spent so long developing your data wrangling and visualisation skills that the code for statistical models is pretty short. Hopefully, you now believe us when we said almost all the work goes into wrangling your data into a format you can analyse. Once it comes to inferential statistics, it shifts from wrangling the data being the most difficult to being able to express your research question and interpret the outcome being the most difficult. 
+
+In the next chapter, we reinforce most of the content by applying simple linear regression to a categorical predictor. This is when you want to test for differences between two groups on your outcome instead of testing the relationship between two continuous variables.  

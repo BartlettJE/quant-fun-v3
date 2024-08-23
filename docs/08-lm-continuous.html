@@ -376,7 +376,7 @@ div.csl-indent {
 <li><a href="#introduction-to-the-data-set" id="toc-introduction-to-the-data-set" class="nav-link" data-scroll-target="#introduction-to-the-data-set"><span class="header-section-number">8.1.1</span> Introduction to the data set</a></li>
   <li><a href="#organising-your-files-and-project-for-the-chapter" id="toc-organising-your-files-and-project-for-the-chapter" class="nav-link" data-scroll-target="#organising-your-files-and-project-for-the-chapter"><span class="header-section-number">8.1.2</span> Organising your files and project for the chapter</a></li>
   <li><a href="#activity-1---read-and-wrangle-the-data" id="toc-activity-1---read-and-wrangle-the-data" class="nav-link" data-scroll-target="#activity-1---read-and-wrangle-the-data"><span class="header-section-number">8.1.3</span> Activity 1 - Read and wrangle the data</a></li>
-  <li><a href="#activity-2---explore-the-data" id="toc-activity-2---explore-the-data" class="nav-link" data-scroll-target="#activity-2---explore-the-data"><span class="header-section-number">8.1.4</span> Activity 2 - Explore the data</a></li>
+  <li><a href="#08-explore" id="toc-08-explore" class="nav-link" data-scroll-target="#08-explore"><span class="header-section-number">8.1.4</span> Activity 2 - Explore the data</a></li>
   </ul>
 </li>
   <li>
@@ -434,12 +434,15 @@ div.csl-indent {
   </div>
   
 
-</header><p>So far in this book we have been building your skills and knowledge on data wrangling and you now have the basis for a lot of the work you will do in research. You may think that the tasks we ask you to do will get harder as this course progresses but that isn’t true. The hardest part of working with data is at the very beginning, trying to learn the new terminology, figuring out how to load in data and wrangle it into the format you need. And whilst it may feel like you have not yet covered a lot, it is really worth reflecting on just how far you’ve come in a short time..</p>
-<p>We will talk a little bit about these two correlations in the work we do today. And we shall begin now!</p>
+</header><p>So far in this book, we have been building your data wrangling and visualisation skills and you now have the basis for a lot of the work you will do in research. Most of the work in data analysis is invested in getting your data into an appropriate form for analysis. Once you get there, the functions for inferential statistics is pretty short, but the challenge now comes to expressing your design as a statistical model and interpreting the output.</p>
+<p>In this chapter, we focus on simple linear regression for testing research questions and hypotheses for the relationship between two continuous predictors. We will also explore the concepts of correlation and checking the statistical assumptions of your regression model.</p>
 <p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
 <p>By the end of this chapter, you will be able to:</p>
 <ul>
-<li>ILO1.</li>
+<li><p>Visualise the relationship between two continuous variables using a scatterplot.</p></li>
+<li><p>Apply and interpret a Pearson’s and Spearman’s correlation.</p></li>
+<li><p>Apply and interpret linear regression with one continuous predictor variable.</p></li>
+<li><p>Check the assumptions of linear regression through diagnostic plots.</p></li>
 </ul>
 <section id="chapter-preparation" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="chapter-preparation">
 <span class="header-section-number">8.1</span> Chapter preparation</h2>
@@ -476,7 +479,15 @@ Try this
 <div class="callout-body-container callout-body">
 <p>To wrangle the data, complete the following tasks:</p>
 <ol type="1">
-<li><p>Load the <pkg>tidyverse</pkg> package.</p></li>
+<li>
+<p>Load the following packages (three of these are new, so revisit <a href="01-programming-basics.html#install-tidy">Chapter 1</a> if you need a refresher of installing R packages, but remember not to do this on the university computers / online server):</p>
+<ul>
+<li><p><pkg>tidyverse</pkg></p></li>
+<li><p><pkg>effectsize</pkg></p></li>
+<li><p><pkg>correlation</pkg></p></li>
+<li><p><pkg>performance</pkg></p></li>
+</ul>
+</li>
 <li><p>Read the data file <code>data/Dawtry_2015.csv</code> to the object name <code>dawtry_data</code>.</p></li>
 <li><p>Reverse code two items: <code>redist2</code> and <code>redist4</code> to create two new variables <code>redist2_R</code> and <code>redist4_R</code></p></li>
 <li><p>Summarise the data to calculate the mean <code>fairness_satisfaction</code> score, by taking the mean of two items: <code>fairness</code> and <code>satisfaction</code>.</p></li>
@@ -518,46 +529,49 @@ Show me the solution
 <div class="callout-body-container callout-body">
 <p>You should have the following in a code chunk:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load the tidyverse package below</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load the packages below</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Load the data file</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># This should be the Dawtry_2015.csv file </span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>dawtry_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Dawtry_2015.csv"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Reverse code redist2 and redist4</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>dawtry_data <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">mutate</span>(<span class="at">redist2_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist2,</span>
-<span id="cb2-11"><a href="#cb2-11"></a>         <span class="at">redist4_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist4)</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># calculate mean fairness and satisfaction score  </span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>fairness_satisfaction <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
-<span id="cb2-15"><a href="#cb2-15"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> fairness<span class="sc">:</span>satisfaction, </span>
-<span id="cb2-16"><a href="#cb2-16"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
-<span id="cb2-17"><a href="#cb2-17"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-19"><a href="#cb2-19"></a>  <span class="fu">summarise</span>(<span class="at">fairness_satisfaction =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-20"><a href="#cb2-20"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb2-21"><a href="#cb2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co"># calculate mean wealth redistribution score  </span></span>
-<span id="cb2-23"><a href="#cb2-23"></a>redistribution <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
-<span id="cb2-24"><a href="#cb2-24"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(redist1, redist2_R, redist3, redist4_R), </span>
-<span id="cb2-25"><a href="#cb2-25"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
-<span id="cb2-26"><a href="#cb2-26"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-27"><a href="#cb2-27"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-28"><a href="#cb2-28"></a>  <span class="fu">summarise</span>(<span class="at">redistribution =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-29"><a href="#cb2-29"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb2-30"><a href="#cb2-30"></a></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co"># join data and select columns for focus</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
-<span id="cb2-33"><a href="#cb2-33"></a>  <span class="fu">inner_join</span>(fairness_satisfaction, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-34"><a href="#cb2-34"></a>  <span class="fu">inner_join</span>(redistribution, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-35"><a href="#cb2-35"></a>  <span class="fu">select</span>(PS, Household_Income<span class="sc">:</span>redistribution, <span class="sc">-</span>redist2_R, <span class="sc">-</span>redist4_R)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(correlation)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">library</span>(performance)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Load the data file</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># This should be the Dawtry_2015.csv file </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>dawtry_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Dawtry_2015.csv"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># Reverse code redist2 and redist4</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>dawtry_data <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="fu">mutate</span>(<span class="at">redist2_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist2,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>         <span class="at">redist4_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist4)</span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># calculate mean fairness and satisfaction score  </span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>fairness_satisfaction <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> fairness<span class="sc">:</span>satisfaction, </span>
+<span id="cb2-19"><a href="#cb2-19"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
+<span id="cb2-20"><a href="#cb2-20"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-21"><a href="#cb2-21"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-22"><a href="#cb2-22"></a>  <span class="fu">summarise</span>(<span class="at">fairness_satisfaction =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-23"><a href="#cb2-23"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb2-24"><a href="#cb2-24"></a></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co"># calculate mean wealth redistribution score  </span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>redistribution <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb2-27"><a href="#cb2-27"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(redist1, redist2_R, redist3, redist4_R), </span>
+<span id="cb2-28"><a href="#cb2-28"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
+<span id="cb2-29"><a href="#cb2-29"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-30"><a href="#cb2-30"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-31"><a href="#cb2-31"></a>  <span class="fu">summarise</span>(<span class="at">redistribution =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-32"><a href="#cb2-32"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="co"># join data and select columns for focus</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb2-36"><a href="#cb2-36"></a>  <span class="fu">inner_join</span>(fairness_satisfaction, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-37"><a href="#cb2-37"></a>  <span class="fu">inner_join</span>(redistribution, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-38"><a href="#cb2-38"></a>  <span class="fu">select</span>(PS, Household_Income<span class="sc">:</span>redistribution, <span class="sc">-</span>redist2_R, <span class="sc">-</span>redist4_R)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="activity-2---explore-the-data" class="level3" data-number="8.1.4"><h3 data-number="8.1.4" class="anchored" data-anchor-id="activity-2---explore-the-data">
+</section><section id="08-explore" class="level3" data-number="8.1.4"><h3 data-number="8.1.4" class="anchored" data-anchor-id="08-explore">
 <span class="header-section-number">8.1.4</span> Activity 2 - Explore the data</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -613,7 +627,7 @@ Try this
 <tr class="even">
 <td style="text-align: center;">Population_Inequality_Gini_Index</td>
 <td style="text-align: left;">double</td>
-<td style="text-align: left;">Measure of income inequality from 0 (perfect equality) to 1 (perfect inequality), here where participants estimated population in equality.</td>
+<td style="text-align: left;">Measure of income inequality from 0 (perfect equality) to 100 (perfect inequality), here where participants estimated population in equality.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Population_Mean_Income</td>
@@ -623,7 +637,7 @@ Try this
 <tr class="even">
 <td style="text-align: center;">Social_Circle_Inequality_Gini_Index</td>
 <td style="text-align: left;">double</td>
-<td style="text-align: left;">Measure of income inequality from 0 (perfect equality) to 1 (perfect inequality), here where participants estimated inequality in their social circle.</td>
+<td style="text-align: left;">Measure of income inequality from 0 (perfect equality) to 100 (perfect inequality), here where participants estimated inequality in their social circle.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Social_Circle_Mean_Income</td>
@@ -1628,44 +1642,167 @@ Show me the solution
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
 <section id="knowledge-check" class="level3" data-number="8.6.1"><h3 data-number="8.6.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">8.6.1</span> Knowledge check</h3>
-<p>Look at this code and answer the following questions:</p>
+<p>For this chapter’s knowledge check section, we have something a little different. Instead of purely conceptual questions about functions, we have another example of linear regression from <span class="citation" data-cites="dawtry_why_2015">Dawtry et al. (<a href="references.html#ref-dawtry_why_2015" role="doc-biblioref">2015</a>)</span>. Feel free to create this model yourself, but we will show you some output and ask you questions based on it.</p>
+<p>For this model, we focus on the two variables estimated population inequality index (<code>Population_Inequality_Gini_Index</code>) and support for wealth redistribution (<code>redistribution</code>). Check back to the code book in <a href="#08-explore">Activity 2</a> if you need a reminder of what the variables mean.</p>
+<p><strong>Question 1</strong>. In the scatterplot of the relationship below, this shows a negative relationship between the inequality index and support for redistribution: <select class="webex-select"><option value="blank"></option>
+<option value="">TRUE</option>
+<option value="answer">FALSE</option></select>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>results <span class="ot">&lt;-</span> <span class="fu">correlation</span>(<span class="at">data =</span> mh, </span>
-<span id="cb37-2"><a href="#cb37-2"></a>                       <span class="at">select =</span> <span class="st">"IQ"</span>, </span>
-<span id="cb37-3"><a href="#cb37-3"></a>                       <span class="at">select2 =</span> <span class="st">"Home"</span>,  </span>
-<span id="cb37-4"><a href="#cb37-4"></a>                       <span class="at">method =</span> <span class="st">"pearson"</span>, </span>
-<span id="cb37-5"><a href="#cb37-5"></a>                       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
 </div>
-<ol type="1">
-<li>What would this analysis show?
-<div id="radio_QHMESFHRKT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value="answer"><span>the relationship between IQ and the time spent reading at home</span></label><label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value=""><span>the relationship between IQ and the time spent watching TV at home</span></label><label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value=""><span>the relationship between IQ and Reading Ability</span></label><label><input type="radio" autocomplete="off" name="radio_QHMESFHRKT" value=""><span>the effect of IQ on time spent reading at Home</span></label>
 </div>
-</li>
-<li>What type of correlation analysis is it?
-<div id="radio_JYPQYYJLSC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value=""><span>one-tailed spearman analysis</span></label><label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value="answer"><span>two-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value=""><span>one-tailed pearson analysis</span></label><label><input type="radio" autocomplete="off" name="radio_JYPQYYJLSC" value=""><span>two-tailed spearman analysis</span></label>
 </div>
-</li>
-</ol>
-<p>Now try running the code and then answering the following questions.</p>
-<ol start="3" type="1">
-<li><p>To three decimal places, what is the r-value of the correlation between IQ and the time spent reading at Home? <code>longmcq(sample(c(answer = rv, tv, civ, pv)))</code></p></li>
-<li><p>To three decimal places, what is the p-value of the correlation between IQ and the time spent reading at Home? <code>longmcq(sample(c(answer = pv, tv, civ, rv)))</code></p></li>
-<li><p>What is the degrees of freedom of the correlation between IQ and the time spent reading at Home? <code>longmcq(sample(c(answer = dfv, tv, civ, nv)))</code></p></li>
-</ol>
-<div class="webex-solution">
-<button>
-Explain these answers
-</button>
+<p><strong>Question 2</strong> For the next few questions, we have the output from a linear regression model and we would like you to interpret it.</p>
 <div class="cell" data-layout-align="center">
-<p>This analysis is a two-tailed pearson correlation looking at the relationship between IQ and the amount of time spent reading at home. You can tell this from the two variables in the code being IQ and Home, and the code stating pearson, and two-sided (another name for two-tailed). If you run the analysis you will find that the result would be r(23) = .202, p = .334.</p>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = redistribution ~ Population_Inequality_Gini_Index, 
+    data = dawtry_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9478 -0.6384  0.1389  0.8511  2.3854 
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      3.097452   0.316914   9.774  &lt; 2e-16 ***
+Population_Inequality_Gini_Index 0.022879   0.008734   2.619  0.00925 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.139 on 303 degrees of freedom
+Multiple R-squared:  0.02214,   Adjusted R-squared:  0.01892 
+F-statistic: 6.861 on 1 and 303 DF,  p-value: 0.009251</code></pre>
 </div>
 </div>
+<p>The outcome variable in this model is <select class="webex-select"><option value="blank"></option>
+<option value="answer">Attitudes on Wealth Redistribution</option>
+<option value="">Population Inequality Index</option></select> and the predictor variable is <select class="webex-select"><option value="blank"></option>
+<option value="">Attitudes on Wealth Redistribution</option>
+<option value="answer">Population Inequality Index</option></select>.</p>
+<p><strong>Question 3</strong> Rounded to 2 decimals, when the predictor is 0, we predict a value of <input class="webex-solveme nospaces" data-tol="0.1" size="3" data-answer="[&quot;3.1&quot;]"> for our outcome variable.</p>
+<p><strong>Question 4</strong> The predictor is <select class="webex-select"><option value="blank"></option>
+<option value="answer">significant</option>
+<option value="">non-significant</option></select> with a <em>p</em>-value of <input class="webex-solveme nospaces" size="5" data-answer="[&quot;0.009&quot;,&quot;.009&quot;]">.</p>
+<p><strong>Question 5</strong> The predictor is <select class="webex-select"><option value="blank"></option>
+<option value="answer">positive</option>
+<option value="">negative</option></select>, where we expect for every 1-unit increase in the predictor a <input class="webex-solveme nospaces" size="4" data-answer="[&quot;0.02&quot;,&quot;.02&quot;]"> -unit <select class="webex-select"><option value="blank"></option>
+<option value="answer">increase</option>
+<option value="">decrease</option></select> in the outcome.</p>
 </section><section id="error-mode-1" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="error-mode-1">
 <span class="header-section-number">8.6.2</span> Error mode</h3>
-<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on the new types of data visualisation. Remember to keep a note of what kind of error messages you receive and how you fixed them, so you have a bank of solutions when you tackle errors independently.</p>
+<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on simple linear regression between two continuous variables. There are not many outright errors that people make here, more misspecifications that are not doing what you think they are doing.</p>
 <p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Load the packages below</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="fu">library</span>(correlation)</span>
+<span id="cb38-5"><a href="#cb38-5"></a><span class="fu">library</span>(performance)</span>
+<span id="cb38-6"><a href="#cb38-6"></a></span>
+<span id="cb38-7"><a href="#cb38-7"></a><span class="co"># Load the data file</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a><span class="co"># This should be the Dawtry_2015.csv file </span></span>
+<span id="cb38-9"><a href="#cb38-9"></a>dawtry_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Dawtry_2015.csv"</span>)</span>
+<span id="cb38-10"><a href="#cb38-10"></a></span>
+<span id="cb38-11"><a href="#cb38-11"></a><span class="co"># Reverse code redist2 and redist4</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a>dawtry_data <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span></span>
+<span id="cb38-13"><a href="#cb38-13"></a>  <span class="fu">mutate</span>(<span class="at">redist2_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist2,</span>
+<span id="cb38-14"><a href="#cb38-14"></a>         <span class="at">redist4_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist4)</span>
+<span id="cb38-15"><a href="#cb38-15"></a></span>
+<span id="cb38-16"><a href="#cb38-16"></a><span class="co"># calculate mean fairness and satisfaction score  </span></span>
+<span id="cb38-17"><a href="#cb38-17"></a>fairness_satisfaction <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb38-18"><a href="#cb38-18"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> fairness<span class="sc">:</span>satisfaction, </span>
+<span id="cb38-19"><a href="#cb38-19"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
+<span id="cb38-20"><a href="#cb38-20"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-21"><a href="#cb38-21"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-22"><a href="#cb38-22"></a>  <span class="fu">summarise</span>(<span class="at">fairness_satisfaction =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-23"><a href="#cb38-23"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb38-24"><a href="#cb38-24"></a></span>
+<span id="cb38-25"><a href="#cb38-25"></a><span class="co"># calculate mean wealth redistribution score  </span></span>
+<span id="cb38-26"><a href="#cb38-26"></a>redistribution <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb38-27"><a href="#cb38-27"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(redist1, redist2_R, redist3, redist4_R), </span>
+<span id="cb38-28"><a href="#cb38-28"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
+<span id="cb38-29"><a href="#cb38-29"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-30"><a href="#cb38-30"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-31"><a href="#cb38-31"></a>  <span class="fu">summarise</span>(<span class="at">redistribution =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-32"><a href="#cb38-32"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb38-33"><a href="#cb38-33"></a></span>
+<span id="cb38-34"><a href="#cb38-34"></a><span class="co"># join data and select columns for focus</span></span>
+<span id="cb38-35"><a href="#cb38-35"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb38-36"><a href="#cb38-36"></a>  <span class="fu">inner_join</span>(fairness_satisfaction, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-37"><a href="#cb38-37"></a>  <span class="fu">inner_join</span>(redistribution, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-38"><a href="#cb38-38"></a>  <span class="fu">select</span>(PS, Household_Income<span class="sc">:</span>redistribution, <span class="sc">-</span>redist2_R, <span class="sc">-</span>redist4_R)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Below, we have several variations of a misspecification. Copy and paste them into your R Markdown file below the code chunk to wrangle the data. Once you have copied the activities, click knit and look at the output you receive. See if you can identify the mistake and fix it before checking the answer.</p>
+<p><strong>Question 6</strong>. Copy the following code chunk into your R Markdown file and press knit. We want to create a simple linear regression model to specify <code>fairness_satisfaction</code> as our outcome variable and <code>Political_Preference</code> as our predictor. Have we expressed that accurately?</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1"></a><span class="in">```{r}</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(Political_Preference <span class="sc">~</span> fairness_satisfaction,</span>
+<span id="cb39-3"><a href="#cb39-3"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb39-4"><a href="#cb39-4"></a></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="fu">summary</span>(lm_fairness)</span>
+<span id="cb39-6"><a href="#cb39-6"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In this example, we mixed up the variables. The formula in <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> has the form <code>outcome ~ predictor</code>, so we mixed up the order. In simple linear regression, it makes no difference to the slope, but it is important to be able to express your model accurately and it would make a difference once you scale up to multiple linear regression.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_satisfaction <span class="sc">~</span> Political_Preference,</span>
+<span id="cb40-2"><a href="#cb40-2"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb40-3"><a href="#cb40-3"></a>                        </span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="fu">summary</span>(lm_fairness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Question 7</strong>. Copy the following code chunk into your R Markdown file and press knit. We want to standardise the outcome and predictors, so that we get the intercept and slope estimates in standard deviations. Have we expressed that accurately?</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">mutate</span>(<span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction))</span>
+<span id="cb41-4"><a href="#cb41-4"></a></span>
+<span id="cb41-5"><a href="#cb41-5"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_std <span class="sc">~</span> Political_Preference,</span>
+<span id="cb41-6"><a href="#cb41-6"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb41-7"><a href="#cb41-7"></a>                        </span>
+<span id="cb41-8"><a href="#cb41-8"></a><span class="fu">summary</span>(lm_fairness)</span>
+<span id="cb41-9"><a href="#cb41-9"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In this example, we only standardised the outcome. When we standardise predictors, we must standardise both the outcome and predictor so they are expressed in standard deviations. It is just when we center, we only center the predictor.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">mutate</span>(<span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction),</span>
+<span id="cb42-3"><a href="#cb42-3"></a>         <span class="at">Political_std =</span> (Political_Preference <span class="sc">-</span> <span class="fu">mean</span>(Political_Preference, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(Political_Preference, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb42-4"><a href="#cb42-4"></a></span>
+<span id="cb42-5"><a href="#cb42-5"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_std <span class="sc">~</span> Political_std,</span>
+<span id="cb42-6"><a href="#cb42-6"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb42-7"><a href="#cb42-7"></a>                        </span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">summary</span>(lm_fairness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section></section><section id="words-from-this-chapter" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="words-from-this-chapter">
 <span class="header-section-number">8.7</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
@@ -1715,8 +1852,9 @@ Explain these answers
 </div>
 </section><section id="end-of-chapter" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">8.8</span> End of chapter</h2>
-<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
-<p>Excellent work today! You can now add running, interpreting and writing up correlations to the list of knowledge and skills in your research methods toolbox. Remember that actually a lot of the work is in the preparation of the data and really running the correlation is just one more function. It might be worthwhile repeating the first few activities with two other variables to test your understanding. If you have any questions, please post them on Teams.</p>
+<p>Great work, that was your first chapter working on inferential statistics!</p>
+<p>We have spent so long developing your data wrangling and visualisation skills that the code for statistical models is pretty short. Hopefully, you now believe us when we said almost all the work goes into wrangling your data into a format you can analyse. Once it comes to inferential statistics, it shifts from wrangling the data being the most difficult to being able to express your research question and interpret the outcome being the most difficult.</p>
+<p>In the next chapter, we reinforce most of the content by applying simple linear regression to a categorical predictor. This is when you want to test for differences between two groups on your outcome instead of testing the relationship between two continuous variables.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
