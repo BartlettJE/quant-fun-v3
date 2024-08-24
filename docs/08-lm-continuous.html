@@ -434,7 +434,7 @@ div.csl-indent {
   </div>
   
 
-</header><p>So far in this book, we have been building your data wrangling and visualisation skills and you now have the basis for a lot of the work you will do in research. Most of the work in data analysis is invested in getting your data into an appropriate form for analysis. Once you get there, the functions for inferential statistics is pretty short, but the challenge now comes to expressing your design as a statistical model and interpreting the output.</p>
+</header><p>So far in this book, we have been building your data wrangling and visualisation skills and you now have the basis for a lot of the work you will do in research. Most of the work in data analysis is invested in getting your data into an appropriate form for analysis. Once you get there, the functions for inferential statistics are pretty short, but the challenge now comes to expressing your design as a statistical model and interpreting the output.</p>
 <p>In this chapter, we focus on simple linear regression for testing research questions and hypotheses for the relationship between two continuous predictors. We will also explore the concepts of correlation and checking the statistical assumptions of your regression model.</p>
 <p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
 <p>By the end of this chapter, you will be able to:</p>
@@ -452,7 +452,7 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>The present studies provide evidence that social-sampling processes lead wealthier people to oppose redistribution policies. In samples of American Internet users, wealthier participants reported higher levels of wealth in their social circles (Studies 1a and 1b). This was associated, in turn, with estimates of higher mean wealth in the wider U.S. population, greater perceived fairness of the economic status quo, and opposition to redistribution policies. Furthermore, results from a large-scale, nationally representative New Zealand survey revealed that low levels of neighborhood-level socioeconomic deprivation?an objective index of wealth within participants’ social circles mediated the relation between income and satisfaction with the economic status quo (Study 2). These findings held controlling for relevant variables, including political orientation and perceived self-interest. Social-structural inequalities appear to combine with social-sampling processes to shape the different political attitudes of wealthier and poorer people.</p>
 </blockquote>
-<p>In summary, the authors investigated why people with more money tend to oppose wealth redistribution policies to decrease inequality in society. We are using data from Study 1A where 305 people completed measures on household income, predicted population income, their predicted social circle income, in addition to measures on support for wealth redistribution and fairness and satisfaction with the current system.</p>
+<p>In summary, the authors investigated why people with more money tend to oppose wealth redistribution policies like higher taxes for higher incomes to decrease inequality in society. We are using data from Study 1A where 305 people completed measures on household income, predicted population income, their predicted social circle income, in addition to measures on support for wealth redistribution and fairness and satisfaction with the current system.</p>
 <p>They predicted people with higher incomes have social circles with higher incomes, so they are more satisfied with the current system of wealth redistribution and less interested in changing it. In essence, poorer people and richer people have different experiences of how rich and equal their country is. In this chapter, we will explore the relationship between a range of these variables.</p>
 </section><section id="organising-your-files-and-project-for-the-chapter" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-chapter">
 <span class="header-section-number">8.1.2</span> Organising your files and project for the chapter</h3>
@@ -466,7 +466,7 @@ div.csl-indent {
 <p>You are now ready to start working on the chapter!</p>
 </section><section id="activity-1---read-and-wrangle-the-data" class="level3" data-number="8.1.3"><h3 data-number="8.1.3" class="anchored" data-anchor-id="activity-1---read-and-wrangle-the-data">
 <span class="header-section-number">8.1.3</span> Activity 1 - Read and wrangle the data</h3>
-<p>As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. Create an object called <code>dawtry_data</code> to be consistent with the tasks below. If you want to focus on correlations and regression, then you can just type the code in the solution.</p>
+<p>As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. Create a final object called <code>dawtry_clean</code> to be consistent with the tasks below. If you want to focus on correlations and regression, then you can just type the code in the solution.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -480,7 +480,7 @@ Try this
 <p>To wrangle the data, complete the following tasks:</p>
 <ol type="1">
 <li>
-<p>Load the following packages (three of these are new, so revisit <a href="01-programming-basics.html#install-tidy">Chapter 1</a> if you need a refresher of installing R packages, but remember not to do this on the university computers / online server):</p>
+<p>Load the following packages (three of these are new, so revisit <a href="01-programming-basics.html#install-tidy">Chapter 1</a> if you need a refresher of installing R packages, but remember not to install packages on the university computers / online server):</p>
 <ul>
 <li><p><pkg>tidyverse</pkg></p></li>
 <li><p><pkg>effectsize</pkg></p></li>
@@ -489,7 +489,7 @@ Try this
 </ul>
 </li>
 <li><p>Read the data file <code>data/Dawtry_2015.csv</code> to the object name <code>dawtry_data</code>.</p></li>
-<li><p>Reverse code two items: <code>redist2</code> and <code>redist4</code> to create two new variables <code>redist2_R</code> and <code>redist4_R</code></p></li>
+<li><p>Reverse code two items: <code>redist2</code> and <code>redist4</code> to create two new variables <code>redist2_R</code> and <code>redist4_R</code>. See the codebook below, but they are on a 1-6 scale.</p></li>
 <li><p>Summarise the data to calculate the mean <code>fairness_satisfaction</code> score, by taking the mean of two items: <code>fairness</code> and <code>satisfaction</code>.</p></li>
 <li><p>Summarise the data to calculate the mean <code>redistribution</code> score, by taking the mean of four items: <code>redist1</code>, <code>redist2_R</code>, <code>redist3</code>, and <code>redist4_R</code>.</p></li>
 <li><p>Create a new object called <code>dawtry_clean</code> by joining <code>dawtry_data</code> with your two new variables <code>fairness_satisfaction</code> and <code>redistribution</code>.</p></li>
@@ -652,17 +652,17 @@ Try this
 <tr class="odd">
 <td style="text-align: center;">redistribution</td>
 <td style="text-align: left;">double</td>
-<td style="text-align: left;">Attitudes on wealth distribution: Mean of four items (1 strongly disagree – 6 strongly agree).</td>
+<td style="text-align: left;">Support for wealth distribution: Mean of four items (1 strongly disagree – 6 strongly agree).</td>
 </tr>
 </tbody>
 </table>
 <p>We will use this data set to demonstrate correlations and regression when you have one continuous predictor.</p>
 </section></section><section id="correlation" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="correlation">
 <span class="header-section-number">8.2</span> Correlation</h2>
-<p>Before we cover regression as a more flexible framework for inferential statistics, we think it is useful to start with correlation to get a feel for how we can capture the relationship between two variables. As a reminder from the materials, correlations are standardised to range from -1 (a perfect negative correlation) to 1 (a perfect positive correlation). A value of 0 would mean there is no correlation between your variables.</p>
+<p>Before we cover regression as a more flexible framework for inferential statistics, we think it is useful to start with correlation to get a feel for how we can capture the relationship between two variables. As a reminder from the course materials, correlations are standardised to range from -1 (a perfect negative correlation) to 1 (a perfect positive correlation). A value of 0 would mean there is no correlation between your variables.</p>
 <section id="activity-3---visualise-the-relationship" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="activity-3---visualise-the-relationship">
 <span class="header-section-number">8.2.1</span> Activity 3 - Visualise the relationship</h3>
-<p>To explore the relationship between two variables, it is useful to create a scatterplot early for yourself, then provide a more professional looking version to help communicate your results.</p>
+<p>To explore the relationship between two variables, it is useful to create a scatterplot early for yourself, then provide a more professional looking version to help communicate your results. For most of the demonstrations in this chapter, we will try and answer the research question: “Is there a relationship between support for wealth redistribution and fairness and satisfaction with the current system?”</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -700,7 +700,8 @@ Show me the solution
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The scatterplot shows a negative correlation between the two variables. As attitudes on wealth redistribution increase to be more positive, perceived fairness and satisfaction tends to decrease. This makes sense as people who are more dissatisfied with the current system think there should be more wealth redistribution stategies.</p>
+<p>The scatterplot shows a negative correlation between the two variables. You need to be careful interpreting fairness and satisfaction as it is coded a little counterintuitive. Higher values mean great <em>dissatisfaction</em>.</p>
+<p>As support for wealth redistribution increases to be more positive, perceived fairness and satisfaction tends to decrease. This makes sense as people who are more dissatisfied with the current system think there should be more wealth redistribution strategies.</p>
 <p>You should have the following in a code chunk:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dawtry_clean <span class="sc">%&gt;%</span> </span>
@@ -709,14 +710,8 @@ Show me the solution
 <span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> </span>
 <span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Perceived Fairness and Satisfaction"</span>, </span>
 <span id="cb3-6"><a href="#cb3-6"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)) <span class="sc">+</span> </span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Attitudes on Wealth Distribution"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Support for Wealth Redistribution"</span>, </span>
 <span id="cb3-8"><a href="#cb3-8"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -724,17 +719,17 @@ Show me the solution
 </section><section id="activity-4---calculate-the-correlation-coefficient" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="activity-4---calculate-the-correlation-coefficient">
 <span class="header-section-number">8.2.2</span> Activity 4 - Calculate the correlation coefficient</h3>
 <p>Visualising the relationship between two variables is great for our understanding, but it does not tell us anything about the inferential statistics for what we can learn from our sample in hypothesis testing and measures of effect size.</p>
-<p>A correlation is a specific application of the general linear model. We want to capture the covariation between two variables. If you are interested, see the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/pearson-correlation.html" target="_blank">McAleer, 2023</a>) for the calculations behind correlation and how it represents the covariance of two variables compared to their total variability. They are not the only methods, but the two most common versions of a correlation are:</p>
+<p>A correlation is a specific application of the general linear model. We want to capture the covariation between two variables. If you are interested, see the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/pearson-correlation.html" target="_blank">McAleer, 2023</a>) for the calculations behind different types of correlation and how it represents the covariance of two variables compared to their total variability. They are not the only methods, but the two most common versions of a correlation are:</p>
 <ul>
-<li><p>Pearson’s product-moment correlation (often shortened to the <a class="glossary" title="A standardised measure of the linear relationship between two variables that makes stringent assumptions about the population.">Pearson</a> correlation) and symbolised by <strong>r</strong></p></li>
-<li><p>Spearman’s rank correlation coefficient (often shortened to the <a class="glossary" title="A standardised measure of the relationship between two variables that assumes a monotonic - but not necessarily a linear - relationship and makes less stringent assumptions about the population.">Spearman</a> correlation) and symbolised by <span class="math inline">\(r_s\)</span> or sometimes the Greek letter <strong>rho</strong> <span class="math inline">\(\rho\)</span></p></li>
+<li><p>Pearson’s product-moment correlation (often shortened to the <a class="glossary" title="A standardised measure of the linear relationship between two variables that makes stringent assumptions about the population.">Pearson</a> correlation) and symbolised by <strong>r</strong>.</p></li>
+<li><p>Spearman’s rank correlation coefficient (often shortened to the <a class="glossary" title="A standardised measure of the relationship between two variables that assumes a monotonic - but not necessarily a linear - relationship and makes less stringent assumptions about the population.">Spearman</a> correlation) and symbolised by <span class="math inline">\(r_s\)</span> or sometimes the Greek letter <strong>rho</strong> <span class="math inline">\(\rho\)</span>.</p></li>
 </ul>
-<p>There is a function built into R (<code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code>) to calculate the correlation between two variables, but we tend to use the <code>correlation()</code> function from the <pkg>correlation</pkg> package as it has more complete reporting features. The <code>correlation()</code> function requires:</p>
+<p>There is a function built into R (<code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code>) to calculate the correlation between two variables, but we tend to use the <code>correlation()</code> function from the <pkg>correlation</pkg> package as it has more consistent reporting features. The <code>correlation()</code> function requires:</p>
 <ul>
-<li><p>The name of the data set you are using</p></li>
-<li><p>The name of the first variable you want to select for the correlation</p></li>
-<li><p>The name of the second variable you want to select for the correlation</p></li>
-<li><p>The type of correlation you want to run: e.g.&nbsp;<code>pearson</code>, <code>spearman</code></p></li>
+<li><p>The name of the data set you are using.</p></li>
+<li><p>The name of the first variable you want to select for the correlation.</p></li>
+<li><p>The name of the second variable you want to select for the correlation.</p></li>
+<li><p>The type of correlation you want to run: e.g.&nbsp;<code>pearson</code>, <code>spearman</code>.</p></li>
 </ul>
 <p>For our <code>dawtry_clean</code> data, we would run the following code for a two-tailed Pearson correlation:</p>
 <div class="cell" data-layout-align="center">
@@ -797,7 +792,7 @@ Show me the solution
 <li><p><strong>Effect size</strong>: <em>r</em> = -.70, suggesting a strong negative correlation.</p></li>
 <li><p><strong>Confidence interval</strong>: [-0.75, -0.64], showing the precision around the effect size estimate.</p></li>
 </ul>
-<p>To summarise, there was a strong, negative, statistically significant relationship between attitudes on wealth redistribution and perceived fairness and satisfaction, <em>r</em> (303) = -0.70, <em>p</em> &lt; .001, 95% CI = [-0.75, -0.64].</p>
+<p>To summarise: a Pearson correlation showed there was a strong, negative, statistically significant relationship between attitudes on wealth redistribution and perceived fairness and satisfaction, <em>r</em> (303) = -0.70, <em>p</em> &lt; .001, 95% CI = [-0.75, -0.64].</p>
 <p>If we had reason to use a Spearman correlation instead, all we need to do is change the <code>method</code> argument.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">correlation</span>(<span class="at">data =</span> dawtry_clean, </span>
@@ -850,6 +845,7 @@ Show me the solution
 </div>
 </div>
 </div>
+<p>Similarly, we could report the results as: a Spearman correlation showed there was a strong, negative, statistically significant relationship between attitudes on wealth redistribution and perceived fairness and satisfaction, <span class="math inline">\(r_s\)</span> (303) = -0.68, <em>p</em> &lt; .001, 95% CI = [-0.74, -0.61].</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -860,7 +856,7 @@ Try this
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Great work following along so far, but now it is time to test your understanding on a new set of variables. This time, use the variables <code>age</code> and <code>redistribution</code> from <code>dawtry_clean</code>. We can ask the question “What is the relationship between age and attitudes on wealth redistribution?”.</p>
+<p>Great work following along so far, but now it is time to test your understanding on a new set of variables. Use the variables <code>age</code> and <code>redistribution</code> from <code>dawtry_clean</code>. We can ask the question: “What is the relationship between age and attitudes on wealth redistribution?”</p>
 <ol type="1">
 <li><p>Create a scatterplot to visualise the relationship between <code>age</code> and <code>redistribution</code> from <code>dawtry_clean</code>.</p></li>
 <li>
@@ -915,7 +911,7 @@ Show me the solution
 </div>
 </div>
 </div>
-<p>For our inferential statistics, the relationship is not statistically significant and the Pearson correlation coefficient is very weak, <em>r</em> (302) = -0.03, <em>p</em> = .625, 95% CI = [-0.14, 0.08].</p>
+<p>For our inferential statistics, the relationship is not statistically significant and the Pearson correlation coefficient is very weak, <em>r</em> (302) = -0.03, <em>p</em> = .625, 95% CI = [-0.14, 0.08]. Note there is a missing value for age, so we have one few participant / degrees of freedom.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">correlation</span>(<span class="at">data =</span> dawtry_clean, </span>
 <span id="cb7-2"><a href="#cb7-2"></a>            <span class="at">select =</span> <span class="st">"age"</span>, </span>
@@ -974,7 +970,7 @@ Show me the solution
 </section></section><section id="linear-regression-with-one-continuous-predictor" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="linear-regression-with-one-continuous-predictor">
 <span class="header-section-number">8.3</span> Linear regression with one continuous predictor</h2>
 <p>Now you know how to calculate a correlation in R, we can turn to simple linear regression as a more flexible tool for modelling the relationship between variables.</p>
-<p>In Research Methods 1, we focus on just two variables, before scaling up to more complicated models in Research Methods 2. In this chapter, we focus the relationship between a continuous <a class="glossary" title="">outcome</a> and one continuous <a class="glossary" title="">predictor</a>, before extending the framework to one categorical predictor in Chapter 9. There is also a chapter in the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/simple-linear-regression.html" target="_blank">McAleer, 2023</a>) dedicated to manually calculating simple linear regression.</p>
+<p>In Research Methods 1, we focus on just two variables, before scaling up to more complicated models in Research Methods 2. In this chapter, we focus the relationship between a continuous <a class="glossary" title="The outcome (also known as the dependent variable) is the variable you are interested in seeing a potential change in.">outcome</a> and one continuous <a class="glossary" title="The predictor (also known as an independent variable) is the variable you measure or manipulate to see how it is associated with changes in the outcome variable.">predictor</a>, before extending the framework to one categorical predictor in Chapter 9. There is also a chapter in the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/simple-linear-regression.html" target="_blank">McAleer, 2023</a>) dedicated to manually calculating simple linear regression.</p>
 <section id="activity-5--calculating-descriptive-statistics" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="activity-5--calculating-descriptive-statistics">
 <span class="header-section-number">8.3.1</span> Activity 5- Calculating descriptive statistics</h3>
 <p>For all the information we want to include in a report, calculating descriptive statistics is helpful for the reader to show the context behind the results you present. Here, we can report the mean and standard deviation of our two variables.</p>
@@ -1030,7 +1026,7 @@ Note
 </section><section id="activity-6---using-the-lm-function" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="activity-6---using-the-lm-function">
 <span class="header-section-number">8.3.2</span> Activity 6 - Using the <code>lm()</code> function</h3>
 <p>For our research question of “is there a relationship between support for wealth redistribution and fairness and satisfaction”, we can address it with simple linear regression.</p>
-<p>Instead of a standardised correlation coefficient, we can frame it as whether knowing fairness and satisfaction can predict values of support for wealth redistribution. The design is still correlational, so it does not tell us anything about a causal relationship in isolation. We use the word predict in the statistical sense, where we can ask whether knowing values of one variable help us predict values of another variable.</p>
+<p>Instead of a standardised correlation coefficient, we can frame it as whether knowing fairness and satisfaction can predict values of support for wealth redistribution. The design is still correlational, so it does not tell us anything about a causal relationship in isolation. We use the word predict in the statistical sense, where we can ask whether knowing values of one variable help us predict values of another variable with a degree of error.</p>
 <p>The first step is to create an object (<code>lm_redistribution</code>) for the linear model.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>lm_redistribution <span class="ot">&lt;-</span> <span class="fu">lm</span>(redistribution <span class="sc">~</span> fairness_satisfaction,</span>
@@ -1042,6 +1038,19 @@ Note
 <li><p>The tilde (<code>~</code>) separates the equation, where everything on the right is your predictor variable(s). In simple linear regression, we just have one predictor, which is <code>fairness_satisfaction</code> in our model here. This is saying we want to predict <code>redistribution</code> as our outcome from <code>fairness_satisfaction</code> as our predictor.</p></li>
 <li><p>We then specify the data frame we want to use.</p></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In some resources, you might see people enter the same model as <code>redistribution ~ 1 + fairness_satisfaction</code>. The <code>1 +</code> component explicitly tells R to fit an intercept, plus a slope from <code>fairness_satisfaction</code>. R includes an intercept by default, so you do not need to add it, but some people like to include it for clarity.</p>
+</div>
+</div>
 <p>When you create this object, it stores a bunch of information, but does not really tell us all the statistics we expect. If you simply print the object in the console, it will tell you the intercept and coefficient(s), but none of the model fitting nor hypothesis testing values. If you look at the object in the R environment, you will see it is a <a href="https://psyteachr.github.io/glossary/l#list" target="_blank" class="glossary" title="A container data type that allows items with different data types to be grouped together.">list</a> containing several elements. It stores things like the model, the residuals, and other information you can use.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>lm_redistribution</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1101,7 +1110,7 @@ Does it matter if the slope is positive or negative?
 <p>When you have a continuous predictor, the sign is important to keep in mind. A positive slope would mean an increase in the predictor is associated with increased values of your outcome. A negative slope would mean an increase in the predictor is associated with decreased values of your outcome. This is crucial for interpreting the coefficient.</p>
 </div>
 </div>
-<p>At the bottom of the model output, you then get the fit statistics. Multiple <span class="math inline">\(R^2\)</span> tells you how much variance in your outcome your predictor(s) explain. Adjusted <span class="math inline">\(R^2\)</span> tends to be more conservative as it adjusts for the number of predictors in the model (something we will not cover until Chapter 14), but they will be very similar when you have one predictor. Adjusted <span class="math inline">\(R^2\)</span> is .49, suggesting fairness and satisfaction explains 49% of the variance in support for wealth redistribution.</p>
+<p>At the bottom of the model output, you then get the fit statistics. Multiple <span class="math inline">\(R^2\)</span> tells you how much variance in your outcome your predictor(s) explain. Adjusted <span class="math inline">\(R^2\)</span> tends to be more conservative as it adjusts for the number of predictors in the model (something we will not cover until Chapter 14), but they will be very similar when you have one predictor. <span class="math inline">\(R^2\)</span> is .49, suggesting fairness and satisfaction explains 49% of the variance in support for wealth redistribution.</p>
 <p>Finally, we have the model fit statistics to tell us whether the model explains a significant amount of variance in the outcome. With one predictor, the <em>p</em>-value next to the coefficient and next to the model fit will be identical, as one predictor is the whole model. The F-statistic is 291.7, the model degrees of freedom is 1, the residual degrees of freedom is 303, and the <em>p</em>-value is <em>p</em> &lt; .001.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1124,7 +1133,7 @@ What does 2e-16 mean?
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1133,7 +1142,7 @@ How are correlation and regression the same?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If you are interested in the relationship between the two concepts, we said correlation was a specific application of the general linear model. It describes the - standardised - covariation between two variables compared to their total variability. For values of -1 and 1, knowing the value of one variable perfectly correlates to the value of your other variable. As you approach 0, the relationship between the variables is less perfect, meaning there is more variability left over compared to the covariance.</p>
 <p>In regression, we frame it as how much variance you explain compared to the total amount of variance. The more variance your predictor explains, the less unexplained variance there is left over. We no longer calculate <em>r</em>, we calculate <span class="math inline">\(R^2\)</span> as the proportion of variance in your outcome explained by your model. A value of 0 would be you explain no variance and a value of 1 means you explain all the variance.</p>
@@ -1193,7 +1202,7 @@ Try this
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1202,7 +1211,7 @@ Show me the solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The conclusions are the same as when we calculated the correlation where age is not a statistically significant predictor of support for wealth redistribution. As a regression model, we get the same conclusions expressed in a slightly different way. Age is negative, but the size of the slope is very small (-0.003) and non-significant (<em>p</em> = .625). We explain pretty much no variance in support for wealth redistribution (<span class="math inline">\(R^2\)</span> = 0.0008), so age is not very informative as a predictor.</p>
 <div class="cell" data-layout-align="center">
@@ -1249,7 +1258,7 @@ age         -0.01351424 0.00812738</code></pre>
 <p>So far, we have covered specifying your outcome and predictor variables as their raw values in the data. However, there are two variations that are useful to understand: centering and standardising predictors. These do not change the model fitting or <em>p</em>-values, but change how you interpret the intercept and/or slope.</p>
 <section id="centering-predictors" class="level4" data-number="8.3.4.1"><h4 data-number="8.3.4.1" class="anchored" data-anchor-id="centering-predictors">
 <span class="header-section-number">8.3.4.1</span> Centering predictors</h4>
-<p><a class="glossary" title="">Centering</a> predictors is where you change the values of your predictor, but not their scale. Typically, this means substracting the mean of your predictor from each observation. This changes how you interpret the intercept of your regression model.</p>
+<p><a class="glossary" title="Usually, centering a predictor means subtracting the mean from each value, so the mean is 0. You can then interpret the intercept as the value of your outcome for the mean value of your predictor(s).">Centering</a> predictors is where you change the values of your predictor, but not their scale. Typically, this means substracting the mean of your predictor from each observation. This changes how you interpret the intercept of your regression model.</p>
 <p>Remember the interpretation of the intercept is the predicted value of your outcome when your predictor is set to 0. If 0 is not present in your data or a value of 0 would be uninformative, the intercept can be difficult to interpret. When you center your predictor, 0 becomes the mean value of your predictor. So, the intercept is now the predicted value of your outcome for the mean value of your predictor, but the slope itself does not change. You can see the impact of this by plotting the data side by side in <a href="#fig-centering-predictors">Figure&nbsp;<span>8.1</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
@@ -1259,7 +1268,7 @@ age         -0.01351424 0.00812738</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-centering-predictors" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/fig-centering-predictors-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/fig-centering-predictors-1.png" class="img-fluid figure-img" style="width:100.0%" alt="The plot at the top shows the relationship between wealth redistribution and perceived fairness and satisfaction using raw values. The plot at the bottom shows the relationship after centering perceived fairness and satisfaction values, so the values shift to the left."></p>
 <figcaption class="figure-caption">Figure&nbsp;8.1: Top: The relationship between wealth redistribution and perceived fairness and satisfaction using raw values. Bottom: The relationship after centering perceived fairness and satisfaction values.</figcaption></figure>
 </div>
 </div>
@@ -1294,12 +1303,13 @@ F-statistic: 291.7 on 1 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Every single one of the values remains the same apart from the intercept. Now, we can interpret it as the predicted value of redistribution when fairness and satisfaction is set to 0, i.e., the mean value. So, for the mean value of fairness and satisfaction, we would predict a value of 3.91 for redistribution.</p>
 </section><section id="standardising-predictors" class="level4" data-number="8.3.4.2"><h4 data-number="8.3.4.2" class="anchored" data-anchor-id="standardising-predictors">
 <span class="header-section-number">8.3.4.2</span> Standardising predictors</h4>
-<p><a class="glossary" title="">Standardising</a> predictors is where you first convert your values to z-scores. This means you interpret the values as standard deviations rather than your original units. This is more useful in multiple regression (Chapter 14) to compare the magnitude of predictors, but it is useful to get used to now when you only have one predictor to focus on.</p>
+<p><a class="glossary" title="Standardising involves substracting the variable mean from each value and dividing it by the variable standard deviation. It then has the property of a mean of 0 and standard deviation of 1, so you interpret the units as standard deviations.">Standardising</a> predictors is where you first convert your values to z-scores. This means you interpret the values as standard deviations rather than your original units. This is more useful in multiple regression (Chapter 14) to compare the magnitude of predictors, but it is useful to get used to now when you only have one predictor to focus on.</p>
 <p>The first step is to standardise <strong>all</strong> your variables, not just the predictor this time. This involves subtracting the mean of your variable from each value, and dividing by the standard deviation of the variable. They now have a mean of 0 and a standard deviation of 1.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">mutate</span>(<span class="at">redistribution_std =</span> (redistribution <span class="sc">-</span> <span class="fu">mean</span>(redistribution)) <span class="sc">/</span> <span class="fu">sd</span>(redistribution),</span>
-<span id="cb23-3"><a href="#cb23-3"></a>         <span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Be careful with the bracket placement to subtract the mean first</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">mutate</span>(<span class="at">redistribution_std =</span> (redistribution <span class="sc">-</span> <span class="fu">mean</span>(redistribution)) <span class="sc">/</span> <span class="fu">sd</span>(redistribution),</span>
+<span id="cb23-4"><a href="#cb23-4"></a>         <span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once we enter them into the model, we no longer have values in the original units of measurement, we now have them expressed as standard deviations.</p>
 <div class="cell" data-layout-align="center">
@@ -1329,7 +1339,7 @@ F-statistic: 291.7 on 1 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Like centering, the model fit and <em>p</em>-values do not change again, apart from the intercept. The relationship between the variables is exactly the same, but we changed their units. The intercept is tiny and close enough to zero that the <em>p</em>-value is 1.</p>
-<p>More importantly, the slope is now expressed in standard deviations. Annoyingly, R prints the values in scientific notation, so this can be awkward to read (remember the <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function). Now, for every 1 standard deviation increase in our predictor, we predict the outcome to decrease by 0.70 standard deviations (does this remind you of the correlation value now we have standardised the relationship?).</p>
+<p>More importantly, the slope is now expressed in standard deviations. Annoyingly, R prints the values in scientific notation, so this can be awkward to read (remember the <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function). Now, for every 1 standard deviation increase in our predictor, we predict the outcome to decrease by 0.70 standard deviations.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1391,7 +1401,7 @@ Tip
 <li><p>There should be homoscedasticity.</p></li>
 </ol>
 <p>Assumptions 1-4 are pretty straight forward as they relate to your understanding of the design or a simple check on the data for non-zero variance (the responses are not all the exact same value).</p>
-<p>Assumptions 5-7 require diagnostic checks on the <a class="glossary" title="">residuals</a> from the model. The residuals are the difference between your observed values in the data and the values your model expects given it’s assumptions. If you remember back, we highlighted the model output mentioned <code>Residuals:</code> and they are saved within the model object.</p>
+<p>Assumptions 5-7 require diagnostic checks on the <a class="glossary" title="The difference between the observed value in the data and the predicted value from the model given its assumptions.">residuals</a> from the model. The residuals are the difference between your observed values in the data and the values your model predicts given it’s assumptions. If you remember back, we highlighted the model output mentioned <code>Residuals:</code> and they are saved within the model object.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># head shows the first 6 values </span></span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="fu">head</span>(lm_redistribution<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1420,7 +1430,7 @@ What does the $ symbol mean?
 </div>
 </div>
 <p>In your reading, you might see individual statistical tests to check these assumptions, but they have more limitations than benefits. The best way to check the assumptions is through diagnostic plots which express the model residuals in different ways. We want to walk through this longer way of checking assumptions to develop a solid understanding before showing you a shortcut to see them all below.</p>
-<p>In the code below, we use a format you will be less familiar with as all these functions come from base R. If you just run the code for the diagnostic plots <code>plot(lm_redistribution)</code>, each one gets individually printed to your Plots window. Here, we create a 2x2 panel to show them all together, then turn it back off.</p>
+<p>In the code below, we use a format you will be less familiar with as all these functions come from base R. If you just run the code for the diagnostic plots <code>plot(lm_redistribution)</code>, each one gets individually printed to your Plots window. Here, we create a 2x2 panel to show them all together.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Change the panel layout to 2 x 2</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
@@ -1437,7 +1447,7 @@ What does the $ symbol mean?
 <p>For more information on each of these plots, see this great resource by <a href="https://library.virginia.edu/data/articles/diagnostic-plots" target="_blank">Kim (2015)</a> via the University of Virginia, but we will break the key ones down below.</p>
 </section><section id="checking-linearity" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="checking-linearity">
 <span class="header-section-number">8.4.2</span> Checking linearity</h3>
-<p>To isolate each plot, we can use the <code>which</code> argument. Plot 1 is a residuals vs fitted plot and helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis.</p>
+<p>To isolate each plot, we can use the <code>which</code> argument. Plot 1 is a residuals vs fitted plot and helps us check linearity by showing the residuals on the y-axis and the fitted (predicted) values on the x-axis.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
 <span id="cb30-2"><a href="#cb30-2"></a>     <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1448,7 +1458,7 @@ What does the $ symbol mean?
 </div>
 </div>
 </div>
-<p>Here, you are looking out for a roughly flat horizontal red line. Common patterns to look out if there is a problem are when the lines has an obvious curve to look like a hump or several bends to look like an S.</p>
+<p>Here, you are looking out for a roughly flat horizontal red line. Common patterns to look out for if there is a problem are when the line has an obvious curve to look like a hump or several bends to look like an S.</p>
 <p>The only downside to using diagnostic plots is it takes experience to recognise when there is nothing wrong with a regression model compared to when it violates the assumptions. It is easy to see a little deviation and think there is some drastically wrong. Our advice is if you squint and it looks fine, it is probably fine. You are looking for clear and obvious deviations from what you expect and all the models we use in Chapters 8 and 9 are intentionally fine to develop foundational skills. In Chapter 11, we then introduce you to more problematic cases and what your options are.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1479,7 +1489,7 @@ Error mode
 </div>
 <p>In this plot, you are looking for the data points to roughly follow the dashed line. The idea is there should be a linear relationship between the residuals and the values we would expect under a normal distribution.</p>
 <p>Like the other diagnostic plots, it is tempting to think there are problems where there are none. The vast majority of the points here follow the line nicely, but tail off a little at the extremes. It flags the points with the largest deviations but there do not appear to be any obvious problems.</p>
-<p>When there are problems with normality, you are looking for obvious deviations, like a the points curving around in a banana shape, or snaking around like an S.</p>
+<p>When there are problems with normality, you are looking for obvious deviations, like the points curving around in a banana shape, or snaking around like an S.</p>
 </section><section id="checking-homoscedasticity" class="level3" data-number="8.4.4"><h3 data-number="8.4.4" class="anchored" data-anchor-id="checking-homoscedasticity">
 <span class="header-section-number">8.4.4</span> Checking homoscedasticity</h3>
 <p>Plot 3 is a scale-location plot and helps us check homoscedasticity by showing the square root of the standardised residuals on the y-axis and the fitted values on the x-axis. Homoscedasticity is where the variance of the residuals is approximately equal across the range of your predictor(s).</p>
@@ -1494,7 +1504,7 @@ Error mode
 </div>
 </div>
 <p>In this plot, you are looking out for a roughly random spread of points as you move from one end of the x-axis to the other. The red line should be roughly flat and horizontal.</p>
-<p>When there is heteroscedasticity, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range, or a bow tie where there is a wide spread of points at each end and dense in the middle.</p>
+<p>When there is <em>heteroscedasticity</em>, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range at the other end, or a bow tie where there is a wide spread of points at each end and dense in the middle.</p>
 </section><section id="checking-all-the-assumptions" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="checking-all-the-assumptions">
 <span class="header-section-number">8.4.5</span> Checking all the assumptions</h3>
 <p>There is a fourth plot which you could examine using <code>plot(lm_redistribution, which = 4)</code>, but we are going to leave that until Chapter 11. It shows influential values or outliers which have the biggest individual effect on the model residuals. It is not technically an assumption of linear regression, but has knock on effects for the other assumptions.</p>
@@ -1508,7 +1518,7 @@ Error mode
 </div>
 </div>
 </div>
-<p>The key difference is you get a posterior predictive check (essentially comparing values you observe compared to what your model would predict) and the qq-plot for normality of residuals looks a little different. Instead of a kind of angled line, the residuals are expressed as deviations instead, so the points should be close to a flat horizontal line. This version can make smaller deviations look worse, so keep in mind again you are looking for clear deviations in the overall pattern.</p>
+<p>The key difference is you get a posterior predictive check (essentially comparing values you observe compared to what your model predicts) and the qq-plot for normality of residuals looks a little different. Instead of a kind of angled line, the residuals are expressed as deviations instead, so the points should be close to a flat horizontal line. This version can make smaller deviations look worse, so keep in mind again you are looking for clear deviations in the overall pattern.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1545,7 +1555,7 @@ Try this
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1554,7 +1564,7 @@ Show me the solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>The outcome is interval/ratio level data.</li>
@@ -1746,7 +1756,7 @@ F-statistic: 6.861 on 1 and 303 DF,  p-value: 0.009251</code></pre>
 <span id="cb39-5"><a href="#cb39-5"></a><span class="fu">summary</span>(lm_fairness)</span>
 <span id="cb39-6"><a href="#cb39-6"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1755,7 +1765,7 @@ Explain the solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In this example, we mixed up the variables. The formula in <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> has the form <code>outcome ~ predictor</code>, so we mixed up the order. In simple linear regression, it makes no difference to the slope, but it is important to be able to express your model accurately and it would make a difference once you scale up to multiple linear regression.</p>
 <div class="cell" data-layout-align="center">
@@ -1778,7 +1788,7 @@ Explain the solution
 <span id="cb41-8"><a href="#cb41-8"></a><span class="fu">summary</span>(lm_fairness)</span>
 <span id="cb41-9"><a href="#cb41-9"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1787,7 +1797,7 @@ Explain the solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In this example, we only standardised the outcome. When we standardise predictors, we must standardise both the outcome and predictor so they are expressed in standard deviations. It is just when we center, we only center the predictor.</p>
 <div class="cell" data-layout-align="center">
@@ -1816,7 +1826,7 @@ Explain the solution
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/c#centered-predictors" class="glossary" target="_blank">centered-predictors</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Usually, centering a predictor means subtracting the mean from each value, so the mean is 0. You can then interpret the intercept as the value of your outcome for the mean value of your predictor(s).</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/l#list" class="glossary" target="_blank">list</a></td>
@@ -1824,7 +1834,7 @@ Explain the solution
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/o#outcome" class="glossary" target="_blank">outcome</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">The outcome (also known as the dependent variable) is the variable you are interested in seeing a potential change in.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#pearson" class="glossary" target="_blank">pearson</a></td>
@@ -1832,11 +1842,11 @@ Explain the solution
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/p#predictor" class="glossary" target="_blank">predictor</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">The predictor (also known as an independent variable) is the variable you measure or manipulate to see how it is associated with changes in the outcome variable.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#residuals" class="glossary" target="_blank">residuals</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">The difference between the observed value in the data and the predicted value from the model given its assumptions.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#spearman" class="glossary" target="_blank">spearman</a></td>
@@ -1844,7 +1854,7 @@ Explain the solution
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#standardised-predictors" class="glossary" target="_blank">standardised-predictors</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Standardising involves substracting the variable mean from each value and dividing it by the variable standard deviation. It then has the property of a mean of 0 and standard deviation of 1, so you interpret the units as standard deviations.</td>
 </tr>
 </tbody>
 </table>

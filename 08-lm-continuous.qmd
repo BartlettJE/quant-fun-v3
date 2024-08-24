@@ -15,7 +15,7 @@ library(performance)
 library(tidyverse)
 ```
 
-So far in this book, we have been building your data wrangling and visualisation skills and you now have the basis for a lot of the work you will do in research. Most of the work in data analysis is invested in getting your data into an appropriate form for analysis. Once you get there, the functions for inferential statistics is pretty short, but the challenge now comes to expressing your design as a statistical model and interpreting the output. 
+So far in this book, we have been building your data wrangling and visualisation skills and you now have the basis for a lot of the work you will do in research. Most of the work in data analysis is invested in getting your data into an appropriate form for analysis. Once you get there, the functions for inferential statistics are pretty short, but the challenge now comes to expressing your design as a statistical model and interpreting the output. 
 
 In this chapter, we focus on simple linear regression for testing research questions and hypotheses for the relationship between two continuous predictors. We will also explore the concepts of correlation and checking the statistical assumptions of your regression model. 
 
@@ -39,7 +39,7 @@ For this chapter, we are using open data from @dawtry_why_2015. The abstract of 
 
 > The present studies provide evidence that social-sampling processes lead wealthier people to oppose redistribution policies. In samples of American Internet users, wealthier participants reported higher levels of wealth in their social circles (Studies 1a and 1b). This was associated, in turn, with estimates of higher mean wealth in the wider U.S. population, greater perceived fairness of the economic status quo, and opposition to redistribution policies. Furthermore, results from a large-scale, nationally representative New Zealand survey revealed that low levels of neighborhood-level socioeconomic deprivation?an objective index of wealth within participants' social circles mediated the relation between income and satisfaction with the economic status quo (Study 2). These findings held controlling for relevant variables, including political orientation and perceived self-interest. Social-structural inequalities appear to combine with social-sampling processes to shape the different political attitudes of wealthier and poorer people.
 
-In summary, the authors investigated why people with more money tend to oppose wealth redistribution policies to decrease inequality in society. We are using data from Study 1A where 305 people completed measures on household income, predicted population income, their predicted social circle income, in addition to measures on support for wealth redistribution and fairness and satisfaction with the current system. 
+In summary, the authors investigated why people with more money tend to oppose wealth redistribution policies like higher taxes for higher incomes to decrease inequality in society. We are using data from Study 1A where 305 people completed measures on household income, predicted population income, their predicted social circle income, in addition to measures on support for wealth redistribution and fairness and satisfaction with the current system. 
 
 They predicted people with higher incomes have social circles with higher incomes, so they are more satisfied with the current system of wealth redistribution and less interested in changing it. In essence, poorer people and richer people have different experiences of how rich and equal their country is. In this chapter, we will explore the relationship between a range of these variables. 
 
@@ -98,14 +98,14 @@ dawtry_clean <- dawtry_data %>%
 ```
 
 
-As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. Create an object called `dawtry_data` to be consistent with the tasks below. If you want to focus on correlations and regression, then you can just type the code in the solution. 
+As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. Create a final object called `dawtry_clean` to be consistent with the tasks below. If you want to focus on correlations and regression, then you can just type the code in the solution. 
 
 ::: {.callout-tip}
 #### Try this
 
 To wrangle the data, complete the following tasks: 
 
-1. Load the following packages (three of these are new, so revisit [Chapter 1](#install-tidy) if you need a refresher of installing R packages, but remember not to do this on the university computers / online server):
+1. Load the following packages (three of these are new, so revisit [Chapter 1](#install-tidy) if you need a refresher of installing R packages, but remember not to install packages on the university computers / online server):
 
     - <pkg>tidyverse</pkg>
     
@@ -117,7 +117,7 @@ To wrangle the data, complete the following tasks:
 
 2. Read the data file `data/Dawtry_2015.csv` to the object name `dawtry_data`.
 
-3. Reverse code two items: `redist2` and `redist4` to create two new variables `redist2_R` and `redist4_R`
+3. Reverse code two items: `redist2` and `redist4` to create two new variables `redist2_R` and `redist4_R`. See the codebook below, but they are on a 1-6 scale.
 
 4. Summarise the data to calculate the mean `fairness_satisfaction` score, by taking the mean of two items: `fairness` and `satisfaction`. 
 
@@ -203,17 +203,17 @@ In `dawtry_clean`, we have the following variables:
 | Social_Circle_Inequality_Gini_Index | `r typeof(dawtry_clean$Social_Circle_Inequality_Gini_Index)`| Measure of income inequality from 0 (perfect equality) to 100 (perfect inequality), here where participants estimated inequality in their social circle. |
 | Social_Circle_Mean_Income | `r typeof(dawtry_clean$Social_Circle_Mean_Income)`| Participant estimate of the mean household income in their social circle (\$). |
 | fairness_satisfaction | `r typeof(dawtry_clean$fairness_satisfaction)`| Perceived fairness and satisfaction about the current system of wealth redistribution: Mean of two items (1 extremely fair – 9 extremely unfair) |
-| redistribution | `r typeof(dawtry_clean$redistribution)`| Attitudes on wealth distribution: Mean of four items (1 strongly disagree – 6 strongly agree). |
+| redistribution | `r typeof(dawtry_clean$redistribution)`| Support for wealth distribution: Mean of four items (1 strongly disagree – 6 strongly agree). |
 
 We will use this data set to demonstrate correlations and regression when you have one continuous predictor. 
 
 ## Correlation
 
-Before we cover regression as a more flexible framework for inferential statistics, we think it is useful to start with correlation to get a feel for how we can capture the relationship between two variables. As a reminder from the materials, correlations are standardised to range from -1 (a perfect negative correlation) to 1 (a perfect positive correlation). A value of 0 would mean there is no correlation between your variables. 
+Before we cover regression as a more flexible framework for inferential statistics, we think it is useful to start with correlation to get a feel for how we can capture the relationship between two variables. As a reminder from the course materials, correlations are standardised to range from -1 (a perfect negative correlation) to 1 (a perfect positive correlation). A value of 0 would mean there is no correlation between your variables. 
 
 ### Activity 3 - Visualise the relationship
 
-To explore the relationship between two variables, it is useful to create a scatterplot early for yourself, then provide a more professional looking version to help communicate your results. 
+To explore the relationship between two variables, it is useful to create a scatterplot early for yourself, then provide a more professional looking version to help communicate your results. For most of the demonstrations in this chapter, we will try and answer the research question: "Is there a relationship between support for wealth redistribution and fairness and satisfaction with the current system?"
 
 ::: {.callout-tip}
 #### Try this
@@ -227,7 +227,7 @@ dawtry_clean %>%
   geom_smooth(method = "lm") + 
   scale_x_continuous(name = "Perceived Fairness and Satisfaction", 
                      breaks = c(1:9)) + 
-  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+  scale_y_continuous(name = "Support for Wealth Redistribution", 
                      breaks = c(1:6))
   
 ```
@@ -237,18 +237,20 @@ Looking at the graph, we can describe the relationship as `r mcq(c("positive", "
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
-The scatterplot shows a negative correlation between the two variables. As attitudes on wealth redistribution increase to be more positive, perceived fairness and satisfaction tends to decrease. This makes sense as people who are more dissatisfied with the current system think there should be more wealth redistribution stategies. 
+The scatterplot shows a negative correlation between the two variables. You need to be careful interpreting fairness and satisfaction as it is coded a little counterintuitive. Higher values mean great *dissatisfaction*. 
+
+As support for wealth redistribution increases to be more positive, perceived fairness and satisfaction tends to decrease. This makes sense as people who are more dissatisfied with the current system think there should be more wealth redistribution strategies. 
 
 You should have the following in a code chunk: 
 
-```{r}
+```{r eval=FALSE}
 dawtry_clean %>% 
   ggplot(aes(x = fairness_satisfaction, y = redistribution)) + 
   geom_point() + 
   geom_smooth(method = "lm") + 
   scale_x_continuous(name = "Perceived Fairness and Satisfaction", 
                      breaks = c(1:9)) + 
-  scale_y_continuous(name = "Attitudes on Wealth Distribution", 
+  scale_y_continuous(name = "Support for Wealth Redistribution", 
                      breaks = c(1:6))
 ```
 :::
@@ -257,21 +259,21 @@ dawtry_clean %>%
 
 Visualising the relationship between two variables is great for our understanding, but it does not tell us anything about the inferential statistics for what we can learn from our sample in hypothesis testing and measures of effect size.
 
-A correlation is a specific application of the general linear model. We want to capture the covariation between two variables. If you are interested, see the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/pearson-correlation.html){target="_blank"}) for the calculations behind correlation and how it represents the covariance of two variables compared to their total variability. They are not the only methods, but the two most common versions of a correlation are:
+A correlation is a specific application of the general linear model. We want to capture the covariation between two variables. If you are interested, see the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/pearson-correlation.html){target="_blank"}) for the calculations behind different types of correlation and how it represents the covariance of two variables compared to their total variability. They are not the only methods, but the two most common versions of a correlation are:
 
--  Pearson's product-moment correlation (often shortened to the `r glossary("Pearson", def = "A standardised measure of the linear relationship between two variables that makes stringent assumptions about the population.")` correlation) and symbolised by **r**
+-  Pearson's product-moment correlation (often shortened to the `r glossary("Pearson", def = "A standardised measure of the linear relationship between two variables that makes stringent assumptions about the population.")` correlation) and symbolised by **r**.
 
-- Spearman's rank correlation coefficient (often shortened to the `r glossary("Spearman", def = "A standardised measure of the relationship between two variables that assumes a monotonic - but not necessarily a linear - relationship and makes less stringent assumptions about the population.")` correlation) and symbolised by $r_s$ or sometimes the Greek letter **rho** $\rho$
+- Spearman's rank correlation coefficient (often shortened to the `r glossary("Spearman", def = "A standardised measure of the relationship between two variables that assumes a monotonic - but not necessarily a linear - relationship and makes less stringent assumptions about the population.")` correlation) and symbolised by $r_s$ or sometimes the Greek letter **rho** $\rho$.
 
-There is a function built into R (`cor.test()`) to calculate the correlation between two variables, but we tend to use the `correlation()` function from the <pkg>correlation</pkg> package as it has more complete reporting features. The `correlation()` function requires:
+There is a function built into R (`cor.test()`) to calculate the correlation between two variables, but we tend to use the `correlation()` function from the <pkg>correlation</pkg> package as it has more consistent reporting features. The `correlation()` function requires:
 
-- The name of the data set you are using
+- The name of the data set you are using.
 
-- The name of the first variable you want to select for the correlation
+- The name of the first variable you want to select for the correlation.
 
-- The name of the second variable you want to select for the correlation
+- The name of the second variable you want to select for the correlation.
 
-- The type of correlation you want to run: e.g. `pearson`, `spearman`
+- The type of correlation you want to run: e.g. `pearson`, `spearman`.
 
 For our `dawtry_clean` data, we would run the following code for a two-tailed Pearson correlation:
 
@@ -303,7 +305,7 @@ Your output will look a little different due to how our book renders tables, but
 
 - **Confidence interval**: [-0.75, -0.64], showing the precision around the effect size estimate.   
 
-To summarise, there was a strong, negative, statistically significant relationship between attitudes on wealth redistribution and perceived fairness and satisfaction, *r* (303) = -0.70, *p* < .001, 95% CI = [-0.75, -0.64].
+To summarise: a Pearson correlation showed there was a strong, negative, statistically significant relationship between attitudes on wealth redistribution and perceived fairness and satisfaction, *r* (303) = -0.70, *p* < .001, 95% CI = [-0.75, -0.64].
 
 If we had reason to use a Spearman correlation instead, all we need to do is change the `method` argument. 
 
@@ -327,10 +329,12 @@ correlation(data = dawtry_clean,
   
 ```
 
+Similarly, we could report the results as: a Spearman correlation showed there was a strong, negative, statistically significant relationship between attitudes on wealth redistribution and perceived fairness and satisfaction, $r_s$ (303) = -0.68, *p* < .001, 95% CI = [-0.74, -0.61].
+
 ::: {.callout-tip}
 #### Try this
 
-Great work following along so far, but now it is time to test your understanding on a new set of variables. This time, use the variables `age` and `redistribution` from `dawtry_clean`. We can ask the question "What is the relationship between age and attitudes on wealth redistribution?". 
+Great work following along so far, but now it is time to test your understanding on a new set of variables. Use the variables `age` and `redistribution` from `dawtry_clean`. We can ask the question: "What is the relationship between age and attitudes on wealth redistribution?"
 
 1. Create a scatterplot to visualise the relationship between `age` and `redistribution` from `dawtry_clean`. 
 
@@ -356,7 +360,7 @@ dawtry_clean %>%
                      breaks = c(1:6))
 ```
 
-For our inferential statistics, the relationship is not statistically significant and the Pearson correlation coefficient is very weak, *r* (302) = -0.03, *p* = .625, 95% CI = [-0.14, 0.08]. 
+For our inferential statistics, the relationship is not statistically significant and the Pearson correlation coefficient is very weak, *r* (302) = -0.03, *p* = .625, 95% CI = [-0.14, 0.08]. Note there is a missing value for age, so we have one few participant / degrees of freedom. 
 
 ```{r}
 correlation(data = dawtry_clean, 
@@ -372,7 +376,7 @@ correlation(data = dawtry_clean,
 
 Now you know how to calculate a correlation in R, we can turn to simple linear regression as a more flexible tool for modelling the relationship between variables. 
 
-In Research Methods 1, we focus on just two variables, before scaling up to more complicated models in Research Methods 2. In this chapter, we focus the relationship between a continuous `r glossary("outcome", def = "")` and one continuous `r glossary("predictor", def = "")`, before extending the framework to one categorical predictor in Chapter 9. There is also a chapter in the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/simple-linear-regression.html){target="_blank"}) dedicated to manually calculating simple linear regression.
+In Research Methods 1, we focus on just two variables, before scaling up to more complicated models in Research Methods 2. In this chapter, we focus the relationship between a continuous `r glossary("outcome", def = "The outcome (also known as the dependent variable) is the variable you are interested in seeing a potential change in.")` and one continuous `r glossary("predictor", def = "The predictor (also known as an independent variable) is the variable you measure or manipulate to see how it is associated with changes in the outcome variable.")`, before extending the framework to one categorical predictor in Chapter 9. There is also a chapter in the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/simple-linear-regression.html){target="_blank"}) dedicated to manually calculating simple linear regression.
 
 ### Activity 5- Calculating descriptive statistics
 
@@ -401,7 +405,7 @@ If other types of descriptive statistic would be more suitable to your data, the
 
 For our research question of "is there a relationship between support for wealth redistribution and fairness and satisfaction", we can address it with simple linear regression. 
 
-Instead of a standardised correlation coefficient, we can frame it as whether knowing fairness and satisfaction can predict values of support for wealth redistribution. The design is still correlational, so it does not tell us anything about a causal relationship in isolation. We use the word predict in the statistical sense, where we can ask whether knowing values of one variable help us predict values of another variable. 
+Instead of a standardised correlation coefficient, we can frame it as whether knowing fairness and satisfaction can predict values of support for wealth redistribution. The design is still correlational, so it does not tell us anything about a causal relationship in isolation. We use the word predict in the statistical sense, where we can ask whether knowing values of one variable help us predict values of another variable with a degree of error. 
 
 The first step is to create an object (`lm_redistribution`) for the linear model.
 
@@ -417,6 +421,10 @@ The function `lm()` is built into R and is incredibly flexible for creating line
 - The tilde (`~`) separates the equation, where everything on the right is your predictor variable(s). In simple linear regression, we just have one predictor, which is `fairness_satisfaction` in our model here. This is saying we want to predict `redistribution` as our outcome from `fairness_satisfaction` as our predictor. 
 
 - We then specify the data frame we want to use.
+
+::: {.callout-note}
+In some resources, you might see people enter the same model as `redistribution ~ 1 + fairness_satisfaction`. The `1 +` component explicitly tells R to fit an intercept, plus a slope from `fairness_satisfaction`. R includes an intercept by default, so you do not need to add it, but some people like to include it for clarity.
+:::
 
 When you create this object, it stores a bunch of information, but does not really tell us all the statistics we expect. If you simply print the object in the console, it will tell you the intercept and coefficient(s), but none of the model fitting nor hypothesis testing values. If you look at the object in the R environment, you will see it is a `r glossary("list")` containing several elements. It stores things like the model, the residuals, and other information you can use.
 
@@ -522,7 +530,7 @@ So far, we have covered specifying your outcome and predictor variables as their
 
 #### Centering predictors
 
-`r glossary("Centered predictors", display = "Centering", def = "")` predictors is where you change the values of your predictor, but not their scale. Typically, this means substracting the mean of your predictor from each observation. This changes how you interpret the intercept of your regression model. 
+`r glossary("Centered predictors", display = "Centering", def = "Usually, centering a predictor means subtracting the mean from each value, so the mean is 0. You can then interpret the intercept as the value of your outcome for the mean value of your predictor(s).")` predictors is where you change the values of your predictor, but not their scale. Typically, this means substracting the mean of your predictor from each observation. This changes how you interpret the intercept of your regression model. 
 
 Remember the interpretation of the intercept is the predicted value of your outcome when your predictor is set to 0. If 0 is not present in your data or a value of 0 would be uninformative, the intercept can be difficult to interpret. When you center your predictor, 0 becomes the mean value of your predictor. So, the intercept is now the predicted value of your outcome for the mean value of your predictor, but the slope itself does not change. You can see the impact of this by plotting the data side by side in @fig-centering-predictors. 
 
@@ -535,6 +543,7 @@ dawtry_clean <- dawtry_clean %>%
 ```{r centering-predictors, echo=FALSE}
 #| label: fig-centering-predictors
 #| fig.cap: "Top: The relationship between wealth redistribution and perceived fairness and satisfaction using raw values. Bottom: The relationship after centering perceived fairness and satisfaction values."
+#| fig-alt: "The plot at the top shows the relationship between wealth redistribution and perceived fairness and satisfaction using raw values. The plot at the bottom shows the relationship after centering perceived fairness and satisfaction values, so the values shift to the left."
 
 normal <- dawtry_clean %>% 
   ggplot(aes(x = fairness_satisfaction, y = redistribution)) + 
@@ -542,7 +551,7 @@ normal <- dawtry_clean %>%
   geom_smooth(method = "lm") + 
   scale_x_continuous(name = "", 
                      breaks = c(1:9)) + 
-  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+  scale_y_continuous(name = "Support for Wealth Redistribution", 
                      breaks = c(1:6)) + 
   labs(title = "Raw predictor values")
 
@@ -551,7 +560,7 @@ centered <- dawtry_clean %>%
   geom_point() + 
   geom_smooth(method = "lm") + 
   scale_x_continuous(name = "Perceived Fairness and Satisfaction") + 
-  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+  scale_y_continuous(name = "Support for Wealth Redistribution", 
                      breaks = c(1:6)) + 
   labs(title = "Centered predictor values")
 
@@ -571,11 +580,12 @@ Every single one of the values remains the same apart from the intercept. Now, w
 
 #### Standardising predictors
 
-`r glossary("Standardised predictors", display = "Standardising", def = "")` predictors is where you first convert your values to z-scores. This means you interpret the values as standard deviations rather than your original units. This is more useful in multiple regression (Chapter 14) to compare the magnitude of predictors, but it is useful to get used to now when you only have one predictor to focus on. 
+`r glossary("Standardised predictors", display = "Standardising", def = "Standardising involves substracting the variable mean from each value and dividing it by the variable standard deviation. It then has the property of a mean of 0 and standard deviation of 1, so you interpret the units as standard deviations.")` predictors is where you first convert your values to z-scores. This means you interpret the values as standard deviations rather than your original units. This is more useful in multiple regression (Chapter 14) to compare the magnitude of predictors, but it is useful to get used to now when you only have one predictor to focus on. 
 
 The first step is to standardise **all** your variables, not just the predictor this time. This involves subtracting the mean of your variable from each value, and dividing by the standard deviation of the variable. They now have a mean of 0 and a standard deviation of 1. 
 
 ```{r}
+# Be careful with the bracket placement to subtract the mean first
 dawtry_clean <- dawtry_clean %>% 
   mutate(redistribution_std = (redistribution - mean(redistribution)) / sd(redistribution),
          fairness_std = (fairness_satisfaction - mean(fairness_satisfaction)) / sd(fairness_satisfaction))
@@ -592,7 +602,7 @@ summary(lm_standardised)
 
 Like centering, the model fit and *p*-values do not change again, apart from the intercept. The relationship between the variables is exactly the same, but we changed their units. The intercept is tiny and close enough to zero that the *p*-value is 1. 
 
-More importantly, the slope is now expressed in standard deviations. Annoyingly, R prints the values in scientific notation, so this can be awkward to read (remember the `format()` function). Now, for every 1 standard deviation increase in our predictor, we predict the outcome to decrease by 0.70 standard deviations (does this remind you of the correlation value now we have standardised the relationship?). 
+More importantly, the slope is now expressed in standard deviations. Annoyingly, R prints the values in scientific notation, so this can be awkward to read (remember the `format()` function). Now, for every 1 standard deviation increase in our predictor, we predict the outcome to decrease by 0.70 standard deviations. 
 
 ::: {.callout-tip}
 
@@ -627,7 +637,7 @@ As a reminder, the assumptions for simple linear regression are:
 
 Assumptions 1-4 are pretty straight forward as they relate to your understanding of the design or a simple check on the data for non-zero variance (the responses are not all the exact same value).
 
-Assumptions 5-7 require diagnostic checks on the `r glossary("residuals", def = "")` from the model. The residuals are the difference between your observed values in the data and the values your model expects given it's assumptions. If you remember back, we highlighted the model output mentioned `Residuals:` and they are saved within the model object.
+Assumptions 5-7 require diagnostic checks on the `r glossary("residuals", def = "The difference between the observed value in the data and the predicted value from the model given its assumptions.")` from the model. The residuals are the difference between your observed values in the data and the values your model predicts given it's assumptions. If you remember back, we highlighted the model output mentioned `Residuals:` and they are saved within the model object.
 
 ```{r}
 # head shows the first 6 values 
@@ -649,7 +659,7 @@ If you type an object name into the console and add the `$`, you will see all th
 
 In your reading, you might see individual statistical tests to check these assumptions, but they have more limitations than benefits. The best way to check the assumptions is through diagnostic plots which express the model residuals in different ways. We want to walk through this longer way of checking assumptions to develop a solid understanding before showing you a shortcut to see them all below. 
 
-In the code below, we use a format you will be less familiar with as all these functions come from base R. If you just run the code for the diagnostic plots `plot(lm_redistribution)`, each one gets individually printed to your Plots window. Here, we create a 2x2 panel to show them all together, then turn it back off. 
+In the code below, we use a format you will be less familiar with as all these functions come from base R. If you just run the code for the diagnostic plots `plot(lm_redistribution)`, each one gets individually printed to your Plots window. Here, we create a 2x2 panel to show them all together. 
 
 ```{r}
 # Change the panel layout to 2 x 2
@@ -663,14 +673,14 @@ For more information on each of these plots, see this great resource by [Kim (20
 
 ### Checking linearity 
 
-To isolate each plot, we can use the `which` argument. Plot 1 is a residuals vs fitted plot and helps us check linearity by showing the residuals on the y-axis and the fitted values on the x-axis. 
+To isolate each plot, we can use the `which` argument. Plot 1 is a residuals vs fitted plot and helps us check linearity by showing the residuals on the y-axis and the fitted (predicted) values on the x-axis. 
 
 ```{r}
 plot(lm_redistribution, 
      which = 1)
 ```
 
-Here, you are looking out for a roughly flat horizontal red line. Common patterns to look out if there is a problem are when the lines has an obvious curve to look like a hump or several bends to look like an S. 
+Here, you are looking out for a roughly flat horizontal red line. Common patterns to look out for if there is a problem are when the line has an obvious curve to look like a hump or several bends to look like an S. 
 
 The only downside to using diagnostic plots is it takes experience to recognise when there is nothing wrong with a regression model compared to when it violates the assumptions. It is easy to see a little deviation and think there is some drastically wrong. Our advice is if you squint and it looks fine, it is probably fine. You are looking for clear and obvious deviations from what you expect and all the models we use in Chapters 8 and 9 are intentionally fine to develop foundational skills. In Chapter 11, we then introduce you to more problematic cases and what your options are. 
 
@@ -695,7 +705,7 @@ In this plot, you are looking for the data points to roughly follow the dashed l
 
 Like the other diagnostic plots, it is tempting to think there are problems where there are none. The vast majority of the points here follow the line nicely, but tail off a little at the extremes. It flags the points with the largest deviations but there do not appear to be any obvious problems. 
 
-When there are problems with normality, you are looking for obvious deviations, like a the points curving around in a banana shape, or snaking around like an S.
+When there are problems with normality, you are looking for obvious deviations, like the points curving around in a banana shape, or snaking around like an S.
 
 ### Checking homoscedasticity 
 
@@ -708,7 +718,7 @@ plot(lm_redistribution,
 
 In this plot, you are looking out for a roughly random spread of points as you move from one end of the x-axis to the other. The red line should be roughly flat and horizontal. 
 
-When there is heteroscedasticity, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range, or a bow tie where there is a wide spread of points at each end and dense in the middle. 
+When there is *heteroscedasticity*, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range at the other end, or a bow tie where there is a wide spread of points at each end and dense in the middle. 
 
 ### Checking all the assumptions
 
@@ -720,7 +730,7 @@ Now we have covered the individual diagnostic plots, there is a handy function c
 check_model(lm_redistribution)
 ```
 
-The key difference is you get a posterior predictive check (essentially comparing values you observe compared to what your model would predict) and the qq-plot for normality of residuals looks a little different. Instead of a kind of angled line, the residuals are expressed as deviations instead, so the points should be close to a flat horizontal line. This version can make smaller deviations look worse, so keep in mind again you are looking for clear deviations in the overall pattern. 
+The key difference is you get a posterior predictive check (essentially comparing values you observe compared to what your model predicts) and the qq-plot for normality of residuals looks a little different. Instead of a kind of angled line, the residuals are expressed as deviations instead, so the points should be close to a flat horizontal line. This version can make smaller deviations look worse, so keep in mind again you are looking for clear deviations in the overall pattern. 
 
 ::: {.callout-note}
 The <pkg>performance</pkg> version of the diagnostic plots are actually created using <pkg>ggplot2</pkg>, so the function `ggsave()` would work here if you need to save the plot to add into your report. 
@@ -816,9 +826,9 @@ dawtry_clean %>%
   ggplot(aes(x = fairness_satisfaction, y = redistribution)) + 
   geom_point() + 
   geom_smooth(method = "lm") + 
-  scale_x_continuous(name = "", 
+  scale_x_continuous(name = "Fairness and Satisfaction", 
                      breaks = c(1:9)) + 
-  scale_y_continuous(name = "Attitudes on Wealth Redistribution", 
+  scale_y_continuous(name = "Support for Wealth Redistribution", 
                      breaks = c(1:6)) + 
   theme_classic()
 ```
@@ -984,6 +994,6 @@ glossary_table()
 
 Great work, that was your first chapter working on inferential statistics! 
 
-We have spent so long developing your data wrangling and visualisation skills that the code for statistical models is pretty short. Hopefully, you now believe us when we said almost all the work goes into wrangling your data into a format you can analyse. Once it comes to inferential statistics, it shifts from wrangling the data being the most difficult to being able to express your research question and interpret the outcome being the most difficult. 
+We have spent so long developing your data wrangling and visualisation skills that the code for statistical models is pretty short. Hopefully, you now believe us when we said almost all the work goes into wrangling your data into a format you can analyse. Once it comes to inferential statistics, it shifts from wrangling the data being the most difficult to being able to express your research question/design and interpret the outcome being the most difficult. 
 
 In the next chapter, we reinforce most of the content by applying simple linear regression to a categorical predictor. This is when you want to test for differences between two groups on your outcome instead of testing the relationship between two continuous variables.  
