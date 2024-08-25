@@ -47,7 +47,7 @@ They predicted people with higher incomes have social circles with higher income
 
 Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.
 
-1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, create a new folder called `Chapter_08_regression_continuous`. Within `Chapter_07_dataviz`, create two new folders called `data` and `figures`.
+1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, create a new folder called `Chapter_08_regression_continuous`. Within `Chapter_08_regression_continuous`, create two new folders called `data` and `figures`.
 
 2. Create an R Project for `Chapter_08_regression_continuous` as an existing directory for your chapter folder. This should now be your working directory.
 

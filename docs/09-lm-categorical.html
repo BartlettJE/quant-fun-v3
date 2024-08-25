@@ -110,8 +110,7 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -136,7 +135,8 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/BartlettJE/quant-fun-v3/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -192,7 +192,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-starting-with-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating reproducible documents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Creating Reproducible Documents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -204,25 +204,25 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-wrangling-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling 1: Join, select, and mutate</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-wrangling-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data wrangling 2: Filter and summarise</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-wrangling-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling 3: Pivots and Pipes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-more-visualisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Building your data visualisation skills</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Scatterplots, boxplots, and violin-boxplots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -371,31 +371,44 @@ div.csl-indent {
    
   <ul>
 <li>
-<a href="#between-subjects-t-tests-two-sample" id="toc-between-subjects-t-tests-two-sample" class="nav-link active" data-scroll-target="#between-subjects-t-tests-two-sample"><span class="header-section-number">9.1</span> Between-Subjects t-tests (two-sample)</a>
+<a href="#chapter-preparation" id="toc-chapter-preparation" class="nav-link active" data-scroll-target="#chapter-preparation"><span class="header-section-number">9.1</span> Chapter preparation</a>
   <ul class="collapse">
-<li><a href="#data-and-descriptives" id="toc-data-and-descriptives" class="nav-link" data-scroll-target="#data-and-descriptives"><span class="header-section-number">9.1.1</span> Data and Descriptives</a></li>
-  <li><a href="#visualising-two-groups" id="toc-visualising-two-groups" class="nav-link" data-scroll-target="#visualising-two-groups"><span class="header-section-number">9.1.2</span> Visualising two groups</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">9.1.3</span> Assumptions</a></li>
-  <li><a href="#inferential-analysis" id="toc-inferential-analysis" class="nav-link" data-scroll-target="#inferential-analysis"><span class="header-section-number">9.1.4</span> Inferential analysis</a></li>
-  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size"><span class="header-section-number">9.1.5</span> Effect Size</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">9.1.6</span> Interpretation</a></li>
-  <li><a href="#write-up" id="toc-write-up" class="nav-link" data-scroll-target="#write-up"><span class="header-section-number">9.1.7</span> Write-Up</a></li>
+<li><a href="#introduction-to-the-data-set" id="toc-introduction-to-the-data-set" class="nav-link" data-scroll-target="#introduction-to-the-data-set"><span class="header-section-number">9.1.1</span> Introduction to the data set</a></li>
+  <li><a href="#organising-your-files-and-project-for-the-chapter" id="toc-organising-your-files-and-project-for-the-chapter" class="nav-link" data-scroll-target="#organising-your-files-and-project-for-the-chapter"><span class="header-section-number">9.1.2</span> Organising your files and project for the chapter</a></li>
+  <li><a href="#activity-1---read-and-wrangle-the-data" id="toc-activity-1---read-and-wrangle-the-data" class="nav-link" data-scroll-target="#activity-1---read-and-wrangle-the-data"><span class="header-section-number">9.1.3</span> Activity 1 - Read and wrangle the data</a></li>
+  <li><a href="#09-explore" id="toc-09-explore" class="nav-link" data-scroll-target="#09-explore"><span class="header-section-number">9.1.4</span> Activity 2 - Explore the data</a></li>
   </ul>
 </li>
   <li>
-<a href="#within-subjects-paired-samples" id="toc-within-subjects-paired-samples" class="nav-link" data-scroll-target="#within-subjects-paired-samples"><span class="header-section-number">9.2</span> Within-subjects (paired-samples)</a>
+<a href="#comparing-differences-using-the-t-test" id="toc-comparing-differences-using-the-t-test" class="nav-link" data-scroll-target="#comparing-differences-using-the-t-test"><span class="header-section-number">9.2</span> Comparing differences using the t-test</a>
   <ul class="collapse">
-<li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">9.2.1</span> The Data</a></li>
-  <li><a href="#assumptions-1" id="toc-assumptions-1" class="nav-link" data-scroll-target="#assumptions-1"><span class="header-section-number">9.2.2</span> Assumptions</a></li>
-  <li><a href="#descriptives" id="toc-descriptives" class="nav-link" data-scroll-target="#descriptives"><span class="header-section-number">9.2.3</span> Descriptives</a></li>
-  <li><a href="#inferential-analysis-1" id="toc-inferential-analysis-1" class="nav-link" data-scroll-target="#inferential-analysis-1"><span class="header-section-number">9.2.4</span> Inferential Analysis</a></li>
-  <li><a href="#write-up-and-interpretation" id="toc-write-up-and-interpretation" class="nav-link" data-scroll-target="#write-up-and-interpretation"><span class="header-section-number">9.2.5</span> Write-Up and Interpretation</a></li>
+<li><a href="#activity-3---visualising-the-difference" id="toc-activity-3---visualising-the-difference" class="nav-link" data-scroll-target="#activity-3---visualising-the-difference"><span class="header-section-number">9.2.1</span> Activity 3 - Visualising the difference</a></li>
+  <li><a href="#activity-4---using-the-t.test-function" id="toc-activity-4---using-the-t.test-function" class="nav-link" data-scroll-target="#activity-4---using-the-t.test-function"><span class="header-section-number">9.2.2</span> Activity 4 - Using the <code>t.test()</code> function</a></li>
+  <li><a href="#activity-5---calculating-cohens-d" id="toc-activity-5---calculating-cohens-d" class="nav-link" data-scroll-target="#activity-5---calculating-cohens-d"><span class="header-section-number">9.2.3</span> Activity 5 - Calculating Cohen’s d</a></li>
   </ul>
 </li>
-  <li><a href="#ttest-fin" id="toc-ttest-fin" class="nav-link" data-scroll-target="#ttest-fin"><span class="header-section-number">9.3</span> Finished!</a></li>
-  <li><a href="#ttest-sols" id="toc-ttest-sols" class="nav-link" data-scroll-target="#ttest-sols"><span class="header-section-number">9.4</span> Activity solutions</a></li>
-  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">9.5</span> Words from this Chapter</a></li>
-  </ul></nav>
+  <li>
+<a href="#linear-regression-with-one-categorical-predictor" id="toc-linear-regression-with-one-categorical-predictor" class="nav-link" data-scroll-target="#linear-regression-with-one-categorical-predictor"><span class="header-section-number">9.3</span> Linear regression with one categorical predictor</a>
+  <ul class="collapse">
+<li><a href="#activity-6---descriptive-statistics" id="toc-activity-6---descriptive-statistics" class="nav-link" data-scroll-target="#activity-6---descriptive-statistics"><span class="header-section-number">9.3.1</span> Activity 6 - Descriptive statistics</a></li>
+  <li><a href="#activity-7---using-the-lm-function" id="toc-activity-7---using-the-lm-function" class="nav-link" data-scroll-target="#activity-7---using-the-lm-function"><span class="header-section-number">9.3.2</span> Activity 7 - Using the <code>lm()</code> function</a></li>
+  <li><a href="#activity-8---calculating-confidence-intervals" id="toc-activity-8---calculating-confidence-intervals" class="nav-link" data-scroll-target="#activity-8---calculating-confidence-intervals"><span class="header-section-number">9.3.3</span> Activity 8 - Calculating confidence intervals</a></li>
+  <li><a href="#activity-9---standardising-predictors" id="toc-activity-9---standardising-predictors" class="nav-link" data-scroll-target="#activity-9---standardising-predictors"><span class="header-section-number">9.3.4</span> Activity 9 - Standardising predictors</a></li>
+  </ul>
+</li>
+  <li><a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions"><span class="header-section-number">9.4</span> Checking assumptions</a></li>
+  <li><a href="#reporting-your-results" id="toc-reporting-your-results" class="nav-link" data-scroll-target="#reporting-your-results"><span class="header-section-number">9.5</span> Reporting your results</a></li>
+  <li><a href="#one--and-paired-sample-tests" id="toc-one--and-paired-sample-tests" class="nav-link" data-scroll-target="#one--and-paired-sample-tests"><span class="header-section-number">9.6</span> One- and paired-sample tests</a></li>
+  <li>
+<a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">9.7</span> Test Yourself</a>
+  <ul class="collapse">
+<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">9.7.1</span> Knowledge check</a></li>
+  <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">9.7.2</span> Error mode</a></li>
+  </ul>
+</li>
+  <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">9.8</span> Words from this Chapter</a></li>
+  <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">9.9</span> End of chapter</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/09-lm-categorical.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/09-lm-categorical.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -414,993 +427,509 @@ div.csl-indent {
   </div>
   
 
-</header><p>Experiments where you compare results from two conditions or two groups are very common within Psychology as often we want to know if there is an effect of a given variable. One of the really confusing things however about research design is that there are many names for the same type of design. To clarify:</p>
+</header><p>Introduction.</p>
+<p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
+<p>By the end of this chapter, you will be able to:</p>
 <ul>
-<li>
-<a class="glossary">One-sample<span class="def"></span></a> are used to study one group of people against a known norm or criterion - for example, comparing the mean IQ of a sample against a known population norm such as an IQ of 100.</li>
-<li>Independent-samples and <a class="glossary">between-subjects<span class="def"></span></a> designs mean the same thing - different participants in different conditions.</li>
-<li>In contrast, <a class="glossary">within-subjects<span class="def"></span></a>, dependent-samples, paired-samples, and repeated-measures all tend to mean the same participants in all conditions</li>
-<li>Matched-pairs design means different people in different conditions but you have matched participants across the conditions so that they are effectively the same person (e.g.&nbsp;age, IQ, Social Economic Status, etc)</li>
-<li>
-<a class="glossary">Mixed-design<span class="def"></span></a> is when there is a combination of within-subjects and between-subjects designs in the one experiment. For example, say you are looking at attractiveness and dominance of male and female faces. Everyone might see both male and female faces (within) but half of the participants do ratings of attractiveness and half of the participants do ratings of trustworthiness (between).</li>
+<li><p>Visualise the difference between two groups on an outcome.</p></li>
+<li><p>ILO2.</p></li>
 </ul>
-<p>To get a better understanding of how some of these tests run we will look at running an example of a between-subjects t-test and a within-subjects t-test through a series of activities. Remember that the solutions are at the bottom of the page if you are stuck, and please do ask questions on the forums.</p>
-<section id="between-subjects-t-tests-two-sample" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="between-subjects-t-tests-two-sample">
-<span class="header-section-number">9.1</span> Between-Subjects t-tests (two-sample)</h2>
-<p>We will begin by looking at the between-subjects t-test which is used for comparing the outcome in two groups of different people. Here we will be using data from <a href="https://doi.org/10.1177/0956797615572906" target="_blank">‘The sound of intellect: Speech reveals a thoughtful mind, increasing a job candidate’s appeal’</a> <span class="citation" data-cites="schroeder_sound_2015">(<a href="references.html#ref-schroeder_sound_2015" role="doc-biblioref">Schroeder &amp; Epley, 2015</a>)</span>. The abstract explains more about their study but for the purposes of this activity, we focus Experiment 4.</p>
-<p>To summarise, 39 professional recruiters from Fortune 500 companies evaluated job pitches of M.B.A. candidates from the University of Chicago Booth School of Business. The methods and results appear on pages 887-889 of the article if you want to look at them specifically for more details and the original data, in <strong>wide</strong> format, can be found at the <a href="https://drive.google.com/open?id=0Bz-rhZ21ShvOei1MM24xNndnQ00" target="_blank">Open Stats Lab</a> website for later self-directed learning. Today however, we will be working with a modified version in “tidy” format which can be downloaded below and what we plan to do is reproduce the results from the article on Pg 887.</p>
-<section id="data-and-descriptives" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="data-and-descriptives">
-<span class="header-section-number">9.1.1</span> Data and Descriptives</h3>
-<p>As always, the first activity is about getting ourselves ready to analyse the data so try out the steps and if you need help, consult the earlier chapters.</p>
-<section id="ttest-a1" class="level4" data-number="9.1.1.1"><h4 data-number="9.1.1.1" class="anchored" data-anchor-id="ttest-a1">
-<span class="header-section-number">9.1.1.1</span> Activity 1: Set-up</h4>
-<ul>
-<li>Open RStudio and set the working directory to your chapter folder. Ensure the environment is clear.
-<ul>
-<li>If you’re using the Rserver, avoid a number of issues by restarting the session - click <code>Session</code> - <code>Restart R</code>
-</li>
-</ul>
-</li>
-<li>Open a new R Markdown document and save it in your working directory. Call the file “ttests”.<br>
-</li>
-<li>Download <a href="evaluators.csv" download="">evaluators.csv</a> and <a href="ratings.csv" download="">ratings.csv</a> and save them in your t-test folder. Make sure that you do not change the file names at all.
-<ul>
-<li>If you prefer you can download the data in a <a href="data/chpt10/PsyTeachR_FQA_Chpt10-data-between.zip" target="_blank">zip folder by clicking here</a>
-</li>
-<li>Remember not to change the file names at all and that <code>data.csv</code> is not the same as <code>data (1).csv</code>.</li>
-</ul>
-</li>
-<li>Delete the default R Markdown welcome text and insert a new code chunk that loads the following packages, in this specific order, using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function. Remember the solutions if needed.
-<ul>
-<li>Load the packages in this order, <code>Hmisc</code>, <code>broom</code>, <code>car</code>,<code>effectsize</code>, <code>report</code>, and <code>tidyverse</code>
-</li>
-<li>again we have not used some of these packages so you will likely need to install some of them using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. Remember though that you should only do this on your own machine and only in the console window. If you are using the RServer you will not need to install them.</li>
-</ul>
-</li>
-<li>Finally, load the data held in <code>evaluators.csv</code> as a tibble into an object named <code>evaluators</code> using <code>read_csv()</code>.</li>
-</ul>
-<p>Remember to have a look at your data to help you understand the structure and the layout of the data. You can do this in whatever way you prefer.</p>
-<p>Now that we have our data, and have explored it, there is a few things we can do to make working with it a bit easier. If you look at the data, and in particular the <code>sex</code> column, you will see it is actually coded as <a class="glossary">numeric<span class="def"></span></a> but we will want to treat it as <a class="glossary">categorical<span class="def"></span></a>. Secondly, it can be tricky to work with 1s and 2s when you mean people, so we can “recode” the variables into labels that are easier to work with. That is what we will do here using a combination of <code>mutate()</code>, which we already know, and the <code>recode()</code> function from the <code>dplyr</code> package that is loaded in as part of the <code>tidyverse</code>, and the <code><a href="https://rdrr.io/r/base/factor.html">as.factor()</a></code> function from <code>base</code>. Converting categorical data to factors will make it easier to work with in visualisations and analysis.</p>
-</section><section id="ttest-a2" class="level4" data-number="9.1.1.2"><h4 data-number="9.1.1.2" class="anchored" data-anchor-id="ttest-a2">
-<span class="header-section-number">9.1.1.2</span> Activity 2: Explore the dataset</h4>
-<p>In a new code chunk, copy the code below and see if you can follow it.</p>
-<ul>
-<li>First we use <code>mutate()</code> and <code>recode()</code> to recode <code>sex</code> into a new variable called <code>sex_labels</code> so that <code>1</code> = <code>male</code> and <code>2</code> = <code>female</code>.
-<ul>
-<li>Be careful using <code>recode()</code> as there are multiple functions in different packages called with the same name so it is better to use the <code>package::function()</code> approach and specify <code><a href="https://dplyr.tidyverse.org/reference/recode.html">dplyr::recode()</a></code> to get the right one.</li>
-</ul>
-</li>
-<li>Then we use <code>mutate()</code> and <code><a href="https://rdrr.io/r/base/factor.html">as.factor()</a></code> to overwrite <code>sex_labels</code> and <code>condition</code> as factors.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>evaluators <span class="ot">&lt;-</span> evaluators <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">mutate</span>(<span class="at">sex_labels =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(sex, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"male"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"female"</span>),</span>
-<span id="cb1-3"><a href="#cb1-3"></a>         <span class="at">sex_labels =</span> <span class="fu">as.factor</span>(sex_labels),</span>
-<span id="cb1-4"><a href="#cb1-4"></a>         <span class="at">condition =</span> <span class="fu">as.factor</span>(condition))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now see if you can create a count of the different sex labels to answer the following question. One approach would be <code>group_by() %&gt;% count()</code> but what would you group by? Maybe store this tibble in an object called <code>eval_counts</code>.</p>
-<ul>
-<li>How many participants were noted as being female: <input class="webex-solveme nospaces" size="2" data-answer="[&quot;30&quot;]">
-</li>
-<li>How many participants were noted as being male: <input class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]">
-</li>
-<li>How many data points are missing for <code>sex</code>? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;5&quot;]">
-</li>
-</ul></section><section id="ttest-a3" class="level4" data-number="9.1.1.3"><h4 data-number="9.1.1.3" class="anchored" data-anchor-id="ttest-a3">
-<span class="header-section-number">9.1.1.3</span> Activity 3: Ratings</h4>
-<p>Excellent work. Our evaluator data is ready to work with and we are now going to calculate what is called an “overall intellect rating” given by each evaluator, calculated by averaging the ratings of <code>competent</code>, <code>thoughtful</code> and <code>intelligent</code> from each evaluator; held within <code>ratings.csv</code>. This overall rating will measure how intellectual the evaluators thought candidates were, depending on whether or not the evaluators <strong>read</strong> or <strong>listened</strong> to the candidates’ resume pitches. <strong>Note</strong>, however, we are not looking at ratings to individual candidates; we are looking at overall ratings for each evaluator. This is a bit confusing but makes sense if you stop to think about it a little. What we are interested in is how the medium they received the resume impacted their rating of the candidate. Once we have done that, we will then combine the overall intellect rating with the overall impression ratings and overall hire ratings for each evaluator, with the end goal of having a tibble called <code>ratings2</code> - which has the following structure:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: right;">eval_id</th>
-<th style="text-align: left;">Category</th>
-<th style="text-align: right;">Rating</th>
-<th style="text-align: left;">condition</th>
-<th style="text-align: left;">sex_labels</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">hire</td>
-<td style="text-align: right;">6.000</td>
-<td style="text-align: left;">listened</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">impression</td>
-<td style="text-align: right;">7.000</td>
-<td style="text-align: left;">listened</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">intellect</td>
-<td style="text-align: right;">6.000</td>
-<td style="text-align: left;">listened</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">hire</td>
-<td style="text-align: right;">4.000</td>
-<td style="text-align: left;">listened</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">impression</td>
-<td style="text-align: right;">4.667</td>
-<td style="text-align: left;">listened</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">intellect</td>
-<td style="text-align: right;">5.667</td>
-<td style="text-align: left;">listened</td>
-<td style="text-align: left;">female</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>The following steps describe how to create the above tibble and it would be good practice to try this out yourself. Look at the table and think what do I need? The trick when doing data analysis and data wrangling is to first think about what you want to achieve - the end goal - and then think about what functions you need to use to get there. The solution is hidden just below the stpes of course if you want to look at it. Let’s look at the steps. Steps 1, 2 and 3 calculate the new overall <code>intellect</code> rating. Steps 4 and 5 combine this rating to all other information.</p>
+<section id="chapter-preparation" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="chapter-preparation">
+<span class="header-section-number">9.1</span> Chapter preparation</h2>
+<section id="introduction-to-the-data-set" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
+<span class="header-section-number">9.1.1</span> Introduction to the data set</h3>
+<p>For most of this chapter, we are using open data from <span class="citation" data-cites="lopez_visual_2023">Lopez et al. (<a href="references.html#ref-lopez_visual_2023" role="doc-biblioref">2023</a>)</span>. The abstract of their article is:</p>
+<blockquote class="blockquote">
+<p>Imagine a bowl of soup that never emptied, no matter how many spoonfuls you ate—when and how would you know to stop eating? Satiation can play a role in regulating eating behavior, but research suggests visual cues may be just as important. In a seminal study by Wansink et al.&nbsp;(2005), researchers used self-refilling bowls to assess how visual cues of portion size would influence intake. The study found that participants who unknowingly ate from self-refilling bowls ate more soup than did participants eating from normal (not self-refilling) bowls. Despite consuming 73% more soup, however, participants in the self-refilling condition did not believe they had consumed more soup, nor did they perceive themselves as more satiated than did participants eating from normal bowls. Given recent concerns regarding the validity of research from the Wansink lab, we conducted a preregistered direct replication study of Wansink et al.&nbsp;(2005) with a more highly powered sample (N = 464 vs.&nbsp;54 in the original study). We found that most results replicated, albeit with half the effect size (d = 0.45 instead of 0.84), with participants in the self-refilling bowl condition eating significantly more soup than those in the control condition. Like the original study, participants in the selfrefilling condition did not believe they had consumed any more soup than participants in the control condition. These results suggest that eating can be strongly controlled by visual cues, which can even override satiation.</p>
+</blockquote>
+<p>In summary, they replicated an (in)famous experiment that won the Ig-Nobel prize. Participants engaged in a intricate setting (seriously, go and look at the diagrams in the article) where they ate soup from bowls on a table. In the control group, participants could eat as much soup as they wanted and could ask for a top-up from the researchers. In the experimental group, the soup bowls automatically topped up through a series of hidden tubes under the table. The idea behind the control group is they get an accurate visual cue by the soup bowl reducing, and the experimental group get an inaccurate visual cue by the soup bowl seemingly never reducing.</p>
+<p>In the original article, participants in the experimental group ate more soup than participants in the control group, but the main author was involved in a series of research misconduct cases. <span class="citation" data-cites="lopez_visual_2023">Lopez et al. (<a href="references.html#ref-lopez_visual_2023" role="doc-biblioref">2023</a>)</span> wanted to see if the result would replicate in an independent study, so they predicted they would find the same results. In this chapter, we will explore the difference between the control and experimental groups on several variables in their data set.</p>
+</section><section id="organising-your-files-and-project-for-the-chapter" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-chapter">
+<span class="header-section-number">9.1.2</span> Organising your files and project for the chapter</h3>
+<p>Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.</p>
 <ol type="1">
-<li><p>Load the data found in <code>ratings.csv</code> as a tibble into an object called <code>ratings</code>. (e.g.&nbsp;read the csv)</p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> only the relevant variables (<strong>thoughtful</strong>, <strong>competent</strong>, <strong>intelligent</strong>) into a new tibble stored in an objected called something useful (we will call ours <code>iratings</code>), and then calculate a mean <code>Rating</code> for each evaluator (e.g.&nbsp;group_by &amp; summarise).</p></li>
-<li><p>Add on a new column called <code>Category</code> where every entry is the word <code>intellect</code>. This tells us that every number in this tibble is an intellect rating. (e.g.&nbsp;mutate)</p></li>
-<li><p>Now create a new tibble called <code>ratings2</code> and filter into it just the “impression” and “hire” ratings from the original <code>ratings</code> tibble.</p></li>
-<li><p>Next, bind this tibble with the tibble you created in step 3 to bring together the intellect, impression, and hire ratings, in <code>ratings2</code>. (e.g.&nbsp;<code>bind_rows(object1, object2)</code>)</p></li>
-<li><p>Join <code>ratings2</code> with the <code>evaluator</code> tibble that we created in Task 1 (e.g.&nbsp;<code>inner_join()</code>). Keep only the necessary columns as shown above (e.g.&nbsp;<code>select()</code>) and arrange by Evaluator and Category (e.g.&nbsp;<code>arrange()</code>).</p></li>
+<li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, create a new folder called <code>Chapter_09_regression_categorical</code>. Within <code>Chapter_09_regression_categorical</code>, create two new folders called <code>data</code> and <code>figures</code>.</p></li>
+<li><p>Create an R Project for <code>Chapter_09_regression_categorical</code> as an existing directory for your chapter folder. This should now be your working directory.</p></li>
+<li><p>Create a new R Markdown document and give it a sensible title describing the chapter, such as <code>09 t-tests and Regression</code>. Delete everything below line 10 so you have a blank file to work with and save the file in your <code>Chapter_09_regression_categorical</code> folder.</p></li>
+<li><p>We are working with a new data set, so please save the following data file: <a href="data/Lopez_2023.csv">Lopez_2023.csv</a>. Right click the link and select “save link as”, or clicking the link will save the files to your Downloads. Make sure that you save the file as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Chapter_09_regression_categorical</code>.</p></li>
 </ol>
-<div class="webex-solution">
-<button>
-Our approach to this
-</button>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># 1. load in the data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>ratings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"book/ratings.csv"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># 2. first step: pull out the ratings associated with intellect</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>iratings <span class="ot">&lt;-</span> ratings <span class="sc">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="fu">filter</span>(Category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"competent"</span>, <span class="st">"thoughtful"</span>, <span class="st">"intelligent"</span>))</span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># second step: calculate means for each evaluator</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>imeans <span class="ot">&lt;-</span> iratings <span class="sc">%&gt;%</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">group_by</span>(eval_id) <span class="sc">%&gt;%</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">summarise</span>(<span class="at">Rating =</span> <span class="fu">mean</span>(Rating))</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># 3. add Category variable </span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># this way we can combine with 'impression' and 'hire' into a single table, very useful!</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>imeans2 <span class="ot">&lt;-</span> imeans <span class="sc">%&gt;%</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>  <span class="fu">mutate</span>(<span class="at">Category =</span> <span class="st">"intellect"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co"># 4., 5. &amp; 6. combine into a single table</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>ratings2 <span class="ot">&lt;-</span> ratings <span class="sc">%&gt;%</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>  <span class="fu">filter</span>(Category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"impression"</span>, <span class="st">"hire"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>  <span class="fu">bind_rows</span>(imeans2) <span class="sc">%&gt;%</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>  <span class="fu">inner_join</span>(evaluators, <span class="st">"eval_id"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a>  <span class="fu">select</span>(<span class="sc">-</span>age, <span class="sc">-</span>sex) <span class="sc">%&gt;%</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>  <span class="fu">arrange</span>(eval_id, Category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You are now ready to start working on the chapter!</p>
+</section><section id="activity-1---read-and-wrangle-the-data" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="activity-1---read-and-wrangle-the-data">
+<span class="header-section-number">9.1.3</span> Activity 1 - Read and wrangle the data</h3>
+<p>As the first activity, try and test yourself by completing the following task list to practice your data wrangling skills. In this example, there is not loads to do, you just need to tidy up some variables. Create a final object called <code>lopez_clean</code> to be consistent with the tasks below. If you want to focus on t-tests and regression, then you can just type the code in the solution.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
 </div>
 </div>
-<ul>
-<li>Finally, calculate the n, mean and SD for each condition and category to help with reporting the descriptive statistics.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>group_means <span class="ot">&lt;-</span> ratings2 <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">group_by</span>(condition, Category) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">m =</span> <span class="fu">mean</span>(Rating), <span class="at">sd =</span> <span class="fu">sd</span>(Rating))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'condition'. You can override using the
-`.groups` argument.</code></pre>
-</div>
-</div>
-</section></section><section id="visualising-two-groups" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="visualising-two-groups">
-<span class="header-section-number">9.1.2</span> Visualising two groups</h3>
-<p>Brilliant! Now that we have our data in a workable fashion, we are going to start looking at some visualisations and making figures. You should <strong>always</strong> visualise your data before you run a statistical analysis. Visualisations serve as part of the descriptive measures and they help you interpret the results of the test but they also give you an understanding of the spread of your data as part of the test assumptions. For data with a categorical IV, we are going to look at using the violin-boxplots that we saw in the introduction to visualisation chapter. In the past people would have tended to use barplots but as <a href="https://link.springer.com/article/10.3758/s13423-012-0247-5" target="_blank">Newman and Scholl (2012)</a> point out, barplots are misleading to viewers about how the underlying data actually looks. You can read that paper if you like, for more info, but hopefully by the end of this section you will see why violin-boxplots are more informative.</p>
-<section id="ttest-a4" class="level4" data-number="9.1.2.1"><h4 data-number="9.1.2.1" class="anchored" data-anchor-id="ttest-a4">
-<span class="header-section-number">9.1.2.1</span> Activity 4: Visualisation</h4>
-<p>We will visualise the intellect ratings for the listened and the read conditions. The code we will use to create our figure is as follows with the explanation below. Put this code in a new code chunk and run it.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ratings2 <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">filter</span>(Category <span class="sc">==</span> <span class="st">"intellect"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> Rating)) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> condition), <span class="at">width =</span> .<span class="dv">2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>, <span class="at">fun.data =</span> <span class="st">"mean_cl_normal"</span>)  <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Condition"</span>, <span class="at">y =</span> <span class="st">"Rating Score"</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> .<span class="dv">1</span>, <span class="at">width =</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The first part of the code uses a pipe to filter the data to just the intellect rating:</p>
-<ul>
-<li>
-<code>ratings %&gt;% filter(Category == "intellect)</code> is the same as <code>filter(ratings, Category == "intellect")</code>
-</li>
-<li>this code also reflects nicely the difference between pipes (<code>%&gt;%</code>) used in wrangling and the <code>+</code> used in the visualisations with ggplot. Notice that we switch from pipes to plus when we start adding layers to our visualisation.</li>
-</ul>
-<p>The main parts of the code to create the violin-boxplot above are:</p>
-<ul>
-<li>ggplot() which creates our base layer and sets our data and our x and y axes.</li>
-<li>
-<code>geom_violin()</code> which creates the density plot. The reason it is called a violin plot is because if your data are normally distributed it should look something like a violin.<br>
-</li>
-<li>
-<code>geom_boxplot()</code> which creates the boxplot, showing the median and inter-quartile range (see <a href="https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51" target="_blank">here</a> if you would like more information). The boxplot can also give you a good idea if the data are skewed - the median line should be in the middle of the box. The more the median is moved towards one of th extremities of the box, the more your data is likely to be skewed.<br>
-</li>
-<li>
-<code>geom_jitter()</code> can be used to show individual data points in your dataset and you can change the width and height of the jitter. Note that this uses a randomised method to display the points so you will get a different output each time you run it.</li>
-<li>And finally, we will use <code>stat_summary()</code> for displaying the mean and confidence intervals. Within this function, <code>fun.data</code> specifies the a summary function that gives us the summary of the data we want to plot, in this case, <code>mean_cl_normal</code> which will calculate the mean plus the upper and lower confidence interval limits. You could also specify <code>mean_se</code> here if you wanted standard error. Finally, <code>geom</code> specifies what shape or plot we want to use to display the summary, in this case we want a <code>pointrange</code> (literally a point (the mean) with a range (the CI)).</li>
-</ul>
-<p>The figure will look like this:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/plot1a-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Violin-boxplot of the evaluator data</figcaption></figure>
-</div>
-</div>
-</div>
-<p>An alternative version would be this shown below. Perhaps compare the two codes and see if you can see what makes the differences:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>ratings2 <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(Category <span class="sc">==</span> <span class="st">"intellect"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> Rating)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> condition), <span class="at">width =</span> .<span class="dv">2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>, <span class="at">fun.data =</span> <span class="st">"mean_cl_normal"</span>) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Condition"</span>, <span class="at">y =</span> <span class="st">"Rating Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/plot2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Violin-boxplot of the evaluator data</figcaption></figure>
-</div>
-</div>
-</div>
-<p>Try to answer the following question:</p>
-<ul>
-<li>In which condition did the evaluators give the higher ratings overall? <select class="webex-select"><option value="blank"></option>
-<option value="answer">listened</option>
-<option value="">read</option></select>
-</li>
-<li>Would the descriptives (means, sds, figure) be inline with the hypothesis that evaluators favour resumes they have listened to more than resumes they have read? <select class="webex-select"><option value="blank"></option>
-<option value="answer">yes</option>
-<option value="">no</option></select>
-</li>
-</ul>
-<p>Nice and informative figure huh? It gives a good representation of the data in the two conditions, clearly showing the spread and the centre points. If you compare this to Figure 7 in the original paper you see the difference. We actually get much more information with our approach. We even get a sense that maybe the data is questionable on whether it is skewed or not, but more on that below.</p>
-<p>The code is really useful as well so you know it is here if you want to use it again. But maybe have a play with the code to try out things to see what happens. For instance:</p>
-<ul>
-<li>Try setting <code>trim = TRUE</code>, <code>show.legend = FALSE</code>, and/or altering the value of <code>width</code> to see what these arguments do.</li>
-<li>change the <code>Category == "intellect"</code> to <code>Category == "hire"</code> or <code>Category == "impression"</code> to create visualisations of the other conditions.</li>
-</ul></section></section><section id="assumptions" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">9.1.3</span> Assumptions</h3>
-<p>Great. We have visualised our data as well and we have been able to make some descriptive analysis about what is going on. Now we want to get ready to run the actual analysis. But one final thing we are going to decide is which t-test? But hang on you say, didn’t we decide that? We are going to run a between-subjects t-test! Right? Yes! But, and you know what we are about to say, there is more than one between-subjects t-test you can run. The two common ones are:</p>
-<ul>
-<li>Student’s between-subjects t-test</li>
-<li>Welch’s between-subjects t-test</li>
-</ul>
-<p>We are going to recommend that, at least when doing the analysis by code, you should use Welch’s between-subjects t-test for the reasons explained in this paper by <a href="https://www.rips-irsp.com/article/10.5334/irsp.82/" target="_blank">Delarce et al,m (2017)</a> Now you don’t have to read that paper but effectively, the Welch’s between-subjects t-test is better at maintaining the false positive rate of your test (<span class="math inline">\(\alpha\)</span>, usually set at <span class="math inline">\(\alpha\)</span> = .05) at the requested level. So we will show you how to run a Welch’s t-test here.</p>
-<p>The assumptions for a Welch’s between-subjects t-test are:</p>
+<div class="callout-body-container callout-body">
+<p>To wrangle the data, complete the following tasks:</p>
 <ol type="1">
-<li>The data are continuous, i.e.&nbsp;interval/ratio</li>
-<li>The data are independent</li>
-<li>The residuals are normally distributed for each group</li>
-</ol>
-<p>We know that 1 and 2 are true from the design of the experiment, the measures used, and by looking at the data. To test assumption 3, we can create a Q-Q plots of the <strong>residuals</strong>. For a between-subject t-test the residuals are the difference between the mean of each group and each data point. E.g., if the mean of group A is 10 and a participant in group A scores 12, the residual for that participant is 2.</p>
-<ul>
-<li>Thinking back to your lectures, if you ran a Student’s t-test instead of a Welch t-test, what would the 4th assumption be? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Homogeneity of variance</option>
-<option value="">Homoscedascity</option>
-<option value="">Nominal data</option></select>
-</li>
-</ul>
-<section id="ttest-a5" class="level4" data-number="9.1.3.1"><h4 data-number="9.1.3.1" class="anchored" data-anchor-id="ttest-a5">
-<span class="header-section-number">9.1.3.1</span> Activity 5: Assumptions</h4>
-<ul>
-<li>Run the below code to calculate then plot the residuals for the “listened” condition on “intellect” ratings.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>listened_intellect_residuals <span class="ot">&lt;-</span> ratings2 <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">"listened"</span>, Category <span class="sc">==</span> <span class="st">"intellect"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">mutate</span>(<span class="at">group_resid =</span> Rating <span class="sc">-</span> <span class="fu">mean</span>(Rating)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">select</span>(group_resid)</span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">qqPlot</span>(listened_intellect_residuals<span class="sc">$</span>group_resid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Run the below code to calculate then plot the residuals for the “read” condition on “intellect” ratings.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>read_intellect_residuals <span class="ot">&lt;-</span> ratings2 <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">"read"</span>, Category <span class="sc">==</span> <span class="st">"intellect"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate</span>(<span class="at">group_resid =</span> Rating <span class="sc">-</span> <span class="fu">mean</span>(Rating)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">select</span>(group_resid)</span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">qqPlot</span>(read_intellect_residuals<span class="sc">$</span>group_resid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If we then look at our plots we get something that looks like this for the listened condition:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/qqplot3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Residual plots of listened condition. Each circle represents an indivudal rater. If data is normally distributed then it should fall close to or on the diagonal line.</figcaption></figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6 8</code></pre>
-</div>
-</div>
-<p>And something like this for the read condition.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/qqplot4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Residual plots of read intellect condition. Each circle represents an indivudal rater. If data is normally distributed then it should fall close to or on the diagonal line.</figcaption></figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 11 18</code></pre>
-</div>
-</div>
-<p>What you are looking for is for the data to fall close to the diagonal line. Looking at the plots, maybe we could suggest that the “listened” condition is not so great as there is some data points moving away from the line at the far ends. The “read” condition seems a bit better, at least subjectively! There will always be some deviation from the diagonal line but at perhaps most of the data in both plots is relatively close to their respective diagonal lines.</p>
-<p>But in addition to the Q-Q plots we can also run a test on the residuals known as the <strong>Shapiro-Wilk</strong> test. The Shapiro-Wilk’s test has the alternative hypothesis that the data is significantly different from normal. As such, if you find a significant result using the test then the interpretation is that your data is not normal. If you find a non-significant finding then the interpretation is that your data is not significantly different from normal. One technical point is that the test doesn’t actually say your data is normal either but just that it is not significantly different from normal. Again, remember that assumptions have a degree of subjectivity to them. We use the <code>shapiro.wilk()</code> function from the base package to run the Shapiro-Wilk’s test.</p>
-<ul>
-<li>In a new code chunk, run both lines of code below and look at their output.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">shapiro.test</span>(<span class="at">x =</span> listened_intellect_residuals<span class="sc">$</span>group_resid)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">shapiro.test</span>(<span class="at">x =</span> read_intellect_residuals<span class="sc">$</span>group_resid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Try to answer the following questions:</p>
-<ul>
-<li>According to the Shapiro-Wilk’s test, is the data normally distributed for the listened condition? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Yes</option>
-<option value="">No</option></select>
-</li>
-<li>According to the Shapiro-Wilk’s test, is the data normally distributed for the read condition? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Yes</option>
-<option value="">No</option></select>
-</li>
-</ul>
-<p>So as you can see, the p-value for the listened condition is p = .174, and the p-value for the read condition is p = .445. So here we are in an interesting position that often happens. The figures for “listened” is a bit unclear, but the figure for “read” looks ok and both tests show a non-significant difference from normality. What do we do? Well we combine our knowledge of our data to make a reasoned decision. In this situation the majority of our information is pointing to the data being normal. However, there are known issues with the Shapiro-Wilks test when there are small sample sizes so we must always take results like this with some caution. It is never a good idea to run a small sample such as this and so in reality we might want to design a study that has larger sample groups. All that said, here it would not be unreasonable to take the assumption of normality as being held.</p>
-<div class="cell" data-layout-align="center" type="info">
-<div class="info">
-<p>
-For info though, here are some options if you are convinced your data is nor normal.
-</p>
-<ol style="list-style-type: decimal">
 <li>
-Transform your data to try and normalise the distribution. We won’t cover this but if you’d like to know more, <a href="https://www.researchgate.net/profile/Jason_Osborne2/publication/200152356_Notes_on_the_Use_of_Data_Transformations/links/0deec5295f1eb10df8000000.pdf">this page</a> is a good start. Not usually recommended these days but some still use it.
+<p>Load the following packages:</p>
+<ul>
+<li><p><pkg>tidyverse</pkg></p></li>
+<li><p><pkg>effectsize</pkg></p></li>
+<li><p><pkg>performance</pkg></p></li>
+</ul>
 </li>
+<li><p>Read the data file <code>data/Lopez_2023.csv</code> to the object name <code>lopez_data</code>.</p></li>
 <li>
-Use a non-parametric test. The non-parametric equivalent of the independent t-test is the Mann-Whitney and the equivalent of the paired-samples t-test is the Wilcoxon signed-ranks test. Though more modern permutation tests are better. Again we won’t cover these here but useful to know if you read them in a paper.
-</li>
-<li>
-Do nothing. <a href="https://www.rips-irsp.com/articles/10.5334/irsp.82/">Delacre, Lakens &amp; Leys, 2017</a> argue that with a large enough sample (&gt;30), the Welch test is robust to deviations from assumptions. With very large samples normality is even less of an issue, so design studies with large samples.
+<p>Create a new object called <code>lopez_clean</code> based on <code>lopez_data</code>:</p>
+<ul>
+<li><p>Modify the variable <code>Condition</code> to turn it into a factor.</p></li>
+<li><p>Create a new variable called <code>Condition_label</code> by recoding <code>Condition</code>. “0” is the “Control” group and “1” is the “Experimental” group.</p></li>
+</ul>
 </li>
 </ol>
-</div>
-</div>
-</section></section><section id="inferential-analysis" class="level3" data-number="9.1.4"><h3 data-number="9.1.4" class="anchored" data-anchor-id="inferential-analysis">
-<span class="header-section-number">9.1.4</span> Inferential analysis</h3>
-<p>Now that we have checked our assumptions and our data seems to fit our Welch’s t-test we can go ahead and run the test. We are going to conduct t-tests for the Intellect, Hire and Impression ratings separately; each time comparing evaluators’ overall ratings for the listened group versus overall ratings for the read group to see if there was a significant difference between the two conditions: i.e.&nbsp;did the evaluators who <strong>listened</strong> to pitches give a significant higher or lower rating than evaluators that <strong>read</strong> pitches.</p>
-<section id="ttest-a6" class="level4" data-number="9.1.4.1"><h4 data-number="9.1.4.1" class="anchored" data-anchor-id="ttest-a6">
-<span class="header-section-number">9.1.4.1</span> Activity 6: Running the t-test</h4>
-<ul>
-<li>First, create separate objects for the intellect, hire, and impression data using <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>. We have completed intellect object for you so you should replace the NULLs in the below code to create one for <code>hire</code> and <code>impression</code>.</li>
-</ul>
+<p>Your data should look like this to be ready to analyse:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>intellect <span class="ot">&lt;-</span> <span class="fu">filter</span>(ratings2, Category <span class="sc">==</span> <span class="st">"intellect"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a>hire <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>impression <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 464
+Columns: 10
+$ ParticipantID      &lt;dbl&gt; 1002, 1004, 1007, 1016, 1018, 1021, 1022, 1024, 102…
+$ Sex                &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, …
+$ Age                &lt;dbl&gt; 18, 19, 19, 21, 20, 20, 21, 21, 19, 20, 21, 20, 21,…
+$ Ethnicity          &lt;dbl&gt; 7, 3, 3, 4, 1, 3, 1, 6, 4, 7, 1, 3, 3, 4, 7, 2, 3, …
+$ OzEstimate         &lt;dbl&gt; 3.0, 2.0, 1.0, 3.0, 5.0, 1.0, 1.0, 3.0, 4.0, 1.0, 4…
+$ CalEstimate        &lt;dbl&gt; 65, 10, 20, 25, 50, 5, 20, 180, 470, 50, 130, 100, …
+$ M_postsoup         &lt;dbl&gt; 3.3, 3.1, 43.4, 5.5, 6.0, 0.8, 3.8, 4.5, 7.9, 8.1, …
+$ F_CaloriesConsumed &lt;dbl&gt; 73.19441, 68.75839, 962.61743, 121.99069, 133.08075…
+$ Condition          &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ Condition_label    &lt;chr&gt; "Control", "Control", "Control", "Control", "Contro…</code></pre>
 </div>
-<p>And we are finally ready to run the t-test. It is funny right, as you may have realised by now, most of the work in analysis involves the set-up and getting the data ready, running the tests is generally just one more function. To conduct the t-test we will use <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function from <code>base</code> which takes the following format called the <strong>formula syntax</strong>:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">t.test</span>(DV_column_name <span class="sc">~</span> IV_column_name, </span>
-<span id="cb13-2"><a href="#cb13-2"></a>       <span class="at">paired =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb13-3"><a href="#cb13-3"></a>       <span class="at">data =</span> my_object)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ul>
-<li>
-<code>~</code> is called a tilde. It can be read as ‘by’ as in “analyse the DV by the IV”.<br>
-</li>
-<li>The variable on the left of the tilde is the dependent or outcome variable, <code>DV_column_name</code>.</li>
-<li>The variable(s) on the right of the tilde is the independent or predictor variable, <code>IV_column_name</code>.<br>
-</li>
-<li>and <code>paired = FALSE</code> indicates that we do not want to run a paired-samples test and that our data is from a between-subjects design.</li>
-</ul>
-<p>So let’s run our first test:</p>
-<ul>
-<li>In a new code chunk, type and run the below code, and thenview the output by typing <code>intellect_t</code> in the console.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>intellect_t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(Rating <span class="sc">~</span> condition, </span>
-<span id="cb14-2"><a href="#cb14-2"></a>                      <span class="at">paired =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb14-3"><a href="#cb14-3"></a>                      <span class="at">data =</span> intellect,</span>
-<span id="cb14-4"><a href="#cb14-4"></a>                      <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Similar to when we used <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code> for correlations, the output of <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> is a list type object which can make it harder to work with. This time, we are going to show you how to use the function <code>tidy()</code> from the <code>broom</code> package to convert the output to a tidyverse format.</p>
-<ul>
-<li>Run the below code. You can read it as “take what is in the object <code>intellect_t</code> and try to tidy it into a tibble”.<br>
-</li>
-<li>View the object by clicking on <code>results_intellect</code> in the environment.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>results_intellect <span class="ot">&lt;-</span> intellect_t <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>As you will see, <code>results_intellect</code> is now in a nice tibble format that makes it easy to extract individual values. It is worth looking at the values with the below explanations:</p>
-<ul>
-<li>
-<code>estimate</code> is the difference between the two means (alphabetically entered as mean 1 minus mean 2)</li>
-<li>
-<code>estimate1</code> is the mean of group 1</li>
-<li>
-<code>estimate2</code> is the mean of group 2<br>
-</li>
-<li>
-<code>statistic</code> is the t-statistic<br>
-</li>
-<li>
-<code>p.value</code> is the p-value<br>
-</li>
-<li>
-<code>parameter</code> is the degrees of freedom<br>
-</li>
-<li>
-<code>con.low</code> and <code>conf.high</code> are the confidence interval of the <code>estimate</code>
-</li>
-<li>
-<code>method</code> is the type of test, Welch’s, Student’s, paired, or one-sample</li>
-<li>
-<code>alternative</code> is whether the test was one or two-tailed</li>
-</ul>
-<p>And now that we know how to run the test and tidy it, try the below:</p>
-<ul>
-<li>Complete the code below in a new code chunk by replacing the NULLs to run the t-tests for the hire and impression ratings, don’t tidy them yet.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>hire_t <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>impression_t <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<ul>
-<li>And now tidy the data into the respective objects - <code>hire_t</code> into <code>results_hire</code>, etc.</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>results_hire <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>results_impression <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-title-container flex-fill">
+Show me the solution
 </div>
-<p>Be sure to look at each of your tests and see what the outcome of each was. To make that easier, we are going join all the results of the t-tests together using <code>bind_rows()</code> - which we can do because all the tibbles have the same column names after we passed them through <code>tidy()</code>.</p>
-<ul>
-<li>Copy and run the below code. First, it specifies all of the individual tibbles you want to join and gives them a label (hire, impression, intellect), and then you specify what the ID column should be named (test).</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="at">hire =</span> results_hire, </span>
-<span id="cb18-2"><a href="#cb18-2"></a>                     <span class="at">impression =</span> results_impression, </span>
-<span id="cb18-3"><a href="#cb18-3"></a>                     <span class="at">intellect =</span> results_intellect, </span>
-<span id="cb18-4"><a href="#cb18-4"></a>                     <span class="at">.id =</span> <span class="st">"test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<p>Which produces the below:</p>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You should have the following in a code chunk:</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># load the relevant packages</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(performance)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Read the Lopez_2023.csv file </span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>lopez_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Lopez_2023.csv"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># turn condition into a factor and recode</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>lopez_clean <span class="ot">&lt;-</span> lopez_data <span class="sc">%&gt;%</span> </span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">mutate</span>(<span class="at">Condition =</span> <span class="fu">as.factor</span>(Condition),</span>
+<span id="cb2-12"><a href="#cb2-12"></a>         <span class="at">Condition_label =</span> <span class="fu">case_match</span>(Condition,</span>
+<span id="cb2-13"><a href="#cb2-13"></a>                                      <span class="st">"0"</span> <span class="sc">~</span> <span class="st">"Control"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>                                      <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Experimental"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="09-explore" class="level3" data-number="9.1.4"><h3 data-number="9.1.4" class="anchored" data-anchor-id="09-explore">
+<span class="header-section-number">9.1.4</span> Activity 2 - Explore the data</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After the wrangling steps, try and explore <code>lopez_clean</code> to see what variables you are working with. For example, opening the data object as a tab to scroll around, explore with <code>glimpse()</code>, or try plotting some of the individual variables.</p>
+</div>
+</div>
+<p>In <code>lopez_clean</code>, we have the following variables:</p>
+<table class="table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 18%">
-<col style="width: 9%">
+<col style="width: 19%">
+<col style="width: 41%">
+<col style="width: 39%">
 </colgroup>
 <thead><tr class="header">
-<th style="text-align: center;">test</th>
-<th style="text-align: center;">estimate</th>
-<th style="text-align: center;">estimate1</th>
-<th style="text-align: center;">estimate2</th>
-<th style="text-align: center;">statistic</th>
-<th style="text-align: center;">p.value</th>
-<th style="text-align: center;">parameter</th>
-<th style="text-align: center;">conf.low</th>
-<th style="text-align: center;">conf.high</th>
-<th style="text-align: center;">method</th>
-<th style="text-align: center;">alternative</th>
+<th style="text-align: center;">Variable</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">hire</td>
-<td style="text-align: center;">1.825397</td>
-<td style="text-align: center;">4.714286</td>
-<td style="text-align: center;">2.888889</td>
-<td style="text-align: center;">2.639949</td>
-<td style="text-align: center;">0.0120842</td>
-<td style="text-align: center;">36.85591</td>
-<td style="text-align: center;">0.4241979</td>
-<td style="text-align: center;">3.226596</td>
-<td style="text-align: center;">Welch Two Sample t-test</td>
-<td style="text-align: center;">two.sided</td>
+<td style="text-align: center;">ParticipantID</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Participant ID number.</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">impression</td>
-<td style="text-align: center;">1.894333</td>
-<td style="text-align: center;">5.968333</td>
-<td style="text-align: center;">4.074000</td>
-<td style="text-align: center;">2.817175</td>
-<td style="text-align: center;">0.0080329</td>
-<td style="text-align: center;">33.80061</td>
-<td style="text-align: center;">0.5275086</td>
-<td style="text-align: center;">3.261158</td>
-<td style="text-align: center;">Welch Two Sample t-test</td>
-<td style="text-align: center;">two.sided</td>
+<td style="text-align: center;">Sex</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Participant sex.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">intellect</td>
-<td style="text-align: center;">1.986722</td>
-<td style="text-align: center;">5.635000</td>
-<td style="text-align: center;">3.648278</td>
-<td style="text-align: center;">3.478555</td>
-<td style="text-align: center;">0.0014210</td>
-<td style="text-align: center;">33.43481</td>
-<td style="text-align: center;">0.8253146</td>
-<td style="text-align: center;">3.148130</td>
-<td style="text-align: center;">Welch Two Sample t-test</td>
-<td style="text-align: center;">two.sided</td>
+<td style="text-align: center;">Age</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Participant age in years.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Ethnicity</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Participant ethnicity.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">OzEstimate</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Estimated soup consumption in ounces (Oz).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">CalEstimate</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Estimated soup consumption in calories (kcals).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">M_postsoup</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Actual soup consumption in ounces (Oz).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F_CaloriesConsumed</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Actual soup consumption in calories (kcals).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Condition</td>
+<td style="text-align: left;">integer</td>
+<td style="text-align: left;">Condition labelled numerically as 0 (Control) and 1 (Experimental).</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Condition_label</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Condition as a direct label: Control and Experimental.</td>
 </tr>
 </tbody>
 </table>
+<p>We will use this data set to demonstrate t-tests and regression when you have one categorical predictor.</p>
+</section></section><section id="comparing-differences-using-the-t-test" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="comparing-differences-using-the-t-test">
+<span class="header-section-number">9.2</span> Comparing differences using the t-test</h2>
+<p>Like correlations are a specific application of the general linear model for the relationship between two continuous variables, t-tests are a specific application for the difference between two groups. Before we demonstrate how you can express this kind of design as a regression model, we cover t-tests so you know how to calculate and interpret them when you come across them in your research.</p>
+<section id="activity-3---visualising-the-difference" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="activity-3---visualising-the-difference">
+<span class="header-section-number">9.2.1</span> Activity 3 - Visualising the difference</h3>
+<p>To visualise the difference between two groups, it is useful to create something like a boxplot early for yourself, then provide a more professional looking violin-boxplot to help communicate your results. For most of the demonstrations in this chapter, we will try and answer the research question: “Is there a difference in actual calories consumed between the control and experimental groups?”</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
 </div>
 </div>
-<p>And looking along the line at the p-values we might have some significant differences. However, we have to remember to consider multiple comparisons.</p>
-</section><section id="ttest-a7" class="level4" data-number="9.1.4.2"><h4 data-number="9.1.4.2" class="anchored" data-anchor-id="ttest-a7">
-<span class="header-section-number">9.1.4.2</span> Activity 7: Correcting for multiple comparisons</h4>
-<p>Because we have run three t-tests, we are actually increasing our false positive rate due to what is called familywise error - essentially, instead of a false positive rate of .05, we would have a false positive rate of 1-(1-.05)^3 = 0.142625, where the “3” in the formula is the number of tests we ran. To correct for this we can apply the multiple comparison correction just like we did with correlations when we ran a lot of correlations. So, we’re going to add on a column to our <code>results</code> tibble that shows the adjusted p-values using <code>p.adj()</code> and <code>mutate()</code>.</p>
-<ul>
-<li>Type and run the below code in a new code chunk and have a look at the output.
-<ul>
-<li>inside the <code><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust()</a></code>, <code>p.value</code> says what column the p-values are in, and <code>bonferroni</code> says what adjustment to use.</li>
-</ul>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>results_adj <span class="ot">&lt;-</span> results <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">mutate</span>(<span class="at">p.adjusted =</span> <span class="fu">p.adjust</span>(<span class="at">p =</span> p.value, </span>
-<span id="cb19-3"><a href="#cb19-3"></a>                               <span class="at">method =</span> <span class="st">"bonferroni"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Looking at the adjusted p-values, try to answer the following questions:</p>
-<ul>
-<li>Listened is significantly more preferred in the <code>hire</code> condition after adjusting for multiple comparisons? <select class="webex-select"><option value="blank"></option>
-<option value="answer">TRUE</option>
-<option value="">FALSE</option></select>
-</li>
-<li>Listened is significantly more preferred in the <code>impression</code> condition after adjusting for multiple comparisons? <select class="webex-select"><option value="blank"></option>
-<option value="answer">TRUE</option>
-<option value="">FALSE</option></select>
-</li>
-<li>Listened is significantly more preferred in the <code>intellect</code> condition after adjusting for multiple comparisons? <select class="webex-select"><option value="blank"></option>
-<option value="answer">TRUE</option>
-<option value="">FALSE</option></select>
-</li>
-</ul></section></section><section id="effect-size" class="level3" data-number="9.1.5"><h3 data-number="9.1.5" class="anchored" data-anchor-id="effect-size">
-<span class="header-section-number">9.1.5</span> Effect Size</h3>
-<p>As you can see, even after correcting for multiple comparisons, our effects are still significant and we have maintained our false positive rate. But one more thing we can add is the effect size. Remember that some effects are significant and large, some are significant and medium, and some are significant and small. The effect size tells us the magnitude of the effect size in a way we can compare across studies - it is said to be a standardised - and the common effect size for a t-test is called Cohen’s D.</p>
-<section id="ttest-a8" class="level4" data-number="9.1.5.1"><h4 data-number="9.1.5.1" class="anchored" data-anchor-id="ttest-a8">
-<span class="header-section-number">9.1.5.1</span> Activity 8: Effect size</h4>
-<p>Whilst Cohen’s D is relatively straightforward by hand, here we will use the function <code>cohens_d()</code> from the <code>effectsize</code> package. The code is similar to the syntax for <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>.</p>
-<ul>
-<li>The code to run the Cohen’s D for intellect has been completed below.
-<ul>
-<li>The first argument should specify the formula, using the same syntax as <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>, that is <code>dv ~ iv</code>.</li>
-<li>
-<code>pooled_sd</code> should be <code>FALSE</code> if you ran a Welch test where the variances are not assumed to be equal and <code>TRUE</code> if you ran a regular Student’s t-test.</li>
-</ul>
-</li>
-<li>Run and complete the code below by replacing the NULLs to calculate the effect sizes for hire and impression</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>intellect_d <span class="ot">&lt;-</span> <span class="fu">cohens_d</span>(Rating <span class="sc">~</span> condition, </span>
-<span id="cb20-2"><a href="#cb20-2"></a>                      <span class="at">pooled_sd =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb20-3"><a href="#cb20-3"></a>                      <span class="at">data =</span> intellect)</span>
-<span id="cb20-4"><a href="#cb20-4"></a>hire_d <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>impression_d <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="interpretation" class="level3" data-number="9.1.6"><h3 data-number="9.1.6" class="anchored" data-anchor-id="interpretation">
-<span class="header-section-number">9.1.6</span> Interpretation</h3>
-<p>Great Work! But let’s take a second to recap on our understanding of the data.</p>
-<section id="ttest-a9" class="level4" data-number="9.1.6.1"><h4 data-number="9.1.6.1" class="anchored" data-anchor-id="ttest-a9">
-<span class="header-section-number">9.1.6.1</span> Activity 9: Interpreting the results</h4>
-<ul>
-<li>
-<p>Were your results for <code>hire</code> significant? Enter the mean estimates and t-test results (means and t-value to 2 decimal places, p-value to 3 decimal places). Use the adjusted p-values:</p>
-<ul>
-<li><p>Mean <code>estimate1</code> (listened condition) = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;4.71&quot;]"></p></li>
-<li><p>Mean <code>estimate2</code> (read condition) = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;2.89&quot;]"></p></li>
-<li><p>t(<input class="webex-solveme nospaces" size="5" data-answer="[&quot;36.86&quot;]">) = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;2.64&quot;]">, p = <input class="webex-solveme nospaces" size="5" data-answer="[&quot;0.036&quot;,&quot;.036&quot;]"></p></li>
-</ul>
-</li>
-<li>
-<p>Were your results for <code>impression</code> significant? Enter the mean estimates and t-test results (means and t-value to 2 decimal places, p-value to 3 decimal places):</p>
-<ul>
-<li><p>Mean<code>estimate1</code> (listened condition) = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;5.97&quot;]"></p></li>
-<li><p>Mean <code>estimate2</code> (read condition) = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;4.07&quot;]"></p></li>
-<li><p>t(<input class="webex-solveme nospaces" size="5" data-answer="[&quot;33.80&quot;,&quot;33.8&quot;]">) = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;2.82&quot;]">, p = <input class="webex-solveme nospaces" size="5" data-answer="[&quot;0.024&quot;,&quot;.024&quot;]"></p></li>
-</ul>
-</li>
-<li><p>According to Cohen’s (1988) guidelines, the effect sizes for all three tests are <select class="webex-select"><option value="blank"></option>
-<option value="">Small</option>
-<option value="">Medium</option>
-<option value="answer">Large</option></select></p></li>
-</ul></section></section><section id="write-up" class="level3" data-number="9.1.7"><h3 data-number="9.1.7" class="anchored" data-anchor-id="write-up">
-<span class="header-section-number">9.1.7</span> Write-Up</h3>
-<p>And then finally on the between-subjects t-test, we should look at the write up.</p>
-<section id="ttest-a10" class="level4" data-number="9.1.7.1"><h4 data-number="9.1.7.1" class="anchored" data-anchor-id="ttest-a10">
-<span class="header-section-number">9.1.7.1</span> Activity 10: Write-up</h4>
-<p>If you refer back to the original paper on pg 887, you can see, for example, that the authors wrote:</p>
-<p><strong>In particular, the recruiters believed that the job candidates had greater intellect—were more competent, thoughtful, and intelligent—when they listened to pitches (M = 5.63, SD = 1.61) than when they read pitches (M = 3.65, SD = 1.91), t(37) = 3.53, p &lt; .01, 95% CI of the difference = [0.85, 3.13], d = 1.16.</strong></p>
-<p>If we were to compare our findings, we would have something like the below:</p>
-<p><strong>A bonferroni-corrected Welch t-test found that recruiters rated job candidates as more intellectual when they listened to resumes (M = 5.64, SD = 1.61) than when they read resumes (M = 3.65, SD = 1.91), t(33.43) = 3.48, p = 0.004, 95% CI of the difference = [0.83, 3.15], d = 1.12.</strong></p>
-<p>You can create this same paragraph, using code, by copying and pasting the below <strong>exactly</strong> into <strong>white space</strong> in your R Markdown document and then knitting the file.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>A bonferroni<span class="sc">-</span>corrected Welch t<span class="sc">-</span>test found that recruiters rated job candidates as more intellectual when they listened to <span class="fu">resumes</span> (<span class="at">M =</span> <span class="st">`</span><span class="at">r results_intellect$estimate1%&gt;% round(2)</span><span class="st">`</span>, <span class="at">SD =</span> <span class="st">`</span><span class="at">r round(group_means$sd[3], 2)</span><span class="st">`</span>) than when they read <span class="fu">resumes</span> (<span class="at">M =</span> <span class="st">`</span><span class="at">r results_intellect$estimate2%&gt;% round(2)</span><span class="st">`</span>, <span class="at">SD =</span> <span class="st">`</span><span class="at">r round(group_means$sd[6], 2)</span><span class="st">`</span>), <span class="fu">t</span>(<span class="st">`</span><span class="at">r round(results_intellect$parameter, 2)</span><span class="st">`</span>) <span class="ot">=</span> <span class="st">`</span><span class="at">r round(results_adj$statistic[3],2)</span><span class="st">`</span>, p <span class="ot">=</span> <span class="st">`</span><span class="at">r results_adj$p.adjusted[3] %&gt;% round(3)</span><span class="st">`</span>, <span class="dv">95</span>% CI of the difference <span class="ot">=</span> [<span class="st">`</span><span class="at">r round(results_intellect$conf.low, 2)</span><span class="st">`</span>, <span class="st">`</span><span class="at">r round(results_intellect$conf.high, 2)</span><span class="st">`</span>], d <span class="ot">=</span> <span class="st">`</span><span class="at">r round(intellect_d$Cohens_d,2)</span><span class="st">`</span>. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Note that we haven’t replicated the analysis exactly - the authors of this paper conducted Student’s t-test whilst we have conducted Welch tests and we’ve also applied a multiple comparison correction. But you can look at the two examples and see the difference. It would also be worthwhile trying your own write-up of the two remaining conditions before moving on to within-subjects t-tests.</p>
-</section></section></section><section id="within-subjects-paired-samples" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="within-subjects-paired-samples">
-<span class="header-section-number">9.2</span> Within-subjects (paired-samples)</h2>
-<p>For the final activity we will run a paired-samples t-test for a within-subject design but we will go through this one more quickly and just point out the differences to the above. For this example we will again draw from the <a href="https://sites.trinity.edu/osl/data-sets-and-activities/t-test-activities">Open Stats Lab</a> and look at data from the data in <a href="https://journals.sagepub.com/stoken/default+domain/d5HcBHg85XamSXGdYqYN/full">Mehr, S. A., Song. L. A., &amp; Spelke, E. S. (2016). For 5-month-old infants, melodies are social. Psychological Science, 27, 486-501.</a>{target = “_blank”}.</p>
-<p>The premis of the paper is that parents often sing to their children and, even as infants, children listen to and look at their parents while they are sung to. The authors sought to explore the psychological function that music has for parents and infants, by examining the research question that particular melodies may convey important social information to infants. More specifically, that common knowledge of songs and melodies convey information about social affiliation. The authors argue that melodies are shared within social groups. Whereas children growing up in one culture may be exposed to certain songs as infants (e.g., “Rock-a-bye Baby”), children growing up in other cultures (or even other groups within a culture) may be exposed to different songs. Thus, when a novel person (someone who the infant has never seen before) sings a familiar song, it may signal to the infant that this new person is a member of their social group.</p>
-<p>To test this the researchers recruited 32 infants and their parents to take part in the following experiment. During their first visit to the lab, the parents were taught a new lullaby (one that neither they nor their infants had heard before). The experimenters asked the parents to sing the new lullaby to their child every day for the next 1-2 weeks. Following this 1-2 week exposure period, the parents and their infant returned to the lab to complete the experimental portion of the study. Infants were first shown a screen with side-by-side videos of two unfamiliar people, each of whom were silently smiling and looking at the infant. The researchers recorded the looking behaviour (or gaze) of the infants during this ‘baseline’ phase. Next, one by one, the two unfamiliar people on the screen sang either the lullaby that the parents learned or a different lullaby (that had the same lyrics and rhythm, but a different melody). Finally, the infants saw the same silent video used at baseline, and the researchers again recorded the looking behaviour of the infants during this ‘test’ phase. For more details on the experiment’s methods, please refer to Mehr et al.&nbsp;(2016) Experiment 1.</p>
-<section id="the-data" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="the-data">
-<span class="header-section-number">9.2.1</span> The Data</h3>
-<section id="ttest-a11" class="level4" data-number="9.2.1.1"><h4 data-number="9.2.1.1" class="anchored" data-anchor-id="ttest-a11">
-<span class="header-section-number">9.2.1.1</span> Activity 11: Getting the data ready</h4>
-<ul>
-<li>First, download <a href="Mehr Song and Spelke 2016 Experiment 1.csv" download="">Mehr Song and Spelke 2016 Experiment 1.csv</a> by clicking on the link and putting it into your working directory.
-<ul>
-<li>again if easier you can download the data as <a href="data/chpt10/PsyTeachR_FQA_Chpt10-data-between.zip">a zip file by clicking this link</a>.</li>
-</ul>
-</li>
-<li>Next, type and run the below code in a new code chunk. The code loads in the data and then does some wrangling to get the data into a working format:
-<ul>
-<li>it filters so we just have the first experiment from the paper</li>
-<li>selects the id and the preferential looking time of babies at the baseline stage and at the test stage.</li>
-<li>finally it renames the two preferential looking time columns to have names that are easier to work with using the <code>rename()</code> function.</li>
-</ul>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>gaze <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Mehr Song and Spelke 2016 Experiment 1.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">filter</span>(exp1 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">select</span>(id,</span>
-<span id="cb22-4"><a href="#cb22-4"></a>         Baseline_Proportion_Gaze_to_Singer,</span>
-<span id="cb22-5"><a href="#cb22-5"></a>         Test_Proportion_Gaze_to_Singer) <span class="sc">%&gt;%</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">rename</span>(<span class="at">baseline =</span> Baseline_Proportion_Gaze_to_Singer,</span>
-<span id="cb22-7"><a href="#cb22-7"></a>         <span class="at">test =</span> Test_Proportion_Gaze_to_Singer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="assumptions-1" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="assumptions-1">
-<span class="header-section-number">9.2.2</span> Assumptions</h3>
-<p>So now that we have our data ready to work with, and be sure to look at it to get an understanding of the data, we want to consider the assumptions of the within-subjects t-test.</p>
-<p>The assumptions for this t-test are a little different (although very similar) to the between-subjects t-tests above. They are</p>
-<ol type="1">
-<li>The data is continuous, i.e.&nbsp;interval/ratio</li>
-<li>All participants should appear in both conditions/groups.</li>
-<li>The residuals are normally distributed.</li>
-</ol>
-<p>Aside from the data being paired rather than independent, i.e.&nbsp;it is the same participants in two conditions, rather than two groups of people in different conditions, the key difference is that for the within-subjects test, the data is actually determined as the difference between the scores in the two conditions for each participant. So for example, say participant one scores 10 in condition 1 and 7 in condition 2, then there data is actually 3, and you do that for all participants. So it isn’t looking at what they scored in either condition by itself, but what was the difference between conditions. And it is that data that must be continuous and that the residuals must be normally distributed for.</p>
-<section id="ttest-a12" class="level4" data-number="9.2.2.1"><h4 data-number="9.2.2.1" class="anchored" data-anchor-id="ttest-a12">
-<span class="header-section-number">9.2.2.1</span> Activity 12: Assumptions</h4>
-<ul>
-<li>Type and run the below code to first calculate the difference scores (<code>diff</code>) and then the residuals (<code>group_resid</code>).</li>
-<li>next it plots the Q-Q plot of the residuals before carrying out a Shapiro-Wilk’s test on the residuals</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>gaze_residual <span class="ot">&lt;-</span> gaze <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> baseline <span class="sc">-</span> test) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">mutate</span>(<span class="at">group_resid =</span> diff <span class="sc">-</span> <span class="fu">mean</span>(diff))</span>
-<span id="cb23-4"><a href="#cb23-4"></a></span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="fu">qqPlot</span>(gaze_residual<span class="sc">$</span>group_resid)</span>
-<span id="cb23-6"><a href="#cb23-6"></a></span>
-<span id="cb23-7"><a href="#cb23-7"></a><span class="fu">shapiro.test</span>(gaze_residual<span class="sc">$</span>group_resid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And if we look at the plot we see:</p>
+<div class="callout-body-container callout-body">
+<p>Using your data visualisation skills from Chapter 7, recreate the scatterplot below using the variables <code>F_CaloriesConsumed</code> and <code>Condition_label</code> from <code>lopez_clean</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 22 29</code></pre>
+</div>
+<p>Looking at the graph, the <select class="webex-select"><option value="blank"></option>
+<option value="">Control</option>
+<option value="answer">Experimental</option></select> group consumed more calories on average.</p>
 </div>
 </div>
-<p>and the Shapiro-Wilk’s suggests:</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The violin-boxplot shows the experimental group who had the biased visual cues consumed more soup in calories than the control group who had the accurate visual cues.</p>
+<p>You should have the following in a code chunk:</p>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> F_CaloriesConsumed, <span class="at">x =</span> Condition_label, <span class="at">fill =</span> Condition_label)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>, </span>
+<span id="cb3-5"><a href="#cb3-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7"></a>               <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_cl_boot"</span>, <span class="co"># confidence interval</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>               <span class="at">geom =</span> <span class="st">"errorbar"</span>, </span>
+<span id="cb3-10"><a href="#cb3-10"></a>               <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span> </span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Actual Calories Consumed (kcals)"</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Study Condition"</span>) <span class="sc">+</span> </span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="activity-4---using-the-t.test-function" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="activity-4---using-the-t.test-function">
+<span class="header-section-number">9.2.2</span> Activity 4 - Using the <code>t.test()</code> function</h3>
+<p>A t-test is a specific application of the general linear model. In this test, we express the difference in an outcome between two groups as a kind of standardised mean difference. If you are interested, see the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/between-subjects-students-t-test.html" target="_blank">McAleer, 2023</a>) for the calculations behind the Student and Welch t-test. Conceptually, a t-test is the difference between two groups divided by the variability of the difference. There are two main versions of a t-test:</p>
+<ul>
+<li><p><a class="glossary" title="">Student t-test</a></p></li>
+<li><p><a class="glossary" title="">Welch t-test</a></p></li>
+</ul>
+<p>There is a function built into R to calculate the t-test: <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>. The function requires:</p>
+<ul>
+<li><p>Blah.</p></li>
+<li><p>Blah.</p></li>
+</ul>
+<p>For our <code>lopez_clean</code> data, we would run the following code for a two-tailed Welch t-test:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">t.test</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, </span>
+<span id="cb4-2"><a href="#cb4-2"></a>       <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Shapiro-Wilk normality test
+    Welch Two Sample t-test
 
-data:  gaze_residual$group_resid
-W = 0.97818, p-value = 0.7451</code></pre>
+data:  F_CaloriesConsumed by Condition
+t = -4.8578, df = 453.45, p-value = 1.638e-06
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -88.55610 -37.54289
+sample estimates:
+mean in group 0 mean in group 1 
+       196.6818        259.7313 </code></pre>
 </div>
 </div>
-<p>Now as we saw above, with the Q-Q plot we want the data to fall approximately on the diagonal line, and with the Shapiro-Wilks test we are looking for a non-significant finding. Based on those two tests, we can therefor say that our data meets the assumption of normality and so we can proceed.</p>
-</section></section><section id="descriptives" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="descriptives">
-<span class="header-section-number">9.2.3</span> Descriptives</h3>
-<p>Now we are going to look at some descriptives. It made sense to keep the data in wide-form until this point to make it easy to calculate a column for the difference score, but now we will transform it to tidy data so that we can easily create descriptives and plot the data using <code>tidyverse</code> tools.</p>
-<section id="ttest-a13" class="level4" data-number="9.2.3.1"><h4 data-number="9.2.3.1" class="anchored" data-anchor-id="ttest-a13">
-<span class="header-section-number">9.2.3.1</span> Activity 13: Descriptives and visualisations</h4>
+<p>For the three key concepts of inferential statistics, we get</p>
 <ul>
-<li>Type and run the below code to gather the data using pivot_longer().</li>
-<li>Next create a violin-boxplot of the data using your knowledge (and code) from Activity 4 above.</li>
-<li>Finally, create a descriptives table that contains the n, the mean, and the standard deviation of each condition.
-<ul>
-<li>If you prefer, you could actually work on the difference scores instead of the two different conditions. Whilst we analyse the difference, people plot either the difference or the two conditions as descriptives.</li>
+<li><p><strong>Hypothesis testing</strong>: X</p></li>
+<li><p><strong>Effect size</strong>: X</p></li>
+<li><p><strong>Confidence interval</strong>: [-0.75, -0.64], X</p></li>
 </ul>
-</li>
-</ul>
+<p>To summarise: X</p>
+<p>When you have statistics software like R to do the heavy lifting for you, there is not really a scenario where you would use the Student t-test anymore, but if you did, you can use the <code>var.equal</code> argument to say you assume there are equal variances in each group:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>gaze_tidy <span class="ot">&lt;-</span> gaze <span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"time"</span>, </span>
-<span id="cb26-3"><a href="#cb26-3"></a>               <span class="at">values_to =</span> <span class="st">"looking"</span>, </span>
-<span id="cb26-4"><a href="#cb26-4"></a>               <span class="at">cols =</span> <span class="fu">c</span>(baseline, test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">t.test</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, </span>
+<span id="cb6-2"><a href="#cb6-2"></a>       <span class="at">data =</span> lopez_clean, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  F_CaloriesConsumed by Condition
+t = -4.8625, df = 462, p-value = 1.591e-06
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -88.52983 -37.56915
+sample estimates:
+mean in group 0 mean in group 1 
+       196.6818        259.7313 </code></pre>
 </div>
-<p>If you have done this step correctly, you should see a plot that looks like this:</p>
+</div>
+</section><section id="activity-5---calculating-cohens-d" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="activity-5---calculating-cohens-d">
+<span class="header-section-number">9.2.3</span> Activity 5 - Calculating Cohen’s d</h3>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">cohens_d</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Preferential Looking time for infants at baseline stage (left) and test stage (right).</figcaption></figure>
-</div>
-</div>
-</div>
-<p>And the descriptives:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
+<div class="kable-table">
 <table class="table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: left;">time</th>
-<th style="text-align: right;">n</th>
-<th style="text-align: right;">mean_looking</th>
-<th style="text-align: right;">sd_looking</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">baseline</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">0.5210967</td>
-<td style="text-align: right;">0.1769651</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">test</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">0.5934912</td>
-<td style="text-align: right;">0.1786884</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Again you could look at the differences and if you know how you could plot the confidence interval of the difference, but it is not essential here. But looking at what you have done it would be worth spending a few minutes to try and predict the outcome of the t-test if the null hypothesis is that there is no difference in preferential looking time in babies between the baseline and test conditions.</p>
-</section></section><section id="inferential-analysis-1" class="level3" data-number="9.2.4"><h3 data-number="9.2.4" class="anchored" data-anchor-id="inferential-analysis-1">
-<span class="header-section-number">9.2.4</span> Inferential Analysis</h3>
-<p>Which brings us on to running the t-test and the effect size. The code is almost identical to the independent code with two differences:</p>
-<ol type="1">
-<li>In <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> you should specify <code>paired = TRUE</code> rather than <code>FALSE</code>
-</li>
-<li>In <code>cohens_d()</code> you should specify <code>method = paired</code> rather than <code>pooled_sd</code>
-</li>
-</ol>
-<section id="ttest-a14" class="level4" data-number="9.2.4.1"><h4 data-number="9.2.4.1" class="anchored" data-anchor-id="ttest-a14">
-<span class="header-section-number">9.2.4.1</span> Activity 14: Paired-samples t-test</h4>
-<ul>
-<li>Now have a go at running the within-subjects t-test based on your knowledge. The data you need is in <code>gaze_tidy()</code>. Store the output of the t-test as a tibble in the object <code>gaze_test</code>
-<ul>
-<li>i.e.&nbsp;pipe the output of the t-test into `tidy() in the one line of code.</li>
-</ul>
-</li>
-<li>calculate the Cohen’s D for the t-test and store it in <code>gaze_d</code>
-</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>gaze_test <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>gaze_d <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And if you have done that correctly, you should see in <code>gaze_test</code> something like this:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 12%">
-<col style="width: 15%">
-<col style="width: 13%">
-</colgroup>
-<thead><tr class="header">
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">parameter</th>
-<th style="text-align: right;">conf.low</th>
-<th style="text-align: right;">conf.high</th>
-<th style="text-align: left;">method</th>
-<th style="text-align: left;">alternative</th>
+<th style="text-align: right;">Cohens_d</th>
+<th style="text-align: right;">CI</th>
+<th style="text-align: right;">CI_low</th>
+<th style="text-align: right;">CI_high</th>
 </tr></thead>
 <tbody><tr class="odd">
-<td style="text-align: right;">-0.0723946</td>
-<td style="text-align: right;">-2.41643</td>
-<td style="text-align: right;">0.0217529</td>
-<td style="text-align: right;">31</td>
-<td style="text-align: right;">-0.133497</td>
-<td style="text-align: right;">-0.0112922</td>
-<td style="text-align: left;">Paired t-test</td>
-<td style="text-align: left;">two.sided</td>
+<td style="text-align: right;">-0.4523004</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">-0.6366884</td>
+<td style="text-align: right;">-0.2674345</td>
 </tr></tbody>
 </table>
 </div>
 </div>
-</section></section><section id="write-up-and-interpretation" class="level3" data-number="9.2.5"><h3 data-number="9.2.5" class="anchored" data-anchor-id="write-up-and-interpretation">
-<span class="header-section-number">9.2.5</span> Write-Up and Interpretation</h3>
-<p>Looking at the output of the test, it is actually very similar to the between-subjects t-test, with one exception. Rather than providing the means of both conditions, there is a single <code>estimate</code>. This is the mean <em>difference</em> score between the two conditions and if you had calculated the descriptives on the <code>diff</code> we created above you would get the same answer.</p>
-<ul>
-<li>
-<p>Enter the mean estimates and t-test results (means and t-value to 2 decimal places, p-value to 3 decimal places):</p>
-<ul>
-<li><p>Mean <code>estimate</code> = <input class="webex-solveme nospaces" size="5" data-answer="[&quot;-0.07&quot;,&quot;0.07&quot;]"></p></li>
-<li><p>t(<input class="webex-solveme nospaces" size="2" data-answer="[&quot;31&quot;]">) = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;2.42&quot;]">, p = <input class="webex-solveme nospaces" size="5" data-answer="[&quot;0.022&quot;,&quot;.022&quot;]"></p></li>
-</ul>
-</li>
-</ul>
-<section id="ttest-a15" class="level4" data-number="9.2.5.1"><h4 data-number="9.2.5.1" class="anchored" data-anchor-id="ttest-a15">
-<span class="header-section-number">9.2.5.1</span> Activity 15: Write-up</h4>
-<p>Now have a go at summarising this finding in a sentence using the standard APA formatting. We have hidden our version just below for you to look at when you have had a go.</p>
-<div class="webex-solution">
-<button>
-Show our write-up
-</button>
-<div class="cell" data-layout-align="center">
-<p>At test stage (M = .59, SD = .18), infants showed a significantly longer preferential looking time to the singer of the familiar melody than they had shown the same singer at baseline (M = .52, SD = .18), t(31) = 2.42, p = .022, d = .41.</p>
-<p>Alternatively:</p>
-<p>At test stage, infants showed a significantly longer preferential looking time to the singer of the familiar melody than they had shown the same singer at baseline (Mean Difference = 0.07, SD = 0.17), t(31) = 2.42, p = .022, d = .41.</p>
 </div>
-</div>
-</section></section></section><section id="ttest-fin" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="ttest-fin">
-<span class="header-section-number">9.3</span> Finished!</h2>
-<p>That was a long chapter but hopefully you will see that it really is true that the hardest part is the set-up and the data wrangling. As we’ve said before, you don’t need to memorise lines of code - you just need to remember where to find examples and to understand which bits of them you need to change. Play around with the examples we have given you and see what changing the values does. There is no specific Test Yourself section for this chapter but make sure you check your understanding of the different sections before moving on.</p>
-</section><section id="ttest-sols" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="ttest-sols">
-<span class="header-section-number">9.4</span> Activity solutions</h2>
-<p>Below you will find the solutions to the above questions. Only look at them after giving the questions a good try and trying to find help on Google or Teams about any issues.</p>
-<section id="ttest-a1sol" class="level4" data-number="9.4.0.1"><h4 data-number="9.4.0.1" class="anchored" data-anchor-id="ttest-a1sol">
-<span class="header-section-number">9.4.0.1</span> Activity 1</h4>
+</section></section><section id="linear-regression-with-one-categorical-predictor" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="linear-regression-with-one-categorical-predictor">
+<span class="header-section-number">9.3</span> Linear regression with one categorical predictor</h2>
+<section id="activity-6---descriptive-statistics" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="activity-6---descriptive-statistics">
+<span class="header-section-number">9.3.1</span> Activity 6 - Descriptive statistics</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">library</span>(car)</span>
-<span id="cb28-3"><a href="#cb28-3"></a><span class="fu">library</span>(effectsize)</span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="fu">library</span>(report)</span>
-<span id="cb28-5"><a href="#cb28-5"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb28-6"><a href="#cb28-6"></a>evaluators <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"evaluators.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="ttest-a2sol" class="level4" data-number="9.4.0.2"><h4 data-number="9.4.0.2" class="anchored" data-anchor-id="ttest-a2sol">
-<span class="header-section-number">9.4.0.2</span> Activity 2</h4>
-<p>This was our code:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>evaluators <span class="ot">&lt;-</span> evaluators <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">mutate</span>(<span class="at">sex_labels =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(sex, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"male"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"female"</span>),</span>
-<span id="cb29-3"><a href="#cb29-3"></a>         <span class="at">sex_labels =</span> <span class="fu">as.factor</span>(sex_labels),</span>
-<span id="cb29-4"><a href="#cb29-4"></a>         <span class="at">condition =</span> <span class="fu">as.factor</span>(condition))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>and you could summarise as below to give an output:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>eval_counts <span class="ot">&lt;-</span> <span class="fu">group_by</span>(evaluators, sex_labels) <span class="sc">%&gt;%</span> <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="ttest-a6sol" class="level4" data-number="9.4.0.3"><h4 data-number="9.4.0.3" class="anchored" data-anchor-id="ttest-a6sol">
-<span class="header-section-number">9.4.0.3</span> Activity 6</h4>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>intellect <span class="ot">&lt;-</span> <span class="fu">filter</span>(ratings2, Category <span class="sc">==</span> <span class="st">"intellect"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2"></a>hire <span class="ot">&lt;-</span> <span class="fu">filter</span>(ratings2, Category <span class="sc">==</span> <span class="st">"hire"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3"></a>impression <span class="ot">&lt;-</span> <span class="fu">filter</span>(ratings2, Category <span class="sc">==</span> <span class="st">"impression"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="ttest-a8sol" class="level4" data-number="9.4.0.4"><h4 data-number="9.4.0.4" class="anchored" data-anchor-id="ttest-a8sol">
-<span class="header-section-number">9.4.0.4</span> Activity 8</h4>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>intellect_d <span class="ot">&lt;-</span> <span class="fu">cohens_d</span>(Rating <span class="sc">~</span> condition, </span>
-<span id="cb32-2"><a href="#cb32-2"></a>                      <span class="at">pooled_sd =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb32-3"><a href="#cb32-3"></a>                      <span class="at">data =</span> intellect)</span>
-<span id="cb32-4"><a href="#cb32-4"></a>hire_d <span class="ot">&lt;-</span> <span class="fu">cohens_d</span>(Rating <span class="sc">~</span> condition, </span>
-<span id="cb32-5"><a href="#cb32-5"></a>                      <span class="at">pooled_sd =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb32-6"><a href="#cb32-6"></a>                      <span class="at">data =</span> hire)</span>
-<span id="cb32-7"><a href="#cb32-7"></a>impression_d <span class="ot">&lt;-</span> <span class="fu">cohens_d</span>(Rating <span class="sc">~</span> condition, </span>
-<span id="cb32-8"><a href="#cb32-8"></a>                      <span class="at">pooled_sd =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb32-9"><a href="#cb32-9"></a>                      <span class="at">data =</span> impression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="ttest-a13sol" class="level4" data-number="9.4.0.5"><h4 data-number="9.4.0.5" class="anchored" data-anchor-id="ttest-a13sol">
-<span class="header-section-number">9.4.0.5</span> Activity 13</h4>
-<p>For the plot:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(gaze_tidy, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> looking)) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> time), <span class="at">width =</span> .<span class="dv">2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">"pointrange"</span>, <span class="at">fun.data =</span> <span class="st">"mean_cl_normal"</span>) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Experimental Stage"</span>, </span>
-<span id="cb33-6"><a href="#cb33-6"></a>       <span class="at">y =</span> <span class="st">"Preferential Looking Time (Proportion)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>For the descriptives:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>desc <span class="ot">&lt;-</span> gaze_tidy <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), </span>
-<span id="cb34-4"><a href="#cb34-4"></a>            <span class="at">mean_looking =</span> <span class="fu">mean</span>(looking), </span>
-<span id="cb34-5"><a href="#cb34-5"></a>            <span class="at">sd_looking =</span> <span class="fu">sd</span>(looking))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section><section id="ttest-a14sol" class="level4" data-number="9.4.0.6"><h4 data-number="9.4.0.6" class="anchored" data-anchor-id="ttest-a14sol">
-<span class="header-section-number">9.4.0.6</span> Activity 14</h4>
-<p>For the t-test:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>gaze_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(looking <span class="sc">~</span> time, </span>
-<span id="cb35-2"><a href="#cb35-2"></a>                    <span class="at">paired =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb35-3"><a href="#cb35-3"></a>                    <span class="at">data =</span> gaze_tidy) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>For the Cohen’s D:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>gaze_d <span class="ot">&lt;-</span> <span class="fu">cohens_d</span>(looking <span class="sc">~</span> time, </span>
-<span id="cb36-2"><a href="#cb36-2"></a>                   <span class="at">method =</span> <span class="st">"paired"</span>, </span>
-<span id="cb36-3"><a href="#cb36-3"></a>                   <span class="at">data =</span> gaze_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="words-from-this-chapter" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="words-from-this-chapter">
-<span class="header-section-number">9.5</span> Words from this Chapter</h2>
-<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
-<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">group_by</span>(Condition) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_cals =</span> <span class="fu">mean</span>(F_CaloriesConsumed),</span>
+<span id="cb9-4"><a href="#cb9-4"></a>            <span class="at">sd_cals =</span> <span class="fu">mean</span>(F_CaloriesConsumed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">definition</th>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: right;">mean_cals</th>
+<th style="text-align: right;">sd_cals</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">between subjects</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">196.6818</td>
+<td style="text-align: right;">196.6818</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">categorical</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">259.7313</td>
+<td style="text-align: right;">259.7313</td>
 </tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section id="activity-7---using-the-lm-function" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="activity-7---using-the-lm-function">
+<span class="header-section-number">9.3.2</span> Activity 7 - Using the <code>lm()</code> function</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>lm_cals <span class="ot">&lt;-</span> <span class="fu">lm</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">summary</span>(lm_cals)</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>lm_cals <span class="ot">&lt;-</span> <span class="fu">lm</span>(F_CaloriesConsumed <span class="sc">~</span> Condition_label, <span class="at">data =</span> lopez_clean)</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="fu">summary</span>(lm_cals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = F_CaloriesConsumed ~ Condition, data = lopez_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-230.90  -99.09  -24.15   62.83  828.04 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  196.682      8.888  22.130  &lt; 2e-16 ***
+Condition1    63.049     12.966   4.863 1.59e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 139.4 on 462 degrees of freedom
+Multiple R-squared:  0.04869,   Adjusted R-squared:  0.04663 
+F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06
+
+
+Call:
+lm(formula = F_CaloriesConsumed ~ Condition_label, data = lopez_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-230.90  -99.09  -24.15   62.83  828.04 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  196.682      8.888  22.130  &lt; 2e-16 ***
+Condition_labelExperimental   63.049     12.966   4.863 1.59e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 139.4 on 462 degrees of freedom
+Multiple R-squared:  0.04869,   Adjusted R-squared:  0.04663 
+F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
+</div>
+</div>
+</section><section id="activity-8---calculating-confidence-intervals" class="level3" data-number="9.3.3"><h3 data-number="9.3.3" class="anchored" data-anchor-id="activity-8---calculating-confidence-intervals">
+<span class="header-section-number">9.3.3</span> Activity 8 - Calculating confidence intervals</h3>
+<p>Try this</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>lm_cal_est <span class="ot">&lt;-</span> <span class="fu">lm</span>(CalEstimate <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">summary</span>(lm_cal_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = CalEstimate ~ Condition, data = lopez_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-130.03  -83.03  -33.03   44.85  666.97 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  133.033      7.679  17.324   &lt;2e-16 ***
+Condition1   -17.883     11.192  -1.598    0.111    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 119.9 on 459 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.005531,  Adjusted R-squared:  0.003365 
+F-statistic: 2.553 on 1 and 459 DF,  p-value: 0.1108</code></pre>
+</div>
+</div>
+</section><section id="activity-9---standardising-predictors" class="level3" data-number="9.3.4"><h3 data-number="9.3.4" class="anchored" data-anchor-id="activity-9---standardising-predictors">
+<span class="header-section-number">9.3.4</span> Activity 9 - Standardising predictors</h3>
+</section></section><section id="checking-assumptions" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="checking-assumptions">
+<span class="header-section-number">9.4</span> Checking assumptions</h2>
+</section><section id="reporting-your-results" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="reporting-your-results">
+<span class="header-section-number">9.5</span> Reporting your results</h2>
+</section><section id="one--and-paired-sample-tests" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="one--and-paired-sample-tests">
+<span class="header-section-number">9.6</span> One- and paired-sample tests</h2>
+</section><section id="test-yourself" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="test-yourself">
+<span class="header-section-number">9.7</span> Test Yourself</h2>
+<p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
+<section id="knowledge-check" class="level3" data-number="9.7.1"><h3 data-number="9.7.1" class="anchored" data-anchor-id="knowledge-check">
+<span class="header-section-number">9.7.1</span> Knowledge check</h3>
+<p>For this chapter’s knowledge check section, we have something a little different. Instead of purely conceptual questions about functions, we have another example of linear regression from X. Feel free to create this model yourself, but we will show you some output and ask you questions based on it.</p>
+<p>For this model…</p>
+<p><strong>Question 1</strong>.</p>
+<p><strong>Question 2</strong>.</p>
+<p><strong>Question 3</strong>.</p>
+<p><strong>Question 4</strong>.</p>
+<p><strong>Question 5</strong>.</p>
+</section><section id="error-mode" class="level3" data-number="9.7.2"><h3 data-number="9.7.2" class="anchored" data-anchor-id="error-mode">
+<span class="header-section-number">9.7.2</span> Error mode</h3>
+<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on simple linear regression between two continuous variables. There are not many outright errors that people make here, more misspecifications that are not doing what you think they are doing.</p>
+<p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files:</p>
+<p>Below, we have several variations of a misspecification. Copy and paste them into your R Markdown file below the code chunk to wrangle the data. Once you have copied the activities, click knit and look at the output you receive. See if you can identify the mistake and fix it before checking the answer.</p>
+<p><strong>Question 6</strong>.</p>
+</section></section><section id="words-from-this-chapter" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="words-from-this-chapter">
+<span class="header-section-number">9.8</span> Words from this Chapter</h2>
+<p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">definition</th>
+</tr></thead>
+<tbody>
 <tr class="odd">
-<td style="text-align: left;">mixed design</td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#student-t-test" class="glossary" target="_blank">student-t-test</a></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">One-sample</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">within subjects</td>
+<td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#welch-t-test" class="glossary" target="_blank">welch-t-test</a></td>
 <td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>That is end of this chapter. Be sure to look again at anything you were unsure about and make some notes to help develop your own knowledge and skills. It would be good to write yourself some questions about what you are unsure of and see if you can answer them later or speak to someone about them. Good work today!</p>
+</section><section id="end-of-chapter" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="end-of-chapter">
+<span class="header-section-number">9.9</span> End of chapter</h2>
+<p>Blah…</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-schroeder_sound_2015" class="csl-entry" role="listitem">
-Schroeder, J., &amp; Epley, N. (2015). The <span>Sound</span> of <span>Intellect</span>: <span>Speech</span> <span>Reveals</span> a <span>Thoughtful</span> <span>Mind</span>, <span>Increasing</span> a <span>Job</span> <span>Candidate</span>’s <span>Appeal</span>. <em>Psychological Science</em>, <em>26</em>(6), 877–891. <a href="https://doi.org/10.1177/0956797615572906">https://doi.org/10.1177/0956797615572906</a>
+<div id="ref-lopez_visual_2023" class="csl-entry" role="listitem">
+Lopez, A., Choi, A. K., Dellawar, N. C., Cullen, B. C., Avila Contreras, S., Rosenfeld, D. L., &amp; Tomiyama, A. J. (2023). Visual cues and food intake: <span>A</span> preregistered replication of <span>Wansink</span> et al (2005). <em>Journal of Experimental Psychology: General</em>. <a href="https://doi.org/10.1037/xge0001503.supp">https://doi.org/10.1037/xge0001503.supp</a>
 </div>
 </div>
 </section></main><!-- /main --><script>
