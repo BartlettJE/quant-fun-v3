@@ -110,7 +110,7 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -686,62 +686,110 @@ Show me the solution
 <span class="header-section-number">9.2.2</span> Activity 4 - Using the <code>t.test()</code> function</h3>
 <p>A t-test is a specific application of the general linear model. In this test, we express the difference in an outcome between two groups as a kind of standardised mean difference. If you are interested, see the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/between-subjects-students-t-test.html" target="_blank">McAleer, 2023</a>) for the calculations behind the Student and Welch t-test. Conceptually, a t-test is the difference between two groups divided by the variability of the difference. There are two main versions of a t-test:</p>
 <ul>
-<li><p><a class="glossary" title="">Student t-test</a></p></li>
-<li><p><a class="glossary" title="">Welch t-test</a></p></li>
+<li><p><a class="glossary" title="Calculating a t-value based on the mean difference divided by the pooled standard deviation. In the Student t-test, we times the pooled standard deviation by a term containing the sample sizes of each group.">Student t-test</a></p></li>
+<li><p><a class="glossary" title="Calculating a t-value based on the mean difference divided by a term containing the variance of each group. We also correct the degrees of freedom for the difference in variances.">Welch t-test</a></p></li>
 </ul>
 <p>There is a function built into R to calculate the t-test: <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>. The function requires:</p>
 <ul>
-<li><p>Blah.</p></li>
-<li><p>Blah.</p></li>
+<li><p>A formula like <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> where you specify the outcome/dependent variable and the predictor/independent variable in the form <code>outcome ~ predictor</code>.</p></li>
+<li><p>The data set you want to use.</p></li>
 </ul>
 <p>For our <code>lopez_clean</code> data, we would run the following code for a two-tailed Welch t-test:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">t.test</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, </span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
 <span id="cb4-2"><a href="#cb4-2"></a>       <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
 
-data:  F_CaloriesConsumed by Condition
+data:  F_CaloriesConsumed by Condition_label
 t = -4.8578, df = 453.45, p-value = 1.638e-06
-alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+alternative hypothesis: true difference in means between group Control and group Experimental is not equal to 0
 95 percent confidence interval:
  -88.55610 -37.54289
 sample estimates:
-mean in group 0 mean in group 1 
-       196.6818        259.7313 </code></pre>
+     mean in group Control mean in group Experimental 
+                  196.6818                   259.7313 </code></pre>
 </div>
 </div>
 <p>For the three key concepts of inferential statistics, we get</p>
 <ul>
-<li><p><strong>Hypothesis testing</strong>: X</p></li>
-<li><p><strong>Effect size</strong>: X</p></li>
-<li><p><strong>Confidence interval</strong>: [-0.75, -0.64], X</p></li>
+<li>
+<strong>Hypothesis testing</strong>: <em>p</em> &lt; .001, suggesting we can reject the null hypothesis assuming <span class="math inline">\(\alpha\)</span> = .05.</li>
 </ul>
-<p>To summarise: X</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What does 1.638e-06 mean?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember: R reports very small or very large numbers using scientific notation to save space. We normally report <em>p</em>-values to three decimals, so we report anything smaller as <em>p</em> &lt; .001 to say it is smaller than this.</p>
+<p>If you want to see the real number, you can use the following function which shows just how small the <em>p</em>-value is:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">format</span>(<span class="fl">1.638e-06</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0.000001638"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>
+<strong>Effect size</strong>: Somewhat annoyingly, we do not directly get the mean difference between groups as a raw/unstandardised mean difference. We must manually calculate it by subtracting the means of each group (196.6818 - 259.7313 = -63.05). So, those in the experimental group ate on average 63 more calories of soup than the control group.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Does it matter whether the difference is positive or negative?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For effect sizes describing the difference between two groups, it is the absolute difference which is important, providing it is consistent with your predictions (if applicable). If you entered the groups the other way around, the mean difference would become 259.7313 - 196.6818 = 63.05. The same applies when we calculate a standardised mean difference like Cohen’s d later.</p>
+</div>
+</div>
+<ul>
+<li>
+<strong>Confidence interval</strong>: [-88.56, -37.54], although we do not get the mean difference, we get the confidence interval around the mean difference.</li>
+</ul>
+<p>To summarise: A Welch t-test showed participants in the experimental group ate significantly more calories of soup than participants in the control group, <em>t</em> (453.45) = -4.86, <em>p</em> &lt; .001. On average, those in the experimental group ate 63.05 (95% CI = [37.54, 88.56]) more calories than those in the control group.</p>
 <p>When you have statistics software like R to do the heavy lifting for you, there is not really a scenario where you would use the Student t-test anymore, but if you did, you can use the <code>var.equal</code> argument to say you assume there are equal variances in each group:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">t.test</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, </span>
-<span id="cb6-2"><a href="#cb6-2"></a>       <span class="at">data =</span> lopez_clean, </span>
-<span id="cb6-3"><a href="#cb6-3"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
+<span id="cb8-2"><a href="#cb8-2"></a>       <span class="at">data =</span> lopez_clean, </span>
+<span id="cb8-3"><a href="#cb8-3"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
 
-data:  F_CaloriesConsumed by Condition
+data:  F_CaloriesConsumed by Condition_label
 t = -4.8625, df = 462, p-value = 1.591e-06
-alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+alternative hypothesis: true difference in means between group Control and group Experimental is not equal to 0
 95 percent confidence interval:
  -88.52983 -37.56915
 sample estimates:
-mean in group 0 mean in group 1 
-       196.6818        259.7313 </code></pre>
+     mean in group Control mean in group Experimental 
+                  196.6818                   259.7313 </code></pre>
 </div>
 </div>
+<p>You can see the main difference between the two versions is the Welch t-test Student corrects the degrees of freedom, so they are a decimal. While the Student t-test does not correct the degrees of freedom, so they are predictably N - 2.</p>
+<p>To summarise: A Student t-test showed participants in the experimental group ate significantly more calories of soup than participants in the control group, <em>t</em> (462) = -4.86, <em>p</em> &lt; .001. On average, those in the experimental group ate 63.05 (95% CI = [37.57, 88.53]) more calories than those in the control group.</p>
 </section><section id="activity-5---calculating-cohens-d" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="activity-5---calculating-cohens-d">
 <span class="header-section-number">9.2.3</span> Activity 5 - Calculating Cohen’s d</h3>
+<p>Raw/unstandardised effect sizes are great for putting results in context, particularly when the units are comparable across studies. For our outcome in this study, differences in calories are easy to put in context.</p>
+<p>Alternatively, it can be useful to calculate standardised effect sizes. This helps for power analyses (more on that in Chapter 10) and when you want to compare across comparable studies with slightly different measurement scales.</p>
+<p>There are different formulas for calculating Cohen’s d, but if you know the t-value and degrees of freedom, you can calculate Cohen’s d through:</p>
+<p><span class="math inline">\(d = \frac{2t}{\sqrt{df}} = \frac{-9.725}{21.49} = -0.45\)</span></p>
+<p>It is important to know the concepts before you use shortcuts, but there is the <code>cohens_d()</code> function from the <pkg>effectsize</pkg> package which uses the same format as <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">cohens_d</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">cohens_d</span>(F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>         <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -761,15 +809,137 @@ mean in group 0 mean in group 1
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Great work following along so far, but now it is time to test your understanding on a new set of variables. Use the variables <code>CalEstimate</code> and <code>Condition_label</code> from <code>lopez_clean</code>. We can ask the question: “What is the difference in estimated calories consumed between the experimental and control groups?”</p>
+<ol type="1">
+<li><p>Create a violin-boxplot to visualise the difference between <code>CalEstimate</code> and <code>Condition_label</code> from <code>lopez_clean</code>.</p></li>
+<li>
+<p>Apply the Welch t-test to get your inferential statistics and answer the following questions:</p>
+<ul>
+<li><p><strong>Hypothesis testing</strong>: Assuming <span class="math inline">\(\alpha\)</span> = .05, the difference between the experimental and control groups on estimated calories consumed was <select class="webex-select"><option value="blank"></option>
+<option value="">statistically significant</option>
+<option value="answer">not statistically significant</option></select>.</p></li>
+<li><p><strong>Effect size</strong>: Rounded to 2 decimals, the raw effect size was an average difference of <input class="webex-solveme nospaces" size="5" data-answer="[&quot;17.88&quot;]"> estimates calories between the two groups. Expressed as a standardised effect size, this difference equates to Cohen’s <em>d</em> = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;0.15&quot;,&quot;.15&quot;]">.</p></li>
+<li><p><strong>Confidence interval</strong>: Rounded to 2 decimals, the 95% confidence interval for the mean difference is <select class="webex-select"><option value="blank"></option>
+<option value="answer">-4.08</option>
+<option value="">-0.03</option>
+<option value="">39.85</option>
+<option value="">0.33</option></select> to <select class="webex-select"><option value="blank"></option>
+<option value="">-4.08</option>
+<option value="">-0.03</option>
+<option value="answer">39.85</option>
+<option value="">0.33</option></select>. The 95% confidence interval for Cohen’s d is <select class="webex-select"><option value="blank"></option>
+<option value="">-4.08</option>
+<option value="answer">-0.03</option>
+<option value="">39.85</option>
+<option value="">0.33</option></select> to <select class="webex-select"><option value="blank"></option>
+<option value="">-4.08</option>
+<option value="">-0.03</option>
+<option value="">39.85</option>
+<option value="answer">0.33</option></select>.</p></li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The violin-boxplot shows little difference between the two groups on estimated calories consumed.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> CalEstimate, <span class="at">x =</span> Condition_label, <span class="at">fill =</span> Condition_label)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>, </span>
+<span id="cb11-5"><a href="#cb11-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb11-7"><a href="#cb11-7"></a>               <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_cl_boot"</span>, <span class="co"># confidence interval</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>               <span class="at">geom =</span> <span class="st">"errorbar"</span>, </span>
+<span id="cb11-10"><a href="#cb11-10"></a>               <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span> </span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Estimated Calories Consumed (kcals)"</span>) <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Study Condition"</span>) <span class="sc">+</span> </span>
+<span id="cb11-14"><a href="#cb11-14"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb11-15"><a href="#cb11-15"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For our inferential statistics, a Welch t-test showed the difference is not statistically significant, <em>t</em> (455.06) = 1.60, <em>p</em> = .110.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> CalEstimate <span class="sc">~</span> Condition_label, </span>
+<span id="cb12-2"><a href="#cb12-2"></a>       <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  CalEstimate by Condition_label
+t = 1.6001, df = 455.06, p-value = 0.1103
+alternative hypothesis: true difference in means between group Control and group Experimental is not equal to 0
+95 percent confidence interval:
+ -4.080399 39.846433
+sample estimates:
+     mean in group Control mean in group Experimental 
+                  133.0328                   115.1498 </code></pre>
+</div>
+</div>
+<p>The control group estimated they consumed 17.88 (95% CI = [-4.08, 39.85]) more calories than the experimental group, but the difference was not significant. Expressed as a standardised effect size, this equates to Cohen’s d = 0.15 (95% CI = [-0.03, 0.33]).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">cohens_d</span>(CalEstimate <span class="sc">~</span> Condition_label, </span>
+<span id="cb14-2"><a href="#cb14-2"></a>         <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">Cohens_d</th>
+<th style="text-align: right;">CI</th>
+<th style="text-align: right;">CI_low</th>
+<th style="text-align: right;">CI_high</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">0.1490887</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">-0.0341294</td>
+<td style="text-align: right;">0.332145</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section></section><section id="linear-regression-with-one-categorical-predictor" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="linear-regression-with-one-categorical-predictor">
 <span class="header-section-number">9.3</span> Linear regression with one categorical predictor</h2>
 <section id="activity-6---descriptive-statistics" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="activity-6---descriptive-statistics">
 <span class="header-section-number">9.3.1</span> Activity 6 - Descriptive statistics</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">group_by</span>(Condition) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_cals =</span> <span class="fu">mean</span>(F_CaloriesConsumed),</span>
-<span id="cb9-4"><a href="#cb9-4"></a>            <span class="at">sd_cals =</span> <span class="fu">mean</span>(F_CaloriesConsumed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(Condition) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_cals =</span> <span class="fu">mean</span>(F_CaloriesConsumed),</span>
+<span id="cb15-4"><a href="#cb15-4"></a>            <span class="at">sd_cals =</span> <span class="fu">mean</span>(F_CaloriesConsumed))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -797,13 +967,13 @@ mean in group 0 mean in group 1
 </section><section id="activity-7---using-the-lm-function" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="activity-7---using-the-lm-function">
 <span class="header-section-number">9.3.2</span> Activity 7 - Using the <code>lm()</code> function</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>lm_cals <span class="ot">&lt;-</span> <span class="fu">lm</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">summary</span>(lm_cals)</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a>lm_cals <span class="ot">&lt;-</span> <span class="fu">lm</span>(F_CaloriesConsumed <span class="sc">~</span> Condition_label, <span class="at">data =</span> lopez_clean)</span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="fu">summary</span>(lm_cals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>lm_cals <span class="ot">&lt;-</span> <span class="fu">lm</span>(F_CaloriesConsumed <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">summary</span>(lm_cals)</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a>lm_cals <span class="ot">&lt;-</span> <span class="fu">lm</span>(F_CaloriesConsumed <span class="sc">~</span> Condition_label, <span class="at">data =</span> lopez_clean)</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="fu">summary</span>(lm_cals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -848,9 +1018,9 @@ F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
 <span class="header-section-number">9.3.3</span> Activity 8 - Calculating confidence intervals</h3>
 <p>Try this</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>lm_cal_est <span class="ot">&lt;-</span> <span class="fu">lm</span>(CalEstimate <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">summary</span>(lm_cal_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>lm_cal_est <span class="ot">&lt;-</span> <span class="fu">lm</span>(CalEstimate <span class="sc">~</span> Condition, <span class="at">data =</span> lopez_clean)</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">summary</span>(lm_cal_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -912,11 +1082,11 @@ F-statistic: 2.553 on 1 and 459 DF,  p-value: 0.1108</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#student-t-test" class="glossary" target="_blank">student-t-test</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Calculating a t-value based on the mean difference divided by the pooled standard deviation. In the Student t-test, we times the pooled standard deviation by a term containing the sample sizes of each group.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#welch-t-test" class="glossary" target="_blank">welch-t-test</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Calculating a t-value based on the mean difference divided by a term containing the variance of each group. We also correct the degrees of freedom for the difference in variances.</td>
 </tr>
 </tbody>
 </table>

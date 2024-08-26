@@ -212,46 +212,132 @@ lopez_clean %>%
 
 A t-test is a specific application of the general linear model. In this test, we express the difference in an outcome between two groups as a kind of standardised mean difference. If you are interested, see the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/between-subjects-students-t-test.html){target="_blank"}) for the calculations behind the Student and Welch t-test. Conceptually, a t-test is the difference between two groups divided by the variability of the difference. There are two main versions of a t-test:
 
-- `r glossary("Student t-test", def = "")`
+- `r glossary("Student t-test", def = "Calculating a t-value based on the mean difference divided by the pooled standard deviation. In the Student t-test, we times the pooled standard deviation by a term containing the sample sizes of each group.")`
 
-- `r glossary("Welch t-test", def = "")`
+- `r glossary("Welch t-test", def = "Calculating a t-value based on the mean difference divided by a term containing the variance of each group. We also correct the degrees of freedom for the difference in variances.")`
 
 There is a function built into R to calculate the t-test: `t.test()`. The function requires:
 
-- Blah. 
+- A formula like `lm()` where you specify the outcome/dependent variable and the predictor/independent variable in the form `outcome ~ predictor`. 
 
-- Blah.
+- The data set you want to use. 
 
 For our `lopez_clean` data, we would run the following code for a two-tailed Welch t-test:
 
 ```{r}
-t.test(F_CaloriesConsumed ~ Condition, 
+t.test(formula = F_CaloriesConsumed ~ Condition_label, 
        data = lopez_clean)
 ```
 
 For the three key concepts of inferential statistics, we get 
 
-- **Hypothesis testing**: X 
+- **Hypothesis testing**: *p* < .001, suggesting we can reject the null hypothesis assuming $\alpha$ = .05. 
 
-- **Effect size**: X
+::: {.callout-important}
+#### What does 1.638e-06 mean? 
+Remember: R reports very small or very large numbers using scientific notation to save space. We normally report *p*-values to three decimals, so we report anything smaller as *p* < .001 to say it is smaller than this.
 
-- **Confidence interval**: [-0.75, -0.64], X
+If you want to see the real number, you can use the following function which shows just how small the *p*-value is:
 
-To summarise: X
+```{r}
+format(1.638e-06, scientific = FALSE)
+```
+:::
+
+- **Effect size**: Somewhat annoyingly, we do not directly get the mean difference between groups as a raw/unstandardised mean difference. We must manually calculate it by subtracting the means of each group (196.6818 - 259.7313 = -63.05). So, those in the experimental group ate on average 63 more calories of soup than the control group. 
+
+::: {.callout-important}
+#### Does it matter whether the difference is positive or negative? 
+
+For effect sizes describing the difference between two groups, it is the absolute difference which is important, providing it is consistent with your predictions (if applicable). If you entered the groups the other way around, the mean difference would become 259.7313 - 196.6818 = 63.05. The same applies when we calculate a standardised mean difference like Cohen's d later. 
+:::
+
+- **Confidence interval**: [-88.56, -37.54], although we do not get the mean difference, we get the confidence interval around the mean difference. 
+
+To summarise: A Welch t-test showed participants in the experimental group ate significantly more calories of soup than participants in the control group, *t* (453.45) = -4.86, *p* < .001. On average, those in the experimental group ate 63.05 (95% CI = [37.54, 88.56]) more calories than those in the control group.
 
 When you have statistics software like R to do the heavy lifting for you, there is not really a scenario where you would use the Student t-test anymore, but if you did, you can use the `var.equal` argument to say you assume there are equal variances in each group:
 
 ```{r}
-t.test(F_CaloriesConsumed ~ Condition, 
+t.test(formula = F_CaloriesConsumed ~ Condition_label, 
        data = lopez_clean, 
        var.equal = TRUE)
 ```
 
+You can see the main difference between the two versions is the Welch t-test Student corrects the degrees of freedom, so they are a decimal. While the Student t-test does not correct the degrees of freedom, so they are predictably N - 2.  
+
+To summarise: A Student t-test showed participants in the experimental group ate significantly more calories of soup than participants in the control group, *t* (462) = -4.86, *p* < .001. On average, those in the experimental group ate 63.05 (95% CI = [37.57, 88.53]) more calories than those in the control group.
+
 ### Activity 5 - Calculating Cohen's d 
 
+Raw/unstandardised effect sizes are great for putting results in context, particularly when the units are comparable across studies. For our outcome in this study, differences in calories are easy to put in context. 
+
+Alternatively, it can be useful to calculate standardised effect sizes. This helps for power analyses (more on that in Chapter 10) and when you want to compare across comparable studies with slightly different measurement scales. 
+
+There are different formulas for calculating Cohen's d, but if you know the t-value and degrees of freedom, you can calculate Cohen's d through: 
+
+$d = \frac{2t}{\sqrt{df}} = \frac{-9.725}{21.49} = -0.45$
+
+It is important to know the concepts before you use shortcuts, but there is the `cohens_d()` function from the <pkg>effectsize</pkg> package which uses the same format as `t.test()`. 
+
 ```{r}
-cohens_d(F_CaloriesConsumed ~ Condition, data = lopez_clean)
+cohens_d(F_CaloriesConsumed ~ Condition_label, 
+         data = lopez_clean)
 ```
+
+::: {.callout-tip}
+#### Try this
+
+Great work following along so far, but now it is time to test your understanding on a new set of variables. Use the variables `CalEstimate` and `Condition_label` from `lopez_clean`. We can ask the question: "What is the difference in estimated calories consumed between the experimental and control groups?"
+
+1. Create a violin-boxplot to visualise the difference between `CalEstimate` and `Condition_label` from `lopez_clean`. 
+
+2. Apply the Welch t-test to get your inferential statistics and answer the following questions: 
+
+    - **Hypothesis testing**: Assuming $\alpha$ = .05, the difference between the experimental and control groups on estimated calories consumed was `r mcq(c("statistically significant", answer = "not statistically significant"))`.
+    
+    - **Effect size**: Rounded to 2 decimals, the raw effect size was an average difference of `r fitb(17.88)` estimates calories between the two groups. Expressed as a standardised effect size, this difference equates to Cohen's *d* = `r fitb(0.15)`. 
+    
+    - **Confidence interval**: Rounded to 2 decimals, the 95% confidence interval for the mean difference is `r mcq(c(answer = "-4.08", "-0.03", "39.85", "0.33"))` to `r mcq(c("-4.08", "-0.03", answer = "39.85", "0.33"))`. The 95% confidence interval for Cohen's d is `r mcq(c("-4.08", answer = "-0.03", "39.85", "0.33"))` to `r mcq(c("-4.08", "-0.03", "39.85", answer = "0.33"))`. 
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+The violin-boxplot shows little difference between the two groups on estimated calories consumed. 
+
+```{r}
+lopez_clean %>% 
+  ggplot(aes(y = CalEstimate, x = Condition_label, fill = Condition_label)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL) + 
+  stat_summary(fun = "mean", 
+               geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", # confidence interval
+               geom = "errorbar", 
+               width = 0.1) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Estimated Calories Consumed (kcals)") +
+  scale_x_discrete(name = "Study Condition") + 
+  guides(fill = FALSE) + 
+  theme_classic()
+```
+
+For our inferential statistics, a Welch t-test showed the difference is not statistically significant, *t* (455.06) = 1.60, *p* = .110.
+
+```{r}
+t.test(formula = CalEstimate ~ Condition_label, 
+       data = lopez_clean)
+```
+
+The control group estimated they consumed 17.88 (95% CI = [-4.08, 39.85]) more calories than the experimental group, but the difference was not significant. Expressed as a standardised effect size, this equates to Cohen's d = 0.15 (95% CI = [-0.03, 0.33]). 
+
+```{r}
+cohens_d(CalEstimate ~ Condition_label, 
+         data = lopez_clean)
+```
+
+:::
 
 ## Linear regression with one categorical predictor
 
