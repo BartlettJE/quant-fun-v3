@@ -10,7 +10,6 @@ knitr::opts_chunk$set(warning = FALSE,
 ```{r echo=FALSE}
 library(patchwork)
 library(effectsize)
-#library(correlation)
 library(performance)
 library(tidyverse)
 ```
@@ -159,7 +158,7 @@ To visualise the difference between two groups, it is useful to create something
 ::: {.callout-tip}
 #### Try this
 
-Using your data visualisation skills from Chapter 7, recreate the scatterplot below using the variables `F_CaloriesConsumed` and `Condition_label` from `lopez_clean`. 
+Using your data visualisation skills from Chapter 7, recreate the violin-boxplot below using the variables `F_CaloriesConsumed` and `Condition_label` from `lopez_clean`. 
 
 ```{r echo=FALSE}
 lopez_clean %>% 
@@ -341,29 +340,97 @@ cohens_d(CalEstimate ~ Condition_label,
 
 ## Linear regression with one categorical predictor
 
+Now you know how to calculate a t-test in R, we can turn to simple linear regression as a more flexible tool for modelling the difference between two groups. As a reminder, there is a chapter in the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/simple-linear-regression.html){target="_blank"}) dedicated to manually calculating simple linear regression if you want to work through what the functions are doing behind the scenes.  
+
 ### Activity 6 - Descriptive statistics
+
+For all the information we want to include in a report, calculating descriptive statistics is helpful for the reader to show the context behind the results you present. Here, we can report the mean and standard deviation of our outcome per group.
 
 ```{r}
 lopez_clean %>% 
-  group_by(Condition) %>% 
-  summarise(mean_cals = mean(F_CaloriesConsumed),
-            sd_cals = mean(F_CaloriesConsumed))
+  group_by(Condition_label) %>% 
+  summarise(mean_cals = round(mean(F_CaloriesConsumed), 2), 
+            sd_cals = round(mean(F_CaloriesConsumed), 2))
 ```
+
+::: {.callout-note}
+If you want some reinforcement of how these skills apply to published research, look at Table 1 in @lopez_visual_2023. The means and standard deviations here (and Cohen's d from Activity 5) exactly reproduce the values they report, apart from the *SD* for the control group.
+:::
 
 ### Activity 7 - Using the `lm()` function
 
+For our research question of "is there a difference in actual calories consumed between the control and experimental group?", we can address it with simple linear regression. In this study, we can make causal conclusions as it was an experiment to randomly allocate people into one of two groups, but you can also use regression to compare two self-selecting groups when you cannot make a causal conclusion in isolation. Think carefully about what you can conclude from your design.
+
+Like Chapter 8, we start by defining our regression model with a formula in the pattern `outcome ~ predictor` and specify the data frame you want to use. We must then use the `summary()` function around your model object to get all the statistics you need. 
+
+There are two ways you can use a categorical predictor. First, we can code groups numerically which people called `r glossary("dummy coding", def = "")`. You code your first group 0 and you code your second group as 1, which maps on directly to how the regression model works. Let's look at the output. 
+
 ```{r}
-lm_cals <- lm(F_CaloriesConsumed ~ Condition, data = lopez_clean)
+# Condition as a factor containing 0 and 1
+lm_cals_numbers <- lm(formula = F_CaloriesConsumed ~ Condition, 
+                      data = lopez_clean)
 
-summary(lm_cals)
-
-lm_cals <- lm(F_CaloriesConsumed ~ Condition_label, data = lopez_clean)
-
-summary(lm_cals)
+summary(lm_cals_numbers)
 ```
 
+Compared to when we had a continuous predictor in Chapter 8, the output is identical. We just need to remember what the key numbers represent. The intercept is the predicted value of your outcome when your predictor is set to 0. When we have two groups coded as 0 and 1, this means the intercept is essentially the mean value of group 0 (here, the control group). We call this the `r glossary("reference group", def = "")`. You can confirm this by comparing the intercept estimate 196.68 to the mean value of the control group we calculated in Activity 6. 
+
+The slope estimate then represents how we predict the outcome to change for every 1-unit increase in the predictor. Since we coded the predictor 0 and 1, this just represents the shift from group 1 to group 2. We call the group we code as 1 the `r glossary("target group", def = "")`. You see the target group appended to the variable name, which is `Condition1` here. So, for a categorical predictor, the slope represents the mean difference between the reference group (0) and the target group (1). In contrast to the t-test, this is our raw/unstandardised effect size for the mean difference we do not need to manually calculate. 
+
+::: {.callout-note}
+#### Does it matter if the slope is positive or negative? 
+
+When you have a categorical predictor, the sign is only important for interpreting which group is bigger or smaller. The absolute size is relevant for the effect size where a larger absolute value indicates a larger effect. Whether the slope is positive or negative depending on the order of the groups and which has a larger mean. If the reference is larger than the target, you will get a negative slope. If the target is larger than the reference, you will get a positive slope.  
+:::
+
+Alternatively, you can use character labels for your categorical predictor and it will still work. This time, we use `Condition_label`. By default, it will set the order of the reference and target groups alphabetically, but you can manually specify the order by setting factor levels. 
+
+```{r}
+# Condition_label as characters
+lm_cals_labels <- lm(formula = F_CaloriesConsumed ~ Condition_label, 
+                     data = lopez_clean)
+
+summary(lm_cals_labels)
+```
+
+::: {.callout-note}
+If you want to test specifying the factor order to see how it affects the output, try running this code prior to the regression model: 
+
+```{r eval=FALSE}
+# Specify group order of Experimental then Control
+lopez_clean <- lopez_clean %>% 
+  mutate(Condition_label = factor(Condition_label, 
+                                  levels = c("Experimental", "Control")))
+```
+:::
+
+::: {.callout-note collapse="true"}
+#### How are t-tests and regression the same? 
+
+If you are interested in the relationship between the two concepts, we said a t-test was a specific application of the general linear model. In the t-test calculations, it expresses the mean difference between groups by the variability of the two groups multiplied by a term containing the sample sizes. In essence, it describes the difference in standard errors, which we can describe with a t-distribution to calculate *p*-values. 
+
+In regression, we frame the model as how much variance you explain compared to the total amount of variance. The more variance your predictor explains, the less unexplained variance there is left over. For the slope estimate though, this is identical to the t-test as we estimate the mean difference between groups plus the standard error around the mean difference. We calculate a *p*-value for the slope from a t-distribution, so you get a t-value in the output. 
+
+You can see the process is identical by comparing the key values from the regression output to the Student t-test. We can recreate the mean difference to compare to the slope, the t-value is the same, the p-value is the same, the degrees of freedom are the same, and the 95% confidence intervals below are the same. 
+
+So, when you have a single categorical predictor, it is the exact same process as the Student t-test, just expressed slightly different. The only downside to this procedure is it is much more difficult to recreate the Welch t-test. 
+:::
 
 ### Activity 8 - Calculating confidence intervals
+
+The only thing we are missing is our confidence intervals around the estimates which we can calculate through the `confint()` function. 
+
+```{r}
+confint(lm_cals_numbers)
+```
+
+Now, we can summarise the three key concepts of inferential statistics as:  
+
+- **Hypothesis testing**: *p* < .001, suggesting we can reject the null hypothesis assuming $\alpha$ = .05. The experimental group ate significantly more calories of soup than the control group.  
+
+- **Effect size**: $b_1$ = 63.05, suggesting the experimental group ate on average 63 more calories than the control group.  
+
+- **Confidence interval**: [37.57, 88.53], showing the precision around the slope estimate.
 
 Try this
 
@@ -379,7 +446,11 @@ summary(lm_cal_est)
 
 ## Reporting your results
 
-## One- and paired-sample tests
+## Bonus section - One- and paired-sample tests
+
+### One-sample comparing against a fixed value 
+
+### Paired-samples comparing conditions
 
 ## Test Yourself
 
