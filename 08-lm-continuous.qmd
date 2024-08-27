@@ -508,7 +508,7 @@ Apply simple linear regression to get your inferential statistics and answer the
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
-The conclusions are the same as when we calculated the correlation where age is not a statistically significant predictor of support for wealth redistribution. As a regression model, we get the same conclusions expressed in a slightly different way. Age is negative, but the size of the slope is very small (-0.003) and non-significant (*p* = .625). We explain pretty much no variance in support for wealth redistribution ($R^2$ = 0.0008), so age is not very informative as a predictor.  
+The conclusions are the same as when we calculated the correlation where age is not a statistically significant predictor of support for wealth redistribution. As a regression model, we get the same conclusions expressed in a slightly different way. Age is negative, but the size of the slope is very small (-0.003) and non-significant (*p* = .625). We explain pretty much no variance in support for wealth redistribution ($R^2$ = .0008), so age is not very informative as a predictor.  
 
 ```{r}
 # Create lm object for age as a predictor
@@ -720,9 +720,18 @@ In this plot, you are looking out for a roughly random spread of points as you m
 
 When there is *heteroscedasticity*, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range at the other end, or a bow tie where there is a wide spread of points at each end and dense in the middle. 
 
-### Checking all the assumptions
+### Checking influential cases
 
-There is a fourth plot which you could examine using `plot(lm_redistribution, which = 4)`, but we are going to leave that until Chapter 11. It shows influential values or outliers which have the biggest individual effect on the model residuals. It is not technically an assumption of linear regression, but has knock on effects for the other assumptions. 
+Finally, plot 4 is a residuals vs leverage plot and helps us identify influential cases. You might have heard of the term outlier before and this is one way of classifying data points that are different enough to the rest of the data in a regression model. It is not strictly an assumption of linear regression, but it can affect the other assumptions. 
+
+```{r}
+plot(lm_redistribution, 
+     which = 4)
+```
+
+Identifying outliers is a complex decision and we will explore your options in the course materials and Chapter 11 on data screening. Influential points and potential outliers would have high leverage values and the plot will show a threshold called Cook's distance as red dashed lines. In this plot, they are not visible as there is no value with a big enough leverage value, but you would be looking for data points outside this threshold to identify influential values. 
+
+### Checking all the assumptions
 
 Now we have covered the individual diagnostic plots, there is a handy function called `check_model()` from the <pkg>performance</pkg> package. This function reports all the diagnostic checks from `plot()`, but tidies up the presentation and has some useful reminders of what you are looking for. 
 

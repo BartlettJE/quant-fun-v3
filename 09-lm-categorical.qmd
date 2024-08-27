@@ -383,6 +383,8 @@ The slope estimate then represents how we predict the outcome to change for ever
 When you have a categorical predictor, the sign is only important for interpreting which group is bigger or smaller. The absolute size is relevant for the effect size where a larger absolute value indicates a larger effect. Whether the slope is positive or negative depending on the order of the groups and which has a larger mean. If the reference is larger than the target, you will get a negative slope. If the target is larger than the reference, you will get a positive slope.  
 :::
 
+Like the continuous predictor, we get values for $R^2$ and adjusted $R^2$, showing we explain .046 (in other words, 4.6%) variance in the outcome through our condition manipulation. We then get the model fit statistics, but with a single predictor, the *p*-value is identifical to the slope. 
+
 Alternatively, you can use character labels for your categorical predictor and it will still work. This time, we use `Condition_label`. By default, it will set the order of the reference and target groups alphabetically, but you can manually specify the order by setting factor levels. 
 
 ```{r}
@@ -432,17 +434,111 @@ Now, we can summarise the three key concepts of inferential statistics as:
 
 - **Confidence interval**: [37.57, 88.53], showing the precision around the slope estimate.
 
-Try this
+::: {.callout-tip}
+#### Try this
+
+Now it is time to test your understanding on a new set of variables. This time, use `CalEstimate` as your outcome, `Condition_label` as your predictor, and use `lopez_clean` as your data. We can ask the same question as Activity 5: "What is the difference in estimated calories consumed between the experimental and control groups?". 
+
+Apply simple linear regression to get your inferential statistics and answer the following questions: 
+
+- **Hypothesis testing**: Assuming $\alpha$ = .05, Condition is a `r mcq(c("statistically significant", answer = "non-significant"))` predictor of estimates calories consumed.
+    
+- **Effect size**: Rounded to 2 decimals, the Condition slope coefficient means there was a mean difference of `r mcq(c("133.03", "7.68", answer = "-17.88", "11.19"))`.
+    
+- **Confidence interval**: Rounded to 2 decimals, the lower bound of the slope is `r mcq(c("117.94", answer = "-39.88", "148.12", "4.11"))` and the upper bound is `r mcq(c("117.94", "-39.88", "148.12", answer = "4.11"))`. 
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+
+The conclusions are the same as when we calculated the t-test, where condition is not a statistically significant predictor of estimated calories consumed. As a regression model, we get the same conclusions expressed in a slightly different way. Condition is a negative but non-significant predictor (*p* = .111). The control group estimated they ate 17.88 ($b_1$ = -17.88, 95% CI = [-39.88, 4.11]) calories more than the experimental group. We explain very little variance in estimated calories consumed ($R^2$ = .006), so the condition manipulation had little effect.  
 
 ```{r}
-lm_cal_est <- lm(CalEstimate ~ Condition, data = lopez_clean)
+# Create lm object for condiiton label as a predictor
+lm_cal_est <- lm(CalEstimate ~ Condition_label, 
+                 data = lopez_clean)
 
+# summary of the model object
 summary(lm_cal_est)
+
+# confidence intervals around estimates
+confint(lm_cal_est)
 ```
+
+:::
 
 ### Activity 9 - Standardising predictors
 
+For simple linear regression with two levels of a categorical predictor, centering the variable does not help, but we can standardise our outcome to express the estimate in standard deviations rather than the raw units. This is analogous to calculating Cohen's d as we express the standardised mean difference. In contrast to continuous predictors, we only need to standardise the outcome, rather than both the outcome and predictor(s). We then use the standardised variable as our outcome. 
+
+```{r}
+# Be careful with the bracket placement to subtract the mean first
+lopez_clean <-lopez_clean %>% 
+  mutate(actual_calories_std = (F_CaloriesConsumed - mean(F_CaloriesConsumed)) / sd(F_CaloriesConsumed))
+
+# Condition as a factor containing 0 and 1
+lm_cals_std <- lm(formula = actual_calories_std ~ Condition, 
+                      data = lopez_clean)
+
+summary(lm_cals_std)
+```
+
+Note, the estimate may be slightly different to directly calculating Cohen's d as there are a few formulas. If you compare to Activity 5, we got *d* = 0.45 there and 0.44 here. Between the estimate and 95% confidence intervals, they are off by .02, so it does not have a material impact on the results. 
+
+```{r}
+standardize_parameters(lm_cals_numbers)
+```
+
+::: {.callout-tip}
+
+As before, once you know how it works conceptually, there is a shortcut where you do not need to standardise all your variables first. The <pkg>effectsize</pkg> package has a handy function called `standardize_parameters()` which you can apply to your initial `lm()` object.
+
+```{r}
+standardize_parameters(lm_cals_numbers)
+```
+:::
+
 ## Checking assumptions
+
+For the inferential statistics to work as intended, the model makes certain assumptions about the data you are putting into it and the accuracy of the inferences depends on how sensible these assumption are.
+
+### Activity 10 - Diagnostic plots for linear regression
+
+We have the same assumptions for simple linear regression now we have a categorical predictor:
+
+1. The outcome is interval/ratio level data.
+
+2. The predictor variable is interval/ratio or categorical (with two levels at a time).
+
+3. All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).
+
+4. The predictors have non-zero variance.
+
+5. The relationship between the outcome and predictor is linear.
+
+6. The residuals should be normally distributed.
+
+7. There should be homoscedasticity.
+
+Assumptions 1-4 are pretty straight forward as they relate to your understanding of the design or a simple check on the data for non-zero variance (the responses are not all the exact same value).
+
+Assumptions 5-7 require diagnostic checks on the residuals from the model. In contrast to continuous predictors, they are a little harder to identify patterns in. 
+
+### Checking linearity 
+
+### Checking normality
+
+### Checking homoscedasticity
+
+### Checking influential cases
+
+### Checking all the assumptions
+
+Now we have covered the individual diagnostic plots, there is a handy function called `check_model()` from the <pkg>performance</pkg> package. Like the `plot()` function, the output for linearity, homoscedasticity, and influential observations does not plot right as we only have two values for the predictor. Do not worry, you have not done anything wrong.  
+
+```{r}
+check_model(lm_cals_numbers)
+```
 
 ## Reporting your results
 

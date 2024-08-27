@@ -402,7 +402,8 @@ div.csl-indent {
   <li><a href="#checking-linearity" id="toc-checking-linearity" class="nav-link" data-scroll-target="#checking-linearity"><span class="header-section-number">8.4.2</span> Checking linearity</a></li>
   <li><a href="#checking-normality" id="toc-checking-normality" class="nav-link" data-scroll-target="#checking-normality"><span class="header-section-number">8.4.3</span> Checking normality</a></li>
   <li><a href="#checking-homoscedasticity" id="toc-checking-homoscedasticity" class="nav-link" data-scroll-target="#checking-homoscedasticity"><span class="header-section-number">8.4.4</span> Checking homoscedasticity</a></li>
-  <li><a href="#checking-all-the-assumptions" id="toc-checking-all-the-assumptions" class="nav-link" data-scroll-target="#checking-all-the-assumptions"><span class="header-section-number">8.4.5</span> Checking all the assumptions</a></li>
+  <li><a href="#checking-influential-cases" id="toc-checking-influential-cases" class="nav-link" data-scroll-target="#checking-influential-cases"><span class="header-section-number">8.4.5</span> Checking influential cases</a></li>
+  <li><a href="#checking-all-the-assumptions" id="toc-checking-all-the-assumptions" class="nav-link" data-scroll-target="#checking-all-the-assumptions"><span class="header-section-number">8.4.6</span> Checking all the assumptions</a></li>
   </ul>
 </li>
   <li><a href="#reporting-your-results" id="toc-reporting-your-results" class="nav-link" data-scroll-target="#reporting-your-results"><span class="header-section-number">8.5</span> Reporting your results</a></li>
@@ -1213,7 +1214,7 @@ Show me the solution
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The conclusions are the same as when we calculated the correlation where age is not a statistically significant predictor of support for wealth redistribution. As a regression model, we get the same conclusions expressed in a slightly different way. Age is negative, but the size of the slope is very small (-0.003) and non-significant (<em>p</em> = .625). We explain pretty much no variance in support for wealth redistribution (<span class="math inline">\(R^2\)</span> = 0.0008), so age is not very informative as a predictor.</p>
+<p>The conclusions are the same as when we calculated the correlation where age is not a statistically significant predictor of support for wealth redistribution. As a regression model, we get the same conclusions expressed in a slightly different way. Age is negative, but the size of the slope is very small (-0.003) and non-significant (<em>p</em> = .625). We explain pretty much no variance in support for wealth redistribution (<span class="math inline">\(R^2\)</span> = .0008), so age is not very informative as a predictor.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Create lm object for age as a predictor</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>lm_age <span class="ot">&lt;-</span> <span class="fu">lm</span>(redistribution <span class="sc">~</span> age,</span>
@@ -1505,15 +1506,28 @@ Error mode
 </div>
 <p>In this plot, you are looking out for a roughly random spread of points as you move from one end of the x-axis to the other. The red line should be roughly flat and horizontal.</p>
 <p>When there is <em>heteroscedasticity</em>, the characteristic patterns to look out for are a kind of arrow shape where there is a wide spread of points at one end and decreases to a denser range at the other end, or a bow tie where there is a wide spread of points at each end and dense in the middle.</p>
-</section><section id="checking-all-the-assumptions" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="checking-all-the-assumptions">
-<span class="header-section-number">8.4.5</span> Checking all the assumptions</h3>
-<p>There is a fourth plot which you could examine using <code>plot(lm_redistribution, which = 4)</code>, but we are going to leave that until Chapter 11. It shows influential values or outliers which have the biggest individual effect on the model residuals. It is not technically an assumption of linear regression, but has knock on effects for the other assumptions.</p>
-<p>Now we have covered the individual diagnostic plots, there is a handy function called <code>check_model()</code> from the <pkg>performance</pkg> package. This function reports all the diagnostic checks from <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>, but tidies up the presentation and has some useful reminders of what you are looking for.</p>
+</section><section id="checking-influential-cases" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="checking-influential-cases">
+<span class="header-section-number">8.4.5</span> Checking influential cases</h3>
+<p>Finally, plot 4 is a residuals vs leverage plot and helps us identify influential cases. You might have heard of the term outlier before and this is one way of classifying data points that are different enough to the rest of the data in a regression model. It is not strictly an assumption of linear regression, but it can affect the other assumptions.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">check_model</span>(lm_redistribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">plot</span>(lm_redistribution, </span>
+<span id="cb33-2"><a href="#cb33-2"></a>     <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Identifying outliers is a complex decision and we will explore your options in the course materials and Chapter 11 on data screening. Influential points and potential outliers would have high leverage values and the plot will show a threshold called Cook’s distance as red dashed lines. In this plot, they are not visible as there is no value with a big enough leverage value, but you would be looking for data points outside this threshold to identify influential values.</p>
+</section><section id="checking-all-the-assumptions" class="level3" data-number="8.4.6"><h3 data-number="8.4.6" class="anchored" data-anchor-id="checking-all-the-assumptions">
+<span class="header-section-number">8.4.6</span> Checking all the assumptions</h3>
+<p>Now we have covered the individual diagnostic plots, there is a handy function called <code>check_model()</code> from the <pkg>performance</pkg> package. This function reports all the diagnostic checks from <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>, but tidies up the presentation and has some useful reminders of what you are looking for.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">check_model</span>(lm_redistribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1587,10 +1601,10 @@ Show me the solution
 </ol>
 <p><strong>Looking at the first plot, the red line is pretty flat and horizontal, so we are happy with this.</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1600,10 +1614,10 @@ Show me the solution
 </ol>
 <p><strong>The qq-plot is fine for the vast majority of the range. We just have a few deviations in the extreme ends of the x-axis, but this is a byproduct of using a scale score as our outcome as responses cannot go beyond 1-6.</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1613,10 +1627,10 @@ Show me the solution
 </ol>
 <p><strong>The red line is pretty flat and it looks like there is a fairly even range of values across the x-axis range.</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">plot</span>(lm_age, <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1640,7 +1654,7 @@ Show me the solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1660,7 +1674,7 @@ Show me the solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-lm-continuous_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1708,53 +1722,53 @@ F-statistic: 6.861 on 1 and 303 DF,  p-value: 0.009251</code></pre>
 <p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on simple linear regression between two continuous variables. There are not many outright errors that people make here, more misspecifications that are not doing what you think they are doing.</p>
 <p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Load the packages below</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb38-3"><a href="#cb38-3"></a><span class="fu">library</span>(effectsize)</span>
-<span id="cb38-4"><a href="#cb38-4"></a><span class="fu">library</span>(correlation)</span>
-<span id="cb38-5"><a href="#cb38-5"></a><span class="fu">library</span>(performance)</span>
-<span id="cb38-6"><a href="#cb38-6"></a></span>
-<span id="cb38-7"><a href="#cb38-7"></a><span class="co"># Load the data file</span></span>
-<span id="cb38-8"><a href="#cb38-8"></a><span class="co"># This should be the Dawtry_2015.csv file </span></span>
-<span id="cb38-9"><a href="#cb38-9"></a>dawtry_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Dawtry_2015.csv"</span>)</span>
-<span id="cb38-10"><a href="#cb38-10"></a></span>
-<span id="cb38-11"><a href="#cb38-11"></a><span class="co"># Reverse code redist2 and redist4</span></span>
-<span id="cb38-12"><a href="#cb38-12"></a>dawtry_data <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span></span>
-<span id="cb38-13"><a href="#cb38-13"></a>  <span class="fu">mutate</span>(<span class="at">redist2_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist2,</span>
-<span id="cb38-14"><a href="#cb38-14"></a>         <span class="at">redist4_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist4)</span>
-<span id="cb38-15"><a href="#cb38-15"></a></span>
-<span id="cb38-16"><a href="#cb38-16"></a><span class="co"># calculate mean fairness and satisfaction score  </span></span>
-<span id="cb38-17"><a href="#cb38-17"></a>fairness_satisfaction <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
-<span id="cb38-18"><a href="#cb38-18"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> fairness<span class="sc">:</span>satisfaction, </span>
-<span id="cb38-19"><a href="#cb38-19"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
-<span id="cb38-20"><a href="#cb38-20"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-21"><a href="#cb38-21"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-22"><a href="#cb38-22"></a>  <span class="fu">summarise</span>(<span class="at">fairness_satisfaction =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-23"><a href="#cb38-23"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb38-24"><a href="#cb38-24"></a></span>
-<span id="cb38-25"><a href="#cb38-25"></a><span class="co"># calculate mean wealth redistribution score  </span></span>
-<span id="cb38-26"><a href="#cb38-26"></a>redistribution <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
-<span id="cb38-27"><a href="#cb38-27"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(redist1, redist2_R, redist3, redist4_R), </span>
-<span id="cb38-28"><a href="#cb38-28"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
-<span id="cb38-29"><a href="#cb38-29"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-30"><a href="#cb38-30"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-31"><a href="#cb38-31"></a>  <span class="fu">summarise</span>(<span class="at">redistribution =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-32"><a href="#cb38-32"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb38-33"><a href="#cb38-33"></a></span>
-<span id="cb38-34"><a href="#cb38-34"></a><span class="co"># join data and select columns for focus</span></span>
-<span id="cb38-35"><a href="#cb38-35"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
-<span id="cb38-36"><a href="#cb38-36"></a>  <span class="fu">inner_join</span>(fairness_satisfaction, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-37"><a href="#cb38-37"></a>  <span class="fu">inner_join</span>(redistribution, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-38"><a href="#cb38-38"></a>  <span class="fu">select</span>(PS, Household_Income<span class="sc">:</span>redistribution, <span class="sc">-</span>redist2_R, <span class="sc">-</span>redist4_R)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Load the packages below</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb39-4"><a href="#cb39-4"></a><span class="fu">library</span>(correlation)</span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="fu">library</span>(performance)</span>
+<span id="cb39-6"><a href="#cb39-6"></a></span>
+<span id="cb39-7"><a href="#cb39-7"></a><span class="co"># Load the data file</span></span>
+<span id="cb39-8"><a href="#cb39-8"></a><span class="co"># This should be the Dawtry_2015.csv file </span></span>
+<span id="cb39-9"><a href="#cb39-9"></a>dawtry_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Dawtry_2015.csv"</span>)</span>
+<span id="cb39-10"><a href="#cb39-10"></a></span>
+<span id="cb39-11"><a href="#cb39-11"></a><span class="co"># Reverse code redist2 and redist4</span></span>
+<span id="cb39-12"><a href="#cb39-12"></a>dawtry_data <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-13"><a href="#cb39-13"></a>  <span class="fu">mutate</span>(<span class="at">redist2_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist2,</span>
+<span id="cb39-14"><a href="#cb39-14"></a>         <span class="at">redist4_R =</span> <span class="dv">7</span> <span class="sc">-</span> redist4)</span>
+<span id="cb39-15"><a href="#cb39-15"></a></span>
+<span id="cb39-16"><a href="#cb39-16"></a><span class="co"># calculate mean fairness and satisfaction score  </span></span>
+<span id="cb39-17"><a href="#cb39-17"></a>fairness_satisfaction <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb39-18"><a href="#cb39-18"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> fairness<span class="sc">:</span>satisfaction, </span>
+<span id="cb39-19"><a href="#cb39-19"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
+<span id="cb39-20"><a href="#cb39-20"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-21"><a href="#cb39-21"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-22"><a href="#cb39-22"></a>  <span class="fu">summarise</span>(<span class="at">fairness_satisfaction =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-23"><a href="#cb39-23"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb39-24"><a href="#cb39-24"></a></span>
+<span id="cb39-25"><a href="#cb39-25"></a><span class="co"># calculate mean wealth redistribution score  </span></span>
+<span id="cb39-26"><a href="#cb39-26"></a>redistribution <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb39-27"><a href="#cb39-27"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(redist1, redist2_R, redist3, redist4_R), </span>
+<span id="cb39-28"><a href="#cb39-28"></a>               <span class="at">names_to =</span> <span class="st">"Items"</span>, </span>
+<span id="cb39-29"><a href="#cb39-29"></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-30"><a href="#cb39-30"></a>  <span class="fu">group_by</span>(PS) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-31"><a href="#cb39-31"></a>  <span class="fu">summarise</span>(<span class="at">redistribution =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-32"><a href="#cb39-32"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb39-33"><a href="#cb39-33"></a></span>
+<span id="cb39-34"><a href="#cb39-34"></a><span class="co"># join data and select columns for focus</span></span>
+<span id="cb39-35"><a href="#cb39-35"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_data <span class="sc">%&gt;%</span> </span>
+<span id="cb39-36"><a href="#cb39-36"></a>  <span class="fu">inner_join</span>(fairness_satisfaction, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-37"><a href="#cb39-37"></a>  <span class="fu">inner_join</span>(redistribution, <span class="at">by =</span> <span class="st">"PS"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-38"><a href="#cb39-38"></a>  <span class="fu">select</span>(PS, Household_Income<span class="sc">:</span>redistribution, <span class="sc">-</span>redist2_R, <span class="sc">-</span>redist4_R)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Below, we have several variations of a misspecification. Copy and paste them into your R Markdown file below the code chunk to wrangle the data. Once you have copied the activities, click knit and look at the output you receive. See if you can identify the mistake and fix it before checking the answer.</p>
 <p><strong>Question 6</strong>. Copy the following code chunk into your R Markdown file and press knit. We want to create a simple linear regression model to specify <code>fairness_satisfaction</code> as our outcome variable and <code>Political_Preference</code> as our predictor. Have we expressed that accurately?</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(Political_Preference <span class="sc">~</span> fairness_satisfaction,</span>
-<span id="cb39-3"><a href="#cb39-3"></a>                        <span class="at">data =</span> dawtry_clean)</span>
-<span id="cb39-4"><a href="#cb39-4"></a></span>
-<span id="cb39-5"><a href="#cb39-5"></a><span class="fu">summary</span>(lm_fairness)</span>
-<span id="cb39-6"><a href="#cb39-6"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="#cb40-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(Political_Preference <span class="sc">~</span> fairness_satisfaction,</span>
+<span id="cb40-3"><a href="#cb40-3"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb40-4"><a href="#cb40-4"></a></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="fu">summary</span>(lm_fairness)</span>
+<span id="cb40-6"><a href="#cb40-6"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1769,24 +1783,24 @@ Explain the solution
 <div class="callout-body-container callout-body">
 <p>In this example, we mixed up the variables. The formula in <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> has the form <code>outcome ~ predictor</code>, so we mixed up the order. In simple linear regression, it makes no difference to the slope, but it is important to be able to express your model accurately and it would make a difference once you scale up to multiple linear regression.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_satisfaction <span class="sc">~</span> Political_Preference,</span>
-<span id="cb40-2"><a href="#cb40-2"></a>                        <span class="at">data =</span> dawtry_clean)</span>
-<span id="cb40-3"><a href="#cb40-3"></a>                        </span>
-<span id="cb40-4"><a href="#cb40-4"></a><span class="fu">summary</span>(lm_fairness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_satisfaction <span class="sc">~</span> Political_Preference,</span>
+<span id="cb41-2"><a href="#cb41-2"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb41-3"><a href="#cb41-3"></a>                        </span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="fu">summary</span>(lm_fairness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 <p><strong>Question 7</strong>. Copy the following code chunk into your R Markdown file and press knit. We want to standardise the outcome and predictors, so that we get the intercept and slope estimates in standard deviations. Have we expressed that accurately?</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1"></a><span class="in">```{r}</span></span>
-<span id="cb41-2"><a href="#cb41-2"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">mutate</span>(<span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction))</span>
-<span id="cb41-4"><a href="#cb41-4"></a></span>
-<span id="cb41-5"><a href="#cb41-5"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_std <span class="sc">~</span> Political_Preference,</span>
-<span id="cb41-6"><a href="#cb41-6"></a>                        <span class="at">data =</span> dawtry_clean)</span>
-<span id="cb41-7"><a href="#cb41-7"></a>                        </span>
-<span id="cb41-8"><a href="#cb41-8"></a><span class="fu">summary</span>(lm_fairness)</span>
-<span id="cb41-9"><a href="#cb41-9"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="#cb42-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">mutate</span>(<span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction))</span>
+<span id="cb42-4"><a href="#cb42-4"></a></span>
+<span id="cb42-5"><a href="#cb42-5"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_std <span class="sc">~</span> Political_Preference,</span>
+<span id="cb42-6"><a href="#cb42-6"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb42-7"><a href="#cb42-7"></a>                        </span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">summary</span>(lm_fairness)</span>
+<span id="cb42-9"><a href="#cb42-9"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1801,14 +1815,14 @@ Explain the solution
 <div class="callout-body-container callout-body">
 <p>In this example, we only standardised the outcome. When we standardise predictors, we must standardise both the outcome and predictor so they are expressed in standard deviations. It is just when we center, we only center the predictor.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">mutate</span>(<span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction),</span>
-<span id="cb42-3"><a href="#cb42-3"></a>         <span class="at">Political_std =</span> (Political_Preference <span class="sc">-</span> <span class="fu">mean</span>(Political_Preference, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(Political_Preference, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb42-4"><a href="#cb42-4"></a></span>
-<span id="cb42-5"><a href="#cb42-5"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_std <span class="sc">~</span> Political_std,</span>
-<span id="cb42-6"><a href="#cb42-6"></a>                        <span class="at">data =</span> dawtry_clean)</span>
-<span id="cb42-7"><a href="#cb42-7"></a>                        </span>
-<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">summary</span>(lm_fairness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>dawtry_clean <span class="ot">&lt;-</span> dawtry_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">mutate</span>(<span class="at">fairness_std =</span> (fairness_satisfaction <span class="sc">-</span> <span class="fu">mean</span>(fairness_satisfaction)) <span class="sc">/</span> <span class="fu">sd</span>(fairness_satisfaction),</span>
+<span id="cb43-3"><a href="#cb43-3"></a>         <span class="at">Political_std =</span> (Political_Preference <span class="sc">-</span> <span class="fu">mean</span>(Political_Preference, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(Political_Preference, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb43-4"><a href="#cb43-4"></a></span>
+<span id="cb43-5"><a href="#cb43-5"></a>lm_fairness <span class="ot">&lt;-</span> <span class="fu">lm</span>(fairness_std <span class="sc">~</span> Political_std,</span>
+<span id="cb43-6"><a href="#cb43-6"></a>                        <span class="at">data =</span> dawtry_clean)</span>
+<span id="cb43-7"><a href="#cb43-7"></a>                        </span>
+<span id="cb43-8"><a href="#cb43-8"></a><span class="fu">summary</span>(lm_fairness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
