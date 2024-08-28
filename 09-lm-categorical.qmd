@@ -785,37 +785,52 @@ If you compare to the paired-samples t-test, all of these values are identical. 
 
 ## Test Yourself {#09-test}
 
-To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter. 
+To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. Compared to previous chapters, there are no error mode questions as the content is so similar to Chapter 8. We are just going to test your understanding of the concepts rather than potential errors.  
 
 ### Knowledge check
 
-For this chapter's knowledge check section, we have something a little different. Instead of purely conceptual questions about functions, we have another example of linear regression from X. Feel free to create this model yourself, but we will show you some output and ask you questions based on it. 
+For this chapter's knowledge check section, we have something a little different. Instead of purely conceptual questions about functions, we have another example of linear regression from @lopez_visual_2023. Feel free to create this model yourself, but we will show you some output and ask you questions based on it. 
 
-For this model...
+For this model, we focus on ounces of soup consumed (`M_postsoup`) rather than calories by each Condition group (`Condition_label`). You might have a good idea about the results based on the chapter, but you will still need to interpret the output accurately.  
 
-**Question 1**.
+**Question 1**. In the violin-boxplot below, the experimental group consumed more soup in ounces than the control group: `r torf(TRUE)`. 
 
-**Question 2**.
-
-**Question 3**.
-
-**Question 4**.
-
-**Question 5**.
-
-### Error mode
-
-The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on simple linear regression between two continuous variables. There are not many outright errors that people make here, more misspecifications that are not doing what you think they are doing. 
-
-Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files: 
-
-```{r eval=FALSE}
-
+```{r echo=FALSE}
+lopez_clean %>% 
+  ggplot(aes(y = M_postsoup, x = Condition_label, fill = Condition_label)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL) + 
+  stat_summary(fun = "mean", 
+               geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", # confidence interval
+               geom = "errorbar", 
+               width = 0.1) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Actual Calories Consumed (Oz)") +
+  scale_x_discrete(name = "Study Condition") + 
+  guides(fill = FALSE) + 
+  theme_classic()
 ```
 
-Below, we have several variations of a misspecification. Copy and paste them into your R Markdown file below the code chunk to wrangle the data. Once you have copied the activities, click knit and look at the output you receive. See if you can identify the mistake and fix it before checking the answer.
+**Question 2** For the next few questions, we have the output from a linear regression model and we would like you to interpret it. 
 
-**Question 6**.
+```{r echo=FALSE}
+lm_test <- lm(M_postsoup ~ Condition_label, 
+              data = lopez_clean)
+
+summary(lm_test)
+```
+
+The outcome variable in this model is `r mcq(c(answer = "Actual ounces of soup consumed", "Experimental condition"))` and the predictor variable is `r mcq(c("Actual ounces of soup consumed", answer = "Experimental condition"))`.
+
+**Question 3** In this model, the reference group is `r mcq(c(answer = "Control", "Experimental"))` and the target group is `r mcq(c("Control", answer = "Experimental"))`
+
+**Question 4** Rounded to 2 decimals, we predict a value of `r fitb(8.87)` for our reference group. 
+
+**Question 5** The predictor is `r mcq(c(answer = "statistically significant", "non-significant"))` and `r mcq(c(answer = "positive", "negative"))`.
+
+**Question 6** The target group consumed on average `r fitb(2.84)` ounces `r mcq(c("less", answer = "more"))` soup than the reference group. 
 
 ## Words from this Chapter
 
@@ -827,4 +842,10 @@ glossary_table()
 
 ## End of chapter
 
-Blah...
+Well done, you have now completed the first core set of chapters for inferential statistics! 
+
+At this point, you can now address a range of research questions by applying variations of the general linear model. As a researcher, the most important thing is starting with your research question - and where applicable, your hypothesis -, designing a study to address that research question, and using an appropriate statistical model to fit the design and answer your research question. But, before you can identify an appropriate statistical model, you need to know what they look like! This is everything we cover in Research Methods 1 to focus on a select range of foundational skills. You will then build on these techniques in Chapters 12-14 for Research Methods 2.
+
+You are now ready to complete the second data analysis chapter: [Simple Linear Regression](#journey-02-wrangling). This is where you can test your new skills in a slightly less structured way, from wrangling data, to answering your research question. 
+
+In the next core chapter, we turn to statistical power and work on how you can conduct a power analysis in R/RStudio. 

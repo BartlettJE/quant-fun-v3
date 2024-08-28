@@ -453,7 +453,6 @@ window.Quarto = {
 <a href="#09-test" id="toc-09-test" class="nav-link" data-scroll-target="#09-test"><span class="header-section-number">9.7</span> Test Yourself</a>
   <ul class="collapse">
 <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check"><span class="header-section-number">9.7.1</span> Knowledge check</a></li>
-  <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode"><span class="header-section-number">9.7.2</span> Error mode</a></li>
   </ul>
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">9.8</span> Words from this Chapter</a></li>
@@ -1675,22 +1674,64 @@ Residual standard error: 17.81 on 99 degrees of freedom</code></pre>
 <p>If you compare to the paired-samples t-test, all of these values are identical. You also have the option of calculating confidence intervals around the estimate, calculating a standardised effect size, and checking assumptions by applying the previous linear regression activities.</p>
 </section></section></section><section id="09-test" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="09-test">
 <span class="header-section-number">9.7</span> Test Yourself</h2>
-<p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter.</p>
+<p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. Compared to previous chapters, there are no error mode questions as the content is so similar to Chapter 8. We are just going to test your understanding of the concepts rather than potential errors.</p>
 <section id="knowledge-check" class="level3" data-number="9.7.1"><h3 data-number="9.7.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">9.7.1</span> Knowledge check</h3>
-<p>For this chapter’s knowledge check section, we have something a little different. Instead of purely conceptual questions about functions, we have another example of linear regression from X. Feel free to create this model yourself, but we will show you some output and ask you questions based on it.</p>
-<p>For this model…</p>
-<p><strong>Question 1</strong>.</p>
-<p><strong>Question 2</strong>.</p>
-<p><strong>Question 3</strong>.</p>
-<p><strong>Question 4</strong>.</p>
-<p><strong>Question 5</strong>.</p>
-</section><section id="error-mode" class="level3" data-number="9.7.2"><h3 data-number="9.7.2" class="anchored" data-anchor-id="error-mode">
-<span class="header-section-number">9.7.2</span> Error mode</h3>
-<p>The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on simple linear regression between two continuous variables. There are not many outright errors that people make here, more misspecifications that are not doing what you think they are doing.</p>
-<p>Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load <pkg>tidyverse</pkg> and wrangle the data files:</p>
-<p>Below, we have several variations of a misspecification. Copy and paste them into your R Markdown file below the code chunk to wrangle the data. Once you have copied the activities, click knit and look at the output you receive. See if you can identify the mistake and fix it before checking the answer.</p>
-<p><strong>Question 6</strong>.</p>
+<p>For this chapter’s knowledge check section, we have something a little different. Instead of purely conceptual questions about functions, we have another example of linear regression from <span class="citation" data-cites="lopez_visual_2023">Lopez et al. (<a href="references.html#ref-lopez_visual_2023" role="doc-biblioref">2023</a>)</span>. Feel free to create this model yourself, but we will show you some output and ask you questions based on it.</p>
+<p>For this model, we focus on ounces of soup consumed (<code>M_postsoup</code>) rather than calories by each Condition group (<code>Condition_label</code>). You might have a good idea about the results based on the chapter, but you will still need to interpret the output accurately.</p>
+<p><strong>Question 1</strong>. In the violin-boxplot below, the experimental group consumed more soup in ounces than the control group: <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question 2</strong> For the next few questions, we have the output from a linear regression model and we would like you to interpret it.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = M_postsoup ~ Condition_label, data = lopez_clean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-10.410  -4.467  -1.089   2.833  37.333 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                   8.8675     0.4007  22.130  &lt; 2e-16 ***
+Condition_labelExperimental   2.8426     0.5846   4.863 1.59e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.285 on 462 degrees of freedom
+Multiple R-squared:  0.04869,   Adjusted R-squared:  0.04663 
+F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
+</div>
+</div>
+<p>The outcome variable in this model is <select class="webex-select"><option value="blank"></option>
+<option value="answer">Actual ounces of soup consumed</option>
+<option value="">Experimental condition</option></select> and the predictor variable is <select class="webex-select"><option value="blank"></option>
+<option value="">Actual ounces of soup consumed</option>
+<option value="answer">Experimental condition</option></select>.</p>
+<p><strong>Question 3</strong> In this model, the reference group is <select class="webex-select"><option value="blank"></option>
+<option value="answer">Control</option>
+<option value="">Experimental</option></select> and the target group is <select class="webex-select"><option value="blank"></option>
+<option value="">Control</option>
+<option value="answer">Experimental</option></select></p>
+<p><strong>Question 4</strong> Rounded to 2 decimals, we predict a value of <input class="webex-solveme nospaces" size="4" data-answer="[&quot;8.87&quot;]"> for our reference group.</p>
+<p><strong>Question 5</strong> The predictor is <select class="webex-select"><option value="blank"></option>
+<option value="answer">statistically significant</option>
+<option value="">non-significant</option></select> and <select class="webex-select"><option value="blank"></option>
+<option value="answer">positive</option>
+<option value="">negative</option></select>.</p>
+<p><strong>Question 6</strong> The target group consumed on average <input class="webex-solveme nospaces" size="4" data-answer="[&quot;2.84&quot;]"> ounces <select class="webex-select"><option value="blank"></option>
+<option value="">less</option>
+<option value="answer">more</option></select> soup than the reference group.</p>
 </section></section><section id="words-from-this-chapter" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="words-from-this-chapter">
 <span class="header-section-number">9.8</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
@@ -1726,7 +1767,10 @@ Residual standard error: 17.81 on 99 degrees of freedom</code></pre>
 </div>
 </section><section id="end-of-chapter" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">9.9</span> End of chapter</h2>
-<p>Blah…</p>
+<p>Well done, you have now completed the first core set of chapters for inferential statistics!</p>
+<p>At this point, you can now address a range of research questions by applying variations of the general linear model. As a researcher, the most important thing is starting with your research question - and where applicable, your hypothesis -, designing a study to address that research question, and using an appropriate statistical model to fit the design and answer your research question. But, before you can identify an appropriate statistical model, you need to know what they look like! This is everything we cover in Research Methods 1 to focus on a select range of foundational skills. You will then build on these techniques in Chapters 12-14 for Research Methods 2.</p>
+<p>You are now ready to complete the second data analysis chapter: <a href="#journey-02-wrangling">Simple Linear Regression</a>. This is where you can test your new skills in a slightly less structured way, from wrangling data, to answering your research question.</p>
+<p>In the next core chapter, we turn to statistical power and work on how you can conduct a power analysis in R/RStudio.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

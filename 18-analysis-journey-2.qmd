@@ -1,4 +1,4 @@
-# Analysis Journey 2: Simple Linear Regression
+# Analysis Journey 2: Simple Linear Regression {#journey-02-wrangling}
 
 Activity on simple linear regression. 
 
