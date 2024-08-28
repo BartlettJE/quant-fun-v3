@@ -485,10 +485,6 @@ summary(lm_cals_std)
 
 Note, the estimate may be slightly different to directly calculating Cohen's d as there are a few formulas. If you compare to Activity 5, we got *d* = 0.45 there and 0.44 here. Between the estimate and 95% confidence intervals, they are off by .02, so it does not have a material impact on the results. 
 
-```{r}
-standardize_parameters(lm_cals_numbers)
-```
-
 ::: {.callout-tip}
 
 As before, once you know how it works conceptually, there is a shortcut where you do not need to standardise all your variables first. The <pkg>effectsize</pkg> package has a handy function called `standardize_parameters()` which you can apply to your initial `lm()` object.
@@ -522,15 +518,50 @@ We have the same assumptions for simple linear regression now we have a categori
 
 Assumptions 1-4 are pretty straight forward as they relate to your understanding of the design or a simple check on the data for non-zero variance (the responses are not all the exact same value).
 
-Assumptions 5-7 require diagnostic checks on the residuals from the model. In contrast to continuous predictors, they are a little harder to identify patterns in. 
+Assumptions 5-7 require diagnostic checks on the residuals from the model. In contrast to continuous predictors, they are a little harder to identify patterns in. As we only have two values on the x-axis (0 and 1), all the residuals will be organised into vertical lines and the trend lines to help spot patterns do not look quite right. 
 
 ### Checking linearity 
 
+When you have a categorical predictor with two levels, you meet linearity by default, so you do not need to check this assumption directly. When you have two levels, you can only fit a straight line between the values. 
+
+```{r}
+plot(lm_cals_numbers, 
+     which = 1)
+```
+
 ### Checking normality
+
+The qq-plot is still the same to interpret. Now, this example presents a useful case of decision making in data analysis we explore more in Chapter 11. The plot here is approaching signs of violating normality as there is a clear curve to the data points with 3 and 118 the largest deviations. For this chapter, we are sticking with it and it would be consistent with how the original authors analysed the data, but note this would be a key decision to make and justify when reporting the analysis. 
+
+```{r}
+plot(lm_cals_numbers, 
+     which = 2)
+```
 
 ### Checking homoscedasticity
 
+The scale-location plot is harder to interpret when you have a categorical predictor. Like linearity, the points are all arranged in two vertical lines as we only have two levels. You are looking out for the spread of the two lines to be roughly similar. They look fine here, just a couple of data points 118 and 3 separated a little from the other points. 
+
+```{r}
+plot(lm_cals_numbers, 
+     which = 3)
+```
+
 ### Checking influential cases
+
+Finally, we have our plots for identifying influential cases. First, we get Cook's distance for all the observations in your data. We see points 3 and 118 come up yet again, but although they are the largest deviations, they do not have worrying Cook's distance values. There are different thresholds in the literature, but estimates range from 1, 0.5, to 4/n. It would only be under this final most conservative estimate (0.009) we would highlight several observations for further inspection. 
+
+```{r}
+plot(lm_cals_numbers, 
+     which = 4)
+```
+
+Finally, the fifth plot shows residual values against leverage. Like Chapter 8, we cannot see the Cook's distance threshold it uses in the plot as none of the points are a large enough deviation, despite 3 and 188 sticking out again.
+
+```{r}
+plot(lm_cals_numbers, 
+     which = 5)
+```
 
 ### Checking all the assumptions
 
@@ -540,15 +571,138 @@ Now we have covered the individual diagnostic plots, there is a handy function c
 check_model(lm_cals_numbers)
 ```
 
+::: {.callout-note collapse="true"}
+#### What might explain the funky normality? 
+
+If you are interested, the posterior predictive check here provides an insight into why we get potential problems with normality. The outcome is ratio but cannot be smaller than 0 as we cannot have negative calories. So, in the green line for the observed data, the data are a little skewed as it drops off prior to 0. However, the model does not know that and it happily predicts normally distributed values which go below 0. Remember the models will work regardless of the data you put into them, it is important to keep your role in mind to recognise when you need to be cautious about what you can learn from the model. 
+:::
+
+::: {.callout-tip}
+#### Try this
+
+In activity 8, you should have calculated the effect of condition (`Condition_label`) on estimated calories consumed (`CalEstimate`) for your independent task. Using the model object `lm_cal_est`, work through assumptions for simple linear regression and make a note of whether you think it meets the assumptions, or there might be any problems. Some of the assumptions you consider what you know about the design, while others you need the diagnostic plots. 
+
+1. The outcome is interval/ratio level data.
+
+2. The predictor variable is interval/ratio or categorical (with two levels at a time).
+
+3. All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).
+
+4. The predictors have non-zero variance.
+
+5. The relationship between the outcome and predictor is linear.
+
+6. The residuals should be normally distributed.
+
+7. There should be homoscedasticity.
+
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+
+1. The outcome is interval/ratio level data.
+
+**The outcome is nicely ratio as estimated calories have a logical 0 point (no calories) and the units are in equal measurements..**
+
+2. The predictor variable is interval/ratio or categorical (with two levels at a time).
+
+**Our predictor is categorical with two levels.**
+
+3. All values of the outcome variable are independent (i.e., each score should come from a different participant/observation).
+
+**The short answer is this appears to be the case in this study. The longer answer is there might have been an issue with the participants apparently completing the study in groups of 3. It is not entirely clear in the data how they recorded this, but grouped data collection does present a potential problem with independence we do not tackle in this course and the original authors did not seem to address it.**
+
+4. The predictors have non-zero variance.
+
+**We have observations from both levels of the predictor.**
+
+5. The relationship between the outcome and predictor is linear.
+
+**We meet linearity by default with two levels, so we do not need the plot here.**
+
+6. The residuals should be normally distributed.
+
+**Like the actual calories consumed, this is firmly a clear deviation from what we expect and provides a good example of when it does not look right. If we were to analyse the data fully, we would explore the impact of this and alternative models, but for this chapter, we are going to note our concern and remember the authors analysed the data like this.**
+
+```{r}
+plot(lm_cal_est, 
+     which = 2)
+```
+
+7. There should be homoscedasticity. 
+
+**Looking at the spread of each group, it looks fine with a similar range until both groups are more sparsely distributed above 1.**
+
+```{r}
+plot(lm_cal_est, 
+     which = 3)
+```
+
+In summary, normality is a clear concern and something we will return to for your options in Chapter 11 and the course materials. For now, we will stick with the model but recognise we should be cautious. 
+:::
+
 ## Reporting your results
+
+Now we have some results to go with, there are a few recommendations on how to communicate that information. If you need a reminder of APA style for formatting numbers, you can see [this PDF online](https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf){target="_blank"} for a little cheat sheet for numbers and statistics. 
+
+1. Explain to the reader what your linear regression model was. For example, what was your outcome and predictor variable?
+
+2. Report descriptive statistics to help contextualise your findings. For example, the mean/standard deviation for your outcome per group.
+
+3. Provide an appropriate data visualisation to help communciate key patterns to the reader. For example, a violin-boxplot for how each group responded on your outcome.
+
+4. Report all three key inferential statistics concepts for the coefficient: the slope, the confidence interval around your slope, and the *p*-value for hypothesis testing. When you have one predictor in simple linear regression, you typically focus on the slope as your key effect size that helps address your research question and hypothesis. APA style rounds numbers to 2 decimal places when numbers can be bigger than 1, and 3 decimals with no leading zero when it cannot be bigger than 1. When you report the unstandardised slope, you use the symbol $b_1$ but for the standardised slope, you use Beta instead $\beta_1$.
+
+5. Provide an overview of the model fit statistics for whether your model explained a significant amount of variance in your outcome. Remember: the *p*-value for your model will be the same as for the slope in simple linear regression. 
+
+For our main example, we could summarise the findings as: 
+
+"Our research question was: is there a difference in actual calories consumed between the control and experimental group? To test this, we applied simple linear regression using condition as a predictor with two levels (control and experimental) and actual calories consumed as our outcome. Figure 1 shows a violin-boxplot of the difference between the control and experimental groups.
+
+```{r echo=FALSE}
+lopez_clean %>% 
+  ggplot(aes(y = F_CaloriesConsumed, x = Condition_label, fill = Condition_label)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               fatten = NULL) + 
+  stat_summary(fun = "mean", 
+               geom = "point") +
+  stat_summary(fun.data = "mean_cl_boot", # confidence interval
+               geom = "errorbar", 
+               width = 0.1) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Actual Calories Consumed (kcals)") +
+  scale_x_discrete(name = "Study Condition") + 
+  guides(fill = FALSE) + 
+  theme_classic()
+```
+
+Our model explained a statistically significant amount of variance in our outcome (adjusted $R^2$ = .047, F(1, 462) = 23.64, *p* < .001). Condition was a positive predictor, where the experimental group consumed on average 63 more calories than the control group ($b_1$ = 63.05, 95% CI = [37.57, 88.53], *p* < .001). Expressed as a standardised effect size, the experimental group consumed 0.44 (95% CI = [0.26, 0.62]) more standard deviations than the control group."
+
+Note: we have not included an APA formatted Figure title here as it is not easy to format in our book, so refer to the course materials for guidance. 
 
 ## Bonus section - One- and paired-sample tests
 
+In this course, we focus on correlational and between-subjects designs, but you might find yourself in a situation where you want to test a continuous variable against a fixed value or compare conditions in the same participants. This is a bonus section if you have time, so you can skip to the [Test Yourself](#09-test) section to finish the chapter if you do not. 
+
+For this demonstration, we will use data from experiment 1 of @bem_feeling_2011, an infamous study that almost single-handedly started the replication crisis in psychology. Briefly, participants completed a computer task adapted from priming experiments where they could select one of two windows. They had to guess which window had an image hidden behind it and the images contained different stimuli like erotic or neutral/control images. Across many trials of the participants guessing the location, Bem calculated the proportion of successful trials which could range between 0 (never correct), 50 (50%, chance), and 100 (always correct). The headline finding was participants demonstrated precognition - or the ability to see into the future - to guess above chance levels, but what does the data look like? 
+
+We are working with a new data set, so please save the following data file: [Bem_2011.csv](data/Bem_2011.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_09_regression_categorical`. 
+
 ### One-sample comparing against a fixed value 
+
+#### Expressed as a t-test
+
+#### Expressed as a linear model
 
 ### Paired-samples comparing conditions
 
-## Test Yourself
+#### Expressed as a t-test
+
+#### Expressed as a linear model
+
+## Test Yourself {#09-test}
 
 To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter. 
 

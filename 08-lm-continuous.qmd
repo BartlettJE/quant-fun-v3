@@ -722,14 +722,23 @@ When there is *heteroscedasticity*, the characteristic patterns to look out for 
 
 ### Checking influential cases
 
-Finally, plot 4 is a residuals vs leverage plot and helps us identify influential cases. You might have heard of the term outlier before and this is one way of classifying data points that are different enough to the rest of the data in a regression model. It is not strictly an assumption of linear regression, but it can affect the other assumptions. 
+Finally, there are two main plots to help us identify influential cases. You might have heard of the term outlier before and this is one way of classifying data points that are different enough to the rest of the data in a regression model. It is not strictly an assumption of linear regression, but it can affect the other assumptions. Identifying outliers is a complex decision and we will explore your options in the course materials and Chapter 11 on data screening. 
+
+If you only run `plot(lm_redistribution)` and cycle through the plots, you do not see this version. This plot shows values of Cook's distance for each observation in your data along the x-axis. Cook's distance measures the influence of deleting a given observation, where higher values mean deleting that observation results in a larger change to the model estimates. There are different thresholds in the literature, but estimates range from 1, 0.5, to 4/n. We explore the decision making around this and your options in Chapter 11.  
 
 ```{r}
 plot(lm_redistribution, 
      which = 4)
 ```
 
-Identifying outliers is a complex decision and we will explore your options in the course materials and Chapter 11 on data screening. Influential points and potential outliers would have high leverage values and the plot will show a threshold called Cook's distance as red dashed lines. In this plot, they are not visible as there is no value with a big enough leverage value, but you would be looking for data points outside this threshold to identify influential values. 
+Finally, we get a residuals vs leverage plot to show influential cases in a slightly different way. Instead of just the Cook's distance value of each observation, it plots the standardised residuals against leverage values.  
+
+```{r}
+plot(lm_redistribution, 
+     which = 5)
+```
+
+Influential points and potential outliers would have high leverage values and the plot will show a threshold of Cook's distance as red dashed lines. In this plot, they are not visible as there is no value with a big enough leverage value, but you would be looking for data points outside this threshold to identify influential values. 
 
 ### Checking all the assumptions
 
@@ -828,7 +837,7 @@ Now we have some results to go with, there are a few recommendations on how to c
 
 For our main example, we could summarise the findings as: 
 
-"Our research question was: is there a relationship between support for wealth redistribution and fairness and satisfaction with the current system. To test this, we applied simple linear regression using fairness and satisfaction as a predictor and support for wealth redistribution as our outcome. Figure 1 shows a scatterplot of the relationship.
+"Our research question was: is there a relationship between support for wealth redistribution and fairness and satisfaction with the current system? To test this, we applied simple linear regression using fairness and satisfaction as a predictor and support for wealth redistribution as our outcome. Figure 1 shows a scatterplot of the relationship.
 
 ```{r echo=FALSE}
 dawtry_clean %>% 
@@ -842,7 +851,7 @@ dawtry_clean %>%
   theme_classic()
 ```
 
-Our model explained a statistically significant amount of variance in our outcome (adjusted $R^2$ = .49, F(1, 303) = 291.70, *p* < .001). Fairness and satisfaction was a negative predictor, where for every 1-unit increase we expect support for redistribution to decrease by 0.40 ($b_1 = -0.40$, 95% CI = [-0.44, -0.35], *p* < .001)."
+Our model explained a statistically significant amount of variance in our outcome (adjusted $R^2$ = .489, F(1, 303) = 291.70, *p* < .001). Fairness and satisfaction was a negative predictor, where for every 1-unit increase we expect support for redistribution to decrease by 0.40 ($b_1 = -0.40$, 95% CI = [-0.44, -0.35], *p* < .001)."
 
 Note: we have not included an APA formatted Figure title here as it is not easy to format in our book, so refer to the course materials for guidance. 
 
