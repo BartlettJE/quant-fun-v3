@@ -682,25 +682,106 @@ Our model explained a statistically significant amount of variance in our outcom
 
 Note: we have not included an APA formatted Figure title here as it is not easy to format in our book, so refer to the course materials for guidance. 
 
-## Bonus section - One- and paired-sample tests
+## Bonus section - One- and paired-samples tests
 
 In this course, we focus on correlational and between-subjects designs, but you might find yourself in a situation where you want to test a continuous variable against a fixed value or compare conditions in the same participants. This is a bonus section if you have time, so you can skip to the [Test Yourself](#09-test) section to finish the chapter if you do not. 
 
-For this demonstration, we will use data from experiment 1 of @bem_feeling_2011, an infamous study that almost single-handedly started the replication crisis in psychology. Briefly, participants completed a computer task adapted from priming experiments where they could select one of two windows. They had to guess which window had an image hidden behind it and the images contained different stimuli like erotic or neutral/control images. Across many trials of the participants guessing the location, Bem calculated the proportion of successful trials which could range between 0 (never correct), 50 (50%, chance), and 100 (always correct). The headline finding was participants demonstrated precognition - or the ability to see into the future - to guess above chance levels, but what does the data look like? 
+For this demonstration, we will use data from experiment 1 of @bem_feeling_2011, an (in)famous study that almost single-handedly started the replication crisis in psychology. Briefly, participants completed a computer task adapted from priming experiments where they could select one of two windows. They had to guess which window had an image hidden behind it and the images contained different stimuli like erotic or neutral/control images. Across many trials of the participants guessing the location, Bem calculated the proportion of successful trials which could range between 0 (never correct), 50 (50%, chance), and 100 (always correct). The headline finding was participants demonstrated precognition - or the ability to see into the future - to guess above chance levels, but what does the data look like? 
 
-We are working with a new data set, so please save the following data file: [Bem_2011.csv](data/Bem_2011.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_09_regression_categorical`. 
+We are working with a new data set, so please save the following data file: [Bem_2011.csv](data/Bem_2011.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_09_regression_categorical`. Read in the data file to the object `bem_data` to be consistent with the tasks below.
+
+```{r echo=FALSE}
+bem_data <- read_csv("data/Bem_2011.csv")
+```
 
 ### One-sample comparing against a fixed value 
 
+There are scenarios where you want to compare a single continuous variable against a fixed value. For example, do your participants respond significantly above or below chance? 
+
 #### Expressed as a t-test
 
+As a t-test, we need to specify two arguments:
+
+- `x` - This is the continuous variable you want to analyse and compare the mean value of. We have to use the base R operator `$` to specify the column from your data.  
+
+- `mu` - This is the fixed value you want to test your variable against. 
+
+In this scenario, we want to compare the hit rate to erotic images against a value of 50. This will tell us if the hit rate is significantly above or below chance. 
+
+```{r}
+t.test(x = bem_data$Erotic.Hits.PC,
+       mu = 50)
+```
+
+The output is similar to the independent samples t-test. We get the *p*-value for hypothesis testing, the mean estimate of the variable, and it's 95% confidence interval. To express it as an effect size, you can subtract 50 from each value. So, participants responded 3.14% above chance, statistically significant, but hardly convincing evidence for precognition.
+
 #### Expressed as a linear model
+
+We can also express this as a linear model, but we first must add a small wrangling step. In the one-sample t-test, we can manually enter a fixed value to compare the mean against. In a linear model, we must compare against 0 by subtracting the fixed value from your variable. So, we subtract 50 from all the observations, so they become a kind of deviation from 50. 
+
+```{r}
+bem_data <- bem_data %>% 
+  mutate(erotic_deviation = Erotic.Hits.PC - 50)
+```
+
+In contrast to previous linear models, we only add a fixed intercept and do not add a predictor. This recreates the one-sample t-test by estimating the mean value of your outcome. 
+
+```{r}
+lm_erotic <- lm(erotic_deviation ~ 1, 
+                data = bem_data)
+
+summary(lm_erotic)
+```
+
+This process has the benefit of directly producing your effect size, as the intercept estimate is the deviation from your fixed value (here, 50). As we calculated manually before, the erotic hit rate is 3.14% above your fixed value. If you remember back to the linear model explanations, this is where the *p*-value for the intercept is finally useful as it tests against 0. 
+
+If you compare to the one-sample t-test, all of these values are identical. You also have the option of calculating confidence intervals around the estimate, calculating a standardised effect size, and checking assumptions by applying the previous linear regression activities.  
 
 ### Paired-samples comparing conditions
 
+Alternatively, you might want to compare two conditions from the same participants in paired samples/within-subjects design. For example, is the hit-rate significantly higher for erotic images compared to control images? 
+
 #### Expressed as a t-test
 
+To conduct a paired-samples t-test, we must specify three arguments: 
+
+- `x` - This is the first level of your condition as a column. You need your data in wide format, so the condition levels are spread across two columns per participant. We must use the base R operator `$` to specify the column from your data.  
+
+- `y` - This is the second level of your condition as a column.
+
+- `paired` - This instructs R you want a paired-samples t-test to compare conditions within participants.  
+
+In this scenario, we want to compare the hit rate for erotic images to control images. 
+
+```{r}
+t.test(x = bem_data$Erotic.Hits.PC,
+       y = bem_data$Control.Hits.PC, 
+       paired = TRUE)
+```
+
+The output is almost identical to the one-sample t-test, but this time the effect size is the mean difference between conditions, not just the mean per condition. Behind the scenes, a paired-samples t-test is actually a one-sample t-test in disguise as it uses the difference between conditions as the outcome. 
+
 #### Expressed as a linear model
+
+Finally, we can express a paired-samples t-test as a linear model. We must apply a small data wrangling step to calculate a difference score between conditions. This is so the linear model compares the estimate against 0 of no difference. So, for this example, we create a variable for the difference between erotic and control images.  
+
+```{r}
+bem_data <- bem_data %>% 
+  mutate(erotic_control = Erotic.Hits.PC - Control.Hits.PC)
+```
+
+Like the one-sample scenario, we only add a fixed intercept for the new difference variance and do not add a predictor. This recreates the paired-samples t-test by estimating the mean value of your difference score outcome. 
+
+```{r}
+lm_paired <- lm(erotic_control ~ 1, 
+                data = bem_data)
+
+summary(lm_paired)
+```
+
+This process directly produces your effect size again, as the intercept estimate is the deviation from 0 for your difference score. As we saw in the paired-samples t-test output, there was a 3.31% higher hit rate for erotic images compared to control (as we calculated erotic - control). 
+
+If you compare to the paired-samples t-test, all of these values are identical. You also have the option of calculating confidence intervals around the estimate, calculating a standardised effect size, and checking assumptions by applying the previous linear regression activities.    
 
 ## Test Yourself {#09-test}
 
