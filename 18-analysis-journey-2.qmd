@@ -1,9 +1,122 @@
 # Analysis Journey 2: Simple Linear Regression {#journey-02-wrangling}
 
-Activity on simple linear regression. 
+Welcome to the second data analysis journey. We have designed these chapters as a bridge between the structured learning in the core chapters and your assessments. We present you with a new data set, show you what the end product should look like, and see if you can apply your data wrangling, visualisation, and/or analysis skills to get there. 
 
-## Data overview
+As you gain independence, this is the crucial skill. Data analysis is all about seeing the data you have available to you and identifying what the end product needs to be to apply your visualisation and analysis techniques. You can then mentally (or physically) create a checklist of tasks to work backgrounds to get there. There might be a lot of trial and error as you try one thing, it does not quite work, so you go back and try something else. If you get stuck though, we have a range of hints and task lists you can unhide, then the solution to check your attempts against. 
 
-## Tasks
+In this second data analysis journey, we focus on inferential statistics after some data wrangling to apply all the skills you developed from Chapter 1 to Chapter 9. 
 
-## Solution
+## Task preparation
+
+### Introduction to the data set 
+
+For this task, we are using open data from @binfet_importance_2022, where the authors used the data set to write a separate article on repurposing it for statistics education [@evans_repurposing_2023], inspiring us to use it in the chapter here. The abstract of their article is: 
+
+> Researchers have claimed that canine-assisted interventions (CAIs) contribute significantly to bolstering participants' wellbeing, yet the mechanisms within interactions have received little empirical attention. The aim of this study was to assess the impact of client–canine contact on wellbeing outcomes in a sample of 284 undergraduate college students (77% female; 21% male, 2% non-binary). Participants self-selected to participate and were randomly assigned to one of two canine interaction treatment conditions (touch or no touch) or to a handler-only condition with no therapy dog present. To assess self-reports of wellbeing, measures of flourishing, positive and negative affect, social connectedness, happiness, integration into the campus community, stress, homesickness, and loneliness were administered. Exploratory analyses were conducted to assess whether these wellbeing measures could be considered as measuring a unidimensional construct. This included both reliability analysis and exploratory factor analysis. Based on the results of these analyses we created a composite measure using participant scores on a latent factor. We then conducted the tests of the four hypotheses using these factor scores. Results indicate that participants across all conditions experienced enhanced wellbeing on several measures; however, only those in the direct contact condition reported significant improvements on all measures of wellbeing. Additionally, direct interactions with therapy dogs through touch elicited greater wellbeing benefits than did no touch/indirect interactions or interactions with only a dog handler. Similarly, analyses using scores on the wellbeing factor indicated significant improvement in wellbeing across all conditions (handler-only, *d*=0.18, *p*=0.041; indirect, *d*=0.38, *p*<0.001; direct, *d*=0.78, *p*<0.001), with more benefit when a dog was present (*d*=0.20, *p*<0.001), and the most benefit coming from physical contact with the dog (*d*=0.13, *p*=0.002). The findings hold implications for post-secondary wellbeing programs as well as the organization and delivery of CAIs.
+
+In summary, they were interested in the effect of therapy dogs on well-being in undergraduate students. Participants were randomly allocated to one of three groups: 
+
+1. Canine interaction touching the dogs. 
+
+2. Canine interaction not touching the dogs. 
+
+3. Handler-only with no dogs present. 
+
+They measured 9 outcomes before and after the intervention including social connectedness, stress, and loneliness. For this journey chapter, we will focus on a constrained set of variables and analyses so it does not take forever, but the process would apply to all the outcomes. The authors posed three hypotheses which we will test after some data wrangling:
+
+1. All treatment groups would have significantly higher measures of well-being and lower measures of ill-being after treatment. 
+
+2. The treatment groups that interact with dogs would have significantly higher measures of well-being and lower measures of ill-being compared to the handler-only treatment. 
+
+3. Direct contact with a therapy dog would yield greater benefits than indirect contact treatment.
+
+### Organising your files and project for the task
+
+Before we can get started, you need to organise your files and project for the task, so your working directory is in order.
+
+1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, create a new folder for the data analysis journey called `Journey_02_regression`. Within `Journey_02_regression`, create two new folders called `data` and `figures`.
+
+2. Create an R Project for `Journey_02_regression` as an existing directory for your chapter folder. This should now be your working directory.
+
+3. Create a new R Markdown document and give it a sensible title describing the chapter, such as `Analysis Journey 2 - Simple Linear Regression`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Journey_02_regression` folder. 
+
+4. We are working with a new data set, so please save the following data file: [Evans_2023_raw.csv](data/Evans_2023_raw.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Journey_02_regression`.
+
+You are now ready to start working on the task! 
+
+## Overview
+
+### Load <pkg>tidyverse</pkg> and read the data files
+
+Before we explore what wrangling we need to do, complete the following task list and check the solution if you are stuck. 
+
+::: {.callout-tip}
+#### Try this
+Complete the following steps:
+
+1. Load the following packages:
+
+    - <pkg>tidyverse</pkg>
+    
+    - <pkg>effectsize</pkg>
+    
+    - <pkg>performance</pkg>
+
+2. Read the data file `data/Evans_2023_raw.csv` to the object name `evans_data`.
+:::
+
+::: {.callout-tip collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r}
+# load the relevant packages
+library(effectsize)
+library(performance)
+library(tidyverse)
+
+# Read the Evans_2023_raw.csv file 
+evans_data <- read_csv("data/Evans_2023_raw.csv")
+```
+:::
+
+### Explore `evans_data`
+
+In `evans_data`, we have the participant ID (`RID`), several demographic variables, and pre and post items for stress, loneliness, and social connectedness. There are 88 variables which would take up loads of space, so we are just showing a preview of the first 20 here. If you use `glimpse()`, you will see all 88. 
+
+```{r echo=FALSE}
+evans_data %>% 
+  select(1:20) %>% 
+glimpse()
+```
+
+The columns (variables) we have in the data set are:
+
+| Variable       |       Type                       |           Description          |
+|:--------------:|:---------------------------------|:-------------------------------|
+| RID | `r typeof(evans_data$RID)`| Participant ID number. |
+| GroupAssignment | `r typeof(evans_data$GroupAssignment)`| Randomly allocated study group: Control, Indirect, Direct. |
+| Age_Yrs | `r typeof(evans_data$Age_Yrs)`| Age in years. |
+| Year_of_Study | `r typeof(evans_data$Year_of_Study)`| Participant's year in college: First (1), Second (2), Third (3), Fourth (4), Fifth or more (5). |
+| Live_Pets | `r typeof(evans_data$Live_Pets)`| Does the participant have a pet back at home: Pet back home (1), no pet back home (2). |
+| Consumer_BARK | `r typeof(evans_data$Consumer_BARK)`| Is the participant a low (1), medium (2), or high (3) consumer of the BARK program - the therapy dog service. |
+| S1_1 | `r typeof(evans_data$S1_1)`| Stress scale pre-test, 1 item, 1 (not at all stressed) to 5 (very stressed). |
+| L1_1 to L1_20 | `r typeof(evans_data$L1_1)`| Loneliness scale pre-test, 20 items, 1 (never) to 4 (often). |
+| SC1_1 to SC1_20 | `r typeof(evans_data$SC1_1)`| Social connectedness scale pre-test, 20 items, 1 (strongly disagree) to 6 (strongly agree). |
+| S2_1 | `r typeof(evans_data$S2_1)`| Stress scale post-test, 1 item. |
+| L2_1 to L2_20 | `r typeof(evans_data$L2_1)`| Loneliness scale post-test, 20 items. |
+| SC2_1 to SC2_20 | `r typeof(evans_data$SC2_1)`| Social connectedness scale post-test, 20 items, 1 (strongly disagree) to 6 (strongly agree).|
+
+## Wrangling 
+
+## Summarising/visualising 
+
+## Analysing 
+
+### Hypothesis 1
+
+### Hypothesis 2
+
+### Hypothesis 3
+
+## Conclusion

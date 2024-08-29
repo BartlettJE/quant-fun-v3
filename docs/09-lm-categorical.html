@@ -1616,7 +1616,7 @@ mean difference
 </div>
 </div>
 <p>The output is almost identical to the one-sample t-test, but this time the effect size is the mean difference between conditions, not just the mean per condition. Behind the scenes, a paired-samples t-test is actually a one-sample t-test in disguise as it uses the difference between conditions as the outcome.</p>
-<p>As an aside, <span class="citation" data-cites="bem_feeling_2011">Bem (<a href="references.html#ref-bem_feeling_2011" role="doc-biblioref">2011</a>)</span> reported a significant difference here, but only because he reported a one-tailed test (<code>alternative = "greater"</code>). This is an example where you ideally need a strong (pre-registered) prediction as it makes material impact on the inferences you would make.</p>
+<p>As an aside, <span class="citation" data-cites="bem_feeling_2011">Bem (<a href="references.html#ref-bem_feeling_2011" role="doc-biblioref">2011</a>)</span> reported a significant difference here, but only because he reported a one-tailed test (<code>alternative = "greater"</code>). This is an example where you ideally need a strong (ideally pre-registered) prediction as it makes a material impact on the inferences you would make.</p>
 </section><section id="expressed-as-a-linear-model-1" class="level4" data-number="9.6.2.2"><h4 data-number="9.6.2.2" class="anchored" data-anchor-id="expressed-as-a-linear-model-1">
 <span class="header-section-number">9.6.2.2</span> Expressed as a linear model</h4>
 <p>Finally, we can express a paired-samples t-test as a linear model. We must apply a small data wrangling step to calculate a difference score between conditions. This is so the linear model compares the estimate against 0 of no difference. So, for this example, we create a variable for the difference between erotic and control images.</p>
@@ -1624,7 +1624,7 @@ mean difference
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>bem_data <span class="ot">&lt;-</span> bem_data <span class="sc">%&gt;%</span> </span>
 <span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">mutate</span>(<span class="at">erotic_control =</span> Erotic.Hits.PC <span class="sc">-</span> Control.Hits.PC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Like the one-sample scenario, we only add a fixed intercept for the new difference variance and do not add a predictor. This recreates the paired-samples t-test by estimating the mean value of your difference score outcome.</p>
+<p>Like the one-sample scenario, we only add a fixed intercept for the new difference variance and do not add a predictor. This recreates the paired-samples t-test by estimating the mean value of your difference score.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>lm_paired <span class="ot">&lt;-</span> <span class="fu">lm</span>(erotic_control <span class="sc">~</span> <span class="dv">1</span>, </span>
 <span id="cb46-2"><a href="#cb46-2"></a>                <span class="at">data =</span> bem_data)</span>
