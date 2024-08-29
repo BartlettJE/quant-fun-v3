@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
 <title>Fundamentals of Quantitative Analysis - 9&nbsp; Regression with one categorical predictor</title>
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -56,7 +56,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,13 +98,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,37 +107,10 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -154,19 +120,19 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-lm-categorical.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression with one categorical predictor</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-lm-categorical.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression with one categorical predictor</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -327,18 +293,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./19-analysis-journey-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Analysis Journey 3: ANOVA</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./20-analysis-journey-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Analysis Journey 4: Multiple Linear Regression.</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -398,7 +352,7 @@ window.Quarto = {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -457,7 +411,7 @@ window.Quarto = {
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">9.8</span> Words from this Chapter</a></li>
   <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">9.9</span> End of chapter</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/09-lm-categorical.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/09-lm-categorical.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/09-lm-categorical.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/09-lm-categorical.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -476,13 +430,15 @@ window.Quarto = {
   </div>
   
 
-
-</header><p>Introduction.</p>
+</header><p>In Chapter 8, you finally started working on inferential statistics. We spent so long on data wrangling and visualisation that it now feels so much closer to being able to address your research questions. We covered linear regression and the concept of correlation for investigating the relationship between two continuous variables.</p>
+<p>In this chapter, we focus on simple linear regression for testing research questions and hypotheses for the difference between two groups on one outcome. Like Chapter 8, we reinforce the idea that common statistical tests you come across are specific applications of the general linear model (<a href="[R for Data Science](https://r4ds.had.co.nz/){target=&quot;_blank&quot;}" target="_blank">Lindeløv, 2019</a>). In this chapter, we explore the concepts of t-tests as those specific applications compared to recreating them using linear regression. We also have a bonus section on expressing a one-sample and paired-samples design as linear models.</p>
 <p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
 <p>By the end of this chapter, you will be able to:</p>
 <ul>
 <li><p>Visualise the difference between two groups on an outcome.</p></li>
-<li><p>ILO2.</p></li>
+<li><p>Apply and interpret a Student and Welch t-test.</p></li>
+<li><p>Apply and interpret linear regression with one categorical predictor variable.</p></li>
+<li><p>Apply and interpret linear regression adapted to one-sample and paired-samples designs.</p></li>
 </ul>
 <section id="chapter-preparation" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="chapter-preparation">
 <span class="header-section-number">9.1</span> Chapter preparation</h2>
@@ -492,7 +448,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Imagine a bowl of soup that never emptied, no matter how many spoonfuls you ate—when and how would you know to stop eating? Satiation can play a role in regulating eating behavior, but research suggests visual cues may be just as important. In a seminal study by Wansink et al.&nbsp;(2005), researchers used self-refilling bowls to assess how visual cues of portion size would influence intake. The study found that participants who unknowingly ate from self-refilling bowls ate more soup than did participants eating from normal (not self-refilling) bowls. Despite consuming 73% more soup, however, participants in the self-refilling condition did not believe they had consumed more soup, nor did they perceive themselves as more satiated than did participants eating from normal bowls. Given recent concerns regarding the validity of research from the Wansink lab, we conducted a preregistered direct replication study of Wansink et al.&nbsp;(2005) with a more highly powered sample (N = 464 vs.&nbsp;54 in the original study). We found that most results replicated, albeit with half the effect size (d = 0.45 instead of 0.84), with participants in the self-refilling bowl condition eating significantly more soup than those in the control condition. Like the original study, participants in the selfrefilling condition did not believe they had consumed any more soup than participants in the control condition. These results suggest that eating can be strongly controlled by visual cues, which can even override satiation.</p>
 </blockquote>
-<p>In summary, they replicated an (in)famous experiment that won the Ig-Nobel prize. Participants engaged in a intricate setting (seriously, go and look at the diagrams in the article) where they ate soup from bowls on a table. In the control group, participants could eat as much soup as they wanted and could ask for a top-up from the researchers. In the experimental group, the soup bowls automatically topped up through a series of hidden tubes under the table. The idea behind the control group is they get an accurate visual cue by the soup bowl reducing, and the experimental group get an inaccurate visual cue by the soup bowl seemingly never reducing.</p>
+<p>In summary, they replicated an (in)famous experiment that won the Ig-Nobel prize. Participants engaged in a intricate setting (seriously, go and look at the diagrams in the article) where they ate soup from bowls on a table. In the control group, participants could eat as much soup as they wanted and could ask for a top-up from the researchers. In the experimental group, the soup bowls automatically topped up through a series of hidden tubes under the table. The idea behind the control group is they get an accurate visual cue by the soup bowl reducing, and the experimental group get an inaccurate visual cue by the soup bowl seemingly never reducing. So, the inaccurate visual cue would interfere with natural signs of getting full and lead to people eating more.</p>
 <p>In the original article, participants in the experimental group ate more soup than participants in the control group, but the main author was involved in a series of research misconduct cases. <span class="citation" data-cites="lopez_visual_2023">Lopez et al. (<a href="references.html#ref-lopez_visual_2023" role="doc-biblioref">2023</a>)</span> wanted to see if the result would replicate in an independent study, so they predicted they would find the same results. In this chapter, we will explore the difference between the control and experimental groups on several variables in their data set.</p>
 </section><section id="organising-your-files-and-project-for-the-chapter" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-chapter">
 <span class="header-section-number">9.1.2</span> Organising your files and project for the chapter</h3>
@@ -603,7 +559,7 @@ Try this
 </div>
 </div>
 <p>In <code>lopez_clean</code>, we have the following variables:</p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 41%">
@@ -688,7 +644,7 @@ Try this
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -734,7 +690,7 @@ Show me the solution
 </div>
 </section><section id="activity-4---using-the-t.test-function" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="activity-4---using-the-t.test-function">
 <span class="header-section-number">9.2.2</span> Activity 4 - Using the <code>t.test()</code> function</h3>
-<p>A t-test is a specific application of the general linear model. In this test, we express the difference in an outcome between two groups as a kind of standardised mean difference. If you are interested, see the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/between-subjects-students-t-test.html" target="_blank">McAleer, 2023</a>) for the calculations behind the Student and Welch t-test. Conceptually, a t-test is the difference between two groups divided by the variability of the difference. There are two main versions of a t-test:</p>
+<p>A t-test is a specific application of the general linear model. In this test, we express the difference in an outcome between two groups as a kind of standardised mean difference. If you are interested, see the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/between-subjects-students-t-test.html" target="_blank">McAleer, 2023</a>) for the calculations behind the Student and Welch t-test. Conceptually, a t-test is the difference between two groups divided by the standard error of the difference. There are two main versions of a t-test:</p>
 <ul>
 <li><p><a class="glossary" title="Calculating a t-value based on the mean difference divided by the pooled standard deviation. In the Student t-test, we times the pooled standard deviation by a term containing the sample sizes of each group.">Student t-test</a></p></li>
 <li><p><a class="glossary" title="Calculating a t-value based on the mean difference divided by a term containing the variance of each group. We also correct the degrees of freedom for the difference in variances.">Welch t-test</a></p></li>
@@ -830,6 +786,26 @@ sample estimates:
 </div>
 <p>You can see the main difference between the two versions is the Welch t-test Student corrects the degrees of freedom, so they are a decimal. While the Student t-test does not correct the degrees of freedom, so they are predictably N - 2.</p>
 <p>To summarise: A Student t-test showed participants in the experimental group ate significantly more calories of soup than participants in the control group, <em>t</em> (462) = -4.86, <em>p</em> &lt; .001. On average, those in the experimental group ate 63.05 (95% CI = [37.57, 88.53]) more calories than those in the control group.</p>
+<p>One further useful argument is specifying a one-tailed test if you have a specific prediction. The only downside to using linear models later is there is not a simple argument to apply a one-tailed test.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>       <span class="at">data =</span> lopez_clean, </span>
+<span id="cb10-3"><a href="#cb10-3"></a>       <span class="at">alternative =</span> <span class="st">"less"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  F_CaloriesConsumed by Condition_label
+t = -4.8578, df = 453.45, p-value = 8.188e-07
+alternative hypothesis: true difference in means between group Control and group Experimental is less than 0
+95 percent confidence interval:
+     -Inf -41.6571
+sample estimates:
+     mean in group Control mean in group Experimental 
+                  196.6818                   259.7313 </code></pre>
+</div>
+</div>
+<p>The difference here is specifying the <code>alternative</code> argument. You can use “less” or “greater” depending if you predict a negative (group A &lt; group B) or positive difference (group A &gt; group B).</p>
 </section><section id="activity-5---calculating-cohens-d" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="activity-5---calculating-cohens-d">
 <span class="header-section-number">9.2.3</span> Activity 5 - Calculating Cohen’s d</h3>
 <p>Raw/unstandardised effect sizes are great for putting results in context, particularly when the units are comparable across studies. For our outcome in this study, differences in calories are easy to put in context.</p>
@@ -838,11 +814,11 @@ sample estimates:
 <p><span class="math inline">\(d = \frac{2t}{\sqrt{df}} = \frac{-9.725}{21.49} = -0.45\)</span></p>
 <p>It is important to know the concepts before you use shortcuts, but there is the <code>cohens_d()</code> function from the <pkg>effectsize</pkg> package which uses the same format as <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">cohens_d</span>(F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
-<span id="cb10-2"><a href="#cb10-2"></a>         <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">cohens_d</span>(F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
+<span id="cb12-2"><a href="#cb12-2"></a>         <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">Cohens_d</th>
 <th style="text-align: right;">CI</th>
@@ -915,32 +891,32 @@ Show me the solution
 <div class="callout-body-container callout-body">
 <p>The violin-boxplot shows little difference between the two groups on estimated calories consumed.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> CalEstimate, <span class="at">x =</span> Condition_label, <span class="at">fill =</span> Condition_label)) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>, </span>
-<span id="cb11-5"><a href="#cb11-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
-<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, </span>
-<span id="cb11-7"><a href="#cb11-7"></a>               <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_cl_boot"</span>, <span class="co"># confidence interval</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>               <span class="at">geom =</span> <span class="st">"errorbar"</span>, </span>
-<span id="cb11-10"><a href="#cb11-10"></a>               <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span> </span>
-<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Estimated Calories Consumed (kcals)"</span>) <span class="sc">+</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Study Condition"</span>) <span class="sc">+</span> </span>
-<span id="cb11-14"><a href="#cb11-14"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb11-15"><a href="#cb11-15"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> CalEstimate, <span class="at">x =</span> Condition_label, <span class="at">fill =</span> Condition_label)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>, </span>
+<span id="cb13-5"><a href="#cb13-5"></a>               <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, </span>
+<span id="cb13-7"><a href="#cb13-7"></a>               <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_cl_boot"</span>, <span class="co"># confidence interval</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>               <span class="at">geom =</span> <span class="st">"errorbar"</span>, </span>
+<span id="cb13-10"><a href="#cb13-10"></a>               <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>) <span class="sc">+</span> </span>
+<span id="cb13-12"><a href="#cb13-12"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Estimated Calories Consumed (kcals)"</span>) <span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Study Condition"</span>) <span class="sc">+</span> </span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb13-15"><a href="#cb13-15"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>For our inferential statistics, a Welch t-test showed the difference is not statistically significant, <em>t</em> (455.06) = 1.60, <em>p</em> = .110.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> CalEstimate <span class="sc">~</span> Condition_label, </span>
-<span id="cb12-2"><a href="#cb12-2"></a>       <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">t.test</span>(<span class="at">formula =</span> CalEstimate <span class="sc">~</span> Condition_label, </span>
+<span id="cb14-2"><a href="#cb14-2"></a>       <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -957,11 +933,11 @@ sample estimates:
 </div>
 <p>The control group estimated they consumed 17.88 (95% CI = [-4.08, 39.85]) more calories than the experimental group, but the difference was not significant. Expressed as a standardised effect size, this equates to Cohen’s d = 0.15 (95% CI = [-0.03, 0.33]).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">cohens_d</span>(CalEstimate <span class="sc">~</span> Condition_label, </span>
-<span id="cb14-2"><a href="#cb14-2"></a>         <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cohens_d</span>(CalEstimate <span class="sc">~</span> Condition_label, </span>
+<span id="cb16-2"><a href="#cb16-2"></a>         <span class="at">data =</span> lopez_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">Cohens_d</th>
 <th style="text-align: right;">CI</th>
@@ -972,7 +948,7 @@ sample estimates:
 <td style="text-align: right;">0.1490887</td>
 <td style="text-align: right;">0.95</td>
 <td style="text-align: right;">-0.0341294</td>
-<td style="text-align: right;">0.3321449</td>
+<td style="text-align: right;">0.332145</td>
 </tr></tbody>
 </table>
 </div>
@@ -988,13 +964,13 @@ sample estimates:
 <span class="header-section-number">9.3.1</span> Activity 6 - Descriptive statistics</h3>
 <p>For all the information we want to include in a report, calculating descriptive statistics is helpful for the reader to show the context behind the results you present. Here, we can report the mean and standard deviation of our outcome per group.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(Condition_label) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_cals =</span> <span class="fu">round</span>(<span class="fu">mean</span>(F_CaloriesConsumed), <span class="dv">2</span>), </span>
-<span id="cb15-4"><a href="#cb15-4"></a>            <span class="at">sd_cals =</span> <span class="fu">round</span>(<span class="fu">mean</span>(F_CaloriesConsumed), <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">group_by</span>(Condition_label) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_cals =</span> <span class="fu">round</span>(<span class="fu">mean</span>(F_CaloriesConsumed), <span class="dv">2</span>), </span>
+<span id="cb17-4"><a href="#cb17-4"></a>            <span class="at">sd_cals =</span> <span class="fu">round</span>(<span class="fu">mean</span>(F_CaloriesConsumed), <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">Condition_label</th>
 <th style="text-align: right;">mean_cals</th>
@@ -1026,20 +1002,20 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you want some reinforcement of how these skills apply to published research, look at Table 1 in <span class="citation" data-cites="lopez_visual_2023">Lopez et al. (<a href="references.html#ref-lopez_visual_2023" role="doc-biblioref">2023</a>)</span>. The means and standard deviations here (and Cohen’s d from Activity 5) exactly reproduce the values they report, apart from the <em>SD</em> for the control group.</p>
+<p>If you want some reinforcement of how these skills apply to published research, look at Table 1 in <span class="citation" data-cites="lopez_visual_2023">Lopez et al. (<a href="references.html#ref-lopez_visual_2023" role="doc-biblioref">2023</a>)</span>. The means and standard deviations here (and Cohen’s d from Activity 5) exactly reproduce the values they report, apart from the <em>SD</em> for the control group (maybe there is a typo in their article).</p>
 </div>
 </div>
 </section><section id="activity-7---using-the-lm-function" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="activity-7---using-the-lm-function">
 <span class="header-section-number">9.3.2</span> Activity 7 - Using the <code>lm()</code> function</h3>
 <p>For our research question of “is there a difference in actual calories consumed between the control and experimental group?”, we can address it with simple linear regression. In this study, we can make causal conclusions as it was an experiment to randomly allocate people into one of two groups, but you can also use regression to compare two self-selecting groups when you cannot make a causal conclusion in isolation. Think carefully about what you can conclude from your design.</p>
 <p>Like Chapter 8, we start by defining our regression model with a formula in the pattern <code>outcome ~ predictor</code> and specify the data frame you want to use. We must then use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function around your model object to get all the statistics you need.</p>
-<p>There are two ways you can use a categorical predictor. First, we can code groups numerically which people called <a class="glossary" title="">dummy coding</a>. You code your first group 0 and you code your second group as 1, which maps on directly to how the regression model works. Let’s look at the output.</p>
+<p>There are two ways you can use a categorical predictor. First, we can code groups numerically which people called <a class="glossary" title="Entering a categorical predictor using two values such as 0 and 1.">dummy coding</a>. You code your first group 0 and you code your second group as 1, which maps on directly to how the regression model works. Let’s look at the output.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Condition as a factor containing 0 and 1</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>lm_cals_numbers <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> F_CaloriesConsumed <span class="sc">~</span> Condition, </span>
-<span id="cb16-3"><a href="#cb16-3"></a>                      <span class="at">data =</span> lopez_clean)</span>
-<span id="cb16-4"><a href="#cb16-4"></a></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">summary</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Condition as a factor containing 0 and 1</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>lm_cals_numbers <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> F_CaloriesConsumed <span class="sc">~</span> Condition, </span>
+<span id="cb18-3"><a href="#cb18-3"></a>                      <span class="at">data =</span> lopez_clean)</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">summary</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1061,8 +1037,8 @@ Multiple R-squared:  0.04869,   Adjusted R-squared:  0.04663
 F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
 </div>
 </div>
-<p>Compared to when we had a continuous predictor in Chapter 8, the output is identical. We just need to remember what the key numbers represent. The intercept is the predicted value of your outcome when your predictor is set to 0. When we have two groups coded as 0 and 1, this means the intercept is essentially the mean value of group 0 (here, the control group). We call this the <a class="glossary" title="">reference group</a>. You can confirm this by comparing the intercept estimate 196.68 to the mean value of the control group we calculated in Activity 6.</p>
-<p>The slope estimate then represents how we predict the outcome to change for every 1-unit increase in the predictor. Since we coded the predictor 0 and 1, this just represents the shift from group 1 to group 2. We call the group we code as 1 the <a class="glossary" title="">target group</a>. You see the target group appended to the variable name, which is <code>Condition1</code> here. So, for a categorical predictor, the slope represents the mean difference between the reference group (0) and the target group (1). In contrast to the t-test, this is our raw/unstandardised effect size for the mean difference we do not need to manually calculate.</p>
+<p>Compared to when we had a continuous predictor in Chapter 8, the output is identical. We just need to remember what the key numbers represent. The intercept is the predicted value of your outcome when your predictor is set to 0. When we have two groups coded as 0 and 1, this means the intercept is essentially the mean value of group 0 (here, the control group). We call this the <a class="glossary" title="In a dummy-coded variable, the first level of your variable, typically 0.">reference group</a>. You can confirm this by comparing the intercept estimate 196.68 to the mean value of the control group we calculated in Activity 6.</p>
+<p>The slope estimate then represents how we predict the outcome to change for every 1-unit increase in the predictor. Since we coded the predictor 0 and 1, this just represents the shift from group 1 to group 2. We call the group we code as 1 the <a class="glossary" title="In a dummy-coded variable, the second level of your variable, typically 1.">target group</a>. You see the target group appended to the variable name, which is <code>Condition1</code> here. So, for a categorical predictor, the slope represents the mean difference between the reference group (0) and the target group (1): 63.05. In contrast to the t-test, this is our raw/unstandardised effect size for the mean difference we do not need to manually calculate.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1073,17 +1049,17 @@ Does it matter if the slope is positive or negative?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When you have a categorical predictor, the sign is only important for interpreting which group is bigger or smaller. The absolute size is relevant for the effect size where a larger absolute value indicates a larger effect. Whether the slope is positive or negative depending on the order of the groups and which has a larger mean. If the reference is larger than the target, you will get a negative slope. If the target is larger than the reference, you will get a positive slope.</p>
+<p>When you have a categorical predictor, the sign is only important for interpreting which group is bigger or smaller. The absolute size is relevant for the effect size where a larger absolute value indicates a larger effect. Whether the slope is positive or negative depends on the order of the groups and which has a larger mean. If the reference is larger than the target, you will get a negative slope. If the target is larger than the reference, you will get a positive slope.</p>
 </div>
 </div>
 <p>Like the continuous predictor, we get values for <span class="math inline">\(R^2\)</span> and adjusted <span class="math inline">\(R^2\)</span>, showing we explain .046 (in other words, 4.6%) variance in the outcome through our condition manipulation. We then get the model fit statistics, but with a single predictor, the <em>p</em>-value is identifical to the slope.</p>
 <p>Alternatively, you can use character labels for your categorical predictor and it will still work. This time, we use <code>Condition_label</code>. By default, it will set the order of the reference and target groups alphabetically, but you can manually specify the order by setting factor levels.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Condition_label as characters</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>lm_cals_labels <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
-<span id="cb18-3"><a href="#cb18-3"></a>                     <span class="at">data =</span> lopez_clean)</span>
-<span id="cb18-4"><a href="#cb18-4"></a></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">summary</span>(lm_cals_labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Condition_label as characters</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>lm_cals_labels <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> F_CaloriesConsumed <span class="sc">~</span> Condition_label, </span>
+<span id="cb20-3"><a href="#cb20-3"></a>                     <span class="at">data =</span> lopez_clean)</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="fu">summary</span>(lm_cals_labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1117,10 +1093,10 @@ Note
 <div class="callout-body-container callout-body">
 <p>If you want to test specifying the factor order to see how it affects the output, try running this code prior to the regression model:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Specify group order of Experimental then Control</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>lopez_clean <span class="ot">&lt;-</span> lopez_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">mutate</span>(<span class="at">Condition_label =</span> <span class="fu">factor</span>(Condition_label, </span>
-<span id="cb20-4"><a href="#cb20-4"></a>                                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Experimental"</span>, <span class="st">"Control"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Specify group order of Experimental then Control</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>lopez_clean <span class="ot">&lt;-</span> lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">mutate</span>(<span class="at">Condition_label =</span> <span class="fu">factor</span>(Condition_label, </span>
+<span id="cb22-4"><a href="#cb22-4"></a>                                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Experimental"</span>, <span class="st">"Control"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1136,7 +1112,7 @@ How are t-tests and regression the same?
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>If you are interested in the relationship between the two concepts, we said a t-test was a specific application of the general linear model. In the t-test calculations, it expresses the mean difference between groups by the variability of the two groups multiplied by a term containing the sample sizes. In essence, it describes the difference in standard errors, which we can describe with a t-distribution to calculate <em>p</em>-values.</p>
+<p>If you are interested in the relationship between the two concepts, we said a t-test was a specific application of the general linear model. In the t-test calculations, it expresses the mean difference between groups by the standard error of the difference. In essence, it describes the difference in standard errors, which we can describe with a t-distribution to calculate <em>p</em>-values.</p>
 <p>In regression, we frame the model as how much variance you explain compared to the total amount of variance. The more variance your predictor explains, the less unexplained variance there is left over. For the slope estimate though, this is identical to the t-test as we estimate the mean difference between groups plus the standard error around the mean difference. We calculate a <em>p</em>-value for the slope from a t-distribution, so you get a t-value in the output.</p>
 <p>You can see the process is identical by comparing the key values from the regression output to the Student t-test. We can recreate the mean difference to compare to the slope, the t-value is the same, the p-value is the same, the degrees of freedom are the same, and the 95% confidence intervals below are the same.</p>
 <p>So, when you have a single categorical predictor, it is the exact same process as the Student t-test, just expressed slightly different. The only downside to this procedure is it is much more difficult to recreate the Welch t-test.</p>
@@ -1147,7 +1123,7 @@ How are t-tests and regression the same?
 <span class="header-section-number">9.3.3</span> Activity 8 - Calculating confidence intervals</h3>
 <p>The only thing we are missing is our confidence intervals around the estimates which we can calculate through the <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> function.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">confint</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">confint</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                2.5 %    97.5 %
 (Intercept) 179.21657 214.14704
@@ -1205,17 +1181,17 @@ Show me the solution
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The conclusions are the same as when we calculated the t-test, where condition is not a statistically significant predictor of estimated calories consumed. As a regression model, we get the same conclusions expressed in a slightly different way. Condition is a negative but non-significant predictor (<em>p</em> = .111). The control group estimated they ate 17.88 (<span class="math inline">\(b_1\)</span> = -17.88, 95% CI = [-39.88, 4.11]) calories more than the experimental group. We explain very little variance in estimated calories consumed (<span class="math inline">\(R^2\)</span> = .006), so the condition manipulation had little effect.</p>
+<p>The conclusions are the same as when we calculated the t-test, where condition is not a statistically significant predictor of estimated calories consumed. As a regression model, we get the same conclusions expressed in a slightly different way. Condition is a negative but non-significant predictor (<em>p</em> = .111). The control group ate 17.88 (<span class="math inline">\(b_1\)</span> = -17.88, 95% CI = [-39.88, 4.11]) more calories than the experimental group. We explain very little variance in estimated calories consumed (adjusted <span class="math inline">\(R^2\)</span> = .003), so the condition manipulation had little effect.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Create lm object for condiiton label as a predictor</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>lm_cal_est <span class="ot">&lt;-</span> <span class="fu">lm</span>(CalEstimate <span class="sc">~</span> Condition_label, </span>
-<span id="cb23-3"><a href="#cb23-3"></a>                 <span class="at">data =</span> lopez_clean)</span>
-<span id="cb23-4"><a href="#cb23-4"></a></span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="co"># summary of the model object</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="fu">summary</span>(lm_cal_est)</span>
-<span id="cb23-7"><a href="#cb23-7"></a></span>
-<span id="cb23-8"><a href="#cb23-8"></a><span class="co"># confidence intervals around estimates</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a><span class="fu">confint</span>(lm_cal_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Create lm object for condiiton label as a predictor</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>lm_cal_est <span class="ot">&lt;-</span> <span class="fu">lm</span>(CalEstimate <span class="sc">~</span> Condition_label, </span>
+<span id="cb25-3"><a href="#cb25-3"></a>                 <span class="at">data =</span> lopez_clean)</span>
+<span id="cb25-4"><a href="#cb25-4"></a></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="co"># summary of the model object</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="fu">summary</span>(lm_cal_est)</span>
+<span id="cb25-7"><a href="#cb25-7"></a></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="co"># confidence intervals around estimates</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="fu">confint</span>(lm_cal_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1249,15 +1225,15 @@ Condition_labelExperimental -39.87763   4.111599</code></pre>
 <span class="header-section-number">9.3.4</span> Activity 9 - Standardising predictors</h3>
 <p>For simple linear regression with two levels of a categorical predictor, centering the variable does not help, but we can standardise our outcome to express the estimate in standard deviations rather than the raw units. This is analogous to calculating Cohen’s d as we express the standardised mean difference. In contrast to continuous predictors, we only need to standardise the outcome, rather than both the outcome and predictor(s). We then use the standardised variable as our outcome.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Be careful with the bracket placement to subtract the mean first</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>lopez_clean <span class="ot">&lt;-</span>lopez_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">mutate</span>(<span class="at">actual_calories_std =</span> (F_CaloriesConsumed <span class="sc">-</span> <span class="fu">mean</span>(F_CaloriesConsumed)) <span class="sc">/</span> <span class="fu">sd</span>(F_CaloriesConsumed))</span>
-<span id="cb25-4"><a href="#cb25-4"></a></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="co"># Condition as a factor containing 0 and 1</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a>lm_cals_std <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> actual_calories_std <span class="sc">~</span> Condition, </span>
-<span id="cb25-7"><a href="#cb25-7"></a>                      <span class="at">data =</span> lopez_clean)</span>
-<span id="cb25-8"><a href="#cb25-8"></a></span>
-<span id="cb25-9"><a href="#cb25-9"></a><span class="fu">summary</span>(lm_cals_std)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Be careful with the bracket placement to subtract the mean first</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>lopez_clean <span class="ot">&lt;-</span>lopez_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">mutate</span>(<span class="at">actual_calories_std =</span> (F_CaloriesConsumed <span class="sc">-</span> <span class="fu">mean</span>(F_CaloriesConsumed)) <span class="sc">/</span> <span class="fu">sd</span>(F_CaloriesConsumed))</span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="co"># Condition as a factor containing 0 and 1</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a>lm_cals_std <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> actual_calories_std <span class="sc">~</span> Condition, </span>
+<span id="cb27-7"><a href="#cb27-7"></a>                      <span class="at">data =</span> lopez_clean)</span>
+<span id="cb27-8"><a href="#cb27-8"></a></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="fu">summary</span>(lm_cals_std)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1292,10 +1268,10 @@ Tip
 <div class="callout-body-container callout-body">
 <p>As before, once you know how it works conceptually, there is a shortcut where you do not need to standardise all your variables first. The <pkg>effectsize</pkg> package has a handy function called <code>standardize_parameters()</code> which you can apply to your initial <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> object.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">standardize_parameters</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">standardize_parameters</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="caption-top table table-sm table-striped small">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">Parameter</th>
 <th style="text-align: right;">Std_Coefficient</th>
@@ -1344,75 +1320,75 @@ Tip
 <p>Assumptions 5-7 require diagnostic checks on the residuals from the model. In contrast to continuous predictors, they are a little harder to identify patterns in. As we only have two values on the x-axis (0 and 1), all the residuals will be organised into vertical lines and the trend lines to help spot patterns do not look quite right.</p>
 </section><section id="checking-linearity" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="checking-linearity">
 <span class="header-section-number">9.4.2</span> Checking linearity</h3>
-<p>When you have a categorical predictor with two levels, you meet linearity by default, so you do not need to check this assumption directly. When you have two levels, you can only fit a straight line between the values.</p>
+<p>When you have a categorical predictor with two levels, you meet linearity by default, so you <strong>do not</strong> need to check this assumption directly. When you have two levels, you can only fit a straight line between the values.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
-<span id="cb28-2"><a href="#cb28-2"></a>     <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
+<span id="cb30-2"><a href="#cb30-2"></a>     <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section><section id="checking-normality" class="level3" data-number="9.4.3"><h3 data-number="9.4.3" class="anchored" data-anchor-id="checking-normality">
 <span class="header-section-number">9.4.3</span> Checking normality</h3>
-<p>The qq-plot is still the same to interpret. Now, this example presents a useful case of decision making in data analysis we explore more in Chapter 11. The plot here is approaching signs of violating normality as there is a clear curve to the data points with 3 and 118 the largest deviations. For this chapter, we are sticking with it and it would be consistent with how the original authors analysed the data, but note this would be a key decision to make and justify when reporting the analysis.</p>
+<p>The qq-plot is still the same to interpret. Now, this example presents a useful case of decision making in data analysis we explore more in Chapter 11. The plot here is approaching signs of violating normality as there is a clear curve to the data points with 3 and 118 the largest deviations (you can see these on the violin-boxplot as the two highest values in the control group). For this chapter, we are sticking with it and it would be consistent with how the original authors analysed the data, but note this would be a key decision to make and justify when reporting the analysis.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
-<span id="cb29-2"><a href="#cb29-2"></a>     <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
+<span id="cb31-2"><a href="#cb31-2"></a>     <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section><section id="checking-homoscedasticity" class="level3" data-number="9.4.4"><h3 data-number="9.4.4" class="anchored" data-anchor-id="checking-homoscedasticity">
 <span class="header-section-number">9.4.4</span> Checking homoscedasticity</h3>
-<p>The scale-location plot is harder to interpret when you have a categorical predictor. Like linearity, the points are all arranged in two vertical lines as we only have two levels. You are looking out for the spread of the two lines to be roughly similar. They look fine here, just a couple of data points 118 and 3 separated a little from the other points.</p>
+<p>The scale-location plot is harder to interpret when you have a categorical predictor. Like linearity, the points are all arranged in two vertical lines as we only have two levels. You are looking out for the spread of the two lines to be roughly similar. They look fine here, just points 118 and 3 separated a little from the other points.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
-<span id="cb30-2"><a href="#cb30-2"></a>     <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
+<span id="cb32-2"><a href="#cb32-2"></a>     <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section><section id="checking-influential-cases" class="level3" data-number="9.4.5"><h3 data-number="9.4.5" class="anchored" data-anchor-id="checking-influential-cases">
 <span class="header-section-number">9.4.5</span> Checking influential cases</h3>
-<p>Finally, we have our plots for identifying influential cases. First, we get Cook’s distance for all the observations in your data. We see points 3 and 118 come up yet again, but although they are the largest deviations, they do not have worrying Cook’s distance values. There are different thresholds in the literature, but estimates range from 1, 0.5, to 4/n.&nbsp;It would only be under this final most conservative estimate (0.009) we would highlight several observations for further inspection.</p>
+<p>Finally, we have our plots for identifying influential cases. First, we get Cook’s distance for all the observations in your data. We see points 3 and 118 come up yet again, but although they are the largest deviations, they do not necessarily have worrying Cook’s distance values. There are different thresholds in the literature, but estimates range from 1, 0.5, to 4/n.&nbsp;It would only be under this final most conservative estimate (0.009) we would highlight several observations for further inspection.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
-<span id="cb31-2"><a href="#cb31-2"></a>     <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
+<span id="cb33-2"><a href="#cb33-2"></a>     <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Finally, the fifth plot shows residual values against leverage. Like Chapter 8, we cannot see the Cook’s distance threshold it uses in the plot as none of the points are a large enough deviation, despite 3 and 188 sticking out again.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
-<span id="cb32-2"><a href="#cb32-2"></a>     <span class="at">which =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">plot</span>(lm_cals_numbers, </span>
+<span id="cb34-2"><a href="#cb34-2"></a>     <span class="at">which =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section><section id="checking-all-the-assumptions" class="level3" data-number="9.4.6"><h3 data-number="9.4.6" class="anchored" data-anchor-id="checking-all-the-assumptions">
 <span class="header-section-number">9.4.6</span> Checking all the assumptions</h3>
-<p>Now we have covered the individual diagnostic plots, there is a handy function called <code>check_model()</code> from the <pkg>performance</pkg> package. Like the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function, the output for linearity, homoscedasticity, and influential observations does not plot right as we only have two values for the predictor. Do not worry, you have not done anything wrong.</p>
+<p>Now we have covered the individual diagnostic plots, there is a handy function called <code>check_model()</code> from the <pkg>performance</pkg> package. Like the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function, the output for linearity, homoscedasticity, and influential observations does not plot right as we only have two values for the predictor and the plot lines do not really work. Do not worry, you have not done anything wrong.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">check_model</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">check_model</span>(lm_cals_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1429,7 +1405,8 @@ What might explain the funky normality?
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>If you are interested, the posterior predictive check here provides an insight into why we get potential problems with normality. The outcome is ratio but cannot be smaller than 0 as we cannot have negative calories. So, in the green line for the observed data, the data are a little skewed as it drops off prior to 0. However, the model does not know that and it happily predicts normally distributed values which go below 0. Remember the models will work regardless of the data you put into them, it is important to keep your role in mind to recognise when you need to be cautious about what you can learn from the model.</p>
+<p>If you are interested, the posterior predictive check here provides an insight into why we get potential problems with normality. The outcome is ratio but cannot be smaller than 0 as we cannot have negative calories. So, in the green line for the observed data, the data are a little skewed as it drops off prior to 0. However, the model does not know that and it happily predicts normally distributed values which go below 0, creating a mismatch between what the model predicts and the values we enter into it.</p>
+<p>Remember the models will work regardless of the data you put into them, it is important to keep your role in mind to recognise when you need to be cautious about what you can learn from the model.</p>
 </div>
 </div>
 </div>
@@ -1492,11 +1469,11 @@ Show me the solution
 </ol>
 <p><strong>Like the actual calories consumed, this is firmly a clear deviation from what we expect and provides a good example of when it does not look right. If we were to analyse the data fully, we would explore the impact of this and alternative models, but for this chapter, we are going to note our concern and remember the authors analysed the data like this.</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">plot</span>(lm_cal_est, </span>
-<span id="cb34-2"><a href="#cb34-2"></a>     <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">plot</span>(lm_cal_est, </span>
+<span id="cb36-2"><a href="#cb36-2"></a>     <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1506,11 +1483,11 @@ Show me the solution
 </ol>
 <p><strong>Looking at the spread of each group, it looks fine with a similar range until both groups are more sparsely distributed above 1.</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">plot</span>(lm_cal_est, </span>
-<span id="cb35-2"><a href="#cb35-2"></a>     <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">plot</span>(lm_cal_est, </span>
+<span id="cb37-2"><a href="#cb37-2"></a>     <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1534,7 +1511,7 @@ Show me the solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1553,13 +1530,13 @@ Show me the solution
 <span class="header-section-number">9.6.1.1</span> Expressed as a t-test</h4>
 <p>As a t-test, we need to specify two arguments:</p>
 <ul>
-<li><p><code>x</code> - This is the continuous variable you want to analyse and compare the mean value of. We have to use the base R operator <code>$</code> to specify the column from your data.</p></li>
+<li><p><code>x</code> - This is the continuous variable you want to analyse and compare the mean value of. We must use the base R operator <code>$</code> to specify the column from your data.</p></li>
 <li><p><code>mu</code> - This is the fixed value you want to test your variable against.</p></li>
 </ul>
 <p>In this scenario, we want to compare the hit rate to erotic images against a value of 50. This will tell us if the hit rate is significantly above or below chance.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> bem_data<span class="sc">$</span>Erotic.Hits.PC,</span>
-<span id="cb36-2"><a href="#cb36-2"></a>       <span class="at">mu =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> bem_data<span class="sc">$</span>Erotic.Hits.PC,</span>
+<span id="cb38-2"><a href="#cb38-2"></a>       <span class="at">mu =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -1577,17 +1554,17 @@ mean of x
 <p>The output is similar to the independent samples t-test. We get the <em>p</em>-value for hypothesis testing, the mean estimate of the variable, and it’s 95% confidence interval. To express it as an effect size, you can subtract 50 from each value. So, participants responded 3.14% above chance, statistically significant, but hardly convincing evidence for precognition.</p>
 </section><section id="expressed-as-a-linear-model" class="level4" data-number="9.6.1.2"><h4 data-number="9.6.1.2" class="anchored" data-anchor-id="expressed-as-a-linear-model">
 <span class="header-section-number">9.6.1.2</span> Expressed as a linear model</h4>
-<p>We can also express this as a linear model, but we first must add a small wrangling step. In the one-sample t-test, we can manually enter a fixed value to compare the mean against. In a linear model, we must compare against 0 by subtracting the fixed value from your variable. So, we subtract 50 from all the observations, so they become a kind of deviation from 50.</p>
+<p>We can also express this as a linear model, but we must first add a small wrangling step. In the one-sample t-test, we can manually enter a fixed value to compare the mean against. In a linear model, we must compare against 0 by subtracting the fixed value from your variable. So, we subtract 50 from all the observations, so they become a kind of deviation from 50.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>bem_data <span class="ot">&lt;-</span> bem_data <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">mutate</span>(<span class="at">erotic_deviation =</span> Erotic.Hits.PC <span class="sc">-</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>bem_data <span class="ot">&lt;-</span> bem_data <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">mutate</span>(<span class="at">erotic_deviation =</span> Erotic.Hits.PC <span class="sc">-</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In contrast to previous linear models, we only add a fixed intercept and do not add a predictor. This recreates the one-sample t-test by estimating the mean value of your outcome.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>lm_erotic <span class="ot">&lt;-</span> <span class="fu">lm</span>(erotic_deviation <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb39-2"><a href="#cb39-2"></a>                <span class="at">data =</span> bem_data)</span>
-<span id="cb39-3"><a href="#cb39-3"></a></span>
-<span id="cb39-4"><a href="#cb39-4"></a><span class="fu">summary</span>(lm_erotic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>lm_erotic <span class="ot">&lt;-</span> <span class="fu">lm</span>(erotic_deviation <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb41-2"><a href="#cb41-2"></a>                <span class="at">data =</span> bem_data)</span>
+<span id="cb41-3"><a href="#cb41-3"></a></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="fu">summary</span>(lm_erotic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1621,9 +1598,9 @@ Residual standard error: 12.49 on 99 degrees of freedom</code></pre>
 </ul>
 <p>In this scenario, we want to compare the hit rate for erotic images to control images.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> bem_data<span class="sc">$</span>Erotic.Hits.PC,</span>
-<span id="cb41-2"><a href="#cb41-2"></a>       <span class="at">y =</span> bem_data<span class="sc">$</span>Control.Hits.PC, </span>
-<span id="cb41-3"><a href="#cb41-3"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> bem_data<span class="sc">$</span>Erotic.Hits.PC,</span>
+<span id="cb43-2"><a href="#cb43-2"></a>       <span class="at">y =</span> bem_data<span class="sc">$</span>Control.Hits.PC, </span>
+<span id="cb43-3"><a href="#cb43-3"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Paired t-test
@@ -1639,19 +1616,20 @@ mean difference
 </div>
 </div>
 <p>The output is almost identical to the one-sample t-test, but this time the effect size is the mean difference between conditions, not just the mean per condition. Behind the scenes, a paired-samples t-test is actually a one-sample t-test in disguise as it uses the difference between conditions as the outcome.</p>
+<p>As an aside, <span class="citation" data-cites="bem_feeling_2011">Bem (<a href="references.html#ref-bem_feeling_2011" role="doc-biblioref">2011</a>)</span> reported a significant difference here, but only because he reported a one-tailed test (<code>alternative = "greater"</code>). This is an example where you ideally need a strong (pre-registered) prediction as it makes material impact on the inferences you would make.</p>
 </section><section id="expressed-as-a-linear-model-1" class="level4" data-number="9.6.2.2"><h4 data-number="9.6.2.2" class="anchored" data-anchor-id="expressed-as-a-linear-model-1">
 <span class="header-section-number">9.6.2.2</span> Expressed as a linear model</h4>
 <p>Finally, we can express a paired-samples t-test as a linear model. We must apply a small data wrangling step to calculate a difference score between conditions. This is so the linear model compares the estimate against 0 of no difference. So, for this example, we create a variable for the difference between erotic and control images.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>bem_data <span class="ot">&lt;-</span> bem_data <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">mutate</span>(<span class="at">erotic_control =</span> Erotic.Hits.PC <span class="sc">-</span> Control.Hits.PC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>bem_data <span class="ot">&lt;-</span> bem_data <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">mutate</span>(<span class="at">erotic_control =</span> Erotic.Hits.PC <span class="sc">-</span> Control.Hits.PC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Like the one-sample scenario, we only add a fixed intercept for the new difference variance and do not add a predictor. This recreates the paired-samples t-test by estimating the mean value of your difference score outcome.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>lm_paired <span class="ot">&lt;-</span> <span class="fu">lm</span>(erotic_control <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb44-2"><a href="#cb44-2"></a>                <span class="at">data =</span> bem_data)</span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="fu">summary</span>(lm_paired)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>lm_paired <span class="ot">&lt;-</span> <span class="fu">lm</span>(erotic_control <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb46-2"><a href="#cb46-2"></a>                <span class="at">data =</span> bem_data)</span>
+<span id="cb46-3"><a href="#cb46-3"></a></span>
+<span id="cb46-4"><a href="#cb46-4"></a><span class="fu">summary</span>(lm_paired)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1685,7 +1663,7 @@ Residual standard error: 17.81 on 99 degrees of freedom</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-lm-categorical_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1736,7 +1714,8 @@ F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
 <span class="header-section-number">9.8</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
-<table class="caption-top table table-sm table-striped small">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">term</th>
 <th style="text-align: left;">definition</th>
@@ -1744,11 +1723,11 @@ F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/d#dummy-coding" class="glossary" target="_blank">dummy-coding</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">Entering a categorical predictor using two values such as 0 and 1.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/r#reference-group" class="glossary" target="_blank">reference-group</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">In a dummy-coded variable, the first level of your variable, typically 0.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/s#student-t-test" class="glossary" target="_blank">student-t-test</a></td>
@@ -1756,7 +1735,7 @@ F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/t#target-group" class="glossary" target="_blank">target-group</a></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">In a dummy-coded variable, the second level of your variable, typically 1.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><a href="https://psyteachr.github.io/glossary/w#welch-t-test" class="glossary" target="_blank">welch-t-test</a></td>
@@ -1765,15 +1744,16 @@ F-statistic: 23.64 on 1 and 462 DF,  p-value: 1.591e-06</code></pre>
 </tbody>
 </table>
 </div>
+</div>
 </section><section id="end-of-chapter" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">9.9</span> End of chapter</h2>
 <p>Well done, you have now completed the first core set of chapters for inferential statistics!</p>
-<p>At this point, you can now address a range of research questions by applying variations of the general linear model. As a researcher, the most important thing is starting with your research question - and where applicable, your hypothesis -, designing a study to address that research question, and using an appropriate statistical model to fit the design and answer your research question. But, before you can identify an appropriate statistical model, you need to know what they look like! This is everything we cover in Research Methods 1 to focus on a select range of foundational skills. You will then build on these techniques in Chapters 12-14 for Research Methods 2.</p>
-<p>You are now ready to complete the second data analysis chapter: <a href="#journey-02-wrangling">Simple Linear Regression</a>. This is where you can test your new skills in a slightly less structured way, from wrangling data, to answering your research question.</p>
+<p>At this point, you can now address a range of research questions by applying variations of the general linear model. As a researcher, the most important thing is starting with your research question (and where applicable, your hypothesis), designing a study to address that research question, and using an appropriate statistical model for your design and research question. But, before you can identify an appropriate statistical model, you need to know what they look like! This is everything we cover in Research Methods 1 to focus on a select range of foundational skills. You will then build on these modelling techniques in Chapters 12-14 for Research Methods 2.</p>
+<p>You are now ready to complete the second data analysis journey chapter: <a href="18-analysis-journey-2.html">Simple Linear Regression</a>. This is where you can test your new skills in a slightly less structured way, from wrangling data, to answering a research question.</p>
 <p>In the next core chapter, we turn to statistical power and work on how you can conduct a power analysis in R/RStudio.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-bem_feeling_2011" class="csl-entry" role="listitem">
 Bem, D. J. (2011). Feeling the future: <span>Experimental</span> evidence for anomalous retroactive influences on cognition and affect. <em>Journal of Personality and Social Psychology</em>, <em>100</em>(3), 407–425. <a href="https://doi.org/10.1037/a0021524">https://doi.org/10.1037/a0021524</a>
 </div>
@@ -2056,33 +2036,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -2149,15 +2102,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2236,27 +2187,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2266,17 +2200,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2288,130 +2213,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -2455,7 +2257,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2481,32 +2282,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2566,12 +2341,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./08-lm-continuous.html" class="pagination-link" aria-label="Regression with one continuous predictor">
+      <a href="./08-lm-continuous.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Regression with one continuous predictor</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./10-power.html" class="pagination-link" aria-label="Statistical Power">
+      <a href="./10-power.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Power</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -2581,9 +2356,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">
-<p>CC-BY (2024) James Bartlett &amp; Wil Toivo</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/09-lm-categorical.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/09-lm-categorical.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

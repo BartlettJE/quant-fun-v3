@@ -8,13 +8,14 @@ knitr::opts_chunk$set(warning = FALSE,
 ```
 
 ```{r echo=FALSE}
-library(patchwork)
 library(effectsize)
 library(performance)
 library(tidyverse)
 ```
 
-Introduction.
+In Chapter 8, you finally started working on inferential statistics. We spent so long on data wrangling and visualisation that it now feels so much closer to being able to address your research questions. We covered linear regression and the concept of correlation for investigating the relationship between two continuous variables. 
+
+In this chapter, we focus on simple linear regression for testing research questions and hypotheses for the difference between two groups on one outcome. Like Chapter 8, we reinforce the idea that common statistical tests you come across are specific applications of the general linear model ([Lindeløv, 2019]([R for Data Science](https://r4ds.had.co.nz/){target="_blank"}){target="_blank"}). In this chapter, we explore the concepts of t-tests as those specific applications compared to recreating them using linear regression. We also have a bonus section on expressing a one-sample and paired-samples design as linear models. 
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
@@ -22,7 +23,11 @@ By the end of this chapter, you will be able to:
 
 - Visualise the difference between two groups on an outcome. 
 
-- ILO2.
+- Apply and interpret a Student and Welch t-test. 
+
+- Apply and interpret linear regression with one categorical predictor variable.
+
+- Apply and interpret linear regression adapted to one-sample and paired-samples designs.
 
 ## Chapter preparation
 
@@ -32,7 +37,7 @@ For most of this chapter, we are using open data from @lopez_visual_2023. The ab
 
 > Imagine a bowl of soup that never emptied, no matter how many spoonfuls you ate—when and how would you know to stop eating? Satiation can play a role in regulating eating behavior, but research suggests visual cues may be just as important. In a seminal study by Wansink et al. (2005), researchers used self-refilling bowls to assess how visual cues of portion size would influence intake. The study found that participants who unknowingly ate from self-refilling bowls ate more soup than did participants eating from normal (not self-refilling) bowls. Despite consuming 73% more soup, however, participants in the self-refilling condition did not believe they had consumed more soup, nor did they perceive themselves as more satiated than did participants eating from normal bowls. Given recent concerns regarding the validity of research from the Wansink lab, we conducted a preregistered direct replication study of Wansink et al. (2005) with a more highly powered sample (N = 464 vs. 54 in the original study). We found that most results replicated, albeit with half the effect size (d = 0.45 instead of 0.84), with participants in the self-refilling bowl condition eating significantly more soup than those in the control condition. Like the original study, participants in the selfrefilling condition did not believe they had consumed any more soup than participants in the control condition. These results suggest that eating can be strongly controlled by visual cues, which can even override satiation.
 
-In summary, they replicated an (in)famous experiment that won the Ig-Nobel prize. Participants engaged in a intricate setting (seriously, go and look at the diagrams in the article) where they ate soup from bowls on a table. In the control group, participants could eat as much soup as they wanted and could ask for a top-up from the researchers. In the experimental group, the soup bowls automatically topped up through a series of hidden tubes under the table. The idea behind the control group is they get an accurate visual cue by the soup bowl reducing, and the experimental group get an inaccurate visual cue by the soup bowl seemingly never reducing.
+In summary, they replicated an (in)famous experiment that won the Ig-Nobel prize. Participants engaged in a intricate setting (seriously, go and look at the diagrams in the article) where they ate soup from bowls on a table. In the control group, participants could eat as much soup as they wanted and could ask for a top-up from the researchers. In the experimental group, the soup bowls automatically topped up through a series of hidden tubes under the table. The idea behind the control group is they get an accurate visual cue by the soup bowl reducing, and the experimental group get an inaccurate visual cue by the soup bowl seemingly never reducing. So, the inaccurate visual cue would interfere with natural signs of getting full and lead to people eating more. 
 
 In the original article, participants in the experimental group ate more soup than participants in the control group, but the main author was involved in a series of research misconduct cases. @lopez_visual_2023 wanted to see if the result would replicate in an independent study, so they predicted they would find the same results. In this chapter, we will explore the difference between the control and experimental groups on several variables in their data set. 
 
@@ -209,7 +214,7 @@ lopez_clean %>%
 
 ### Activity 4 - Using the `t.test()` function
 
-A t-test is a specific application of the general linear model. In this test, we express the difference in an outcome between two groups as a kind of standardised mean difference. If you are interested, see the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/between-subjects-students-t-test.html){target="_blank"}) for the calculations behind the Student and Welch t-test. Conceptually, a t-test is the difference between two groups divided by the variability of the difference. There are two main versions of a t-test:
+A t-test is a specific application of the general linear model. In this test, we express the difference in an outcome between two groups as a kind of standardised mean difference. If you are interested, see the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/between-subjects-students-t-test.html){target="_blank"}) for the calculations behind the Student and Welch t-test. Conceptually, a t-test is the difference between two groups divided by the standard error of the difference. There are two main versions of a t-test:
 
 - `r glossary("Student t-test", def = "Calculating a t-value based on the mean difference divided by the pooled standard deviation. In the Student t-test, we times the pooled standard deviation by a term containing the sample sizes of each group.")`
 
@@ -266,6 +271,16 @@ t.test(formula = F_CaloriesConsumed ~ Condition_label,
 You can see the main difference between the two versions is the Welch t-test Student corrects the degrees of freedom, so they are a decimal. While the Student t-test does not correct the degrees of freedom, so they are predictably N - 2.  
 
 To summarise: A Student t-test showed participants in the experimental group ate significantly more calories of soup than participants in the control group, *t* (462) = -4.86, *p* < .001. On average, those in the experimental group ate 63.05 (95% CI = [37.57, 88.53]) more calories than those in the control group.
+
+One further useful argument is specifying a one-tailed test if you have a specific prediction. The only downside to using linear models later is there is not a simple argument to apply a one-tailed test. 
+
+```{r}
+t.test(formula = F_CaloriesConsumed ~ Condition_label, 
+       data = lopez_clean, 
+       alternative = "less")
+```
+
+The difference here is specifying the `alternative` argument. You can use "less" or "greater" depending if you predict a negative (group A < group B) or positive difference (group A > group B). 
 
 ### Activity 5 - Calculating Cohen's d 
 
@@ -354,7 +369,7 @@ lopez_clean %>%
 ```
 
 ::: {.callout-note}
-If you want some reinforcement of how these skills apply to published research, look at Table 1 in @lopez_visual_2023. The means and standard deviations here (and Cohen's d from Activity 5) exactly reproduce the values they report, apart from the *SD* for the control group.
+If you want some reinforcement of how these skills apply to published research, look at Table 1 in @lopez_visual_2023. The means and standard deviations here (and Cohen's d from Activity 5) exactly reproduce the values they report, apart from the *SD* for the control group (maybe there is a typo in their article).
 :::
 
 ### Activity 7 - Using the `lm()` function
@@ -363,7 +378,7 @@ For our research question of "is there a difference in actual calories consumed 
 
 Like Chapter 8, we start by defining our regression model with a formula in the pattern `outcome ~ predictor` and specify the data frame you want to use. We must then use the `summary()` function around your model object to get all the statistics you need. 
 
-There are two ways you can use a categorical predictor. First, we can code groups numerically which people called `r glossary("dummy coding", def = "")`. You code your first group 0 and you code your second group as 1, which maps on directly to how the regression model works. Let's look at the output. 
+There are two ways you can use a categorical predictor. First, we can code groups numerically which people called `r glossary("dummy coding", def = "Entering a categorical predictor using two values such as 0 and 1.")`. You code your first group 0 and you code your second group as 1, which maps on directly to how the regression model works. Let's look at the output. 
 
 ```{r}
 # Condition as a factor containing 0 and 1
@@ -373,14 +388,14 @@ lm_cals_numbers <- lm(formula = F_CaloriesConsumed ~ Condition,
 summary(lm_cals_numbers)
 ```
 
-Compared to when we had a continuous predictor in Chapter 8, the output is identical. We just need to remember what the key numbers represent. The intercept is the predicted value of your outcome when your predictor is set to 0. When we have two groups coded as 0 and 1, this means the intercept is essentially the mean value of group 0 (here, the control group). We call this the `r glossary("reference group", def = "")`. You can confirm this by comparing the intercept estimate 196.68 to the mean value of the control group we calculated in Activity 6. 
+Compared to when we had a continuous predictor in Chapter 8, the output is identical. We just need to remember what the key numbers represent. The intercept is the predicted value of your outcome when your predictor is set to 0. When we have two groups coded as 0 and 1, this means the intercept is essentially the mean value of group 0 (here, the control group). We call this the `r glossary("reference group", def = "In a dummy-coded variable, the first level of your variable, typically 0.")`. You can confirm this by comparing the intercept estimate 196.68 to the mean value of the control group we calculated in Activity 6. 
 
-The slope estimate then represents how we predict the outcome to change for every 1-unit increase in the predictor. Since we coded the predictor 0 and 1, this just represents the shift from group 1 to group 2. We call the group we code as 1 the `r glossary("target group", def = "")`. You see the target group appended to the variable name, which is `Condition1` here. So, for a categorical predictor, the slope represents the mean difference between the reference group (0) and the target group (1). In contrast to the t-test, this is our raw/unstandardised effect size for the mean difference we do not need to manually calculate. 
+The slope estimate then represents how we predict the outcome to change for every 1-unit increase in the predictor. Since we coded the predictor 0 and 1, this just represents the shift from group 1 to group 2. We call the group we code as 1 the `r glossary("target group", def = "In a dummy-coded variable, the second level of your variable, typically 1.")`. You see the target group appended to the variable name, which is `Condition1` here. So, for a categorical predictor, the slope represents the mean difference between the reference group (0) and the target group (1): 63.05. In contrast to the t-test, this is our raw/unstandardised effect size for the mean difference we do not need to manually calculate. 
 
 ::: {.callout-note}
 #### Does it matter if the slope is positive or negative? 
 
-When you have a categorical predictor, the sign is only important for interpreting which group is bigger or smaller. The absolute size is relevant for the effect size where a larger absolute value indicates a larger effect. Whether the slope is positive or negative depending on the order of the groups and which has a larger mean. If the reference is larger than the target, you will get a negative slope. If the target is larger than the reference, you will get a positive slope.  
+When you have a categorical predictor, the sign is only important for interpreting which group is bigger or smaller. The absolute size is relevant for the effect size where a larger absolute value indicates a larger effect. Whether the slope is positive or negative depends on the order of the groups and which has a larger mean. If the reference is larger than the target, you will get a negative slope. If the target is larger than the reference, you will get a positive slope.  
 :::
 
 Like the continuous predictor, we get values for $R^2$ and adjusted $R^2$, showing we explain .046 (in other words, 4.6%) variance in the outcome through our condition manipulation. We then get the model fit statistics, but with a single predictor, the *p*-value is identifical to the slope. 
@@ -409,7 +424,7 @@ lopez_clean <- lopez_clean %>%
 ::: {.callout-note collapse="true"}
 #### How are t-tests and regression the same? 
 
-If you are interested in the relationship between the two concepts, we said a t-test was a specific application of the general linear model. In the t-test calculations, it expresses the mean difference between groups by the variability of the two groups multiplied by a term containing the sample sizes. In essence, it describes the difference in standard errors, which we can describe with a t-distribution to calculate *p*-values. 
+If you are interested in the relationship between the two concepts, we said a t-test was a specific application of the general linear model. In the t-test calculations, it expresses the mean difference between groups by the standard error of the difference. In essence, it describes the difference in standard errors, which we can describe with a t-distribution to calculate *p*-values. 
 
 In regression, we frame the model as how much variance you explain compared to the total amount of variance. The more variance your predictor explains, the less unexplained variance there is left over. For the slope estimate though, this is identical to the t-test as we estimate the mean difference between groups plus the standard error around the mean difference. We calculate a *p*-value for the slope from a t-distribution, so you get a t-value in the output. 
 
@@ -451,7 +466,7 @@ Apply simple linear regression to get your inferential statistics and answer the
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
 
-The conclusions are the same as when we calculated the t-test, where condition is not a statistically significant predictor of estimated calories consumed. As a regression model, we get the same conclusions expressed in a slightly different way. Condition is a negative but non-significant predictor (*p* = .111). The control group estimated they ate 17.88 ($b_1$ = -17.88, 95% CI = [-39.88, 4.11]) calories more than the experimental group. We explain very little variance in estimated calories consumed ($R^2$ = .006), so the condition manipulation had little effect.  
+The conclusions are the same as when we calculated the t-test, where condition is not a statistically significant predictor of estimated calories consumed. As a regression model, we get the same conclusions expressed in a slightly different way. Condition is a negative but non-significant predictor (*p* = .111). The control group ate 17.88 ($b_1$ = -17.88, 95% CI = [-39.88, 4.11]) more calories than the experimental group. We explain very little variance in estimated calories consumed (adjusted $R^2$ = .003), so the condition manipulation had little effect.  
 
 ```{r}
 # Create lm object for condiiton label as a predictor
@@ -522,7 +537,7 @@ Assumptions 5-7 require diagnostic checks on the residuals from the model. In co
 
 ### Checking linearity 
 
-When you have a categorical predictor with two levels, you meet linearity by default, so you do not need to check this assumption directly. When you have two levels, you can only fit a straight line between the values. 
+When you have a categorical predictor with two levels, you meet linearity by default, so you **do not** need to check this assumption directly. When you have two levels, you can only fit a straight line between the values. 
 
 ```{r}
 plot(lm_cals_numbers, 
@@ -531,7 +546,7 @@ plot(lm_cals_numbers,
 
 ### Checking normality
 
-The qq-plot is still the same to interpret. Now, this example presents a useful case of decision making in data analysis we explore more in Chapter 11. The plot here is approaching signs of violating normality as there is a clear curve to the data points with 3 and 118 the largest deviations. For this chapter, we are sticking with it and it would be consistent with how the original authors analysed the data, but note this would be a key decision to make and justify when reporting the analysis. 
+The qq-plot is still the same to interpret. Now, this example presents a useful case of decision making in data analysis we explore more in Chapter 11. The plot here is approaching signs of violating normality as there is a clear curve to the data points with 3 and 118 the largest deviations (you can see these on the violin-boxplot as the two highest values in the control group). For this chapter, we are sticking with it and it would be consistent with how the original authors analysed the data, but note this would be a key decision to make and justify when reporting the analysis. 
 
 ```{r}
 plot(lm_cals_numbers, 
@@ -540,7 +555,7 @@ plot(lm_cals_numbers,
 
 ### Checking homoscedasticity
 
-The scale-location plot is harder to interpret when you have a categorical predictor. Like linearity, the points are all arranged in two vertical lines as we only have two levels. You are looking out for the spread of the two lines to be roughly similar. They look fine here, just a couple of data points 118 and 3 separated a little from the other points. 
+The scale-location plot is harder to interpret when you have a categorical predictor. Like linearity, the points are all arranged in two vertical lines as we only have two levels. You are looking out for the spread of the two lines to be roughly similar. They look fine here, just points 118 and 3 separated a little from the other points. 
 
 ```{r}
 plot(lm_cals_numbers, 
@@ -549,7 +564,7 @@ plot(lm_cals_numbers,
 
 ### Checking influential cases
 
-Finally, we have our plots for identifying influential cases. First, we get Cook's distance for all the observations in your data. We see points 3 and 118 come up yet again, but although they are the largest deviations, they do not have worrying Cook's distance values. There are different thresholds in the literature, but estimates range from 1, 0.5, to 4/n. It would only be under this final most conservative estimate (0.009) we would highlight several observations for further inspection. 
+Finally, we have our plots for identifying influential cases. First, we get Cook's distance for all the observations in your data. We see points 3 and 118 come up yet again, but although they are the largest deviations, they do not necessarily have worrying Cook's distance values. There are different thresholds in the literature, but estimates range from 1, 0.5, to 4/n. It would only be under this final most conservative estimate (0.009) we would highlight several observations for further inspection. 
 
 ```{r}
 plot(lm_cals_numbers, 
@@ -565,7 +580,7 @@ plot(lm_cals_numbers,
 
 ### Checking all the assumptions
 
-Now we have covered the individual diagnostic plots, there is a handy function called `check_model()` from the <pkg>performance</pkg> package. Like the `plot()` function, the output for linearity, homoscedasticity, and influential observations does not plot right as we only have two values for the predictor. Do not worry, you have not done anything wrong.  
+Now we have covered the individual diagnostic plots, there is a handy function called `check_model()` from the <pkg>performance</pkg> package. Like the `plot()` function, the output for linearity, homoscedasticity, and influential observations does not plot right as we only have two values for the predictor and the plot lines do not really work. Do not worry, you have not done anything wrong.  
 
 ```{r}
 check_model(lm_cals_numbers)
@@ -574,7 +589,9 @@ check_model(lm_cals_numbers)
 ::: {.callout-note collapse="true"}
 #### What might explain the funky normality? 
 
-If you are interested, the posterior predictive check here provides an insight into why we get potential problems with normality. The outcome is ratio but cannot be smaller than 0 as we cannot have negative calories. So, in the green line for the observed data, the data are a little skewed as it drops off prior to 0. However, the model does not know that and it happily predicts normally distributed values which go below 0. Remember the models will work regardless of the data you put into them, it is important to keep your role in mind to recognise when you need to be cautious about what you can learn from the model. 
+If you are interested, the posterior predictive check here provides an insight into why we get potential problems with normality. The outcome is ratio but cannot be smaller than 0 as we cannot have negative calories. So, in the green line for the observed data, the data are a little skewed as it drops off prior to 0. However, the model does not know that and it happily predicts normally distributed values which go below 0, creating a mismatch between what the model predicts and the values we enter into it. 
+
+Remember the models will work regardless of the data you put into them, it is important to keep your role in mind to recognise when you need to be cautious about what you can learn from the model. 
 :::
 
 ::: {.callout-tip}
@@ -702,7 +719,7 @@ There are scenarios where you want to compare a single continuous variable again
 
 As a t-test, we need to specify two arguments:
 
-- `x` - This is the continuous variable you want to analyse and compare the mean value of. We have to use the base R operator `$` to specify the column from your data.  
+- `x` - This is the continuous variable you want to analyse and compare the mean value of. We must use the base R operator `$` to specify the column from your data.  
 
 - `mu` - This is the fixed value you want to test your variable against. 
 
@@ -717,7 +734,7 @@ The output is similar to the independent samples t-test. We get the *p*-value fo
 
 #### Expressed as a linear model
 
-We can also express this as a linear model, but we first must add a small wrangling step. In the one-sample t-test, we can manually enter a fixed value to compare the mean against. In a linear model, we must compare against 0 by subtracting the fixed value from your variable. So, we subtract 50 from all the observations, so they become a kind of deviation from 50. 
+We can also express this as a linear model, but we must first add a small wrangling step. In the one-sample t-test, we can manually enter a fixed value to compare the mean against. In a linear model, we must compare against 0 by subtracting the fixed value from your variable. So, we subtract 50 from all the observations, so they become a kind of deviation from 50. 
 
 ```{r}
 bem_data <- bem_data %>% 
@@ -761,6 +778,8 @@ t.test(x = bem_data$Erotic.Hits.PC,
 
 The output is almost identical to the one-sample t-test, but this time the effect size is the mean difference between conditions, not just the mean per condition. Behind the scenes, a paired-samples t-test is actually a one-sample t-test in disguise as it uses the difference between conditions as the outcome. 
 
+As an aside, @bem_feeling_2011 reported a significant difference here, but only because he reported a one-tailed test (`alternative = "greater"`). This is an example where you ideally need a strong (ideally pre-registered) prediction as it makes a material impact on the inferences you would make. 
+
 #### Expressed as a linear model
 
 Finally, we can express a paired-samples t-test as a linear model. We must apply a small data wrangling step to calculate a difference score between conditions. This is so the linear model compares the estimate against 0 of no difference. So, for this example, we create a variable for the difference between erotic and control images.  
@@ -770,7 +789,7 @@ bem_data <- bem_data %>%
   mutate(erotic_control = Erotic.Hits.PC - Control.Hits.PC)
 ```
 
-Like the one-sample scenario, we only add a fixed intercept for the new difference variance and do not add a predictor. This recreates the paired-samples t-test by estimating the mean value of your difference score outcome. 
+Like the one-sample scenario, we only add a fixed intercept for the new difference variance and do not add a predictor. This recreates the paired-samples t-test by estimating the mean value of your difference score. 
 
 ```{r}
 lm_paired <- lm(erotic_control ~ 1, 
@@ -844,8 +863,8 @@ glossary_table()
 
 Well done, you have now completed the first core set of chapters for inferential statistics! 
 
-At this point, you can now address a range of research questions by applying variations of the general linear model. As a researcher, the most important thing is starting with your research question - and where applicable, your hypothesis -, designing a study to address that research question, and using an appropriate statistical model to fit the design and answer your research question. But, before you can identify an appropriate statistical model, you need to know what they look like! This is everything we cover in Research Methods 1 to focus on a select range of foundational skills. You will then build on these techniques in Chapters 12-14 for Research Methods 2.
+At this point, you can now address a range of research questions by applying variations of the general linear model. As a researcher, the most important thing is starting with your research question (and where applicable, your hypothesis), designing a study to address that research question, and using an appropriate statistical model for your design and research question. But, before you can identify an appropriate statistical model, you need to know what they look like! This is everything we cover in Research Methods 1 to focus on a select range of foundational skills. You will then build on these modelling techniques in Chapters 12-14 for Research Methods 2.
 
-You are now ready to complete the second data analysis chapter: [Simple Linear Regression](#journey-02-wrangling). This is where you can test your new skills in a slightly less structured way, from wrangling data, to answering your research question. 
+You are now ready to complete the second data analysis journey chapter: [Simple Linear Regression](#journey-02-wrangling). This is where you can test your new skills in a slightly less structured way, from wrangling data, to answering a research question. 
 
 In the next core chapter, we turn to statistical power and work on how you can conduct a power analysis in R/RStudio. 

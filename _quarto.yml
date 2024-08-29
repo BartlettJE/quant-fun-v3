@@ -62,8 +62,6 @@ book:
   - 16-analysis-journeys.qmd
   - 17-analysis-journey-1.qmd
   - 18-analysis-journey-2.qmd
-  - 19-analysis-journey-3.qmd
-  - 20-analysis-journey-4.qmd
   - references.qmd
   appendices:
   - appendix-a-installing-r.qmd
