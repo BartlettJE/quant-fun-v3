@@ -87,7 +87,7 @@ In `evans_data`, we have the participant ID (`RID`), several demographic variabl
 ```{r echo=FALSE}
 evans_data %>% 
   select(1:20) %>% 
-glimpse()
+  glimpse()
 ```
 
 The columns (variables) we have in the data set are:
@@ -107,7 +107,145 @@ The columns (variables) we have in the data set are:
 | L2_1 to L2_20 | `r typeof(evans_data$L2_1)`| Loneliness scale post-test, 20 items. |
 | SC2_1 to SC2_20 | `r typeof(evans_data$SC2_1)`| Social connectedness scale post-test, 20 items, 1 (strongly disagree) to 6 (strongly agree).|
 
+::: {.callout-tip}
+#### Try this
+Now we have introduced the data set, explore them using different methods we introduced. For example, opening the data object as a tab to scroll around, explore with `glimpse()`, or even try plotting some of the individual variables to see what they look like.
+:::
+
 ## Wrangling 
+
+```{r echo=FALSE}
+evans_clean <- evans_data %>% 
+  mutate(Live_Pets = case_match(Live_Pets,
+                                1 ~ "Has a pet back home",
+                                2 ~ "Does not have a pet back home"),
+         Consumer_BARK = case_match(Consumer_BARK,
+                                    1 ~ "Low",
+                                    2 ~ "Medium",
+                                    3 ~ "High"),
+         across(.cols = c(L1_1, L1_5, L1_6, L1_9, L1_10, L1_15, L1_16, L1_19, L1_20,
+                          L2_1, L2_5, L2_6, L2_9, L2_10, L2_15, L2_16, L2_19, L2_20),
+                ~ 5 - .x),
+         across(.cols = c(SC1_3, SC1_6, SC1_7, SC1_9, SC1_11, SC1_13, SC1_15, SC1_17, SC1_18, SC1_20, 
+                          SC2_3, SC2_6, SC2_7, SC2_9, SC2_11, SC2_13, SC2_15, SC2_17, SC2_18, SC2_20),
+                ~ 7 - .x))
+
+lonely_pre <- evans_clean %>% 
+  pivot_longer(cols = L1_1:L1_20, 
+               names_to = "Item", 
+               values_to = "Response") %>% 
+  group_by(RID) %>% 
+  summarise(lonely_pre = mean(Response, na.rm = TRUE))
+
+lonely_post <- evans_clean %>% 
+  pivot_longer(cols = L2_1:L2_20, 
+               names_to = "Item", 
+               values_to = "Response") %>% 
+  group_by(RID) %>% 
+  summarise(lonely_post = mean(Response, na.rm = TRUE))
+
+social_pre <- evans_clean %>% 
+  pivot_longer(cols = SC1_1:SC1_20, 
+               names_to = "Item", 
+               values_to = "Response") %>% 
+  group_by(RID) %>% 
+  summarise(social_pre = mean(Response, na.rm = TRUE))
+
+social_post <- evans_clean %>% 
+  pivot_longer(cols = SC2_1:SC2_20, 
+               names_to = "Item", 
+               values_to = "Response") %>% 
+  group_by(RID) %>% 
+  summarise(social_post = mean(Response, na.rm = TRUE))
+
+evans_wide <- evans_clean %>% 
+  inner_join(lonely_pre) %>% 
+  inner_join(lonely_post) %>% 
+  inner_join(social_pre) %>% 
+  inner_join(social_post) %>% 
+  select(RID:Consumer_BARK, 
+         stress_pre = S1_1, 
+         stress_post = S2_1, 
+         lonely_pre:social_post)
+```
+
+We are going to show you a preview of the starting data set and the end product we are aiming for. For the raw data, we have limited this to the first 20 rows again just so it does not take up the whole page, but if you use `glimpse()` you will see all 88 variables.
+
+::: {.panel-tabset}
+#### Raw data
+
+```{r echo=FALSE}
+evans_data %>% 
+  select(1:20) %>% 
+  glimpse()
+```
+
+#### Wrangled data
+
+```{r echo=FALSE}
+glimpse(evans_wide)
+```
+:::
+
+::: {.callout-tip}
+#### Try this
+
+Before we give you a task list, try and switch between the raw data and the wrangled data. Make a list of all the differences you can see between the two data objects. 
+
+1. Do the values of variables change from numbers? How might you recode them using the code book above?  
+
+2. Looking at the codebook, are some variables the same but renamed? 
+
+3. Looking at the codebook, have we calculated the mean of all the items for a scale (hint: unless you read the original paper, there are a bunch of items that first need reverse coding, so we outline these below)?
+
+Try and wrangle the data based on all the differences you notice to create a new object `evans_wide`. 
+
+When you get as far as you can, check the task list which explains all the steps we applied, but not how to do them. Then, you can check the solution for our code. 
+
+:::
+
+::: {.callout-note collapse="true"} 
+#### Which items need reverse coding? 
+
+If you want to try before checking the task list, there are quite a few items from the social connectedness and loneliness scales to reverse code prior to calculating the scale mean score. 
+
+Loneliness pre-test: L1_1, L1_5, L1_6, L1_9, L1_10, L1_15, L1_16, L1_19, L1_20.
+
+Loneliness post-test: L2_1, L2_5, L2_6, L2_9, L2_10, L2_15, L2_16, L2_19, L2_20.
+                          
+Social connectedness pre-test: SC1_3, SC1_6, SC1_7, SC1_9, SC1_11, SC1_13, SC1_15, SC1_17, SC1_18, SC1_20.
+
+Social connectedness post-test: SC2_3, SC2_6, SC2_7, SC2_9, SC2_11, SC2_13, SC2_15, SC2_17, SC2_18, SC2_20.
+:::
+
+### Task list
+
+::: {.callout-note collapse="true"} 
+#### Show me the task list
+
+These are all the steps we applied to create the wrangled data object:
+
+1. Convert `age_started_smoking` to an integer (as age is a round number).
+
+2. Convert `cpd` to an integer (as cigarettes per day is a round number). You will notice a warning about introducing an NA as some nonsense responses cannot be converted to a number.  
+
+3. Convert `country_of_origin` to a factor (as we have distinct categories).
+
+4. Convert `ethnicity` to a factor (as we have distinct categories). 
+
+5. Convert `gender` to a factor (as we have distinct categories). 
+
+6. Convert `last_cigarette` to an integer (as time since last cigarette in minutes is a round number). You will notice a warning about introducing an NA as some nonsense responses cannot be converted to a number.
+
+7. Convert `level_education` to a factor (as we have distinct categories). 
+
+8. Create a new variable `daily_smoker` by recoding an existing variable. The new variable should have two levels: "Daily Smoker" and "Non-daily Smoker". In the process, convert `daily_smoker` to a factor (as we have distinct categories).
+
+9. Create a new variable `FTND_sum` by taking the sum of the six items `FTND_1` to `FTND_6` per participant. 
+
+For some advice, think of everything we covered in Chapters 4 to 6. How could you complete these steps as efficiently as possible? Could you string together functions using pipes, or do you need some intermediary objects? If it's easier for you to complete steps with longer but accurate code, there is nothing wrong with that. You recognise ways to make your code more efficient over time. 
+
+:::
 
 ## Summarising/visualising 
 
