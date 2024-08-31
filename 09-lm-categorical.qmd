@@ -353,7 +353,7 @@ cohens_d(CalEstimate ~ Condition_label,
 
 :::
 
-## Linear regression with one categorical predictor
+## Linear regression with one categorical predictor {#09-categorical}
 
 Now you know how to calculate a t-test in R, we can turn to simple linear regression as a more flexible tool for modelling the difference between two groups. As a reminder, there is a chapter in the Handy Workbook ([McAleer, 2023](https://psyteachr.github.io/handyworkbook/simple-linear-regression.html){target="_blank"}) dedicated to manually calculating simple linear regression if you want to work through what the functions are doing behind the scenes.  
 
@@ -699,7 +699,7 @@ Our model explained a statistically significant amount of variance in our outcom
 
 Note: we have not included an APA formatted Figure title here as it is not easy to format in our book, so refer to the course materials for guidance. 
 
-## Bonus section - One- and paired-samples tests
+## Bonus section - One- and paired-samples tests {#09-bonus}
 
 In this course, we focus on correlational and between-subjects designs, but you might find yourself in a situation where you want to test a continuous variable against a fixed value or compare conditions in the same participants. This is a bonus section if you have time, so you can skip to the [Test Yourself](#09-test) section to finish the chapter if you do not. 
 

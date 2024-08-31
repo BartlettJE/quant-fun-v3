@@ -400,7 +400,7 @@ evans_wide %>%
 ```
 :::
 
-4. This is not part of their article, but one interesting question might be how many people have a pet at home (`Live_Pets`) against how frequently they use the BARK program (`Consumer_BARK`). Try and recreate the following bar plot to visualise this as close as possible. We have intentionally used some features we have not covered in the data visualisation materials to get you problem solving. For one hint though, we used option D for the viridis colour scheme. 
+4. This is not part of their article, but one interesting question might be how many people have a pet at home (`Live_Pets`) against how frequently they use the BARK program (`Consumer_BARK`). Try and recreate the following bar plot to visualise this as close as possible. We have intentionally used some features we have not covered in the data visualisation chapters to get you problem solving. For one hint though, we used option D for the viridis colour scheme. 
 
 ```{r echo=FALSE}
 evans_wide %>% 
@@ -446,12 +446,312 @@ evans_wide %>%
 
 For wellbeing and ill-being measures, we will recreate some values from Table 2 from @binfet_importance_2022.
 
+5. If you calculate the mean and standard deviation of each variable per group, answer the following questions: 
+
+    - Which group has the lowest post-test stress value? `r mcq(sample(c("Control", "Indirect", answer = "Direct")))`
+    
+    - Which group has the lowest post-test loneliness value? `r mcq(sample(c("Control", "Indirect", answer = "Direct")))`
+    
+    - Which group has the lowest post-test social connectedness value? `r mcq(sample(c("Control", answer = "Indirect", "Direct")))`
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+This table calculates the mean and standard score for each variable per group. You can use this to answer the questions above. 
+
+```{r}
+evans_wide %>% 
+  pivot_longer(cols = stress_pre:social_post, 
+               names_to = "Variable", 
+               values_to = "Value") %>% 
+  group_by(GroupAssignment, Variable) %>% 
+  summarise(mean_score = round(mean(Value), 2), 
+            sd_score = round(sd(Value), 2))
+
+```
+:::
+
+6. Create a scatterplot of the relationship between post-test social connectedness and loneliness. The relationship between the two variables is `r mcq(sample(c("positive", answer = "negative")))`, meaning that as social connectedness increases, we expect loneliness to `r mcq(sample(c("increase", answer = "decrease")))`.
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+The code here creates a scatterplot for the relationship between post-test social connectedness and loneliness. 
+
+```{r}
+evans_wide %>% 
+  ggplot(aes(x = lonely_post, y = social_post)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  theme_classic() + 
+  labs(x = "Loneliness Post-test", y = "Social Connectedness Post-test")
+```
+:::
+
+7. As we start to think about inferential statistics, we can plot the difference between pre- and post-test for each group. For this question, try and recreate the boxplot to visualise stress. Hint: think about if you need to restructure the data, and how you can present the conditions in the appropriate order. 
+
+```{r echo=FALSE}
+evans_wide %>% 
+  pivot_longer(cols = stress_pre:stress_post, 
+               names_to = "Stress", 
+               values_to = "Value") %>% 
+  mutate(Stress = factor(Stress,
+                         levels = c("stress_pre", "stress_post"), 
+                         labels = c("Pre-test", "Post-test"))) %>% 
+  ggplot(aes(x = GroupAssignment, y = Value, fill = Stress)) + 
+  geom_boxplot(alpha = 0.7) + 
+  labs(x = "Group Assignment", y = "Stress Scale") + 
+  scale_fill_viridis_d(option = "E", 
+                       name = "Time") + 
+  theme_classic()
+```
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+There are two key steps before you can plot the data. First, you need to restructure the data to long form to get one variable for pre- and post-test. Second, post comes before pre due to alphabetical order, so you need to create a factor to specify the order here. 
+
+```{r eval=FALSE}
+evans_wide %>% 
+  pivot_longer(cols = stress_pre:stress_post, 
+               names_to = "Stress", 
+               values_to = "Value") %>% 
+  mutate(Stress = factor(Stress,
+                         levels = c("stress_pre", "stress_post"), 
+                         labels = c("Pre-test", "Post-test"))) %>% 
+  ggplot(aes(x = GroupAssignment, y = Value, fill = Stress)) + 
+  geom_boxplot(alpha = 0.7) + 
+  labs(x = "Group Assignment", y = "Stress Scale") + 
+  scale_fill_viridis_d(option = "E", 
+                       name = "Time") + 
+  theme_classic()
+```
+:::
+
+8. Try and recreate the violin-boxplot to visualise loneliness. Hint: remember how to align the different elements from Chapter 7. 
+
+```{r warning=FALSE, message=FALSE, echo=FALSE}
+# specify as an object, so we only change it in one place
+dodge_value <- 0.9
+
+evans_wide %>% 
+  pivot_longer(cols = lonely_pre:lonely_post, 
+               names_to = "Lonely", 
+               values_to = "Value") %>% 
+   mutate(Lonely = factor(Lonely,
+                          levels = c("lonely_pre", "lonely_post"), 
+                          labels = c("Pre-test", "Post-test"))) %>% 
+  ggplot(aes(x = GroupAssignment, y = Value, fill = Lonely)) + 
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               alpha = 0.7,
+               fatten = NULL,
+               position = position_dodge(dodge_value)) + 
+  stat_summary(fun = "mean", 
+               geom = "point",
+               position = position_dodge(dodge_value)) +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1,
+               position = position_dodge(dodge_value)) +
+  scale_fill_viridis_d(option = "E", 
+                       name = "Time") + 
+  labs(x = "Group Assignment", y = "Loneliness Scale") + 
+  theme_classic()
+```
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+The same hints apply as question 7 as you need to restructure the data and create a new factor order so pre comes before post. As we have two grouping variables, we must specify a constant position dodge value so it does not plot weird. 
+
+```{r eval=FALSE}
+# specify as an object, so we only change it in one place
+dodge_value <- 0.9
+
+evans_wide %>% 
+  pivot_longer(cols = lonely_pre:lonely_post, 
+               names_to = "Lonely", 
+               values_to = "Value") %>% 
+   mutate(Lonely = factor(Lonely,
+                          levels = c("lonely_pre", "lonely_post"), 
+                          labels = c("Pre-test", "Post-test"))) %>% 
+  ggplot(aes(x = GroupAssignment, y = Value, fill = Lonely)) + 
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               alpha = 0.7,
+               fatten = NULL,
+               position = position_dodge(dodge_value)) + 
+  stat_summary(fun = "mean", 
+               geom = "point",
+               position = position_dodge(dodge_value)) +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1,
+               position = position_dodge(dodge_value)) +
+  scale_fill_viridis_d(option = "E", 
+                       name = "Time") + 
+  labs(x = "Group Assignment", y = "Loneliness Scale") + 
+  theme_classic()
+```
+:::
+
 ## Analysing 
+
+Finally, we turn to analysis for inferential statistics. In @evans_repurposing_2023, they organise the analyses from @binfet_importance_2022 into three hypotheses. You have not covered all the skills in Research Methods 1 to reproduce their analyses exactly, so we will work around an adapted set based on what we currently expect of you. 
+
+We present each analysis as an overview so you can think about what techniques from Chapters 8 and 9 would address it, give you instructions on what analysis we have in mind if you need guidance, then present the solution. We focus on one outcome per hypothesis, but once you are confident you are applying and interpreting the appropriate techniques, why not try the other outcomes. 
 
 ### Hypothesis 1
 
+9. Hypothesis 1 is that each treatment group will increase measures of well-being (social connectedness) and decrease measures of ill-being (stress and loneliness). For this question, we focus on stress, so we expected stress to decrease. 
+
+::: {.callout-tip}
+#### Try this
+There are two ways you could approach this. Either as the whole sample, or like @evans_repurposing_2023 present to focus on each group separately. Think about what techniques from Chapters 8 and 9 would let you test the hypothesis that each treatment group will decrease stress at post-test compared to pre-test.
+:::
+
+::: {.callout-note collapse="true"} 
+#### Show me the task list
+
+For the solution below, we are focusing on the whole sample to test whether everyone decreased stress in post-test, but you could approach it by separating the data into the three groups and then testing for the difference per group. 
+
+To test whether an outcome decreases between conditions in the same participants, we need a model suitable for a within-subjects design. In Chapter 9, we covered in [the bonus section](#09-bonus) how to test the difference in conditions either through a paired samples-test or linear model with fixed intercept on the difference score. 
+
+1. Calculate the difference between stress pre- and post-test. 
+
+2. Fit a linear model on the difference score with a fixed intercept and no predictor. 
+
+3. Look at the intercept, is it positive or negative? If you calculated pre-test minus post-test, you would be looking for a postive difference as we expect lower stress at post-test. For hypothesis testing, is the *p*-value lower than alpha? 
+
+4. What is the effect size? How much did stress change from pre-test to post-test? What is the confidence interval around the effect size? 
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+In the code below, we first calculate a difference score by substracting stress post-test from stress pre-test. 
+
+We then fit a linear model on this difference score and add a fixed intercept as we have no predictor. 
+
+Consistent with hypothesis 1, stress was lower at post-test compared to pre-test across all participants. On average, participants decreased their stress score by 0.83 points ($b_1$ = 0.83, 95% CI = [0.72, 0.95], *p* < .001).
+
+```{r}
+evans_wide <- evans_wide %>% 
+  mutate(stress_diff = stress_pre - stress_post)
+
+lm_stress <- lm(stress_diff ~ 1, 
+                data = evans_wide)
+
+summary(lm_stress)
+
+confint(lm_stress)
+```
+:::
+
 ### Hypothesis 2
+
+10. In Hypothesis 2, we predict that the direct and indirect contact groups will have higher well-being and lower ill-being measures compared to the control group. For this question, we focus on social connectedness at post-test for a measure of well-being. 
+
+::: {.callout-tip}
+#### Try this
+Think about what techniques from Chapters 8 and 9 would let you test the hypothesis that the direct and indirect groups both increase social connectedness at post-test compared to the control group. Think of how you could focus on two groups at a time per analysis. 
+:::
+
+::: {.callout-note collapse="true"} 
+#### Show me the task list
+
+For the solution below, we apply two tests. We focus on the direct and control groups by filtering out indirect, then we focus on indirect and control by filtering out direct. 
+
+To test the difference between two groups on one outcome, we need a model suitable for a between-subjects design. In Chapter 9, we covered [linear regression with one categorical predictor](#09-categorical) how to test the difference in an outcome between two groups. 
+
+1. Fit a linear model on the outcome social connectedness post-test with a categorical predictor of group. You will need to fit two models, one where you filter out the indirect group and one where you filter out the direct group. 
+
+2. Look at the intercept, what is the predicted value for the reference group? Look at the slope, what is the estimated change to the target group? For hypothesis 2, is the direct/indirect group higher on social connectedness compared to control? For hypothesis testing, is the *p*-value lower than alpha? 
+
+3. What is the effect size? How much did the two groups differ on social connectedness? What is the confidence interval around the effect size? 
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+In the code below, we first fit a linear model on social connectedness post-test and focus on the direct and control groups. There are different ways you could ignore the indirect group, but here we filter the data as we pass the data to the `lm()` function.   
+
+The direct group increased social connectedness post-test on average 0.15 points compared to the control group, but the difference was not statistically significant ($b_1$ = 0.15, 95% CI = [-0.09, 0.39], *p* = .207).
+
+```{r}
+lm_direct <- lm(social_post ~ GroupAssignment, 
+                 data = filter(evans_wide,
+                               GroupAssignment != "Indirect"))
+
+summary(lm_direct)
+
+confint(lm_direct)
+```
+
+The indirect group increased social connectedness post-test compared to the control group, but the difference was very small and not statistically significant ($b_1$ = 0.01, 95% CI = [-0.23, 0.25], *p* = .936).
+
+```{r}
+lm_indirect <- lm(social_post ~ GroupAssignment, 
+                 data = filter(evans_wide,
+                               GroupAssignment != "Direct"))
+
+summary(lm_indirect)
+
+confint(lm_indirect)
+```
+
+In @evans_repurposing_2023, the direct vs control comparison is significant, but they approached the analysis differently using a technique you will not learn until Research Methods 2. They control for pre-test scores by using it as an additional predictor, but you have not learnt about multiple regression yet. 
+:::
 
 ### Hypothesis 3
 
+11. Finally, the third hypothesis focuses on the difference between the two contact groups. They predict that the direct contact group will lead to higher well-being and lower ill-being compared to the indirect contact group. For this question, we focus on loneliness post-test for a measure of ill-being. 
+
+::: {.callout-tip}
+#### Try this
+Think about what techniques from Chapters 8 and 9 would let you test the hypothesis that the direct group decreases loneliness at post-test compared to the indirect group.
+:::
+
+::: {.callout-note collapse="true"} 
+#### Show me the task list
+
+For this analysis, we focus on the final combination of groups, this time ignoring the control group.
+
+To test the difference between two groups on one outcome, we need a model suitable for a between-subjects design. In Chapter 9, we covered [linear regression with one categorical predictor](#09-categorical) how to test the difference in an outcome between two groups. 
+
+1. Fit a linear model on the outcome loneliness post-test with a categorical predictor of group. Filter the data to just focus on the direct and indirect contact groups. 
+
+2. Look at the intercept, what is the predicted value for the reference group? Look at the slope, what is the estimated change to the target group? For hypothesis 3, is the direct group lower on loneliness compared to indirect? For hypothesis testing, is the *p*-value lower than alpha? 
+
+3. What is the effect size? How much did the two groups differ on loneliness? What is the confidence interval around the effect size? 
+
+:::
+
+::: {.callout-caution collapse="true"} 
+#### Show me the solution
+
+In the code below, we first fit a linear model on loneliness post-test and focus on the direct and indirect groups. There are different ways you could ignore the indirect group, but here we filter the data as we pass the data to the `lm()` function.   
+
+The direct group decreased loneliness post-test on average 0.14 points compared to the indirect group, but the difference was not statistically significant ($b_1$ = 0.14, 95% CI = [-0.01, 0.29], *p* = .060).
+
+```{r}
+lm_contact <- lm(lonely_post ~ GroupAssignment, 
+                 data = filter(evans_wide,
+                               GroupAssignment != "Control"))
+
+summary(lm_contact)
+
+confint(lm_contact)
+```
+
+Like hypothesis 2, @evans_repurposing_2023 report the direct vs indirect comparison as significant, but they approached the analysis differently using a technique you will not learn until Research Methods 2. They control for pre-test scores by using it as an additional predictor, but you have not learnt about multiple regression yet. 
+:::
+
 ## Conclusion
+
+Well done! Hopefully you recognised how far your skills have come to be able to do this independently, regardless of how many hints you needed. We are really starting to pile the skills up you have learnt so far, from simply using R Markdown files, to wrangling data, to visualising data, to finally applying modelling techniques for your inferential statistics. 
+
+If you are curious, you can read @evans_repurposing_2023 to see how they walk through wrangling and analysing the data. Some of the techniques we do not cover in Research Methods 1, but they have some great features like highlighting common student mistakes. 
