@@ -2,7 +2,7 @@
 
 Welcome to the second data analysis journey. We have designed these chapters as a bridge between the structured learning in the core chapters and your assessments. We present you with a new data set, show you what the end product should look like, and see if you can apply your data wrangling, visualisation, and/or analysis skills to get there. 
 
-As you gain independence, this is the crucial skill. Data analysis is all about seeing the data you have available to you and identifying what the end product needs to be to apply your visualisation and analysis techniques. You can then mentally (or physically) create a checklist of tasks to work backgrounds to get there. There might be a lot of trial and error as you try one thing, it does not quite work, so you go back and try something else. If you get stuck though, we have a range of hints and task lists you can unhide, then the solution to check your attempts against. 
+As you gain independence, this is the crucial skill. Data analysis is all about seeing the data you have available to you and identifying what the end product needs to be to apply your visualisation and analysis techniques. You can then mentally (or physically) create a checklist of tasks to work backwards to get there. There might be a lot of trial and error as you try one thing, it does not quite work, so you go back and try something else. If you get stuck though, we have a range of hints and task lists you can unhide, then the solution to check your attempts against. 
 
 In this second data analysis journey, we focus on inferential statistics after some data wrangling to apply all the skills you developed from Chapter 1 to Chapter 9. 
 
@@ -16,11 +16,11 @@ For this task, we are using open data from @binfet_importance_2022, where the au
 
 In summary, they were interested in the effect of therapy dogs on well-being in undergraduate students. Participants were randomly allocated to one of three groups: 
 
-1. Canine interaction touching the dogs. 
+1. Canine interaction touching the dogs (Direct). 
 
-2. Canine interaction not touching the dogs. 
+2. Canine interaction not touching the dogs (Indirect). 
 
-3. Handler-only with no dogs present. 
+3. Handler-only with no dogs present (Control). 
 
 They measured 9 outcomes before and after the intervention including social connectedness, stress, and loneliness. For this journey chapter, we will focus on a constrained set of variables and analyses so it does not take forever, but the process would apply to all the outcomes. The authors posed three hypotheses which we will test after some data wrangling:
 
@@ -46,7 +46,7 @@ You are now ready to start working on the task!
 
 ## Overview
 
-### Load <pkg>tidyverse</pkg> and read the data files
+### Load <pkg>tidyverse</pkg> and read the data file
 
 Before we explore what wrangling we need to do, complete the following task list and check the solution if you are stuck. 
 
@@ -54,14 +54,8 @@ Before we explore what wrangling we need to do, complete the following task list
 #### Try this
 Complete the following steps:
 
-1. Load the following packages:
-
-    - <pkg>tidyverse</pkg>
+1. Load the <pkg>tidyverse</pkg> package. 
     
-    - <pkg>effectsize</pkg>
-    
-    - <pkg>performance</pkg>
-
 2. Read the data file `data/Evans_2023_raw.csv` to the object name `evans_data`.
 :::
 
@@ -69,10 +63,8 @@ Complete the following steps:
 #### Show me the solution
 You should have the following in a code chunk: 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # load the relevant packages
-library(effectsize)
-library(performance)
 library(tidyverse)
 
 # Read the Evans_2023_raw.csv file 
@@ -82,7 +74,7 @@ evans_data <- read_csv("data/Evans_2023_raw.csv")
 
 ### Explore `evans_data`
 
-In `evans_data`, we have the participant ID (`RID`), several demographic variables, and pre and post items for stress, loneliness, and social connectedness. There are 88 variables which would take up loads of space, so we are just showing a preview of the first 20 here. If you use `glimpse()`, you will see all 88. 
+In `evans_data`, we have the participant ID (`RID`), several demographic variables, and pre- and post-test items for stress, loneliness, and social connectedness. There are 88 variables which would take up loads of space, so we are just showing a preview of the first 20 here. If you use `glimpse()`, you will see all 88. 
 
 ```{r echo=FALSE}
 evans_data %>% 
@@ -600,7 +592,7 @@ evans_wide %>%
 
 Finally, we turn to analysis for inferential statistics. In @evans_repurposing_2023, they organise the analyses from @binfet_importance_2022 into three hypotheses. You have not covered all the skills in Research Methods 1 to reproduce their analyses exactly, so we will work around an adapted set based on what we currently expect of you. 
 
-We present each analysis as an overview so you can think about what techniques from Chapters 8 and 9 would address it, give you instructions on what analysis we have in mind if you need guidance, then present the solution. We focus on one outcome per hypothesis, but once you are confident you are applying and interpreting the appropriate techniques, why not try the other outcomes. 
+We present each analysis as an overview so you can think about what techniques from Chapters 8 and 9 would address it, give you instructions on what analysis we have in mind if you need guidance, then present the solution. We focus on one outcome per hypothesis, but once you are confident you are applying and interpreting the appropriate techniques, why not try the other outcomes yourself? 
 
 ### Hypothesis 1
 
@@ -635,7 +627,7 @@ In the code below, we first calculate a difference score by substracting stress 
 
 We then fit a linear model on this difference score and add a fixed intercept as we have no predictor. 
 
-Consistent with hypothesis 1, stress was lower at post-test compared to pre-test across all participants. On average, participants decreased their stress score by 0.83 points ($b_1$ = 0.83, 95% CI = [0.72, 0.95], *p* < .001).
+Consistent with hypothesis 1, stress was lower at post-test compared to pre-test across all participants. On average, participants decreased their stress score by 0.83 points ($b_0$ = 0.83, 95% CI = [0.72, 0.95], *p* < .001).
 
 ```{r}
 evans_wide <- evans_wide %>% 
@@ -652,7 +644,7 @@ confint(lm_stress)
 
 ### Hypothesis 2
 
-10. In Hypothesis 2, we predict that the direct and indirect contact groups will have higher well-being and lower ill-being measures compared to the control group. For this question, we focus on social connectedness at post-test for a measure of well-being. 
+10. In Hypothesis 2, we predict that the direct and indirect contact groups will have higher well-being and lower ill-being measures compared to the control group. For this question, we focus on social connectedness at post-test for a measure of well-being, so we expect higher scores in the direct and indirect groups. 
 
 ::: {.callout-tip}
 #### Try this
@@ -708,7 +700,7 @@ In @evans_repurposing_2023, the direct vs control comparison is significant, but
 
 ### Hypothesis 3
 
-11. Finally, the third hypothesis focuses on the difference between the two contact groups. They predict that the direct contact group will lead to higher well-being and lower ill-being compared to the indirect contact group. For this question, we focus on loneliness post-test for a measure of ill-being. 
+11. Finally, the third hypothesis focuses on the difference between the two contact groups. They predict that the direct contact group will lead to higher well-being and lower ill-being compared to the indirect contact group. For this question, we focus on loneliness post-test for a measure of ill-being, so we expect lower scores in the direct group. 
 
 ::: {.callout-tip}
 #### Try this

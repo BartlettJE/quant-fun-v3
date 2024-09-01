@@ -376,7 +376,7 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#linear-regression-with-one-categorical-predictor" id="toc-linear-regression-with-one-categorical-predictor" class="nav-link" data-scroll-target="#linear-regression-with-one-categorical-predictor"><span class="header-section-number">9.3</span> Linear regression with one categorical predictor</a>
+<a href="#09-categorical" id="toc-09-categorical" class="nav-link" data-scroll-target="#09-categorical"><span class="header-section-number">9.3</span> Linear regression with one categorical predictor</a>
   <ul class="collapse">
 <li><a href="#activity-6---descriptive-statistics" id="toc-activity-6---descriptive-statistics" class="nav-link" data-scroll-target="#activity-6---descriptive-statistics"><span class="header-section-number">9.3.1</span> Activity 6 - Descriptive statistics</a></li>
   <li><a href="#activity-7---using-the-lm-function" id="toc-activity-7---using-the-lm-function" class="nav-link" data-scroll-target="#activity-7---using-the-lm-function"><span class="header-section-number">9.3.2</span> Activity 7 - Using the <code>lm()</code> function</a></li>
@@ -397,7 +397,7 @@ div.csl-indent {
 </li>
   <li><a href="#reporting-your-results" id="toc-reporting-your-results" class="nav-link" data-scroll-target="#reporting-your-results"><span class="header-section-number">9.5</span> Reporting your results</a></li>
   <li>
-<a href="#bonus-section---one--and-paired-samples-tests" id="toc-bonus-section---one--and-paired-samples-tests" class="nav-link" data-scroll-target="#bonus-section---one--and-paired-samples-tests"><span class="header-section-number">9.6</span> Bonus section - One- and paired-samples tests</a>
+<a href="#09-bonus" id="toc-09-bonus" class="nav-link" data-scroll-target="#09-bonus"><span class="header-section-number">9.6</span> Bonus section - One- and paired-samples tests</a>
   <ul class="collapse">
 <li><a href="#one-sample-comparing-against-a-fixed-value" id="toc-one-sample-comparing-against-a-fixed-value" class="nav-link" data-scroll-target="#one-sample-comparing-against-a-fixed-value"><span class="header-section-number">9.6.1</span> One-sample comparing against a fixed value</a></li>
   <li><a href="#paired-samples-comparing-conditions" id="toc-paired-samples-comparing-conditions" class="nav-link" data-scroll-target="#paired-samples-comparing-conditions"><span class="header-section-number">9.6.2</span> Paired-samples comparing conditions</a></li>
@@ -957,7 +957,7 @@ sample estimates:
 </div>
 </div>
 </div>
-</section></section><section id="linear-regression-with-one-categorical-predictor" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="linear-regression-with-one-categorical-predictor">
+</section></section><section id="09-categorical" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="09-categorical">
 <span class="header-section-number">9.3</span> Linear regression with one categorical predictor</h2>
 <p>Now you know how to calculate a t-test in R, we can turn to simple linear regression as a more flexible tool for modelling the difference between two groups. As a reminder, there is a chapter in the Handy Workbook (<a href="https://psyteachr.github.io/handyworkbook/simple-linear-regression.html" target="_blank">McAleer, 2023</a>) dedicated to manually calculating simple linear regression if you want to work through what the functions are doing behind the scenes.</p>
 <section id="activity-6---descriptive-statistics" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="activity-6---descriptive-statistics">
@@ -1518,7 +1518,7 @@ Show me the solution
 </div>
 <p>Our model explained a statistically significant amount of variance in our outcome (adjusted <span class="math inline">\(R^2\)</span> = .047, F(1, 462) = 23.64, <em>p</em> &lt; .001). Condition was a positive predictor, where the experimental group consumed on average 63 more calories than the control group (<span class="math inline">\(b_1\)</span> = 63.05, 95% CI = [37.57, 88.53], <em>p</em> &lt; .001). Expressed as a standardised effect size, the experimental group consumed 0.44 (95% CI = [0.26, 0.62]) more standard deviations than the control group.”</p>
 <p>Note: we have not included an APA formatted Figure title here as it is not easy to format in our book, so refer to the course materials for guidance.</p>
-</section><section id="bonus-section---one--and-paired-samples-tests" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="bonus-section---one--and-paired-samples-tests">
+</section><section id="09-bonus" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="09-bonus">
 <span class="header-section-number">9.6</span> Bonus section - One- and paired-samples tests</h2>
 <p>In this course, we focus on correlational and between-subjects designs, but you might find yourself in a situation where you want to test a continuous variable against a fixed value or compare conditions in the same participants. This is a bonus section if you have time, so you can skip to the <a href="#09-test">Test Yourself</a> section to finish the chapter if you do not.</p>
 <p>For this demonstration, we will use data from experiment 1 of <span class="citation" data-cites="bem_feeling_2011">Bem (<a href="references.html#ref-bem_feeling_2011" role="doc-biblioref">2011</a>)</span>, an (in)famous study that almost single-handedly started the replication crisis in psychology. Briefly, participants completed a computer task adapted from priming experiments where they could select one of two windows. They had to guess which window had an image hidden behind it and the images contained different stimuli like erotic or neutral/control images. Across many trials of the participants guessing the location, Bem calculated the proportion of successful trials which could range between 0 (never correct), 50 (50%, chance), and 100 (always correct). The headline finding was participants demonstrated precognition - or the ability to see into the future - to guess above chance levels, but what does the data look like?</p>
