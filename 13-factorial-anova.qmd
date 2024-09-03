@@ -2,24 +2,42 @@
 
 For this chapter, we're going to look at an example of a factorial ANOVA. You'll learn more about interpreting these in the lectures, but for now, we'll just focus on the code. 
 
-We're going to reproduce the analysis from Experiment 3 of ['present" for the future: The unexpected value of rediscovery'](https://journals.sagepub.com/doi/abs/10.1177/0956797614542274){target="_blank"} [@zhang_present_2014], which you may remember from chapter 7 - building your data visualisation skills. 
+**Chapter Intended Learning Outcomes (ILOs)**
 
-This experiment has a 2 x 2 mixed design:
+By the end of this chapter, you will be able to: 
 
-* The first IV is time (time1, time2) and is within-subjects 
-* The second IV is type of event (ordinary vs. extraordinary) and is a between-subjects factor 
-* The DV we will use is `interest` 
+## Chapter preparation
 
-### Activity 1: Set-up {#factorial-a1}
+### Introduction to the data set 
 
-* Open R Studio and set the working directory to your chapter folder. Ensure the environment is clear. 
-* Open a new R Markdown document and save it in your working directory. Call the file "Factorial ANOVA". 
-* Download <a href="Zhang et al. 2014 Study 3.csv" download>Zhang et al. 2014 Study 3.csv</a> and extract the files in to your Chapter 15 folder. 
-* If you're on the server, avoid a number of issues by restarting the session - click `Session` - `Restart R` 
-* If you are working on your own computer, install the package `rcompanion`. Remember **do not install packages on university computers, they are already installed**.
-* Type and run the code that loads `pwr`, `rcompanion`, `lsr`, `car`, `broom`, `afex`, `emmeans` and `tidyverse` using the `library()` function.
+For this chapter, we are using open data from experiment 3 in @zhang_present_2014 which you might remember from Chapter 7. Now you have developed your inferential skills, we can return to reproduce their analyses. The abstract of their article is:
 
-```{r packages, warning=FALSE, echo=FALSE, message=FALSE}
+> Although documenting everyday activities may seem trivial, four studies reveal that creating records of the present generates unexpected benefits by allowing future rediscoveries. In Study 1, we used a time-capsule paradigm to show that individuals underestimate the extent to which rediscovering experiences from the past will be curiosity provoking and interesting in the future. In Studies 2 and 3, we found that people are particularly likely to underestimate the pleasure of rediscovering ordinary, mundane experiences, as opposed to extraordinary experiences. Finally, Study 4 demonstrates that underestimating the pleasure of rediscovery leads to time-inconsistent choices: Individuals forgo opportunities to document the present but then prefer rediscovering those moments in the future to engaging in an alternative fun activity. Underestimating the value of rediscovery is linked to people’s erroneous faith in their memory of everyday events. By documenting the present, people provide themselves with the opportunity to rediscover mundane moments that may otherwise have been forgotten.
+
+In summary, they were interested in whether people could predict how interested they would be in rediscovering past experiences. They call it a "time capsule" effect, where people store photos or messages to remind themselves of past events in the future. They predicted participants in the ordinary group would underestimate their future feelings (i.e., there would be a bigger difference between time 1 and time 2 measures) compared to participants in the extraordinary group.
+
+Now we are focusing on the analysis rather than just visualisation, we can describe the experiment as a 2 x 2 mixed design. The first IV is time (time1, time2) and is within-subjects. The second IV is type of event (ordinary vs. extraordinary) and is a between-subjects factor. We will then use interest as a DV for a composite measure which took the mean of items on interest, meaningfulness, and enjoyment
+
+### Organising your files and project for the chapter
+
+Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.
+
+1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, create a new folder called `Chapter_12_F_ANOVA`. Within `Chapter_12_F_ANOVA`, create two new folders called `data` and `figures`.
+
+2. Create an R Project for `Chapter_12_F_ANOVA` as an existing directory for your chapter folder. This should now be your working directory.
+
+3. Create a new R Markdown document and give it a sensible title describing the chapter, such as `12 Factorial ANOVA`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_12_F_ANOVA` folder. 
+
+4. If you must download the data again, please save the following file: [Zhang_2014.csv](data/Zhang_2014.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_12_F_ANOVA`.
+
+You are now ready to start working on the chapter! 
+
+### Activity 1 - Load the packages and read the data
+
+We already worked on the data wrangling in Chapter 7, so please type or copy and paste the following code to prepare for the chapter. 
+
+```{r message=FALSE, warning=FALSE}
+# Load the packages below
 library("pwr")
 library("rcompanion")
 library("lsr")
@@ -28,108 +46,133 @@ library("broom")
 library("afex")
 library("emmeans")
 library("tidyverse")
+library(performance)
+
+# Load the data file
+# This should be the Zhang_2014.csv file 
+zhang_data <- read_csv("data/Zhang_2014.csv")
+
+# Wrangle the data for plotting. 
+# select and rename key variables
+# mutate to add participant ID and recode
+zhang_wide <- zhang_data %>%
+  select(Gender, 
+         Age, 
+         Condition, 
+         time1_interest = T1_Predicted_Interest_Composite, 
+         time2_interest = T2_Actual_Interest_Composite) %>%
+  mutate(participant_ID = row_number(),
+         Condition = case_match(Condition, 
+                            1 ~ "Ordinary", 
+                            2 ~ "Extraordinary"))
+
+zhang_long <- zhang_wide %>% 
+  pivot_longer(cols = time1_interest:time2_interest,
+               names_to = "Time",
+               values_to = "Interest")
 ```
 
-Run the below code to load the data and wrangle it into the format we need. You don't need to write this code yourself but do make sure you can understand what each line is doing - a good way to do this when the code uses pipes (`%>%`) is to highlight and run each line progressively so you can see how it builds up. Line-by-line the code:
+### Activity 2 - Calculate descriptive statistics {#factorial-a2}
 
-* Reads in the data file
-* Select the three columns we need  
-* Adds on a column of subject IDs  
-* Tidies the data
-* Recodes the values of `Condition` from numeric to text labels
-* Recodes the values of `time` to be easier to read/write
+::: {.callout-tip}
+#### Try this
 
-```{r fact_dat, message=FALSE}
+Before we start on the inferential statistics, one key part of understanding your data and reporting for context in a report is calculating descriptive statistics like the mean and standard deviation. 
 
-factorial <- read_csv("Zhang et al. 2014 Study 3.csv")%>%
-  select(Condition, T1_Predicted_Interest_Composite, T2_Actual_Interest_Composite)%>%
-  mutate(subject = row_number())%>%
-  pivot_longer(names_to = "time",values_to = "interest", cols =       c("T1_Predicted_Interest_Composite","T2_Actual_Interest_Composite"))%>%
-  mutate(Condition = dplyr::recode(Condition, "1" = "Ordinary", "2" = "Extraordinary"))%>%
-  mutate(time = dplyr::recode(time, "T1_Predicted_Interest_Composite" = "time1_interest",
-                       "T2_Actual_Interest_Composite" = "time2_interest")) %>%
-  mutate(Condition = as.factor(Condition)) %>% 
-  mutate (time= as.factor(time))
+For the combination of `Condition` and `Time`, calculate the mean and standard deviation of `Interest`.
+:::
 
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
+
+```{r descrip_factorial}
+zhang_long %>%
+  group_by(Condition, Time) %>%
+  summarise(mean = round(mean(Interest, na.rm = TRUE), 2),
+            sd = round(sd(Interest, na.rm = TRUE), 2))
 ```
 
-### Activity 2: Descriptive statistics {#factorial-a2}
+:::
 
-* Calculate descriptive statistics (mean and SD) for `interest`  for each `Condition` for each `time` (hint: you will need to `group_by()` two variables) and store it in an object named `sum_dat_factorial`. These are known as the cells means.
+### Activity 3 - Create a violin-boxplot {#factorial-a3}
 
+To communicate your findings, it is also important to visualise your data. Initially, this might be a quick boxplot for exploratory data analysis, but something like a violin-boxplot would be great for communicating your findings in a report. 
 
-```{r descrip_factorial, echo=FALSE, message = FALSE}
-sum_dat_factorial<-factorial%>%
-  group_by(Condition, time)%>%
-  summarise(mean = mean(interest, na.rm = TRUE),
-            sd = sd(interest, na.rm = TRUE)
-            )
+::: {.callout-tip}
+#### Try this
+Try and recreate the following violin-boxplot that you learnt how to create in Chapter 7. The finer details like the colour scheme are not important, but see how many features you can recreate before checking the code. 
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+# specify as an object, so we only change it in one place
+dodge_value <- 0.9
+
+zhang_long %>% 
+  mutate(Time = case_match(Time,
+                           "time1_interest" ~ "Time 1",
+                           "time2_interest" ~ "Time 2")) %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Time)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               alpha = 0.7,
+               fatten = NULL,
+               position = position_dodge(dodge_value)) + 
+  stat_summary(fun = "mean", 
+               geom = "point",
+               position = position_dodge(dodge_value)) +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1,
+               position = position_dodge(dodge_value)) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
+  theme_classic()
 ```
+:::
 
-### Activity 3: Violin-boxplots {#factorial-a3}
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
 
-We're going to produce two kinds of plots to visualise our data. First, we'll produce violin-boxplots so that we can see the distribution of our data.
+```{r, eval = FALSE, message=FALSE, warning=FALSE}
+# specify as an object, so we only change it in one place
+dodge_value <- 0.9
 
-* Write the code that produces the below violin-boxplots for the scores in each group. 
-  * Hint 1: you will need to add in the second IV in the first call to ggplot as a fill argument (aes(x,y,fill)). 
-  * Hint 2: you will need to add `position = position_dodge(.9)` to geom_boxplot to get the plots to align. 
-
-You don't need to replicate the exact colour scheme used below, see if you can play around with the settings to whatever colour scheme you think works best.
-
-```{r plt1, fig.cap = "Violin-boxplot by condition and time", echo=FALSE}
-ggplot(factorial, 
-       aes(x = time , y = interest, fill = Condition))+
-  geom_violin(trim = FALSE, 
-              alpha = .4)+
-  geom_boxplot(position = position_dodge(.9), 
-               width = .2, 
-               alpha = .6)+
-  scale_x_discrete(labels = c("Time 1", "Time 2"))+
-  scale_fill_viridis_d(option = "E")+
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(width = 0.9)) +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
-               position = position_dodge(width = 0.9)) +
-  theme_minimal()
-```
-
-### Activity 4: Interaction plots {#factorial-a4}
-
-Now we're going to produce an interaction plot that makes it easier to see how the IVs are interacting, which requires some ggplot2 functions we haven't come across yet. Rather than using the raw data in `dat_factorial`, we use the means that we produced in `sum_dat_factorial`. This type of plot requires two geoms, one to draw the points, and one to draw the lines that connect them. 
-
-This plot reproduces the plot used in the paper.
-
-* Run the code and then play around with how it looks by changing the arguments for e.g., colour, line-type, and the theme.
-
-```{r plot2, fig.cap = "Interaction plot"}
-ggplot(sum_dat_factorial, aes(x = time, y = mean, group = Condition, shape = Condition)) +
-  geom_point(size = 3) +
-  geom_line(aes(linetype = Condition))+
-  scale_x_discrete(labels = c("Time 1", "Time 2"))+
+zhang_long %>% 
+  mutate(Time = case_match(Time,
+                           "time1_interest" ~ "Time 1",
+                           "time2_interest" ~ "Time 2")) %>% 
+  ggplot(aes(y = Interest, x = Condition, fill = Time)) +
+  geom_violin(alpha = 0.5) + 
+  geom_boxplot(width = 0.2, 
+               alpha = 0.7,
+               fatten = NULL,
+               position = position_dodge(dodge_value)) + 
+  stat_summary(fun = "mean", 
+               geom = "point",
+               position = position_dodge(dodge_value)) +
+  stat_summary(fun.data = "mean_cl_boot", 
+               geom = "errorbar", 
+               width = .1,
+               position = position_dodge(dodge_value)) +
+  scale_fill_viridis_d(option = "E") + 
+  scale_y_continuous(name = "Interest score (1-7)", 
+                     breaks = c(1:7)) + 
   theme_classic()
 ```
 
-### Activity 5: ANOVA {#factorial-a5}
+:::
 
-* Complete the below code to run the factorial ANOVA. Remember that you will need to specify both IVs and that one of them is between-subjects and one of them is within-subjects. Look up the help documentation for `aov_ez` to find out how to do this. 
+## Factorial ANOVA {#factorial-a5}
 
-* Save the ANOVA model to an object called `mod_factorial`
-* Pull out the anova table, you can either do this with `mod_factorial$anova_table` or `anova(mod_factorial)` both have the same result. Save this to an object named `factorial_output` and make sure you have used `tidy()`.
+To run the factorial ANOVA, we will be using the <pkg>afex</pkg> package again. Remember that you will must specify both IVs, one of which is between-subjects and the other is within-subjects. Look up the help documentation for `aov_ez` if you need further information. 
 
+### Activity 4 - Using the `aov_ez()` function. 
 
-```{r fact_anova, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-mod_factorial <- aov_ez(id = "subject",
-               data = factorial, 
-               between = "Condition", 
-               within = "time",
-               dv = "interest", 
-               type = 3,
-               include_aov = TRUE,
-               es = "pes") 
+Before we show you the code, try and complete the following skeleton version first. Think about what variable in the data corresponds to each argument. 
 
-factorial_output <- mod_factorial$anova_table %>% tidy()
-
-```
+Save the ANOVA model to an object called `mod_factorial` to be consistent with explanations below. For making it easier to report the results later, pull out the `mod_factorial$anova_table` component and apply the `tidy()` function from <pkg>broom</pkg> as a second step. 
 
 ```{r fact_anova2, eval = FALSE}
 mod_factorial <- aov_ez(id = "NULL",
@@ -143,32 +186,78 @@ mod_factorial <- aov_ez(id = "NULL",
 factorial_output <- NULL
 ```
 
-Look at the results. Remember the pre-class information about how to read p-values in scientific notation.
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+You should have the following in a code chunk: 
 
-* Is the main effect of condition significant? `r mcq(c("Yes", answer = "No"))`
-* Is the main effect of time significant? `r mcq(c(answer = "Yes", "No"))`
-* Is the two-way interaction significant? `r mcq(c(answer = "Yes", "No"))`
+```{r fact_anova, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+mod_factorial <- aov_ez(id = "participant_ID",
+               data = zhang_long, 
+               between = "Condition", 
+               within = "Time",
+               dv = "Interest", 
+               type = 3,
+               include_aov = TRUE,
+               es = "pes") 
 
-### Activity 6: Assumption checking {#factorial-a6}
+factorial_output <- mod_factorial$anova_table %>% 
+  tidy()
+
+```
+
+We can look at the results of the factorial ANOVA by printing the object. 
+
+```{r}
+mod_factorial
+```
+
+:::
+
+Look at the results. Remember the pre-class information about how to read *p*-values in scientific notation.
+
+- Is the main effect of condition significant? `r mcq(c("Yes", answer = "No"))`
+
+- Is the main effect of time significant? `r mcq(c(answer = "Yes", "No"))`
+
+- Is the two-way interaction significant? `r mcq(c(answer = "Yes", "No"))`
+
+### Activity 5 - Checking assumptions for factorial ANOVA {#factorial-a6}
 
 The assumptions for a factorial ANOVA are the same as the one-way ANOVA.
 
 1. The DV is interval or ratio data
+
 2. The observations should be independent
+
 3. The residuals should be normally distributed
+
 4. There should be homogeneity of variance between the groups
 
-As before, we know assumption 2 is met from the design of the study. Assumption 1 throws up an interesting issue which is the problem of ordinal data. Ordinal data are the kind of data that come from Likert scales and are very common in psychology. The problem is that ordinal data aren't interval or ratio data, there's a fixed number of values they can take (the values of the Likert scale) and you can't claim that the distance between the values is equal (is the difference between strongly agree and agree the same as the difference between agree and neutral?). 
+As before, we know assumption 2 is met from the design of the study. Assumption 1 throws up an interesting issue which is the problem of ordinal data. Ordinal data are the kind of data that come from Likert scales and are very common in psychology. The problem is that ordinal data are not interval or ratio data, there's a fixed number of integer values they can take (the values of the Likert scale) and you cannot claim that the distance between the values is equal (is the difference between strongly agree and agree the same as the difference between agree and neutral?). 
 
-Technically, we shouldn't use an ANOVA to analyse ordinal data - *but almost everyone does*. Most people would argue that if there are multiple Likert scale items that are averaged (which is the case in our study) and this averaged data are normally distributed, then it is not a problem. There is a minority (who are actually correct) that argue you should use non-parametric methods or more complicated tests such as ordinal regression for this type of data. Whichever route you choose, you should understand the data you have and you should be able to justify your decision.
+Technically, we should not use an ANOVA to analyse ordinal data - *but almost everyone does*. Many people argue that if you take the average of multiple Likert scale items, you can interpret the data as if they are interval and they can be normally distributed. Other people argue you should use non-parametric methods or more complex models such as ordinal regression for this type of data, but it is beyond the scope of what we cover in this course (if you are super interested, there is a PsyTeachR book for another course - [Statistics and Research Design](https://bartlettje.github.io/statsresdesign/introduction-to-generalised-linear-models.html){target="_blank"} - which covers ordinal regression). Whichever route you choose, you should understand the data you have and you should be able to justify your decision.
 
-* To test assumption 3, extract the residuals from the model (`mod_factorial$lm$residuals`), create a qq-plot and conduct a Shapiro-Wilk test.
+To test assumptions 3, you can run the `check_model()` from <pkg>performance</pkg> on the model object (`mod_factorial`). Unless you add the argument `re_formula = NA`, you get a little warning saying the function does it anyway. The background of this argument is beyond the scope of this course, but expressed as a linear model, a mixed ANOVA looks like something called a mixed-effects model, so this argument is saying there is not a formula for it as we did not one. 
 
-* Are the residuals normally distributed? `r mcq(c("Yes", "No", answer =  "No, but given the sample it is probably acceptable to proceed"))` 
+```{r}
+check_model(mod_factorial, 
+            re_formula = NA) # Specify or you get a warning 
+```
 
-For the final assumption, we can again use `test_levene()` to test homogeneity of variance.
+The one annoying thing here is we do not get a diagnostic plot for checking homogeneity of variance. 
 
-* Conduct Levene's test. Is assumption 4 met? `r mcq(c(answer = "Yes", "No"))`
+```{r}
+residuals <- as.data.frame(mod_factorial$lm$residuals) %>% 
+  select(residuals_time1 = time1_interest,
+         residuals_time2 = time2_interest)
+
+zhang_wide <- zhang_wide %>% 
+  bind_cols(residuals)
+
+zhang_wide %>% 
+  ggplot(aes(x = Condition, y = residuals_time1)) + 
+  geom_point()
+```
 
 
 ### Activity 7: Post-hoc tests {#factorial-a7}
