@@ -22,13 +22,13 @@ Now we are focusing on the analysis rather than just visualisation, we can descr
 
 Before we can get started, you need to organise your files and project for the chapter, so your working directory is in order.
 
-1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, create a new folder called `Chapter_12_F_ANOVA`. Within `Chapter_12_F_ANOVA`, create two new folders called `data` and `figures`.
+1. In your folder for research methods and the book `ResearchMethods1_2/Quant_Fundamentals`, create a new folder called `Chapter_13_F_ANOVA`. Within `Chapter_13_F_ANOVA`, create two new folders called `data` and `figures`.
 
-2. Create an R Project for `Chapter_12_F_ANOVA` as an existing directory for your chapter folder. This should now be your working directory.
+2. Create an R Project for `Chapter_13_F_ANOVA` as an existing directory for your chapter folder. This should now be your working directory.
 
-3. Create a new R Markdown document and give it a sensible title describing the chapter, such as `12 Factorial ANOVA`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_12_F_ANOVA` folder. 
+3. Create a new R Markdown document and give it a sensible title describing the chapter, such as `13 Factorial ANOVA`. Delete everything below line 10 so you have a blank file to work with and save the file in your `Chapter_13_F_ANOVA` folder. 
 
-4. If you must download the data again, please save the following file: [Zhang_2014.csv](data/Zhang_2014.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_12_F_ANOVA`.
+4. If you must download the data again, please save the following file: [Zhang_2014.csv](data/Zhang_2014.csv). Right click the link and select "save link as", or clicking the link will save the files to your Downloads. Make sure that you save the file as ".csv". Save or copy the file to your `data/` folder within `Chapter_13_F_ANOVA`.
 
 You are now ready to start working on the chapter! 
 
@@ -38,14 +38,13 @@ We already worked on the data wrangling in Chapter 7, so please type or copy and
 
 ```{r message=FALSE, warning=FALSE}
 # Load the packages below
-library("pwr")
-library("rcompanion")
-library("lsr")
-library("car")
-library("broom")
-library("afex")
-library("emmeans")
-library("tidyverse")
+#library("rcompanion")
+library(effectsize)
+#library("car")
+library(broom)
+library(afex)
+library(emmeans)
+library(tidyverse)
 library(performance)
 
 # Load the data file
@@ -87,10 +86,12 @@ For the combination of `Condition` and `Time`, calculate the mean and standard d
 You should have the following in a code chunk: 
 
 ```{r descrip_factorial}
-zhang_long %>%
+zhang_descriptives <- zhang_long %>%
   group_by(Condition, Time) %>%
   summarise(mean = round(mean(Interest, na.rm = TRUE), 2),
             sd = round(sd(Interest, na.rm = TRUE), 2))
+
+zhang_descriptives
 ```
 
 :::
@@ -190,7 +191,7 @@ factorial_output <- NULL
 #### Show me the solution
 You should have the following in a code chunk: 
 
-```{r fact_anova, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r fact_anova, message=FALSE, warning=FALSE}
 mod_factorial <- aov_ez(id = "participant_ID",
                data = zhang_long, 
                between = "Condition", 
@@ -215,13 +216,13 @@ mod_factorial
 
 Look at the results. Remember the pre-class information about how to read *p*-values in scientific notation.
 
-- Is the main effect of condition significant? `r mcq(c("Yes", answer = "No"))`
+- Is the main effect of Condition significant? `r mcq(c("Yes", answer = "No"))`
 
-- Is the main effect of time significant? `r mcq(c(answer = "Yes", "No"))`
+- Is the main effect of Time significant? `r mcq(c(answer = "Yes", "No"))`
 
 - Is the two-way interaction significant? `r mcq(c(answer = "Yes", "No"))`
 
-### Activity 5 - Checking assumptions for factorial ANOVA {#factorial-a6}
+### Activity 5 - Checking assumptions for factorial ANOVA {#factorial-a5}
 
 The assumptions for a factorial ANOVA are the same as the one-way ANOVA.
 
@@ -244,243 +245,210 @@ check_model(mod_factorial,
             re_formula = NA) # Specify or you get a warning 
 ```
 
-The one annoying thing here is we do not get a diagnostic plot for checking homogeneity of variance. 
+Does it look like we have any obvious problems with normality here? `r mcq(c("Yes", answer = "No"))`
+
+The one annoying thing here is we do not get a diagnostic plot for checking homogeneity of variance / homoscedasticity. We can create our own using the lm component of the model object (`mod_factorial$lm`), but it takes a few steps. In the code below: 
+
+- We first isolate the standardised residuals of the model object. We must convert it to a data frame and rename the two columsn. 
+- We combine the residuals with the wide version of the data. 
+
+- We pivot the data longer so all the residuals are in one column and create a new variable to take the square root of the absolute residuals. This recreates how the diagnostic plots you saw in Chapters 8, 9, and 12 look. 
+
+- Finally, we plot the standardised residuals and add a line to join the means of each group. If the line is roughly flat, we support homoscedasticity. If the line angles up or down substantially, then this points to signs of heteroscedasticity. 
 
 ```{r}
-residuals <- as.data.frame(mod_factorial$lm$residuals) %>% 
+# Isolate standardised residuals as a data frame
+residuals <- as.data.frame(rstandard(mod_factorial$lm)) %>% 
   select(residuals_time1 = time1_interest,
          residuals_time2 = time2_interest)
 
+# add residuals to the wide version of the data, so we have the groups
 zhang_wide <- zhang_wide %>% 
   bind_cols(residuals)
 
-zhang_wide %>% 
-  ggplot(aes(x = Condition, y = residuals_time1)) + 
-  geom_point()
+# Pivot longer and calculate the square root of absolute standardised residuals
+residuals_long <- zhang_wide %>% 
+  pivot_longer(cols = residuals_time1:residuals_time2, 
+               names_to = "Time", 
+               values_to = "Residuals") %>% 
+  mutate(std_residuals = sqrt(abs(Residuals)))
+
+# Plot the residuals
+residuals_long %>%
+  # we need groups as numbers for the line to plot 
+  mutate(Condition = case_match(Condition,
+                                "Ordinary" ~ 1,
+                                "Extraordinary" ~ 2)) %>% 
+  ggplot(aes(x = Condition, y = std_residuals)) + 
+  geom_point() + 
+  # add line joining the mean of residuals per group
+  stat_summary(geom = "line", 
+               fun = mean, 
+               color = "blue", 
+               linewidth = 1.5) + 
+    labs(x = "Condition", y = "Standardised Residuals")
 ```
 
+Does it look like we have any obvious problems with homoscedasticity here? `r mcq(c("Yes", answer = "No"))`
 
-### Activity 7: Post-hoc tests {#factorial-a7}
+### Activity 6 - Post-hoc tests {#factorial-a6}
 
 Because the interaction is significant, we should follow this up with post-hoc tests using `emmeans()` to determine which comparisons are significant. If the overall interaction is not significant, you should not conduct additional tests.
 
-`emmeans()` requires you to specify the `aov` object, and then the factors you want to contrast. For an interaction, we use the notation `pairwise ~ IV1 | IV2` and you specify which multiple comparison correction you want to apply. Finally, you can use `tidy()` to tidy up the output of the contrasts and save it into a tibble.
+`emmeans()` requires you to specify the `aov` object, and then the factors you want to contrast. For an interaction, we use the notation `pairwise ~ IV1 | IV2` and you specify which multiple comparison correction you want to apply.
 
-* Run the below code and view the results. 
+Run the below code and view the results. 
 
 ```{r}
 # run the tests
 posthoc_factorial <- emmeans(mod_factorial, 
-                             pairwise ~ time| Condition, 
+                             pairwise ~ Time | Condition, 
                              adjust = "bonferroni")
 
+posthoc_factorial
+```
+
+In the output, we first get the estimated marginal means for the combination of IVs. We then get the contrasts we requested. This looks at the difference in levels of the first IV for each level of the second IV.  
+
+You can use `tidy()` to tidy up the output of the contrasts and save it into a tibble which makes it easier to use in inline code.
+
+```{r}
 # tidy up the output of the tests
 contrasts_factorial <- posthoc_factorial$contrasts %>%
   tidy()
+
+contrasts_factorial
 ```
 
-Note that because there are two factors, we could also reverse the order of the IVs. Above, we get the results contrasting time 1 and time 2 for each event condition. Instead, we could look at the difference between ordinary and extraordinary events at each time point.
+Note that because there are two IVs/factors, we could also reverse the order. Above, we get the results contrasting time 1 and time 2 for each event condition. Instead, we could look at the difference between ordinary and extraordinary events at each time point.
 
-* Run the below code and look at the output of `contrast_factorial` and `contrasts_factorial2` carefully making sure you understand how to interpret the results. You will find it useful to refer to the interaction plot we made earlier.
+Run the code below and compare the output to `contrast_factorial`. Look at how the contrasts are expressed subtly different when you switch the order. Think carefully about your research question and hypotheses for which way around is the most informative.  
 
 ```{r}
 posthoc_factorial2 <- emmeans(mod_factorial, 
-                             pairwise ~ Condition| time, 
+                             pairwise ~ Condition | Time, 
                              adjust = "bonferroni") 
+
+posthoc_factorial2
 
 contrasts_factorial2 <- posthoc_factorial2$contrasts %>%
   tidy()
+
+contrasts_factorial2
 ```
 
 Because our main effects (condition and time) only have two levels, we don't need to do any post-hoc tests to determine which conditions differ from each other, however, if one of our factors had three levels then we could use `emmeans()` to calculate the contrast for the main effects, like we did for the one-way ANOVA. 
 
-Finally, to calculate effect size for the pairwise comparisons we again need to do this individually using 'cohensD()` from `lsr`. 
+Finally, to calculate standardised effect sizes for the pairwise comparisons, we again need to do this individually using `cohens_d()` from <pkg>effectsize</pkg>. 
 
-* Run the below code to add on effect sizes to `contrasts_factorial` and `contrasts_factorial2`.
+As we have a mixed design, we must follow a slightly different process for each comparison. Cohen's d has a different calculation for between-subjects and within-subjects contrasts, we must express it differently. For the first comparison, we are interested in the difference between time 1 and time 2 for each group, so this represents a within-subjects comparison. 
 
-```{r effsizes}
-d_extra_t1_t2 <- cohensD(interest ~ time, 
-                         data = (filter(factorial, Condition == "Extraordinary") %>% droplevels())) 
+```{r effsizes1, message=FALSE, warning=FALSE}
+# time 1 vs time 2 for Extraordinary group
+d_extraordinary <- cohens_d(x = "time1_interest", 
+                            y = "time2_interest", 
+                            paired = TRUE,
+                            data = filter(zhang_wide, 
+                                          Condition == "Extraordinary"))
+# time 1 vs time 2 for Ordinary group
+d_ordinary <- cohens_d(x = "time1_interest", 
+                       y = "time2_interest", 
+                       paired = TRUE,
+                       data = filter(zhang_wide, 
+                                     Condition == "Ordinary"))
 
-d_ord_t1_t2 <- cohensD(interest ~ time, 
-                         data = (filter(factorial, Condition == "Ordinary") %>% droplevels())) 
+# bind together the two contrasts
+Condition_ds <- bind_rows(d_extraordinary, 
+                          d_ordinary)
 
-
-Condition_ds <- c(d_extra_t1_t2, d_ord_t1_t2)
-
+# add the contrasts to the emmeans tidy table
 contrasts_factorial <- contrasts_factorial %>%
-  mutate(eff_size = Condition_ds)
+  bind_cols(Condition_ds)
 
-d_time1_extra_ord <- cohensD(interest ~ Condition, 
-                         data = (filter(factorial, time == "time1_interest") %>% droplevels())) 
+contrasts_factorial
+```
 
-d_time2_extra_ord <- cohensD(interest ~ Condition, 
-                         data = (filter(factorial, time == "time2_interest") %>% droplevels()))
+For the second comparison, we are interested in the difference between ordinary and extraordinary at each time point, so this represents a between-subjects comparison. 
 
+```{r effsizes2, message=FALSE, warning=FALSE}
+# Extraordinary vs ordinary at time 1
+d_time1 <- cohens_d(time1_interest ~ Condition,
+                       data = zhang_wide)
 
-time_ds <- c(d_time1_extra_ord, d_time2_extra_ord)
+# Extraordinary vs ordinary at time 2
+d_time2 <- cohens_d(time2_interest ~ Condition,
+                       data = zhang_wide)
 
+# bind the two contrasts together
+Time_ds <- bind_rows(d_time1,
+                     d_time2)
+
+# add the contrasts to the emmeans tidy table
 contrasts_factorial2 <- contrasts_factorial2 %>%
-  mutate(eff_size = time_ds)
+  bind_cols(Time_ds)
 
+contrasts_factorial2
 ```
 
-### Activity 8: Write-up {#factorial-a8}
+### Activity 7 - Creating an interaction plot {#factorial-a7}
 
-* p-values of < .001 have been entered manually. There is a way to get R to produce this formatting but it's overly complicated for our purposes. If you want to push yourself, look up the [papaja](https://github.com/crsh/papaja) package. 
-* The values of partial eta-squared do not match between our analysis and those reported in the paper. I haven't figured out why this is yet - if you know, please get in touch!
-* We have replaced the simple effects in the main paper with our pairwise comparisons. 
+When you have a factorial design, one powerful way of visualising the data is through an interaction plot. This is essentially a line graph where the x-axis has one IV and separate lines for a second IV. However, once you have the factorial ANOVA model, you can add confidence intervals to the plot to visualise uncertainty. <pkg>afex</pkg> has it's own function called `afex_plot()` which you can use with the model object you created. 
 
-First we need to calculate descriptives for the main effect of time as we didn't do this earlier.
+In the code below, there are a few key argument to highlight: 
 
-```{r time_descrip, message = FALSE}
-time_descrip <- factorial %>% 
-  group_by(time) %>%
-  summarise(mean_interest = mean(interest, na.rm = TRUE),
-            sd_interest = sd(interest, na.rm = TRUE))
+- `object` is the <pkg>afex</pkg> model you created. 
+
+- `x` is the variable you want on the x-axis. 
+
+- `trace` is the variable you want to plot as separate lines. 
+
+- `error` controls whether the error bars show confidence intervals for between-subjects or within-subjects. In a mixed design, these have different properties, so you must think about which you want to plot and highlight to the reader. 
+
+- `factor_levels` lets you edit the levels of factors you plot, such as renaming or reordering them. You add each factor into a list and you can check the documentation for other options. 
+
+```{r message=FALSE, warning=FALSE}
+afex_plot(object = mod_factorial, 
+          x = "Condition", 
+          trace = "Time", 
+          error = "between",
+          factor_levels = list(Time = c("Time 1", "Time 2")))
+  
 ```
 
-Copy and paste the below into **white-space**.
+One handy feature about this function is it uses <pkg>ggplot2</pkg> in the background, so you can add layers to the initial function like other data visualisation you created. 
+
+```{r message=FALSE, warning=FALSE}
+afex_plot(mod_factorial, 
+          x = "Condition", 
+          trace = "Time", 
+          error = "between",
+          factor_levels = list(Time = c("Time 1", "Time 2"))) + 
+  theme_classic() + 
+  scale_y_continuous(breaks = 1:7)
+```
+
+::: {.callout-note}
+Since `afex_plot()` uses <pkg>ggplot2</pkg>, you can use `ggsave()` to save your plots and insert them into your work. 
+:::
+
+### Activity 8 - Reporting the results of your factorial ANOVA {#factorial-a8}
+
+Now you have all your values, we can work on the write-up of your results. 
+
+In the in-line code demonstration below, we manually entered *p*-values where they are < .001. There is a way to get R to produce this formatting but it's overly complicated for our purposes in this course. If you want to push yourself, look up the [papaja](https://github.com/crsh/papaja){target="_blank"} package for creating reproducible manuscripts. 
+
+The values of partial eta-squared do not match between our analysis and those reported in the paper. We have not figured out why this is yet, so if you know, please get in touch!
+
+We have also replaced the simple effects in the main paper with our pairwise comparisons. 
+
+Copy and paste the text and inline code below into **white-space** in your R Markdown document. If you saved all the descriptives, model, and contrasts using the same object names as us, this should knit. 
 
 ```{r writeup, eval = FALSE}
-We conducted the same repeated measures ANOVA with interest as the dependent measure and again found a main effect of time, F(`r factorial_output$num.Df[2]`, `r factorial_output$den.Df[2]`) = `r factorial_output$statistic[2] %>% round(2)`, p < .001, ηp2 = `r factorial_output$ges[2] %>% round(3)`; anticipated interest at Time 1 (M = `r time_descrip$mean_interest[1] %>% round(2)`), SD = `r time_descrip$sd_interest[1]%>% round(2)`)) was lower than actual interest at Time 2 (M = `r time_descrip$mean_interest[2]%>% round(2)`, SD = `r time_descrip$sd_interest[2]%>% round(2)`).We also observed an interaction between time and type of experience, F(`r factorial_output$num.Df[3]`, `r factorial_output$den.Df[3]`) = `r factorial_output$statistic[3] %>% round(3)`, p = `r factorial_output$p.value[3] %>% round(2)`, ηp2 = `r factorial_output$ges[3] %>% round(3)`. Pairwise comparisons revealed that for ordinary events, predicted interest at Time 1 (M = `r sum_dat_factorial$mean[3]%>% round(2)`, SD = `r sum_dat_factorial$sd[3]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r sum_dat_factorial$mean[4]%>% round(2)`, SD = `r sum_dat_factorial$sd[4]%>% round(2)`), t(`r contrasts_factorial$df[2]%>% round(2)`) = `r contrasts_factorial$statistic[2]%>% round(2)`, p < .001, d = `r contrasts_factorial$eff_size[2]%>% round(2)`. Although predicted interest for extraordinary events at Time 1 (M = `r sum_dat_factorial$mean[1]%>% round(2)`, SD = `r sum_dat_factorial$sd[1]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r sum_dat_factorial$mean[2]%>% round(2)`, SD = `r sum_dat_factorial$sd[2]%>% round(2)`), t(`r contrasts_factorial$df[1]%>% round(2)`) = `r contrasts_factorial$statistic[1]%>% round(2)`, p < .001, d = `r contrasts_factorial$eff_size[1]%>% round(2)` , the magnitude of underestimation was smaller than for ordinary events.
+We conducted the same repeated measures ANOVA with interest as the dependent measure and again found a main effect of time, F(`r factorial_output$num.Df[2]`, `r factorial_output$den.Df[2]`) = `r factorial_output$statistic[2] %>% round(2)`, p < .001, ηp2 = `r factorial_output$ges[2] %>% round(3)`; anticipated interest at Time 1 (M = `r zhang_descriptives$mean[1] %>% round(2)`), SD = `r zhang_descriptives$sd[1]%>% round(2)`)) was lower than actual interest at Time 2 (M = `r zhang_descriptives$mean[2]%>% round(2)`, SD = `r zhang_descriptives$sd[2]%>% round(2)`). We also observed an interaction between time and type of experience, F(`r factorial_output$num.Df[3]`, `r factorial_output$den.Df[3]`) = `r factorial_output$statistic[3] %>% round(3)`, p = `r factorial_output$p.value[3] %>% round(2)`, ηp2 = `r factorial_output$ges[3] %>% round(3)`. Pairwise comparisons revealed that for ordinary events, predicted interest at Time 1 (M = `r zhang_descriptives$mean[3]%>% round(2)`, SD = `r zhang_descriptives$sd[3]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r zhang_descriptives$mean[4]%>% round(2)`, SD = `r zhang_descriptives$sd[4]%>% round(2)`), t(`r contrasts_factorial$df[2]%>% round(2)`) = `r contrasts_factorial$statistic[2]%>% round(2)`, p < .001, d = `r contrasts_factorial$Cohens_d[2]%>% round(2)`. Although predicted interest for extraordinary events at Time 1 (M = `r zhang_descriptives$mean[1]%>% round(2)`, SD = `r zhang_descriptives$sd[1]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r zhang_descriptives$mean[2]%>% round(2)`, SD = `r zhang_descriptives$sd[2]%>% round(2)`), t(`r contrasts_factorial$df[1]%>% round(2)`) = `r contrasts_factorial$statistic[1]%>% round(2)`, p < .001, d = `r contrasts_factorial$Cohens_d[1]%>% round(2)`, the magnitude of underestimation was smaller than for ordinary events.
 ```
 
-> We conducted the same repeated measures ANOVA with interest as the dependent measure and again found a main effect of time, F(`r factorial_output$num.Df[2]`, `r factorial_output$den.Df[2]`) = `r factorial_output$statistic[2] %>% round(2)`, p < .001, ηp2 = `r factorial_output$ges[2] %>% round(3)`; anticipated interest at Time 1 (M = `r time_descrip$mean_interest[1] %>% round(2)`), SD = `r time_descrip$sd_interest[1]%>% round(2)`)) was lower than actual interest at Time 2 (M = `r time_descrip$mean_interest[2]%>% round(2)`, SD = `r time_descrip$sd_interest[2]%>% round(2)`).We also observed an interaction between time and type of experience, F(`r factorial_output$num.Df[3]`, `r factorial_output$den.Df[3]`) = `r factorial_output$statistic[3] %>% round(3)`, p = `r factorial_output$p.value[3] %>% round(2)`, ηp2 = `r factorial_output$ges[3] %>% round(3)`. Pairwise comparisons revealed that for ordinary events, predicted interest at Time 1 (M = `r sum_dat_factorial$mean[3]%>% round(2)`, SD = `r sum_dat_factorial$sd[3]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r sum_dat_factorial$mean[4]%>% round(2)`, SD = `r sum_dat_factorial$sd[4]%>% round(2)`), t(`r contrasts_factorial$df[2]%>% round(2)`) = `r contrasts_factorial$statistic[2]%>% round(2)`, p < .001, d = `r contrasts_factorial$eff_size[2]%>% round(2)`. Although predicted interest for extraordinary events at Time 1 (M = `r sum_dat_factorial$mean[1]%>% round(2)`, SD = `r sum_dat_factorial$sd[1]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r sum_dat_factorial$mean[2]%>% round(2)`, SD = `r sum_dat_factorial$sd[2]%>% round(2)`), t(`r contrasts_factorial$df[1]%>% round(2)`) = `r contrasts_factorial$statistic[1]%>% round(2)`, p < .001, d = `r contrasts_factorial$eff_size[1]%>% round(2)` , the magnitude of underestimation was smaller than for ordinary events.
+> We conducted the same repeated measures ANOVA with interest as the dependent measure and again found a main effect of time, F(`r factorial_output$num.Df[2]`, `r factorial_output$den.Df[2]`) = `r factorial_output$statistic[2] %>% round(2)`, p < .001, ηp2 = `r factorial_output$ges[2] %>% round(3)`; anticipated interest at Time 1 (M = `r zhang_descriptives$mean[1] %>% round(2)`), SD = `r zhang_descriptives$sd[1]%>% round(2)`)) was lower than actual interest at Time 2 (M = `r zhang_descriptives$mean[2]%>% round(2)`, SD = `r zhang_descriptives$sd[2]%>% round(2)`). We also observed an interaction between time and type of experience, F(`r factorial_output$num.Df[3]`, `r factorial_output$den.Df[3]`) = `r factorial_output$statistic[3] %>% round(3)`, p = `r factorial_output$p.value[3] %>% round(2)`, ηp2 = `r factorial_output$ges[3] %>% round(3)`. Pairwise comparisons revealed that for ordinary events, predicted interest at Time 1 (M = `r zhang_descriptives$mean[3]%>% round(2)`, SD = `r zhang_descriptives$sd[3]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r zhang_descriptives$mean[4]%>% round(2)`, SD = `r zhang_descriptives$sd[4]%>% round(2)`), t(`r contrasts_factorial$df[2]%>% round(2)`) = `r contrasts_factorial$statistic[2]%>% round(2)`, p < .001, d = `r contrasts_factorial$Cohens_d[2]%>% round(2)`. Although predicted interest for extraordinary events at Time 1 (M = `r zhang_descriptives$mean[1]%>% round(2)`, SD = `r zhang_descriptives$sd[1]%>% round(2)`) was lower than experienced interest at Time 2 (M = `r zhang_descriptives$mean[2]%>% round(2)`, SD = `r zhang_descriptives$sd[2]%>% round(2)`), t(`r contrasts_factorial$df[1]%>% round(2)`) = `r contrasts_factorial$statistic[1]%>% round(2)`, p < .001, d = `r contrasts_factorial$Cohens_d[1]%>% round(2)`, the magnitude of underestimation was smaller than for ordinary events.
 
-### Activity 9: Transforming data {#factorial-a9}
+## End of Chapter
 
-In this chapter we decided that the violation of the assumption of normality was ok so that we could replicate the results in the paper. But what if we weren't happy with this or if the violation had been more extreme? One option to deal with normality is to **transform your data**. If you want more information on this you should consult the Appendix chapter on data transformation.
-
-There are various options for how you can transform data but we're going to use Tukeys Ladder of Powers transformation. This finds the power transformation that makes the data fit the normal distribution as closely as possible with this type of transformation.
-
-* Run the below code. This will use `mutate()` to add a new variable to the data-set, `interest_tukey` which is going to be our transformed DV. The function `transformTukey()` is from the `rcompanion` package. Setting `plotit = TRUE` will automatically create qqPlots and histograms so that we can immediately visualise the new variable. 
-
-
-```{r transform_var, eval = FALSE}
-factorial <- factorial %>%
-  mutate(interest_tukey = transformTukey(interest, plotit=TRUE))
-
-```
-
-```{r transform_var2, echo = FALSE, results='hide'}
-factorial <- factorial %>%
-  mutate(interest_tukey = transformTukey(interest, plotit=FALSE))
-
-```
-
-Now that you've transformed the DV we can re-run the ANOVA with this new variable.
-
-```{r trans_anova, results='hide', warning = FALSE, message = FALSE}
-tukey_factorial <- aov_ez(id = "subject",
-               data = factorial, 
-               between = "Condition", 
-               within = "time",
-               dv = "interest_tukey", 
-               type = 3)
-
-tukey_factorial
-
-```
-
-Notice that doing this hasn't changed the pattern of the ANOVA results, the p-values for the main effects and interactions are very slightly different but the overall conclusions remain the same. This is likely because the violations of normality was quite mild and there is a large sample size, however, with the transformation we can be more confident in our results and it may not always be the case that the transformed ANOVA is the same if the violations were more extreme. 
-
-#### Finished! {#factorial-fin}
-
-
-### Activity solutions {#factorial-sols}
-
-#### Activity 1 {#factorial-a1sol}
-
-`r hide("Activity 1")`
-```{r a1b, eval = FALSE}
-
-library("pwr")
-library("rcompanion")
-library("car")
-library("lsr")
-library("broom")
-library("afex")
-library("emmeans")
-library("tidyverse")
-
-```
-`r unhide()`
-
-** Click tab to see solution **
-
-
-#### Activity 2 {#factorial-a2sol}
-
-`r hide()`
-```{r a2b, eval = FALSE}
-sum_dat_factorial<-factorial%>%
-  group_by(Condition, time)%>%
-  summarise(mean = mean(interest, na.rm = TRUE),
-            sd = sd(interest, na.rm = TRUE)
-            )
-```
-`r unhide()`
-
-** Click tab to see solution **
-
-
-#### Activity 3 {#factorial-a3sol}
-
-`r hide()`
-```{r a3b, eval=FALSE}
-ggplot(factorial, 
-       aes(x = time , y = interest, fill = Condition))+
-  geom_violin(trim = FALSE, 
-              alpha = .4)+
-  geom_boxplot(position = position_dodge(.9), 
-               width = .2, 
-               alpha = .6)+
-  scale_x_discrete(labels = c("Time 1", "Time 2"))+
-  scale_fill_viridis_d(option = "E")+
-  stat_summary(fun = "mean", geom = "point",
-               position = position_dodge(width = 0.9)) +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
-               position = position_dodge(width = 0.9)) +
-  theme_minimal()
-```
-`r unhide()`
-
-** Click tab to see solution **
-
-#### Activity 5 {#factorial-a5sol}
-
-`r hide()`
-```{r a5b, eval=FALSE}
-
-mod_factorial <- aov_ez(id = "subject",
-               data = factorial, 
-               between = "Condition", 
-               within = "time",
-               dv = "interest", 
-               type = 3) 
-
-factorial_output <- anova(mod_factorial) %>% tidy()
-
-# OR
-
-factorial_output <- mod_factorial$anova_table %>% tidy()
-```
-`r unhide()`
-
-** Click tab to see solution **
-
-#### Activity 6 {#factorial-a6sol}
-
-`r hide()`
-```{r a6b, eval=FALSE}
-# normality testing
-qqPlot(mod_factorial$lm$residuals)
-shapiro.test(mod_factorial$lm$residuals)
-
-# levene's test
-test_levene(mod_factorial)
-```
-`r unhide()`
-
-** Click tab to see solution **
+Blah
