@@ -402,9 +402,16 @@ div.csl-indent {
   
 
 
-</header><p>For this chapter, we’re going to look at an example of a factorial ANOVA. You’ll learn more about interpreting these in the lectures, but for now, we’ll just focus on the code.</p>
+</header><p>In the previous chapter, you learnt how to conduct and interpret a one-way ANOVA in R. These are flexible models where you have one independent variable (IV) with three or more levels. They get you a long way but sometimes your research question and design calls for multiple IVs or factors.</p>
+<p>In this chapter, we extend the ANOVA framework to include two or more IVs/factors and their interaction. We will show you how to run a factorial ANOVA using the <pkg>afex</pkg> package and break down interactions through post-hoc tests using the <pkg>emmeans</pkg> package. Visualising your data is particularly important for understanding interactions, so we put a lot of emphasis on data visualisation through violin-boxplots and interaction plots.</p>
 <p><strong>Chapter Intended Learning Outcomes (ILOs)</strong></p>
 <p>By the end of this chapter, you will be able to:</p>
+<ul>
+<li><p>Apply and interpret a factorial ANOVA.</p></li>
+<li><p>Break down the results of a factorial ANOVA using post-hocs tests and apply a correction for multiple comparisons.</p></li>
+<li><p>Check statistical assumptions for factorial ANOVA through your understanding of the design and diagnostic plots.</p></li>
+<li><p>Visualise the results of a factorial ANOVA through an interaction plot.</p></li>
+</ul>
 <section id="chapter-preparation" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="chapter-preparation">
 <span class="header-section-number">13.1</span> Chapter preparation</h2>
 <section id="introduction-to-the-data-set" class="level3" data-number="13.1.1"><h3 data-number="13.1.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
@@ -462,6 +469,7 @@ div.csl-indent {
 <span id="cb1-31"><a href="#cb1-31"></a>               <span class="at">names_to =</span> <span class="st">"Time"</span>,</span>
 <span id="cb1-32"><a href="#cb1-32"></a>               <span class="at">values_to =</span> <span class="st">"Interest"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>For different functions, we need the data in wide- or long-format, so we have two versions of the data prepared for the chapter. Pay careful attention to when you need one version or the other.</p>
 </section><section id="factorial-a2" class="level3" data-number="13.1.4"><h3 data-number="13.1.4" class="anchored" data-anchor-id="factorial-a2">
 <span class="header-section-number">13.1.4</span> Activity 2 - Calculate descriptive statistics</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -475,7 +483,7 @@ Try this
 </div>
 <div class="callout-body-container callout-body">
 <p>Before we start on the inferential statistics, one key part of understanding your data and reporting for context in a report is calculating descriptive statistics like the mean and standard deviation.</p>
-<p>For the combination of <code>Condition</code> and <code>Time</code>, calculate the mean and standard deviation of <code>Interest</code>.</p>
+<p>For the combination of <code>Condition</code> and <code>Time</code>, calculate the mean and standard deviation of <code>Interest</code>. We will need this at the end of the chapter, so save your results to the object name <code>zhang_descriptives</code>.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -611,7 +619,7 @@ Show me the solution
 </div>
 </section></section><section id="factorial-a5" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="factorial-a5">
 <span class="header-section-number">13.2</span> Factorial ANOVA</h2>
-<p>To run the factorial ANOVA, we will be using the <pkg>afex</pkg> package again. Remember that you will must specify both IVs, one of which is between-subjects and the other is within-subjects. Look up the help documentation for <code>aov_ez</code> if you need further information.</p>
+<p>To run the factorial ANOVA, we will be using the <pkg>afex</pkg> package again. Remember that you must specify both IVs, one of which is between-subjects and the other is within-subjects. Look up the help documentation for <code>aov_ez</code> if you need further information.</p>
 <section id="activity-4---using-the-aov_ez-function." class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="activity-4---using-the-aov_ez-function.">
 <span class="header-section-number">13.2.1</span> Activity 4 - Using the <code>aov_ez()</code> function.</h3>
 <p>Before we show you the code, try and complete the following skeleton version first. Think about what variable in the data corresponds to each argument.</p>
@@ -686,14 +694,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
 <span class="header-section-number">13.2.2</span> Activity 5 - Checking assumptions for factorial ANOVA</h3>
 <p>The assumptions for a factorial ANOVA are the same as the one-way ANOVA.</p>
 <ol type="1">
-<li><p>The DV is interval or ratio data</p></li>
-<li><p>The observations should be independent</p></li>
-<li><p>The residuals should be normally distributed</p></li>
-<li><p>There should be homogeneity of variance between the groups</p></li>
+<li><p>The DV is interval or ratio data.</p></li>
+<li><p>The observations should be independent.</p></li>
+<li><p>The residuals should be normally distributed.</p></li>
+<li><p>There should be homogeneity of variance between the groups.</p></li>
 </ol>
 <p>As before, we know assumption 2 is met from the design of the study. Assumption 1 throws up an interesting issue which is the problem of ordinal data. Ordinal data are the kind of data that come from Likert scales and are very common in psychology. The problem is that ordinal data are not interval or ratio data, there’s a fixed number of integer values they can take (the values of the Likert scale) and you cannot claim that the distance between the values is equal (is the difference between strongly agree and agree the same as the difference between agree and neutral?).</p>
 <p>Technically, we should not use an ANOVA to analyse ordinal data - <em>but almost everyone does</em>. Many people argue that if you take the average of multiple Likert scale items, you can interpret the data as if they are interval and they can be normally distributed. Other people argue you should use non-parametric methods or more complex models such as ordinal regression for this type of data, but it is beyond the scope of what we cover in this course (if you are super interested, there is a PsyTeachR book for another course - <a href="https://bartlettje.github.io/statsresdesign/introduction-to-generalised-linear-models.html" target="_blank">Statistics and Research Design</a> - which covers ordinal regression). Whichever route you choose, you should understand the data you have and you should be able to justify your decision.</p>
-<p>To test assumptions 3, you can run the <code>check_model()</code> from <pkg>performance</pkg> on the model object (<code>mod_factorial</code>). Unless you add the argument <code>re_formula = NA</code>, you get a little warning saying the function does it anyway. The background of this argument is beyond the scope of this course, but expressed as a linear model, a mixed ANOVA looks like something called a mixed-effects model, so this argument is saying there is not a formula for it as we did not one.</p>
+<p>To test assumption 3, you can run <code>check_model()</code> from <pkg>performance</pkg> on the model object (<code>mod_factorial</code>). Unless you add the argument <code>re_formula = NA</code>, you get a little warning saying the function does it anyway. The background of this argument is beyond the scope of this course, but expressed as a linear model, a mixed ANOVA looks like something called a mixed-effects model, so this argument is saying that there is not a formula for it, since we did not have one.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">check_model</span>(mod_factorial, </span>
 <span id="cb10-2"><a href="#cb10-2"></a>            <span class="at">re_formula =</span> <span class="cn">NA</span>) <span class="co"># Specify or you get a warning </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1192,7 +1200,8 @@ Note
 </blockquote>
 </section></section><section id="end-of-chapter" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">13.3</span> End of Chapter</h2>
-<p>Blah</p>
+<p>Well done, you have now covered the ANOVA section of the course to learn how to express experimental designs into statistical models. ANOVA and factorial ANOVA are incredibly flexible tools where you can start to combine multiple independent variables. You might have between-subject factors, within-subject factors, or a combination of the two in a mixed design. The most important thing to keep in mind is your research question, hypothesis, and design come first. Factorial ANOVA can get arbitrarily more complicated but try and avoid the temptation to create complex models just because you can. You do not get extra points for complication, it is better to think about which model will let you address your research question.</p>
+<p>In the next chapter, we finish the core chapters on the final extension of the general linear model we cover in this course. In Research Methods 1, you learnt about simple linear regression when you only have one predictor. In multiple linear regression, you can add two or more predictors, and even the interaction between predictors.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">

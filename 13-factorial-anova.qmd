@@ -1,10 +1,20 @@
 # Factorial ANOVA
 
-For this chapter, we're going to look at an example of a factorial ANOVA. You'll learn more about interpreting these in the lectures, but for now, we'll just focus on the code. 
+In the previous chapter, you learnt how to conduct and interpret a one-way ANOVA in R. These are flexible models where you have one independent variable (IV) with three or more levels. They get you a long way but sometimes your research question and design calls for multiple IVs or factors. 
+
+In this chapter, we extend the ANOVA framework to include two or more IVs/factors and their interaction. We will show you how to run a factorial ANOVA using the <pkg>afex</pkg> package and break down interactions through post-hoc tests using the <pkg>emmeans</pkg> package. Visualising your data is particularly important for understanding interactions, so we put a lot of emphasis on data visualisation through violin-boxplots and interaction plots. 
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
 By the end of this chapter, you will be able to: 
+
+- Apply and interpret a factorial ANOVA. 
+
+- Break down the results of a factorial ANOVA using post-hocs tests and apply a correction for multiple comparisons.
+
+- Check statistical assumptions for factorial ANOVA through your understanding of the design and diagnostic plots. 
+
+- Visualise the results of a factorial ANOVA through an interaction plot. 
 
 ## Chapter preparation
 
@@ -71,6 +81,8 @@ zhang_long <- zhang_wide %>%
                values_to = "Interest")
 ```
 
+For different functions, we need the data in wide- or long-format, so we have two versions of the data prepared for the chapter. Pay careful attention to when you need one version or the other. 
+
 ### Activity 2 - Calculate descriptive statistics {#factorial-a2}
 
 ::: {.callout-tip}
@@ -78,7 +90,7 @@ zhang_long <- zhang_wide %>%
 
 Before we start on the inferential statistics, one key part of understanding your data and reporting for context in a report is calculating descriptive statistics like the mean and standard deviation. 
 
-For the combination of `Condition` and `Time`, calculate the mean and standard deviation of `Interest`.
+For the combination of `Condition` and `Time`, calculate the mean and standard deviation of `Interest`. We will need this at the end of the chapter, so save your results to the object name `zhang_descriptives`. 
 :::
 
 ::: {.callout-caution collapse="true"}
@@ -167,7 +179,7 @@ zhang_long %>%
 
 ## Factorial ANOVA {#factorial-a5}
 
-To run the factorial ANOVA, we will be using the <pkg>afex</pkg> package again. Remember that you will must specify both IVs, one of which is between-subjects and the other is within-subjects. Look up the help documentation for `aov_ez` if you need further information. 
+To run the factorial ANOVA, we will be using the <pkg>afex</pkg> package again. Remember that you must specify both IVs, one of which is between-subjects and the other is within-subjects. Look up the help documentation for `aov_ez` if you need further information. 
 
 ### Activity 4 - Using the `aov_ez()` function. 
 
@@ -226,19 +238,19 @@ Look at the results. Remember the pre-class information about how to read *p*-va
 
 The assumptions for a factorial ANOVA are the same as the one-way ANOVA.
 
-1. The DV is interval or ratio data
+1. The DV is interval or ratio data.
 
-2. The observations should be independent
+2. The observations should be independent.
 
-3. The residuals should be normally distributed
+3. The residuals should be normally distributed.
 
-4. There should be homogeneity of variance between the groups
+4. There should be homogeneity of variance between the groups.
 
 As before, we know assumption 2 is met from the design of the study. Assumption 1 throws up an interesting issue which is the problem of ordinal data. Ordinal data are the kind of data that come from Likert scales and are very common in psychology. The problem is that ordinal data are not interval or ratio data, there's a fixed number of integer values they can take (the values of the Likert scale) and you cannot claim that the distance between the values is equal (is the difference between strongly agree and agree the same as the difference between agree and neutral?). 
 
 Technically, we should not use an ANOVA to analyse ordinal data - *but almost everyone does*. Many people argue that if you take the average of multiple Likert scale items, you can interpret the data as if they are interval and they can be normally distributed. Other people argue you should use non-parametric methods or more complex models such as ordinal regression for this type of data, but it is beyond the scope of what we cover in this course (if you are super interested, there is a PsyTeachR book for another course - [Statistics and Research Design](https://bartlettje.github.io/statsresdesign/introduction-to-generalised-linear-models.html){target="_blank"} - which covers ordinal regression). Whichever route you choose, you should understand the data you have and you should be able to justify your decision.
 
-To test assumptions 3, you can run the `check_model()` from <pkg>performance</pkg> on the model object (`mod_factorial`). Unless you add the argument `re_formula = NA`, you get a little warning saying the function does it anyway. The background of this argument is beyond the scope of this course, but expressed as a linear model, a mixed ANOVA looks like something called a mixed-effects model, so this argument is saying there is not a formula for it as we did not one. 
+To test assumption 3, you can run `check_model()` from <pkg>performance</pkg> on the model object (`mod_factorial`). Unless you add the argument `re_formula = NA`, you get a little warning saying the function does it anyway. The background of this argument is beyond the scope of this course, but expressed as a linear model, a mixed ANOVA looks like something called a mixed-effects model, so this argument is saying that there is not a formula for it, since we did not have one. 
 
 ```{r}
 check_model(mod_factorial, 
@@ -249,7 +261,8 @@ Does it look like we have any obvious problems with normality here? `r mcq(c("Ye
 
 The one annoying thing here is we do not get a diagnostic plot for checking homogeneity of variance / homoscedasticity. We can create our own using the lm component of the model object (`mod_factorial$lm`), but it takes a few steps. In the code below: 
 
-- We first isolate the standardised residuals of the model object. We must convert it to a data frame and rename the two columsn. 
+- We first isolate the standardised residuals of the model object. We must convert it to a data frame and rename the two columns. 
+
 - We combine the residuals with the wide version of the data. 
 
 - We pivot the data longer so all the residuals are in one column and create a new variable to take the square root of the absolute residuals. This recreates how the diagnostic plots you saw in Chapters 8, 9, and 12 look. 
@@ -310,7 +323,7 @@ posthoc_factorial
 
 In the output, we first get the estimated marginal means for the combination of IVs. We then get the contrasts we requested. This looks at the difference in levels of the first IV for each level of the second IV.  
 
-You can use `tidy()` to tidy up the output of the contrasts and save it into a tibble which makes it easier to use in inline code.
+You can use `tidy()` to tidy up the output of the contrasts and save it into a tibble which makes it easier to use in inline code later.
 
 ```{r}
 # tidy up the output of the tests
@@ -337,11 +350,11 @@ contrasts_factorial2 <- posthoc_factorial2$contrasts %>%
 contrasts_factorial2
 ```
 
-Because our main effects (condition and time) only have two levels, we don't need to do any post-hoc tests to determine which conditions differ from each other, however, if one of our factors had three levels then we could use `emmeans()` to calculate the contrast for the main effects, like we did for the one-way ANOVA. 
+Because our main effects (condition and time) only have two levels, we do not need to do any post-hoc tests to determine which conditions differ from each other, however, if one of our factors had three levels then we could use `emmeans()` to calculate the contrast for the main effects, like we did for the one-way ANOVA. 
 
 Finally, to calculate standardised effect sizes for the pairwise comparisons, we again need to do this individually using `cohens_d()` from <pkg>effectsize</pkg>. 
 
-As we have a mixed design, we must follow a slightly different process for each comparison. Cohen's d has a different calculation for between-subjects and within-subjects contrasts, we must express it differently. For the first comparison, we are interested in the difference between time 1 and time 2 for each group, so this represents a within-subjects comparison. 
+As we have a mixed design, we must follow a slightly different process for each comparison. Cohen's d has a different calculation for between-subjects and within-subjects contrasts, so we must express it differently. For the first comparison, we are interested in the difference between time 1 and time 2 for each group, so this represents a within-subjects comparison. 
 
 ```{r effsizes1, message=FALSE, warning=FALSE}
 # time 1 vs time 2 for Extraordinary group
@@ -404,7 +417,7 @@ In the code below, there are a few key argument to highlight:
 
 - `error` controls whether the error bars show confidence intervals for between-subjects or within-subjects. In a mixed design, these have different properties, so you must think about which you want to plot and highlight to the reader. 
 
-- `factor_levels` lets you edit the levels of factors you plot, such as renaming or reordering them. You add each factor into a list and you can check the documentation for other options. 
+- `factor_levels` lets you edit the levels of factors you plot, such as renaming or reordering them. You add each factor into a list but check the documentation and vignettes for other options. 
 
 ```{r message=FALSE, warning=FALSE}
 afex_plot(object = mod_factorial, 
@@ -415,7 +428,7 @@ afex_plot(object = mod_factorial,
   
 ```
 
-One handy feature about this function is it uses <pkg>ggplot2</pkg> in the background, so you can add layers to the initial function like other data visualisation you created. 
+One handy feature about this function is it uses <pkg>ggplot2</pkg> in the background, so you can add layers to the initial function like other plots that you have created. 
 
 ```{r message=FALSE, warning=FALSE}
 afex_plot(mod_factorial, 
@@ -451,4 +464,6 @@ We conducted the same repeated measures ANOVA with interest as the dependent mea
 
 ## End of Chapter
 
-Blah
+Well done, you have now covered the ANOVA section of the course to learn how to express experimental designs into statistical models. ANOVA and factorial ANOVA are incredibly flexible tools where you can start to combine multiple independent variables. You might have between-subject factors, within-subject factors, or a combination of the two in a mixed design. The most important thing to keep in mind is your research question, hypothesis, and design come first. Factorial ANOVA can get arbitrarily more complicated but try and avoid the temptation to create complex models just because you can. You do not get extra points for complication, it is better to think about which model will let you address your research question. 
+
+In the next chapter, we finish the core chapters on the final extension of the general linear model we cover in this course. In Research Methods 1, you learnt about simple linear regression when you only have one predictor. In multiple linear regression, you can add two or more predictors, and even the interaction between predictors. 
