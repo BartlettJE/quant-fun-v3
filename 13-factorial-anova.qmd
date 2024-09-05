@@ -444,7 +444,7 @@ afex_plot(mod_factorial,
 Since `afex_plot()` uses <pkg>ggplot2</pkg>, you can use `ggsave()` to save your plots and insert them into your work. 
 :::
 
-### Activity 8 - Reporting the results of your factorial ANOVA {#factorial-a8}
+## Reporting the results of your factorial ANOVA {#factorial-a8}
 
 Now you have all your values, we can work on the write-up of your results. 
 
