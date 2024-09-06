@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
 <title>Fundamentals of Quantitative Analysis - 10&nbsp; Statistical Power and Effect Sizes</title>
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -56,7 +56,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,13 +98,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,37 +107,11 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -154,23 +121,23 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-power.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Power and Effect Sizes</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-power.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Power and Effect Sizes</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/BartlettJE/quant-fun-v3/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/BartlettJE/quant-fun-v3/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -380,7 +347,7 @@ window.Quarto = {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -396,7 +363,7 @@ window.Quarto = {
   <li>
 <a href="#power-analysis-for-t-tests-categorical-predictors" id="toc-power-analysis-for-t-tests-categorical-predictors" class="nav-link" data-scroll-target="#power-analysis-for-t-tests-categorical-predictors"><span class="header-section-number">10.3</span> Power analysis for t-tests / categorical predictors</a>
   <ul class="collapse">
-<li><a href="#introduction-to-the-data-set" id="toc-introduction-to-the-data-set" class="nav-link" data-scroll-target="#introduction-to-the-data-set"><span class="header-section-number">10.3.1</span> Introduction to the data set</a></li>
+<li><a href="#introduction-to-the-study" id="toc-introduction-to-the-study" class="nav-link" data-scroll-target="#introduction-to-the-study"><span class="header-section-number">10.3.1</span> Introduction to the study</a></li>
   <li><a href="#a-priori-power-analysis" id="toc-a-priori-power-analysis" class="nav-link" data-scroll-target="#a-priori-power-analysis"><span class="header-section-number">10.3.2</span> A priori power analysis</a></li>
   <li><a href="#sensitivity-power-analysis" id="toc-sensitivity-power-analysis" class="nav-link" data-scroll-target="#sensitivity-power-analysis"><span class="header-section-number">10.3.3</span> Sensitivity power analysis</a></li>
   <li><a href="#power-for-regression-with-a-categorical-predictor" id="toc-power-for-regression-with-a-categorical-predictor" class="nav-link" data-scroll-target="#power-for-regression-with-a-categorical-predictor"><span class="header-section-number">10.3.4</span> Power for regression with a categorical predictor</a></li>
@@ -405,9 +372,10 @@ window.Quarto = {
   <li>
 <a href="#power-analysis-for-correlations-continuous-predictors" id="toc-power-analysis-for-correlations-continuous-predictors" class="nav-link" data-scroll-target="#power-analysis-for-correlations-continuous-predictors"><span class="header-section-number">10.4</span> Power analysis for correlations / continuous predictors</a>
   <ul class="collapse">
-<li><a href="#introduction-to-the-data-set-1" id="toc-introduction-to-the-data-set-1" class="nav-link" data-scroll-target="#introduction-to-the-data-set-1"><span class="header-section-number">10.4.1</span> Introduction to the data set</a></li>
+<li><a href="#introduction-to-the-study-1" id="toc-introduction-to-the-study-1" class="nav-link" data-scroll-target="#introduction-to-the-study-1"><span class="header-section-number">10.4.1</span> Introduction to the study</a></li>
   <li><a href="#a-priori-power-analysis-1" id="toc-a-priori-power-analysis-1" class="nav-link" data-scroll-target="#a-priori-power-analysis-1"><span class="header-section-number">10.4.2</span> A priori power analysis</a></li>
   <li><a href="#sensitivity-power-analysis-1" id="toc-sensitivity-power-analysis-1" class="nav-link" data-scroll-target="#sensitivity-power-analysis-1"><span class="header-section-number">10.4.3</span> Sensitivity power analysis</a></li>
+  <li><a href="#power-for-regression-with-a-continuous-predictor" id="toc-power-for-regression-with-a-continuous-predictor" class="nav-link" data-scroll-target="#power-for-regression-with-a-continuous-predictor"><span class="header-section-number">10.4.4</span> Power for regression with a continuous predictor</a></li>
   </ul>
 </li>
   <li><a href="#reporting-a-power-analysis" id="toc-reporting-a-power-analysis" class="nav-link" data-scroll-target="#reporting-a-power-analysis"><span class="header-section-number">10.5</span> Reporting a power analysis</a></li>
@@ -420,7 +388,7 @@ window.Quarto = {
 </li>
   <li><a href="#words-from-this-chapter" id="toc-words-from-this-chapter" class="nav-link" data-scroll-target="#words-from-this-chapter"><span class="header-section-number">10.7</span> Words from this Chapter</a></li>
   <li><a href="#end-of-chapter" id="toc-end-of-chapter" class="nav-link" data-scroll-target="#end-of-chapter"><span class="header-section-number">10.8</span> End of Chapter</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/10-power.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/10-power.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/10-power.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/10-power.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -438,7 +406,6 @@ window.Quarto = {
     
   </div>
   
-
 
 </header><p>Up until now we have mainly spent time on data-wrangling, understanding probability, visualising our data, and more recently, running inferential tests, i.e.&nbsp;t-tests. In the lectures, however, you have also started to learn about additional aspects of inferential testing and trying to reduce certain types of error in your analyses. It is this balance of minimising error in our inferential statistics that we will focus on today.</p>
 <p>This chapter is adapted from <span class="citation" data-cites="bartlett_power_2022">Bartlett &amp; Charles (<a href="references.html#ref-bartlett_power_2022" role="doc-biblioref">2022</a>)</span> and we recommend referring to this article for more information on the concepts behind statistical power. However, this article focuses on the statistics software jamovi, so this chapter focuses on power analysis using the <pkg>pwr</pkg> package.</p>
@@ -487,8 +454,8 @@ window.Quarto = {
 <p>After the brief recap, we will now focus on <em>a priori</em> and sensitivity power analyses applied to different statistical models.</p>
 </section><section id="power-analysis-for-t-tests-categorical-predictors" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="power-analysis-for-t-tests-categorical-predictors">
 <span class="header-section-number">10.3</span> Power analysis for t-tests / categorical predictors</h2>
-<section id="introduction-to-the-data-set" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
-<span class="header-section-number">10.3.1</span> Introduction to the data set</h3>
+<section id="introduction-to-the-study" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="introduction-to-the-study">
+<span class="header-section-number">10.3.1</span> Introduction to the study</h3>
 <p>In this section, imagine we are designing a study to build on <span class="citation" data-cites="irving_correcting_2022">Irving et al. (<a href="references.html#ref-irving_correcting_2022" role="doc-biblioref">2022</a>)</span> who tested an intervention to correct statistical misinformation. Participants read an article about a new fictional study where one passage falsely concludes watching TV causes cognitive decline. In the correction group, participants receive an extra passage where the fictional researcher explains they only reported a correlation, not a causal relationship. In the no-correction group, the extra passage just explains the fictional researcher was not available to comment. Irving et al.&nbsp;then tested participants’ comprehension of the story and coded their answers for mistaken causal inferences. They expected participants in the correction group to make fewer causal inferences than those in the no-correction group, and found evidence supporting this prediction with an effect size equivalent to Cohen’s d = 0.64, 95% CI = [0.28, 0.99]. Inspired by their study, we want to design an experiment to correct another type of misinformation in articles.</p>
 <p>Irving et al.&nbsp;(2022) themselves provide an excellent example of explaining and justifying the rationale behind their power analysis, so we will walk through the decision making process and how it changes the outputs. For our smallest effect size of interest, our starting point is the estimate of d = 0.64. However, it is worth consulting other sources to calibrate our understanding of effects in the area, such as Irving et al.&nbsp;citing a meta-analysis. For debunking, the average effect across 30 studies was d = 1.14, 95% CI = [0.68, 1.61], so we could use the lower bound of the confidence interval, but this may still represent an overestimate. Irving et al.&nbsp;used the smallest effect (d = 0.54) from the studies most similar to their design which was included in the meta-analysis. As a value slightly smaller than the other estimates, we will also use this as the smallest effect of interest for our study.</p>
 <p>Now we have settled on our smallest effect size of interest, we will use d = 0.54 in the following demonstrations. We start with a priori and sensitivity power analysis for two independent samples, exploring how the outputs change as we alter inputs like alpha, power, and the number of tails in the test. For each demonstration, we explain how you can transparently report the power analysis to your reader. We then repeat the demonstrations for two dependent samples to show how you require fewer participants when the same participants complete multiple conditions instead of being allocated to separate groups.</p>
@@ -667,17 +634,17 @@ Show me the solution
 <p>These are important lessons to recognise which inputs increase and which decrease the sample size you need. For an <em>a priori</em> power analysis in the design phase, you can tweak the inputs depending on how sensitive you want your study given the resources available to you. Holding everything else constant, we can summarise the patterns as:</p>
 <ul>
 <li><p>Using a one-tailed test <select class="webex-select"><option value="blank"></option>
-<option value="answer">decreases</option>
-<option value="">increases</option></select> the sample size you need.</p></li>
+<option value="">increases</option>
+<option value="answer">decreases</option></select> the sample size you need.</p></li>
 <li><p>Reducing alpha <select class="webex-select"><option value="blank"></option>
 <option value="answer">increases</option>
 <option value="">decreases</option></select> the sample size you need.</p></li>
 <li><p>Reducing power / increasing beta <select class="webex-select"><option value="blank"></option>
-<option value="answer">decreases</option>
-<option value="">increases</option></select> the sample size you need.</p></li>
+<option value="">increases</option>
+<option value="answer">decreases</option></select> the sample size you need.</p></li>
 <li><p>Reducing the smallest effect size of interest <select class="webex-select"><option value="blank"></option>
-<option value="">decreases</option>
-<option value="answer">increases</option></select> the sample size you need.</p></li>
+<option value="answer">increases</option>
+<option value="">decreases</option></select> the sample size you need.</p></li>
 <li><p>Switching to a within-subjects design <select class="webex-select"><option value="blank"></option>
 <option value="answer">decreases</option>
 <option value="">increases</option></select> the sample size you need.</p></li>
@@ -720,29 +687,21 @@ NOTE: n is number in *each* group</code></pre>
 <pre><code>[1] 0.73</code></pre>
 </div>
 </div>
-<p>One other key point here is power exists along a curve, there is not just a single value for power once your sample size is fixed. We can visualise this through something called a power curve. <a href="#fig-power-curve-40" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> shows statistical power against Cohen’s d as the effect size for a fixed sample of 40 participants per group. We would have 90% power to detect a Cohen’s d of 0.75 (the value is a little different here as we set the effect size, rather than calculate it as the output), shown where the two lines meet. You would have more power to detect effects larger than 0.75 (follow the curve to the right), but less power to detect effects smaller than 0.75 (follow the curve to the left). The grey shaded region highlights the effects your study would be less sensitive to.</p>
+<p>One other key point here is power exists along a curve, there is not just a single value for power once your sample size is fixed. We can visualise this through something called a power curve. <a href="#fig-power-curve-40">Figure&nbsp;<span>10.1</span></a> shows statistical power against Cohen’s d as the effect size for a fixed sample of 40 participants per group. We would have 90% power to detect a Cohen’s d of 0.75 (the value is a little different here as we set the effect size, rather than calculate it as the output), shown where the two lines meet. You would have more and more power to detect effects larger than 0.75 (follow the curve to the right), but less power to detect effects smaller than 0.75 (follow the curve to the left). The grey shaded region highlights the effects your study would be less sensitive to.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-power-curve-40" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-power-curve-40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="10-power_files/figure-html/fig-power-curve-40-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-power-curve-40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.1: Power curve for 40 participants per group and 90% power.
-</figcaption></figure>
+<div id="fig-power-curve-40" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-power_files/figure-html/fig-power-curve-40-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;10.1: Power curve for 40 participants per group and 90% power.</figcaption></figure>
 </div>
 </div>
 </div>
-<p>On the other hand, <a href="#fig-power-curve-80" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> shows statistical power against Cohen’s d as the effect size for a fixed sample of 80 participants per group. This time, we would have 90% power to detect effects of d = 0.53 and there is a smaller grey region. We would be sensitive to effects larger than d = 0.53 but less sensitive to effects smaller than 0.53.</p>
+<p>On the other hand, <a href="#fig-power-curve-80">Figure&nbsp;<span>10.2</span></a> shows statistical power against Cohen’s d as the effect size for a fixed sample of 80 participants per group. This time, we would have 90% power to detect effects of d = 0.53 and there is a smaller grey region. We would have more power to detect effects larger than d = 0.53 but less power to detect effects smaller than 0.53.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-power-curve-80" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-power-curve-80-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="10-power_files/figure-html/fig-power-curve-80-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-power-curve-80-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10.2: Power curve for 80 participants per group and 90% power.
-</figcaption></figure>
+<div id="fig-power-curve-80" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-power_files/figure-html/fig-power-curve-80-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;10.2: Power curve for 80 participants per group and 90% power.</figcaption></figure>
 </div>
 </div>
 </div>
@@ -807,12 +766,243 @@ Figure&nbsp;10.2: Power curve for 80 participants per group and 90% power.
 <p>In the t-test power analysis function, we needed 148 participants in total, so this is off by 1 participant. There are a few steps for rounding errors here, so this is close enough to show it is the equivalent but more awkward process.</p>
 </section></section><section id="power-analysis-for-correlations-continuous-predictors" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="power-analysis-for-correlations-continuous-predictors">
 <span class="header-section-number">10.4</span> Power analysis for correlations / continuous predictors</h2>
-<section id="introduction-to-the-data-set-1" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="introduction-to-the-data-set-1">
-<span class="header-section-number">10.4.1</span> Introduction to the data set</h3>
+<section id="introduction-to-the-study-1" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="introduction-to-the-study-1">
+<span class="header-section-number">10.4.1</span> Introduction to the study</h3>
+<p>For this section, we need a new study to work with for a correlation / continuous predictor. <span class="citation" data-cites="wingen_no_2020">Wingen et al. (<a href="references.html#ref-wingen_no_2020" role="doc-biblioref">2020</a>)</span> were interested in the relationship between the replication rate in psychology studies and the public trust in psychology research. The replication crisis has led to a lot of introspection in the field to consider how we conduct robust research. However, being honest about the state of the field might be good for science, but perhaps it is related to lower public trust in science. We will focus on study 1 which asked the question: does trust in psychology correlate with expected replicability?</p>
+<p><span class="citation" data-cites="wingen_no_2020">Wingen et al. (<a href="references.html#ref-wingen_no_2020" role="doc-biblioref">2020</a>)</span> reported a power analysis and they aimed for 95% power, 5% alpha, and their smallest effect size of interest was <em>r</em> = .20. Like Irving et al.&nbsp;(2022), they chose this value based on a meta-analysis which summarised hundreds of studies across social psychology. We will use these values as a starting point and adapt them to see it’s impact on the sample size we need.</p>
 </section><section id="a-priori-power-analysis-1" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="a-priori-power-analysis-1">
 <span class="header-section-number">10.4.2</span> A priori power analysis</h3>
-</section><section id="sensitivity-power-analysis-1" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="sensitivity-power-analysis-1">
+<p>For Pearson’s <em>r</em> correlation, there is the function <code>pwr.r.test()</code>. All the arguments are the same as for the t-test, apart from we specify <em>r</em> as an effect size instead of Cohen’s d and we do not need to specify the type of test.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-2"><a href="#cb25-2"></a>           <span class="at">r =</span> .<span class="dv">20</span>, </span>
+<span id="cb25-3"><a href="#cb25-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb25-4"><a href="#cb25-4"></a>           <span class="at">power =</span> .<span class="dv">95</span>, </span>
+<span id="cb25-5"><a href="#cb25-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     approximate correlation power calculation (arctangh transformation) 
+
+              n = 318.2637
+              r = 0.2
+      sig.level = 0.05
+          power = 0.95
+    alternative = two.sided</code></pre>
+</div>
+</div>
+<p>As before, we can isolate the sample size we would need for a study sensitive to these inputs.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, </span>
+<span id="cb27-2"><a href="#cb27-2"></a>           <span class="at">r =</span> .<span class="dv">20</span>, </span>
+<span id="cb27-3"><a href="#cb27-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb27-4"><a href="#cb27-4"></a>           <span class="at">power =</span> .<span class="dv">95</span>, </span>
+<span id="cb27-5"><a href="#cb27-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">pluck</span>(<span class="st">"n"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">ceiling</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 319</code></pre>
+</div>
+</div>
+<p>Our starting point is we need 319 participants to detect our smallest effect size of interest <em>r</em> = .20 with 95% power and 5% alpha.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>With decision making in mind, we can tweak the arguments to see how it affects the sample size we need. We will tweak one argument at a time, so your starting point will be the arguments we started with above.</p>
+<ol type="1">
+<li><p>If we used a one-tailed test predicting a positive relationship, we would need <input class="webex-solveme nospaces" size="3" data-answer="[&quot;266&quot;]"> participants. This reproduces the power analysis from Wingen et al., as they used a one-tailed test.</p></li>
+<li><p>If we wanted to make fewer type I errors and reduce alpha to .005, we would need <input class="webex-solveme nospaces" size="3" data-answer="[&quot;485&quot;]"> participants.</p></li>
+<li><p>If we were happy with a larger beta and reduce power to .80 (80%), we would need <input class="webex-solveme nospaces" size="3" data-answer="[&quot;194&quot;]"> participants.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>We can calculate sample size for a one-tailed test by entering <code>alternative = "greater"</code> or <code>alternative = "less"</code>. This must match the effect size direction or you will receive an error.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, </span>
+<span id="cb29-2"><a href="#cb29-2"></a>           <span class="at">r =</span> .<span class="dv">20</span>, </span>
+<span id="cb29-3"><a href="#cb29-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb29-4"><a href="#cb29-4"></a>           <span class="at">power =</span> .<span class="dv">95</span>, </span>
+<span id="cb29-5"><a href="#cb29-5"></a>           <span class="at">alternative =</span> <span class="st">"greater"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">pluck</span>(<span class="st">"n"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">ceiling</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 266</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>We can decrease alpha by entering <code>alpha = .005</code> to calculate the sample size for reducing the type I error rate.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, </span>
+<span id="cb31-2"><a href="#cb31-2"></a>           <span class="at">r =</span> .<span class="dv">20</span>, </span>
+<span id="cb31-3"><a href="#cb31-3"></a>           <span class="at">sig.level =</span> .<span class="dv">005</span>, </span>
+<span id="cb31-4"><a href="#cb31-4"></a>           <span class="at">power =</span> .<span class="dv">95</span>, </span>
+<span id="cb31-5"><a href="#cb31-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">pluck</span>(<span class="st">"n"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">ceiling</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 485</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>We can decrease power if we were happy with a larger beta / type II error rate by entering <code>power = .80</code>.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, </span>
+<span id="cb33-2"><a href="#cb33-2"></a>           <span class="at">r =</span> .<span class="dv">20</span>, </span>
+<span id="cb33-3"><a href="#cb33-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb33-4"><a href="#cb33-4"></a>           <span class="at">power =</span> .<span class="dv">80</span>, </span>
+<span id="cb33-5"><a href="#cb33-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">pluck</span>(<span class="st">"n"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-7"><a href="#cb33-7"></a>  <span class="fu">ceiling</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 194</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Like for the independent samples t-test, the design phase allows you to carefully consider the inputs you choose and tweak them depending on how sensitive you want your study given the resources available to you. Holding everything else constant, we can summarise the patterns here as:</p>
+<ul>
+<li><p>Using a one-tailed test <select class="webex-select"><option value="blank"></option>
+<option value="">increases</option>
+<option value="answer">decreases</option></select> the sample size you need.</p></li>
+<li><p>Reducing alpha <select class="webex-select"><option value="blank"></option>
+<option value="">decreases</option>
+<option value="answer">increases</option></select> the sample size you need.</p></li>
+<li><p>Reducing power / increasing beta <select class="webex-select"><option value="blank"></option>
+<option value="">increases</option>
+<option value="answer">decreases</option></select> the sample size you need.</p></li>
+</ul></section><section id="sensitivity-power-analysis-1" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="sensitivity-power-analysis-1">
 <span class="header-section-number">10.4.3</span> Sensitivity power analysis</h3>
+<p><span class="citation" data-cites="wingen_no_2020">Wingen et al. (<a href="references.html#ref-wingen_no_2020" role="doc-biblioref">2020</a>)</span> is a great example of a sensitivity power analysis in the wild as they are relatively rare to see in published research. They explain they recruited participants online, so they ended up with more participants than they aimed for.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Their final sample size was <strong>271</strong>, so try and adapt the function to calculate the effect size <em>r</em> they were sensitive to. Both of these answers assume 5% alpha and a one-sided test.</p>
+<p>To 2 decimal places, they could detect an effect of <em>r</em> = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;0.15&quot;,&quot;.15&quot;]"> with 80% power and <em>r</em> = <input class="webex-solveme nospaces" data-tol="0.001" size="3" data-answer="[&quot;0.2&quot;,&quot;.2&quot;]"> with 95% power.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You should have had this in a code chunk for 80% power:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="dv">271</span>, </span>
+<span id="cb35-2"><a href="#cb35-2"></a>           <span class="at">r =</span> <span class="cn">NULL</span>, </span>
+<span id="cb35-3"><a href="#cb35-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb35-4"><a href="#cb35-4"></a>           <span class="at">power =</span> .<span class="dv">80</span>, </span>
+<span id="cb35-5"><a href="#cb35-5"></a>           <span class="at">alternative =</span> <span class="st">"greater"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="fu">pluck</span>(<span class="st">"r"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-7"><a href="#cb35-7"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.15</code></pre>
+</div>
+</div>
+<p>And this in a code chunk for 95% power:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="dv">271</span>, </span>
+<span id="cb37-2"><a href="#cb37-2"></a>           <span class="at">r =</span> <span class="cn">NULL</span>, </span>
+<span id="cb37-3"><a href="#cb37-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb37-4"><a href="#cb37-4"></a>           <span class="at">power =</span> .<span class="dv">95</span>, </span>
+<span id="cb37-5"><a href="#cb37-5"></a>           <span class="at">alternative =</span> <span class="st">"greater"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-6"><a href="#cb37-6"></a>  <span class="fu">pluck</span>(<span class="st">"r"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-7"><a href="#cb37-7"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="power-for-regression-with-a-continuous-predictor" class="level3" data-number="10.4.4"><h3 data-number="10.4.4" class="anchored" data-anchor-id="power-for-regression-with-a-continuous-predictor">
+<span class="header-section-number">10.4.4</span> Power for regression with a continuous predictor</h3>
+<p>Like the categorical predictor, we have a mismatch between the effect size you typically see reported (Pearson’s <em>r</em>) and the effect size we need for a regression power analysis (<span class="math inline">\(f^2\)</span>). The website <a href="https://www.psychometrica.de/effect_size.html#interpretation" target="_blank">psychometrica.de</a> still works for converting effect sizes in section 14. Alternatively, you can use the following code to save <span class="math inline">\(f^2\)</span> as an object.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># effect size as Pearson's r</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>r <span class="ot">&lt;-</span> .<span class="dv">20</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a></span>
+<span id="cb39-4"><a href="#cb39-4"></a><span class="co"># convert to f2 by squaring r values</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a>f2 <span class="ot">&lt;-</span> r<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> r<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have <span class="math inline">\(f^2\)</span>, we can use the function <code>pwr.f2.test()</code> which calculates power for regression models.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># number of predictors</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>u <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="co"># alpha for type I error rate</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>alpha <span class="ot">&lt;-</span> .<span class="dv">05</span></span>
+<span id="cb40-6"><a href="#cb40-6"></a></span>
+<span id="cb40-7"><a href="#cb40-7"></a><span class="co"># power for 1-beta</span></span>
+<span id="cb40-8"><a href="#cb40-8"></a>power <span class="ot">&lt;-</span>  .<span class="dv">95</span></span>
+<span id="cb40-9"><a href="#cb40-9"></a></span>
+<span id="cb40-10"><a href="#cb40-10"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> u, </span>
+<span id="cb40-11"><a href="#cb40-11"></a>            <span class="at">v =</span> <span class="cn">NULL</span>, </span>
+<span id="cb40-12"><a href="#cb40-12"></a>            <span class="at">sig.level =</span> alpha, </span>
+<span id="cb40-13"><a href="#cb40-13"></a>            <span class="at">power =</span> power, </span>
+<span id="cb40-14"><a href="#cb40-14"></a>            <span class="at">f2 =</span> f2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Multiple regression power calculation 
+
+              u = 1
+              v = 311.807
+             f2 = 0.04166667
+      sig.level = 0.05
+          power = 0.95</code></pre>
+</div>
+</div>
+<p>Using the objects from the power analysis, we can calculate the sample size we need with a little reorganising.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>wingen_v <span class="ot">&lt;-</span> <span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>, </span>
+<span id="cb42-2"><a href="#cb42-2"></a>                        <span class="at">v =</span> <span class="cn">NULL</span>, </span>
+<span id="cb42-3"><a href="#cb42-3"></a>                        <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb42-4"><a href="#cb42-4"></a>                        <span class="at">power =</span> .<span class="dv">95</span>, </span>
+<span id="cb42-5"><a href="#cb42-5"></a>                        <span class="at">f2 =</span> f2) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-6"><a href="#cb42-6"></a>  <span class="fu">pluck</span>(<span class="st">"v"</span>) </span>
+<span id="cb42-7"><a href="#cb42-7"></a></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">ceiling</span>(wingen_v <span class="sc">+</span> u <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 314</code></pre>
+</div>
+</div>
+<p>In the Pearson’s <em>r</em> power analysis function, we needed 319 participants in total, so the estimate is off by 5 participants this time. We still have a few steps for rounding error, so this is close enough to show it is the equivalent but more awkward process.</p>
 </section></section><section id="reporting-a-power-analysis" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="reporting-a-power-analysis">
 <span class="header-section-number">10.5</span> Reporting a power analysis</h2>
 <p>Bakker et al.&nbsp;(2020) warned that only 20% of power analyses contained enough information to be fully reproducible. To report your power analysis, the reader needs the following four key pieces of information: - The type of test being conducted,</p>
@@ -833,8 +1023,8 @@ Figure&nbsp;10.2: Power curve for 80 participants per group and 90% power.
 <span class="header-section-number">10.6.1</span> Knowledge check</h3>
 <ol type="1">
 <li>Assuming you were running a between-subjects t-test on secondary data (<span class="math inline">\(\alpha = .05\)</span>, Power = .8, alternative = two-tailed) and that this secondary data has 100 participants in both groups. The smallest effect size, to three decimal places, you could determine with this data is:
-<div id="radio_HFZYEVDBWY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HFZYEVDBWY" value=""><span>d = 0.280</span></label><label><input type="radio" autocomplete="off" name="radio_HFZYEVDBWY" value=""><span>d = 0.281</span></label><label><input type="radio" autocomplete="off" name="radio_HFZYEVDBWY" value="answer"><span>d = 0.398</span></label><label><input type="radio" autocomplete="off" name="radio_HFZYEVDBWY" value=""><span>d = 0.399</span></label>
+<div id="radio_RSHBAWSGOA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value=""><span>d = 0.281</span></label><label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value=""><span>d = 0.280</span></label><label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value=""><span>d = 0.399</span></label><label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value="answer"><span>d = 0.398</span></label>
 </div>
 </li>
 </ol>
@@ -844,13 +1034,13 @@ Solution
 </button>
 <p>The code for this test would be:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">100</span>, </span>
-<span id="cb25-2"><a href="#cb25-2"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
-<span id="cb25-3"><a href="#cb25-3"></a>           <span class="at">power =</span> .<span class="dv">8</span>,</span>
-<span id="cb25-4"><a href="#cb25-4"></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>,</span>
-<span id="cb25-5"><a href="#cb25-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-6"><a href="#cb25-6"></a>  <span class="fu">pluck</span>(<span class="st">"d"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">100</span>, </span>
+<span id="cb44-2"><a href="#cb44-2"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb44-3"><a href="#cb44-3"></a>           <span class="at">power =</span> .<span class="dv">8</span>,</span>
+<span id="cb44-4"><a href="#cb44-4"></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>,</span>
+<span id="cb44-5"><a href="#cb44-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-6"><a href="#cb44-6"></a>  <span class="fu">pluck</span>(<span class="st">"d"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-7"><a href="#cb44-7"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Meaning that the smallest effect size would be d = 0.39</li>
@@ -858,8 +1048,8 @@ Solution
 </div>
 <ol start="2" type="1">
 <li>Assuming you were running a between-subjects t-test on secondary data (<span class="math inline">\(\alpha = .05\)</span>, Power = .8, alternative = two-tailed) and that this secondary data has 60 participants in Group 1 and 40 participants in Group 2. The smallest effect size, to three decimal places, you could determine with this data is:
-<div id="radio_WJQLDRXXDR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WJQLDRXXDR" value=""><span>r = .578</span></label><label><input type="radio" autocomplete="off" name="radio_WJQLDRXXDR" value="answer"><span>d = 0.578</span></label><label><input type="radio" autocomplete="off" name="radio_WJQLDRXXDR" value=""><span>d = 0.577</span></label><label><input type="radio" autocomplete="off" name="radio_WJQLDRXXDR" value=""><span>r = .577</span></label>
+<div id="radio_CJWRSBQBJF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value=""><span>r = .577</span></label><label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value=""><span>r = .578</span></label><label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value="answer"><span>d = 0.578</span></label><label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value=""><span>d = 0.577</span></label>
 </div>
 </li>
 </ol>
@@ -869,13 +1059,13 @@ Solution
 </button>
 <p>The code for this test would be:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">pwr.t2n.test</span>(<span class="at">n1 =</span> <span class="dv">60</span>,</span>
-<span id="cb26-2"><a href="#cb26-2"></a>           <span class="at">n2 =</span> <span class="dv">40</span>,</span>
-<span id="cb26-3"><a href="#cb26-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
-<span id="cb26-4"><a href="#cb26-4"></a>           <span class="at">power =</span> .<span class="dv">8</span>,</span>
-<span id="cb26-5"><a href="#cb26-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">pluck</span>(<span class="st">"d"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">pwr.t2n.test</span>(<span class="at">n1 =</span> <span class="dv">60</span>,</span>
+<span id="cb45-2"><a href="#cb45-2"></a>           <span class="at">n2 =</span> <span class="dv">40</span>,</span>
+<span id="cb45-3"><a href="#cb45-3"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb45-4"><a href="#cb45-4"></a>           <span class="at">power =</span> .<span class="dv">8</span>,</span>
+<span id="cb45-5"><a href="#cb45-5"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-6"><a href="#cb45-6"></a>  <span class="fu">pluck</span>(<span class="st">"d"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-7"><a href="#cb45-7"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Meaning that the smallest effect size would be d = 0.578</li>
@@ -883,8 +1073,8 @@ Solution
 </div>
 <ol start="3" type="1">
 <li>Assuming you ran a correlation on secondary data (<span class="math inline">\(\alpha = .05\)</span>, Power = .8, alternative = two-tailed) and that this secondary data has 50 observations. The smallest effect size, to three decimal places, you could determine with this data is:
-<div id="radio_FGHNWKWLXY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FGHNWKWLXY" value="answer"><span>r = .384</span></label><label><input type="radio" autocomplete="off" name="radio_FGHNWKWLXY" value=""><span>r = .276</span></label><label><input type="radio" autocomplete="off" name="radio_FGHNWKWLXY" value=""><span>r = .275</span></label><label><input type="radio" autocomplete="off" name="radio_FGHNWKWLXY" value=""><span>r = .385</span></label>
+<div id="radio_CSBTSKUYJD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value=""><span>r = .385</span></label><label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value="answer"><span>r = .384</span></label><label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value=""><span>r = .276</span></label><label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value=""><span>r = .275</span></label>
 </div>
 </li>
 </ol>
@@ -894,12 +1084,12 @@ Solution
 </button>
 <p>The code for this test would be:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="dv">50</span>,</span>
-<span id="cb27-2"><a href="#cb27-2"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
-<span id="cb27-3"><a href="#cb27-3"></a>           <span class="at">power =</span> .<span class="dv">8</span>,</span>
-<span id="cb27-4"><a href="#cb27-4"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">pluck</span>(<span class="st">"r"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">pwr.r.test</span>(<span class="at">n =</span> <span class="dv">50</span>,</span>
+<span id="cb46-2"><a href="#cb46-2"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>, </span>
+<span id="cb46-3"><a href="#cb46-3"></a>           <span class="at">power =</span> .<span class="dv">8</span>,</span>
+<span id="cb46-4"><a href="#cb46-4"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-5"><a href="#cb46-5"></a>  <span class="fu">pluck</span>(<span class="st">"r"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-6"><a href="#cb46-6"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Meaning that the smallest effect size would be r = .384</li>
@@ -914,7 +1104,8 @@ Solution
 <span class="header-section-number">10.7</span> Words from this Chapter</h2>
 <p>Below you will find a list of words that were used in this chapter that might be new to you in case it helps to have somewhere to refer back to what they mean. The links in this table take you to the entry for the words in the <a href="https://psyteachr.github.io/glossary/" target="_blank">PsyTeachR Glossary</a>. Note that the Glossary is written by numerous members of the team and as such may use slightly different terminology from that shown in the chapter.</p>
 <div class="cell" data-layout-align="center">
-<table class="caption-top table table-sm table-striped small">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">term</th>
 <th style="text-align: left;">definition</th>
@@ -951,6 +1142,7 @@ Solution
 </tbody>
 </table>
 </div>
+</div>
 </section><section id="end-of-chapter" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="end-of-chapter">
 <span class="header-section-number">10.8</span> End of Chapter</h2>
 <p><strong>Great!</strong> Hopefully you are now starting to see the interaction between alpha, power, effect sizes, and sample size. We should always want really high powered studies and depending on the size of the effect we are interested in (small to large), and our <span class="math inline">\(\alpha\)</span> level, this will mean we will need to run more or less participants to make sure our study is well powered. Points to note:</p>
@@ -964,7 +1156,7 @@ Solution
 <p>If you want more examples of power to reinforce your understanding, go back and calculate the power of the t-tests, correlations, and chi-squares from earlier chapters.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-bartlett_power_2022" class="csl-entry" role="listitem">
 Bartlett, J., &amp; Charles, S. (2022). Power to the <span>People</span>: <span>A</span> <span>Beginner</span>’s <span>Tutorial</span> to <span>Power</span> <span>Analysis</span> using jamovi. <em>Meta-Psychology</em>, <em>6</em>. <a href="https://doi.org/10.15626/MP.2021.3078">https://doi.org/10.15626/MP.2021.3078</a>
 </div>
@@ -973,6 +1165,9 @@ Irving, D., Clark, R. W. A., Lewandowsky, S., &amp; Allen, P. J. (2022). Correct
 </div>
 <div id="ref-lakens_sample_2022" class="csl-entry" role="listitem">
 Lakens, D. (2022). Sample <span>Size</span> <span>Justification</span>. <em>Collabra: Psychology</em>, <em>8</em>(1), 33267. <a href="https://doi.org/10.1525/collabra.33267">https://doi.org/10.1525/collabra.33267</a>
+</div>
+<div id="ref-wingen_no_2020" class="csl-entry" role="listitem">
+Wingen, T., Berkessel, J. B., &amp; Englich, B. (2020). No <span>Replication</span>, <span>No</span> <span>Trust</span>? <span>How</span> <span>Low</span> <span>Replicability</span> <span>Influences</span> <span>Trust</span> in <span>Psychology</span>. <em>Social Psychological and Personality Science</em>, <em>11</em>(4), 454–463. <a href="https://doi.org/10.1177/1948550619877412">https://doi.org/10.1177/1948550619877412</a>
 </div>
 </div>
 </section></main><!-- /main --><script>
@@ -1250,33 +1445,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1343,15 +1511,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1430,27 +1596,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1460,17 +1609,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1482,130 +1622,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -1649,7 +1666,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1675,32 +1691,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1760,12 +1750,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./09-lm-categorical.html" class="pagination-link" aria-label="Regression with one categorical predictor">
+      <a href="./09-lm-categorical.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression with one categorical predictor</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./11-screening-data.html" class="pagination-link" aria-label="Screening Data">
+      <a href="./11-screening-data.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Screening Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1775,9 +1765,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">
-<p>CC-BY (2024) James Bartlett &amp; Wil Toivo</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/10-power.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/10-power.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-center">CC-BY (2024) James Bartlett &amp; Wil Toivo</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

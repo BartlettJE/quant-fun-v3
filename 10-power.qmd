@@ -67,7 +67,7 @@ After the brief recap, we will now focus on *a priori* and sensitivity power ana
 
 ## Power analysis for t-tests / categorical predictors
 
-### Introduction to the data set
+### Introduction to the study
 
 In this section, imagine we are designing a study to build on @irving_correcting_2022 who tested an intervention to correct statistical misinformation. Participants read an article about a new fictional study where one passage falsely concludes watching TV causes cognitive decline. In the correction group, participants receive an extra passage where the fictional researcher explains they only reported a correlation, not a causal relationship. In the no-correction group, the extra passage just explains the fictional researcher was not available to comment. Irving et al. then tested participants’ comprehension of the story and coded their answers for mistaken causal inferences. They expected participants in the correction group to make fewer causal inferences than those in the no-correction group, and found evidence supporting this prediction with an effect size equivalent to Cohen’s d = 0.64, 95% CI = [0.28, 0.99]. Inspired by their study, we want to design an experiment to correct another type of misinformation in articles.
 
@@ -312,7 +312,7 @@ curve_80 <- power_table %>%
 
 ```
 
-One other key point here is power exists along a curve, there is not just a single value for power once your sample size is fixed. We can visualise this through something called a power curve. @fig-power-curve-40 shows statistical power against Cohen's d as the effect size for a fixed sample of 40 participants per group. We would have 90% power to detect a Cohen's d of 0.75 (the value is a little different here as we set the effect size, rather than calculate it as the output), shown where the two lines meet. You would have more power to detect effects larger than 0.75 (follow the curve to the right), but less power to detect effects smaller than 0.75 (follow the curve to the left). The grey shaded region highlights the effects your study would be less sensitive to. 
+One other key point here is power exists along a curve, there is not just a single value for power once your sample size is fixed. We can visualise this through something called a power curve. @fig-power-curve-40 shows statistical power against Cohen's d as the effect size for a fixed sample of 40 participants per group. We would have 90% power to detect a Cohen's d of 0.75 (the value is a little different here as we set the effect size, rather than calculate it as the output), shown where the two lines meet. You would have more and more power to detect effects larger than 0.75 (follow the curve to the right), but less power to detect effects smaller than 0.75 (follow the curve to the left). The grey shaded region highlights the effects your study would be less sensitive to. 
 
 ```{r power-curve-40, echo=FALSE}
 #| label: fig-power-curve-40
@@ -322,7 +322,7 @@ curve_40
 
 ```
 
-On the other hand, @fig-power-curve-80 shows statistical power against Cohen's d as the effect size for a fixed sample of 80 participants per group. This time, we would have 90% power to detect effects of d = 0.53 and there is a smaller grey region. We would be sensitive to effects larger than d = 0.53 but less sensitive to effects smaller than 0.53. 
+On the other hand, @fig-power-curve-80 shows statistical power against Cohen's d as the effect size for a fixed sample of 80 participants per group. This time, we would have 90% power to detect effects of d = 0.53 and there is a smaller grey region. We would have more power to detect effects larger than d = 0.53 but less power to detect effects smaller than 0.53. 
 
 ```{r power-curve-80, echo=FALSE}
 #| label: fig-power-curve-80
@@ -390,11 +390,182 @@ In the t-test power analysis function, we needed 148 participants in total, so t
 
 ## Power analysis for correlations / continuous predictors
 
-### Introduction to the data set
+### Introduction to the study
+
+For this section, we need a new study to work with for a correlation / continuous predictor. @wingen_no_2020 were interested in the relationship between the replication rate in psychology studies and the public trust in psychology research. The replication crisis has led to a lot of introspection in the field to consider how we conduct robust research. However, being honest about the state of the field might be good for science, but perhaps it is related to lower public trust in science. We will focus on study 1 which asked the question: does trust in psychology correlate with expected replicability? 
+
+@wingen_no_2020 reported a power analysis and they aimed for 95% power, 5% alpha, and their smallest effect size of interest was *r* = .20. Like Irving et al. (2022), they chose this value based on a meta-analysis which summarised hundreds of studies across social psychology. We will use these values as a starting point and adapt them to see it's impact on the sample size we need.
 
 ### A priori power analysis
 
+For Pearson's *r* correlation, there is the function `pwr.r.test()`. All the arguments are the same as for the t-test, apart from we specify *r* as an effect size instead of Cohen's d and we do not need to specify the type of test. 
+
+```{r}
+pwr.r.test(n = NULL, 
+           r = .20, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "two.sided")
+```
+
+As before, we can isolate the sample size we would need for a study sensitive to these inputs. 
+
+```{r}
+pwr.r.test(n = NULL, 
+           r = .20, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "two.sided") %>% 
+  pluck("n") %>% 
+  ceiling()
+```
+
+Our starting point is we need 319 participants to detect our smallest effect size of interest *r* = .20 with 95% power and 5% alpha. 
+
+::: {.callout-tip}
+#### Try this
+
+With decision making in mind, we can tweak the arguments to see how it affects the sample size we need. We will tweak one argument at a time, so your starting point will be the arguments we started with above. 
+
+1. If we used a one-tailed test predicting a positive relationship, we would need `r fitb(266)` participants. This reproduces the power analysis from Wingen et al., as they used a one-tailed test. 
+
+2. If we wanted to make fewer type I errors and reduce alpha to .005, we would need `r fitb(485)` participants.
+
+3. If we were happy with a larger beta and reduce power to .80 (80%), we would need `r fitb(194)` participants.
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+
+1. We can calculate sample size for a one-tailed test by entering `alternative = "greater"` or `alternative = "less"`. This must match the effect size direction or you will receive an error. 
+
+```{r}
+pwr.r.test(n = NULL, 
+           r = .20, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "greater") %>% 
+  pluck("n") %>% 
+  ceiling()
+```
+
+2. We can decrease alpha by entering `alpha = .005` to calculate the sample size for reducing the type I error rate. 
+
+```{r}
+pwr.r.test(n = NULL, 
+           r = .20, 
+           sig.level = .005, 
+           power = .95, 
+           alternative = "two.sided") %>% 
+  pluck("n") %>% 
+  ceiling()
+```
+
+3. We can decrease power if we were happy with a larger beta / type II error rate by entering `power = .80`.
+
+```{r}
+pwr.r.test(n = NULL, 
+           r = .20, 
+           sig.level = .05, 
+           power = .80, 
+           alternative = "two.sided") %>% 
+  pluck("n") %>% 
+  ceiling()
+```
+:::
+
+Like for the independent samples t-test, the design phase allows you to carefully consider the inputs you choose and tweak them depending on how sensitive you want your study given the resources available to you. Holding everything else constant, we can summarise the patterns here as:
+
+- Using a one-tailed test `r mcq(sample(c("increases", answer = "decreases")))` the sample size you need.
+
+- Reducing alpha `r mcq(sample(c(answer = "increases", "decreases")))` the sample size you need. 
+
+- Reducing power / increasing beta `r mcq(sample(c("increases", answer = "decreases")))` the sample size you need. 
+
 ### Sensitivity power analysis
+
+@wingen_no_2020 is a great example of a sensitivity power analysis in the wild as they are relatively rare to see in published research. They explain they recruited participants online, so they ended up with more participants than they aimed for. 
+
+::: {.callout-tip}
+#### Try this
+Their final sample size was **271**, so try and adapt the function to calculate the effect size *r* they were sensitive to. Both of these answers assume 5% alpha and a one-sided test.
+
+To 2 decimal places, they could detect an effect of *r* = `r fitb(0.15)` with 80% power and *r* = `r fitb(0.20, tol = 0.001)` with 95% power. 
+:::
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+
+You should have had this in a code chunk for 80% power: 
+
+```{r}
+pwr.r.test(n = 271, 
+           r = NULL, 
+           sig.level = .05, 
+           power = .80, 
+           alternative = "greater") %>% 
+  pluck("r") %>% 
+  round(digits = 2)
+```
+
+And this in a code chunk for 95% power:
+
+```{r}
+pwr.r.test(n = 271, 
+           r = NULL, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "greater") %>% 
+  pluck("r") %>% 
+  round(digits = 2)
+```
+:::
+
+### Power for regression with a continuous predictor
+
+Like the categorical predictor, we have a mismatch between the effect size you typically see reported (Pearson's *r*) and the effect size we need for a regression power analysis ($f^2$). The website [psychometrica.de](https://www.psychometrica.de/effect_size.html#interpretation ){target="_blank"} still works for converting effect sizes in section 14. Alternatively, you can use the following code to save $f^2$ as an object. 
+
+```{r}
+# effect size as Pearson's r
+r <- .20
+
+# convert to f2 by squaring r values
+f2 <- r^2 / (1 - r^2)
+```
+
+Now we have $f^2$, we can use the function `pwr.f2.test()` which calculates power for regression models.
+
+```{r}
+# number of predictors
+u <- 1
+
+# alpha for type I error rate
+alpha <- .05
+
+# power for 1-beta
+power <-  .95
+
+pwr.f2.test(u = u, 
+            v = NULL, 
+            sig.level = alpha, 
+            power = power, 
+            f2 = f2)
+```
+
+Using the objects from the power analysis, we can calculate the sample size we need with a little reorganising. 
+
+```{r}
+wingen_v <- pwr.f2.test(u = 1, 
+                        v = NULL, 
+                        sig.level = .05, 
+                        power = .95, 
+                        f2 = f2) %>% 
+  pluck("v") 
+
+ceiling(wingen_v + u + 1)
+```
+
+In the Pearson's *r* power analysis function, we needed 319 participants in total, so the estimate is off by 5 participants this time. We still have a few steps for rounding error, so this is close enough to show it is the equivalent but more awkward process. 
 
 ## Reporting a power analysis
 
