@@ -378,7 +378,14 @@ div.csl-indent {
   <li><a href="#power-for-regression-with-a-continuous-predictor" id="toc-power-for-regression-with-a-continuous-predictor" class="nav-link" data-scroll-target="#power-for-regression-with-a-continuous-predictor"><span class="header-section-number">10.4.4</span> Power for regression with a continuous predictor</a></li>
   </ul>
 </li>
-  <li><a href="#reporting-a-power-analysis" id="toc-reporting-a-power-analysis" class="nav-link" data-scroll-target="#reporting-a-power-analysis"><span class="header-section-number">10.5</span> Reporting a power analysis</a></li>
+  <li>
+<a href="#reporting-a-power-analysis" id="toc-reporting-a-power-analysis" class="nav-link" data-scroll-target="#reporting-a-power-analysis"><span class="header-section-number">10.5</span> Reporting a power analysis</a>
+  <ul class="collapse">
+<li><a href="#reporting-a-t-test-power-analysis" id="toc-reporting-a-t-test-power-analysis" class="nav-link" data-scroll-target="#reporting-a-t-test-power-analysis"><span class="header-section-number">10.5.1</span> Reporting a t-test power analysis</a></li>
+  <li><a href="#reporting-a-correlation-power-analysis" id="toc-reporting-a-correlation-power-analysis" class="nav-link" data-scroll-target="#reporting-a-correlation-power-analysis"><span class="header-section-number">10.5.2</span> Reporting a correlation power analysis</a></li>
+  <li><a href="#reporting-a-regression-power-analysis" id="toc-reporting-a-regression-power-analysis" class="nav-link" data-scroll-target="#reporting-a-regression-power-analysis"><span class="header-section-number">10.5.3</span> Reporting a regression power analysis</a></li>
+  </ul>
+</li>
   <li>
 <a href="#test-yourself" id="toc-test-yourself" class="nav-link" data-scroll-target="#test-yourself"><span class="header-section-number">10.6</span> Test Yourself</a>
   <ul class="collapse">
@@ -646,8 +653,8 @@ Show me the solution
 <option value="answer">increases</option>
 <option value="">decreases</option></select> the sample size you need.</p></li>
 <li><p>Switching to a within-subjects design <select class="webex-select"><option value="blank"></option>
-<option value="answer">decreases</option>
-<option value="">increases</option></select> the sample size you need.</p></li>
+<option value="">increases</option>
+<option value="answer">decreases</option></select> the sample size you need.</p></li>
 </ul></section><section id="sensitivity-power-analysis" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="sensitivity-power-analysis">
 <span class="header-section-number">10.3.3</span> Sensitivity power analysis</h3>
 <p>Now imagine you already knew the sample size or had access to a population of a known size. In this scenario, you would conduct a sensitivity power analysis. This would tell you what effect sizes your study would be powered to detect for a given alpha, power, and sample size. This is helpful for interpreting your results as you can outline what effect sizes your study was sensitive to and which effects would be too small for you to reliably detect.</p>
@@ -885,14 +892,14 @@ Show me the solution
 <p>Like for the independent samples t-test, the design phase allows you to carefully consider the inputs you choose and tweak them depending on how sensitive you want your study given the resources available to you. Holding everything else constant, we can summarise the patterns here as:</p>
 <ul>
 <li><p>Using a one-tailed test <select class="webex-select"><option value="blank"></option>
-<option value="">increases</option>
-<option value="answer">decreases</option></select> the sample size you need.</p></li>
+<option value="answer">decreases</option>
+<option value="">increases</option></select> the sample size you need.</p></li>
 <li><p>Reducing alpha <select class="webex-select"><option value="blank"></option>
-<option value="">decreases</option>
-<option value="answer">increases</option></select> the sample size you need.</p></li>
+<option value="answer">increases</option>
+<option value="">decreases</option></select> the sample size you need.</p></li>
 <li><p>Reducing power / increasing beta <select class="webex-select"><option value="blank"></option>
-<option value="">increases</option>
-<option value="answer">decreases</option></select> the sample size you need.</p></li>
+<option value="answer">decreases</option>
+<option value="">increases</option></select> the sample size you need.</p></li>
 </ul></section><section id="sensitivity-power-analysis-1" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="sensitivity-power-analysis-1">
 <span class="header-section-number">10.4.3</span> Sensitivity power analysis</h3>
 <p><span class="citation" data-cites="wingen_no_2020">Wingen et al. (<a href="references.html#ref-wingen_no_2020" role="doc-biblioref">2020</a>)</span> is a great example of a sensitivity power analysis in the wild as they are relatively rare to see in published research. They explain they recruited participants online, so they ended up with more participants than they aimed for.</p>
@@ -1005,26 +1012,40 @@ Show me the solution
 <p>In the Pearson’s <em>r</em> power analysis function, we needed 319 participants in total, so the estimate is off by 5 participants this time. We still have a few steps for rounding error, so this is close enough to show it is the equivalent but more awkward process.</p>
 </section></section><section id="reporting-a-power-analysis" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="reporting-a-power-analysis">
 <span class="header-section-number">10.5</span> Reporting a power analysis</h2>
-<p>Bakker et al.&nbsp;(2020) warned that only 20% of power analyses contained enough information to be fully reproducible. To report your power analysis, the reader needs the following four key pieces of information: - The type of test being conducted,</p>
+<p><span class="citation" data-cites="bakker_recommendations_2020">Bakker et al. (<a href="references.html#ref-bakker_recommendations_2020" role="doc-biblioref">2020</a>)</span> warned that only 20% of power analyses contained enough information to be fully reproducible. To report your power analysis, the reader needs the following four key pieces of information:</p>
 <ul>
-<li><p>The software used to calculate power,</p></li>
-<li><p>The inputs that you used, and</p></li>
+<li><p>The type of test you based the power analysis on (e.g., t-test, correlation, regression),</p></li>
+<li><p>The software used to calculate power (i.e., cite the <pkg>pwr</pkg> package, see <a href="appendix-a3-How-to-cite-R.html">How to cite R</a>),</p></li>
+<li><p>The inputs that you used (alpha, power, effect size, sample size, tails), and</p></li>
 <li><p>Why you chose those inputs.</p></li>
 </ul>
-<p>For the original example in Figure 3, we could report it like this:</p>
+<p>In this chapter, we will only cover the first three. The justification for your inputs comes under evaluation skills, so we will work on that in the course materials. Please note there is no single ‘correct’ way to report a power analysis, we just provide examples. Just be sure that you have the four key pieces of information.</p>
+<section id="reporting-a-t-test-power-analysis" class="level3" data-number="10.5.1"><h3 data-number="10.5.1" class="anchored" data-anchor-id="reporting-a-t-test-power-analysis">
+<span class="header-section-number">10.5.1</span> Reporting a t-test power analysis</h3>
+<p>For a t-test, the key distinctive input is Cohen’s d as the effect size.</p>
 <blockquote class="blockquote">
-<p>“To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the jpower module in jamovi suggests we would need 74 participants per group (N = 148) for an independent samples t-test. Similar to Irving et al.&nbsp;(2022), the smallest effect size of interest was set to d = 0.54, but we used a two-tailed test as we were less certain about the direction of the effect.”</p>
+<p>“To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the pwr package <span class="citation" data-cites="Champely2020_pwr">(<a href="references.html#ref-Champely2020_pwr" role="doc-biblioref">Champely, 2020</a>)</span> in R <span class="citation" data-cites="RCoreTeam_2024">(<a href="references.html#ref-RCoreTeam_2024" role="doc-biblioref">R Core Team, 2024</a>)</span> suggests we would need 74 participants per group (N = 148) for an independent samples t-test.”</p>
 </blockquote>
-<p>This provides the reader with all the information they would need in order to reproduce the power analysis and ensure you have calculated it accurately. The statement also includes your justification for the smallest effect size of interest. Please note there is no single ‘correct’ way to report a power analysis. Just be sure that you have the four key pieces of information.</p>
-</section><section id="test-yourself" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="test-yourself">
+</section><section id="reporting-a-correlation-power-analysis" class="level3" data-number="10.5.2"><h3 data-number="10.5.2" class="anchored" data-anchor-id="reporting-a-correlation-power-analysis">
+<span class="header-section-number">10.5.2</span> Reporting a correlation power analysis</h3>
+<p>For a correlation, the key distinctive input is Pearson’s <em>r</em> as the effect size.</p>
+<blockquote class="blockquote">
+<p>“To detect an effect size of <em>r</em> = .20 with 95% power (alpha = .05, one-tailed), the pwr package <span class="citation" data-cites="Champely2020_pwr">(<a href="references.html#ref-Champely2020_pwr" role="doc-biblioref">Champely, 2020</a>)</span> in R <span class="citation" data-cites="RCoreTeam_2024">(<a href="references.html#ref-RCoreTeam_2024" role="doc-biblioref">R Core Team, 2024</a>)</span> suggests we would need 74 participants for a Pearson’s <em>r</em> correlation.”</p>
+</blockquote>
+</section><section id="reporting-a-regression-power-analysis" class="level3" data-number="10.5.3"><h3 data-number="10.5.3" class="anchored" data-anchor-id="reporting-a-regression-power-analysis">
+<span class="header-section-number">10.5.3</span> Reporting a regression power analysis</h3>
+<blockquote class="blockquote">
+<p>“To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the pwr package <span class="citation" data-cites="Champely2020_pwr">(<a href="references.html#ref-Champely2020_pwr" role="doc-biblioref">Champely, 2020</a>)</span> in R <span class="citation" data-cites="RCoreTeam_2024">(<a href="references.html#ref-RCoreTeam_2024" role="doc-biblioref">R Core Team, 2024</a>)</span> suggests we would need 74 participants per group (N = 148) for an independent samples t-test.”</p>
+</blockquote>
+</section></section><section id="test-yourself" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="test-yourself">
 <span class="header-section-number">10.6</span> Test Yourself</h2>
 <p>To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. Compared to previous chapters, there are no error mode questions as the content is so similar to Chapter 8. We are just going to test your understanding of the concepts rather than potential errors.</p>
 <section id="knowledge-check" class="level3" data-number="10.6.1"><h3 data-number="10.6.1" class="anchored" data-anchor-id="knowledge-check">
 <span class="header-section-number">10.6.1</span> Knowledge check</h3>
 <ol type="1">
 <li>Assuming you were running a between-subjects t-test on secondary data (<span class="math inline">\(\alpha = .05\)</span>, Power = .8, alternative = two-tailed) and that this secondary data has 100 participants in both groups. The smallest effect size, to three decimal places, you could determine with this data is:
-<div id="radio_RSHBAWSGOA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value=""><span>d = 0.281</span></label><label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value=""><span>d = 0.280</span></label><label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value=""><span>d = 0.399</span></label><label><input type="radio" autocomplete="off" name="radio_RSHBAWSGOA" value="answer"><span>d = 0.398</span></label>
+<div id="radio_ASPIVCXRDR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ASPIVCXRDR" value=""><span>d = 0.399</span></label><label><input type="radio" autocomplete="off" name="radio_ASPIVCXRDR" value=""><span>d = 0.281</span></label><label><input type="radio" autocomplete="off" name="radio_ASPIVCXRDR" value="answer"><span>d = 0.398</span></label><label><input type="radio" autocomplete="off" name="radio_ASPIVCXRDR" value=""><span>d = 0.280</span></label>
 </div>
 </li>
 </ol>
@@ -1048,8 +1069,8 @@ Solution
 </div>
 <ol start="2" type="1">
 <li>Assuming you were running a between-subjects t-test on secondary data (<span class="math inline">\(\alpha = .05\)</span>, Power = .8, alternative = two-tailed) and that this secondary data has 60 participants in Group 1 and 40 participants in Group 2. The smallest effect size, to three decimal places, you could determine with this data is:
-<div id="radio_CJWRSBQBJF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value=""><span>r = .577</span></label><label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value=""><span>r = .578</span></label><label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value="answer"><span>d = 0.578</span></label><label><input type="radio" autocomplete="off" name="radio_CJWRSBQBJF" value=""><span>d = 0.577</span></label>
+<div id="radio_KKZUICWHBP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KKZUICWHBP" value=""><span>r = .578</span></label><label><input type="radio" autocomplete="off" name="radio_KKZUICWHBP" value=""><span>r = .577</span></label><label><input type="radio" autocomplete="off" name="radio_KKZUICWHBP" value=""><span>d = 0.577</span></label><label><input type="radio" autocomplete="off" name="radio_KKZUICWHBP" value="answer"><span>d = 0.578</span></label>
 </div>
 </li>
 </ol>
@@ -1073,8 +1094,8 @@ Solution
 </div>
 <ol start="3" type="1">
 <li>Assuming you ran a correlation on secondary data (<span class="math inline">\(\alpha = .05\)</span>, Power = .8, alternative = two-tailed) and that this secondary data has 50 observations. The smallest effect size, to three decimal places, you could determine with this data is:
-<div id="radio_CSBTSKUYJD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value=""><span>r = .385</span></label><label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value="answer"><span>r = .384</span></label><label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value=""><span>r = .276</span></label><label><input type="radio" autocomplete="off" name="radio_CSBTSKUYJD" value=""><span>r = .275</span></label>
+<div id="radio_LEXLNIDNJS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LEXLNIDNJS" value="answer"><span>r = .384</span></label><label><input type="radio" autocomplete="off" name="radio_LEXLNIDNJS" value=""><span>r = .276</span></label><label><input type="radio" autocomplete="off" name="radio_LEXLNIDNJS" value=""><span>r = .385</span></label><label><input type="radio" autocomplete="off" name="radio_LEXLNIDNJS" value=""><span>r = .275</span></label>
 </div>
 </li>
 </ol>
@@ -1157,14 +1178,23 @@ Solution
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-bakker_recommendations_2020" class="csl-entry" role="listitem">
+Bakker, M., Veldkamp, C. L. S., Akker, O. R. van den, Assen, M. A. L. M. van, Crompvoets, E., Ong, H. H., &amp; Wicherts, J. M. (2020). Recommendations in pre-registrations and internal review board proposals promote formal power analyses but do not increase sample size. <em>PLoS ONE</em>, <em>15</em>(7), e0236079. <a href="https://doi.org/10.1371/journal.pone.0236079">https://doi.org/10.1371/journal.pone.0236079</a>
+</div>
 <div id="ref-bartlett_power_2022" class="csl-entry" role="listitem">
 Bartlett, J., &amp; Charles, S. (2022). Power to the <span>People</span>: <span>A</span> <span>Beginner</span>’s <span>Tutorial</span> to <span>Power</span> <span>Analysis</span> using jamovi. <em>Meta-Psychology</em>, <em>6</em>. <a href="https://doi.org/10.15626/MP.2021.3078">https://doi.org/10.15626/MP.2021.3078</a>
+</div>
+<div id="ref-Champely2020_pwr" class="csl-entry" role="listitem">
+Champely, S. (2020). <em>Pwr: Basic functions for power analysis</em>. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr</a>
 </div>
 <div id="ref-irving_correcting_2022" class="csl-entry" role="listitem">
 Irving, D., Clark, R. W. A., Lewandowsky, S., &amp; Allen, P. J. (2022). Correcting statistical misinformation about scientific findings in the media: <span>Causation</span> versus correlation. <em>Journal of Experimental Psychology. Applied</em>. <a href="https://doi.org/10.1037/xap0000408">https://doi.org/10.1037/xap0000408</a>
 </div>
 <div id="ref-lakens_sample_2022" class="csl-entry" role="listitem">
 Lakens, D. (2022). Sample <span>Size</span> <span>Justification</span>. <em>Collabra: Psychology</em>, <em>8</em>(1), 33267. <a href="https://doi.org/10.1525/collabra.33267">https://doi.org/10.1525/collabra.33267</a>
+</div>
+<div id="ref-RCoreTeam_2024" class="csl-entry" role="listitem">
+R Core Team. (2024). <em>R: A language and environment for statistical computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
 </div>
 <div id="ref-wingen_no_2020" class="csl-entry" role="listitem">
 Wingen, T., Berkessel, J. B., &amp; Englich, B. (2020). No <span>Replication</span>, <span>No</span> <span>Trust</span>? <span>How</span> <span>Low</span> <span>Replicability</span> <span>Influences</span> <span>Trust</span> in <span>Psychology</span>. <em>Social Psychological and Personality Science</em>, <em>11</em>(4), 454–463. <a href="https://doi.org/10.1177/1948550619877412">https://doi.org/10.1177/1948550619877412</a>

@@ -569,20 +569,35 @@ In the Pearson's *r* power analysis function, we needed 319 participants in tota
 
 ## Reporting a power analysis
 
-Bakker et al. (2020) warned that only 20% of power analyses contained enough information to be fully reproducible. To report your power analysis, the reader needs the following four key pieces of information:
-- The type of test being conducted,  
+@bakker_recommendations_2020 warned that only 20% of power analyses contained enough information to be fully reproducible. To report your power analysis, the reader needs the following four key pieces of information:
 
-- The software used to calculate power,
+- The type of test you based the power analysis on (e.g., t-test, correlation, regression),  
 
-- The inputs that you used, and 
+- The software used to calculate power (i.e., cite the <pkg>pwr</pkg> package, see [How to cite R](#citing-r-rstudio)),
+
+- The inputs that you used (alpha, power, effect size, sample size, tails), and 
 
 - Why you chose those inputs. 
 
-For the original example in Figure 3, we could report it like this:
+In this chapter, we will only cover the first three. The justification for your inputs comes under evaluation skills, so we will work on that in the course materials. Please note there is no single ‘correct’ way to report a power analysis, we just provide examples. Just be sure that you have the four key pieces of information. 
 
-> “To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the jpower module in jamovi suggests we would need 74 participants per group (N = 148) for an independent samples t-test. Similar to Irving et al. (2022), the smallest effect size of interest was set to d = 0.54, but we used a two-tailed test as we were less certain about the direction of the effect.” 
+### Reporting a t-test power analysis
 
-This provides the reader with all the information they would need in order to reproduce the power analysis and ensure you have calculated it accurately. The statement also includes your justification for the smallest effect size of interest. Please note there is no single ‘correct’ way to report a power analysis. Just be sure that you have the four key pieces of information. 
+For a t-test, the key distinctive input is Cohen's d as the effect size. 
+
+> “To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the pwr package [@Champely2020_pwr] in R [@RCoreTeam_2024]  suggests we would need 74 participants per group (N = 148) for an independent samples t-test.” 
+
+### Reporting a correlation power analysis
+
+For a correlation, the key distinctive input is Pearson's *r* as the effect size. 
+
+> “To detect an effect size of *r* = .20 with 95% power (alpha = .05, one-tailed), the pwr package [@Champely2020_pwr] in R [@RCoreTeam_2024]  suggests we would need 266 participants for a Pearson's *r* correlation.” 
+
+### Reporting a regression power analysis
+
+For regression, the key distinctive inputs are $f^2$ as the effect size, including any details of converting effect sizes, plus the number of predictors. 
+
+> “To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the pwr package [@Champely2020_pwr] in R [@RCoreTeam_2024]  suggests we would need 74 participants per group (N = 148) for an independent samples t-test.” 
 
 ## Test Yourself
 
