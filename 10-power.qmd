@@ -6,15 +6,19 @@ library(tidyverse)
 library(cowplot)
 ```
 
-Up until now we have mainly spent time on data-wrangling, understanding probability, visualising our data, and more recently, running inferential tests, i.e. t-tests. In the lectures, however, you have also started to learn about additional aspects of inferential testing and trying to reduce certain types of error in your analyses. It is this balance of minimising error in our inferential statistics that we will focus on today. 
+Until now, a large component of each chapter was dedicated to data wrangling as we must first process raw data into something tidier we can apply our visualisation or modelling steps to. In this chapter, there is no data wrangling, just functions to calculate statistical power in different ways for different tests. Before, the difficulty was in unique problems in wrangling your specific data. In power analysis, the functions are pretty straight forward to use, but deciding what inputs you use are the hard parts as they are your decisions. 
 
-This chapter is adapted from @bartlett_power_2022 and we recommend referring to this article for more information on the concepts behind statistical power. However, this article focuses on the statistics software jamovi, so this chapter focuses on power analysis using the <pkg>pwr</pkg> package.
+We adapted a few components of this chapter from @bartlett_power_2022 and we recommend referring to this article for more information on the concepts behind statistical power. However, this article focuses on the statistics software jamovi, so this chapter focuses on power analysis using the <pkg>pwr</pkg> package.
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
 By the end of this chapter, you will be able to: 
 
-- ILO1
+- Conduct and interpret an *a priori* power analysis for t-tests, correlations, and regression models. 
+
+- Conduct and interpret a sensitivity power analysis for t-tests, correlations, and regression models. 
+
+- Report your power analysis to make it reproducible for your reader. 
 
 ## Chapter preparation
 
@@ -388,6 +392,16 @@ ceiling(irving_v + u + 1)
 
 In the t-test power analysis function, we needed 148 participants in total, so this is off by 1 participant. There are a few steps for rounding errors here, so this is close enough to show it is the equivalent but more awkward process. 
 
+If you wanted to use this function for a sensitivity power analysis, you can convert $f^2$ back to Cohen's d using [psychometrica.de](https://www.psychometrica.de/effect_size.html#interpretation ){target="_blank"} or use the following code:
+
+```{r}
+# f2 from the output
+f2 <- .073
+
+# convert to d by square root of f2 times 2
+d <- sqrt(f2) * 2
+```
+
 ## Power analysis for correlations / continuous predictors
 
 ### Introduction to the study
@@ -567,6 +581,16 @@ ceiling(wingen_v + u + 1)
 
 In the Pearson's *r* power analysis function, we needed 319 participants in total, so the estimate is off by 5 participants this time. We still have a few steps for rounding error, so this is close enough to show it is the equivalent but more awkward process. 
 
+If you wanted to use this function for a sensitivity power analysis, you can convert $f^2$ back to Pearson's $r$ using [psychometrica.de](https://www.psychometrica.de/effect_size.html#interpretation ){target="_blank"} or use the following code:
+
+```{r}
+# f2 from the output
+f2 <- .042
+
+# convert to r from the square root of f2 / f2 + 1
+r <- sqrt(f2 / (f2 + 1))
+```
+
 ## Reporting a power analysis
 
 @bakker_recommendations_2020 warned that only 20% of power analyses contained enough information to be fully reproducible. To report your power analysis, the reader needs the following four key pieces of information:
@@ -587,85 +611,181 @@ For a t-test, the key distinctive input is Cohen's d as the effect size.
 
 > “To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the pwr package [@Champely2020_pwr] in R [@RCoreTeam_2024]  suggests we would need 74 participants per group (N = 148) for an independent samples t-test.” 
 
+Alternatively, if you reported a sensitivity power analysis, the emphasis goes to the effect size your study would be sensitive to. 
+
+> "With our final sample size of 40 participants per group, a sensitivity power analysis for an independent samples t-test using the pwr package [@Champely2020_pwr; @RCoreTeam_2024] showed we could detect an effect size of d = 0.73 with 90% power (5% alpha, two-sided)."
+
 ### Reporting a correlation power analysis
 
 For a correlation, the key distinctive input is Pearson's *r* as the effect size. 
 
 > “To detect an effect size of *r* = .20 with 95% power (alpha = .05, one-tailed), the pwr package [@Champely2020_pwr] in R [@RCoreTeam_2024]  suggests we would need 266 participants for a Pearson's *r* correlation.” 
 
+And for a sensitivity power analysis.
+
+> "With our final sample size of 271 participants, a sensitivity power analysis for a Pearson's *r* correlation using the pwr package [@Champely2020_pwr; @RCoreTeam_2024] showed we could detect an effect size of *r* = .20 with 95% power (5% alpha, one-sided)."
+
 ### Reporting a regression power analysis
 
 For regression, the key distinctive inputs are $f^2$ as the effect size, including any details of converting effect sizes, plus the number of predictors. 
 
-> “To detect an effect size of Cohen’s d = 0.54 with 90% power (alpha = .05, two-tailed), the pwr package [@Champely2020_pwr] in R [@RCoreTeam_2024]  suggests we would need 74 participants per group (N = 148) for an independent samples t-test.” 
+> “To detect an effect size of Cohen’s $f^2$ = .073, we first converted the effect size from d = 0.54. For 90% power (alpha = .05, two-tailed), the pwr package [@Champely2020_pwr] in R [@RCoreTeam_2024]  suggests we would need 147 participants split into two groups for a regression model with one categorical predictor.” 
+
+For a sensitivity power analysis, remember to include a note of any effect size conversions. 
+
+> "We used the pwr package [@Champely2020_pwr; @RCoreTeam_2024] to conduct a sensitivity power analysis for linear regression with one predictor. With a final sample size of 319, we would be able to detect an effect size of Cohen's $f^2$ = .041 (95% power, 5% alpha). Converted to Pearson's *r*, this would be an effect size of *r* = .20."
 
 ## Test Yourself
 
-To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. Compared to previous chapters, there are no error mode questions as the content is so similar to Chapter 8. We are just going to test your understanding of the concepts rather than potential errors.  
+To end the chapter, we have some knowledge check questions to test your understanding of the concepts we covered in the chapter. We then have some error mode tasks to see if you can find the solution to some common errors in the concepts we covered in this chapter. 
 
 ### Knowledge check
 
-1. Assuming you were running a between-subjects t-test on secondary data ($\alpha = .05$, Power = .8, alternative = two-tailed) and that this secondary data has 100 participants in both groups. The smallest effect size, to three decimal places, you could determine with this data is: `r longmcq(sample(c(answer = "d = 0.398", "d = 0.399", "d = 0.280", "d = 0.281")))`
+**Question 1**. If you want to conduct an *a priori* power analysis , what input do you leave blank to solve for?  
 
-`r hide()`
-The code for this test would be:
+`r longmcq(sample(c(answer = "sample size", "power", "effect size", "alpha")))`
 
-```{r, eval = FALSE}
-pwr.t.test(n = 100, 
+**Question 2**. If you want to conduct a sensitivity power analysis , what input do you leave blank to solve for?  
+
+`r longmcq(sample(c("sample size", "power", answer = "effect size", "alpha")))`
+
+Read the following output for an *a priori* power analysis. The next two questions are based on this output. 
+
+```{r echo=FALSE}
+pwr.t.test(n = NULL, 
+           d = 0.42, 
            sig.level = .05, 
-           power = .8,
-           type = "two.sample",
-           alternative = "two.sided") %>% 
-  pluck("d") %>% 
-  round(3)
+           power = .80, 
+           type = "two.sample", 
+           alternative = "two.sided")
 ```
 
-* Meaning that the smallest effect size would be d = 0.39
+**Question 3**. Our smallest effect size of interest is: 
 
-`r unhide()`
+`r longmcq(sample(c("r = .80", "r = .42", answer = "d = 0.42", "d = 0.80")))`
 
-2. Assuming you were running a between-subjects t-test on secondary data ($\alpha = .05$, Power = .8, alternative = two-tailed) and that this secondary data has 60 participants in Group 1 and 40 participants in Group 2. The smallest effect size, to three decimal places, you could determine with this data is: `r longmcq(sample(c(answer = "d = 0.578", "d = 0.577", "r = .578", "r = .577")))`
+**Question 4**. For these inputs, we would need to recruit how many participants per group? 
 
-`r hide()`
-The code for this test would be:
+`r longmcq(sample(c("89", "42", answer = "90", "80")))`
 
-```{r, eval = FALSE}
-pwr.t2n.test(n1 = 60,
-           n2 = 40,
+Read the following output for a sensitivity power analysis. The next two questions are based on this output. 
+
+```{r echo=FALSE}
+pwr.r.test(n = 72, 
+           r = NULL, 
            sig.level = .05, 
-           power = .8,
-           alternative = "two.sided") %>% 
-  pluck("d") %>% 
-  round(3)
+           power = .90, 
+           alternative = "two.sided")
 ```
 
-* Meaning that the smallest effect size would be d = 0.578
+**Question 5**. Our final sample size was: 
 
-`r unhide()`
+`r longmcq(sample(c("36", "90", answer = "72", "50")))`
 
-3. Assuming you ran a correlation on secondary data ($\alpha = .05$, Power = .8, alternative = two-tailed) and that this secondary data has 50 observations. The smallest effect size, to three decimal places, you could determine with this data is: `r longmcq(sample(c(answer = "r = .384", "r = .385", "r = .275", "r = .276")))`
+**Question 6**. For these inputs, what effect size would we be sensitive to detect? 
 
-`r hide()`
-The code for this test would be:
-
-```{r, eval = FALSE}
-pwr.r.test(n = 50,
-           sig.level = .05, 
-           power = .8,
-           alternative = "two.sided") %>% 
-  pluck("r") %>% 
-  round(3)
-```
-
-* Meaning that the smallest effect size would be r = .384
-
-`r unhide()`
+`r longmcq(sample(c("r = .90", "r = .05", answer = "r = .37", "r = .72")))`
 
 ### Error mode
 
 The following questions are designed to introduce you to making and fixing errors. For this topic, we focus on simple linear regression between two continuous variables. There are not many outright errors that people make here, more misspecifications that are not doing what you think they are doing. 
 
-- Mismatch between effect size and tails
+Create and save a new R Markdown file for these activities. Delete the example code, so your file is blank from line 10. Create a new code chunk to load the packages <pkg>tidyverse</pkg> and <pkg>pwr</pkg>.
+
+Below, we have several variations of a code chunk error or misspecification. Copy and paste them into your R Markdown file below the code chunk to load <pkg>tidyverse</pkg> and <pkg>pwr</pkg>. Once you have copied the activities, click knit and look at the error message you receive. See if you can fix the error and get it working before checking the answer.
+
+- unconverted effect sizes
+
+**Question 7**. Copy the following code chunk into your R Markdown file and press knit. You should get a cryptic sounding error like `Error in uniroot(function(n) eval(p.body) - power, c(4 + 1e-10, 1e+09)): f() values at end points not of opposite sign`. 
+
+````{verbatim, lang = "markdown"}
+```{r}
+pwr.r.test(n = NULL, 
+           r = .20, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "less")
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+In this example, we specified a positive effect size but negative one-tailed test. They must be consistent, so you either need to make the hypothesis the same:
+
+```{r eval = FALSE}
+pwr.r.test(n = NULL, 
+           r = .20, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "greater")
+```
+
+Or the effect size the same: 
+
+```{r eval = FALSE}
+pwr.r.test(n = NULL, 
+           r = -.20, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "less")
+```
+
+Both will produce the same sample size as it is the absolute effect which is important, but we recommend making it consistent with your research question / hypothesis. 
+:::
+
+**Question 8**. Copy the following code chunk into your R Markdown file and press knit. You want to conduct a sensitivity power analysis when you have unequal sample sizes. You should get the following error: `Error in pwr.t.test(n1 = 40, n2 = 50, d = NULL, sig.level = 0.05, power = 0.9,  : unused arguments (n1 = 40, n2 = 50)`. 
+
+````{verbatim, lang = "markdown"}
+```{r}
+pwr.t.test(n1 = 40, 
+           n2 = 50,
+           d = NULL, 
+           sig.level = .05, 
+           power = .90, 
+           alternative = "two.sided")
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+In this example, we used the wrong function. `pwr.t.test()` only accepts `n` as a single argument. If you want a sensitivity power analysis for unequal sample sizes, you need the function `pwr.t2n.test()`:
+
+```{r eval = FALSE}
+pwr.t2n.test(n1 = 40, n2 = 50,
+           d = NULL, 
+           sig.level = .05, 
+           power = .90, 
+           alternative = "two.sided")
+```
+:::
+
+**Question 9**. Copy the following code chunk into your R Markdown file and press knit. In your research to establish your smallest effect size of interest, you found a meta-analysis which found the average effect size for your topic was d = 0.54. For your correlational study, you use this effect size for your *a priori* power analysis. This...works, but is this all consistent? 
+
+````{verbatim, lang = "markdown"}
+```{r}
+pwr.r.test(n = NULL, 
+           r = .54, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "two.sided")
+```
+````
+
+::: {.callout-caution collapse="true"} 
+#### Explain the solution
+
+In this example, we used the wrong effect size. We see this error a lot when people are looking for past studies to inform their smallest effect size of interest. You find a meta-analysis which is perfect, but it reports Cohen's d when you want Pearson's *r* for your study. You can convert between effect sizes (with the caveat the studies should be comparable), but the same number means different things. Mistaking d = 0.54 for Pearson's *r* is going to vastly underestimate the sample size you need, as it would be converted to *r* = .26.  
+
+```{r eval = FALSE}
+pwr.r.test(n = NULL, 
+           r = .26, 
+           sig.level = .05, 
+           power = .95, 
+           alternative = "two.sided")
+```
+:::
 
 ## Words from this Chapter
 
@@ -677,14 +797,6 @@ glossary_table()
 
 ## End of Chapter
 
-**Great!** Hopefully you are now starting to see the interaction between alpha, power, effect sizes, and sample size. We should always want really high powered studies and depending on the size of the effect we are interested in (small to large), and our $\alpha$ level, this will mean we will need to run more or less participants to make sure our study is well powered. Points to note:
+Great work, being able to conduct a power analysis is a great skill to have for designing an informative study. Although things have improved over the years, it is still relatively rare to see a study in the wild report a power analysis to justify their sample size. Keep in mind they involve a lot of subjective decision making as the values you choose for alpha, power, and your smallest effect size have flexibility. A larger sample - and hence more powerful study - would always be useful, but you are never working with unlimited resources. You must make compromises and think about whether you can conduct an informative study with the resources available to you. This means the hard work comes into making decisions about the values you enter, rather than the data skills for power analysis being difficult. 
 
-* Lowering the $\alpha$ level (e.g. .05 to .01) will reduce the power.
-* Lowering the effect size (e.g. .8 to .2) will reduce the power.
-* Increasing power (.8 to .9) will require more participants.
-
-A high-powered study looking to detect a small effect size at a low alpha will require a large number of participants!
-
-There are additional functions in the `pwr` package for other types of statistical analyses. We will include these calculates as part of the ANOVA and regression chapters. 
-
-If you want more examples of power to reinforce your understanding, go back and calculate the power of the t-tests, correlations, and chi-squares from earlier chapters. 
+In the next - and final for the Research Methods 1 component - chapter, we cover screening data and decision making in data analysis. In Chapters 8 and 9, we covered topics like diagnostic checks for statistical models. Some of them looked fine, whereas some looked potentially problematic. In the next chapter, we work through the decisions you must make when analysing data like checking for missing data, outliers, and issues with diagnostic checks. Importantly, we outline the kind of solutions you can consider for those problems which we omitted in previous chapters. 
