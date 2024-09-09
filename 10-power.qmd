@@ -6,9 +6,9 @@ library(tidyverse)
 library(cowplot)
 ```
 
-Until now, a large component of each chapter was dedicated to data wrangling as we must first process raw data into something tidier we can apply our visualisation or modelling steps to. In this chapter, there is no data wrangling, just functions to calculate statistical power in different ways for different tests. Before, the difficulty was in unique problems in wrangling your specific data. In power analysis, the functions are pretty straight forward to use, but deciding what inputs you use are the hard parts as they are your decisions. 
+Until now, a large component of each chapter was dedicated to data wrangling as we must first process raw data into something tidier we can apply our visualisation or modelling steps to. In this chapter, there is no data wrangling, just functions to calculate statistical power in different ways for different tests. Before, the difficulty was in unique problems in wrangling your specific data. In power analysis, the functions are pretty straight forward to use, but deciding what inputs you use are the hard parts as they are your decisions to make. 
 
-We adapted a few components of this chapter from @bartlett_power_2022 and we recommend referring to this article for more information on the concepts behind statistical power. However, this article focuses on the statistics software jamovi, so this chapter focuses on power analysis using the <pkg>pwr</pkg> package.
+We adapted a few components of this chapter from @bartlett_power_2022 and we recommend referring to this article for more information on the concepts behind statistical power. However, the article focuses on the statistics software jamovi, so this chapter focuses on power analysis using the <pkg>pwr</pkg> package.
 
 **Chapter Intended Learning Outcomes (ILOs)**
 
@@ -51,7 +51,7 @@ NHST is designed to control error rates associated with two main decisions aroun
 
 - **Type II error** - or `r glossary("false negative")`, is the probability of retaining the null hypothesis when it should be rejected (otherwise called `r glossary("beta")` or $\beta$). In other words, you conclude that there was no real "effect" when in fact there was one. There is less tradition around this, but the most common rule of thumb you will come across is $\beta = .20$, meaning that we would accept 1 in 5 studies may be a false negative. 
 
-Statistical power is the opposite of beta and represents the long-run probability of correctly rejecting the null hypothesis when there is a real effect to detect. In other words, how likely are you to detect an effect that is really there? You calculate `r glossary("power", display = "Power")` as $1-\beta$, meaning that if the field standard for beta is $\beta = .20$, then the field standard for power is $1 - .20 = .80$.
+Statistical power is the opposite of beta and represents the long-run probability of correctly rejecting the null hypothesis when there is a real effect to detect. In other words, how likely are you to detect an effect that is really there? You calculate `r glossary("power", display = "Power")` as $1-\beta$, meaning that if the field standard for beta is $\beta = .20$, then the field standard for power is $1 - .20 = .80$ (80%).
 
 In addition to alpha and beta/power, there are two other key concepts (there are more depending on the test, but we will add them in when we need them):
 
@@ -77,11 +77,11 @@ In this section, imagine we are designing a study to build on @irving_correcting
 
 Irving et al. (2022) themselves provide an excellent example of explaining and justifying the rationale behind their power analysis, so we will walk through the decision making process and how it changes the outputs. For our smallest effect size of interest, our starting point is the estimate of d = 0.64. However, it is worth consulting other sources to calibrate our understanding of effects in the area, such as Irving et al. citing a meta-analysis. For debunking, the average effect across 30 studies was d = 1.14, 95% CI = [0.68, 1.61], so we could use the lower bound of the confidence interval, but this may still represent an overestimate. Irving et al. used the smallest effect (d = 0.54) from the studies most similar to their design which was included in the meta-analysis. As a value slightly smaller than the other estimates, we will also use this as the smallest effect of interest for our study. 
 
-Now we have settled on our smallest effect size of interest, we will use d = 0.54 in the following demonstrations. We start with a priori and sensitivity power analysis for two independent samples, exploring how the outputs change as we alter inputs like alpha, power, and the number of tails in the test. For each demonstration, we explain how you can transparently report the power analysis to your reader. We then repeat the demonstrations for two dependent samples to show how you require fewer participants when the same participants complete multiple conditions instead of being allocated to separate groups.   
+Now we have settled on our smallest effect size of interest, we will use d = 0.54 in the following demonstrations. We start with *a priori* and sensitivity power analysis for two independent samples, exploring how the outputs change as we alter inputs like alpha, power, and the number of tails in the test.   
 
 ### A priori power analysis
 
-For an independent samples t-test (we will cover regression shortly, but one of the downsides is the power analysis function uses a different effect size which can be awkward), there is the function `pwr.t.test()`. We can enter the following arguments: 
+For an independent samples t-test (we will cover regression shortly), there is the function `pwr.t.test()`. We can enter the following arguments: 
 
 - `n`: The number of observations. 
 
@@ -95,7 +95,7 @@ For an independent samples t-test (we will cover regression shortly, but one of 
 
 - `alternative`: Whether you have a one- or two-sided hypothesis. 
 
-Remember, power analysis works by leaving one argument blank, so for calculating the sample size, we leave `n` blank or enter `NULL` as the argument. To recreate the power analysis from @irving_correcting_2022, we enter d = 0.54, sig.level = .05, power = .90, type = two.sample and alternative = two-sided. 
+Remember, power analysis works by leaving one argument blank, so for calculating the sample size, we leave `n` blank or enter `NULL` as the argument. As our starting point, we enter d = 0.54, sig.level = .05, power = .90, type = two.sample and alternative = two-sided. 
 
 ```{r}
 pwr.t.test(n = NULL, 
@@ -106,7 +106,7 @@ pwr.t.test(n = NULL,
            alternative = "two.sided")
 ```
 
-As the note warns us, for an independent-samples t-test, n represents the number of observations per group, so we need **74** per group (we round up as we cannot have .04 of a person) or N = **148**.
+As the note warns us, for an independent-samples t-test, `n` represents the number of observations per group, so we need **74** per group (we round up as we cannot have .04 of a person) or N = **148**.
 
 If you wanted to use these values in inline code, you can save the power analysis object and pick out values to work with. 
 
@@ -121,7 +121,7 @@ irving_samplesize <- pwr.t.test(n = NULL,
   ceiling()
 ```
 
-In this code, we save the power analysis function to an object, use the `pluck()` function to pick out as a specific component (the argument name must be spelt exactly), and use the `ceiling()` function to round up. This helps to avoid manually calculating the values as you can use the object. 
+In this code, we save the power analysis function to an object, use the `pluck()` function to pick out a specific component (the argument name must be spelt exactly), and use the `ceiling()` function to round up. This helps to avoid manually calculating the values as you can use the object. 
 
 ```{r}
 # sample size per group
@@ -131,7 +131,7 @@ irving_samplesize
 irving_samplesize * 2
 ```
 
-The power analysis function is pretty straight forward to work with, it is the thinking and decision making that does into selecting the value for each argument that is the hardest part here. It is ultimately a subjective decision you must be able to justify in a report and there will always be compromises. You never have unlimited resources, so you are trying to balance designing the most informative study with maximizing the resources available. 
+The power analysis function is pretty straight forward to work with, it is the thinking and decision making that goes into selecting the value for each argument that is the hardest part here. It is ultimately a subjective decision you must be able to justify in a report and there will always be compromises. You never have unlimited resources, so you are trying to balance designing the most informative study with maximizing the resources available to you. 
 
 ::: {.callout-tip}
 #### Try this
@@ -316,7 +316,7 @@ curve_80 <- power_table %>%
 
 ```
 
-One other key point here is power exists along a curve, there is not just a single value for power once your sample size is fixed. We can visualise this through something called a power curve. @fig-power-curve-40 shows statistical power against Cohen's d as the effect size for a fixed sample of 40 participants per group. We would have 90% power to detect a Cohen's d of 0.75 (the value is a little different here as we set the effect size, rather than calculate it as the output), shown where the two lines meet. You would have more and more power to detect effects larger than 0.75 (follow the curve to the right), but less power to detect effects smaller than 0.75 (follow the curve to the left). The grey shaded region highlights the effects your study would be less sensitive to. 
+One other key point here is power exists along a curve, there is not just a single value for power once your sample size is fixed. We can visualise this through something called a power curve. @fig-power-curve-40 shows statistical power against Cohen's d as the effect size for a fixed sample of 40 participants per group. We would have 90% power to detect a Cohen's d of 0.75 (the value is a little different here as we set the effect size, rather than calculate it as the output), shown where the two lines meet. You would have more and more power to detect effects larger than 0.75 (follow the curve to the right), but less power to detect effects smaller than 0.75 (follow the curve to the left). The grey shaded region highlights the effects your study would be less sensitive to than your desired value for power. 
 
 ```{r power-curve-40, echo=FALSE}
 #| label: fig-power-curve-40
@@ -340,7 +340,7 @@ Hopefully, these demonstrations reinforce the idea of sensitivity and how power 
 
 ### Power for regression with a categorical predictor
 
-In Chapters 8 and 9, we recommended expressing your designs as linear regression models. They have many benefits, but one downside is the effect size and process we need for power analysis is not the most intuitive. Typically, people report effect sizes like Cohen's d when comparing groups, but here we need $f^2$. You can convert between effect sizes and we recommend the website [psychometrica.de](https://www.psychometrica.de/effect_size.html#interpretation ){target="_blank"} which has an online calculator for converting effect sizes in section 14. Alternatively, you can use the following code to save $f^2$ as an object. 
+In Chapters 8 and 9, we recommended expressing your designs as linear regression models. They have many benefits, but one downside is the effect size and process we need for power analysis is not the most intuitive. Typically, people report effect sizes like Cohen's d when comparing groups, but here we need Cohen's $f^2$. You can convert between effect sizes and we recommend the website [psychometrica.de](https://www.psychometrica.de/effect_size.html#interpretation ){target="_blank"} which has an online calculator for converting effect sizes in section 14. Alternatively, you can use the following code to save $f^2$ as an object. 
 
 ```{r}
 # enter your Cohen's d value
@@ -434,7 +434,7 @@ pwr.r.test(n = NULL,
   ceiling()
 ```
 
-Our starting point is we need 319 participants to detect our smallest effect size of interest *r* = .20 with 95% power and 5% alpha. 
+Our starting point is 319 participants to detect our smallest effect size of interest *r* = .20 with 95% power and 5% alpha. 
 
 ::: {.callout-tip}
 #### Try this
