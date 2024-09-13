@@ -63,8 +63,6 @@ book:
   - 18-analysis-journey-2.qmd
   - references.qmd
   appendices:
-  - appendix-a-installing-r.qmd
-  - appendix-a1-updating-packages.qmd
   - appendix-a2-additional-learning-resources.qmd
   - appendix-a3-How-to-cite-R.qmd
   - appendix-b-symbols.qmd

@@ -34,7 +34,7 @@ We recommend wherever possible installing R and RStudio on your own computer. Th
 
 However, we appreciate not everyone has a computer that will support R and RStudio. All of our computer lab and library spaces have R and RStudio installed, so you will always be able to access those for working through the materials and your assignments. If you cannot install R and RStudio on your computer and there are accessibility issues preventing you from using the university computers, please come and speak with your course leads who will advise alternative options.  
 
-To use R and RStudio on your computer, please see [Installing R](https://psyteachr.github.io/ug1-practical/installing-r.html){target="_blank"} which has detailed instructions and links to the files you need to download, as well as links to a series of walkthroughs for installing R and RStudio on different types of computers. This video by [Danielle Navarro (choose the one for your own machine type)](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd){target="_blank"} is also highly recommended
+To install R and RStudio on your computer, please see the [Installing R/RStudio guide](https://psyteachr.github.io/RSetGo/){target="_blank"} which we use across all of our books. The guide covers installing R/RStudio on a Windows computer, Mac, and accessing the software on one of the university computers. Please install R and RStudio **before** continuing with the chapter.  
 
 ## Getting to know R Studio
 

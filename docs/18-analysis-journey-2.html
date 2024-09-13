@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Materials for the MSc Conversion Research Methods 1 and 2 courses at the University of Glasgow School of Psychology &amp; Neuroscience.">
-<title>Fundamentals of Quantitative Analysis - 17&nbsp; Analysis Journey 2: Simple Linear Regression</title>
+<title>Fundamentals of Quantitative Analysis - 16&nbsp; Analysis Journey 2: Simple Linear Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
@@ -123,10 +124,10 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./18-analysis-journey-2.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./18-analysis-journey-2.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -136,7 +137,7 @@ div.csl-indent {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentals of Quantitative Analysis</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/BartlettJE/quant-fun-v3/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/BartlettJE/quant-fun-v3/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -240,7 +241,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Statistical Power and Effect Sizes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -269,12 +270,6 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-dissertation-prep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Dissertation Preparation</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./16-analysis-journeys.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data Analysis Journeys</span></a>
   </div>
@@ -282,13 +277,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-analysis-journey-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18-analysis-journey-2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -308,38 +303,26 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing <code>R</code></span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./appendix-a1-updating-packages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Updating packages</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./appendix-a2-additional-learning-resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Additional Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Additional Resources</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a3-How-to-cite-R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Citing R and RStudio</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Citing R and RStudio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-b-symbols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Symbols</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Symbols</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-d-probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -359,47 +342,47 @@ div.csl-indent {
    
   <ul>
 <li>
-<a href="#task-preparation" id="toc-task-preparation" class="nav-link active" data-scroll-target="#task-preparation"><span class="header-section-number">17.1</span> Task preparation</a>
+<a href="#task-preparation" id="toc-task-preparation" class="nav-link active" data-scroll-target="#task-preparation"><span class="header-section-number">16.1</span> Task preparation</a>
   <ul class="collapse">
-<li><a href="#introduction-to-the-data-set" id="toc-introduction-to-the-data-set" class="nav-link" data-scroll-target="#introduction-to-the-data-set"><span class="header-section-number">17.1.1</span> Introduction to the data set</a></li>
-  <li><a href="#organising-your-files-and-project-for-the-task" id="toc-organising-your-files-and-project-for-the-task" class="nav-link" data-scroll-target="#organising-your-files-and-project-for-the-task"><span class="header-section-number">17.1.2</span> Organising your files and project for the task</a></li>
+<li><a href="#introduction-to-the-data-set" id="toc-introduction-to-the-data-set" class="nav-link" data-scroll-target="#introduction-to-the-data-set"><span class="header-section-number">16.1.1</span> Introduction to the data set</a></li>
+  <li><a href="#organising-your-files-and-project-for-the-task" id="toc-organising-your-files-and-project-for-the-task" class="nav-link" data-scroll-target="#organising-your-files-and-project-for-the-task"><span class="header-section-number">16.1.2</span> Organising your files and project for the task</a></li>
   </ul>
 </li>
   <li>
-<a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">17.2</span> Overview</a>
+<a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">16.2</span> Overview</a>
   <ul class="collapse">
-<li><a href="#load-tidyverse-and-read-the-data-file" id="toc-load-tidyverse-and-read-the-data-file" class="nav-link" data-scroll-target="#load-tidyverse-and-read-the-data-file"><span class="header-section-number">17.2.1</span> Load <pkg>tidyverse</pkg> and read the data file</a></li>
-  <li><a href="#explore-evans_data" id="toc-explore-evans_data" class="nav-link" data-scroll-target="#explore-evans_data"><span class="header-section-number">17.2.2</span> Explore <code>evans_data</code></a></li>
+<li><a href="#load-tidyverse-and-read-the-data-file" id="toc-load-tidyverse-and-read-the-data-file" class="nav-link" data-scroll-target="#load-tidyverse-and-read-the-data-file"><span class="header-section-number">16.2.1</span> Load <pkg>tidyverse</pkg> and read the data file</a></li>
+  <li><a href="#explore-evans_data" id="toc-explore-evans_data" class="nav-link" data-scroll-target="#explore-evans_data"><span class="header-section-number">16.2.2</span> Explore <code>evans_data</code></a></li>
   </ul>
 </li>
   <li>
-<a href="#wrangling" id="toc-wrangling" class="nav-link" data-scroll-target="#wrangling"><span class="header-section-number">17.3</span> Wrangling</a>
+<a href="#wrangling" id="toc-wrangling" class="nav-link" data-scroll-target="#wrangling"><span class="header-section-number">16.3</span> Wrangling</a>
   <ul class="collapse">
-<li><a href="#task-list" id="toc-task-list" class="nav-link" data-scroll-target="#task-list"><span class="header-section-number">17.3.1</span> Task list</a></li>
-  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">17.3.2</span> Solution</a></li>
+<li><a href="#task-list" id="toc-task-list" class="nav-link" data-scroll-target="#task-list"><span class="header-section-number">16.3.1</span> Task list</a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution"><span class="header-section-number">16.3.2</span> Solution</a></li>
   </ul>
 </li>
   <li>
-<a href="#summarisingvisualising" id="toc-summarisingvisualising" class="nav-link" data-scroll-target="#summarisingvisualising"><span class="header-section-number">17.4</span> Summarising/visualising</a>
+<a href="#summarisingvisualising" id="toc-summarisingvisualising" class="nav-link" data-scroll-target="#summarisingvisualising"><span class="header-section-number">16.4</span> Summarising/visualising</a>
   <ul class="collapse">
-<li><a href="#demographics" id="toc-demographics" class="nav-link" data-scroll-target="#demographics"><span class="header-section-number">17.4.1</span> Demographics</a></li>
-  <li><a href="#wellbeing-measures" id="toc-wellbeing-measures" class="nav-link" data-scroll-target="#wellbeing-measures"><span class="header-section-number">17.4.2</span> Wellbeing measures</a></li>
+<li><a href="#demographics" id="toc-demographics" class="nav-link" data-scroll-target="#demographics"><span class="header-section-number">16.4.1</span> Demographics</a></li>
+  <li><a href="#wellbeing-measures" id="toc-wellbeing-measures" class="nav-link" data-scroll-target="#wellbeing-measures"><span class="header-section-number">16.4.2</span> Wellbeing measures</a></li>
   </ul>
 </li>
   <li>
-<a href="#analysing" id="toc-analysing" class="nav-link" data-scroll-target="#analysing"><span class="header-section-number">17.5</span> Analysing</a>
+<a href="#analysing" id="toc-analysing" class="nav-link" data-scroll-target="#analysing"><span class="header-section-number">16.5</span> Analysing</a>
   <ul class="collapse">
-<li><a href="#hypothesis-1" id="toc-hypothesis-1" class="nav-link" data-scroll-target="#hypothesis-1"><span class="header-section-number">17.5.1</span> Hypothesis 1</a></li>
-  <li><a href="#hypothesis-2" id="toc-hypothesis-2" class="nav-link" data-scroll-target="#hypothesis-2"><span class="header-section-number">17.5.2</span> Hypothesis 2</a></li>
-  <li><a href="#hypothesis-3" id="toc-hypothesis-3" class="nav-link" data-scroll-target="#hypothesis-3"><span class="header-section-number">17.5.3</span> Hypothesis 3</a></li>
+<li><a href="#hypothesis-1" id="toc-hypothesis-1" class="nav-link" data-scroll-target="#hypothesis-1"><span class="header-section-number">16.5.1</span> Hypothesis 1</a></li>
+  <li><a href="#hypothesis-2" id="toc-hypothesis-2" class="nav-link" data-scroll-target="#hypothesis-2"><span class="header-section-number">16.5.2</span> Hypothesis 2</a></li>
+  <li><a href="#hypothesis-3" id="toc-hypothesis-3" class="nav-link" data-scroll-target="#hypothesis-3"><span class="header-section-number">16.5.3</span> Hypothesis 3</a></li>
   </ul>
 </li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">17.6</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">16.6</span> Conclusion</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BartlettJE/quant-fun-v3/edit/main/18-analysis-journey-2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/BartlettJE/quant-fun-v3/blob/main/18-analysis-journey-2.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="journey-02-wrangling" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></span></h1>
+<h1 class="title"><span id="journey-02-wrangling" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 2: Simple Linear Regression</span></span></h1>
 </div>
 
 
@@ -415,10 +398,10 @@ div.csl-indent {
 </header><p>Welcome to the second data analysis journey. We have designed these chapters as a bridge between the structured learning in the core chapters and your assessments. We present you with a new data set, show you what the end product should look like, and see if you can apply your data wrangling, visualisation, and/or analysis skills to get there.</p>
 <p>As you gain independence, this is the crucial skill. Data analysis is all about seeing the data you have available to you and identifying what the end product needs to be to apply your visualisation and analysis techniques. You can then mentally (or physically) create a checklist of tasks to work backwards to get there. There might be a lot of trial and error as you try one thing, it does not quite work, so you go back and try something else. If you get stuck though, we have a range of hints and task lists you can unhide, then the solution to check your attempts against.</p>
 <p>In this second data analysis journey, we focus on inferential statistics after some data wrangling to apply all the skills you developed from Chapter 1 to Chapter 9.</p>
-<section id="task-preparation" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="task-preparation">
-<span class="header-section-number">17.1</span> Task preparation</h2>
-<section id="introduction-to-the-data-set" class="level3" data-number="17.1.1"><h3 data-number="17.1.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
-<span class="header-section-number">17.1.1</span> Introduction to the data set</h3>
+<section id="task-preparation" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="task-preparation">
+<span class="header-section-number">16.1</span> Task preparation</h2>
+<section id="introduction-to-the-data-set" class="level3" data-number="16.1.1"><h3 data-number="16.1.1" class="anchored" data-anchor-id="introduction-to-the-data-set">
+<span class="header-section-number">16.1.1</span> Introduction to the data set</h3>
 <p>For this task, we are using open data from <span class="citation" data-cites="binfet_importance_2022">Binfet et al. (<a href="references.html#ref-binfet_importance_2022" role="doc-biblioref">2022</a>)</span>, where the authors used the data set to write a separate article on repurposing it for statistics education <span class="citation" data-cites="evans_repurposing_2023">(<a href="references.html#ref-evans_repurposing_2023" role="doc-biblioref">Evans et al., 2023</a>)</span>, inspiring us to use it in the chapter here. The abstract of their article is:</p>
 <blockquote class="blockquote">
 <p>Researchers have claimed that canine-assisted interventions (CAIs) contribute significantly to bolstering participants’ wellbeing, yet the mechanisms within interactions have received little empirical attention. The aim of this study was to assess the impact of client–canine contact on wellbeing outcomes in a sample of 284 undergraduate college students (77% female; 21% male, 2% non-binary). Participants self-selected to participate and were randomly assigned to one of two canine interaction treatment conditions (touch or no touch) or to a handler-only condition with no therapy dog present. To assess self-reports of wellbeing, measures of flourishing, positive and negative affect, social connectedness, happiness, integration into the campus community, stress, homesickness, and loneliness were administered. Exploratory analyses were conducted to assess whether these wellbeing measures could be considered as measuring a unidimensional construct. This included both reliability analysis and exploratory factor analysis. Based on the results of these analyses we created a composite measure using participant scores on a latent factor. We then conducted the tests of the four hypotheses using these factor scores. Results indicate that participants across all conditions experienced enhanced wellbeing on several measures; however, only those in the direct contact condition reported significant improvements on all measures of wellbeing. Additionally, direct interactions with therapy dogs through touch elicited greater wellbeing benefits than did no touch/indirect interactions or interactions with only a dog handler. Similarly, analyses using scores on the wellbeing factor indicated significant improvement in wellbeing across all conditions (handler-only, <em>d</em>=0.18, <em>p</em>=0.041; indirect, <em>d</em>=0.38, <em>p</em>&lt;0.001; direct, <em>d</em>=0.78, <em>p</em>&lt;0.001), with more benefit when a dog was present (<em>d</em>=0.20, <em>p</em>&lt;0.001), and the most benefit coming from physical contact with the dog (<em>d</em>=0.13, <em>p</em>=0.002). The findings hold implications for post-secondary wellbeing programs as well as the organization and delivery of CAIs.</p>
@@ -434,8 +417,8 @@ div.csl-indent {
 <li><p>All treatment groups would have significantly higher measures of well-being and lower measures of ill-being after treatment.</p></li>
 <li><p>The treatment groups that interact with dogs would have significantly higher measures of well-being and lower measures of ill-being compared to the handler-only treatment.</p></li>
 <li><p>Direct contact with a therapy dog would yield greater benefits than indirect contact treatment.</p></li>
-</ol></section><section id="organising-your-files-and-project-for-the-task" class="level3" data-number="17.1.2"><h3 data-number="17.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-task">
-<span class="header-section-number">17.1.2</span> Organising your files and project for the task</h3>
+</ol></section><section id="organising-your-files-and-project-for-the-task" class="level3" data-number="16.1.2"><h3 data-number="16.1.2" class="anchored" data-anchor-id="organising-your-files-and-project-for-the-task">
+<span class="header-section-number">16.1.2</span> Organising your files and project for the task</h3>
 <p>Before we can get started, you need to organise your files and project for the task, so your working directory is in order.</p>
 <ol type="1">
 <li><p>In your folder for research methods and the book <code>ResearchMethods1_2/Quant_Fundamentals</code>, create a new folder for the data analysis journey called <code>Journey_02_regression</code>. Within <code>Journey_02_regression</code>, create two new folders called <code>data</code> and <code>figures</code>.</p></li>
@@ -444,10 +427,10 @@ div.csl-indent {
 <li><p>We are working with a new data set, so please save the following data file: <a href="data/Evans_2023_raw.csv">Evans_2023_raw.csv</a>. Right click the link and select “save link as”, or clicking the link will save the files to your Downloads. Make sure that you save the file as “.csv”. Save or copy the file to your <code>data/</code> folder within <code>Journey_02_regression</code>.</p></li>
 </ol>
 <p>You are now ready to start working on the task!</p>
-</section></section><section id="overview" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="overview">
-<span class="header-section-number">17.2</span> Overview</h2>
-<section id="load-tidyverse-and-read-the-data-file" class="level3" data-number="17.2.1"><h3 data-number="17.2.1" class="anchored" data-anchor-id="load-tidyverse-and-read-the-data-file">
-<span class="header-section-number">17.2.1</span> Load <pkg>tidyverse</pkg> and read the data file</h3>
+</section></section><section id="overview" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="overview">
+<span class="header-section-number">16.2</span> Overview</h2>
+<section id="load-tidyverse-and-read-the-data-file" class="level3" data-number="16.2.1"><h3 data-number="16.2.1" class="anchored" data-anchor-id="load-tidyverse-and-read-the-data-file">
+<span class="header-section-number">16.2.1</span> Load <pkg>tidyverse</pkg> and read the data file</h3>
 <p>Before we explore what wrangling we need to do, complete the following task list and check the solution if you are stuck.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -489,8 +472,8 @@ Show me the solution
 </div>
 </div>
 </div>
-</section><section id="explore-evans_data" class="level3" data-number="17.2.2"><h3 data-number="17.2.2" class="anchored" data-anchor-id="explore-evans_data">
-<span class="header-section-number">17.2.2</span> Explore <code>evans_data</code>
+</section><section id="explore-evans_data" class="level3" data-number="16.2.2"><h3 data-number="16.2.2" class="anchored" data-anchor-id="explore-evans_data">
+<span class="header-section-number">16.2.2</span> Explore <code>evans_data</code>
 </h3>
 <p>In <code>evans_data</code>, we have the participant ID (<code>RID</code>), several demographic variables, and pre- and post-test items for stress, loneliness, and social connectedness. There are 88 variables which would take up loads of space, so we are just showing a preview of the first 20 here. If you use <code>glimpse()</code>, you will see all 88.</p>
 <div class="cell" data-layout-align="center">
@@ -607,8 +590,8 @@ Try this
 <p>Now we have introduced the data set, explore them using different methods we introduced. For example, opening the data object as a tab to scroll around, explore with <code>glimpse()</code>, or even try plotting some of the individual variables to see what they look like.</p>
 </div>
 </div>
-</section></section><section id="wrangling" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="wrangling">
-<span class="header-section-number">17.3</span> Wrangling</h2>
+</section></section><section id="wrangling" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="wrangling">
+<span class="header-section-number">16.3</span> Wrangling</h2>
 <p>We are going to show you a preview of the starting data set and the end product we are aiming for. For the raw data, we have limited this to the first 20 rows again just so it does not take up the whole page, but if you use <code>glimpse()</code> you will see all 88 variables.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -693,8 +676,8 @@ Try this
 <p>When you get as far as you can, check the task list which explains all the steps we applied, but not how to do them. Then, you can check the solution for our code.</p>
 </div>
 </div>
-<section id="task-list" class="level3" data-number="17.3.1"><h3 data-number="17.3.1" class="anchored" data-anchor-id="task-list">
-<span class="header-section-number">17.3.1</span> Task list</h3>
+<section id="task-list" class="level3" data-number="16.3.1"><h3 data-number="16.3.1" class="anchored" data-anchor-id="task-list">
+<span class="header-section-number">16.3.1</span> Task list</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -737,8 +720,8 @@ Show me the task list
 </div>
 </div>
 </div>
-</section><section id="solution" class="level3" data-number="17.3.2"><h3 data-number="17.3.2" class="anchored" data-anchor-id="solution">
-<span class="header-section-number">17.3.2</span> Solution</h3>
+</section><section id="solution" class="level3" data-number="16.3.2"><h3 data-number="16.3.2" class="anchored" data-anchor-id="solution">
+<span class="header-section-number">16.3.2</span> Solution</h3>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -822,11 +805,11 @@ Show me the solution
 </div>
 </div>
 </div>
-</section></section><section id="summarisingvisualising" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="summarisingvisualising">
-<span class="header-section-number">17.4</span> Summarising/visualising</h2>
+</section></section><section id="summarisingvisualising" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="summarisingvisualising">
+<span class="header-section-number">16.4</span> Summarising/visualising</h2>
 <p>You should now have an object called <code>evans_wide</code> containing 12 variables. If you struggled completing the wrangling steps, you can copy the code from the solution to follow along from this point. In this section, we will calculate some summary statistics and plot the data to see what we can learn. We present you with a list of questions to answer using your wrangling and visualisation skills, interspersed with the solutions to check if you are stuck.</p>
-<section id="demographics" class="level3" data-number="17.4.1"><h3 data-number="17.4.1" class="anchored" data-anchor-id="demographics">
-<span class="header-section-number">17.4.1</span> Demographics</h3>
+<section id="demographics" class="level3" data-number="16.4.1"><h3 data-number="16.4.1" class="anchored" data-anchor-id="demographics">
+<span class="header-section-number">16.4.1</span> Demographics</h3>
 <p>For demographics, we will recreate some values from Table 1 from <span class="citation" data-cites="binfet_importance_2022">Binfet et al. (<a href="references.html#ref-binfet_importance_2022" role="doc-biblioref">2022</a>)</span>.</p>
 <ol type="1">
 <li>
@@ -1075,8 +1058,8 @@ Show me the solution
 </div>
 </div>
 </div>
-</section><section id="wellbeing-measures" class="level3" data-number="17.4.2"><h3 data-number="17.4.2" class="anchored" data-anchor-id="wellbeing-measures">
-<span class="header-section-number">17.4.2</span> Wellbeing measures</h3>
+</section><section id="wellbeing-measures" class="level3" data-number="16.4.2"><h3 data-number="16.4.2" class="anchored" data-anchor-id="wellbeing-measures">
+<span class="header-section-number">16.4.2</span> Wellbeing measures</h3>
 <p>For wellbeing and ill-being measures, we will recreate some values from Table 2 from <span class="citation" data-cites="binfet_importance_2022">Binfet et al. (<a href="references.html#ref-binfet_importance_2022" role="doc-biblioref">2022</a>)</span>.</p>
 <ol start="5" type="1">
 <li>
@@ -1386,12 +1369,12 @@ Show me the solution
 </div>
 </div>
 </div>
-</section></section><section id="analysing" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="analysing">
-<span class="header-section-number">17.5</span> Analysing</h2>
+</section></section><section id="analysing" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="analysing">
+<span class="header-section-number">16.5</span> Analysing</h2>
 <p>Finally, we turn to analysis for inferential statistics. In <span class="citation" data-cites="evans_repurposing_2023">Evans et al. (<a href="references.html#ref-evans_repurposing_2023" role="doc-biblioref">2023</a>)</span>, they organise the analyses from <span class="citation" data-cites="binfet_importance_2022">Binfet et al. (<a href="references.html#ref-binfet_importance_2022" role="doc-biblioref">2022</a>)</span> into three hypotheses. You have not covered all the skills in Research Methods 1 to reproduce their analyses exactly, so we will work around an adapted set based on what we currently expect of you.</p>
 <p>We present each analysis as an overview so you can think about what techniques from Chapters 8 and 9 would address it, give you instructions on what analysis we have in mind if you need guidance, then present the solution. We focus on one outcome per hypothesis, but once you are confident you are applying and interpreting the appropriate techniques, why not try the other outcomes yourself?</p>
-<section id="hypothesis-1" class="level3" data-number="17.5.1"><h3 data-number="17.5.1" class="anchored" data-anchor-id="hypothesis-1">
-<span class="header-section-number">17.5.1</span> Hypothesis 1</h3>
+<section id="hypothesis-1" class="level3" data-number="16.5.1"><h3 data-number="16.5.1" class="anchored" data-anchor-id="hypothesis-1">
+<span class="header-section-number">16.5.1</span> Hypothesis 1</h3>
 <ol start="9" type="1">
 <li>Hypothesis 1 is that each treatment group will increase measures of well-being (social connectedness) and decrease measures of ill-being (stress and loneliness). For this question, we focus on stress, so we expected stress to decrease.</li>
 </ol>
@@ -1480,8 +1463,8 @@ Residual standard error: 0.9534 on 283 degrees of freedom
 </div>
 </div>
 </div>
-</section><section id="hypothesis-2" class="level3" data-number="17.5.2"><h3 data-number="17.5.2" class="anchored" data-anchor-id="hypothesis-2">
-<span class="header-section-number">17.5.2</span> Hypothesis 2</h3>
+</section><section id="hypothesis-2" class="level3" data-number="16.5.2"><h3 data-number="16.5.2" class="anchored" data-anchor-id="hypothesis-2">
+<span class="header-section-number">16.5.2</span> Hypothesis 2</h3>
 <ol start="10" type="1">
 <li>In Hypothesis 2, we predict that the direct and indirect contact groups will have higher well-being and lower ill-being measures compared to the control group. For this question, we focus on social connectedness at post-test for a measure of well-being, so we expect higher scores in the direct and indirect groups.</li>
 </ol>
@@ -1607,8 +1590,8 @@ GroupAssignmentIndirect -0.2326772 0.2523439</code></pre>
 </div>
 </div>
 </div>
-</section><section id="hypothesis-3" class="level3" data-number="17.5.3"><h3 data-number="17.5.3" class="anchored" data-anchor-id="hypothesis-3">
-<span class="header-section-number">17.5.3</span> Hypothesis 3</h3>
+</section><section id="hypothesis-3" class="level3" data-number="16.5.3"><h3 data-number="16.5.3" class="anchored" data-anchor-id="hypothesis-3">
+<span class="header-section-number">16.5.3</span> Hypothesis 3</h3>
 <ol start="11" type="1">
 <li>Finally, the third hypothesis focuses on the difference between the two contact groups. They predict that the direct contact group will lead to higher well-being and lower ill-being compared to the indirect contact group. For this question, we focus on loneliness post-test for a measure of ill-being, so we expect lower scores in the direct group.</li>
 </ol>
@@ -1699,8 +1682,8 @@ GroupAssignmentIndirect -0.005898489 0.2879484</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="conclusion" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="conclusion">
-<span class="header-section-number">17.6</span> Conclusion</h2>
+</section></section><section id="conclusion" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">16.6</span> Conclusion</h2>
 <p>Well done! Hopefully you recognised how far your skills have come to be able to do this independently, regardless of how many hints you needed. We are really starting to pile the skills up you have learnt so far, from simply using R Markdown files, to wrangling data, to visualising data, to finally applying modelling techniques for your inferential statistics.</p>
 <p>If you are curious, you can read <span class="citation" data-cites="evans_repurposing_2023">Evans et al. (<a href="references.html#ref-evans_repurposing_2023" role="doc-biblioref">2023</a>)</span> to see how they walk through wrangling and analysing the data. Some of the techniques we do not cover in Research Methods 1, but they have some great features like highlighting common student mistakes.</p>
 
@@ -2294,7 +2277,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./17-analysis-journey-1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Analysis Journey 1: Data Wrangling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
